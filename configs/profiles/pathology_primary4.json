@@ -1,0 +1,13 @@
+{
+  "name": "pathology_primary4",
+  "task": "pathology",
+  "classes": ["ASMI", "LVH", "IMI", "ISC_"],
+  "thresholds": [0.67, 0.705, 0.635, 0.595],
+  "canonical_status": "ACEPTADO_POR_DECISION_DEL_PROYECTO",
+  "backbone_sha256": "bf71e4cf8acc34031cb3611c7031e0649822e705fd7dcea354a3ea583ce920ee",
+  "specialist_sha256": "cf5091e962fffb3254b1a71fe57236dd82ea0139093df192511499d931391dbc",
+  "evaluation_scope": "external_dev",
+  "artifact_classes": ["ASMI", "LVH", "IMI", "ISC_"],
+  "backbone_rhythm_classes": ["NSR", "SB", "STACH", "RBBB", "PVC", "1AVB", "Flutter", "Paced"],
+  "backbone_pathology_classes": ["ASMI", "LVH", "IMI", "ISC_"]
+}

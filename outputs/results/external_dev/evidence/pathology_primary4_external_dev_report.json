@@ -1,0 +1,97 @@
+{
+  "protocol": "TITAN_V45_V3AG_PATHOLOGY4_ONLY_EXTERNAL_DEV",
+  "coverage": 1.0,
+  "pathology4_classes": [
+    "ASMI",
+    "LVH",
+    "IMI",
+    "ISC_"
+  ],
+  "pathology4_macro_f1": 0.793456370406346,
+  "pathology4_accuracy": 0.8022904853689048,
+  "gate_required": {
+    "accuracy": 0.95,
+    "macro_f1_strictly_greater_than": 0.75
+  },
+  "gate_passed": false,
+  "pathology4": {
+    "protocol": "TITAN_V45_V3D_EXTERNAL_PATHOLOGY4_SPECIALIST",
+    "panels": {
+      "ASMI": {
+        "tp": 106,
+        "tn": 139,
+        "fp": 8,
+        "fn": 41,
+        "positive_support": 147,
+        "negative_support": 147,
+        "accuracy": 0.8333333333333334,
+        "balanced_accuracy": 0.8333333333333334,
+        "precision": 0.9298245614035088,
+        "recall": 0.7210884353741497,
+        "f1": 0.8122605363984674,
+        "records": 294,
+        "windows": 294,
+        "threshold": 0.6699999999999999,
+        "manifest_csv": "<PRIVATE_PATH_REDACTED>",
+        "record_predictions_csv": "<PRIVATE_PATH_REDACTED>"
+      },
+      "LVH": {
+        "tp": 70,
+        "tn": 81,
+        "fp": 31,
+        "fn": 42,
+        "positive_support": 112,
+        "negative_support": 112,
+        "accuracy": 0.6741071428571429,
+        "balanced_accuracy": 0.6741071428571428,
+        "precision": 0.693069306930693,
+        "recall": 0.625,
+        "f1": 0.6572769953051643,
+        "records": 224,
+        "windows": 224,
+        "threshold": 0.705,
+        "manifest_csv": "<PRIVATE_PATH_REDACTED>",
+        "record_predictions_csv": "<PRIVATE_PATH_REDACTED>"
+      },
+      "IMI": {
+        "tp": 84,
+        "tn": 77,
+        "fp": 26,
+        "fn": 19,
+        "positive_support": 103,
+        "negative_support": 103,
+        "accuracy": 0.7815533980582524,
+        "balanced_accuracy": 0.7815533980582524,
+        "precision": 0.7636363636363637,
+        "recall": 0.8155339805825242,
+        "f1": 0.7887323943661971,
+        "records": 206,
+        "windows": 206,
+        "threshold": 0.635,
+        "manifest_csv": "<PRIVATE_PATH_REDACTED>",
+        "record_predictions_csv": "<PRIVATE_PATH_REDACTED>"
+      },
+      "ISC_": {
+        "tp": 103,
+        "tn": 116,
+        "fp": 3,
+        "fn": 16,
+        "positive_support": 119,
+        "negative_support": 119,
+        "accuracy": 0.9201680672268907,
+        "balanced_accuracy": 0.9201680672268908,
+        "precision": 0.9716981132075472,
+        "recall": 0.865546218487395,
+        "f1": 0.9155555555555555,
+        "records": 238,
+        "windows": 238,
+        "threshold": 0.595,
+        "manifest_csv": "<PRIVATE_PATH_REDACTED>",
+        "record_predictions_csv": "<PRIVATE_PATH_REDACTED>"
+      }
+    },
+    "pathology4_macro_f1": 0.793456370406346,
+    "pathology4_accuracy": 0.8022904853689048,
+    "pathology4_balanced_accuracy": 0.8022904853689048
+  }
+}

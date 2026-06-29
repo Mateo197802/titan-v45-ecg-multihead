@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this research artifact, cite the software and the source ECG datasets."
+title: "TITAN V4.5 ECG Multihead"
+type: software
+version: 0.1.0
+date-released: 2026-06-29
+authors:
+  - family-names: Gavilanes
+    given-names: Mateo
+repository-code: "https://github.com/Mateo197802/titan-v45-ecg-multihead"
+license: Apache-2.0
+keywords:
+  - electrocardiography
+  - deep learning
+  - arrhythmia
+  - cardiac pathology

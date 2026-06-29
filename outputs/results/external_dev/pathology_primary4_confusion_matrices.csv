@@ -1,0 +1,5 @@
+class,tn,fp,fn,tp,negative_support,positive_support
+ASMI,139,8,41,106,147,147
+LVH,81,31,42,70,112,112
+IMI,77,26,19,84,103,103
+ISC_,116,3,16,103,119,119

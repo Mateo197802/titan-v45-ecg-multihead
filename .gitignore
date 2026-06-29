@@ -1,0 +1,55 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+
+# Model weights and release staging never belong in Git history.
+*.pt
+*.pth
+*.ckpt
+*.onnx
+release_staging/
+release_downloads/
+
+# Raw ECG records are distributed as release assets, not Git objects.
+data/external_dev/rhythm/*
+!data/external_dev/rhythm/README.md
+data/external_dev/pathology/*
+!data/external_dev/pathology/README.md
+*.dat
+*.mat
+*.hea
+*.npy
+*.npz
+*.tar
+*.tar.gz
+*.tar.zst
+
+# Generated local outputs.
+outputs/models/backbones/*
+!outputs/models/backbones/README.md
+outputs/models/heads/*
+!outputs/models/heads/README.md
+outputs/models/specialists/rhythm/*
+!outputs/models/specialists/rhythm/README.md
+outputs/models/specialists/pathology/*
+!outputs/models/specialists/pathology/README.md
+outputs/results/gradcam/generated/
+outputs/results/uncertainty/generated/
+
+# Editors and operating systems.
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+desktop.ini

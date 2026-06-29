@@ -1,0 +1,2 @@
+# Load the CEDIA CUDA/PyTorch module first so the cluster selects its compatible wheel.
+-e .[data,optuna]

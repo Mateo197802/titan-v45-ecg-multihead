@@ -1,0 +1,23 @@
+{
+  "study": "TITAN_V45_V3C_PRIMARY8_PRIMARY4",
+  "objective": "0.6 * primary8_macro_f1 + 0.4 * primary4_macro_f1 - missing_class_penalties",
+  "sampler": "TPESampler",
+  "seed": 197813,
+  "multivariate": true,
+  "startup_trials": 10,
+  "best_trial": 6,
+  "ranking_score": 0.6245117257,
+  "completed_trials": 9,
+  "planned_trials": 12,
+  "status": "promoted_for_training_not_external_gate",
+  "parameters": {
+    "base_lr": 0.000006500544048573367,
+    "max_lr": 0.00009757631767617988,
+    "weight_decay": 0.000007910707751210257,
+    "gamma": 1.525417547903868,
+    "label_smoothing": 0.018120992735340936,
+    "batch_size": 16,
+    "mixup_alpha": 0.03382190558577173,
+    "lambda_pathology": 0.24550907982119335
+  }
+}

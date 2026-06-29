@@ -1,0 +1,8 @@
+{
+  "profile": "pathology_primary4",
+  "evaluation_scope": "internal_validation",
+  "thresholds": {"ASMI": 0.67, "LVH": 0.705, "IMI": 0.635, "ISC_": 0.595},
+  "mean_accuracy": 0.804193,
+  "macro_f1": 0.806442,
+  "external_data_used_for_threshold_selection": false
+}

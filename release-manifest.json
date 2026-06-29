@@ -1,0 +1,72 @@
+{
+  "schema": "TITAN_V45_RELEASE_MANIFEST_V1",
+  "repository": "Mateo197802/titan-v45-ecg-multihead",
+  "tag": "v0.1.0",
+  "assets": [
+    {
+      "name": "backbone-v3f-original.pt",
+      "path": "outputs/models/backbones/backbone-v3f-original.pt",
+      "category": "model",
+      "bytes": 233565900,
+      "sha256": "ca5d4dcb4b9828e6c4339800fe81ec27f32d9b09a090bb57503bfb56746a8da8",
+      "download_url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/releases/download/v0.1.0/backbone-v3f-original.pt"
+    },
+    {
+      "name": "specialists-v3p-e008-primary6-diagnostic.pt",
+      "path": "outputs/models/specialists/rhythm/specialists-v3p-e008-primary6-diagnostic.pt",
+      "category": "model",
+      "bytes": 22354966,
+      "sha256": "9c5a9265a7155e1206c551cc4e6d645b86363ba3dbdeb7baf7b9f173c314be3d",
+      "download_url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/releases/download/v0.1.0/specialists-v3p-e008-primary6-diagnostic.pt"
+    },
+    {
+      "name": "specialists-v3q-primary8-best-candidate.pt",
+      "path": "outputs/models/specialists/rhythm/specialists-v3q-primary8-best-candidate.pt",
+      "category": "model",
+      "bytes": 29498326,
+      "sha256": "b30cb2bbb45f1231c93ff1c196aa966b57b49831cadb296131c0283e7b0ceb02",
+      "download_url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/releases/download/v0.1.0/specialists-v3q-primary8-best-candidate.pt"
+    },
+    {
+      "name": "backbone-v3ag-pathology.pt",
+      "path": "outputs/models/backbones/backbone-v3ag-pathology.pt",
+      "category": "model",
+      "bytes": 233566092,
+      "sha256": "bf71e4cf8acc34031cb3611c7031e0649822e705fd7dcea354a3ea583ce920ee",
+      "download_url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/releases/download/v0.1.0/backbone-v3ag-pathology.pt"
+    },
+    {
+      "name": "specialists-v3ag-primary4-calibrated.pt",
+      "path": "outputs/models/specialists/pathology/specialists-v3ag-primary4-calibrated.pt",
+      "category": "model",
+      "bytes": 29413606,
+      "sha256": "cf5091e962fffb3254b1a71fe57236dd82ea0139093df192511499d931391dbc",
+      "download_url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/releases/download/v0.1.0/specialists-v3ag-primary4-calibrated.pt"
+    },
+    {
+      "name": "external-dev-rhythm-chapman-shaoxing.tar.zst",
+      "path": "data/external_dev/rhythm/external-dev-rhythm-chapman-shaoxing.tar.zst",
+      "category": "external_dev_dataset",
+      "bytes": 97120385,
+      "sha256": "ec6ade27ab77b9807d41331016def56e54cbb96fba528fd7aca811e5a468f2fb",
+      "download_url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/releases/download/v0.1.0/external-dev-rhythm-chapman-shaoxing.tar.zst"
+    },
+    {
+      "name": "external-dev-pathology-ptbxl-fold10.tar.zst",
+      "path": "data/external_dev/pathology/external-dev-pathology-ptbxl-fold10.tar.zst",
+      "category": "external_dev_dataset",
+      "bytes": 10977160,
+      "sha256": "fc1c3fc5374af962a8fc5903b6d1dd99a44ebfd7c66e0dfceaa106167afee558",
+      "download_url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/releases/download/v0.1.0/external-dev-pathology-ptbxl-fold10.tar.zst"
+    }
+  ],
+  "artifacts": {
+    "outputs/models/backbones/backbone-v3f-original.pt": "ca5d4dcb4b9828e6c4339800fe81ec27f32d9b09a090bb57503bfb56746a8da8",
+    "outputs/models/specialists/rhythm/specialists-v3p-e008-primary6-diagnostic.pt": "9c5a9265a7155e1206c551cc4e6d645b86363ba3dbdeb7baf7b9f173c314be3d",
+    "outputs/models/specialists/rhythm/specialists-v3q-primary8-best-candidate.pt": "b30cb2bbb45f1231c93ff1c196aa966b57b49831cadb296131c0283e7b0ceb02",
+    "outputs/models/backbones/backbone-v3ag-pathology.pt": "bf71e4cf8acc34031cb3611c7031e0649822e705fd7dcea354a3ea583ce920ee",
+    "outputs/models/specialists/pathology/specialists-v3ag-primary4-calibrated.pt": "cf5091e962fffb3254b1a71fe57236dd82ea0139093df192511499d931391dbc",
+    "data/external_dev/rhythm/external-dev-rhythm-chapman-shaoxing.tar.zst": "ec6ade27ab77b9807d41331016def56e54cbb96fba528fd7aca811e5a468f2fb",
+    "data/external_dev/pathology/external-dev-pathology-ptbxl-fold10.tar.zst": "fc1c3fc5374af962a8fc5903b6d1dd99a44ebfd7c66e0dfceaa106167afee558"
+  }
+}

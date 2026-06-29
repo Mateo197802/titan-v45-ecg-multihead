@@ -1,0 +1,2 @@
+-e .[data,optuna]
+--extra-index-url https://download.pytorch.org/whl/cpu

@@ -1,0 +1,9 @@
+{
+  "protocol": "source_held_out_rhythm_cross_validation",
+  "evaluation_scope": "internal_source_cv",
+  "folds": [
+    {"held_out_source": "INCART", "train_records": 7171, "validation_records": 171, "best_macro_f1": 0.361646, "best_top1_accuracy": 0.452084},
+    {"held_out_source": "SVDB", "train_records": 7168, "validation_records": 174, "best_macro_f1": 0.472228, "best_top1_accuracy": 0.188423}
+  ],
+  "interpretation": "weak_source_transfer_primary8_unresolved"
+}

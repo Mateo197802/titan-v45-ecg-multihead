@@ -1,0 +1,48 @@
+{
+  "protocol": "TITAN_V45_PUBLIC_CANONICAL_PROFILES_V1",
+  "evaluation_scope": "external_dev",
+  "profiles": [
+    {
+      "profile": "rhythm_primary8",
+      "classes": ["AFIB", "SB", "STACH", "NSR", "RBBB", "PAC", "1AVB", "PVC"],
+      "records": 2193,
+      "accuracy": 0.9060647514819882,
+      "accuracy_definition": "record_top1_accepted_labels",
+      "macro_f1": 0.7614253535094375,
+      "macro_f1_definition": "binary_panel_macro_f1",
+      "coverage": 1.0,
+      "top_k": 1,
+      "hidden_abstention": false,
+      "status": "NO_PASA"
+    },
+    {
+      "profile": "rhythm_primary6_diagnostic",
+      "classes": ["AFIB", "SB", "STACH", "RBBB", "1AVB", "PVC"],
+      "records": 1643,
+      "correct": 1564,
+      "accuracy": 0.9519172245891662,
+      "accuracy_definition": "record_top1",
+      "macro_f1": 0.8009383239876123,
+      "macro_f1_definition": "binary_panel_macro_f1",
+      "coverage": 1.0,
+      "top_k": 1,
+      "hidden_abstention": false,
+      "status": "PASA_METRICA",
+      "not_equivalent_to": "rhythm_primary8"
+    },
+    {
+      "profile": "pathology_primary4",
+      "classes": ["ASMI", "LVH", "IMI", "ISC_"],
+      "accuracy": 0.8022904853689048,
+      "accuracy_definition": "mean_binary_panel_accuracy",
+      "macro_f1": 0.793456370406346,
+      "macro_f1_definition": "binary_panel_macro_f1",
+      "coverage": 1.0,
+      "coverage_scope": "selected_high_confidence_panels",
+      "top_k": 1,
+      "hidden_abstention": false,
+      "metric_gate_passed": false,
+      "status": "ACEPTADO_POR_DECISION_DEL_PROYECTO"
+    }
+  ]
+}
