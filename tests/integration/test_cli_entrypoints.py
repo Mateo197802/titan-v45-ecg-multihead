@@ -24,6 +24,7 @@ ENTRYPOINTS = (
     "scripts/artifacts/build_release_manifest.py",
     "scripts/artifacts/sanitize_report.py",
     "scripts/cedia/generate_cleanup_manifest.py",
+    "scripts/cedia/run_reproducibility_verification.py",
 )
 
 
