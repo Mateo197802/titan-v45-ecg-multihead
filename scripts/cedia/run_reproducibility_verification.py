@@ -197,7 +197,7 @@ def main() -> int:
     payload = {
         "schema": "TITAN_V45_CEDIA_REPRODUCIBILITY_REPORT_V1",
         "status": "passed",
-        "root": str(root),
+        "execution_root": "release_checkout",
         "release_tag": manifest["tag"],
         "release_assets": {
             asset["name"]: {"bytes": asset["bytes"], "sha256": asset["sha256"]}
