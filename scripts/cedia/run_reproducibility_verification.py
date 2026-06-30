@@ -9,15 +9,8 @@ import tarfile
 from pathlib import Path
 from typing import Any
 
-import numpy as np
-
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-
-from titan_v45.artifacts.manifest import sha256_file, verify_artifact_manifest
-from titan_v45.contracts.profiles import CANONICAL_PROFILES
-from titan_v45.evaluation.primary import evaluate_primary_predictions
-from titan_v45.models.bundle import load_profile_bundle
 
 PRIVATE_PATH = re.compile(r"(?:[A-Za-z]:[\\/]+Users[\\/]+|/" + r"home/[^/\s]+/)")
 BACKBONE_PARAMETER_COUNT = 58_352_219
@@ -47,6 +40,8 @@ def _extract_tar_zst(archive: Path, destination: Path) -> None:
 
 
 def _dataset_package_report(root: Path) -> dict[str, Any]:
+    from titan_v45.artifacts.manifest import sha256_file
+
     package_manifests = sorted(root.rglob("package-manifest.json"))
     if len(package_manifests) != 1:
         raise RuntimeError(f"expected one package-manifest.json under {root}, found {len(package_manifests)}")
@@ -68,6 +63,11 @@ def _dataset_package_report(root: Path) -> dict[str, Any]:
 
 
 def _top1_from_csv(path: Path, profile_name: str, true_column: str, pred_column: str) -> dict[str, Any]:
+    import numpy as np
+
+    from titan_v45.contracts.profiles import CANONICAL_PROFILES
+    from titan_v45.evaluation.primary import evaluate_primary_predictions
+
     profile = CANONICAL_PROFILES[profile_name]
     rows = list(csv.DictReader(path.open(encoding="utf-8", newline="")))
     index = {name: position for position, name in enumerate(profile.classes)}
@@ -128,6 +128,9 @@ def _p8_from_csv(root: Path) -> dict[str, Any]:
 
 
 def _load_bundles(root: Path) -> dict[str, Any]:
+    from titan_v45.contracts.profiles import CANONICAL_PROFILES
+    from titan_v45.models.bundle import load_profile_bundle
+
     paths = {
         "v3f": root / "outputs/models/backbones/backbone-v3f-original.pt",
         "p6": root / "outputs/models/specialists/rhythm/specialists-v3p-e008-primary6-diagnostic.pt",
@@ -178,6 +181,8 @@ def main() -> int:
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--extract-root", type=Path, default=None)
     args = parser.parse_args()
+    from titan_v45.artifacts.manifest import verify_artifact_manifest
+
     root = args.root.resolve()
     manifest = _read_json(root / "release-manifest.json")
     verify_artifact_manifest(root, manifest["artifacts"])
