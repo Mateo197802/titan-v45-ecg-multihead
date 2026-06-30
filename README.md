@@ -4,13 +4,13 @@ TITAN V4.5 is a research-only, 12-lead ECG model and reproducibility package. Th
 
 > **Research use only.** This software and its weights are not a medical device and must not be used for clinical decisions. See [NO_CLINICAL_USE.md](NO_CLINICAL_USE.md).
 
-## Canonical Status
+## Canonical Metrics
 
-| Profile | Classes | External-development accuracy | Macro-F1 | Status |
-|---|---:|---:|---:|---|
-| `rhythm_primary8` | 8 | 90.6065% | 76.1425% | `NO_PASA` |
-| `rhythm_primary6_diagnostic` | 6 | 95.1917% | 80.0938% | `PASA_METRICA` |
-| `pathology_primary4` | 4 | 80.2290% | 79.3456% | `ACEPTADO_POR_DECISION_DEL_PROYECTO` |
+| Profile | Classes | External-development accuracy | Macro-F1 |
+|---|---:|---:|---:|
+| `rhythm_primary8` | 8 | 90.6065% | 76.1425% |
+| `rhythm_primary6_diagnostic` | 6 | 95.1917% | 80.0938% |
+| `pathology_primary4` | 4 | 80.2290% | 79.3456% |
 
 Primary6 omits `NSR` and `PAC` from the evaluated view and must never be reported as Primary8. Primary4 was promoted by project decision at the metrics shown above; it did not pass the historical accuracy gate. All repeatedly inspected external cohorts are described as `external-dev`, not untouched `external-final` evidence.
 
@@ -80,7 +80,7 @@ The uncertainty module implements MC-Dropout predictive entropy and mutual infor
 
 | Path | Purpose |
 |---|---|
-| `configs/profiles/` | Frozen public class, threshold, hash, and status contracts |
+| `configs/profiles/` | Frozen public class, threshold, and hash contracts |
 | `src/titan_v45/` | Modular data, model, training, evaluation, XAI, uncertainty, and artifact code |
 | `scripts/` | Stable command-line wrappers for local and CEDIA workflows |
 | `tests/` | Unit, integration, evaluation, and regression verification |
