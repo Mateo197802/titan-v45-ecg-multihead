@@ -26,6 +26,7 @@ data/external_dev/rhythm/*
 !data/external_dev/rhythm/README.md
 data/external_dev/pathology/*
 !data/external_dev/pathology/README.md
+data/external_dev/extracted/
 *.dat
 *.mat
 *.hea
@@ -46,6 +47,7 @@ outputs/models/specialists/pathology/*
 !outputs/models/specialists/pathology/README.md
 outputs/results/gradcam/generated/
 outputs/results/uncertainty/generated/
+outputs/results/external_dev/reproducibility_report.json
 
 # Editors and operating systems.
 .idea/
