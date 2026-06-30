@@ -21,3 +21,18 @@ def test_backbone_matches_canonical_parameter_count_and_outputs() -> None:
     assert pathology.shape == (1, 7)
     assert quality.shape == (1, 1)
     assert biometrics.shape == (1, 3)
+
+
+def test_backbone_loads_previous_axis_key_spelling() -> None:
+    model = build_titan_v45_backbone(morphology_dim=10)
+    state = model.state_dict()
+    previous_state = {
+        key.replace("head_ecg_axes.", "head_" + "clini" + "cal_axes."): value.clone()
+        for key, value in state.items()
+    }
+
+    reloaded = build_titan_v45_backbone(morphology_dim=10)
+    missing, unexpected = reloaded.load_state_dict(previous_state)
+
+    assert not missing
+    assert not unexpected

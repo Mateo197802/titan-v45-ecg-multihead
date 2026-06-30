@@ -24,7 +24,7 @@ def main() -> int:
         "passes": int(samples.shape[0]),
         "mean_predictive_entropy": float(predictive_entropy.mean()),
         "mean_mutual_information": float(np.maximum(predictive_entropy - expected_entropy, 0.0).mean()),
-        "claim_boundary": "Uncertainty supports quarantine; it does not guarantee correctness.",
+        "quarantine_policy": "entropy and mutual-information thresholds",
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")

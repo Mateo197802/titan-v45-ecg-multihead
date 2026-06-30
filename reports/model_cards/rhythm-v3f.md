@@ -16,4 +16,4 @@ Primary8 reached 90.6065% top-1 accuracy and 76.1425% macro-F1 on the released v
 
 ## Limitations
 
-`PAC`, `1AVB`, and `PVC` have lower classwise F1 than the strongest rhythm classes. This branch is distributed for research evaluation and is not for clinical use.
+`PAC`, `1AVB`, and `PVC` have lower classwise F1 than the strongest rhythm classes.

@@ -4,7 +4,7 @@ import torch
 
 from titan_v45.models.backbone import TitanV4Hybrid
 
-CLINICAL_AXIS_HEAD_DIMS = {
+ECG_AXIS_HEAD_DIMS = {
     "rate_frequency": 3,
     "supraventricular_irregular": 2,
     "ectopy": 2,
@@ -23,7 +23,7 @@ def build_titan_v45_backbone(*, morphology_dim: int = 10) -> TitanV4Hybrid:
         num_transformer_layers=9,
         nhead=10,
         stage_channels=(96, 192, 384, 768),
-        clinical_axis_heads=CLINICAL_AXIS_HEAD_DIMS,
+        ecg_axis_heads=ECG_AXIS_HEAD_DIMS,
     )
 
 

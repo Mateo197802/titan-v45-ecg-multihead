@@ -1,4 +1,4 @@
 TITAN V4.5 ECG Multihead
 Copyright 2026 Mateo Gavilanes
 
-Source code is licensed under Apache-2.0. Model weights and datasets are governed by separate terms. See MODEL_LICENSE.md, NO_CLINICAL_USE.md, and data/licenses/.
+Source code is licensed under Apache-2.0. Model weights and datasets are governed by separate terms. See MODEL_LICENSE.md and data/licenses/.

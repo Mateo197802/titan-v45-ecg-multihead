@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: "If you use this research artifact, cite the software and the source ECG datasets."
+message: "If you use this software package, cite the software and the source ECG datasets."
 title: "TITAN V4.5 ECG Multihead"
 type: software
 version: 0.1.0

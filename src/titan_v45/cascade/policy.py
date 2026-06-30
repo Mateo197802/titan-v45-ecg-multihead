@@ -5,4 +5,4 @@ CASCADE_PATHOLOGIES = ("ALMI", "ILMI", "LAE")
 
 
 def cascade_evidence_role() -> str:
-    return "secondary_safety_annex"
+    return "secondary_cascade_annex"

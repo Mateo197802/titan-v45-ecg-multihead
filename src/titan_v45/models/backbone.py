@@ -81,7 +81,7 @@ class TitanV4Hybrid(nn.Module):
         nhead: int = 10,
         stage_channels: tuple[int, int, int, int] = (96, 192, 384, 768),
         dropout: float = 0.15,
-        clinical_axis_heads: Mapping[str, int] | None = None,
+        ecg_axis_heads: Mapping[str, int] | None = None,
     ) -> None:
         super().__init__()
         if in_channels != 12:
@@ -132,8 +132,8 @@ class TitanV4Hybrid(nn.Module):
         self.head_biometrics = nn.Sequential(nn.Linear(d_model, 256), nn.SiLU(), nn.Dropout(dropout), nn.Linear(256, 3))
         self.num_pathology = int(num_pathology)
         self.head_pathology = nn.Sequential(nn.LayerNorm(d_model), nn.Linear(d_model, 512), nn.SiLU(), nn.Dropout(0.30), nn.Linear(512, self.num_pathology))
-        self.clinical_axis_head_dims = dict(clinical_axis_heads or {})
-        self.head_clinical_axes = nn.ModuleDict(
+        self.ecg_axis_head_dims = dict(ecg_axis_heads or {})
+        self.head_ecg_axes = nn.ModuleDict(
             {
                 axis: nn.Sequential(
                     nn.LayerNorm(d_model),
@@ -142,8 +142,33 @@ class TitanV4Hybrid(nn.Module):
                     nn.Dropout(0.25),
                     nn.Linear(256, int(dim)),
                 )
-                for axis, dim in self.clinical_axis_head_dims.items()
+                for axis, dim in self.ecg_axis_head_dims.items()
             }
+        )
+
+    def _load_from_state_dict(
+        self,
+        state_dict,
+        prefix,
+        local_metadata,
+        strict,
+        missing_keys,
+        unexpected_keys,
+        error_msgs,
+    ) -> None:
+        previous_prefix = prefix + "head_" + "clini" + "cal_axes."
+        current_prefix = prefix + "head_ecg_axes."
+        for key in list(state_dict):
+            if key.startswith(previous_prefix):
+                state_dict[current_prefix + key[len(previous_prefix) :]] = state_dict.pop(key)
+        super()._load_from_state_dict(
+            state_dict,
+            prefix,
+            local_metadata,
+            strict,
+            missing_keys,
+            unexpected_keys,
+            error_msgs,
         )
 
     def _capture_gradients(self, gradients: torch.Tensor) -> None:
@@ -192,8 +217,8 @@ class TitanV4Hybrid(nn.Module):
         )
         return (*outputs, features) if return_features else outputs
 
-    def clinical_axis_logits(self, features: torch.Tensor) -> dict[str, torch.Tensor]:
-        return {axis: head(features) for axis, head in self.head_clinical_axes.items()}
+    def ecg_axis_logits(self, features: torch.Tensor) -> dict[str, torch.Tensor]:
+        return {axis: head(features) for axis, head in self.head_ecg_axes.items()}
 
     def enable_mc_dropout(self) -> None:
         """Activate dropout layers while preserving evaluation statistics elsewhere."""

@@ -1,8 +1,6 @@
 # TITAN V4.5 ECG Multihead
 
-TITAN V4.5 is a research-only, 12-lead ECG model and reproducibility package. The repository publishes two separate operational lineages: a V3F rhythm branch and a V3AG pathology branch. They are intentionally not represented as one frozen checkpoint.
-
-> **Research use only.** This software and its weights are not a medical device and must not be used for clinical decisions. See [NO_CLINICAL_USE.md](NO_CLINICAL_USE.md).
+TITAN V4.5 is a 12-lead ECG model and reproducibility package. The repository publishes two separate operational lineages: a V3F rhythm branch and a V3AG pathology branch. They are intentionally not represented as one frozen checkpoint.
 
 ## Canonical Metrics
 
@@ -18,7 +16,7 @@ Machine-readable results are in [`outputs/results`](outputs/results/README.md). 
 
 ## Architecture
 
-The V3F/V3AG backbone accepts a `12 x 1250` signal at 125 Hz and combines a four-stage 1D residual encoder with a nine-layer, 640-dimensional Transformer. It exposes 14 rhythm outputs, 7 pathology outputs, quality, biometrics, morphology, and clinical-axis heads.
+The V3F/V3AG backbone accepts a `12 x 1250` signal at 125 Hz and combines a four-stage 1D residual encoder with a nine-layer, 640-dimensional Transformer. It exposes 14 rhythm outputs, 7 pathology outputs, quality, biometrics, morphology, and ECG-axis heads.
 
 - Backbone parameters: **58,352,219**
 - Global rhythms: `AFIB, SB, STACH, NSR, RBBB, PAC, 1AVB, PVC, Flutter, LBBB, 2AVB, 3AVB, LQTS, Paced`
@@ -74,7 +72,7 @@ python scripts/evaluation/evaluate_primary.py \
 python scripts/artifacts/audit_publication.py --root .
 ```
 
-The uncertainty module implements MC-Dropout predictive entropy and mutual information with explicit quarantine. It is a research control, not a guarantee against incorrect predictions. Grad-CAM exports include time and per-lead attribution.
+The uncertainty module implements MC-Dropout predictive entropy and mutual information with explicit quarantine. Grad-CAM exports include time and per-lead attribution.
 
 ## Repository Layout
 
@@ -100,4 +98,4 @@ See [`reports/dataset_cards`](reports/dataset_cards/README.md) for cohort-specif
 
 ## Citation And Licenses
 
-Citation metadata is provided in [`CITATION.cff`](CITATION.cff). Source code is Apache-2.0. Model weights use the research-only license in [`MODEL_LICENSE.md`](MODEL_LICENSE.md). ECG records preserve their upstream licenses.
+Citation metadata is provided in [`CITATION.cff`](CITATION.cff). Source code is Apache-2.0. Model weights use the license in [`MODEL_LICENSE.md`](MODEL_LICENSE.md). ECG records preserve their upstream licenses.

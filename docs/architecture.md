@@ -12,7 +12,7 @@ The backbone has 58,352,219 parameters. Its state dictionary also contains 10,96
 - Pathology: 7 logits.
 - Signal quality: 1 output.
 - Biometrics: 3 outputs.
-- Clinical axes: rate/frequency, supraventricular irregularity, ectopy, conduction, and repolarization/QT.
+- ECG axes: rate/frequency, supraventricular irregularity, ectopy, conduction, and repolarization/QT.
 
 ## Operational Branches
 
