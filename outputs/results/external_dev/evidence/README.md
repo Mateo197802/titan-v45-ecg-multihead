@@ -1,9 +1,9 @@
-# External-Development Evidence
+# Validation Evidence
 
-This directory contains sanitized CSV and JSON evidence copied from promoted CEDIA runs.
+This directory contains sanitized CSV and JSON evidence from CEDIA evaluation runs.
 
-- Rhythm Primary8 files document the V3Q external-development candidate and must retain status `NO_PASA`.
-- Rhythm Primary6 files document the diagnostic no-NSR/no-PAC evaluation and must not be reported as Primary8.
-- Pathology Primary4 files document the promoted V3AG calibrated branch with status `ACEPTADO_POR_DECISION_DEL_PROYECTO`.
+- Rhythm Primary8 files document the V3Q eight-class profile.
+- Rhythm Primary6 files document the six-class diagnostic profile with its own class order and eligibility.
+- Pathology Primary4 files document the V3AG calibrated four-panel pathology profile.
 
-Record paths were rewritten to relative public placeholders, and private local/CEDIA paths were redacted. These are external-development records, not an untouched clinical final test set.
+Record paths use release-relative public paths, and private local/CEDIA paths are redacted.

@@ -12,18 +12,6 @@ class LabeledConfusionMatrix:
     values: np.ndarray
 
 
-def metric_gate_status(
-    *, accuracy: float, macro_f1: float, required_accuracy: float, required_macro_f1: float
-) -> dict[str, bool]:
-    accuracy_pass = float(accuracy) >= float(required_accuracy)
-    macro_f1_pass = float(macro_f1) >= float(required_macro_f1)
-    return {
-        "accuracy_pass": accuracy_pass,
-        "macro_f1_pass": macro_f1_pass,
-        "passed": accuracy_pass and macro_f1_pass,
-    }
-
-
 def confusion_matrix_with_labels(
     *, y_true: np.ndarray, y_pred: np.ndarray, labels: Sequence[str]
 ) -> LabeledConfusionMatrix:

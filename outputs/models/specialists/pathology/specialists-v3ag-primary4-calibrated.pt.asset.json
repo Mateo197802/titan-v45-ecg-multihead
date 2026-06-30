@@ -1,0 +1,12 @@
+{
+  "schema": "TITAN_V45_RELEASE_ASSET_POINTER_V1",
+  "release_tag": "v0.1.0",
+  "name": "specialists-v3ag-primary4-calibrated.pt",
+  "repository_path": "outputs/models/specialists/pathology/specialists-v3ag-primary4-calibrated.pt",
+  "bytes": 29413606,
+  "sha256": "cf5091e962fffb3254b1a71fe57236dd82ea0139093df192511499d931391dbc",
+  "category": "model",
+  "model_role": "pathology_specialist",
+  "download_url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/releases/download/v0.1.0/specialists-v3ag-primary4-calibrated.pt",
+  "materialization": "Distributed as a GitHub Release asset; use the fetch script to materialize this file at repository_path and verify SHA-256."
+}

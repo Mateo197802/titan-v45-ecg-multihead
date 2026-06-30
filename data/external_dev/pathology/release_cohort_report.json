@@ -1,0 +1,37 @@
+{
+  "schema": "TITAN_V45_PATHOLOGY_RELEASE_COHORT_REPORT_V1",
+  "release_tag": "v0.1.0",
+  "asset": {
+    "name": "external-dev-pathology-ptbxl-fold10.tar.zst",
+    "path": "data/external_dev/pathology/external-dev-pathology-ptbxl-fold10.tar.zst",
+    "category": "external_dev_dataset",
+    "bytes": 10977160,
+    "sha256": "fc1c3fc5374af962a8fc5903b6d1dd99a44ebfd7c66e0dfceaa106167afee558",
+    "download_url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/releases/download/v0.1.0/external-dev-pathology-ptbxl-fold10.tar.zst"
+  },
+  "classes_primary4": [
+    "ASMI",
+    "LVH",
+    "IMI",
+    "ISC_"
+  ],
+  "panel_rows": 962,
+  "panel_counts": {
+    "ASMI": 294,
+    "LVH": 224,
+    "IMI": 206,
+    "ISC_": 238
+  },
+  "manifest_files": [
+    "data/manifests/external_dev/pathology_primary4_panels.csv"
+  ],
+  "evidence_files": [
+    "outputs/results/external_dev/pathology_primary4_metrics.json",
+    "outputs/results/external_dev/pathology_primary4_confusion_matrices.csv",
+    "outputs/results/external_dev/evidence/pathology_primary4_external_dev_report.json",
+    "outputs/results/external_dev/evidence/pathology_primary4_ASMI_record_predictions.csv",
+    "outputs/results/external_dev/evidence/pathology_primary4_LVH_record_predictions.csv",
+    "outputs/results/external_dev/evidence/pathology_primary4_IMI_record_predictions.csv",
+    "outputs/results/external_dev/evidence/pathology_primary4_ISC__record_predictions.csv"
+  ]
+}

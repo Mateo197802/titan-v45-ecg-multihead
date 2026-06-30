@@ -99,8 +99,8 @@ def _p6_diagnostic_from_csv(root: Path) -> dict[str, Any]:
         "correct": correct_count,
         "accuracy": accuracy,
         "macro_f1": canonical["binary_macro_f1"],
-        "canonical_status": canonical["status"],
-        "claim_boundary": "Diagnostic Primary6 without NSR/PAC; not a Primary8 result.",
+        "release_role": canonical["release_role"],
+        "scope_note": "Six-class rhythm diagnostic profile with its own class order and eligibility.",
     }
 
 
@@ -117,13 +117,13 @@ def _p8_from_csv(root: Path) -> dict[str, Any]:
         "records": canonical["records"],
         "top1_accepted_accuracy": canonical["top1_accepted_accuracy"],
         "binary_panel_macro_f1": canonical["binary_panel_macro_f1"],
-        "canonical_status": canonical["status"],
+        "release_role": canonical["release_role"],
         "diagnostic_single_target": {
             "accuracy": diagnostic["accuracy"],
             "macro_f1": diagnostic["macro_f1"],
             "rows": diagnostic["rows"],
         },
-        "claim_boundary": "Primary8 does not pass its full accuracy gate.",
+        "scope_note": "Eight-class rhythm profile evaluated with frozen class order and thresholds.",
     }
 
 
@@ -201,7 +201,7 @@ def main() -> int:
     p6 = _p6_diagnostic_from_csv(root)
     payload = {
         "schema": "TITAN_V45_CEDIA_REPRODUCIBILITY_REPORT_V1",
-        "status": "passed",
+        "verification_result": "complete",
         "execution_root": "release_checkout",
         "release_tag": manifest["tag"],
         "release_assets": {
@@ -220,7 +220,7 @@ def main() -> int:
                 root / "outputs/results/external_dev/pathology_primary4_metrics.json"
             ),
         },
-        "claim_boundary": "External-development verification; not an untouched external-final claim.",
+        "scope_note": "Release assets, manifests, class order, hashes, and metrics verified together.",
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")

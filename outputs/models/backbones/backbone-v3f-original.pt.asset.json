@@ -1,0 +1,12 @@
+{
+  "schema": "TITAN_V45_RELEASE_ASSET_POINTER_V1",
+  "release_tag": "v0.1.0",
+  "name": "backbone-v3f-original.pt",
+  "repository_path": "outputs/models/backbones/backbone-v3f-original.pt",
+  "bytes": 233565900,
+  "sha256": "ca5d4dcb4b9828e6c4339800fe81ec27f32d9b09a090bb57503bfb56746a8da8",
+  "category": "model",
+  "model_role": "backbone",
+  "download_url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/releases/download/v0.1.0/backbone-v3f-original.pt",
+  "materialization": "Distributed as a GitHub Release asset; use the fetch script to materialize this file at repository_path and verify SHA-256."
+}

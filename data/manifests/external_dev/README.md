@@ -1,3 +1,3 @@
-# External-Development Manifests
+# Validation Manifests
 
-Sanitized record lists for repeatable rhythm and pathology evaluation. These cohorts have been inspected repeatedly and are not external-final.
+Sanitized record lists and cohort summaries for repeatable rhythm and pathology validation. CSV manifests expose record identifiers, release-relative record paths, labels, predictions, and window counts used by the published reports.

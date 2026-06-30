@@ -1,5 +1,5 @@
 {
-  "protocol": "TITAN_V45_PRIMARY6_NO_NSR_PAC_RECORD_ERROR_AUDIT",
+  "protocol": "TITAN_V45_PRIMARY6_DIAGNOSTIC_RECORD_AUDIT",
   "classes": [
     "AFIB",
     "SB",
@@ -8,7 +8,7 @@
     "1AVB",
     "PVC"
   ],
-  "dropped_from_primary8": [
+  "profile_excludes": [
     "NSR",
     "PAC"
   ],
@@ -17,7 +17,7 @@
   "v3d_specialists_checkpoint": "<PRIVATE_PATH_REDACTED>",
   "internal_manifest": "<PRIVATE_PATH_REDACTED>",
   "external_manifest": "<PRIVATE_PATH_REDACTED>",
-  "thresholds_source": "internal_zero_bias_f1_tuning",
+  "threshold_source": "frozen_release_thresholds",
   "internal_records": 192,
   "internal_window_count": 276,
   "external_window_count": 1679,
@@ -227,7 +227,7 @@
       }
     ]
   },
-  "external_gate": {
+  "external_metrics": {
     "accuracy_required": 0.95,
     "macro_f1_required": 0.8,
     "accuracy": 0.9519172245891662,
@@ -282,5 +282,6 @@
     "multi_primary_ambiguous": 20,
     "single_primary_with_cascade_context": 13
   },
-  "ambiguous_multilabel_error_count": 20
+  "ambiguous_multilabel_error_count": 20,
+  "release_role": "primary6_diagnostic"
 }

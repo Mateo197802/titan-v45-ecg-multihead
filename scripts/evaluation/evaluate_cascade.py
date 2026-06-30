@@ -19,7 +19,7 @@ def main() -> int:
         "evidence_role": cascade_evidence_role(),
         "rhythm_classes": CASCADE_RHYTHMS,
         "pathology_classes": CASCADE_PATHOLOGIES,
-        "eligible_for_primary_gate": False,
+        "primary_profile_evidence": False,
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")

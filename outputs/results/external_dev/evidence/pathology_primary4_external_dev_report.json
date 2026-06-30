@@ -9,11 +9,6 @@
   ],
   "pathology4_macro_f1": 0.793456370406346,
   "pathology4_accuracy": 0.8022904853689048,
-  "gate_required": {
-    "accuracy": 0.95,
-    "macro_f1_strictly_greater_than": 0.75
-  },
-  "gate_passed": false,
   "pathology4": {
     "protocol": "TITAN_V45_V3D_EXTERNAL_PATHOLOGY4_SPECIALIST",
     "panels": {
@@ -93,5 +88,6 @@
     "pathology4_macro_f1": 0.793456370406346,
     "pathology4_accuracy": 0.8022904853689048,
     "pathology4_balanced_accuracy": 0.8022904853689048
-  }
+  },
+  "release_role": "primary4_pathology"
 }

@@ -17,12 +17,12 @@ def test_canonical_profile_contracts_are_explicit() -> None:
     assert primary8.classes == (
         "AFIB", "SB", "STACH", "NSR", "RBBB", "PAC", "1AVB", "PVC"
     )
-    assert primary8.canonical_status == "NO_PASA"
+    assert primary8.release_role == "primary8_candidate"
     assert primary6.classes == ("AFIB", "SB", "STACH", "RBBB", "1AVB", "PVC")
     assert primary6.artifact_classes == primary8.classes
-    assert primary6.canonical_status == "PASA_METRICA"
+    assert primary6.release_role == "primary6_diagnostic"
     assert pathology4.classes == ("ASMI", "LVH", "IMI", "ISC_")
-    assert pathology4.canonical_status == "ACEPTADO_POR_DECISION_DEL_PROYECTO"
+    assert pathology4.release_role == "primary4_pathology"
 
 
 def test_profile_rejects_incompatible_backbone_or_specialist() -> None:

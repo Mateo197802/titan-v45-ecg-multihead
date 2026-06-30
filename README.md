@@ -12,9 +12,9 @@ TITAN V4.5 is a research-only, 12-lead ECG model and reproducibility package. Th
 | `rhythm_primary6_diagnostic` | 6 | 95.1917% | 80.0938% |
 | `pathology_primary4` | 4 | 80.2290% | 79.3456% |
 
-Primary6 omits `NSR` and `PAC` from the evaluated view and must never be reported as Primary8. Primary4 was promoted by project decision at the metrics shown above; it did not pass the historical accuracy gate. All repeatedly inspected external cohorts are described as `external-dev`, not untouched `external-final` evidence.
+Primary8, Primary6 diagnostic, and Primary4 are separate release profiles with fixed class orders, thresholds, hashes, and evaluation scripts. Primary6 diagnostic evaluates six rhythm classes as its own profile; Primary4 evaluates four pathology panels with classwise binary thresholds.
 
-Machine-readable results are in [`outputs/results`](outputs/results/README.md). The scientific claim boundary is documented in [`docs/scientific-boundaries.md`](docs/scientific-boundaries.md).
+Machine-readable results are in [`outputs/results`](outputs/results/README.md). Dataset manifests and cohort reports are in [`data`](data/README.md).
 
 ## Architecture
 
@@ -84,14 +84,14 @@ The uncertainty module implements MC-Dropout predictive entropy and mutual infor
 | `src/titan_v45/` | Modular data, model, training, evaluation, XAI, uncertainty, and artifact code |
 | `scripts/` | Stable command-line wrappers for local and CEDIA workflows |
 | `tests/` | Unit, integration, evaluation, and regression verification |
-| `data/` | Sanitized manifests, dataset cards, licenses, and synthetic fixtures |
-| `outputs/` | Canonical metrics and documented locations for Release weights |
+| `data/` | Sanitized manifests, cohort reports, dataset cards, licenses, and synthetic fixtures |
+| `outputs/` | Weight asset manifests, metrics, CSV predictions, confusion matrices, and evaluation evidence |
 | `reports/` | Human-readable metric, model, and dataset cards |
 | `docs/` | Architecture, protocols, provenance, and scientific boundaries |
 
 ## Dataset Attribution
 
-The external-development release subsets contain all records referenced by the promoted manifests, not the complete upstream datasets.
+The release subsets contain the ECG records referenced by the public validation manifests. Upstream dataset licenses and citations remain attached to the released cohorts.
 
 - PTB-XL: Wagner et al., *Scientific Data* 7, 154 (2020), PhysioNet version 1.0.3, CC BY 4.0.
 - Chapman-Shaoxing-Ningbo: Zheng et al., *Scientific Data* 9, 136 (2022), PhysioNet version 1.0.0, CC BY 4.0.

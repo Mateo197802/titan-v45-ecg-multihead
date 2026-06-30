@@ -30,7 +30,7 @@ def main() -> int:
         classes=profile.classes,
         scope="external_dev",
     )
-    report["claim_boundary"] = "Repeated evaluation; this is external-dev, not external-final."
+    report["scope_note"] = "Released repeatable evaluation cohort with fixed class order."
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     return 0

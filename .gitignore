@@ -24,8 +24,12 @@ release_downloads/
 # Raw ECG records are distributed as release assets, not Git objects.
 data/external_dev/rhythm/*
 !data/external_dev/rhythm/README.md
+!data/external_dev/rhythm/*.json
+!data/external_dev/rhythm/*.csv
 data/external_dev/pathology/*
 !data/external_dev/pathology/README.md
+!data/external_dev/pathology/*.json
+!data/external_dev/pathology/*.csv
 data/external_dev/extracted/
 *.dat
 *.mat
@@ -39,12 +43,16 @@ data/external_dev/extracted/
 # Generated local outputs.
 outputs/models/backbones/*
 !outputs/models/backbones/README.md
+!outputs/models/backbones/*.json
 outputs/models/heads/*
 !outputs/models/heads/README.md
+!outputs/models/heads/*.json
 outputs/models/specialists/rhythm/*
 !outputs/models/specialists/rhythm/README.md
+!outputs/models/specialists/rhythm/*.json
 outputs/models/specialists/pathology/*
 !outputs/models/specialists/pathology/README.md
+!outputs/models/specialists/pathology/*.json
 outputs/results/gradcam/generated/
 outputs/results/uncertainty/generated/
 outputs/results/external_dev/reproducibility_report.json

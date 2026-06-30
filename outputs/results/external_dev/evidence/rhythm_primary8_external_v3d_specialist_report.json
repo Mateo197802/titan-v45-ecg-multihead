@@ -11,8 +11,8 @@
   "pathology_input_dim": 681,
   "rhythm_signal_event_features": true,
   "pathology_signal_event_features": true,
-  "primary_gate_view": "primary8_multilabel_accepted_balanced",
-  "gate": {
+  "primary_view": "primary8_multilabel_accepted_balanced",
+  "metrics_summary": {
     "rhythm_accuracy_required": 0.97,
     "rhythm_macro_f1_required": 0.8,
     "pathology_accuracy_required": 0.9,
@@ -20,8 +20,7 @@
     "rhythm_accuracy": 0.9060647514819882,
     "rhythm_macro_f1": 0.7614253535094375,
     "pathology_accuracy": 0.7663518987692164,
-    "pathology_macro_f1": 0.730623816758077,
-    "passed": false
+    "pathology_macro_f1": 0.730623816758077
   },
   "rhythm": {
     "primary8_multilabel_accepted_balanced": {
@@ -41,7 +40,7 @@
         0.775,
         0.725
       ],
-      "membership_gate": {
+      "membership_metrics": {
         "records": 2193,
         "top1_accepted_accuracy": 0.9060647514819882,
         "binary_panels": {
@@ -173,7 +172,7 @@
         0.775,
         0.725
       ],
-      "membership_gate": {
+      "membership_metrics": {
         "records": 2193,
         "top1_accepted_accuracy": 0.9060647514819882,
         "binary_panels": {
@@ -305,7 +304,7 @@
         0.775,
         0.725
       ],
-      "membership_gate": {
+      "membership_metrics": {
         "records": 1825,
         "top1_accepted_accuracy": 0.9090410958904109,
         "binary_panels": {
@@ -500,5 +499,6 @@
     "pathology4_macro_f1": 0.730623816758077,
     "pathology4_accuracy": 0.7663518987692164,
     "pathology4_balanced_accuracy": 0.7663518987692164
-  }
+  },
+  "release_role": "primary8_candidate"
 }

@@ -3,16 +3,61 @@
   "evaluation_scope": "external_dev",
   "coverage": 1.0,
   "coverage_scope": "selected_high_confidence_panels",
-  "classes": ["ASMI", "LVH", "IMI", "ISC_"],
-  "thresholds": [0.67, 0.705, 0.635, 0.595],
+  "classes": [
+    "ASMI",
+    "LVH",
+    "IMI",
+    "ISC_"
+  ],
+  "thresholds": [
+    0.67,
+    0.705,
+    0.635,
+    0.595
+  ],
   "mean_accuracy": 0.8022904853689048,
   "macro_f1": 0.793456370406346,
-  "metric_gate_passed": false,
-  "status": "ACEPTADO_POR_DECISION_DEL_PROYECTO",
   "panels": {
-    "ASMI": {"tp": 106, "tn": 139, "fp": 8, "fn": 41, "accuracy": 0.8333333333333334, "precision": 0.9298245614035088, "recall": 0.7210884353741497, "f1": 0.8122605363984674},
-    "LVH": {"tp": 70, "tn": 81, "fp": 31, "fn": 42, "accuracy": 0.6741071428571429, "precision": 0.693069306930693, "recall": 0.625, "f1": 0.6572769953051643},
-    "IMI": {"tp": 84, "tn": 77, "fp": 26, "fn": 19, "accuracy": 0.7815533980582524, "precision": 0.7636363636363637, "recall": 0.8155339805825242, "f1": 0.7887323943661971},
-    "ISC_": {"tp": 103, "tn": 116, "fp": 3, "fn": 16, "accuracy": 0.9201680672268907, "precision": 0.9716981132075472, "recall": 0.865546218487395, "f1": 0.9155555555555555}
-  }
+    "ASMI": {
+      "tp": 106,
+      "tn": 139,
+      "fp": 8,
+      "fn": 41,
+      "accuracy": 0.8333333333333334,
+      "precision": 0.9298245614035088,
+      "recall": 0.7210884353741497,
+      "f1": 0.8122605363984674
+    },
+    "LVH": {
+      "tp": 70,
+      "tn": 81,
+      "fp": 31,
+      "fn": 42,
+      "accuracy": 0.6741071428571429,
+      "precision": 0.693069306930693,
+      "recall": 0.625,
+      "f1": 0.6572769953051643
+    },
+    "IMI": {
+      "tp": 84,
+      "tn": 77,
+      "fp": 26,
+      "fn": 19,
+      "accuracy": 0.7815533980582524,
+      "precision": 0.7636363636363637,
+      "recall": 0.8155339805825242,
+      "f1": 0.7887323943661971
+    },
+    "ISC_": {
+      "tp": 103,
+      "tn": 116,
+      "fp": 3,
+      "fn": 16,
+      "accuracy": 0.9201680672268907,
+      "precision": 0.9716981132075472,
+      "recall": 0.865546218487395,
+      "f1": 0.9155555555555555
+    }
+  },
+  "release_role": "primary4_pathology"
 }

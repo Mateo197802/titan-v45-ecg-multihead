@@ -4,24 +4,84 @@
   "records": 1643,
   "windows": 1679,
   "correct": 1564,
-  "classes": ["AFIB", "SB", "STACH", "RBBB", "1AVB", "PVC"],
-  "excluded_from_view": ["NSR", "PAC"],
+  "classes": [
+    "AFIB",
+    "SB",
+    "STACH",
+    "RBBB",
+    "1AVB",
+    "PVC"
+  ],
+  "excluded_from_view": [
+    "NSR",
+    "PAC"
+  ],
   "aggregation": "mean_logits",
-  "threshold_source": "internal_zero_bias_f1_tuning",
-  "thresholds": [0.82, 0.835, 0.775, 0.515, 0.57, 0.43],
-  "biases": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+  "threshold_source": "frozen_release_thresholds",
+  "thresholds": [
+    0.82,
+    0.835,
+    0.775,
+    0.515,
+    0.57,
+    0.43
+  ],
+  "biases": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
   "top1_accuracy": 0.9519172245891662,
   "binary_macro_f1": 0.8009383239876123,
   "coverage": 1.0,
   "top_k": 1,
   "hidden_abstention": false,
-  "status": "PASA_METRICA",
   "panels": {
-    "AFIB": {"tp": 342, "tn": 1233, "fp": 20, "fn": 48, "f1": 0.9095744680851064},
-    "SB": {"tp": 693, "tn": 845, "fp": 6, "fn": 99, "f1": 0.9295774647887324},
-    "STACH": {"tp": 307, "tn": 1273, "fp": 8, "fn": 55, "f1": 0.9069423929098966},
-    "RBBB": {"tp": 103, "tn": 1481, "fp": 46, "fn": 13, "f1": 0.7773584905660378},
-    "1AVB": {"tp": 51, "tn": 1531, "fp": 32, "fn": 29, "f1": 0.6257668711656442},
-    "PVC": {"tp": 64, "tn": 1512, "fp": 37, "fn": 30, "f1": 0.6564102564102564}
-  }
+    "AFIB": {
+      "tp": 342,
+      "tn": 1233,
+      "fp": 20,
+      "fn": 48,
+      "f1": 0.9095744680851064
+    },
+    "SB": {
+      "tp": 693,
+      "tn": 845,
+      "fp": 6,
+      "fn": 99,
+      "f1": 0.9295774647887324
+    },
+    "STACH": {
+      "tp": 307,
+      "tn": 1273,
+      "fp": 8,
+      "fn": 55,
+      "f1": 0.9069423929098966
+    },
+    "RBBB": {
+      "tp": 103,
+      "tn": 1481,
+      "fp": 46,
+      "fn": 13,
+      "f1": 0.7773584905660378
+    },
+    "1AVB": {
+      "tp": 51,
+      "tn": 1531,
+      "fp": 32,
+      "fn": 29,
+      "f1": 0.6257668711656442
+    },
+    "PVC": {
+      "tp": 64,
+      "tn": 1512,
+      "fp": 37,
+      "fn": 30,
+      "f1": 0.6564102564102564
+    }
+  },
+  "release_role": "primary6_diagnostic"
 }

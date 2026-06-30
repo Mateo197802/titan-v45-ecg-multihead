@@ -1,0 +1,12 @@
+{
+  "schema": "TITAN_V45_RELEASE_ASSET_POINTER_V1",
+  "release_tag": "v0.1.0",
+  "name": "backbone-v3ag-pathology.pt",
+  "repository_path": "outputs/models/backbones/backbone-v3ag-pathology.pt",
+  "bytes": 233566092,
+  "sha256": "bf71e4cf8acc34031cb3611c7031e0649822e705fd7dcea354a3ea583ce920ee",
+  "category": "model",
+  "model_role": "backbone",
+  "download_url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/releases/download/v0.1.0/backbone-v3ag-pathology.pt",
+  "materialization": "Distributed as a GitHub Release asset; use the fetch script to materialize this file at repository_path and verify SHA-256."
+}

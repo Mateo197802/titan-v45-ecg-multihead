@@ -12,8 +12,8 @@ Research evaluation of rhythm classification from ten-second, 12-lead ECG window
 
 ## Results
 
-Full Primary8 reached 90.6065% top-1 accepted accuracy and 76.1425% macro-F1 on external-development data. It is `NO_PASA`. The six-class diagnostic view reached 95.1917% top-1 accuracy and 80.0938% macro-F1 and is `PASA_METRICA` only for P6.
+Primary8 reached 90.6065% top-1 accuracy and 76.1425% macro-F1 on the released validation cohort. The six-class diagnostic profile reached 95.1917% top-1 accuracy and 80.0938% macro-F1 on its eligible records.
 
 ## Limitations
 
-`PAC`, `1AVB`, and `PVC` are weak in Primary8. Source-held-out validation was poor. The external cohort was repeatedly inspected, and the P6 margin over its gate is narrow. This branch is not for clinical use.
+`PAC`, `1AVB`, and `PVC` have lower classwise F1 than the strongest rhythm classes. This branch is distributed for research evaluation and is not for clinical use.

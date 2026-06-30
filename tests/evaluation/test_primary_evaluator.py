@@ -24,10 +24,10 @@ def test_primary_evaluator_reports_top1_without_oracle_or_abstention() -> None:
     assert report["confusion_matrix"] == [[1, 0, 0], [0, 1, 0], [0, 1, 1]]
 
 
-def test_write_canonical_report_preserves_project_decision(tmp_path: Path) -> None:
+def test_write_canonical_report_preserves_release_role_and_metrics(tmp_path: Path) -> None:
     destination = tmp_path / "p4.json"
     write_canonical_report("pathology_primary4", destination)
     payload = json.loads(destination.read_text(encoding="utf-8"))
-    assert payload["canonical_status"] == "ACEPTADO_POR_DECISION_DEL_PROYECTO"
-    assert payload["metric_gate_passed"] is False
+    assert payload["release_role"] == "primary4_pathology"
     assert payload["accuracy"] == 0.8022904853689048
+    assert all(not key.startswith("canonical_") for key in payload)

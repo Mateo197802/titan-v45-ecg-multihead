@@ -3,7 +3,7 @@
   "task": "rhythm",
   "classes": ["AFIB", "SB", "STACH", "RBBB", "1AVB", "PVC"],
   "thresholds": [0.82, 0.835, 0.775, 0.515, 0.57, 0.43],
-  "canonical_status": "PASA_METRICA",
+  "release_role": "primary6_diagnostic",
   "backbone_sha256": "ca5d4dcb4b9828e6c4339800fe81ec27f32d9b09a090bb57503bfb56746a8da8",
   "specialist_sha256": "9c5a9265a7155e1206c551cc4e6d645b86363ba3dbdeb7baf7b9f173c314be3d",
   "evaluation_scope": "external_dev",

@@ -16,6 +16,6 @@ The backbone has 58,352,219 parameters. Its state dictionary also contains 10,96
 
 ## Operational Branches
 
-The V3F rhythm branch and V3AG pathology branch use separately fine-tuned backbones. No released claim combines their best results into one checkpoint. A profile bundle must pair only the hashes and class contract declared in its JSON profile and release manifest.
+The V3F rhythm branch and V3AG pathology branch use separately fine-tuned backbones. A profile bundle pairs the backbone hash, specialist hash, class contract, and threshold vector declared in its JSON profile and release manifest.
 
-The classwise rhythm specialist has 4,909,720 parameters. The promoted 512-unit pathology specialist has 2,432,244 parameters.
+The classwise rhythm specialist has 4,909,720 parameters. The 512-unit pathology specialist has 2,432,244 parameters.

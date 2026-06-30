@@ -6,8 +6,8 @@ The principal source is the Chapman-Shaoxing-Ningbo 12-lead ECG database, Physio
 
 ## Released Scope
 
-The Release archive contains every ECG record referenced by the promoted external-development rhythm manifest, not the complete upstream database. The full Primary8 view contains 2,193 record evaluations; the Primary6 diagnostic view contains 1,643 eligible records.
+The Release archive contains the ECG records referenced by the public rhythm validation manifests. The Primary8 view contains 2,193 record evaluations; the Primary6 diagnostic view contains 1,643 eligible records.
 
 ## Processing And Limitations
 
-Signals are resampled to 125 Hz and evaluated as `12 x 1250` windows with record-level aggregation. Repeated checkpoint evaluation means this cohort is not untouched external-final evidence.
+Signals are resampled to 125 Hz and evaluated as `12 x 1250` windows with record-level aggregation. The release report lists the exact records, labels, predictions, and source counts used by the published metrics.

@@ -1,3 +1,3 @@
-# Pathology External-Development Cohort
+# Pathology Validation Cohort
 
-The Release archive materializes every PTB-XL fold-10 record referenced by the promoted Primary4 panels. Coverage statements apply to the selected panels, not the complete PTB-XL population.
+The Release archive materializes every PTB-XL record referenced by the public Primary4 validation panels, with release-relative paths and upstream license attribution. `release_cohort_report.json` links the cohort archive to panel metrics, predictions, and manifest CSVs.

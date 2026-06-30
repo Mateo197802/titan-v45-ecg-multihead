@@ -14,7 +14,7 @@ class ModelProfile:
     task: str
     classes: tuple[str, ...]
     thresholds: tuple[float, ...]
-    canonical_status: str
+    release_role: str
     backbone_sha256: str
     specialist_sha256: str
     evaluation_scope: str = "external_dev"
@@ -36,7 +36,7 @@ CANONICAL_PROFILES: dict[str, ModelProfile] = {
         task="rhythm",
         classes=("AFIB", "SB", "STACH", "NSR", "RBBB", "PAC", "1AVB", "PVC"),
         thresholds=(0.800, 0.550, 0.800, 0.525, 0.725, 0.450, 0.775, 0.725),
-        canonical_status="NO_PASA",
+        release_role="primary8_candidate",
         backbone_sha256=V3F_SHA256,
         specialist_sha256=P8_V3Q_SPECIALIST_SHA256,
         artifact_classes=("AFIB", "SB", "STACH", "NSR", "RBBB", "PAC", "1AVB", "PVC"),
@@ -48,7 +48,7 @@ CANONICAL_PROFILES: dict[str, ModelProfile] = {
         task="rhythm",
         classes=("AFIB", "SB", "STACH", "RBBB", "1AVB", "PVC"),
         thresholds=(0.820, 0.835, 0.775, 0.515, 0.570, 0.430),
-        canonical_status="PASA_METRICA",
+        release_role="primary6_diagnostic",
         backbone_sha256=V3F_SHA256,
         specialist_sha256=P6_SPECIALIST_SHA256,
         artifact_classes=("AFIB", "SB", "STACH", "NSR", "RBBB", "PAC", "1AVB", "PVC"),
@@ -60,7 +60,7 @@ CANONICAL_PROFILES: dict[str, ModelProfile] = {
         task="pathology",
         classes=("ASMI", "LVH", "IMI", "ISC_"),
         thresholds=(0.670, 0.705, 0.635, 0.595),
-        canonical_status="ACEPTADO_POR_DECISION_DEL_PROYECTO",
+        release_role="primary4_pathology",
         backbone_sha256=P4_V3AG_BACKBONE_SHA256,
         specialist_sha256=P4_V3AG_SPECIALIST_SHA256,
         artifact_classes=("ASMI", "LVH", "IMI", "ISC_"),

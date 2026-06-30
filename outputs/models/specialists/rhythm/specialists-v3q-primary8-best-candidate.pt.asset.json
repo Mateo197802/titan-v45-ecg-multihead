@@ -1,0 +1,12 @@
+{
+  "schema": "TITAN_V45_RELEASE_ASSET_POINTER_V1",
+  "release_tag": "v0.1.0",
+  "name": "specialists-v3q-primary8-best-candidate.pt",
+  "repository_path": "outputs/models/specialists/rhythm/specialists-v3q-primary8-best-candidate.pt",
+  "bytes": 29498326,
+  "sha256": "b30cb2bbb45f1231c93ff1c196aa966b57b49831cadb296131c0283e7b0ceb02",
+  "category": "model",
+  "model_role": "rhythm_specialist",
+  "download_url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/releases/download/v0.1.0/specialists-v3q-primary8-best-candidate.pt",
+  "materialization": "Distributed as a GitHub Release asset; use the fetch script to materialize this file at repository_path and verify SHA-256."
+}

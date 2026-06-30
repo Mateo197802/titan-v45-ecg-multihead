@@ -1,3 +1,3 @@
 # Contracts
 
-Defines frozen class orders, thresholds, statuses, and artifact hashes. Compatibility checks fail closed; callers must create a new profile rather than silently adapting incompatible artifacts.
+Defines frozen class orders, thresholds, release roles, and artifact hashes. Compatibility checks reject incompatible artifacts; callers must create a new profile rather than silently adapting incompatible artifacts.

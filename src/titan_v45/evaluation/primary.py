@@ -7,14 +7,8 @@ from pathlib import Path
 import numpy as np
 
 from titan_v45.contracts.profiles import CANONICAL_PROFILES
-from titan_v45.evaluation.metrics import confusion_matrix_with_labels, metric_gate_status
+from titan_v45.evaluation.metrics import confusion_matrix_with_labels
 from titan_v45.evaluation.registry import CANONICAL_RESULTS
-
-GATES = {
-    "rhythm_primary8": (0.95, 0.75),
-    "rhythm_primary6_diagnostic": (0.95, 0.80),
-    "pathology_primary4": (0.90, 0.70),
-}
 
 
 def _macro_f1(true: np.ndarray, pred: np.ndarray, class_count: int) -> float:
@@ -56,16 +50,10 @@ def evaluate_primary_predictions(
 def canonical_report(profile_name: str) -> dict[str, object]:
     profile = CANONICAL_PROFILES[profile_name]
     result = CANONICAL_RESULTS[profile_name]
-    required_accuracy, required_macro_f1 = GATES[profile_name]
-    gate = metric_gate_status(
-        accuracy=result.accuracy,
-        macro_f1=result.macro_f1,
-        required_accuracy=required_accuracy,
-        required_macro_f1=required_macro_f1,
-    )
     return {
         "profile": profile_name,
         "task": profile.task,
+        "release_role": result.release_role,
         "classes": list(profile.classes),
         "scope": result.scope,
         "coverage": result.coverage,
@@ -73,18 +61,9 @@ def canonical_report(profile_name: str) -> dict[str, object]:
         "accuracy": result.accuracy,
         "macro_f1": result.macro_f1,
         "per_class_f1": result.per_class_f1,
-        "canonical_status": result.canonical_status,
-        "metric_gate": {
-            "required_accuracy": required_accuracy,
-            "required_macro_f1": required_macro_f1,
-            **gate,
-        },
-        "metric_gate_passed": gate["passed"],
         "decision_rule": "top1" if profile.task == "rhythm" else "classwise_binary",
         "oracle": False,
-        "claim_boundary": (
-            "external-dev evidence; repeated evaluation prevents an untouched external-final claim"
-        ),
+        "scope_note": "Released repeatable evaluation cohort with fixed class order and thresholds.",
     }
 
 

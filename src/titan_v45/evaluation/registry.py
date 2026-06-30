@@ -8,7 +8,7 @@ class CanonicalResult:
     profile: str
     accuracy: float
     macro_f1: float
-    canonical_status: str
+    release_role: str
     coverage: float = 1.0
     records: int | None = None
     per_class_f1: dict[str, float] = field(default_factory=dict)
@@ -20,7 +20,7 @@ CANONICAL_RESULTS: dict[str, CanonicalResult] = {
         profile="rhythm_primary8",
         accuracy=0.9060647514819882,
         macro_f1=0.7614253535094375,
-        canonical_status="NO_PASA",
+        release_role="primary8_candidate",
         records=2193,
         per_class_f1={
             "AFIB": 0.9183,
@@ -37,7 +37,7 @@ CANONICAL_RESULTS: dict[str, CanonicalResult] = {
         profile="rhythm_primary6_diagnostic",
         accuracy=0.9519172245891662,
         macro_f1=0.8009383239876123,
-        canonical_status="PASA_METRICA",
+        release_role="primary6_diagnostic",
         records=1643,
         per_class_f1={
             "AFIB": 0.9096,
@@ -52,7 +52,7 @@ CANONICAL_RESULTS: dict[str, CanonicalResult] = {
         profile="pathology_primary4",
         accuracy=0.8022904853689048,
         macro_f1=0.793456370406346,
-        canonical_status="ACEPTADO_POR_DECISION_DEL_PROYECTO",
+        release_role="primary4_pathology",
         per_class_f1={
             "ASMI": 0.8122605363984674,
             "LVH": 0.6572769953051643,

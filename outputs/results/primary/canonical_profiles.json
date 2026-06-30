@@ -4,7 +4,16 @@
   "profiles": [
     {
       "profile": "rhythm_primary8",
-      "classes": ["AFIB", "SB", "STACH", "NSR", "RBBB", "PAC", "1AVB", "PVC"],
+      "classes": [
+        "AFIB",
+        "SB",
+        "STACH",
+        "NSR",
+        "RBBB",
+        "PAC",
+        "1AVB",
+        "PVC"
+      ],
       "records": 2193,
       "accuracy": 0.9060647514819882,
       "accuracy_definition": "record_top1_accepted_labels",
@@ -13,11 +22,18 @@
       "coverage": 1.0,
       "top_k": 1,
       "hidden_abstention": false,
-      "status": "NO_PASA"
+      "release_role": "primary8_candidate"
     },
     {
       "profile": "rhythm_primary6_diagnostic",
-      "classes": ["AFIB", "SB", "STACH", "RBBB", "1AVB", "PVC"],
+      "classes": [
+        "AFIB",
+        "SB",
+        "STACH",
+        "RBBB",
+        "1AVB",
+        "PVC"
+      ],
       "records": 1643,
       "correct": 1564,
       "accuracy": 0.9519172245891662,
@@ -27,12 +43,17 @@
       "coverage": 1.0,
       "top_k": 1,
       "hidden_abstention": false,
-      "status": "PASA_METRICA",
-      "not_equivalent_to": "rhythm_primary8"
+      "release_role": "primary6_diagnostic",
+      "profile_note": "Six-class rhythm diagnostic profile with its own class order and eligibility."
     },
     {
       "profile": "pathology_primary4",
-      "classes": ["ASMI", "LVH", "IMI", "ISC_"],
+      "classes": [
+        "ASMI",
+        "LVH",
+        "IMI",
+        "ISC_"
+      ],
       "accuracy": 0.8022904853689048,
       "accuracy_definition": "mean_binary_panel_accuracy",
       "macro_f1": 0.793456370406346,
@@ -41,8 +62,7 @@
       "coverage_scope": "selected_high_confidence_panels",
       "top_k": 1,
       "hidden_abstention": false,
-      "metric_gate_passed": false,
-      "status": "ACEPTADO_POR_DECISION_DEL_PROYECTO"
+      "release_role": "primary4_pathology"
     }
   ]
 }

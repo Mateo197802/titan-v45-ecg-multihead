@@ -1,0 +1,53 @@
+{
+  "schema": "TITAN_V45_RHYTHM_RELEASE_COHORT_REPORT_V1",
+  "release_tag": "v0.1.0",
+  "asset": {
+    "name": "external-dev-rhythm-chapman-shaoxing.tar.zst",
+    "path": "data/external_dev/rhythm/external-dev-rhythm-chapman-shaoxing.tar.zst",
+    "category": "external_dev_dataset",
+    "bytes": 97120385,
+    "sha256": "ec6ade27ab77b9807d41331016def56e54cbb96fba528fd7aca811e5a468f2fb",
+    "download_url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/releases/download/v0.1.0/external-dev-rhythm-chapman-shaoxing.tar.zst"
+  },
+  "classes_primary8": [
+    "AFIB",
+    "SB",
+    "STACH",
+    "NSR",
+    "RBBB",
+    "PAC",
+    "1AVB",
+    "PVC"
+  ],
+  "classes_primary6_diagnostic": [
+    "AFIB",
+    "SB",
+    "STACH",
+    "RBBB",
+    "1AVB",
+    "PVC"
+  ],
+  "record_rows_primary8": 2193,
+  "record_rows_primary6_diagnostic": 1643,
+  "source_counts_primary8": {
+    "chapman_shaoxing": 1879,
+    "codetest_zenodo_3765780": 167,
+    "data_test": 84,
+    "training/cpsc_2018": 10,
+    "training/cpsc_2018_extra": 8,
+    "training/georgia": 9,
+    "training/ningbo": 13,
+    "training/ptb-xl": 23
+  },
+  "manifest_files": [
+    "data/manifests/external_dev/rhythm_primary8_records.csv",
+    "data/manifests/external_dev/rhythm_primary6_diagnostic_records.csv"
+  ],
+  "evidence_files": [
+    "outputs/results/external_dev/rhythm_primary8_metrics.json",
+    "outputs/results/external_dev/rhythm_primary6_metrics.json",
+    "outputs/results/external_dev/rhythm_primary8_confusion_matrix.csv",
+    "outputs/results/external_dev/evidence/rhythm_primary8_record_predictions.csv",
+    "outputs/results/external_dev/evidence/rhythm_primary6_record_predictions.csv"
+  ]
+}

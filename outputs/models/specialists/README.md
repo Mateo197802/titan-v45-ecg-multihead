@@ -1,3 +1,3 @@
 # Specialists
 
-Specialists are separated by rhythm and pathology because their promoted branches are not one frozen artifact.
+Specialists are separated by rhythm and pathology. Each release profile declares its own backbone hash, specialist hash, class order, threshold vector, and artifact class order.

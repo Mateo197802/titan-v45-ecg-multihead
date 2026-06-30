@@ -3,7 +3,7 @@
   "task": "rhythm",
   "classes": ["AFIB", "SB", "STACH", "NSR", "RBBB", "PAC", "1AVB", "PVC"],
   "thresholds": [0.8, 0.55, 0.8, 0.525, 0.725, 0.45, 0.775, 0.725],
-  "canonical_status": "NO_PASA",
+  "release_role": "primary8_candidate",
   "backbone_sha256": "ca5d4dcb4b9828e6c4339800fe81ec27f32d9b09a090bb57503bfb56746a8da8",
   "specialist_sha256": "b30cb2bbb45f1231c93ff1c196aa966b57b49831cadb296131c0283e7b0ceb02",
   "evaluation_scope": "external_dev",

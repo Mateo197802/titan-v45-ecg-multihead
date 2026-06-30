@@ -9,6 +9,6 @@ The complete CEDIA run must:
 3. prove zero internal/external manifest overlap;
 4. run full Primary8, Primary6, and Primary4 evaluations;
 5. run Grad-CAM and MC-Dropout smoke tests;
-6. write `reproducibility_report.json` with Git commit, asset hashes, environment, metrics, and pass/fail checks.
+6. write `reproducibility_report.json` with Git commit, asset hashes, environment, metrics, and verification results.
 
-Cleanup is a separate guarded operation. It must abort while SLURM jobs are active, when a required asset is absent, when a hash differs, or when any verification fails.
+Cleanup is a separate guarded operation. It must stop while SLURM jobs are active, when a required asset is absent, when a hash differs, or when verification returns an error.

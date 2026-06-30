@@ -1,0 +1,12 @@
+{
+  "schema": "TITAN_V45_RELEASE_ASSET_POINTER_V1",
+  "release_tag": "v0.1.0",
+  "name": "specialists-v3p-e008-primary6-diagnostic.pt",
+  "repository_path": "outputs/models/specialists/rhythm/specialists-v3p-e008-primary6-diagnostic.pt",
+  "bytes": 22354966,
+  "sha256": "9c5a9265a7155e1206c551cc4e6d645b86363ba3dbdeb7baf7b9f173c314be3d",
+  "category": "model",
+  "model_role": "rhythm_specialist",
+  "download_url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/releases/download/v0.1.0/specialists-v3p-e008-primary6-diagnostic.pt",
+  "materialization": "Distributed as a GitHub Release asset; use the fetch script to materialize this file at repository_path and verify SHA-256."
+}

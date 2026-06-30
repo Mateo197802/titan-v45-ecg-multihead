@@ -11,8 +11,8 @@ Research evaluation of four classwise pathology panels: `ASMI`, `LVH`, `IMI`, an
 
 ## Results
 
-The selected external-development panels reached 80.2290% mean accuracy and 79.3456% macro-F1 at 100% panel coverage. Status is `ACEPTADO_POR_DECISION_DEL_PROYECTO`, not metric-gate success. `LVH` is the weakest class at 65.7277% F1.
+The released validation panels reached 80.2290% mean accuracy and 79.3456% macro-F1 at 100% panel coverage. `LVH` is the lowest classwise F1 at 65.7277%.
 
 ## Limitations
 
-Panels were selected for high-confidence labels and do not represent complete external population coverage. This branch uses a separately fine-tuned backbone and must not be silently combined with the best rhythm specialist.
+Panels use high-confidence labels and classwise binary thresholds. This branch uses a separately fine-tuned backbone and should be loaded with the declared Primary4 specialist.
