@@ -1,0 +1,2 @@
+task,evaluation_scope,accuracy_type,n_panel_observations,coverage,accuracy,macro_f1_type,macro_f1,macro_roc_auc,macro_average_precision
+pathology_primary4,external_development,mean_binary,962,1,0.8022904854,mean_binary_f1,0.7934563704,0.8745553958,0.8784781078

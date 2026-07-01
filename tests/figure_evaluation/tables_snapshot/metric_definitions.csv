@@ -1,0 +1,7 @@
+metric,definition,use
+Top-1 accuracy,Correct primary class predictions divided by evaluated records,multiclass rhythm
+Mean binary accuracy,Arithmetic mean of one-vs-rest class accuracies,multilabel pathology
+Macro-F1,Unweighted mean of classwise F1 scores,both tasks
+AUROC,Area under the receiver operating characteristic curve,one-vs-rest
+Average precision,Area-equivalent summary of precision-recall ranking,one-vs-rest
+ECE,Ten-bin expected calibration error,probability calibration

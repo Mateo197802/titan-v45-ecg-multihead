@@ -1,0 +1,9 @@
+parameter,value
+base_lr,6.500544049e-06
+max_lr,9.757631768e-05
+weight_decay,7.910707751e-06
+gamma,1.525417548
+label_smoothing,0.01812099274
+batch_size,16
+mixup_alpha,0.03382190559
+lambda_pathology,0.2455090798

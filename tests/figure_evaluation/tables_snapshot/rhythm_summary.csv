@@ -1,0 +1,2 @@
+task,evaluation_scope,accuracy_type,n_records,correct,coverage,accuracy,accuracy_ci_low,accuracy_ci_high,macro_f1_type,macro_f1,macro_roc_auc,macro_average_precision
+rhythm_primary6,external_development,top1_multiclass,1643,1564,1,0.9519172246,0.9404766742,0.9612494707,mean_one_vs_rest_binary_f1,0.800938324,0.965258058,0.8560526252

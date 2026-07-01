@@ -1,0 +1,5 @@
+module,description,parameters,scope
+Input,12-lead ECG,0,12 x 1250 at 125 Hz
+Shared backbone,ResNet-1D + Transformer + auxiliary heads,58352219,Separate multi-head representation
+Rhythm package,Backbone + classwise rhythm specialist,63930847,Primary6 operational branch
+Pathology package,Backbone + 512-unit pathology specialist,65694183,Primary4 operational branch

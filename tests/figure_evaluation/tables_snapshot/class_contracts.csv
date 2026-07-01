@@ -1,0 +1,7 @@
+task,role,classes
+Rhythm,Primary,"AFIB, SB, STACH, RBBB, 1AVB, PVC"
+Rhythm,Cascade,"NSR, PAC, Flutter, Paced"
+Rhythm,Auxiliary global,"LBBB, 2AVB, 3AVB, LQTS"
+Pathology,Primary,"ASMI, LVH, IMI, ISC_"
+Pathology,Cascade,"ALMI, ILMI"
+Pathology,Auxiliary global,LAE
