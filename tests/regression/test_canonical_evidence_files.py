@@ -90,3 +90,55 @@ def test_outputs_directory_contains_weight_asset_pointers() -> None:
         payload = json.loads((ROOT / relative).read_text(encoding="utf-8"))
         assert payload["sha256"]
         assert payload["download_url"].startswith("https://github.com/")
+
+
+def test_outputs_directory_contains_global_head_contract() -> None:
+    payload = json.loads(
+        (ROOT / "outputs/models/heads/global_head_contracts.json").read_text(encoding="utf-8")
+    )
+    assert payload["schema"] == "TITAN_V45_GLOBAL_HEAD_CONTRACTS_V1"
+    assert payload["heads"]["rhythm"]["output_dim"] == 14
+    assert payload["heads"]["pathology"]["classes"] == ["ASMI", "LVH", "IMI", "ISC_", "ALMI", "ILMI", "LAE"]
+    assert payload["heads"]["ecg_axes"]["conduction"]["output_dim"] == 6
+
+
+def test_synthetic_fixtures_are_materialized() -> None:
+    fixture_root = ROOT / "data/fixtures/synthetic"
+    with (fixture_root / "synthetic_manifest.csv").open(encoding="utf-8", newline="") as handle:
+        manifest_rows = list(csv.DictReader(handle))
+    assert manifest_rows[0]["record_id"] == "synthetic_12lead_0001"
+    assert int(manifest_rows[0]["samples"]) == 1250
+    assert int(manifest_rows[0]["leads"]) == 12
+
+    with (fixture_root / "synthetic_ecg_12x1250.csv").open(encoding="utf-8", newline="") as handle:
+        rows = list(csv.reader(handle))
+    assert len(rows) == 13
+    assert len(rows[0]) == 1251
+    assert all(len(row) == 1251 for row in rows[1:])
+
+    labels = json.loads((fixture_root / "synthetic_labels.json").read_text(encoding="utf-8"))
+    assert labels["record_id"] == "synthetic_12lead_0001"
+
+
+def test_secondary_result_directories_contain_machine_readable_summaries() -> None:
+    gradcam = json.loads(
+        (ROOT / "outputs/results/gradcam/gradcam_synthetic_smoke_summary.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    uncertainty = json.loads(
+        (ROOT / "outputs/results/uncertainty/mc_dropout_synthetic_smoke_summary.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    cascade = json.loads(
+        (ROOT / "outputs/results/cascade/cascade_secondary_summary.json").read_text(
+            encoding="utf-8"
+        )
+    )
+
+    assert gradcam["input_shape"] == [12, 1250]
+    assert gradcam["finite_values"] is True
+    assert uncertainty["passes"] == 8
+    assert uncertainty["finite_values"] is True
+    assert cascade["role"] == "secondary_cascade_annex"

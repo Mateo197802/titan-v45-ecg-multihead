@@ -1,0 +1,68 @@
+{
+  "schema": "TITAN_V45_GLOBAL_HEAD_CONTRACTS_V1",
+  "backbone_parameter_count": 58352219,
+  "input_signal_shape": [12, 1250],
+  "sample_rate_hz": 125,
+  "heads": {
+    "rhythm": {
+      "output_dim": 14,
+      "classes": [
+        "AFIB",
+        "SB",
+        "STACH",
+        "NSR",
+        "RBBB",
+        "PAC",
+        "1AVB",
+        "PVC",
+        "Flutter",
+        "LBBB",
+        "2AVB",
+        "3AVB",
+        "LQTS",
+        "Paced"
+      ]
+    },
+    "pathology": {
+      "output_dim": 7,
+      "classes": ["ASMI", "LVH", "IMI", "ISC_", "ALMI", "ILMI", "LAE"]
+    },
+    "quality": {
+      "output_dim": 1,
+      "activation": "sigmoid"
+    },
+    "biometrics": {
+      "output_dim": 3,
+      "outputs": ["heart_rate_proxy", "qrs_width_proxy", "signal_scale_proxy"]
+    },
+    "ecg_axes": {
+      "rate_frequency": {
+        "output_dim": 3,
+        "labels": ["SB", "normal_rate", "STACH"]
+      },
+      "supraventricular_irregular": {
+        "output_dim": 2,
+        "labels": ["regular", "irregular"]
+      },
+      "ectopy": {
+        "output_dim": 2,
+        "labels": ["none_or_unspecified", "ectopy"]
+      },
+      "conduction": {
+        "output_dim": 6,
+        "labels": ["none_or_unspecified", "RBBB", "LBBB", "1AVB", "2AVB", "3AVB"]
+      },
+      "repolarization_qt": {
+        "output_dim": 1,
+        "labels": ["qt_score"]
+      }
+    }
+  },
+  "packaging": {
+    "backbone_assets": [
+      "outputs/models/backbones/backbone-v3f-original.pt",
+      "outputs/models/backbones/backbone-v3ag-pathology.pt"
+    ],
+    "head_weights": "packaged_inside_backbone_assets"
+  }
+}

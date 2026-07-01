@@ -1,0 +1,8 @@
+{
+  "schema": "TITAN_V45_CASCADE_SECONDARY_SUMMARY_V1",
+  "role": "secondary_cascade_annex",
+  "rhythm_classes": ["Flutter", "LBBB", "2AVB", "3AVB", "LQTS", "Paced"],
+  "pathology_classes": ["ALMI", "ILMI", "LAE"],
+  "primary_profiles": ["rhythm_primary8", "rhythm_primary6_diagnostic", "pathology_primary4"],
+  "reported_separately": true
+}

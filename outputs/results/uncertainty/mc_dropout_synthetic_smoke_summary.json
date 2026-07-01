@@ -1,0 +1,14 @@
+{
+  "schema": "TITAN_V45_MC_DROPOUT_SMOKE_SUMMARY_V1",
+  "record_id": "synthetic_12lead_0001",
+  "profile": "rhythm_primary8",
+  "passes": 8,
+  "classes": ["AFIB", "SB", "STACH", "NSR", "RBBB", "PAC", "1AVB", "PVC"],
+  "predictive_entropy": 1.2847,
+  "mutual_information": 0.0372,
+  "entropy_threshold": 1.5,
+  "mutual_information_threshold": 0.08,
+  "retained": true,
+  "finite_values": true,
+  "source_fixture": "data/fixtures/synthetic/synthetic_ecg_12x1250.csv"
+}

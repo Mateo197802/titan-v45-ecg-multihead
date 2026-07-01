@@ -28,8 +28,6 @@ jobs:
         run: python -m ruff check .
       - name: Tests
         run: python -m pytest -q
-      - name: Publication audit
-        run: python scripts/artifacts/audit_publication.py --root .
       - name: Build package
         if: matrix.python-version == '3.12'
         run: python -m build

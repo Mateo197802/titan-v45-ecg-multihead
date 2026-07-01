@@ -1,3 +1,3 @@
 # Cascade Results
 
-Secondary routing metrics for non-primary classes. Cascade evidence cannot be substituted for primary-profile results.
+Secondary routing metrics for non-primary classes. Cascade evidence is reported separately from primary-profile results.

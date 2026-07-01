@@ -69,7 +69,6 @@ Canonical primary reports use full-coverage top-1 accuracy for rhythm and macro-
 python scripts/evaluation/evaluate_primary.py \
   --profile rhythm_primary6_diagnostic \
   --output outputs/results/primary/rhythm_primary6_diagnostic.json
-python scripts/artifacts/audit_publication.py --root .
 ```
 
 The uncertainty module implements MC-Dropout predictive entropy and mutual information with explicit quarantine. Grad-CAM exports include time and per-lead attribution.
@@ -84,7 +83,7 @@ The uncertainty module implements MC-Dropout predictive entropy and mutual infor
 | `tests/` | Unit, integration, evaluation, and regression verification |
 | `data/` | Sanitized manifests, cohort reports, dataset cards, licenses, and synthetic fixtures |
 | `outputs/` | Weight asset manifests, metrics, CSV predictions, confusion matrices, and evaluation evidence |
-| `reports/` | Human-readable metric, model, and dataset cards |
+| `reports/` | Curated metric reports, model cards, and dataset cards |
 | `docs/` | Architecture, protocols, provenance, and scientific boundaries |
 
 ## Dataset Attribution

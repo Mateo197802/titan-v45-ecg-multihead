@@ -1,0 +1,12 @@
+{
+  "record_id": "synthetic_12lead_0001",
+  "rhythm_labels": [
+    "NSR"
+  ],
+  "pathology_labels": [],
+  "primary_profile_eligible": {
+    "rhythm_primary8": true,
+    "rhythm_primary6_diagnostic": false,
+    "pathology_primary4": true
+  }
+}

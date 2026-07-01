@@ -1,0 +1,2 @@
+record_id,signal_path,lead_mask_path,labels_path,sample_rate_hz,samples,leads
+synthetic_12lead_0001,data/fixtures/synthetic/synthetic_ecg_12x1250.csv,data/fixtures/synthetic/lead_mask.csv,data/fixtures/synthetic/synthetic_labels.json,125,1250,12

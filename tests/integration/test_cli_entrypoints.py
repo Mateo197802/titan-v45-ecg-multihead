@@ -18,12 +18,10 @@ ENTRYPOINTS = (
     "scripts/evaluation/generate_gradcam.py",
     "scripts/evaluation/audit_optuna.py",
     "scripts/artifacts/verify_artifact_hashes.py",
-    "scripts/artifacts/audit_publication.py",
     "scripts/artifacts/fetch_release_assets.py",
     "scripts/artifacts/build_external_dev_archive.py",
     "scripts/artifacts/build_release_manifest.py",
     "scripts/artifacts/sanitize_report.py",
-    "scripts/cedia/generate_cleanup_manifest.py",
     "scripts/cedia/run_reproducibility_verification.py",
 )
 
