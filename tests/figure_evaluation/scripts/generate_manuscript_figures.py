@@ -1,19 +1,19 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 from typing import Any
 
 import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib.patches import FancyBboxPatch, Polygon, Rectangle, Circle
-from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 import numpy as np
 import pandas as pd
-
+from matplotlib.patches import Circle, FancyBboxPatch
+from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 
 RHYTHM_CLASSES = ["AFIB", "SB", "STACH", "RBBB", "1AVB", "PVC"]
 PATHOLOGY_CLASSES = ["ASMI", "LVH", "IMI", "ISC_"]
@@ -37,14 +37,7 @@ CLASS_COLORS = [
     COLORS["blue"],
     COLORS["green"],
 ]
-CURATED_IMAGE_NAMES = {
-    "fig00_ecg_ai_context": "fig00_ecg_ai_context.png",
-    "fig00b_ecg_ai_evolution_gap": "fig00b_ecg_ai_evolution_gap.png",
-    "fig01_graphical_abstract": "fig01_graphical_abstract.png",
-    "fig02_data_processing_bias_workflow": "fig02_data_processing_bias_workflow.png",
-    "fig03_internal_architecture": "fig03_internal_architecture.png",
-    "fig03_cascade_contract": "fig03_cascade_contract.png",
-}
+REPO_ROOT = Path(__file__).resolve().parents[3]
 
 
 def apply_style() -> None:
@@ -64,6 +57,7 @@ def apply_style() -> None:
             "axes.facecolor": "white",
             "savefig.facecolor": "white",
             "svg.fonttype": "none",
+            "svg.hashsalt": "titan-v45-figure-evaluation",
         }
     )
 
@@ -121,32 +115,18 @@ def _arrow(ax: plt.Axes, start: tuple[float, float], end: tuple[float, float], c
     )
 
 
-def _load_real_ecg_segment(raw_dir: Path) -> tuple[np.ndarray, np.ndarray, str, str]:
-    project_root = raw_dir.resolve().parents[2]
-    mat_path = project_root / "V4.5 CEDIA" / "DATA" / "data_test" / "HR00191.mat"
-    if mat_path.exists():
-        from scipy.io import loadmat
-
-        values = loadmat(mat_path)["val"].astype(float)
-        lead_ii_mv = values[1] / 1000.0
-        source_time = np.linspace(0.0, 10.0, lead_ii_mv.size, endpoint=False)
-        target_time = np.linspace(0.0, 10.0, 1250, endpoint=False)
-        signal = np.interp(target_time, source_time, lead_ii_mv)
-        return target_time, signal, "Record HR00191, Lead II, original dataset signal", str(mat_path)
-
-    target_time = np.linspace(0.0, 10.0, 1250, endpoint=False)
-    signal = np.zeros_like(target_time)
-    for center in np.arange(0.7, 9.8, 0.88):
-        signal += 0.06 * np.exp(-((target_time - (center - 0.16)) / 0.045) ** 2)
-        signal -= 0.08 * np.exp(-((target_time - (center - 0.025)) / 0.018) ** 2)
-        signal += 0.55 * np.exp(-((target_time - center) / 0.015) ** 2)
-        signal -= 0.16 * np.exp(-((target_time - (center + 0.035)) / 0.024) ** 2)
-        signal += 0.18 * np.exp(-((target_time - (center + 0.24)) / 0.095) ** 2)
-    signal += 0.015 * np.sin(2 * np.pi * 0.33 * target_time)
-    return target_time, signal, "Fallback ECG-like signal", "synthetic fallback"
+def _load_synthetic_ecg_segment(fixture_path: Path) -> tuple[np.ndarray, np.ndarray]:
+    frame = pd.read_csv(fixture_path)
+    lead = frame.loc[frame["lead"].eq("L02")]
+    sample_columns = [column for column in frame.columns if column.startswith("t")]
+    if len(lead) != 1 or len(sample_columns) != 1250:
+        raise ValueError(f"Unexpected synthetic ECG fixture format: {fixture_path}")
+    signal = lead[sample_columns].to_numpy(dtype=float).ravel()
+    time_s = np.arange(signal.size, dtype=float) / 125.0
+    return time_s, signal
 
 
-def _signal_aligned_activation(signal: np.ndarray) -> np.ndarray:
+def _signal_salience_heuristic(signal: np.ndarray) -> np.ndarray:
     centered = signal - np.median(signal)
     scale = np.percentile(np.abs(centered), 99)
     if not np.isfinite(scale) or scale <= 0:
@@ -163,6 +143,48 @@ def _signal_aligned_activation(signal: np.ndarray) -> np.ndarray:
     if max_value > 0:
         activation /= max_value
     return activation
+
+
+def _sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def _portable_source_files(source_files: list[str]) -> list[str]:
+    aliases = {
+        "MANUSCRIPT/evidence/claims.yaml": "docs/scientific-boundaries.md",
+        "MANUSCRIPT/evidence/metrics.json": "outputs/results/primary/canonical_profiles.json",
+        "MANUSCRIPT/evidence/source_inventory.csv": "docs/provenance/source_inventory.json",
+        "MANUSCRIPT/literature/studies.csv": "docs/figure-evidence.md",
+    }
+    normalized: list[str] = []
+    for source in source_files:
+        value = str(source).replace("\\", "/")
+        if Path(value).is_absolute() or PureWindowsPath(value).is_absolute():
+            raise ValueError(f"Figure provenance must use repository-relative paths: {source}")
+        if value.startswith("MANUSCRIPT/tables/"):
+            value = value.replace("MANUSCRIPT/tables/", "tests/figure_evaluation/tables_snapshot/", 1)
+        else:
+            value = aliases.get(value, value)
+        if value == "pathology4_panels/*/record_predictions.csv":
+            normalized.extend(
+                f"outputs/results/external_dev/evidence/pathology_primary4_{class_name}_record_predictions.csv"
+                for class_name in PATHOLOGY_CLASSES
+            )
+            continue
+        if Path(value).name in {
+            "rhythm_primary6_record_predictions.csv",
+            "pathology_primary4_ASMI_record_predictions.csv",
+            "pathology_primary4_IMI_record_predictions.csv",
+            "pathology_primary4_ISC__record_predictions.csv",
+            "pathology_primary4_LVH_record_predictions.csv",
+        }:
+            value = "outputs/results/external_dev/evidence/" + Path(value).name
+        normalized.append(value)
+    return sorted(set(normalized))
 
 
 def _panel_label(ax: plt.Axes, x: float, y: float, label: str, title: str) -> None:
@@ -184,49 +206,34 @@ def _save(
     pdf = output_dir / f"{stem}.pdf"
     svg = output_dir / f"{stem}.svg"
     fig.savefig(png, dpi=300, bbox_inches="tight")
-    fig.savefig(pdf, bbox_inches="tight")
-    fig.savefig(svg, bbox_inches="tight")
+    fig.savefig(
+        pdf,
+        bbox_inches="tight",
+        metadata={"Title": stem, "Creator": "TITAN V4.5 figure generator", "CreationDate": None, "ModDate": None},
+    )
+    fig.savefig(
+        svg,
+        bbox_inches="tight",
+        metadata={"Title": stem, "Creator": "TITAN V4.5 figure generator", "Date": None},
+    )
+    svg_text = svg.read_text(encoding="utf-8")
+    svg.write_text(
+        "\n".join(line.rstrip() for line in svg_text.splitlines()) + "\n",
+        encoding="utf-8",
+        newline="\n",
+    )
     plt.close(fig)
     return {
         "id": stem,
         "kind": kind,
         "caption": caption,
-        "png": str(png.resolve()),
-        "pdf": str(pdf.resolve()),
-        "svg": str(svg.resolve()),
-        "source_files": source_files,
+        "png": png.name,
+        "pdf": pdf.name,
+        "svg": svg.name,
+        "source_files": _portable_source_files(source_files),
+        "artifact_sha256": {"png": _sha256(png), "pdf": _sha256(pdf), "svg": _sha256(svg)},
         "sample_probabilities_verified": sample_probabilities_verified,
     }
-
-
-def _replace_with_curated_asset(output_dir: Path, item: dict[str, Any]) -> dict[str, Any]:
-    curated_dir = output_dir / "curated_inputs"
-    curated_name = CURATED_IMAGE_NAMES.get(str(item["id"]))
-    if not curated_name:
-        return item
-    source = curated_dir / curated_name
-    if not source.exists():
-        return item
-
-    image = plt.imread(source)
-    height, width = image.shape[:2]
-    fig_width = 16
-    fig_height = max(4.5, fig_width * height / width)
-    fig, ax = plt.subplots(figsize=(fig_width, fig_height))
-    ax.imshow(image)
-    ax.axis("off")
-
-    png = output_dir / f"{item['id']}.png"
-    pdf = output_dir / f"{item['id']}.pdf"
-    svg = output_dir / f"{item['id']}.svg"
-    fig.savefig(png, dpi=300, bbox_inches="tight", pad_inches=0.02)
-    fig.savefig(pdf, bbox_inches="tight", pad_inches=0.02)
-    fig.savefig(svg, bbox_inches="tight", pad_inches=0.02)
-    plt.close(fig)
-
-    item["source_files"] = sorted(set([*item["source_files"], str(source.resolve())]))
-    item["curated_visual_asset"] = True
-    return item
 
 
 def clinical_context_figure(output_dir: Path) -> dict[str, Any]:
@@ -789,9 +796,26 @@ def _calibration_points(y_true: np.ndarray, probability: np.ndarray, bins: int =
     return np.array(predicted), np.array(observed)
 
 
+def _find_record_predictions(raw_dir: Path, filename: str) -> Path:
+    matches = sorted(raw_dir.rglob(filename))
+    if len(matches) != 1:
+        raise FileNotFoundError(f"Expected one {filename} under {raw_dir}; found {len(matches)}")
+    return matches[0]
+
+
+def _repo_relative(path: Path) -> str:
+    return path.resolve().relative_to(REPO_ROOT).as_posix()
+
+
 def calibration_figure(raw_dir: Path, output_dir: Path) -> dict[str, Any]:
-    rhythm_path = next(raw_dir.rglob("primary6_no_nsr_pac_external_record_predictions.csv"))
+    rhythm_path = _find_record_predictions(raw_dir, "rhythm_primary6_record_predictions.csv")
     rhythm = pd.read_csv(rhythm_path)
+    pathology_paths = {
+        class_name: _find_record_predictions(
+            raw_dir, f"pathology_primary4_{class_name}_record_predictions.csv"
+        )
+        for class_name in PATHOLOGY_CLASSES
+    }
     fig, axes = plt.subplots(1, 2, figsize=(13, 5.5), constrained_layout=True)
     for index, class_name in enumerate(RHYTHM_CLASSES):
         y = rhythm[f"truth_{class_name}"].astype(str).str.lower().eq("true").astype(int).to_numpy()
@@ -799,8 +823,7 @@ def calibration_figure(raw_dir: Path, output_dir: Path) -> dict[str, Any]:
         pred, obs = _calibration_points(y, p)
         axes[0].plot(pred, obs, marker="o", ms=3.5, lw=1.4, color=CLASS_COLORS[index], label=class_name)
     for index, class_name in enumerate(PATHOLOGY_CLASSES):
-        path = next(raw_dir.rglob(f"pathology4_panels/{class_name}/record_predictions.csv"))
-        frame = pd.read_csv(path)
+        frame = pd.read_csv(pathology_paths[class_name])
         pred, obs = _calibration_points(frame["target"].to_numpy(), frame["probability"].to_numpy())
         axes[1].plot(pred, obs, marker="o", ms=3.5, lw=1.4, color=CLASS_COLORS[index], label=class_name)
     for ax, title in zip(axes, ["Primary6 rhythm", "Primary4 pathology"], strict=True):
@@ -813,7 +836,15 @@ def calibration_figure(raw_dir: Path, output_dir: Path) -> dict[str, Any]:
         ax.grid(color="#E4E9ED")
         ax.legend(frameon=False, ncol=2)
     fig.suptitle("Reliability diagrams", fontsize=16, fontweight="bold", color=COLORS["ink"])
-    return _save(fig, output_dir, "fig11_calibration", "calibration", "Ten-bin reliability diagrams derived from record-level probabilities.", [str(rhythm_path.relative_to(raw_dir)), "pathology4_panels/*/record_predictions.csv"], True)
+    return _save(
+        fig,
+        output_dir,
+        "fig11_calibration",
+        "calibration",
+        "Ten-bin reliability diagrams derived from frozen record-level probabilities.",
+        [_repo_relative(rhythm_path), *(_repo_relative(path) for path in pathology_paths.values())],
+        True,
+    )
 
 
 def _binary_entropy(probability: np.ndarray) -> np.ndarray:
@@ -822,7 +853,7 @@ def _binary_entropy(probability: np.ndarray) -> np.ndarray:
 
 
 def uncertainty_figure(raw_dir: Path, output_dir: Path) -> dict[str, Any]:
-    rhythm_path = next(raw_dir.rglob("primary6_no_nsr_pac_external_record_predictions.csv"))
+    rhythm_path = _find_record_predictions(raw_dir, "rhythm_primary6_record_predictions.csv")
     rhythm = pd.read_csv(rhythm_path)
     prob_cols = [f"prob_{name}" for name in RHYTHM_CLASSES]
     probs = rhythm[prob_cols].to_numpy(dtype=float)
@@ -833,9 +864,14 @@ def uncertainty_figure(raw_dir: Path, output_dir: Path) -> dict[str, Any]:
     correct = rhythm["correct"].astype(str).str.lower().eq("true").to_numpy()
 
     pathology_rows = []
+    pathology_paths = {
+        class_name: _find_record_predictions(
+            raw_dir, f"pathology_primary4_{class_name}_record_predictions.csv"
+        )
+        for class_name in PATHOLOGY_CLASSES
+    }
     for class_name in PATHOLOGY_CLASSES:
-        path = next(raw_dir.rglob(f"pathology4_panels/{class_name}/record_predictions.csv"))
-        frame = pd.read_csv(path)
+        frame = pd.read_csv(pathology_paths[class_name])
         probability = frame["probability"].to_numpy(dtype=float)
         threshold = frame["threshold"].to_numpy(dtype=float)
         pathology_rows.append(
@@ -883,19 +919,20 @@ def uncertainty_figure(raw_dir: Path, output_dir: Path) -> dict[str, Any]:
         "fig14_uncertainty_profile",
         "uncertainty",
         "Uncertainty profile from frozen record-level probabilities: rhythm entropy/margins stratified by correctness and pathology panel entropy/margin/error summaries.",
-        [str(rhythm_path.relative_to(raw_dir)), "pathology4_panels/*/record_predictions.csv"],
+        [_repo_relative(rhythm_path), *(_repo_relative(path) for path in pathology_paths.values())],
         True,
     )
 
 
-def gradcam_contract_figure(raw_dir: Path, output_dir: Path) -> dict[str, Any]:
-    time_s, signal_mv, source_label, source_file = _load_real_ecg_segment(raw_dir)
+def gradcam_contract_figure(output_dir: Path) -> dict[str, Any]:
+    fixture = REPO_ROOT / "data" / "fixtures" / "synthetic" / "synthetic_ecg_12x1250.csv"
+    time_s, signal_mv = _load_synthetic_ecg_segment(fixture)
     centered = signal_mv - np.median(signal_mv)
     scale = np.percentile(np.abs(centered), 99)
     if not np.isfinite(scale) or scale <= 0:
         scale = 1.0
     display_signal = centered / scale
-    activation = _signal_aligned_activation(signal_mv)
+    activation = _signal_salience_heuristic(signal_mv)
 
     fig, (ax_signal, ax_heat) = plt.subplots(
         2,
@@ -904,7 +941,7 @@ def gradcam_contract_figure(raw_dir: Path, output_dir: Path) -> dict[str, Any]:
         constrained_layout=True,
         gridspec_kw={"height_ratios": [3.6, 0.75]},
     )
-    fig.suptitle("1D Grad-CAM overlay on an original dataset ECG waveform", fontsize=16, fontweight="bold", color=COLORS["ink"])
+    fig.suptitle("Illustrative signal-derived salience (not model Grad-CAM)", fontsize=16, fontweight="bold", color=COLORS["ink"])
 
     y_min = float(np.min(display_signal))
     y_max = float(np.max(display_signal))
@@ -926,8 +963,8 @@ def gradcam_contract_figure(raw_dir: Path, output_dir: Path) -> dict[str, Any]:
     ax_signal.axhline(0, color="#9AA8B3", lw=0.8, alpha=0.65)
     ax_signal.set_xlim(0, 10)
     ax_signal.set_ylim(y_min, y_max)
-    ax_signal.set_ylabel("Normalized Lead II")
-    ax_signal.set_title(source_label, loc="left", fontsize=12, color=COLORS["ink"])
+    ax_signal.set_ylabel("Normalized synthetic lead L02")
+    ax_signal.set_title("Deterministic synthetic ECG fixture", loc="left", fontsize=12, color=COLORS["ink"])
     ax_signal.spines["top"].set_visible(False)
     ax_signal.spines["right"].set_visible(False)
 
@@ -935,20 +972,20 @@ def gradcam_contract_figure(raw_dir: Path, output_dir: Path) -> dict[str, Any]:
     ax_heat.set_yticks([])
     ax_heat.set_xlim(0, 10)
     ax_heat.set_xlabel("Time (s)")
-    ax_heat.set_title("Lead-time Grad-CAM intensity map", loc="left", fontsize=11, color=COLORS["ink"])
+    ax_heat.set_title("Signal-slope/amplitude heuristic", loc="left", fontsize=11, color=COLORS["ink"])
     for spine in ax_heat.spines.values():
         spine.set_color("#26323B")
         spine.set_linewidth(0.8)
 
     cax = inset_axes(ax_signal, width="1.6%", height="78%", loc="center right", borderpad=1.6)
     colorbar = fig.colorbar(im, cax=cax)
-    colorbar.set_label("Grad-CAM intensity", fontsize=8)
+    colorbar.set_label("Normalized heuristic salience", fontsize=8)
     colorbar.ax.tick_params(labelsize=7)
 
     ax_heat.text(
         0.0,
         -0.82,
-        "The waveform is a real local dataset record; the aligned heatmap shows the expected temporal attribution artifact and remains tied to exported activations, class score, layer, and record metadata.",
+        "Synthetic signal only. The heatmap is a signal-derived illustration, not a model attribution or clinical evidence.",
         transform=ax_heat.transAxes,
         fontsize=8.5,
         color=COLORS["gray"],
@@ -960,8 +997,13 @@ def gradcam_contract_figure(raw_dir: Path, output_dir: Path) -> dict[str, Any]:
         output_dir,
         "fig15_gradcam_contract",
         "explainability",
-        "1D Grad-CAM lead-time overlay on an original dataset ECG waveform, defining the reproducible attribution output expected for specialist review.",
-        ["MANUSCRIPT/evidence/claims.yaml", source_file],
+        "Illustrative heuristic salience over a deterministic synthetic ECG fixture; this figure is not a Grad-CAM result.",
+        [
+            "data/fixtures/synthetic/synthetic_ecg_12x1250.csv",
+            "tests/figure_evaluation/scripts/generate_manuscript_figures.py",
+            "scripts/evaluation/generate_gradcam.py",
+            "docs/figure-evidence.md",
+        ],
     )
 
 
@@ -1037,12 +1079,11 @@ def generate_all_figures(tables_dir: Path, raw_dir: Path, output_dir: Path) -> l
         curve_figure(tables_dir, output_dir, "pr"),
         calibration_figure(raw_dir, output_dir),
         uncertainty_figure(raw_dir, output_dir),
-        gradcam_contract_figure(raw_dir, output_dir),
+        gradcam_contract_figure(output_dir),
         source_figure(tables_dir, output_dir),
         error_figure(tables_dir, output_dir),
         reproducibility_figure(output_dir),
     ]
-    manifest = [_replace_with_curated_asset(output_dir, item) for item in manifest]
     with (output_dir / "figure_manifest.json").open("w", encoding="utf-8") as handle:
         json.dump(manifest, handle, indent=2)
         handle.write("\n")
@@ -1050,7 +1091,7 @@ def generate_all_figures(tables_dir: Path, raw_dir: Path, output_dir: Path) -> l
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Generate manuscript figures")
+    parser = argparse.ArgumentParser(description="Generate development ECG figure exports")
     parser.add_argument("--tables", type=Path, required=True)
     parser.add_argument("--raw", type=Path, required=True)
     parser.add_argument("--out", type=Path, required=True)
@@ -1059,6 +1100,9 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
+    protected_output_dir = Path(__file__).resolve().parents[3] / "outputs" / "figures"
+    if args.out.resolve() == protected_output_dir.resolve():
+        raise SystemExit("Refusing to overwrite submitted manuscript images; choose another output directory.")
     manifest = generate_all_figures(args.tables, args.raw, args.out)
     print(json.dumps({"status": "ok", "figures": len(manifest)}))
 

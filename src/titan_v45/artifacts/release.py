@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import re
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -13,6 +14,9 @@ class ReleaseAsset:
     name: str
     path: str
     category: str
+    license: str | None = None
+    source_lineage: str | None = None
+    rights_review: str | None = None
 
 
 def _download_url(repository: str, tag: str, asset_name: str) -> str:
@@ -34,6 +38,17 @@ def build_release_manifest(
     asset_rows: list[dict[str, object]] = []
     artifact_hashes: dict[str, str] = {}
     for asset in assets:
+        license_name = (asset.license or "").strip()
+        source_lineage = (asset.source_lineage or "").strip()
+        if not license_name or not source_lineage:
+            raise ValueError(f"release asset requires license and source lineage: {asset.name}")
+        if asset.category == "external_dev_dataset":
+            if asset.rights_review != "cleared":
+                raise ValueError(f"dataset asset requires rights_review=cleared: {asset.name}")
+            metadata = f"{license_name} {source_lineage}".casefold()
+            unresolved_markers = ("unresolved", "unverified", "unknown", "tbd", "hold")
+            if any(re.search(rf"\b{marker}\b", metadata) for marker in unresolved_markers):
+                raise ValueError(f"dataset asset has unresolved provenance or rights: {asset.name}")
         source = Path(asset.source).resolve()
         if not source.is_file():
             raise FileNotFoundError(f"release asset is missing: {source}")
@@ -42,6 +57,9 @@ def build_release_manifest(
             "name": asset.name,
             "path": asset.path,
             "category": asset.category,
+            "license": license_name,
+            "source_lineage": source_lineage,
+            "rights_review": asset.rights_review,
             "bytes": source.stat().st_size,
             "sha256": digest,
             "download_url": _download_url(repository, tag, asset.name),
@@ -49,7 +67,7 @@ def build_release_manifest(
         asset_rows.append(row)
         artifact_hashes[asset.path] = digest
     payload: dict[str, object] = {
-        "schema": "TITAN_V45_RELEASE_MANIFEST_V1",
+        "schema": "TITAN_V45_RELEASE_MANIFEST_V2",
         "repository": repository,
         "tag": tag,
         "assets": asset_rows,

@@ -1,21 +1,5 @@
-# Manuscript figure evaluation package
+# Figure Tests
 
-This folder mirrors the figure-generation and validation contract used for the manuscript.
+The tests generate development figures in a temporary directory and verify the separate set of 14 PNGs used by the manuscript. They do not regenerate or replace the manuscript images.
 
-Contents:
-
-- `scripts/generate_manuscript_figures.py`: manuscript figure generator copied from `MANUSCRIPT/scripts/figures.py`.
-- `scripts/test_figures.py`: pytest checks for generated figures.
-- `scripts/test_manuscript_outputs.py`: pytest checks for manuscript output claims and figure inclusion.
-- `scripts/verify_figure_assets.py`: lightweight manifest verifier for PNG/PDF/SVG outputs.
-- `tables_snapshot/`: CSV inputs used by the result figures.
-- `figures_png/`: PNG snapshot of the generated manuscript figures.
-
-Typical verification:
-
-```powershell
-python TEST\figure_evaluation\scripts\verify_figure_assets.py --manifest MANUSCRIPT\figures\figure_manifest.json --figures MANUSCRIPT\figures
-python -m pytest MANUSCRIPT\tests
-```
-
-The public-repository copy follows the same structure under `tests/figure_evaluation`.
+Run from the repository root with `python -m pytest tests/figure_evaluation/scripts`.

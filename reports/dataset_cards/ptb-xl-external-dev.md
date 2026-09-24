@@ -2,7 +2,7 @@
 
 ## Source
 
-PTB-XL version 1.0.3, PhysioNet. Wagner et al., *Scientific Data* 7, 154 (2020). License: CC BY 4.0.
+PTB-XL version 1.0.3, PhysioNet (2022; release DOI `10.13026/kfzx-aw45`). Cite the original descriptor by Wagner et al., *Scientific Data* 7, article 154 (2020; DOI `10.1038/s41597-020-0495-6`). License: CC BY 4.0.
 
 ## Released Scope
 

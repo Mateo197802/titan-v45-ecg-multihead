@@ -1,256 +1,78 @@
-[
-  {
-    "id": "fig00_ecg_ai_context",
-    "kind": "introduction",
-    "caption": "Representative clinical and methodological context for multi-source 12-lead ECG AI and the modular specialist evidence boundary.",
-    "png": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig00_ecg_ai_context.png",
-    "pdf": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig00_ecg_ai_context.pdf",
-    "svg": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig00_ecg_ai_context.svg",
-    "source_files": [
-      "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\curated_inputs\\fig00_ecg_ai_context.png",
-      "MANUSCRIPT/evidence/metrics.json",
-      "MANUSCRIPT/literature/studies.csv"
-    ],
-    "sample_probabilities_verified": false,
-    "curated_visual_asset": true
-  },
-  {
-    "id": "fig00b_ecg_ai_evolution_gap",
-    "kind": "introduction",
-    "caption": "Historical and methodological evolution from rule-based ECG interpretation to modular specialist ECG-AI evidence packages.",
-    "png": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig00b_ecg_ai_evolution_gap.png",
-    "pdf": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig00b_ecg_ai_evolution_gap.pdf",
-    "svg": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig00b_ecg_ai_evolution_gap.svg",
-    "source_files": [
-      "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\curated_inputs\\fig00b_ecg_ai_evolution_gap.png",
-      "MANUSCRIPT/evidence/metrics.json",
-      "MANUSCRIPT/literature/studies.csv"
-    ],
-    "sample_probabilities_verified": false,
-    "curated_visual_asset": true
-  },
-  {
-    "id": "fig01_graphical_abstract",
-    "kind": "methodology",
-    "caption": "Graphical abstract of the modular ECG workflow and the two independently evaluated specialist branches.",
-    "png": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig01_graphical_abstract.png",
-    "pdf": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig01_graphical_abstract.pdf",
-    "svg": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig01_graphical_abstract.svg",
-    "source_files": [
-      "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\curated_inputs\\fig01_graphical_abstract.png",
-      "MANUSCRIPT/evidence/claims.yaml"
-    ],
-    "sample_probabilities_verified": false,
-    "curated_visual_asset": true
-  },
-  {
-    "id": "fig02_data_processing_bias_workflow",
-    "kind": "methodology",
-    "caption": "Multi-source ECG curation workflow linking dataset integration, waveform harmonization, label ontology mapping, leakage control, and source-stratified external-development evaluation.",
-    "png": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig02_data_processing_bias_workflow.png",
-    "pdf": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig02_data_processing_bias_workflow.pdf",
-    "svg": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig02_data_processing_bias_workflow.svg",
-    "source_files": [
-      "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\curated_inputs\\fig02_data_processing_bias_workflow.png",
-      "MANUSCRIPT/evidence/claims.yaml",
-      "MANUSCRIPT/evidence/source_inventory.csv"
-    ],
-    "sample_probabilities_verified": false,
-    "curated_visual_asset": true
-  },
-  {
-    "id": "fig03_internal_architecture",
-    "kind": "methodology",
-    "caption": "Internal CNN-Transformer-specialist workflow showing shared temporal encoding, morphology fusion, global heads, and separate rhythm/pathology specialist reports.",
-    "png": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig03_internal_architecture.png",
-    "pdf": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig03_internal_architecture.pdf",
-    "svg": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig03_internal_architecture.svg",
-    "source_files": [
-      "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\curated_inputs\\fig03_internal_architecture.png",
-      "MANUSCRIPT/evidence/claims.yaml",
-      "MANUSCRIPT/tables/architecture.csv"
-    ],
-    "sample_probabilities_verified": false,
-    "curated_visual_asset": true
-  },
-  {
-    "id": "fig03_cascade_contract",
-    "kind": "methodology",
-    "caption": "Primary, quarantine-cascade, and auxiliary output contracts for rhythm and pathology.",
-    "png": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig03_cascade_contract.png",
-    "pdf": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig03_cascade_contract.pdf",
-    "svg": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig03_cascade_contract.svg",
-    "source_files": [
-      "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\curated_inputs\\fig03_cascade_contract.png",
-      "MANUSCRIPT/tables/class_contracts.csv"
-    ],
-    "sample_probabilities_verified": false,
-    "curated_visual_asset": true
-  },
-  {
-    "id": "fig04_optuna",
-    "kind": "optimization",
-    "caption": "Optuna trial ranking and the selected hyperparameter configuration.",
-    "png": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig04_optuna.png",
-    "pdf": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig04_optuna.pdf",
-    "svg": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig04_optuna.svg",
-    "source_files": [
-      "MANUSCRIPT/tables/optuna_trials.csv",
-      "MANUSCRIPT/tables/optuna_best_parameters.csv"
-    ],
-    "sample_probabilities_verified": false
-  },
-  {
-    "id": "fig05_training_curves",
-    "kind": "training",
-    "caption": "Internal validation trajectories for shared and pathology-focused optimization stages.",
-    "png": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig05_training_curves.png",
-    "pdf": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig05_training_curves.pdf",
-    "svg": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig05_training_curves.svg",
-    "source_files": [
-      "MANUSCRIPT/tables/training_history_shared_backbone.csv",
-      "MANUSCRIPT/tables/training_history_pathology_backbone.csv",
-      "MANUSCRIPT/tables/training_history_pathology_specialist.csv"
-    ],
-    "sample_probabilities_verified": false
-  },
-  {
-    "id": "fig06_rhythm_confusion",
-    "kind": "confusion_matrix",
-    "caption": "Primary6 row-normalized confusion matrix restricted to 1,305 records with a single primary rhythm reference label.",
-    "png": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig06_rhythm_confusion.png",
-    "pdf": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig06_rhythm_confusion.pdf",
-    "svg": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig06_rhythm_confusion.svg",
-    "source_files": [
-      "MANUSCRIPT/tables/rhythm_strict_confusion_matrix_normalized.csv"
-    ],
-    "sample_probabilities_verified": false
-  },
-  {
-    "id": "fig07_pathology_confusion",
-    "kind": "confusion_matrix",
-    "caption": "One-vs-rest confusion panels for the four pathology specialists on balanced external-development panels.",
-    "png": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig07_pathology_confusion.png",
-    "pdf": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig07_pathology_confusion.pdf",
-    "svg": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig07_pathology_confusion.svg",
-    "source_files": [
-      "MANUSCRIPT/tables/pathology_confusion_panels.csv"
-    ],
-    "sample_probabilities_verified": false
-  },
-  {
-    "id": "fig08_class_metrics",
-    "kind": "performance",
-    "caption": "Per-class precision, recall, and F1 for the rhythm and pathology specialist branches.",
-    "png": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig08_class_metrics.png",
-    "pdf": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig08_class_metrics.pdf",
-    "svg": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig08_class_metrics.svg",
-    "source_files": [
-      "MANUSCRIPT/tables/rhythm_class_metrics.csv",
-      "MANUSCRIPT/tables/pathology_class_metrics.csv"
-    ],
-    "sample_probabilities_verified": false
-  },
-  {
-    "id": "fig09_roc_curves",
-    "kind": "roc",
-    "caption": "Receiver operating characteristic curves computed from record-level probabilities for both specialist branches.",
-    "png": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig09_roc_curves.png",
-    "pdf": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig09_roc_curves.pdf",
-    "svg": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig09_roc_curves.svg",
-    "source_files": [
-      "MANUSCRIPT/tables/rhythm_roc_points.csv",
-      "MANUSCRIPT/tables/pathology_roc_points.csv"
-    ],
-    "sample_probabilities_verified": true
-  },
-  {
-    "id": "fig10_precision_recall_curves",
-    "kind": "precision_recall",
-    "caption": "Precision-recall curves computed from record-level probabilities for both specialist branches.",
-    "png": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig10_precision_recall_curves.png",
-    "pdf": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig10_precision_recall_curves.pdf",
-    "svg": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig10_precision_recall_curves.svg",
-    "source_files": [
-      "MANUSCRIPT/tables/rhythm_pr_points.csv",
-      "MANUSCRIPT/tables/pathology_pr_points.csv"
-    ],
-    "sample_probabilities_verified": true
-  },
-  {
-    "id": "fig11_calibration",
-    "kind": "calibration",
-    "caption": "Ten-bin reliability diagrams derived from record-level probabilities.",
-    "png": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig11_calibration.png",
-    "pdf": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig11_calibration.pdf",
-    "svg": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig11_calibration.svg",
-    "source_files": [
-      "20260627_primary6_no_nsr_pac_epoch8_gate_audit_v1\\primary6_no_nsr_pac_external_record_predictions.csv",
-      "pathology4_panels/*/record_predictions.csv"
-    ],
-    "sample_probabilities_verified": true
-  },
-  {
-    "id": "fig14_uncertainty_profile",
-    "kind": "uncertainty",
-    "caption": "Uncertainty profile from frozen record-level probabilities: rhythm entropy/margins stratified by correctness and pathology panel entropy/margin/error summaries.",
-    "png": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig14_uncertainty_profile.png",
-    "pdf": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig14_uncertainty_profile.pdf",
-    "svg": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig14_uncertainty_profile.svg",
-    "source_files": [
-      "20260627_primary6_no_nsr_pac_epoch8_gate_audit_v1\\primary6_no_nsr_pac_external_record_predictions.csv",
-      "pathology4_panels/*/record_predictions.csv"
-    ],
-    "sample_probabilities_verified": true
-  },
-  {
-    "id": "fig15_gradcam_contract",
-    "kind": "explainability",
-    "caption": "1D Grad-CAM lead-time overlay on an original dataset ECG waveform, defining the reproducible attribution output expected for specialist review.",
-    "png": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig15_gradcam_contract.png",
-    "pdf": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig15_gradcam_contract.pdf",
-    "svg": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig15_gradcam_contract.svg",
-    "source_files": [
-      "MANUSCRIPT/evidence/claims.yaml",
-      "synthetic fallback"
-    ],
-    "sample_probabilities_verified": false
-  },
-  {
-    "id": "fig12_source_performance",
-    "kind": "robustness",
-    "caption": "Primary6 source-stratified top-1 accuracy with Wilson confidence intervals.",
-    "png": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig12_source_performance.png",
-    "pdf": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig12_source_performance.pdf",
-    "svg": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig12_source_performance.svg",
-    "source_files": [
-      "MANUSCRIPT/tables/rhythm_source_performance.csv"
-    ],
-    "sample_probabilities_verified": false
-  },
-  {
-    "id": "fig13_error_flows",
-    "kind": "error_analysis",
-    "caption": "Most frequent Primary6 reference-to-prediction error flows; multi-label references are identified separately.",
-    "png": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig13_error_flows.png",
-    "pdf": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig13_error_flows.pdf",
-    "svg": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig13_error_flows.svg",
-    "source_files": [
-      "MANUSCRIPT/tables/rhythm_error_pairs.csv"
-    ],
-    "sample_probabilities_verified": false
-  },
-  {
-    "id": "fig16_reproducibility_map",
-    "kind": "reproducibility",
-    "caption": "Evidence-to-publication reproducibility map and repository release boundary.",
-    "png": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig16_reproducibility_map.png",
-    "pdf": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig16_reproducibility_map.pdf",
-    "svg": "C:\\Users\\intel\\OneDrive - yachaytech.edu.ec\\Escritorio\\UITEY\\Semestre VII\\Matematica superior\\Proyecto final\\V4.5\\MANUSCRIPT\\figures\\fig16_reproducibility_map.svg",
-    "source_files": [
-      "MANUSCRIPT/evidence/source_inventory.csv",
-      "MANUSCRIPT/evidence/claims.yaml"
-    ],
-    "sample_probabilities_verified": false
-  }
-]
+{
+  "schema": "TITAN_V45_MANUSCRIPT_IMAGE_MANIFEST_V1",
+  "source_archive": "mdpi_Articulo.zip",
+  "source_archive_sha256": "36c1c6db30a759ef9d349ae2e545577cfd7ce3af91a3b97fb459380113f294a8",
+  "source_tex": "mdpi_Articulo/manuscrito.tex",
+  "assets": [
+    {
+      "file": "fig00_ecg_ai_context.png",
+      "source": "mdpi_Articulo/figures/fig00_ecg_ai_context.png",
+      "sha256": "263314aec0ae1261cbe4995cbdde602d38ac13fda2eae3bd549f667df60fd54c"
+    },
+    {
+      "file": "fig00b_ecg_ai_evolution_gap.png",
+      "source": "mdpi_Articulo/figures/fig00b_ecg_ai_evolution_gap.png",
+      "sha256": "6b28af7459556cff3ddd5563f12315eda0029cea118f6ff344a1132d6bf991f3"
+    },
+    {
+      "file": "fig01_graphical_abstract.png",
+      "source": "mdpi_Articulo/figures/fig01_graphical_abstract.png",
+      "sha256": "52401fa880a6f521490297b01d535c49e9e7e6f957ef3dea62c7d685012ef665"
+    },
+    {
+      "file": "fig02_data_processing_bias_workflow.png",
+      "source": "mdpi_Articulo/figures/fig02_data_processing_bias_workflow.png",
+      "sha256": "b045537dfeb3ffd0f4392f6817fd9448099b75b6119e08fc7fc58e8b492c6066"
+    },
+    {
+      "file": "fig03_cascade_contract.png",
+      "source": "mdpi_Articulo/figures/fig03_cascade_contract.png",
+      "sha256": "a3780f5f9bb1120feb6cebee217706608dd0794b221961fbaad0e48531a207c7"
+    },
+    {
+      "file": "fig03_internal_architecture.png",
+      "source": "mdpi_Articulo/figures/fig03_internal_architecture.png",
+      "sha256": "a4780a7c9533c93af94c08770dbb480faacf00c7ce44d0e30338a360cf07941b"
+    },
+    {
+      "file": "fig06_rhythm_confusion.png",
+      "source": "mdpi_Articulo/figures/fig06_rhythm_confusion.png",
+      "sha256": "7093447cba8e0ccc64065c96e86a18d799bd22e6b632cbe663b8d8da7b94cf92"
+    },
+    {
+      "file": "fig07_pathology_confusion.png",
+      "source": "mdpi_Articulo/figures/fig07_pathology_confusion.png",
+      "sha256": "b057e5f6f665158b8715f6bfcb079765472590f332fa7590434512bf75302386"
+    },
+    {
+      "file": "fig08_class_metrics.png",
+      "source": "mdpi_Articulo/figures/fig08_class_metrics.png",
+      "sha256": "506c1cfd1c15c082cac72422de67e2633f53ed2204c5f19d4c82b96adaa15270"
+    },
+    {
+      "file": "fig09_roc_curves.png",
+      "source": "mdpi_Articulo/figures/fig09_roc_curves.png",
+      "sha256": "ae21ae9c3868879cbe246010e8efdb640ee59d7534b47ee96aaaaf6b6c356398"
+    },
+    {
+      "file": "fig10_precision_recall_curves.png",
+      "source": "mdpi_Articulo/figures/fig10_precision_recall_curves.png",
+      "sha256": "d2eaf88ee47f9c324054fb209a8e3b971797c7bb23f7217dde7bc691217d3835"
+    },
+    {
+      "file": "fig11_calibration.png",
+      "source": "mdpi_Articulo/figures/fig11_calibration.png",
+      "sha256": "8e1bc30864d28810d475a607107ecde9ab41189c6156b8eedb96dd8ec145b2fa"
+    },
+    {
+      "file": "fig12_source_performance.png",
+      "source": "mdpi_Articulo/figures/fig12_source_performance.png",
+      "sha256": "b2bc3b1d79de93a196bb230c00f08b426768518306a8e9628e2ada7b592011a0"
+    },
+    {
+      "file": "fig13_error_flows.png",
+      "source": "mdpi_Articulo/figures/fig13_error_flows.png",
+      "sha256": "4fb5833368926e22f310f4815483badd54c8fcf5a6789199b59a249faf85004c"
+    }
+  ]
+}

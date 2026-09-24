@@ -20,6 +20,9 @@ def _read_assets(path: Path) -> list[ReleaseAsset]:
                 name=row["name"],
                 path=row["path"],
                 category=row["category"],
+                license=row["license"],
+                source_lineage=row["source_lineage"],
+                rights_review=row["rights_review"] or None,
             )
             for row in rows
         ]

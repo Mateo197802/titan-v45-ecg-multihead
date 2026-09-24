@@ -1,5 +1,7 @@
 # CEDIA Reproducibility
 
+This document is a runbook, not evidence that the listed CEDIA run succeeded. The current `run_reproducibility_verification.py` checks release hashes, dataset-package metadata, and model-bundle contracts; it recalculates some metrics from saved prediction tables and reads the Primary4 metric report. It does not run model inference on ECG waveforms or retrain the model. The repository also lacks the full source cohorts, every training checkpoint, scheduler logs, and a tracked `reproducibility_report.json`.
+
 Set `TITAN_V45_DATA_ROOT` to the dataset cache outside the repository and `TITAN_V45_RELEASE_ROOT` to verified Release assets. Load the cluster CUDA/PyTorch module before installing `requirements/requirements-cedia-cuda.txt`.
 
 The complete CEDIA run must:

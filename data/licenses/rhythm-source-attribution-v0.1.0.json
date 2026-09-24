@@ -1,0 +1,86 @@
+{
+  "schema": "TITAN_V45_SOURCE_ATTRIBUTION_AUDIT_V1",
+  "release_tag": "v0.1.0",
+  "asset_name": "external-dev-rhythm-chapman-shaoxing.tar.zst",
+  "distribution_status": "HOLD_UNRESOLVED_SOURCE_RIGHTS",
+  "profiles": {
+    "rhythm_primary8": {
+      "record_rows": 2193,
+      "source_counts": {
+        "chapman_shaoxing": 1879,
+        "codetest_zenodo_3765780": 167,
+        "data_test": 84,
+        "training/cpsc_2018": 10,
+        "training/cpsc_2018_extra": 8,
+        "training/georgia": 9,
+        "training/ningbo": 13,
+        "training/ptb-xl": 23
+      }
+    },
+    "rhythm_primary6_diagnostic": {
+      "record_rows": 1643,
+      "source_counts": {
+        "chapman_shaoxing": 1514,
+        "codetest_zenodo_3765780": 19,
+        "data_test": 63,
+        "training/cpsc_2018": 5,
+        "training/cpsc_2018_extra": 8,
+        "training/georgia": 6,
+        "training/ningbo": 10,
+        "training/ptb-xl": 18
+      }
+    },
+    "pathology_primary4": {
+      "panel_rows": 962,
+      "source": "PTBXL_FULL_100HZ_DERIVED",
+      "dataset": "PTB-XL version 1.0.3",
+      "license": "CC-BY-4.0"
+    }
+  },
+  "sources": [
+    {
+      "manifest_label": "chapman_shaoxing",
+      "dataset": "Chapman-Shaoxing-Ningbo ECG database",
+      "release": "PhysioNet version 1.0.0",
+      "doi": "10.13026/wgex-er52",
+      "license": "CC-BY-4.0",
+      "mapping_status": "source_label_only; upstream record hashes not compared"
+    },
+    {
+      "manifest_label": "codetest_zenodo_3765780",
+      "dataset": "CODE-test: An annotated 12-lead ECG dataset",
+      "release": "Zenodo v1.0.3",
+      "doi": "10.5281/zenodo.3765780",
+      "license": "CC-BY-4.0",
+      "mapping_status": "manifest label and record IDs; upstream waveform hashes not compared"
+    },
+    {
+      "manifest_labels": [
+        "training/cpsc_2018",
+        "training/cpsc_2018_extra",
+        "training/georgia",
+        "training/ningbo",
+        "training/ptb-xl"
+      ],
+      "dataset": "PhysioNet/Computing in Cardiology Challenge 2021 training release",
+      "release": "PhysioNet version 1.0.3",
+      "doi": "10.13026/34va-7q14",
+      "license": "CC-BY-4.0",
+      "citation_doi": "10.23919/CinC53138.2021.9662687",
+      "mapping_status": "inferred from manifest path labels; upstream record hashes not compared"
+    },
+    {
+      "manifest_label": "data_test",
+      "dataset": null,
+      "release": null,
+      "doi": null,
+      "license": null,
+      "mapping_status": "UNRESOLVED; no upstream identity, citation, version, checksum, or rights evidence in this repository"
+    }
+  ],
+  "limitations": [
+    "Counts come from the committed row manifests and cohort report; they do not independently prove waveform identity.",
+    "The v0.1.0 rhythm release manifest records hashes and URLs but has no per-asset license or source-lineage fields.",
+    "The public v0.1.0 rhythm asset must not be treated as rights-cleared until all 84 data_test records are traced."
+  ]
+}

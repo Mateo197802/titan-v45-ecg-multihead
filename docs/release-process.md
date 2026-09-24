@@ -1,5 +1,7 @@
 # Release Process
 
-Release `v0.1.0` stores weights and evaluated external-development cohorts outside Git history. `release-manifest.json` records file name, repository destination, byte count, SHA-256, license, source lineage, and download URL. `SHA256SUMS` duplicates the cryptographic inventory in standard text form.
+Release `v0.1.0` stores weights and evaluated external-development cohorts outside Git history. Its published `release-manifest.json` is schema V1 and records file name, repository destination, byte count, SHA-256, and download URL; it does **not** contain per-asset license or source-lineage fields. `SHA256SUMS` is an integrity inventory, not license evidence. The V1 manifest and asset names are historical and must not be represented as a complete provenance record.
 
-The release is created as a draft, all assets are uploaded, downloaded into a clean clone, and verified before publication. Each file must remain below GitHub's 2 GiB per-file limit.
+Future releases use schema V2, require nonempty `license` and `source_lineage` metadata for every asset, and must be created as drafts. Dataset assets additionally require `rights_review=cleared`; the builder rejects missing/blocked review status and explicit unresolved-source markers. The reviewer must compare the source-attribution inventory to the included rows before setting this field; the status is an attestation, not an automatic legal determination. Before publication, download every asset into a clean clone, verify the SHA-256 values, inspect the source/rights inventory, then publish. Each file must remain below GitHub's 2 GiB per-file limit.
+
+The `v0.1.0` rhythm archive is mixed-source and includes 84 `data_test` records with unresolved upstream identity and rights. Its distribution status is **HOLD** for any replacement/republication until those records are traced. This repository change does not modify or retract the already-published release asset.
