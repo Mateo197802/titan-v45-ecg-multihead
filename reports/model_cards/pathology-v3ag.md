@@ -11,7 +11,7 @@ Research evaluation of four classwise pathology panels: `ASMI`, `LVH`, `IMI`, an
 
 ## Results
 
-The released validation panels reached 80.2290% mean accuracy and 79.3456% macro-F1 at 100% panel coverage. `LVH` is the lowest classwise F1 at 65.7277%.
+On the repeated external-development evidence, the four panels reached 80.2290% mean binary-panel accuracy and 79.3456% macro-F1 at 100% coverage within the selected panels. `LVH` is the lowest classwise F1 at 65.7277%. The Primary4 branch was accepted by project decision; this status does not change the measured metrics or imply that a 90% or 95% accuracy threshold was reached. See the [evidence status](../../docs/evidence-status.md) and [recomputed metrics](../../outputs/results/external_dev/README.md).
 
 ## Limitations
 

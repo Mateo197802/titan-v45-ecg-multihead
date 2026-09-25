@@ -12,7 +12,9 @@ Research evaluation of rhythm classification from ten-second, 12-lead ECG window
 
 ## Results
 
-Primary8 reached 90.6065% top-1 accuracy and 76.1425% macro-F1 on the released validation cohort. The six-class diagnostic profile reached 95.1917% top-1 accuracy and 80.0938% macro-F1 on its eligible records.
+On the repeated external-development cohort, Primary8 reached 90.6065% top-1 accepted-label accuracy and 76.1425% binary-panel macro-F1. Accepted-label accuracy counts a top-1 prediction when it appears in the reference `accepted_labels` set; the panel F1 compares reference `accepted_labels` with model `predicted_labels`. The separate single-target diagnostic accuracy was 85.2713% (1,870/2,193). Primary8 remains a candidate and did not meet the 97% accuracy and 80% macro-F1 gates.
+
+The six-class Primary6 diagnostic profile reached 95.1917% top-1 accuracy and 80.0938% binary-panel macro-F1 on the same repeated external-development evidence package. Its top-1 decision is checked against the multi-label `true_labels` set; panel F1 is calculated from classwise threshold outcomes. See the [evidence status](../../docs/evidence-status.md) and [recomputed metrics](../../outputs/results/external_dev/README.md).
 
 ## Limitations
 

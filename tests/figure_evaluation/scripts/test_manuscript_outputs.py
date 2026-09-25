@@ -12,7 +12,8 @@ ROOT = Path(__file__).resolve().parents[3]
 def test_publication_scope_and_missing_manuscript_are_documented() -> None:
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
     evidence_notes = (ROOT / "docs" / "figure-evidence.md").read_text(encoding="utf-8")
-    assert "Only the 14 PNG images referenced by the submitted manuscript are included" in readme
+    assert "The 14 current manuscript figure PNGs are included." in readme
+    assert "The manuscript source and compiled PDF are outside this repository." in readme
     assert "full manuscript, its bibliography" in evidence_notes
     assert "not included" in evidence_notes
 
