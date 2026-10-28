@@ -9,10 +9,12 @@ These are repeated external-development evaluations. They are not untouched exte
 | Profile | Evidence size | Reported result | Status |
 | --- | ---: | --- | --- |
 | Rhythm Primary6 | 1,643 records | 95.19% top-1 accuracy; 80.09% binary-panel macro-F1 | Six-class diagnostic branch reported in the paper ([metrics](outputs/results/external_dev/rhythm_primary6_metrics.json)). |
-| Pathology Primary4 | 962 panel rows | 80.23% mean binary-panel accuracy; 79.35% macro-F1 | Accepted by project decision; observed accuracy remains 80.23% ([metrics](outputs/results/external_dev/pathology_primary4_metrics.json)). |
+| Pathology Primary4 | 962 panel rows / 733 ECGs / 676 linked patients | 80.23% mean binary-panel accuracy; 79.35% macro-F1 | Accepted by project decision; observed accuracy remains 80.23% ([metrics](outputs/results/external_dev/pathology_primary4_metrics.json)). |
 | Rhythm Primary8 | 2,193 records | 90.61% top-1 accepted-label accuracy; 76.14% binary-panel macro-F1 | Candidate only; it does not meet the 97% accuracy and 80% macro-F1 gates ([metrics](outputs/results/external_dev/rhythm_primary8_metrics.json)). |
 
 Primary8's separate single-target diagnostic accuracy is 85.27% (1,870/2,193); it is not the 90.61% accepted-label metric. See the [evidence status and metric definitions](docs/evidence-status.md) before citing these values.
+
+**Waveform reproduction remains unresolved.** Two full-cohort CEDIA runs of the fixed public-runtime/candidate-preprocessing contract disagreed with **166 of 962** archived Primary4 panel decisions. This failed historical-equivalence check is [reported with its provenance](docs/revision-evidence-20261028.md#waveform-replay-finding); successful saved-prediction recomputation and matching weight hashes do not resolve it. Primary6/Primary8 replay additionally requires the missing original signal-event extractor. Linked patient counts do not establish historical train/validation isolation.
 
 ## Verify Reported Metrics
 
