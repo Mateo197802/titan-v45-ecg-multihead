@@ -34,6 +34,8 @@ python scripts/evaluation/verify_release_evidence.py --output outputs/results/re
 
 The verifier checks saved prediction evidence; it does not rerun waveform inference or model training. Run the full test suite with `python -m pytest`.
 
+The [submitted hash-table correction](docs/hash-correction-20261028.md) distinguishes the invalid A10 example values from measured model hashes. Run `python scripts/evaluation/verify_release_hashes.py` to validate declarations and any available physical files; add `--require-models` where all model assets are installed. Missing assets are not reported as physically verified.
+
 ## Data
 
 Full source ECG datasets are not stored in this repository. Their sources, links, versions, and licenses are documented in [`data/licenses`](data/licenses/README.md). Evaluation manifests are in [`data/manifests`](data/manifests/README.md). Published assets and their hashes are listed in [`release-manifest.json`](release-manifest.json).
