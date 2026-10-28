@@ -1,0 +1,92 @@
+{
+  "schema": "TITAN_V45_CEDIA_RECOVERY_20261028_V1",
+  "scope": "physical_artifact_and_historical_metadata_audit",
+  "weights": [
+    {
+      "name": "backbone-v3ag-pathology.pt",
+      "bytes": 233566092,
+      "sha256": "bf71e4cf8acc34031cb3611c7031e0649822e705fd7dcea354a3ea583ce920ee",
+      "matches_release_manifest": true
+    },
+    {
+      "name": "backbone-v3f-original.pt",
+      "bytes": 233565900,
+      "sha256": "ca5d4dcb4b9828e6c4339800fe81ec27f32d9b09a090bb57503bfb56746a8da8",
+      "matches_release_manifest": true
+    },
+    {
+      "name": "specialists-v3ag-primary4-calibrated.pt",
+      "bytes": 29413606,
+      "sha256": "cf5091e962fffb3254b1a71fe57236dd82ea0139093df192511499d931391dbc",
+      "matches_release_manifest": true
+    },
+    {
+      "name": "specialists-v3p-e008-primary6-diagnostic.pt",
+      "bytes": 22354966,
+      "sha256": "9c5a9265a7155e1206c551cc4e6d645b86363ba3dbdeb7baf7b9f173c314be3d",
+      "matches_release_manifest": true
+    },
+    {
+      "name": "specialists-v3q-primary8-best-candidate.pt",
+      "bytes": 29498326,
+      "sha256": "b30cb2bbb45f1231c93ff1c196aa966b57b49831cadb296131c0283e7b0ceb02",
+      "matches_release_manifest": true
+    }
+  ],
+  "compute_probe": {
+    "job_id": "31402",
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "python": "3.11.14",
+    "torch": "2.10.0+cu128",
+    "cuda_available": true
+  },
+  "historical_log_fingerprints": [
+    {
+      "name": "slurm-17315.out",
+      "bytes": 15278,
+      "sha256": "74e03a97067b176c758c2c28b2faf0888c0bb555eb6a20a732b05f81385d43ec",
+      "distribution": "private original retained; sanitized findings only"
+    },
+    {
+      "name": "slurm-17314.out",
+      "bytes": 57887,
+      "sha256": "19df83ca78f0688a99e06a967611e04b4f308d0fd5a1af8df1bdd3efe144452e",
+      "distribution": "private original retained; sanitized findings only"
+    },
+    {
+      "name": "slurm-17296.out",
+      "bytes": 96324,
+      "sha256": "1f0b29540c84cb68a5719e74e02ce3c58a1a4c38da66a8b39c9862913d2b18e8",
+      "distribution": "private original retained; sanitized findings only"
+    }
+  ],
+  "p6_metadata": {
+    "validation_manifest_basename": "v3h_rhythm_external_gate_holdout_accepted_balanced_manifest.csv",
+    "interpretation": "The checkpoint records the released external-development manifest as rhythm validation input. It cannot be described as an untouched external-final test.",
+    "signal_event_feature_dim": 12,
+    "signal_event_extractor_recovered": false
+  },
+  "inference_status": "not_certified_by_this_report",
+  "limits": [
+    "Exact original training manifests and full source snapshot not yet recovered.",
+    "Checkpoint metadata establishes configuration claims, not independent clinical validation.",
+    "Matching weight hashes does not establish correct preprocessing or prediction equivalence."
+  ],
+  "source_metadata_recovery": {
+    "primary4": {
+      "panel_rows": 962,
+      "unique_record_ids": 733,
+      "matched_source_rows": 733,
+      "known_patient_ids": 676,
+      "fold_counts": {
+        "10": 733
+      },
+      "metadata_sha256": "7600de9c1b27d181d850b3c6038a35d7c3ddb6bb33b702e3a20252a6859d216b",
+      "note": "Patient counts recovered from local upstream metadata; exact original training/calibration manifests remain required for overlap certification."
+    },
+    "data_test_records_examined": 84,
+    "data_test_exact_mirror_matches": 0,
+    "mapping_status": "unresolved_for_data_test"
+  }
+}

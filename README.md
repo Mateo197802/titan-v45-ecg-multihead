@@ -16,6 +16,8 @@ Primary8's separate single-target diagnostic accuracy is 85.27% (1,870/2,193); i
 
 ## Verify Reported Metrics
 
+The [October 2026 revision analysis](docs/revision-evidence-20261028.md) adds per-class metrics, explicit ECG/panel denominators, ECG-clustered bootstrap intervals and findings from the surviving CEDIA model files and historical logs. Its scope and remaining waveform-replay limitations are recorded separately from the historical release.
+
 From the repository root, recompute the reported metrics from the tracked per-record prediction tables and check them against the canonical reports, cohort manifests, and release hashes:
 
 ```bash
