@@ -18,6 +18,8 @@ Primary8's separate single-target diagnostic accuracy is 85.27% (1,870/2,193); i
 
 ## Verify Reported Metrics
 
+The [29 October source and policy follow-up](docs/revision-evidence-20261029.md) identifies all 84 selected `data_test` signals against official PhysioNet checksums and reconstructs every saved P8 decision using membership scores with an explicit empty-set fallback. These close bounded source/decision questions, not historical waveform reproduction, training isolation or distribution approval.
+
 The [October 2026 revision analysis](docs/revision-evidence-20261028.md) adds per-class metrics, explicit ECG/panel denominators, ECG-clustered bootstrap intervals and findings from the surviving CEDIA model files and historical logs. Its scope and remaining waveform-replay limitations are recorded separately from the historical release.
 
 From the repository root, recompute the reported metrics from the tracked per-record prediction tables and check them against the canonical reports, cohort manifests, and release hashes:
