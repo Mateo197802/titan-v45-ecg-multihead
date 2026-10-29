@@ -1,0 +1,169 @@
+{
+  "schema": "TITAN_V45_RECOVERY_SEARCH_V1",
+  "date": "2026-10-29",
+  "scope": "bounded_accessible_project_related_search_not_proof_of_global_absence",
+  "source_identity_scope": "filesystem_and_git_search_only; archived-event recovery is separately reported in inventory_matched_source_recovery.json",
+  "searches": {
+    "local_target_hash_inventory.json": {
+      "sha256": "202f593989994a476f2d02e88cb98f753922e4a3c83f90906f310d9f47ac42ee",
+      "roots": 6,
+      "files_seen": 327738,
+      "directories_seen": 16443,
+      "candidate_entries": 87,
+      "unique_candidate_content_hashes": 12,
+      "archives_by_status": {
+        "inspected": 75,
+        "skipped_data_or_size_bound": 13
+      },
+      "errors": 3,
+      "terminated_at_time_bound": false,
+      "max_depth": null
+    },
+    "remote_home_inventory.json": {
+      "sha256": "9c5a9f6bf83f8d946fde36e7cf7ca60a370b8dff13428da90532956a802d247e",
+      "roots": 1,
+      "files_seen": 108168,
+      "directories_seen": 7952,
+      "candidate_entries": 0,
+      "unique_candidate_content_hashes": 0,
+      "archives_by_status": {},
+      "errors": 0,
+      "terminated_at_time_bound": true,
+      "max_depth": null
+    },
+    "remote_target_hash_inventory.json": {
+      "sha256": "9540ca22c31f68e734705dc176f635bf8a0e3d365151fd37034d950740586b58",
+      "roots": 1,
+      "files_seen": 1202,
+      "directories_seen": 1,
+      "candidate_entries": 1,
+      "unique_candidate_content_hashes": 1,
+      "archives_by_status": {},
+      "errors": 0,
+      "terminated_at_time_bound": false,
+      "max_depth": 0
+    },
+    "remote_project_target_hash_inventory.json": {
+      "sha256": "75ee5442d91db98b50d7f9fe68999816dcdcb3b0ba0fa327b14807f16d4205f8",
+      "roots": 1,
+      "files_seen": 6567,
+      "directories_seen": 3107,
+      "candidate_entries": 26,
+      "unique_candidate_content_hashes": 11,
+      "archives_by_status": {
+        "inspected": 8,
+        "skipped_data_or_size_bound": 2
+      },
+      "errors": 0,
+      "terminated_at_time_bound": false,
+      "max_depth": null
+    },
+    "remote_legacy_inventory.json": {
+      "sha256": "f8fb4cd351705265015195a1b6df03acbcd8a53a0b9b10e3d4f8f19a66fac457",
+      "roots": 3,
+      "files_seen": 46,
+      "directories_seen": 24,
+      "candidate_entries": 0,
+      "unique_candidate_content_hashes": 0,
+      "archives_by_status": {},
+      "errors": 0,
+      "terminated_at_time_bound": false,
+      "max_depth": null
+    },
+    "remote_kevin_project_inventory.json": {
+      "sha256": "9c31f53aca13d22c2d7e0597fc6068a76873628605c405735e24fbd769ab91e1",
+      "roots": 1,
+      "files_seen": 173,
+      "directories_seen": 13,
+      "candidate_entries": 2,
+      "unique_candidate_content_hashes": 2,
+      "archives_by_status": {},
+      "errors": 0,
+      "terminated_at_time_bound": false,
+      "max_depth": null
+    },
+    "local_auxiliary_inventory.json": {
+      "sha256": "28a3a62c5e3266ac498d999e5694625021a496cca46388cd7e9918eedcdc2f7e",
+      "roots": 3,
+      "files_seen": 658,
+      "directories_seen": 150,
+      "candidate_entries": 0,
+      "unique_candidate_content_hashes": 0,
+      "archives_by_status": {},
+      "errors": 0,
+      "terminated_at_time_bound": false,
+      "max_depth": null
+    }
+  },
+  "unreachable_git_blobs": [
+    {
+      "git_object": "ad0165c0f37ae86226b7ff5078c886affefef0d2",
+      "bytes": 702,
+      "sha256": "1e8ab4fd4bcbc33aaed0c4fef450e13ae4b0b6439372d19576f6c8a253db066b",
+      "historical_source_inventory_match": null
+    },
+    {
+      "git_object": "a76a11931c197b6633727c8d88e48665824ae190",
+      "bytes": 4938,
+      "sha256": "95c3227374864312ed796f893cb1f734d75330b3734fc202fa805b02de04162d",
+      "historical_source_inventory_match": null
+    },
+    {
+      "git_object": "0b93c081bed2a2d84bff8985058f21c7f99b052f",
+      "bytes": 4174,
+      "sha256": "12e20832d54f5720aa97cff7c67b2588cdb9ad345e24fdb106984e0cbefad8e7",
+      "historical_source_inventory_match": null
+    },
+    {
+      "git_object": "cd3cbc51445f9a60f1acf1118135d3c4292123d7",
+      "bytes": 3708,
+      "sha256": "985bc59ec99c1c8af5fdae76c2f8e0be25e742ab20664c0badc911c43d7ad5f8",
+      "historical_source_inventory_match": null
+    },
+    {
+      "git_object": "76a723fa9008685872ac6a4c90fea554282865a3",
+      "bytes": 18706,
+      "sha256": "ef6de90b26329432d883bdf49dceee4402634e1eff22a5ab964a6e67c7b5b60c",
+      "historical_source_inventory_match": null
+    },
+    {
+      "git_object": "a0a766eb7b9104f1d263f0a396174d058c349fa9",
+      "bytes": 8518,
+      "sha256": "09164fdeabf7e96afc52571baff3bce3ccba6e285b790de2da0c62a1d28c6037",
+      "historical_source_inventory_match": null
+    }
+  ],
+  "reachable_git_blob_audit": {
+    "reachable_objects": 762,
+    "blobs": 480,
+    "exact_historical_size_candidate_blobs": [
+      {
+        "git_object": "f5642493553c6c0f1de60a175b9b7d4ea0442da0",
+        "bytes": 9189,
+        "sha256": "46bb36737a93a4cfe4be4417f6c62bcbfd0e8e7e8356f31f532ad21662075c80",
+        "inventory_match": "MODEL_CORE/titan_v4_hybrid.py"
+      }
+    ],
+    "matching_method": "Check every reachable blob size; hash every blob matching any historical target size."
+  },
+  "original_source_inventory_matches_recovered": [
+    {
+      "path": "MODEL_CORE/titan_v4_hybrid.py",
+      "bytes": 9189,
+      "sha256": "46bb36737a93a4cfe4be4417f6c62bcbfd0e8e7e8356f31f532ad21662075c80"
+    }
+  ],
+  "morphology_extractor_recovered": false,
+  "event12_extractor_recovered": false,
+  "private_full_48_point_ledger_not_published": true,
+  "manuscript_or_responses_regenerated": false,
+  "new_evaluation_cohort_selected": false,
+  "distribution_hold_lifted": false,
+  "limitations": [
+    "Counts across host/root passes overlap and must not be summed as unique files.",
+    "General home traversal reached240seconds; targeted project and top-level passes completed.",
+    "Local inventory retained13archive data/size exclusions and3access-denied Windows junctions.",
+    "Only the two configured CEDIA accounts were examined; other accounts, inaccessible snapshots and undisclosed collaborator backups were not accessed.",
+    "No original extractor found in examined candidates is not a claim of absence in every possible backup."
+  ]
+}

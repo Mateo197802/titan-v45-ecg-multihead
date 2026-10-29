@@ -33,6 +33,7 @@ parser.add_argument("--morphology-module", type=Path, required=True)
 parser.add_argument("--work-dir", type=Path, required=True)
 parser.add_argument("--scratch-dir", type=Path, required=True)
 parser.add_argument("--limit", type=int, default=0)
+parser.add_argument("--recovered-trainer", type=Path, help="Exact inventoried trainer; enables its documented backbone softmax")
 args = parser.parse_args()
 if args.limit < 0:
     parser.error("--limit must be nonnegative")
@@ -41,9 +42,18 @@ work.mkdir(parents=True, exist_ok=True)
 print("Imports completed", flush=True)
 repo = args.repo_root.resolve()
 assets = args.release_root.resolve()
+recovered_trainer_hash = None
+if args.recovered_trainer is not None:
+    recovered_trainer_hash = hashlib.sha256(args.recovered_trainer.read_bytes()).hexdigest()
+    if recovered_trainer_hash != "8e8d59889a0458c47a90f9735ff6ba017c7e1a79582d11529a608e1816e671fe":
+        raise ValueError("Recovered trainer does not match the independent historical source inventory")
 sys.path.insert(0, str(repo / "src"))
 from titan_v45.models.factory import build_titan_v45_backbone
-from titan_v45.models.features import SpecialistFeatureLayout, compose_specialist_features
+from titan_v45.models.features import (
+    SpecialistFeatureLayout,
+    compose_specialist_features,
+    recovered_backbone_rhythm_probabilities,
+)
 from titan_v45.models.specialists import ClassWiseBinaryMLP
 
 spec = importlib.util.spec_from_file_location("recovered_morphology", args.morphology_module)
@@ -52,7 +62,7 @@ spec.loader.exec_module(morphology)
 torch.set_num_threads(2)
 torch.manual_seed(2026)
 device = "cuda" if torch.cuda.is_available() else "cpu"
-out = work / ("p4_replay_declared_contract_" + str(args.limit))
+out = work / (("p4_replay_recovered_softmax_" if recovered_trainer_hash else "p4_replay_declared_contract_") + str(args.limit))
 out.mkdir(exist_ok=True)
 root = args.scratch_dir.resolve() / "unpacked_pathology"
 archive_path = assets / "data/external_dev/pathology/external-dev-pathology-ptbxl-fold10.tar.zst"
@@ -172,7 +182,7 @@ with torch.inference_mode():
         )
         inputs = compose_specialist_features(
             backbone_features=features,
-            rhythm_probabilities=r.sigmoid(),
+            rhythm_probabilities=(recovered_backbone_rhythm_probabilities(r) if recovered_trainer_hash else r.sigmoid()),
             pathology_probabilities=p.sigmoid(),
             morphology=morph,
             layout=layout,
@@ -223,6 +233,15 @@ report = {
         (args.morphology_module).read_bytes()
     ).hexdigest(),
     "historical_preprocessing_certified": False,
+    "recovered_trainer_sha256": recovered_trainer_hash,
+    "backbone_rhythm_transform": "recovered_categorical_softmax" if recovered_trainer_hash else "legacy_diagnostic_sigmoid",
+    "predeclared_probability_atol": 1e-5,
+    "predeclared_probability_rtol": 0.0,
+    "selected_cohort_equivalence_passed": (
+        len(results) == 962 and len(predictions) == 733
+        and max(r["absolute_difference"] for r in results) <= 1e-5
+        and all(r["replayed_predicted"] == r["archived_predicted"] for r in results)
+    ),
     "note": "Single declared public feature layout and surviving loader reconstruction. Not tuned to labels; mismatch is retained as a reproducibility finding.",
 }
 (out / "replay_report.json").write_text(json.dumps(report, indent=2))

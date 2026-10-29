@@ -1,5 +1,7 @@
 # Source Identity and Saved Decision Reconstruction, 29 October 2026
 
+**Later29October update:** [historical recovery status](recovery-status-20261029.md) identifies the exact inventoried backbone source and establishes that all84selected headers differ from upstream only by CRLF/LF line endings. The selected-file attribution notice is documented; package-wide HOLD, historical replay and split-independence limits remain unchanged.
+
 This follow-up narrows two previously open evidence gaps. It does not replace the archived scientific predictions, overwrite the 28 October audit, or certify the still-failed Primary4 waveform-equivalence check. Aggregate findings and portable fingerprints are in [`outputs/results/revision_20261029`](../outputs/results/revision_20261029).
 
 ## Resolved Selected-Record Source Identity

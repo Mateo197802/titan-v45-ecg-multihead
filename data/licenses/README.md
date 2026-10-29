@@ -4,6 +4,8 @@ This inventory separates verified upstream terms from source identity inferred f
 
 ## Historical Rhythm Asset `v0.1.0`
 
+**Current selected-file notice:** [84 selected `data_test` records](PhysioNet-Challenge-2020-selected-data-test.md). Source attribution and measured header modifications are documented there. The new representation audit establishes that all84headers differ only by CRLF versus LF line endings. The historical table and V1 JSON below remain an older snapshot, not the current identity finding. The mixed-archive HOLD remains in place for package-wide review.
+
 **29 October follow-up:** the [new checksum/header audit](../../docs/revision-evidence-20261029.md) resolves upstream signal identity for all 84 selected `data_test` records (3 CPSC 2018, 5 Georgia, 76 PTB-XL). All signals match official bytes; normalized headers match parsed signal and diagnosis fields, not raw header bytes. The table below and machine-readable V1 report describe the preceding audit snapshot. Distribution review remains pending: source identity recovery does not automatically lift HOLD or certify training isolation.
 
 The public asset `external-dev-rhythm-chapman-shaoxing.tar.zst` contains 2,193 Primary8 record rows and is not a Chapman-only cohort. Counts below are copied from `data/external_dev/rhythm/release_cohort_report.json` and the two public record manifests. They do not prove that every waveform was matched against an upstream checksum.

@@ -13,6 +13,76 @@ SHA256 = re.compile(r"[0-9a-fA-F]{64}")
 EMPTY_SHA256 = hashlib.sha256(b"").hexdigest()
 
 
+def describe_header_changes(local: bytes, upstream: bytes) -> dict[str, Any]:
+    """Describe UTF-8 WFDB text representation changes without exporting values.
+
+    This is a formatting audit, not a WFDB semantic parser or a patient/diagnosis
+    equivalence certificate. Token columns are zero-based, including the filename.
+    Unknown comment names are redacted to prevent accidental identifier disclosure.
+    """
+    allowed = {"age", "sex", "dx", "rx", "hx", "sx"}
+
+    def parse(raw: bytes) -> tuple[list[str], list[list[str]], dict[str, str]]:
+        try:
+            lines = raw.decode("utf-8").splitlines()
+            first = lines[0].split()
+            count = int(first[1])
+        except (UnicodeError, IndexError, ValueError) as exc:
+            raise ValueError("invalid header encoding or record line") from exc
+        if count <= 0 or len(lines) < count + 1:
+            raise ValueError("invalid or incomplete signal line count")
+        signals = [line.split() for line in lines[1:count + 1]]
+        if any(not line or line[0].startswith("#") for line in signals):
+            raise ValueError("missing signal line")
+        comments = {}
+        for line in lines[count + 1:]:
+            if not line.strip():
+                continue
+            if not line.startswith("#") or ":" not in line:
+                raise ValueError("unsupported comment representation")
+            key, value = line[1:].split(":", 1)
+            key = key.strip().casefold()
+            if key in comments:
+                raise ValueError("duplicate comment key")
+            comments[key] = value.strip()
+        return first, signals, comments
+
+    def newlines(raw: bytes) -> str:
+        crlf = raw.count(b"\r\n")
+        lf = raw.count(b"\n") - crlf
+        cr = raw.count(b"\r") - crlf
+        kinds = [name for name, count in [("CRLF", crlf), ("LF", lf), ("CR", cr)] if count]
+        return kinds[0] if len(kinds) == 1 else "mixed" if kinds else "none"
+
+    a, a_signals, a_comments = parse(local)
+    b, b_signals, b_comments = parse(upstream)
+    changed_columns = set()
+    for left, right in zip(a_signals, b_signals, strict=False):
+        changed_columns.update(
+            index for index in range(max(len(left), len(right)))
+            if (left[index] if index < len(left) else None)
+            != (right[index] if index < len(right) else None)
+        )
+    changed_comments = {
+        key if key in allowed else "other"
+        for key in set(a_comments) | set(b_comments)
+        if a_comments.get(key) != b_comments.get(key)
+    }
+    return {
+        "byte_identical": local == upstream,
+        "identical_after_newline_normalization": (
+            local.replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+            == upstream.replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+        ),
+        "local_newline_style": newlines(local), "upstream_newline_style": newlines(upstream),
+        "record_line_tokens_equal": a == b,
+        "signal_line_count_equal": len(a_signals) == len(b_signals),
+        "changed_signal_token_columns": sorted(changed_columns),
+        "changed_comment_fields": sorted(changed_comments),
+        "clinical_equivalence_certified": False,
+    }
+
+
 def parse_checksums(text: str) -> dict[str, str]:
     """Parse plain PhysioNet or GNU lines; reject conflicting and unsafe paths."""
     index: dict[str, str] = {}
