@@ -24,6 +24,14 @@ The recovered `specialist_input_from_base` applies **categorical softmax** to ba
 
 Before executing this new comparison, the criterion is fixed:733ECGs,962panel rows, zero decision disagreements and maximum absolute probability error at most `1e-5`, relative tolerance zero. The previous166-disagreement outputs are preserved. No threshold, class order, filter or hyperparameter is selected by evaluation accuracy. A source-backed replay is an existing-cohort equivalence test, not new independent validation. Its result must be reported even if it fails.
 
+**Measured outcome:** job31577 completed `0:0` in46seconds; softmax alone still fails, with168decision disagreements, maximum absolute error0.6975915134and mean error0.1197770961. This is worse in decision agreement than the original166and is preserved in [the31577report](../outputs/results/revision_20261029/p4_recovered_softmax_31577.json); it was not discarded in favor of a better-looking score.
+
+### Recorded Named-Lead Mapping
+
+A packaged header uses uppercase `AVR/AVL/AVF`, while the old diagnostic searched the literal mixed-case names `aVR/aVL/aVF`. It consequently replaced those channels with zeros and marked them absent. The recorded loader helper normalizes alphanumeric lead tokens to uppercase and uses canonical names and explicit aliases. Its source-diff fingerprint and the observed header contract are in [the lead-mapping receipt](../outputs/results/revision_20261029/lead_mapping_recovery_contract.json).
+
+The recovered-trainer path now enables both the documented softmax and that recorded named-lead mapping. Tests enforce equivalent uppercase/mixed-case inputs, no fabricated missing channels, rejection of non-ECG channels and canonical-before-alias precedence. A further complete comparison uses the same predeclared tolerance and unchanged thresholds. Its result is pending until measured; the full inventoried loader remains unrecovered and neither earlier failure is overwritten.
+
 ## Header Modification Identified
 
 All84selected `data_test` headers are **identical to upstream after newline normalization alone**: local CRLF, official LF. They remain unequal as raw byte strings. Record-line tokens, signal-line tokens and normalized comment fields also agree. The script validates local header fingerprints and indexed upstream header digests before comparing; it exports no record identifiers or comment values.

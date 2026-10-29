@@ -134,8 +134,9 @@
     }
   ],
   "reachable_git_blob_audit": {
-    "reachable_objects": 762,
-    "blobs": 480,
+    "audited_revision": "c807f6afbbd1554dafb5c1af4d427298a3d850fd",
+    "reachable_objects": 753,
+    "blobs": 478,
     "exact_historical_size_candidate_blobs": [
       {
         "git_object": "f5642493553c6c0f1de60a175b9b7d4ea0442da0",

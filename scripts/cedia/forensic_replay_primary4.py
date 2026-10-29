@@ -11,6 +11,7 @@ import json
 import os
 import sys
 import tarfile
+from collections import Counter
 from pathlib import Path
 
 print("Importing numpy", flush=True)
@@ -48,6 +49,7 @@ if args.recovered_trainer is not None:
     if recovered_trainer_hash != "8e8d59889a0458c47a90f9735ff6ba017c7e1a79582d11529a608e1816e671fe":
         raise ValueError("Recovered trainer does not match the independent historical source inventory")
 sys.path.insert(0, str(repo / "src"))
+from titan_v45.data.preprocessing import extract_named_leads
 from titan_v45.models.factory import build_titan_v45_backbone
 from titan_v45.models.features import (
     SpecialistFeatureLayout,
@@ -62,7 +64,7 @@ spec.loader.exec_module(morphology)
 torch.set_num_threads(2)
 torch.manual_seed(2026)
 device = "cuda" if torch.cuda.is_available() else "cpu"
-out = work / (("p4_replay_recovered_softmax_" if recovered_trainer_hash else "p4_replay_declared_contract_") + str(args.limit))
+out = work / (("p4_replay_recovered_features_leads_" if recovered_trainer_hash else "p4_replay_declared_contract_") + str(args.limit))
 out.mkdir(exist_ok=True)
 root = args.scratch_dir.resolve() / "unpacked_pathology"
 archive_path = assets / "data/external_dev/pathology/external-dev-pathology-ptbxl-fold10.tar.zst"
@@ -138,20 +140,30 @@ limit = args.limit
 if limit:
     unique = dict(list(unique.items())[:limit])
 leads = ["I", "II", "III", "aVR", "aVL", "aVF", "V1", "V2", "V3", "V4", "V5", "V6"]
+present_lead_counts = Counter()
+case_mapping_changed_records = 0
 
 
 def preprocess(record_base):
+    global case_mapping_changed_records
     header = wfdb.rdheader(str(record_base))
     fs = int(header.fs)
     # The surviving historical loader uses two seconds of zero context at edges.
     record = wfdb.rdrecord(str(record_base), sampfrom=0, sampto=min(header.sig_len, 12 * fs))
     signal = np.pad(record.p_signal, ((2 * fs, max(0, 12 * fs - header.sig_len)), (0, 0)))
-    values = np.zeros((12, signal.shape[0]), dtype=np.float32)
-    mask = np.zeros(12, dtype=bool)
-    for i, lead in enumerate(leads):
-        if lead in record.sig_name:
-            values[i] = np.nan_to_num(signal[:, record.sig_name.index(lead)])
-            mask[i] = True
+    if recovered_trainer_hash:
+        values, mask = extract_named_leads(signal, record.sig_name)
+        values = np.nan_to_num(values, nan=0.0, posinf=0.0, neginf=0.0)
+        legacy_mask = np.array([lead in record.sig_name for lead in leads])
+        case_mapping_changed_records += int(not np.array_equal(mask, legacy_mask))
+    else:
+        values = np.zeros((12, signal.shape[0]), dtype=np.float32)
+        mask = np.zeros(12, dtype=bool)
+        for i, lead in enumerate(leads):
+            if lead in record.sig_name:
+                values[i] = np.nan_to_num(signal[:, record.sig_name.index(lead)])
+                mask[i] = True
+    present_lead_counts[int(mask.sum())] += 1
     for i in range(12):
         if np.std(values[i]) > 1e-6:
             b, a = butter(3, [0.5 / (fs / 2), min(45 / (fs / 2), 0.99)], btype="band")
@@ -235,6 +247,9 @@ report = {
     "historical_preprocessing_certified": False,
     "recovered_trainer_sha256": recovered_trainer_hash,
     "backbone_rhythm_transform": "recovered_categorical_softmax" if recovered_trainer_hash else "legacy_diagnostic_sigmoid",
+    "canonical_named_leads_enabled": bool(recovered_trainer_hash),
+    "records_affected_by_legacy_case_sensitive_leads": case_mapping_changed_records,
+    "records_by_present_lead_count": dict(present_lead_counts),
     "predeclared_probability_atol": 1e-5,
     "predeclared_probability_rtol": 0.0,
     "selected_cohort_equivalence_passed": (
@@ -242,7 +257,7 @@ report = {
         and max(r["absolute_difference"] for r in results) <= 1e-5
         and all(r["replayed_predicted"] == r["archived_predicted"] for r in results)
     ),
-    "note": "Single declared public feature layout and surviving loader reconstruction. Not tuned to labels; mismatch is retained as a reproducibility finding.",
+    "note": "Source-backed softmax and recorded canonical named-lead mapping when recovered-trainer supplied. Morphology/preprocessing identity remains uncertified. No evaluation-label tuning; all mismatches retained.",
 }
 (out / "replay_report.json").write_text(json.dumps(report, indent=2))
 print(json.dumps(report, indent=2), flush=True)
