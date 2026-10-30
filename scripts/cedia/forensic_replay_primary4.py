@@ -27,6 +27,20 @@ print("Importing scipy", flush=True)
 import zstandard
 from scipy.signal import butter, lfilter, resample_poly
 
+
+def build_source_backed_panel_plan(rows, class_order, allowed_records):
+    plan = []
+    for label in class_order:
+        selected = [(row["record_id"], row["record_base"]) for row in rows
+                    if row["pathology"] == label and row["record_id"] in allowed_records]
+        if len({item[0] for item in selected}) != len(selected):
+            raise ValueError("duplicate record within historical panel")
+        if len({str(Path(item[1]).parent) for item in selected}) != len(selected):
+            raise ValueError("shared directory makes historical glob ordering ambiguous")
+        plan.append((label, sorted(selected, key=lambda item: str(Path(item[1]).parent))))
+    return plan
+
+
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("--repo-root", type=Path, required=True)
 parser.add_argument("--release-root", type=Path, required=True)
@@ -64,7 +78,7 @@ spec.loader.exec_module(morphology)
 torch.set_num_threads(2)
 torch.manual_seed(2026)
 device = "cuda" if torch.cuda.is_available() else "cpu"
-out = work / (("p4_replay_recovered_features_leads_" if recovered_trainer_hash else "p4_replay_declared_contract_") + str(args.limit))
+out = work / (("p4_replay_recovered_panels_b32_" if recovered_trainer_hash else "p4_replay_declared_contract_") + str(args.limit))
 out.mkdir(exist_ok=True)
 root = args.scratch_dir.resolve() / "unpacked_pathology"
 archive_path = assets / "data/external_dev/pathology/external-dev-pathology-ptbxl-fold10.tar.zst"
@@ -115,6 +129,8 @@ specialist = torch.load(
 model = build_titan_v45_backbone()
 model.load_state_dict(backbone["state_dict"], strict=True)
 model = model.to(device).eval()
+if recovered_trainer_hash:
+    model.requires_grad_(False)
 state = specialist["pathology4_specialist_state_dict"]
 head = ClassWiseBinaryMLP(
     state["heads.0.0.weight"].numel(), 4, hidden_dim=state["heads.0.1.weight"].shape[0]
@@ -141,11 +157,11 @@ if limit:
     unique = dict(list(unique.items())[:limit])
 leads = ["I", "II", "III", "aVR", "aVL", "aVF", "V1", "V2", "V3", "V4", "V5", "V6"]
 present_lead_counts = Counter()
-case_mapping_changed_records = 0
+case_mapping_changed_bases = set()
+present_leads_by_base = {}
 
 
 def preprocess(record_base):
-    global case_mapping_changed_records
     header = wfdb.rdheader(str(record_base))
     fs = int(header.fs)
     # The surviving historical loader uses two seconds of zero context at edges.
@@ -155,7 +171,8 @@ def preprocess(record_base):
         values, mask = extract_named_leads(signal, record.sig_name)
         values = np.nan_to_num(values, nan=0.0, posinf=0.0, neginf=0.0)
         legacy_mask = np.array([lead in record.sig_name for lead in leads])
-        case_mapping_changed_records += int(not np.array_equal(mask, legacy_mask))
+        if not np.array_equal(mask, legacy_mask):
+            case_mapping_changed_bases.add(str(record_base))
     else:
         values = np.zeros((12, signal.shape[0]), dtype=np.float32)
         mask = np.zeros(12, dtype=bool)
@@ -164,6 +181,7 @@ def preprocess(record_base):
                 values[i] = np.nan_to_num(signal[:, record.sig_name.index(lead)])
                 mask[i] = True
     present_lead_counts[int(mask.sum())] += 1
+    present_leads_by_base[str(record_base)] = int(mask.sum())
     for i in range(12):
         if np.std(values[i]) > 1e-6:
             b, a = butter(3, [0.5 / (fs / 2), min(45 / (fs / 2), 0.99)], btype="band")
@@ -181,34 +199,41 @@ def preprocess(record_base):
 
 
 predictions = {}
-items = list(unique.items())
-with torch.inference_mode():
-    for start in range(0, len(items), 16):
-        batch = items[start : start + 16]
-        prepared = [preprocess(package / base) for _, base in batch]
-        x = torch.as_tensor(np.stack([p[0] for p in prepared]), device=device)
-        mask = torch.as_tensor(np.stack([p[1] for p in prepared]), device=device)
-        morph = torch.as_tensor(np.stack([p[2] for p in prepared]), device=device)
-        r, q, b, p, features = model(
-            x, morphology_features=morph, lead_mask=mask, return_features=True
-        )
-        inputs = compose_specialist_features(
-            backbone_features=features,
-            rhythm_probabilities=(recovered_backbone_rhythm_probabilities(r) if recovered_trainer_hash else r.sigmoid()),
-            pathology_probabilities=p.sigmoid(),
-            morphology=morph,
-            layout=layout,
-        )
-        probabilities = head(inputs).sigmoid().cpu().numpy()
-        for (record_id, _), scores in zip(batch, probabilities, strict=True):
-            predictions[record_id] = scores.tolist()
-        print(f"Processed {min(start + 16, len(items))}/{len(items)}", flush=True)
+batch_size = 32 if recovered_trainer_hash else 16
+plan = (build_source_backed_panel_plan(rows, specialist["pathology4_classes"], set(unique))
+        if recovered_trainer_hash else [(None, list(unique.items()))])
+processed_records = set()
+with (torch.no_grad() if recovered_trainer_hash else torch.inference_mode()):
+    for panel, items in plan:
+        for start in range(0, len(items), batch_size):
+            batch = items[start : start + batch_size]
+            prepared = [preprocess(package / base) for _, base in batch]
+            x = torch.as_tensor(np.stack([p[0] for p in prepared]), device=device)
+            mask = torch.as_tensor(np.stack([p[1] for p in prepared]), device=device)
+            morph = torch.as_tensor(np.stack([p[2] for p in prepared]), device=device)
+            r, q, b, p, features = model(
+                x, morphology_features=morph, lead_mask=mask, return_features=True
+            )
+            inputs = compose_specialist_features(
+                backbone_features=features,
+                rhythm_probabilities=(recovered_backbone_rhythm_probabilities(r) if recovered_trainer_hash else r.sigmoid()),
+                pathology_probabilities=p.sigmoid(),
+                morphology=morph,
+                layout=layout,
+            )
+            probabilities = head(inputs).sigmoid().cpu().numpy()
+            for (record_id, _), scores in zip(batch, probabilities, strict=True):
+                key = (record_id, panel) if recovered_trainer_hash else record_id
+                predictions[key] = scores.tolist()
+                processed_records.add(record_id)
+            print(f"Processed {panel or 'union'} {min(start + batch_size, len(items))}/{len(items)}", flush=True)
 results = []
 for row in rows:
-    if row["record_id"] not in predictions:
+    key = (row["record_id"], row["pathology"]) if recovered_trainer_hash else row["record_id"]
+    if key not in predictions:
         continue
     c = specialist["pathology4_classes"].index(row["pathology"])
-    score = predictions[row["record_id"]][c]
+    score = predictions[key][c]
     expected = float(row["probability"])
     results.append(
         {
@@ -232,7 +257,10 @@ report = {
     "torch": torch.__version__,
     "slurm_job_id": os.environ.get("SLURM_JOB_ID"),
     "implementation_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
-    "records": len(predictions),
+    "records": len(processed_records),
+    "batch_size": batch_size,
+    "batching_scope": "source_backed_separate_panels" if recovered_trainer_hash else "legacy_unique_ecg_union",
+    "forward_record_panel_pairs": len(predictions),
     "panel_rows": len(results),
     "max_absolute_probability_difference": max(r["absolute_difference"] for r in results),
     "mean_absolute_probability_difference": float(
@@ -248,12 +276,13 @@ report = {
     "recovered_trainer_sha256": recovered_trainer_hash,
     "backbone_rhythm_transform": "recovered_categorical_softmax" if recovered_trainer_hash else "legacy_diagnostic_sigmoid",
     "canonical_named_leads_enabled": bool(recovered_trainer_hash),
-    "records_affected_by_legacy_case_sensitive_leads": case_mapping_changed_records,
-    "records_by_present_lead_count": dict(present_lead_counts),
+    "records_affected_by_legacy_case_sensitive_leads": len(case_mapping_changed_bases),
+    "records_by_present_lead_count": dict(Counter(present_leads_by_base.values())),
+    "preprocessing_calls_by_present_lead_count": dict(present_lead_counts),
     "predeclared_probability_atol": 1e-5,
     "predeclared_probability_rtol": 0.0,
     "selected_cohort_equivalence_passed": (
-        len(results) == 962 and len(predictions) == 733
+        len(results) == 962 and len(processed_records) == 733
         and max(r["absolute_difference"] for r in results) <= 1e-5
         and all(r["replayed_predicted"] == r["archived_predicted"] for r in results)
     ),

@@ -1,0 +1,208 @@
+{
+  "profiles": {
+    "primary6": {
+      "schema": "TITAN_V45_AF_REFERENCE_CONSISTENCY_V1",
+      "scope": "saved_ecg_reference_flags_not_clinical_or_longitudinal_validation",
+      "reference_field": "true_labels",
+      "records": 1643,
+      "af_reference_positive": 390,
+      "af_code_positive": 390,
+      "unresolved_code_rows": 0,
+      "af_flag_mismatches": 0,
+      "all_af_flags_match_codes": true,
+      "sources": [
+        {
+          "source_label": "chapman_shaoxing",
+          "records": 1514,
+          "af_reference_positive": 373,
+          "af_code_positive": 373,
+          "unresolved_code_rows": 0,
+          "af_flag_mismatches": 0,
+          "af_and_nsr_code_overlap": 0,
+          "af_and_nsr_reference_overlap": 0
+        },
+        {
+          "source_label": "codetest_zenodo_3765780",
+          "records": 19,
+          "af_reference_positive": 0,
+          "af_code_positive": 0,
+          "unresolved_code_rows": 0,
+          "af_flag_mismatches": 0,
+          "af_and_nsr_code_overlap": 0,
+          "af_and_nsr_reference_overlap": 0
+        },
+        {
+          "source_label": "data_test",
+          "records": 63,
+          "af_reference_positive": 13,
+          "af_code_positive": 13,
+          "unresolved_code_rows": 0,
+          "af_flag_mismatches": 0,
+          "af_and_nsr_code_overlap": 1,
+          "af_and_nsr_reference_overlap": 0
+        },
+        {
+          "source_label": "training/cpsc_2018",
+          "records": 5,
+          "af_reference_positive": 0,
+          "af_code_positive": 0,
+          "unresolved_code_rows": 0,
+          "af_flag_mismatches": 0,
+          "af_and_nsr_code_overlap": 0,
+          "af_and_nsr_reference_overlap": 0
+        },
+        {
+          "source_label": "training/cpsc_2018_extra",
+          "records": 8,
+          "af_reference_positive": 0,
+          "af_code_positive": 0,
+          "unresolved_code_rows": 0,
+          "af_flag_mismatches": 0,
+          "af_and_nsr_code_overlap": 0,
+          "af_and_nsr_reference_overlap": 0
+        },
+        {
+          "source_label": "training/georgia",
+          "records": 6,
+          "af_reference_positive": 0,
+          "af_code_positive": 0,
+          "unresolved_code_rows": 0,
+          "af_flag_mismatches": 0,
+          "af_and_nsr_code_overlap": 0,
+          "af_and_nsr_reference_overlap": 0
+        },
+        {
+          "source_label": "training/ningbo",
+          "records": 10,
+          "af_reference_positive": 0,
+          "af_code_positive": 0,
+          "unresolved_code_rows": 0,
+          "af_flag_mismatches": 0,
+          "af_and_nsr_code_overlap": 0,
+          "af_and_nsr_reference_overlap": 0
+        },
+        {
+          "source_label": "training/ptb-xl",
+          "records": 18,
+          "af_reference_positive": 4,
+          "af_code_positive": 4,
+          "unresolved_code_rows": 0,
+          "af_flag_mismatches": 0,
+          "af_and_nsr_code_overlap": 0,
+          "af_and_nsr_reference_overlap": 0
+        }
+      ],
+      "clinical_readjudication": false,
+      "incident_af_validated": false,
+      "first_diagnosis_validated": false,
+      "independent_validation": false,
+      "input_sha256": "2f51cf51e6eb392dbd8ba165df73a698c0478166d364844c72bca382f5d7cc76"
+    },
+    "primary8": {
+      "schema": "TITAN_V45_AF_REFERENCE_CONSISTENCY_V1",
+      "scope": "saved_ecg_reference_flags_not_clinical_or_longitudinal_validation",
+      "reference_field": "accepted_labels",
+      "records": 2193,
+      "af_reference_positive": 390,
+      "af_code_positive": 390,
+      "unresolved_code_rows": 0,
+      "af_flag_mismatches": 0,
+      "all_af_flags_match_codes": true,
+      "sources": [
+        {
+          "source_label": "chapman_shaoxing",
+          "records": 1879,
+          "af_reference_positive": 373,
+          "af_code_positive": 373,
+          "unresolved_code_rows": 0,
+          "af_flag_mismatches": 0,
+          "af_and_nsr_code_overlap": 0,
+          "af_and_nsr_reference_overlap": 0
+        },
+        {
+          "source_label": "codetest_zenodo_3765780",
+          "records": 167,
+          "af_reference_positive": 0,
+          "af_code_positive": 0,
+          "unresolved_code_rows": 0,
+          "af_flag_mismatches": 0,
+          "af_and_nsr_code_overlap": 0,
+          "af_and_nsr_reference_overlap": 0
+        },
+        {
+          "source_label": "data_test",
+          "records": 84,
+          "af_reference_positive": 13,
+          "af_code_positive": 13,
+          "unresolved_code_rows": 0,
+          "af_flag_mismatches": 0,
+          "af_and_nsr_code_overlap": 1,
+          "af_and_nsr_reference_overlap": 1
+        },
+        {
+          "source_label": "training/cpsc_2018",
+          "records": 10,
+          "af_reference_positive": 0,
+          "af_code_positive": 0,
+          "unresolved_code_rows": 0,
+          "af_flag_mismatches": 0,
+          "af_and_nsr_code_overlap": 0,
+          "af_and_nsr_reference_overlap": 0
+        },
+        {
+          "source_label": "training/cpsc_2018_extra",
+          "records": 8,
+          "af_reference_positive": 0,
+          "af_code_positive": 0,
+          "unresolved_code_rows": 0,
+          "af_flag_mismatches": 0,
+          "af_and_nsr_code_overlap": 0,
+          "af_and_nsr_reference_overlap": 0
+        },
+        {
+          "source_label": "training/georgia",
+          "records": 9,
+          "af_reference_positive": 0,
+          "af_code_positive": 0,
+          "unresolved_code_rows": 0,
+          "af_flag_mismatches": 0,
+          "af_and_nsr_code_overlap": 0,
+          "af_and_nsr_reference_overlap": 0
+        },
+        {
+          "source_label": "training/ningbo",
+          "records": 13,
+          "af_reference_positive": 0,
+          "af_code_positive": 0,
+          "unresolved_code_rows": 0,
+          "af_flag_mismatches": 0,
+          "af_and_nsr_code_overlap": 0,
+          "af_and_nsr_reference_overlap": 0
+        },
+        {
+          "source_label": "training/ptb-xl",
+          "records": 23,
+          "af_reference_positive": 4,
+          "af_code_positive": 4,
+          "unresolved_code_rows": 0,
+          "af_flag_mismatches": 0,
+          "af_and_nsr_code_overlap": 0,
+          "af_and_nsr_reference_overlap": 0
+        }
+      ],
+      "clinical_readjudication": false,
+      "incident_af_validated": false,
+      "first_diagnosis_validated": false,
+      "independent_validation": false,
+      "input_sha256": "1c7fa4ebed66f5683109aa7f1db8c6669cdbc4d96842ddf432ed53f03d8cf0a6"
+    }
+  },
+  "reference_code": "164889003",
+  "normal_rhythm_code": "426783006",
+  "source_labels_are_not_independent_institutions": true,
+  "limitations": [
+    "Code/accepted-label agreement does not adjudicate the original diagnosis.",
+    "No event dates, incidence, first diagnosis or patient split independence established.",
+    "A co-occurring AF/NSR code set is reported, not silently adjudicated or relabeled."
+  ]
+}

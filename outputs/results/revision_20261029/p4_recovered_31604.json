@@ -1,0 +1,70 @@
+{
+  "scope": "forensic_replay_declared_contract",
+  "device": "cuda",
+  "torch": "2.10.0+cu128",
+  "slurm_job_id": "31604",
+  "implementation_sha256": "401bf6a516c05403459d5d0c72fe73beeaac7dc889859a471c242e7232d6217a",
+  "records": 733,
+  "panel_rows": 962,
+  "max_absolute_probability_difference": 0.0005892813205718994,
+  "mean_absolute_probability_difference": 8.534290367958141e-05,
+  "decision_disagreements": 0,
+  "morphology_candidate_sha256": "2bd1c1822ed72d1531b1f62712d8007c7e2f21009056ad1a3ee905f37051fc3d",
+  "historical_preprocessing_certified": false,
+  "recovered_trainer_sha256": "8e8d59889a0458c47a90f9735ff6ba017c7e1a79582d11529a608e1816e671fe",
+  "backbone_rhythm_transform": "recovered_categorical_softmax",
+  "canonical_named_leads_enabled": true,
+  "records_affected_by_legacy_case_sensitive_leads": 733,
+  "records_by_present_lead_count": {
+    "12": 733
+  },
+  "predeclared_probability_atol": 1e-05,
+  "predeclared_probability_rtol": 0.0,
+  "selected_cohort_equivalence_passed": false,
+  "note": "Source-backed softmax and recorded canonical named-lead mapping when recovered-trainer supplied. Morphology/preprocessing identity remains uncertified. No evaluation-label tuning; all mismatches retained.",
+  "description": "source_softmax_and_named_leads_union_batch16",
+  "slurm_state": "COMPLETED",
+  "slurm_exit_code": "0:0",
+  "independent_csv_reconciliation": true,
+  "absolute_error_above_predeclared_tolerance": 834,
+  "panels": [
+    {
+      "class": "ASMI",
+      "rows": 294,
+      "correct": 245,
+      "f1": 0.8122605363984674,
+      "accuracy": 0.8333333333333334,
+      "decision_disagreements": 0
+    },
+    {
+      "class": "LVH",
+      "rows": 224,
+      "correct": 151,
+      "f1": 0.6572769953051644,
+      "accuracy": 0.6741071428571429,
+      "decision_disagreements": 0
+    },
+    {
+      "class": "IMI",
+      "rows": 206,
+      "correct": 161,
+      "f1": 0.7887323943661971,
+      "accuracy": 0.7815533980582524,
+      "decision_disagreements": 0
+    },
+    {
+      "class": "ISC_",
+      "rows": 238,
+      "correct": 219,
+      "f1": 0.9155555555555556,
+      "accuracy": 0.9201680672268907,
+      "decision_disagreements": 0
+    }
+  ],
+  "recomputed_macro_f1": 0.7934563704063461,
+  "recomputed_mean_panel_accuracy": 0.8022904853689048,
+  "archived_predictions_changed": false,
+  "thresholds_changed": false,
+  "private_original_report_sha256": "641a574d4f3c48e8006fef607714374f529a29206b002a0b7986c11d94d123af",
+  "private_comparison_sha256": "bcf58c3abbc0c8459135096e77c03eecbedaac2ba8859e30160eca05a645a2da"
+}
