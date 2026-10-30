@@ -1,0 +1,65 @@
+{
+  "scope": "forensic_replay_declared_contract",
+  "device": "cuda",
+  "torch": "2.10.0+cu128",
+  "slurm_job_id": "31577",
+  "implementation_sha256": "243850796789b16de4b049ba805fd3425d7eca68f89dfb77b2b45543ac25ac53",
+  "records": 733,
+  "panel_rows": 962,
+  "max_absolute_probability_difference": 0.6975915133953094,
+  "mean_absolute_probability_difference": 0.11977709614523646,
+  "decision_disagreements": 168,
+  "morphology_candidate_sha256": "2bd1c1822ed72d1531b1f62712d8007c7e2f21009056ad1a3ee905f37051fc3d",
+  "historical_preprocessing_certified": false,
+  "recovered_trainer_sha256": "8e8d59889a0458c47a90f9735ff6ba017c7e1a79582d11529a608e1816e671fe",
+  "backbone_rhythm_transform": "recovered_categorical_softmax",
+  "predeclared_probability_atol": 1e-05,
+  "predeclared_probability_rtol": 0.0,
+  "selected_cohort_equivalence_passed": false,
+  "note": "Single declared public feature layout and surviving loader reconstruction. Not tuned to labels; mismatch is retained as a reproducibility finding.",
+  "description": "source_softmax_only_legacy_case_sensitive_leads",
+  "slurm_state": "COMPLETED",
+  "slurm_exit_code": "0:0",
+  "independent_csv_reconciliation": true,
+  "absolute_error_above_predeclared_tolerance": 962,
+  "panels": [
+    {
+      "class": "ASMI",
+      "rows": 294,
+      "correct": 248,
+      "f1": 0.8174603174603174,
+      "accuracy": 0.8435374149659864,
+      "decision_disagreements": 35
+    },
+    {
+      "class": "LVH",
+      "rows": 224,
+      "correct": 137,
+      "f1": 0.6716981132075471,
+      "accuracy": 0.6116071428571429,
+      "decision_disagreements": 62
+    },
+    {
+      "class": "IMI",
+      "rows": 206,
+      "correct": 144,
+      "f1": 0.6836734693877551,
+      "accuracy": 0.6990291262135923,
+      "decision_disagreements": 41
+    },
+    {
+      "class": "ISC_",
+      "rows": 238,
+      "correct": 205,
+      "f1": 0.8641975308641975,
+      "accuracy": 0.8613445378151261,
+      "decision_disagreements": 30
+    }
+  ],
+  "recomputed_macro_f1": 0.7592573577299543,
+  "recomputed_mean_panel_accuracy": 0.7538795554629619,
+  "archived_predictions_changed": false,
+  "thresholds_changed": false,
+  "private_original_report_sha256": "68b4d0f5bc1568fbab2df79a9614e48247d4f01e681cf28703e30b53a361353c",
+  "private_comparison_sha256": "fe6c871457b3611f5a5d96f1a8e2a092c9bb564c51001ad5dc5fe9b65c8f3ec5"
+}

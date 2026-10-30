@@ -9,12 +9,18 @@ These are repeated external-development evaluations. They are not untouched exte
 | Profile | Evidence size | Reported result | Status |
 | --- | ---: | --- | --- |
 | Rhythm Primary6 | 1,643 records | 95.19% top-1 accuracy; 80.09% binary-panel macro-F1 | Six-class diagnostic branch reported in the paper ([metrics](outputs/results/external_dev/rhythm_primary6_metrics.json)). |
-| Pathology Primary4 | 962 panel rows | 80.23% mean binary-panel accuracy; 79.35% macro-F1 | Accepted by project decision; observed accuracy remains 80.23% ([metrics](outputs/results/external_dev/pathology_primary4_metrics.json)). |
+| Pathology Primary4 | 962 panel rows / 733 ECGs / 676 linked patients | 80.23% mean binary-panel accuracy; 79.35% macro-F1 | Accepted by project decision; observed accuracy remains 80.23% ([metrics](outputs/results/external_dev/pathology_primary4_metrics.json)). |
 | Rhythm Primary8 | 2,193 records | 90.61% top-1 accepted-label accuracy; 76.14% binary-panel macro-F1 | Candidate only; it does not meet the 97% accuracy and 80% macro-F1 gates ([metrics](outputs/results/external_dev/rhythm_primary8_metrics.json)). |
 
 Primary8's separate single-target diagnostic accuracy is 85.27% (1,870/2,193); it is not the 90.61% accepted-label metric. See the [evidence status and metric definitions](docs/evidence-status.md) before citing these values.
 
+**Waveform reproduction remains unresolved.** Two full-cohort CEDIA runs of the fixed public-runtime/candidate-preprocessing contract disagreed with **166 of 962** archived Primary4 panel decisions. This failed historical-equivalence check is [reported with its provenance](docs/revision-evidence-20261028.md#waveform-replay-finding); successful saved-prediction recomputation and matching weight hashes do not resolve it. Primary6/Primary8 replay additionally requires the missing original signal-event extractor. Linked patient counts do not establish historical train/validation isolation.
+
 ## Verify Reported Metrics
+
+The [29 October source and policy follow-up](docs/revision-evidence-20261029.md) identifies all 84 selected `data_test` signals against official PhysioNet checksums and reconstructs every saved P8 decision using membership scores with an explicit empty-set fallback. These close bounded source/decision questions, not historical waveform reproduction, training isolation or distribution approval.
+
+The [October 2026 revision analysis](docs/revision-evidence-20261028.md) adds per-class metrics, explicit ECG/panel denominators, ECG-clustered bootstrap intervals and findings from the surviving CEDIA model files and historical logs. Its scope and remaining waveform-replay limitations are recorded separately from the historical release.
 
 From the repository root, recompute the reported metrics from the tracked per-record prediction tables and check them against the canonical reports, cohort manifests, and release hashes:
 
@@ -29,6 +35,8 @@ python scripts/evaluation/verify_release_evidence.py --output outputs/results/re
 ```
 
 The verifier checks saved prediction evidence; it does not rerun waveform inference or model training. Run the full test suite with `python -m pytest`.
+
+The [submitted hash-table correction](docs/hash-correction-20261028.md) distinguishes the invalid A10 example values from measured model hashes. Run `python scripts/evaluation/verify_release_hashes.py` to validate declarations and any available physical files; add `--require-models` where all model assets are installed. Missing assets are not reported as physically verified.
 
 ## Data
 

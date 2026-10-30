@@ -1,0 +1,49 @@
+{
+  "scope": "historically_recorded_lead_mapping_not_whole_loader_certification",
+  "source_diff_sha256": "ddea0e6d9737984320ab5c51868b98aeb2592c2be2510a833a5777a06e77fc78",
+  "source_event_timestamp": "2026-06-20T06:35:51.364Z",
+  "recorded_source_role": "V4.5 DATA_PIPELINE/data_loader_ultra.py named-lead helper",
+  "recorded_behavior": "Uppercase alphanumeric token normalization; canonical names then recorded aliases; missing/non-ECG channels not synthesized.",
+  "observed_header_sample": {
+    "source": "packaged_ptbxl_100hz_header",
+    "signal_lead_names": [
+      "I",
+      "II",
+      "III",
+      "AVR",
+      "AVL",
+      "AVF",
+      "V1",
+      "V2",
+      "V3",
+      "V4",
+      "V5",
+      "V6"
+    ]
+  },
+  "old_diagnostic_exact_match_targets": [
+    "I",
+    "II",
+    "III",
+    "aVR",
+    "aVL",
+    "aVF",
+    "V1",
+    "V2",
+    "V3",
+    "V4",
+    "V5",
+    "V6"
+  ],
+  "consequence_for_observed_header": "Old exact-name lookup zeroed augmented channels and marked their mask false; recovered mapping preserves all12.",
+  "all_733_header_patterns_counted_before_next_execution": false,
+  "complete_original_loader_inventory_match": false,
+  "selection_used_evaluation_targets": false,
+  "next_comparison_prespecified": {
+    "ecgs": 733,
+    "panels": 962,
+    "probability_atol": 1e-05,
+    "probability_rtol": 0.0,
+    "decision_disagreements_required": 0
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "schema": "TITAN_V45_BACKBONE_STATIC_RECOVERY_V1",
+  "date": "2026-10-29",
+  "scope": "exact_source_inventory_identity_and_static_ast_not_historical_run_certification",
+  "archive_basename": "titan_repo_stage_20260629.tar",
+  "archive_sha256": "483b7a722ec2432271f7d2593e42384decc650ed735afad2175fc2997a62d3e9",
+  "member": "./src/titan_v45/models/backbone.py",
+  "recovered_source_bytes": 9189,
+  "recovered_source_sha256": "46bb36737a93a4cfe4be4417f6c62bcbfd0e8e7e8356f31f532ad21662075c80",
+  "inventory_path_matched": "MODEL_CORE/titan_v4_hybrid.py",
+  "inventory_declared_source_count": 11,
+  "current_source_sha256": "0ecfd5988ed2f5f38c262cd1cb80681a173eb93d12963e8e4f3bde7f556cc783",
+  "reachable_git_content_matches": [
+    "b704df016bf9763146cf2a66ad75abfec32c452c"
+  ],
+  "forward_method_ast_identity": {
+    "SqueezeExcitation1D.forward": true,
+    "ResidualSEBlock1D.forward": true,
+    "SinusoidalPositionEncoding.forward": true,
+    "TitanV4Hybrid.forward_features": true,
+    "TitanV4Hybrid.forward": true
+  },
+  "constructor_ast_identical_after_documented_axis_renaming": true,
+  "documented_axis_identifier_renames": {
+    "clinical_axis_heads": "ecg_axis_heads",
+    "clinical_axis_head_dims": "ecg_axis_head_dims",
+    "head_clinical_axes": "head_ecg_axes",
+    "clinical_axis_logits": "ecg_axis_logits"
+  },
+  "additional_current_methods": [
+    "TitanV4Hybrid._load_from_state_dict"
+  ],
+  "all_shared_methods_ast_identical_after_documented_renames": true,
+  "historical_factory_sha256": "b30cbf919f4d4d9f102ed1866e97844cf2e5b8cd42f750714e67afb8cfa0f55b",
+  "historical_factory_kwargs": {
+    "in_channels": 12,
+    "num_rhythm": 14,
+    "num_pathology": 7,
+    "morphology_dim": {
+      "expression": "int(morphology_dim)"
+    },
+    "d_model": 640,
+    "num_transformer_layers": 9,
+    "nhead": 10,
+    "stage_channels": [
+      96,
+      192,
+      384,
+      768
+    ],
+    "clinical_axis_heads": {
+      "expression": "CLINICAL_AXIS_HEAD_DIMS"
+    }
+  },
+  "diagnostic_conclusion": "No forward-body difference between recovered source and current backbone; constructor differs only by documented axis renaming. Current loader adds axis-key migration.",
+  "p4_waveform_equivalence_certified": false,
+  "p4_decision_disagreements_unchanged": 166,
+  "original_morphology_or_event_extractor_recovered": false,
+  "limitations": [
+    "Inventory identity is not proof that this source/config was executed for every checkpoint.",
+    "Parameterless semantics now have an identified snapshot; original runtime and feature contracts remain missing.",
+    "Static AST equality does not establish PyTorch/runtime numerical equivalence or cohort independence.",
+    "No test-reference tuning, waveform inference, weight/prediction change or pipeline selection."
+  ]
+}

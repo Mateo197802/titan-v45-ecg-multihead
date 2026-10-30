@@ -1,0 +1,41 @@
+{
+  "schema": "TITAN_V45_SAVED_MEMBERSHIP_POLICY_V1",
+  "scope": "saved_decisions_not_waveform_inference",
+  "records": 2193,
+  "top1_matches": 2193,
+  "binary_set_matches": 2193,
+  "fallback_records": 58,
+  "other_score_stream_argmax_disagreements": 580,
+  "all_decisions_reconstructed": true,
+  "rule": "argmax membership_prob; threshold membership_prob; if empty use membership argmax",
+  "classes": [
+    "AFIB",
+    "SB",
+    "STACH",
+    "NSR",
+    "RBBB",
+    "PAC",
+    "1AVB",
+    "PVC"
+  ],
+  "thresholds": {
+    "AFIB": 0.8,
+    "SB": 0.55,
+    "STACH": 0.8,
+    "NSR": 0.525,
+    "RBBB": 0.725,
+    "PAC": 0.45,
+    "1AVB": 0.775,
+    "PVC": 0.725
+  },
+  "thresholds_modified": false,
+  "reference_labels_used": false,
+  "input_sha256_lf_normalized": {
+    "outputs/results/external_dev/rhythm_primary8_metrics.json": "cc664094b32a1f881aa417bd5ccc12367a2d7f388e56de823c30d4084933f66a",
+    "outputs/results/external_dev/evidence/rhythm_primary8_record_predictions.csv": "1c7fa4ebed66f5683109aa7f1db8c6669cdbc4d96842ddf432ed53f03d8cf0a6"
+  },
+  "limitations": [
+    "Exact agreement with saved fields does not recover the original implementation or feature extraction.",
+    "This does not establish training isolation or independent external validation."
+  ]
+}

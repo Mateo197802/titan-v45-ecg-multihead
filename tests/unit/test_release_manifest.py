@@ -3,7 +3,24 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import pytest
+
 from titan_v45.artifacts.release import ReleaseAsset, build_release_manifest
+
+
+def test_release_manifest_rejects_empty_model_file(tmp_path: Path) -> None:
+    source = tmp_path / "model.pt"
+    source.write_bytes(b"")
+    manifest = tmp_path / "release-manifest.json"
+    with pytest.raises(ValueError, match="empty release asset"):
+        build_release_manifest(
+            assets=[ReleaseAsset(source=source, name="model.pt", path="models/model.pt",
+                                 category="model", license="MODEL_LICENSE.md",
+                                 source_lineage="verified lineage")],
+            repository="example/repo", tag="test", manifest_path=manifest,
+            sha256sums_path=tmp_path / "SHA256SUMS",
+        )
+    assert not manifest.exists()
 
 
 def test_build_release_manifest_records_hashes_urls_and_sha256sums(tmp_path: Path) -> None:

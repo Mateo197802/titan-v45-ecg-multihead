@@ -1,0 +1,22 @@
+{
+  "scope": "all_packaged_signal_checksums_not_training_isolation",
+  "records": 2193,
+  "exact_match_records": 2026,
+  "ambiguous_source_records": 10,
+  "record_base_path_mismatches": 167,
+  "matched_by_declared_source": {
+    "chapman_shaoxing": 1879,
+    "training/cpsc_2018": 10,
+    "training/cpsc_2018_extra": 8,
+    "training/georgia": 9,
+    "training/ningbo": 13,
+    "training/ptb-xl": 23,
+    "data_test": 84
+  },
+  "unmatched_by_declared_source": {
+    "codetest_zenodo_3765780": 167
+  },
+  "official_checksum_url": "https://physionet.org/files/challenge-2021/1.0.3/SHA256SUMS.txt",
+  "official_checksum_sha256": "f29c2609343c38734f3a3d62be4a9052ca56a9e560e7ad2efc2118563fca2473",
+  "package_inventory_sha256": "3986ecce8008ce51f92239437cf580a400eb3b2effd643aea12ae4d9f0260b66"
+}

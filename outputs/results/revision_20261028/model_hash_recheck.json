@@ -1,0 +1,40 @@
+{
+  "scope": "physical_model_hash_recheck",
+  "date": "2026-10-28",
+  "models": [
+    {
+      "name": "backbone-v3f-original.pt",
+      "bytes": 233565900,
+      "sha256": "ca5d4dcb4b9828e6c4339800fe81ec27f32d9b09a090bb57503bfb56746a8da8",
+      "matches_manifest": true
+    },
+    {
+      "name": "specialists-v3p-e008-primary6-diagnostic.pt",
+      "bytes": 22354966,
+      "sha256": "9c5a9265a7155e1206c551cc4e6d645b86363ba3dbdeb7baf7b9f173c314be3d",
+      "matches_manifest": true
+    },
+    {
+      "name": "specialists-v3q-primary8-best-candidate.pt",
+      "bytes": 29498326,
+      "sha256": "b30cb2bbb45f1231c93ff1c196aa966b57b49831cadb296131c0283e7b0ceb02",
+      "matches_manifest": true
+    },
+    {
+      "name": "backbone-v3ag-pathology.pt",
+      "bytes": 233566092,
+      "sha256": "bf71e4cf8acc34031cb3611c7031e0649822e705fd7dcea354a3ea583ce920ee",
+      "matches_manifest": true
+    },
+    {
+      "name": "specialists-v3ag-primary4-calibrated.pt",
+      "bytes": 29413606,
+      "sha256": "cf5091e962fffb3254b1a71fe57236dd82ea0139093df192511499d931391dbc",
+      "matches_manifest": true
+    }
+  ],
+  "physical_models_verified": 5,
+  "raw_data_published": false,
+  "waveform_equivalence_certified": false,
+  "receipt_sha256": "131d4ef0a790f2320f9280bcb304287ba76b93b1e2dae8c902efc5974567fe29"
+}

@@ -10,4 +10,5 @@
 *.pth binary
 *.dat binary
 *.mat binary
+*.zip binary
 *.tar.zst binary

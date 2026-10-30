@@ -63,3 +63,5 @@ ignore = ["E501"]
 
 [tool.ruff.lint.per-file-ignores]
 "scripts/**/*.py" = ["E402"]
+# Preserve the recovered candidate's bytes for comparison with its source hash.
+"scripts/cedia/recovery_candidates/*.py" = ["I001"]
