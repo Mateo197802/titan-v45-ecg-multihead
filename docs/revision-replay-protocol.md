@@ -36,6 +36,10 @@ AUROC and AP require both the declared reference and the named score column; ret
 
 Full-workflow validation requires an all-input denominator and a routing policy based solely on signals/model outputs. Selecting a panel using ground-truth labels is an eligibility analysis, not operational routing.
 
+The [released-profile workflow audit](saved-workflow-audit.md) reconstructs
+score-only transitions over the two retained manifests. It is not the original
+all-input evaluation and does not estimate a quarantine rate from missing scores.
+
 Genuinely independent validation requires a new cohort not previously used for model development, calibration or selection. Source-held-out validation requires accounting for backbone training as well as specialist training. A frozen replay on previously used data cannot establish this independence.
 
 Human review outcomes require an actual reader study or recoverable historical review records. An uncertainty flag, synthetic test or class registry cannot establish that a human corrected a prediction or improved patient outcomes.
