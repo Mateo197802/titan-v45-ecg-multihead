@@ -1,0 +1,56 @@
+{
+  "schema": "TITAN_V45_SAVED_WORKFLOW_AUDIT_V1",
+  "scope": "released_selected_manifest_union_not_historical_all_input_population",
+  "unit": "exact released record_base; not a deduplicated waveform or patient count",
+  "denominators": {
+    "p8_records": 2193,
+    "p4_records": 733,
+    "p4_panel_pairs": 962,
+    "exact_overlap": 0
+  },
+  "inputs": 2926,
+  "pre_counts": {
+    "pathology_only": 733,
+    "rhythm_only": 2193
+  },
+  "post_counts": {
+    "quarantine_not_assessed": 2926
+  },
+  "transitions": {
+    "pathology_only->quarantine_not_assessed": 733,
+    "rhythm_only->quarantine_not_assessed": 2193
+  },
+  "quarantine_assessed": 0,
+  "quarantine_rate_among_assessed": null,
+  "quarantine_rate_all_inputs": null,
+  "p8_pre_top1_counts": {
+    "1AVB": 64,
+    "AFIB": 363,
+    "NSR": 476,
+    "PAC": 34,
+    "PVC": 71,
+    "RBBB": 116,
+    "SB": 728,
+    "STACH": 341
+  },
+  "p8_nsr_in_predicted_set": 530,
+  "p8_empty_membership_fallbacks": 58,
+  "p4_scored_panel_pairs": 962,
+  "p4_records_with_all_four_scores": 5,
+  "other_arrhythmia": "not assessed: no released Other classifier scores",
+  "other_pathologies": "not assessed: missing panel scores are not negative or Other",
+  "reference_labels_used": false,
+  "historical_quarantine_recovered": false,
+  "full_workflow_validated": false,
+  "independent_validation": false,
+  "input_sha256_lf_normalized": {
+    "data/manifests/external_dev/rhythm_primary8_records.csv": "b7e044ca1696eced6ac25f93cc1574d7c596c1cadfd4a98f86ca9d42699a11d0",
+    "data/manifests/external_dev/pathology_primary4_panels.csv": "26796bdde9f9a736fc7594b65e7e881b4967f15a8665fa5231f5001cbbc105d0",
+    "outputs/results/external_dev/rhythm_primary8_metrics.json": "cc664094b32a1f881aa417bd5ccc12367a2d7f388e56de823c30d4084933f66a",
+    "outputs/results/external_dev/evidence/rhythm_primary8_record_predictions.csv": "1c7fa4ebed66f5683109aa7f1db8c6669cdbc4d96842ddf432ed53f03d8cf0a6",
+    "outputs/results/external_dev/evidence/pathology_primary4_ASMI_record_predictions.csv": "2859facb689f732178b03c2f66559849401460235a80397c4c4bbb30aef46fe1",
+    "outputs/results/external_dev/evidence/pathology_primary4_LVH_record_predictions.csv": "cab4373122e731428ff92198022e8c7e5bea881600db027dd53d6d8cba0c0e1f",
+    "outputs/results/external_dev/evidence/pathology_primary4_IMI_record_predictions.csv": "d3dd64b4a2d3cd184d414f012b2f739a120bd96b3b501c21442ddf19da389c56",
+    "outputs/results/external_dev/evidence/pathology_primary4_ISC__record_predictions.csv": "fc09c2590f5940137378c3465e085122353e7c43200e8174c99890c45a525672"
+  }
+}

@@ -5,6 +5,14 @@ from dataclasses import dataclass
 import torch
 
 
+def recovered_backbone_rhythm_probabilities(logits: torch.Tensor) -> torch.Tensor:
+    """Historical trainer 8e8d5988 uses categorical softmax before specialist inputs.
+
+    This transforms backbone logits, not the specialist's binary output scores.
+    """
+    return torch.softmax(logits.float(), dim=1)
+
+
 @dataclass(frozen=True)
 class SpecialistFeatureLayout:
     rhythm_indices: tuple[int, ...]

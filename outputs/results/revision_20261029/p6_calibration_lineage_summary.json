@@ -1,0 +1,41 @@
+{
+  "aggregation": "mean_logits",
+  "biases": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "classes": [
+    "AFIB",
+    "SB",
+    "STACH",
+    "RBBB",
+    "1AVB",
+    "PVC"
+  ],
+  "complete_historical_manifests_recovered": false,
+  "external_accepted_top1_accuracy": 0.9519172245891662,
+  "external_binary_macro_f1": 0.8009383239876123,
+  "external_records": 1643,
+  "external_window_count": 1679,
+  "internal_records": 192,
+  "internal_window_count": 276,
+  "original_calibration_source_recovered": false,
+  "original_job_id": "17315",
+  "original_log_sha256": "74e03a97067b176c758c2c28b2faf0888c0bb555eb6a20a732b05f81385d43ec",
+  "protocol": "TITAN_V45_PRIMARY6_NO_NSR_PAC_RECORD_ERROR_AUDIT",
+  "same_thresholds_internal_external": true,
+  "split_independence_certified": false,
+  "thresholds": [
+    0.82,
+    0.835,
+    0.7749999999999999,
+    0.5149999999999999,
+    0.57,
+    0.42999999999999994
+  ],
+  "thresholds_source": "internal_zero_bias_f1_tuning"
+}

@@ -1,0 +1,42 @@
+{
+  "scope": "upstream_signal_header_and_label_provenance_not_split_isolation",
+  "records": 84,
+  "signal_exact_matches": 84,
+  "source_counts": {
+    "cpsc_2018": 3,
+    "georgia": 5,
+    "ptb-xl": 76
+  },
+  "header_bytes_exact": 0,
+  "header_signal_contract_equal": 84,
+  "header_diagnosis_codes_equal": 84,
+  "prediction_dx_matches_upstream": 84,
+  "upstream_base_url": "https://physionet.org/files/challenge-2020/1.0.2/",
+  "upstream_project_url": "https://physionet.org/content/challenge-2020/1.0.2/",
+  "license_as_published": "CC BY 4.0",
+  "wfdb": "4.3.0",
+  "pandas": "2.2.3",
+  "header_comparison": "WFDB parsed fs/n_sig/sig_len/leads/gain/baseline/units/fmt/spf/skew/offset/resolution/zero/init/checksum/block_size; only mv/mV unit spelling canonicalized",
+  "inputs_sha256": {
+    "data_test_fingerprints_20261029.json": "bf2b4bd6fa953d928cfd35963292da01821e5f6637e91da2306a2538223b6ee2",
+    "SHA256SUMS.txt": "90cfba453b46deac18340eb359332aabbc7300d03f4ea421c225d16787121864",
+    "LICENSE.txt": "9a78e7f22742dde9f66ae235ec793ba2212019dc4d0ced75c4da09ced0b35fb2"
+  },
+  "patient_split_isolation_certified": false,
+  "source_identity_status": "84_selected_signals_resolved_against_official_index",
+  "raw_header_identity": "not_byte_identical; WFDB-parsed contract and diagnoses match",
+  "archive_reconciliation": {
+    "scope": "recovered_package_manifest_to_current_physical_files",
+    "packaged_total_records": 2193,
+    "data_test_signal_header_pairs": 84,
+    "files_checked": 168,
+    "all_sizes_match": true,
+    "all_hashes_match": true,
+    "probe_sha256": "3986ecce8008ce51f92239437cf580a400eb3b2effd643aea12ae4d9f0260b66",
+    "mismatches": []
+  },
+  "distribution_hold_lifted": false,
+  "license_compliance_approval": false,
+  "clinical_reference_readjudication": false,
+  "historical_training_isolation": false
+}

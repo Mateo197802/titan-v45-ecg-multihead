@@ -1,0 +1,30 @@
+{
+  "schema": "TITAN_V45_HEADER_REPRESENTATION_AUDIT_V1",
+  "scope": "representation_changes_not_clinical_equivalence_or_rights_certification",
+  "records": 84,
+  "byte_identical_headers": 0,
+  "identical_after_newline_normalization": 84,
+  "local_newline_styles": {
+    "CRLF": 84
+  },
+  "upstream_newline_styles": {
+    "LF": 84
+  },
+  "record_line_tokens_equal": 84,
+  "signal_line_count_equal": 84,
+  "headers_with_changed_signal_token_column": {},
+  "headers_with_changed_comment_field": {},
+  "receipt": {
+    "inventory_sha256": "bf2b4bd6fa953d928cfd35963292da01821e5f6637e91da2306a2538223b6ee2",
+    "checksums_sha256": "bb6cc5965ddcdbc888c6a306045350f28da999b5453aee15996e87e05f818d1c",
+    "upstream_header_digest_sequence_sha256": "be3fa5851a31d2ef713607d08860fb32fc0ecbde0534e34a66cf68e45a658472"
+  },
+  "clinical_equivalence_certified": false,
+  "distribution_hold_lifted": false,
+  "limitations": [
+    "No waveform processing, patient matching or clinical adjudication.",
+    "Zero-based signal token columns include filename at column0.",
+    "No comment values or record identifiers exported.",
+    "Official index authenticity must be verified separately."
+  ]
+}

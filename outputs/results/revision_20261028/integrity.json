@@ -1,0 +1,12 @@
+{
+  "figure_runtime": {},
+  "output_sha256": {
+    "class_metrics.csv": "b599bf87ffd11fcb8c3658c9db86f50a066dcabce87640678706b1928bbdef74",
+    "revision_report.csv": "687e07adbf69c96bb63311293a3fefac59f55037c8612bce857e771b99a11343",
+    "revision_report.json": "c0cc2fa7df92e7f5f8c92a2a743c72eff460f723c67953ff7f3b1e159122d999",
+    "source_supports.csv": "2db2ea6bca6d3c8e86f7d7bc0bc697ff0ebb841fff67e109b61a0d9c66f4e1e8",
+    "summary.csv": "936047bc1f1ce5c4871418499e0646e1437e29eeb448267b4a1019632e89e8e6"
+  },
+  "schema": "TITAN_V45_REVISION_REPORT_V1",
+  "scope": "saved_predictions"
+}

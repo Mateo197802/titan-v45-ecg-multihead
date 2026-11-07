@@ -1,0 +1,22 @@
+{
+  "schema": "TITAN_V45_CONTINUATION_EXPORT_V1",
+  "date": "2026-10-29",
+  "input_sha256": {
+    "source_provenance/signal_header_provenance.json": "35d3837872f50fede8a139cc7d3e358446a2bc89a517b476a854301d069f6644",
+    "source_provenance/official_checksum_probe.json": "e3c3055913e3be78ce2cc949b3db738a1bdde7b5d7e65c7f5654ddca35fe1291",
+    "full_checkpoint_metadata.json": "5d853a2b3702f6846579b9e2b2d18cd6df00e0ceb0477a7b4ac9adc0357bf08b"
+  },
+  "outputs_sha256": {
+    "data_test_file_fingerprints.json": "ad746e2a9313bb238ad4823a6d0414ce308b94c81fdade9b85d66a2de1269348",
+    "data_test_provenance_summary.json": "1bc3ebdd181314ed9674909a3051d2b9d1af09200821f1221967f61f54711411",
+    "membership_policy_reconstruction.json": "d13774434ada94dd18fe22986008b3ff91baa3e07b4bcc52f597b988f2cdb109",
+    "official_checksums_selected.txt": "bb6cc5965ddcdbc888c6a306045350f28da999b5453aee15996e87e05f818d1c",
+    "p6_calibration_lineage_summary.json": "4b4e55c8fbec130dd253907618b580ac7686bdd413ece4a0d6c16464f6e802fa",
+    "packaged_checksum_summary.json": "7621fc86dc85e7d6881e6a9667d4a1b80257b480dbdfde3da9e11c86c5a74e0b"
+  },
+  "original_predictions_changed": false,
+  "inference_equivalence_certified": false,
+  "official_index_url": "https://physionet.org/files/challenge-2020/1.0.2/SHA256SUMS.txt",
+  "official_complete_index_sha256": "90cfba453b46deac18340eb359332aabbc7300d03f4ea421c225d16787121864",
+  "checksum_subset_is_not_complete_index": true
+}

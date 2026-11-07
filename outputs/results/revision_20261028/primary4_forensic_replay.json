@@ -1,0 +1,21 @@
+{
+  "scope": "forensic_replay_declared_contract",
+  "device": "cuda",
+  "torch": "2.10.0+cu128",
+  "slurm_job_id": "31416",
+  "implementation_sha256": "7e8c870907b19a53b88c00e5e1c58bc0b9330fd937ef7182d6751ea1606dfe69",
+  "records": 733,
+  "panel_rows": 962,
+  "max_absolute_probability_difference": 0.6978916972875595,
+  "mean_absolute_probability_difference": 0.11985685231368369,
+  "decision_disagreements": 166,
+  "morphology_candidate_sha256": "2bd1c1822ed72d1531b1f62712d8007c7e2f21009056ad1a3ee905f37051fc3d",
+  "historical_preprocessing_certified": false,
+  "note": "Single declared public feature layout and surviving loader reconstruction. Not tuned to labels; mismatch is retained as a reproducibility finding.",
+  "prior_execution_job_id": "31415",
+  "prior_execution_agrees": true,
+  "comparison_sha256": "4c9ac082fa120a045a67ee76faf7e7f3da9baeb11e3a6262755b2c886a601a45",
+  "verdict": "historical_prediction_equivalence_failed",
+  "public_entrypoint": "scripts/cedia/forensic_replay_primary4.py",
+  "recovered_candidate": "scripts/cedia/recovery_candidates/morphology_features_v4.py"
+}

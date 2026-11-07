@@ -5,6 +5,17 @@ import torch
 from titan_v45.models.features import SpecialistFeatureLayout, compose_specialist_features
 
 
+def test_recovered_backbone_rhythm_transform_is_categorical_softmax():
+    from titan_v45.models.features import recovered_backbone_rhythm_probabilities
+
+    logits = torch.tensor([[-2.0, 1.0, 3.0], [0.0, 0.0, 0.0]], dtype=torch.float64)
+    actual = recovered_backbone_rhythm_probabilities(logits)
+    torch.testing.assert_close(actual, torch.softmax(logits.float(), dim=1))
+    torch.testing.assert_close(actual.sum(dim=1), torch.ones(2))
+    assert not torch.allclose(actual, logits.float().sigmoid())
+
+
+
 def test_specialist_feature_composition_has_explicit_stable_layout() -> None:
     layout = SpecialistFeatureLayout(
         rhythm_indices=(0, 2),

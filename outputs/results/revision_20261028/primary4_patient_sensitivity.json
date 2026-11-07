@@ -1,0 +1,45 @@
+{
+  "schema": "TITAN_V45_P4_PATIENT_CLUSTER_SENSITIVITY_V1",
+  "scope": "saved_predictions_with_recovered_upstream_patient_metadata",
+  "panel_rows": 962,
+  "unique_ecgs": 733,
+  "unique_patients": 676,
+  "fold_counts": {
+    "10": 733
+  },
+  "metadata_sha256": "7600de9c1b27d181d850b3c6038a35d7c3ddb6bb33b702e3a20252a6859d216b",
+  "prediction_sha256": {
+    "outputs/results/external_dev/evidence/pathology_primary4_ASMI_record_predictions.csv": "2859facb689f732178b03c2f66559849401460235a80397c4c4bbb30aef46fe1",
+    "outputs/results/external_dev/evidence/pathology_primary4_LVH_record_predictions.csv": "cab4373122e731428ff92198022e8c7e5bea881600db027dd53d6d8cba0c0e1f",
+    "outputs/results/external_dev/evidence/pathology_primary4_IMI_record_predictions.csv": "d3dd64b4a2d3cd184d414f012b2f739a120bd96b3b501c21442ddf19da389c56",
+    "outputs/results/external_dev/evidence/pathology_primary4_ISC__record_predictions.csv": "fc09c2590f5940137378c3465e085122353e7c43200e8174c99890c45a525672"
+  },
+  "bootstrap": {
+    "unit": "supplied_patient_id",
+    "n_clusters": 676,
+    "method": "unstratified_cluster_percentile",
+    "confidence": 0.95,
+    "seed": 2026,
+    "n_bootstrap": 2000,
+    "rng": "numpy.PCG64",
+    "macro_f1": {
+      "low": 0.7615161730657389,
+      "high": 0.8247785805510929,
+      "valid_replicates": 2000,
+      "invalid_replicates": 0,
+      "status": "ok"
+    },
+    "mean_panel_accuracy": {
+      "low": 0.7775381382623489,
+      "high": 0.8278195431515982,
+      "valid_replicates": 2000,
+      "invalid_replicates": 0,
+      "status": "ok"
+    }
+  },
+  "limitations": [
+    "Patient identifiers originate from the supplied upstream metadata, not from names inferred from ECGs.",
+    "This does not certify patient-level training/calibration isolation; original manifests remain required.",
+    "Sensitivity analysis preserves selected-panel sampling; it does not restore natural prevalence."
+  ]
+}

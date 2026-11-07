@@ -1,0 +1,53 @@
+{
+  "schema": "TITAN_V45_SOURCE_BACKED_REPLAY_STAGES_V1",
+  "date": "2026-10-29",
+  "legacy_candidate_decision_disagreements": 166,
+  "stages": [
+    {
+      "slurm_job_id": "31577",
+      "description": "source_softmax_only_legacy_case_sensitive_leads",
+      "records": 733,
+      "panel_rows": 962,
+      "decision_disagreements": 168,
+      "max_absolute_probability_difference": 0.6975915133953094,
+      "mean_absolute_probability_difference": 0.11977709614523646,
+      "selected_cohort_equivalence_passed": false,
+      "recomputed_macro_f1": 0.7592573577299543,
+      "recomputed_mean_panel_accuracy": 0.7538795554629619
+    },
+    {
+      "slurm_job_id": "31604",
+      "description": "source_softmax_and_named_leads_union_batch16",
+      "records": 733,
+      "panel_rows": 962,
+      "decision_disagreements": 0,
+      "max_absolute_probability_difference": 0.0005892813205718994,
+      "mean_absolute_probability_difference": 8.534290367958141e-05,
+      "selected_cohort_equivalence_passed": false,
+      "recomputed_macro_f1": 0.7934563704063461,
+      "recomputed_mean_panel_accuracy": 0.8022904853689048
+    },
+    {
+      "slurm_job_id": "31605",
+      "description": "source_softmax_named_leads_per_panel_batch32_no_grad",
+      "records": 733,
+      "panel_rows": 962,
+      "decision_disagreements": 0,
+      "max_absolute_probability_difference": 0.0005390644073486328,
+      "mean_absolute_probability_difference": 8.489741080221788e-05,
+      "selected_cohort_equivalence_passed": false,
+      "recomputed_macro_f1": 0.7934563704063461,
+      "recomputed_mean_panel_accuracy": 0.8022904853689048
+    }
+  ],
+  "selected_p4_binary_decision_replay_resolved": true,
+  "strict_probability_replay_resolved": false,
+  "historical_complete_preprocessing_source_recovered": false,
+  "training_reproduction_or_independent_validation_claimed": false,
+  "criterion_not_relaxed_after_results": {
+    "probability_atol": 1e-05,
+    "probability_rtol": 0.0,
+    "decision_disagreements": 0
+  },
+  "new_source_code_sha256": "027f9dec0f9694d11bdeaf8d0d6a6e0024b82a860ede42a0ab97543c3d3eccd2"
+}
