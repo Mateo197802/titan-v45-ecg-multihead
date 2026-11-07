@@ -1,0 +1,30 @@
+# Revision Data Dispositions
+
+Internal engineering identifiers link to public evidence. This is not a reviewer response, an editorial decision, or a claim that every requested experiment was performed. No reviewer text or correspondence is reproduced. Results cited here are selected development evidence.
+
+| ID | Verified scope | Next disposition |
+| --- | --- | --- |
+| R1-1 | Development reuse and selected profiles are explicit; historical patient isolation is not certified. | Limit claims. Independent evaluation is the one deferred empirical study; do not relabel the existing cohorts. |
+| R1-2 | [Waveform execution and transition ledger](frozen-waveform-audit.md) account for 2,926 selected keys without labels in routing. | Retire any claim to a historical all-input denominator; the pre-selection populations and exclusion ledger are not recovered. |
+| R1-3 | [ECG-linked AF audit](af-reference-contract.md) agrees with the saved AF code on all retained rows. | State ECG-associated AF only; no incidence, first diagnosis or longitudinal inference. |
+| R1-4 | [A10 correction](hash-correction-20261028.md): measured hashes and sizes for five models. | Replace invalid entries in the next manuscript. Do not list a hash for the unrecovered generic Optuna DB or generic predictions file. |
+| R2-general | P8 NSR scores and fallback observed; auxiliary channels produce scores. | State that Other and performance outside the selected profiles were not evaluated. Do not infer an Other output from low or missing scores. |
+| R2-2a, R2-2c | Literature and comparator decisions are separate from data verification. | Editorial: align references and comparators to the actual scope; a removed comparison is not a replacement experiment. |
+| R2-3a | [Retained source support and attribution](../data/licenses/README.md), [recovered source inventory](recovery-status-20261029.md), and matched metrics document selected cohorts. | Mark unverified train/internal/calibration split counts, identities and overlap as unknown. A checkpoint path is not a manifest. |
+| R2-3b | Historical evaluations and the new source-backed replay have separate [evidence receipts](../outputs/results/revision_20261107/execution.json). | Editorial: separate design, development evidence and reconstruction. |
+| R2-3c, R2-3d | [Frozen inference](frozen-waveform-audit.md) observes six auxiliary rhythm outputs and ALMI/ILMI/LAE; NSR is primary in P8. | Distinguish an output and a code path capable of loss from demonstrated supervision/support on the published training run. Do not infer the latter. |
+| R2-3e | Model role, selected eligibility, emitted score and transition are distinguishable in the [waveform audit](frozen-waveform-audit.md). | Use operational definitions; do not equate an auxiliary head with a human-reviewed or historically routed case. |
+| R2-3f | [Ten morphology and twelve event definitions](recovered-feature-contract.md); actual P4 and rhythm replay with measured residuals. | Describe candidate loader/morphology and exact recovered event code separately. Do not claim historical identity or probability parity. |
+| R2-4a | Retained cohorts and reconstruction are [development evidence](evidence-status.md). | Define the term and avoid claims of untouched generalization. |
+| R2-4k | Pre/post states are accounted for; 2,926 keys have no certified quarantine assessment. | Remove historical rates/effect claims without the original policy and ledger; use undefined, not 0%. |
+| R2-4m | Machine-readable results and denominators are available. | Figures and layout are deferred; no regeneration in this phase. |
+| A-02 | [Source-check evidence](revision-evidence-20261029.md) and [supports](../outputs/results/revision_20261028/source_supports.csv). | Use literal source counts; explain Chapman/Ningbo duplicate identity and avoid counting literal strings as independent institutions. |
+| A-04 | Frozen thresholds applied on actual ECGs; [P6 calibration lineage](../outputs/results/revision_20261029/p6_calibration_lineage_summary.json) and retained P4 threshold metadata distinguish calibration from the reported panels. | Use measured/recorded thresholds; do not certify calibration patient isolation without the historical manifests. |
+| A-06 | [Optuna source recovered](recovery-status-20261029.md), not the complete database or checkpoint-to-trial linkage. | Limit search/quarantine statements to verified source or retained log fragments; do not reproduce missing trials from conjecture. |
+| A-07 | Versioned repository, native job [receipt](../outputs/results/revision_20261107/execution.json), and public aggregate files. | Data Availability Statement should cite the reviewed final commit and explain the restricted inputs; no broken or speculative URL. |
+| A-08 | [Metrics and supports](../outputs/results/README.md) are versioned and can be checked now. | Editorial packaging: enumerate only attached, verified files. Supplement is not rebuilt here. |
+| A-09 | Reference integrity is separate from model evidence. | Editorial: replace the incorrect DOI with the verified reference appropriate to the final scope. |
+| A-10 | [Selected-file identity and notices](../data/licenses/README.md); exact archive identity and CODE-test path mapping do not clear the mixed archive. | No new distribution; existing HOLD remains. Author/custodian rights confirmation is needed only to change that boundary. |
+| A-11, A-12 | No new clinical attribution, reader effect, or human review was measured. | Remove unsupported efficacy claims; preserve synthetic examples only when clearly labeled. A clinical claim would require a separate study, not this audit. |
+
+Earlier bounded items retain their existing evidence or editorial disposition: R2-1a, R2-1b, R2-2b, R2-2d, R2-2e, R2-2f, R2-3g, R2-3h, R2-4b, R2-4c, R2-4d, R2-4e, R2-4f, R2-4g, R2-4h, R2-4i, R2-4j, R2-4l, R2-5, R2-6, A-01, A-03 and A-05. R2-4e's saved fallback is independently reinforced by the new waveform run. None of these designations imply reviewer acceptance.

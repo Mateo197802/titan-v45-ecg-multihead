@@ -14,7 +14,7 @@ These are repeated external-development evaluations. They are not untouched exte
 
 Primary8's separate single-target diagnostic accuracy is 85.27% (1,870/2,193); it is not the 90.61% accepted-label metric. See the [evidence status and metric definitions](docs/evidence-status.md) before citing these values.
 
-**Waveform reproduction remains unresolved.** Two full-cohort CEDIA runs of the fixed public-runtime/candidate-preprocessing contract disagreed with **166 of 962** archived Primary4 panel decisions. This failed historical-equivalence check is [reported with its provenance](docs/revision-evidence-20261028.md#waveform-replay-finding); successful saved-prediction recomputation and matching weight hashes do not resolve it. Primary6/Primary8 replay additionally requires the missing original signal-event extractor. Linked patient counts do not establish historical train/validation isolation.
+**New waveform audit, with limits.** CEDIA replay on the selected development manifests recovered agreement on all 962 P4 binary decisions and all 2,193 P8 top-1 and binary-set decisions; P6 had one top-1 difference in 1,643 ECGs. This supersedes the earlier 166-decision P4 discrepancy for the reconstructed runner, not the historical equivalence finding. The P4 probability tolerance still fails, and original loader identity, patient split isolation and the historical all-input cascade are not certified. See the [measured audit and runbook](docs/frozen-waveform-audit.md).
 
 ## Verify Reported Metrics
 

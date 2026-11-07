@@ -4,4 +4,6 @@ This directory records architecture, evaluation protocols, CEDIA execution, prov
 
 See [Evidence and Claim Boundaries](evidence-status.md) for the current Primary6, Primary4, and Primary8 status, metric definitions, source links, and the command that recomputes the published metrics from tracked predictions.
 
+The [frozen waveform audit](frozen-waveform-audit.md) reports the newer CEDIA inference and matched-reference comparison. The [disposition index](revision-data-dispositions.md) distinguishes new results, absent historical evidence and deferred external evaluation.
+
 The [29 October historical recovery update](recovery-status-20261029.md) documents recovered source identity, header modifications, search coverage and remaining reproducibility gaps without regenerating the manuscript or asserting that reviewer requests are all closed.

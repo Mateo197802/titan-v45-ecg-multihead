@@ -1,0 +1,48 @@
+{
+  "schema": "TITAN_V45_WAVEFORM_EXECUTION_RECEIPT_V1",
+  "scope": "selected development waveform audit; no historical all-input or independent evaluation",
+  "platform": "CEDIA SLURM",
+  "inference_device": "1 NVIDIA A100-SXM4-40GB per inference job",
+  "inference_environment": {
+    "dependency_bundle_sha256": "5ea9a481f100342a4b7c9aaf98294659340d05ba20dba645007f37a3fbb6cc45",
+    "torch": "2.10.0+cu128",
+    "numpy": "2.2.6",
+    "scipy": "1.15.3",
+    "wfdb": "4.3.0",
+    "zstandard": "0.23.0"
+  },
+  "outputs": {
+    "pathology_waveform.json": {
+      "sha256": "592e2bbab96cd03e23caf5ba4c29b746293a0f6e7584ed4b6fc069160c2d5f46",
+      "job": 32448,
+      "git_commit": "02019b832fafecd0c263ea556c70f16fa0a50ccf",
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed": "00:00:43"
+    },
+    "rhythm_waveform.json": {
+      "sha256": "123d21f4512b988eb24bcff90b971c62510c547b7f766e059137f072c2d871b4",
+      "job": 32461,
+      "git_commit": "cfe6d59fa5cc4be10de0d7c6803fa5208fae0072",
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed": "00:01:13"
+    },
+    "matched_reference_metrics.json": {
+      "sha256": "d8e5603a8e3090c17a223ba80f397cee8d99c6f713465ceb9660ce4e17c2566d",
+      "job": 32464,
+      "git_commit": "244b3113158ecf50ff54570595818945c4db5281",
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed": "00:00:22"
+    }
+  },
+  "preceding_attempts": [
+    {"job": 32458, "state": "FAILED", "exit_code": "1:0", "reason": "declared rhythm MLP width 192, tensors require 512"},
+    {"job": 32460, "state": "COMPLETED", "exit_code": "0:0", "reason": "167 archive paths unresolved before explicit CODE-test alias"},
+    {"job": 32462, "state": "FAILED", "exit_code": "1:0", "reason": "reference report used incorrect Primary6 registry key"},
+    {"job": 32463, "state": "CANCELLED", "reason": "stopped retry with the same registry defect"}
+  ],
+  "private_ledgers": "retained on CEDIA; only SHA-256 values included in aggregate",
+  "canonical_outputs_modified": false
+}
