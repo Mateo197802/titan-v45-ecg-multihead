@@ -9,8 +9,10 @@ from titan_v45.models.frozen_rhythm import (
     P6_CLASSES,
     P8_CLASSES,
     aggregate_rhythm,
+    build_frozen_rhythm_head,
     load_recorded_event_extractor,
 )
+from titan_v45.models.specialists import ClassWiseBinaryMLP
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -46,3 +48,12 @@ def test_extractor_uses_pinned_trainer_and_twelve_outputs(tmp_path):
     corrupted.write_bytes(b"invalid")
     with pytest.raises(ValueError, match="archive"):
         load_recorded_event_extractor(corrupted)
+
+
+def test_frozen_rhythm_width_is_read_from_tensors_not_stale_metadata():
+    state = ClassWiseBinaryMLP(681, 8, hidden_dim=17).state_dict()
+    head, dimensions = build_frozen_rhythm_head({"rhythm_hidden_dim": 9,
+                                                "rhythm_specialist_state_dict": state})
+    assert dimensions == {"declared": 9, "stored": 17, "metadata_matches": False}
+    assert head(torch.zeros((2, 681))).shape == (2, 8)
+    assert all(torch.equal(v, state[k]) for k, v in head.state_dict().items())

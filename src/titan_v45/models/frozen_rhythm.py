@@ -67,6 +67,18 @@ def aggregate_rhythm(logits, thresholds, *, profile):
     return {**membership_decision(scores, thresholds), "scores": scores}
 
 
+def build_frozen_rhythm_head(checkpoint):
+    """Use the actual tensors when the redundant width metadata is stale."""
+    state = checkpoint["rhythm_specialist_state_dict"]
+    width, inputs = state["heads.0.1.weight"].shape
+    if inputs != 681:
+        raise ValueError("stored rhythm feature width is not 681")
+    declared = int(checkpoint["rhythm_hidden_dim"])
+    head = ClassWiseBinaryMLP(inputs, len(P8_CLASSES), hidden_dim=width)
+    head.load_state_dict(state, strict=True)
+    return head, {"declared": declared, "stored": width, "metadata_matches": width == declared}
+
+
 class FrozenRhythm:
     def __init__(self, assets, contract, event_extractor, device):
         self.device = device
@@ -79,7 +91,7 @@ class FrozenRhythm:
         weights = torch.load(assets[BACKBONE], map_location="cpu", weights_only=True)
         self.model.load_state_dict(weights["state_dict"], strict=True)
         self.model.to(device).eval().requires_grad_(False)
-        self.heads, self.layouts, self.biases = {}, {}, {}
+        self.heads, self.layouts, self.biases, self.widths = {}, {}, {}, {}
         for profile, name in HEADS.items():
             checkpoint = torch.load(assets[name], map_location="cpu", weights_only=True)
             if (tuple(checkpoint["primary8_classes"]) != P8_CLASSES
@@ -88,9 +100,7 @@ class FrozenRhythm:
                     or not checkpoint["classwise_rhythm_heads"]
                     or checkpoint["rhythm_mode"] != "multilabel"):
                 raise ValueError("unexpected rhythm specialist checkpoint contract")
-            state = checkpoint["rhythm_specialist_state_dict"]
-            head = ClassWiseBinaryMLP(681, 8, hidden_dim=int(checkpoint["rhythm_hidden_dim"]))
-            head.load_state_dict(state, strict=True)
+            head, self.widths[profile] = build_frozen_rhythm_head(checkpoint)
             self.heads[profile] = head.to(device).eval().requires_grad_(False)
             self.layouts[profile] = SpecialistFeatureLayout(
                 rhythm_indices=tuple(rhythm.index(c) for c in P8_CLASSES),

@@ -132,6 +132,7 @@ def run_rhythm_release(repo: Path, release: Path, scratch: Path, device: str):
         "auxiliary_score_support": {c: sum("auxiliary_scores" in v for v in ledger.values())
                                     for c in CASCADE_RHYTHMS},
         "thresholds": thresholds, "weights_or_thresholds_modified": False,
+        "checkpoint_hidden_widths": scorer.widths,
         "release_sha256": digests,
         "manifest_sha256_lf": {path.name: hashlib.sha256(path.read_bytes()
                                                          .replace(b"\r\n", b"\n")).hexdigest()
