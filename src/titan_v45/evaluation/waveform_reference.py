@@ -175,6 +175,6 @@ def build_waveform_reference_report(repo, *, pathology_ledger, rhythm_ledger, n_
         )},
         **{f"P{size}": _compare_rhythm(
             read(f"rhythm_primary{size}_record_predictions.csv"), rhythm, f"P{size}",
-            CANONICAL_PROFILES[f"rhythm_primary{size}"].classes, n_bootstrap
-        ) for size in (6, 8)},
+            CANONICAL_PROFILES[canonical].classes, n_bootstrap
+        ) for size, canonical in ((6, "rhythm_primary6_diagnostic"), (8, "rhythm_primary8"))},
     }

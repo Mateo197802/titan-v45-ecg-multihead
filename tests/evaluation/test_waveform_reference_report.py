@@ -1,6 +1,14 @@
+import csv
+import json
+from pathlib import Path
+
 import pytest
 
-from titan_v45.evaluation.waveform_reference import compare_binary_panel, summarize_selected_union
+from titan_v45.evaluation.waveform_reference import (
+    build_waveform_reference_report,
+    compare_binary_panel,
+    summarize_selected_union,
+)
 
 
 def test_report_uses_only_joined_references_and_same_archived_subset():
@@ -39,3 +47,27 @@ def test_selected_union_accounts_for_shared_keys_and_unscored_branch():
     assert result["exact_key_overlap"] == 1
     assert result["transitions"] == {"both->quarantine_not_assessed": 1, "no_scores->no_scores": 1}
     assert result["quarantine_rate_all_inputs"] is None
+
+
+def test_whole_report_resolves_canonical_profiles_and_tracks_missing_scores(tmp_path):
+    repo = Path(__file__).resolve().parents[2]
+    base = repo / "data/manifests/external_dev"
+
+    def write_ledger(name):
+        path = tmp_path / f"{name}.jsonl"
+        with (base / f"{name}.csv").open(encoding="utf-8", newline="") as handle:
+            keys = sorted({(row["source"], row["record_id"]) for row in csv.DictReader(handle)})
+        path.write_text("".join(json.dumps({"source": source, "record_id": record_id,
+                                            "pre": "no_scores", "post": "no_scores"}) + "\n"
+                                for source, record_id in keys), encoding="utf-8")
+        return path
+
+    report = build_waveform_reference_report(
+        repo, pathology_ledger=write_ledger("pathology_primary4_panels"),
+        rhythm_ledger=write_ledger("rhythm_primary8_records"), n_bootstrap=0,
+    )
+    assert report["selected_key_union"]["transitions"] == {"no_scores->no_scores": 2926}
+    assert report["P6"]["missing_score_rows"] == 1643
+    assert report["P8"]["missing_score_rows"] == 2193
+    assert sum(panel["missing_score_rows"] for panel in report["P4"]["classes"].values()) == 962
+    assert report["P4"]["bootstrap_new"] is None
