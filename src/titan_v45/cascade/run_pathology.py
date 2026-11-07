@@ -34,7 +34,7 @@ def _read_rows(path):
         return list(csv.DictReader(handle))
 
 
-def _extract_records(path, scratch):
+def _extract_records(path, scratch, package=P4_PACKAGE, suffixes=(".hea", ".dat")):
     # Paths are constrained to the verified release's waveform tree.
     with path.open("rb") as compressed, zstandard.ZstdDecompressor().stream_reader(
         compressed
@@ -43,10 +43,10 @@ def _extract_records(path, scratch):
             if not member.isfile():
                 continue
             parts = Path(member.name).parts
-            if parts[:2] != (P4_PACKAGE, "records"):
+            if parts[:2] != (package, "records"):
                 continue
             target = (scratch / member.name).resolve()
-            if not target.is_relative_to(scratch.resolve()) or target.suffix not in {".hea", ".dat"}:
+            if not target.is_relative_to(scratch.resolve()) or target.suffix not in suffixes:
                 raise ValueError("unexpected path or suffix in release waveform tree")
             target.parent.mkdir(parents=True, exist_ok=True)
             with target.open("xb") as destination, archive.extractfile(member) as source:
@@ -77,17 +77,22 @@ def _compare_saved(repo, ledger):
     }
 
 
-def run_pathology_release(repo: Path, release: Path, scratch: Path, device: str):
-    """Run the fixed P4 candidate with a manifest that contributes no labels."""
-    if device == "cuda" and not torch.cuda.is_available():
-        raise RuntimeError("CUDA requested but unavailable")
-    assets, digests = verified_assets(repo, release, {BACKBONE, SPECIALIST, DATASET})
+def _load_morphology(repo):
     morph = repo / "scripts/cedia/recovery_candidates/morphology_features_v4.py"
     if hashlib.sha256(morph.read_bytes().replace(b"\r\n", b"\n")).hexdigest() != MORPHOLOGY_SHA:
         raise ValueError("unexpected candidate morphology hash")
     spec = importlib.util.spec_from_file_location("titan_reconstructed_morphology", morph)
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
+    return module.normalized_morphology_features
+
+
+def run_pathology_release(repo: Path, release: Path, scratch: Path, device: str):
+    """Run the fixed P4 candidate with a manifest that contributes no labels."""
+    if device == "cuda" and not torch.cuda.is_available():
+        raise RuntimeError("CUDA requested but unavailable")
+    assets, digests = verified_assets(repo, release, {BACKBONE, SPECIALIST, DATASET})
+    morphology = _load_morphology(repo)
     manifest = repo / "data/manifests/external_dev/pathology_primary4_panels.csv"
     inventory = build_waveform_inventory(_read_rows(manifest))
     contract = json.loads((repo / "outputs/models/heads/global_head_contracts.json").read_text(encoding="utf-8"))
@@ -98,7 +103,7 @@ def run_pathology_release(repo: Path, release: Path, scratch: Path, device: str)
         package = work / P4_PACKAGE
         report, ledger = audit_pathology_waveforms(
             inventory,
-            lambda relative: prepare_p4_record(package / relative, module.normalized_morphology_features),
+            lambda relative: prepare_p4_record(package / relative, morphology),
             scorer, scorer.thresholds, batch_size=32,
         )
     report.update({

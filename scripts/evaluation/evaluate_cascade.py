@@ -12,22 +12,24 @@ from titan_v45.cascade.policy import CASCADE_PATHOLOGIES, CASCADE_RHYTHMS, casca
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Inspect the cascade contract or run frozen P4 on ECGs.")
+    parser = argparse.ArgumentParser(description="Inspect the cascade contract or run frozen waveform inference.")
     parser.add_argument("--output", type=Path, required=True)
-    parser.add_argument("--profile", choices=("contract", "pathology_primary4"), default="contract")
+    parser.add_argument("--profile", choices=("contract", "pathology_primary4", "rhythm"), default="contract")
     parser.add_argument("--release-root", type=Path)
     parser.add_argument("--scratch", type=Path)
     parser.add_argument("--private-ledger", type=Path)
     parser.add_argument("--device", choices=("cpu", "cuda"), default="cpu")
     args = parser.parse_args()
-    if args.profile == "pathology_primary4":
+    if args.profile != "contract":
         if args.release_root is None or args.scratch is None:
             parser.error("waveform mode requires --release-root and --scratch")
         if args.private_ledger and args.private_ledger.resolve().is_relative_to(ROOT.resolve()):
             parser.error("the private ledger must be outside the repository")
-        from titan_v45.cascade.run_pathology import run_pathology_release
-
-        report, ledger = run_pathology_release(ROOT, args.release_root, args.scratch, args.device)
+        if args.profile == "pathology_primary4":
+            from titan_v45.cascade.run_pathology import run_pathology_release as run
+        else:
+            from titan_v45.cascade.run_rhythm import run_rhythm_release as run
+        report, ledger = run(ROOT, args.release_root, args.scratch, args.device)
         if args.private_ledger:
             with args.private_ledger.open("x", encoding="utf-8", newline="\n") as handle:
                 for (source, record_id), route in ledger.items():
@@ -37,7 +39,7 @@ def main() -> int:
             handle.write(json.dumps(report, indent=2) + "\n")
         return 0
     if args.release_root or args.scratch or args.private_ledger or args.device != "cpu":
-        parser.error("waveform options require --profile pathology_primary4")
+        parser.error("waveform options require a waveform profile")
     payload = {
         "evidence_role": cascade_evidence_role(),
         "rhythm_classes": CASCADE_RHYTHMS,
