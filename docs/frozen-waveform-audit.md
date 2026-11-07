@@ -1,5 +1,7 @@
 # Frozen Waveform Audit: Selected Development Cohorts
 
+See also the [matched score residuals, fixed-input batch probe and official fold denominator](replay-residual-diagnostics.md).
+
 This audit starts with ECGs, not the published prediction table. It is a new execution of a source-backed reconstruction against preserved checkpoints on the selected development cohorts. It is not the June study, a recovery of the population before selection, a new holdout, or a new canonical release. The architecture, specialist weights, thresholds and archived predictions are unchanged. The absent original loader prevents certifying historical preprocessing identity.
 
 ## Measured Results
