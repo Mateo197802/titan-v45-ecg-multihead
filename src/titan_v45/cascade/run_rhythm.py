@@ -17,8 +17,9 @@ from titan_v45.cascade.run_pathology import (
     _load_morphology,
     _read_rows,
 )
-from titan_v45.cascade.waveform import build_waveform_inventory
+from titan_v45.cascade.waveform import build_waveform_inventory, packaged_rhythm_path
 from titan_v45.data.reconstructed import prepare_rhythm_record
+from titan_v45.evaluation.workflow import summarize_routes
 from titan_v45.models.frozen_pathology import verified_assets
 from titan_v45.models.frozen_rhythm import (
     BACKBONE,
@@ -90,11 +91,14 @@ def run_rhythm_release(repo: Path, release: Path, scratch: Path, device: str):
     p8, p6 = (build_waveform_inventory(_read_rows(path)) for path in (p8_path, p6_path))
     if any(p8.get(key) != path for key, path in p6.items()):
         raise ValueError("P6 is not a compatible subset of the P8 waveform inventory")
+    paths = {key: packaged_rhythm_path(key, path) for key, path in p8.items()}
+    if len(set(paths.values())) != len(paths):
+        raise ValueError("archive directory alias caused a waveform collision")
     ledger, errors = {}, Counter()
     with TemporaryDirectory(prefix="titan-rhythm-waveform-", dir=scratch) as work:
         work = Path(work)
         _extract_records(assets[DATASET], work, PACKAGE, (".hea", ".dat", ".mat"))
-        items = list(p8.items())
+        items = list(paths.items())
         for start in range(0, len(items), BATCH_SIZE):
             samples, offsets = [], {}
             for key, path in items[start:start + BATCH_SIZE]:
@@ -129,6 +133,8 @@ def run_rhythm_release(repo: Path, release: Path, scratch: Path, device: str):
             evidence / f"rhythm_primary{profile[-1]}_record_predictions.csv"
         )) for profile in HEADS},
         "input_error_counts": dict(sorted(errors.items())), "batch_size": BATCH_SIZE,
+        "transitions": summarize_routes(ledger)["transitions"],
+        "codetest_archive_alias_records": sum(paths[key] != path for key, path in p8.items()),
         "auxiliary_score_support": {c: sum("auxiliary_scores" in v for v in ledger.values())
                                     for c in CASCADE_RHYTHMS},
         "thresholds": thresholds, "weights_or_thresholds_modified": False,

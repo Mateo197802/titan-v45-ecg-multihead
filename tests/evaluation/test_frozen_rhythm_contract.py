@@ -17,6 +17,18 @@ from titan_v45.models.specialists import ClassWiseBinaryMLP
 ROOT = Path(__file__).resolve().parents[2]
 
 
+def test_codetest_release_alias_is_specific_to_documented_source_and_prefix():
+    from titan_v45.cascade.waveform import packaged_rhythm_path
+
+    path = "records/codetest_zenodo_3765780/ECG_01/ECG_01"
+    assert packaged_rhythm_path(("codetest_zenodo_3765780", "ECG_01"), path) == (
+        "records/codetest/ECG_01/ECG_01"
+    )
+    assert packaged_rhythm_path(("different", "ECG_01"), path) == path
+    other = "records/codetest_zenodo_3765780_extra/ECG_01/ECG_01"
+    assert packaged_rhythm_path(("codetest_zenodo_3765780", "ECG_01"), other) == other
+
+
 def test_rhythm_keeps_distinct_saved_aggregations_and_fallback():
     logits = np.full((2, 8), -5.0)
     logits[:, 0] = (-5.0, 9.0)

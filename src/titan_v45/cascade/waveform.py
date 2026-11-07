@@ -9,6 +9,15 @@ from titan_v45.cascade.policy import CASCADE_PATHOLOGIES
 from titan_v45.evaluation.workflow import route_record, summarize_routes
 
 
+def packaged_rhythm_path(key, path):
+    """Apply the audited CODE-test archive directory alias, not an ID search."""
+    source = "codetest_zenodo_3765780"
+    prefix = f"records/{source}/"
+    if key[0] == source and path.startswith(prefix):
+        return "records/codetest/" + path[len(prefix):]
+    return path
+
+
 def build_waveform_inventory(rows):
     """Project an inventory to source, identity and relative signal path only."""
     inventory = {}
