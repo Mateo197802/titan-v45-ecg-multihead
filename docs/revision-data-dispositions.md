@@ -2,6 +2,8 @@
 
 Internal engineering identifiers link to public evidence. This is not a reviewer response, an editorial decision, or a claim that every requested experiment was performed. No reviewer text or correspondence is reproduced. Results cited here are selected development evidence.
 
+The [follow-up diagnostic](replay-residual-diagnostics.md) adds the official PTB-XL fold denominator (R1-2, R2-3a) and isolates a batch-size effect on the same fixed P4 inputs (R2-3f). It does not recover the historical candidate pool or original loader.
+
 | ID | Verified scope | Next disposition |
 | --- | --- | --- |
 | R1-1 | Development reuse and selected profiles are explicit; historical patient isolation is not certified. | Limit claims. Independent evaluation is the one deferred empirical study; do not relabel the existing cohorts. |

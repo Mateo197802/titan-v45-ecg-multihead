@@ -1,0 +1,29 @@
+{
+  "schema": "TITAN_V45_REPLAY_DIAGNOSTICS_RECEIPT_V1",
+  "scope": "paired residual audit and official PTB-XL metadata cross-check",
+  "outputs": {
+    "score_residuals.json": {
+      "sha256": "f5dba0f232bc1a786373747752003cecc37d1df6d120350f39121480b0dc8796",
+      "git_commit": "feb7a37a96151f88b314068c2b4d415ad50b9b78",
+      "cedia_job": 32478,
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed": "00:00:28"
+    },
+    "p4_batch_probe.json": {
+      "sha256": "8c9f929efed21132c019e676eddbec43fa5f67554865e48db6770371f731a9dd",
+      "git_commit": "ac600cfc75b5bd27caa0247a6ab4b94aaed383a4",
+      "cedia_job": 32576,
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed": "00:01:17"
+    },
+    "p4_official_fold_coverage.json": {
+      "sha256": "299635763c996cebc66a954b7a5392f56bd66ad7622336f0e9011634a96283eb",
+      "git_commit": "ac600cfc75b5bd27caa0247a6ab4b94aaed383a4",
+      "execution": "local read-only official metadata audit",
+      "upstream_checksum_index": "https://physionet.org/files/ptb-xl/1.0.3/SHA256SUMS.txt",
+      "metadata_matches_official_sha256": true
+    }
+  }
+}
