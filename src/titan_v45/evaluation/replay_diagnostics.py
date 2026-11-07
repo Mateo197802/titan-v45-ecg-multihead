@@ -58,6 +58,21 @@ def binary_residuals(archived, replayed, threshold):
     }
 
 
+def compare_pathology_replay_ledgers(archived, replayed, thresholds):
+    if not archived or archived.keys() != replayed.keys() or any(
+        row.get("primary_scores", {}).keys() != thresholds.keys()
+        for ledger in (archived, replayed) for row in ledger.values()
+    ):
+        raise ValueError("pathology replay coverage or score classes differ")
+    return {
+        label: binary_residuals(
+            [archived[key]["primary_scores"][label] for key in archived],
+            [replayed[key]["primary_scores"][label] for key in archived],
+            threshold,
+        ) for label, threshold in thresholds.items()
+    }
+
+
 def ranking_residuals(archived, replayed, old_winner, new_winner):
     a, b = _probability_pair(archived, replayed)
     if a.ndim != 2 or a.shape[1] < 2:
