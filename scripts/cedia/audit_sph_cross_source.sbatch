@@ -25,23 +25,9 @@ export PYTHONPATH="$repo/src:$scratch${PYTHONPATH:+:$PYTHONPATH}"
 export OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 PYTHONDONTWRITEBYTECODE=1
 release_scratch="$scratch/release-root"
 mkdir -p "$release_scratch"
-python - "$release" "$release_scratch" <<'PY'
-import sys
-from pathlib import Path
-from titan_v45.cascade.run_pathology import _extract_records
-
-source, target = map(Path, sys.argv[1:])
-_extract_records(
-    source / "data/external_dev/rhythm/external-dev-rhythm-chapman-shaoxing.tar.zst",
-    target / "data/external_dev/extracted/rhythm",
-    package="external-dev-rhythm-chapman-shaoxing",
-)
-_extract_records(
-    source / "data/external_dev/pathology/external-dev-pathology-ptbxl-fold10.tar.zst",
-    target / "data/external_dev/extracted/pathology",
-    package="external-dev-pathology-ptbxl-fold10",
-)
-PY
+python -u scripts/external_validation/stage_retained_wfdb_archives.py \
+    --release-root "$release" --output-root "$release_scratch" \
+    --receipt "$output/staging-receipt.json"
 printf 'Waveform packages staged on node-local scratch.\n'
 cd "$repo"
 git rev-parse HEAD > "$output/commit.txt"
