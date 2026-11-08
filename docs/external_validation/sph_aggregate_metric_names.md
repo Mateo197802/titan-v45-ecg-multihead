@@ -15,3 +15,11 @@ a zero denominator, and leaves all bootstrap intervals unchanged. It embeds
 the input aggregate SHA-256 in the new file. Preserve both files and hash the
 normalizer and both outputs in the publication receipt. No predictions,
 references, thresholds, weights, or inclusion criteria are modified.
+
+The separately versioned `plot_sph_aggregate_corrected.py` is the designated
+renderer for this normalized aggregate. It preserves the frozen figure layout
+and draws absolute percentile interval endpoints, including intervals that do
+not contain the point estimate. This avoids negative `xerr` rejection without
+clipping or changing the interval. Preserve the original renderer and include
+the corrected renderer's commit and SHA-256 in the figure receipt. This renderer
+correction was prepared using synthetic tests before SPH metrics were inspected.

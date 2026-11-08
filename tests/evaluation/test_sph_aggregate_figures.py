@@ -1,6 +1,8 @@
 import pytest
 
+from scripts.external_validation.normalize_sph_aggregate import normalize_report
 from scripts.external_validation.plot_sph_aggregate import plot_sph_aggregate
+from scripts.external_validation.plot_sph_aggregate_corrected import plot_corrected
 
 
 def _metric(value):
@@ -55,3 +57,36 @@ def test_aggregate_plotter_writes_fixed_privacy_safe_figures(tmp_path):
 def test_aggregate_plotter_rejects_nonaggregate_input(tmp_path):
     with pytest.raises(ValueError, match="schema"):
         plot_sph_aggregate({"schema": "private-ledger"}, tmp_path)
+
+
+def test_frozen_aggregate_metric_names_normalize_before_plotting(tmp_path):
+    pytest.importorskip("matplotlib")
+    report = _report()
+    for endpoint in report["endpoints"].values():
+        endpoint["metrics"].pop("sensitivity")
+        endpoint["metrics"].update({"tn": 8, "fp": 2, "fn": 3, "tp": 7, "recall": 0.7})
+        endpoint["discordant_exact_duplicate_sensitivity"]["metrics"].update(
+            {"tn": 8, "fp": 2, "fn": 3, "tp": 7, "recall": 0.7}
+        )
+    normalized = normalize_report(report, "a" * 64)
+    assert normalized["endpoints"]["P6:TEST"]["metrics"]["sensitivity"] == 0.7
+    assert len(plot_corrected(normalized, tmp_path)["files"]) == 6
+
+
+def test_corrected_plot_preserves_interval_excluding_point(tmp_path, monkeypatch):
+    pytest.importorskip("matplotlib")
+    report = _report()
+    for endpoint in report["endpoints"].values():
+        endpoint["cluster_bootstrap_ci95"]["sensitivity"] = {"low": 0.85, "high": 0.95}
+    from matplotlib.axes import Axes
+
+    intervals = []
+    original = Axes.hlines
+
+    def capture(axis, y, xmin, xmax, *args, **kwargs):
+        intervals.append((xmin, xmax))
+        return original(axis, y, xmin, xmax, *args, **kwargs)
+
+    monkeypatch.setattr(Axes, "hlines", capture)
+    plot_corrected(report, tmp_path)
+    assert any(low == pytest.approx(0.85) and high == pytest.approx(0.95) for low, high in intervals)
