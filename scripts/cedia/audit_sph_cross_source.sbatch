@@ -6,19 +6,21 @@
 #SBATCH --time=00:30:00
 set -euo pipefail
 umask 077
-if [[ $# != 5 ]]; then
-    printf 'Usage: sbatch %s SOURCE_TREE SPH_DIRECTORY RELEASE_ROOT PYTHON_DEPS_TAR PRIVATE_OUTPUT_DIR\n' "$0" >&2
+if [[ $# != 6 ]]; then
+    printf 'Usage: sbatch %s SOURCE_TREE SPH_DIRECTORY RELEASE_ROOT PYTHON_DEPS_TAR H5PY_DEPS_TAR PRIVATE_OUTPUT_DIR\n' "$0" >&2
     exit 2
 fi
 repo=$1
 source=$2
 release=$3
 deps=$4
-output=$5/sph-cross-source-audit-$SLURM_JOB_ID
+h5py_deps=$5
+output=$6/sph-cross-source-audit-$SLURM_JOB_ID
 mkdir -m 700 "$output"
 module load pytorch/2.2
 scratch=$(mktemp -d "${SLURM_TMPDIR:-/tmp}/titan-sph-xsrc-XXXXXX")
 tar -xf "$deps" -C "$scratch"
+tar -xf "$h5py_deps" -C "$scratch"
 export PYTHONPATH="$repo/src:$scratch${PYTHONPATH:+:$PYTHONPATH}"
 export OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 PYTHONDONTWRITEBYTECODE=1
 cd "$repo"

@@ -7,18 +7,19 @@
 #SBATCH --time=01:00:00
 set -euo pipefail
 umask 077
-if [[ $# != 8 ]]; then
-    printf 'Usage: sbatch %s SOURCE_TREE SPH_DIRECTORY RELEASE_ROOT PYTHON_DEPS OUTPUT_DIR COMMIT CONFIG_SHA256 RECORDS_PER_BATCH\n' "$0" >&2
+if [[ $# != 9 ]]; then
+    printf 'Usage: sbatch %s SOURCE_TREE SPH_DIRECTORY RELEASE_ROOT PYTHON_DEPS H5PY_DEPS OUTPUT_DIR COMMIT CONFIG_SHA256 RECORDS_PER_BATCH\n' "$0" >&2
     exit 2
 fi
 repo=$1
 source=$2
 release=$3
 deps=$4
-output=$5/sph-frozen-$SLURM_JOB_ID
-commit=$6
-config_sha256=$7
-batch=$8
+h5py_deps=$5
+output=$6/sph-frozen-$SLURM_JOB_ID
+commit=$7
+config_sha256=$8
+batch=$9
 [[ "$commit" =~ ^[0-9a-f]{40}$ ]]
 [[ "$config_sha256" =~ ^[0-9a-f]{64}$ ]]
 [[ "$batch" == 16 ]]
@@ -26,6 +27,7 @@ mkdir -m 700 "$output"
 module load pytorch/2.2
 scratch=$(mktemp -d "${SLURM_TMPDIR:-/tmp}/titan-sph-score-XXXXXX")
 tar -xf "$deps" -C "$scratch"
+tar -xf "$h5py_deps" -C "$scratch"
 export PYTHONPATH="$repo/src:$scratch${PYTHONPATH:+:$PYTHONPATH}"
 export OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 PYTHONDONTWRITEBYTECODE=1
 cd "$repo"
