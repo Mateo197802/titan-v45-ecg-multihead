@@ -52,6 +52,21 @@ def read_sph_dictionary(text):
     return primary, modifier
 
 
+def read_sph_signal_index(text):
+    """Read only ECG_ID and sample count for label-blind waveform processing."""
+    records = {}
+    for row in _csv(text, ("ECG_ID", "N")):
+        record, samples = row["ECG_ID"], int(row["N"])
+        if not RECORD_ID.fullmatch(record) or samples < 1:
+            raise ValueError("invalid SPH signal index row")
+        if record in records:
+            raise ValueError("duplicate SPH ECG ID in signal index")
+        records[record] = samples
+    if not records:
+        raise ValueError("empty SPH signal index")
+    return records
+
+
 def parse_aha(value, primary, modifier):
     statements = []
     for statement in value.split(";"):
@@ -110,6 +125,37 @@ def read_sph_signal(content, samples):
         if not np.isfinite(signal).all():
             raise ValueError("nonfinite SPH signal")
         return signal, dataset.dtype.str
+
+
+def inspect_sph_signal_metadata(content, samples):
+    """Inspect HDF5 units and raw amplitude without converting or scoring signals."""
+    import h5py
+
+    with h5py.File(io.BytesIO(content), "r") as handle:
+        dataset = handle["ecg"]
+        attrs = {}
+        for prefix, values in (("file.", handle.attrs), ("ecg.", dataset.attrs)):
+            for key, value in values.items():
+                if isinstance(value, bytes):
+                    value = value.decode("utf-8", errors="replace")
+                elif isinstance(value, np.ndarray):
+                    value = value.tolist()
+                elif isinstance(value, np.generic):
+                    value = value.item()
+                attrs[prefix + str(key)] = value
+        signal, dtype = read_sph_signal(content, samples)
+        values = signal.astype(np.float64)
+        return {
+            "attributes": attrs,
+            "dtype": dtype,
+            "signal_sha256_canonical_f64": hashlib.sha256(
+                values.astype("<f8", copy=False).tobytes()
+            ).hexdigest(),
+            "raw_min": float(values.min()),
+            "raw_max": float(values.max()),
+            "raw_abs_quantiles": np.quantile(np.abs(values), [0.5, 0.95, 0.999]).tolist(),
+            "lead_std_median": float(np.median(values.std(axis=1))),
+        }
 
 
 def build_sph_inventory(directory: Path):
