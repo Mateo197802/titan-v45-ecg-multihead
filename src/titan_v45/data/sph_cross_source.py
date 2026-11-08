@@ -13,6 +13,12 @@ from titan_v45.data.sph import open_sph_records, read_sph_signal, read_sph_signa
 from titan_v45.data.sph_waveform import prepare_sph_waveform
 
 
+def _signature_morphology(_signal, *, fs):
+    if fs != 125:
+        raise ValueError("unexpected signature preprocessing sample rate")
+    return np.zeros(10, dtype=np.float32)
+
+
 def normalized_signature(signal):
     """Hash quantized, source-preprocessed first ten seconds without class data."""
     values = np.asarray(signal, dtype="<f4")
@@ -38,7 +44,7 @@ def _record_bases(root):
             yield base
 
 
-def audit_cross_source_signatures(source: Path, release_root: Path, morphology):
+def audit_cross_source_signatures(source: Path, release_root: Path):
     """Screen SPH against only the retained Chapman/Shaoxing and PTB-XL releases."""
     source_index = _signal_index(source / "metadata.csv")
     signatures = defaultdict(list)
@@ -51,7 +57,9 @@ def audit_cross_source_signatures(source: Path, release_root: Path, morphology):
             continue
         try:
             signal, _ = read_sph_signal(content, samples)
-            prepared = prepare_sph_waveform(signal, morphology, branch="P4")[0][0]
+            prepared = prepare_sph_waveform(
+                signal, _signature_morphology, branch="P4"
+            )[0][0]
             signatures[normalized_signature(prepared)].append({
                 "source": "SPH",
                 "record_id": record_id,
@@ -77,7 +85,7 @@ def audit_cross_source_signatures(source: Path, release_root: Path, morphology):
         count = 0
         for base in _record_bases(directory):
             try:
-                prepared, _, _ = prepare_p4_record(base, morphology)
+                prepared, _, _ = prepare_p4_record(base, _signature_morphology)
                 signatures[normalized_signature(prepared)].append({
                     "source": source_name,
                     "record_id": base.name,

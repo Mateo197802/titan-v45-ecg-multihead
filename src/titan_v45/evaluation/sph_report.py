@@ -187,6 +187,8 @@ def evaluate_sph_ledger(
     }
     if receipt["preperformance_control_sha256"] != expected_control_hashes:
         raise ValueError("pre-performance control hashes differ from the scoring receipt")
+    if receipt["implementation_sha256"] != protocol["implementation_sha256"]:
+        raise ValueError("frozen implementation hashes differ from the scoring receipt")
     primary, modifier = read_sph_dictionary((source / "code.csv").read_text(encoding="utf-8-sig"))
     metadata = read_sph_metadata(
         (source / "metadata.csv").read_text(encoding="utf-8-sig"), primary, modifier
@@ -322,6 +324,7 @@ def evaluate_sph_ledger(
         "scoring_ledger_sha256": receipt["ledger_sha256"],
         "private_duplicate_index_sha256": _sha256(duplicate_index),
         "preperformance_control_sha256": receipt["preperformance_control_sha256"],
+        "implementation_sha256": receipt["implementation_sha256"],
         "data_hashes": receipt["source_sha256"],
         "model_hashes": receipt["model_sha256"],
         "full_population_flow": {

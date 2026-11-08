@@ -65,13 +65,13 @@ def _read_signal_index(path):
 def _protocol(repo, args):
     config_path = repo / "configs/external_validation/sph_frozen.json"
     commit = subprocess.run(
-        ["git", "-C", str(repo), "rev-parse", "HEAD"], check=True,
+        ["git", "rev-parse", "HEAD"], cwd=repo, check=True,
         capture_output=True, text=True,
     ).stdout.strip()
     if commit != args.expected_commit or not commit:
         raise ValueError("working tree commit does not match frozen protocol commit")
     status = subprocess.run(
-        ["git", "-C", str(repo), "status", "--porcelain"], check=True,
+        ["git", "status", "--porcelain"], cwd=repo, check=True,
         capture_output=True, text=True,
     ).stdout.strip()
     if status:
@@ -120,6 +120,12 @@ def run(args):
     if args.output.resolve().is_relative_to(repo):
         raise ValueError("execution receipt must stay outside Git")
     protocol, config_hash, commit = _protocol(repo, args)
+    implementation_hashes = {}
+    for relative_path, expected_hash in protocol["implementation_sha256"].items():
+        path = (repo / relative_path).resolve()
+        if not path.is_relative_to(repo) or _sha256(path) != expected_hash:
+            raise ValueError(f"frozen implementation digest mismatch: {relative_path}")
+        implementation_hashes[relative_path] = expected_hash
     control_hashes = {}
     for name, item in protocol["preperformance_controls"]["aggregates"].items():
         path = (repo / item["path"]).resolve()
@@ -241,6 +247,7 @@ def run(args):
         "protocol_sha256": config_hash,
         "source_sha256": protocol["source_sha256"],
         "model_sha256": digests,
+        "implementation_sha256": implementation_hashes,
         "preperformance_control_sha256": control_hashes,
         "private_duplicate_index_sha256": duplicate_index_sha256,
         "ledger_sha256": ledger_hash,

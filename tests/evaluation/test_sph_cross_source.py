@@ -31,7 +31,7 @@ def test_signature_comparison_uses_full_12_lead_windows(tmp_path, monkeypatch):
     )
 
     report, candidates = sph_cross_source.audit_cross_source_signatures(
-        source, release, morphology=None
+        source, release
     )
 
     assert report["sph_records_compared"] == 1

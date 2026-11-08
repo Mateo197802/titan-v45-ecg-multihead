@@ -1,0 +1,59 @@
+{
+  "schema": "TITAN_V45_SPH_DUPLICATE_AMPLITUDE_AUDIT_V1",
+  "scope": "exact decoded arrays and source metadata; no model performance",
+  "records_hashed": 25770,
+  "exact_duplicate_groups": 168,
+  "exact_duplicate_excess_records": 168,
+  "groups_crossing_patient_ids": 0,
+  "groups_with_primary_code_set_conflicts": 25,
+  "code_conflict_groups": {
+    "1": 8,
+    "23": 3,
+    "30": 1,
+    "36": 1,
+    "50": 2,
+    "51": 2,
+    "82": 1,
+    "86": 2,
+    "104": 1,
+    "105": 8,
+    "145": 4,
+    "146": 5,
+    "147": 5,
+    "152": 1
+  },
+  "patients_in_exact_duplicate_groups": 168,
+  "records_in_exact_duplicate_groups": 336,
+  "patient_components_linked_by_exact_duplicates": {
+    "patient_count": 24666,
+    "count": 24666,
+    "component_size_distribution": {
+      "1": 24666
+    },
+    "unit_for_cluster_bootstrap": "connected_component_of_source_patient_ids"
+  },
+  "hdf5_attribute_presence_counts": {},
+  "hdf5_attribute_values": {},
+  "raw_signal_scale": {
+    "interpretation": "native stored values only; physical units not inferred",
+    "dtype_counts": {
+      "<f2": 25770
+    },
+    "global_min": -1590.0,
+    "global_max": 1440.0,
+    "abs_value_quantiles_by_record": {
+      "0.5": 0.042388916015625,
+      "0.95": 0.5102807617187476,
+      "0.999": 222.48168275000057
+    },
+    "median_of_record_median_lead_std": 0.12836918901410466,
+    "minimum_record_lead_std": 0.011316988074157897,
+    "records_with_any_lead_std_at_or_below_1e-6_native": 0,
+    "records_with_any_lead_std_at_or_below_1e-6_after_scale_0_001": 0,
+    "normalization_test": "per-lead z-score after source-backed filter/resampling; prefilter branch uses std > 1e-6"
+  },
+  "source_inventory_sha256": "c6f8dc5197758a3970aae554f8b6ee884d96656b121879bc0eb1adf367ea6d86",
+  "record_or_patient_identifiers_exported": false,
+  "near_duplicate_analysis": "not performed",
+  "historical_cross_source_independence": "not certified; source patient IDs are not linkable"
+}

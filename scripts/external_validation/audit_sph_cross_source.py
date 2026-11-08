@@ -9,7 +9,6 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 
-from titan_v45.cascade.run_pathology import _load_morphology
 from titan_v45.data.sph_cross_source import audit_cross_source_signatures
 
 
@@ -24,9 +23,8 @@ def main():
             or args.output.resolve().is_relative_to(ROOT)
             or args.private_candidates.resolve().is_relative_to(ROOT)):
         parser.error("SPH data, reports and candidate links must stay outside Git")
-    morphology = _load_morphology(ROOT)
     report, candidates = audit_cross_source_signatures(
-        args.source, args.release_root, morphology
+        args.source, args.release_root
     )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     with args.output.open("x", encoding="utf-8", newline="\n") as stream:

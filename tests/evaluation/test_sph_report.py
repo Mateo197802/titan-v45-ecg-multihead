@@ -44,6 +44,7 @@ def test_sph_endpoint_report_checks_sealed_ledger_and_patient_cluster_ci(tmp_pat
     receipt = tmp_path / "receipt.json"
     duplicate_index_sha256 = hashlib.sha256(duplicate_index.read_bytes()).hexdigest()
     control_hashes = {"source_inventory": "c" * 64}
+    implementation_hashes = {"script.py": "d" * 64}
     receipt.write_text(json.dumps({
         "ledger_sha256": hashlib.sha256(ledger.read_bytes()).hexdigest(),
         "stage": "full_population",
@@ -53,6 +54,7 @@ def test_sph_endpoint_report_checks_sealed_ledger_and_patient_cluster_ci(tmp_pat
         "model_sha256": {},
         "preperformance_control_sha256": control_hashes,
         "private_duplicate_index_sha256": duplicate_index_sha256,
+        "implementation_sha256": implementation_hashes,
         "flow": {"archive_records": 3},
     }), encoding="utf-8")
     protocol = {
@@ -65,6 +67,7 @@ def test_sph_endpoint_report_checks_sealed_ledger_and_patient_cluster_ci(tmp_pat
             "aggregates": {"source_inventory": {"sha256": "c" * 64}},
             "private_duplicate_index_sha256": duplicate_index_sha256,
         },
+        "implementation_sha256": implementation_hashes,
     }
     report = evaluate_sph_ledger(
         source=source, ledger=ledger, scoring_receipt=receipt,
@@ -142,12 +145,14 @@ def test_endpoint_sensitivity_excludes_only_discordant_exact_signal_groups(tmp_p
     receipt = tmp_path / "receipt.json"
     duplicate_index_sha256 = hashlib.sha256(duplicate_index.read_bytes()).hexdigest()
     control_hashes = {"source_inventory": "c" * 64}
+    implementation_hashes = {"script.py": "d" * 64}
     receipt.write_text(json.dumps({
         "ledger_sha256": hashlib.sha256(ledger.read_bytes()).hexdigest(),
         "stage": "full_population", "protocol_commit": "a" * 40,
         "protocol_sha256": "b" * 64, "source_sha256": {}, "model_sha256": {},
         "preperformance_control_sha256": control_hashes,
         "private_duplicate_index_sha256": duplicate_index_sha256,
+        "implementation_sha256": implementation_hashes,
         "flow": {"archive_records": 4},
     }), encoding="utf-8")
     protocol = {
@@ -160,6 +165,7 @@ def test_endpoint_sensitivity_excludes_only_discordant_exact_signal_groups(tmp_p
             "aggregates": {"source_inventory": {"sha256": "c" * 64}},
             "private_duplicate_index_sha256": duplicate_index_sha256,
         },
+        "implementation_sha256": implementation_hashes,
     }
 
     report = evaluate_sph_ledger(
