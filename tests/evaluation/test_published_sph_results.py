@@ -30,3 +30,14 @@ def test_published_sph_results_match_receipts_and_normalization():
     assert independent["inputs"]["ledger_sha256"] == json.loads(score.read_text(encoding="utf-8"))["ledger_sha256"]
     assert len(independent["endpoints"]) == 14
     assert all(row == {"records": 25770, "checks_passed": 8} for row in independent["endpoints"].values())
+    bootstrap_path = OUT / "sph_independent_bootstrap_32677.json"
+    bootstrap = json.loads(bootstrap_path.read_text(encoding="utf-8"))
+    assert hashlib.sha256(bootstrap_path.read_bytes()).hexdigest() == (
+        "1beb13bbabd38308efcdf929740e16e6b75dd018ddc6b916022789eb41cfb52f"
+    )
+    assert bootstrap["individual_records_exported"] is False
+    assert bootstrap["inputs"]["aggregate"] == hashlib.sha256(raw.read_bytes()).hexdigest()
+    assert bootstrap["inputs"]["ledger"] == independent["inputs"]["ledger_sha256"]
+    assert set(bootstrap["endpoints"]) == set(independent["endpoints"])
+    assert all(row == {"binary_metrics": 6, "primary_and_sensitivity": True}
+               for row in bootstrap["endpoints"].values())

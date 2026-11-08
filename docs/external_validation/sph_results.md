@@ -31,4 +31,7 @@ The [full aggregate](../../outputs/results/external_sph/sph_aggregate_normalized
 contains confusion counts, predictive values, calibration metrics, valid
 and invalid bootstrap draws, and duplicate-sensitivity analyses. The
 [independent point check](../../outputs/results/external_sph/sph_independent_points_32672.json)
-recomputes point metrics, not the confidence intervals, from restricted inputs.
+recomputes point metrics from restricted inputs. A separate
+[bootstrap check](../../outputs/results/external_sph/sph_independent_bootstrap_32677.json)
+reproduces six binary-metric intervals, including F1; it does not independently
+recalculate AUROC, average precision, Brier or ECE intervals.
