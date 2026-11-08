@@ -21,13 +21,14 @@ def parse_index(text):
         cells = [cell.strip() for cell in line.strip().strip("|").split("|")]
         if len(cells) != 4 or cells[0] not in expected_ids():
             continue
-        if cells[2] not in {"EDITORIAL", "LIMITED", "EXPERIMENT_PENDING"}:
+        if cells[2] not in {"MANUSCRIPT_UPDATE_ONLY", "VERIFIED_WITH_LIMITATIONS",
+                            "CLAIM_WITHDRAWAL_REQUIRED", "EXPERIMENT_COMPLETED"}:
             raise ValueError(f"unknown disposition for {cells[0]}")
         rows.append(dict(zip(("id", "concern", "disposition", "evidence_and_action"), cells, strict=True)))
     ids = [row["id"] for row in rows]
     if len(ids) != len(set(ids)) or set(ids) != expected_ids():
         raise ValueError("reviewer index must contain each of the 48 IDs exactly once")
-    return {"schema": "TITAN_V45_REVIEWER_INDEX_PRE_SPH_V1", "items": rows}
+    return {"schema": "TITAN_V45_REVIEWER_INDEX_POST_SPH_V1", "items": rows}
 
 
 def main():

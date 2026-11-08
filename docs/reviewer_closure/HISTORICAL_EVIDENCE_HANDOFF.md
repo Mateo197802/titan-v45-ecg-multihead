@@ -1,8 +1,8 @@
 # Historical evidence handoff
 
 This document prepares later manuscript editing; it does not change the
-submitted manuscript or constitute a reviewer response. SPH scoring is in
-progress and no SPH result is included here. Historical development evidence
+submitted manuscript or constitute a reviewer response. SPH results are
+reported separately, not included in this historical table. Historical development evidence
 must not be described as a newly independent external validation.
 
 ## Canonical selected evaluations
@@ -45,6 +45,5 @@ canonical results with reconstructed replay outputs or omit their discrepancies.
 | A10 | Replace invalid placeholder hashes only with measured artifact-specific evidence; the missing generic predictions and Optuna database are not recovered. The separate [technical PR](https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/4) contains the proposed disposition. |
 | Data rights | The historical mixed archive remains on HOLD; public access to other assets does not grant redistribution rights for that archive. See [license evidence](../../data/licenses/README.md). |
 
-The [48-item baseline](REVIEWER_48_STATUS.md) records individual dispositions.
-It remains provisional until the frozen SPH run and its aggregate validation
-are complete and the authors decide how to incorporate the evidence.
+The [48-item index](REVIEWER_48_STATUS.md) records individual dispositions.
+Authors must decide how to incorporate the evidence in the future revision.

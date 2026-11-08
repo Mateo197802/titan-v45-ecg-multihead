@@ -20,7 +20,7 @@ def test_export_matches_all_48_unique_review_items():
     published = json.loads((ROOT / "docs/reviewer_closure/REVIEWER_48_STATUS.json").read_text())
     assert result == published
     with pytest.raises(ValueError, match="48 IDs"):
-        MODULE.parse_index(text + "\n| R1-1 | duplicate | LIMITED | no |\n")
+        MODULE.parse_index(text + "\n| R1-1 | duplicate | VERIFIED_WITH_LIMITATIONS | no |\n")
     with pytest.raises(ValueError, match="48 IDs"):
         MODULE.parse_index("\n".join(line for line in text.splitlines() if not line.startswith("| R1-1 |")))
 
