@@ -1,5 +1,8 @@
+import hashlib
 import io
+import json
 import tarfile
+from pathlib import Path
 
 import h5py
 import numpy as np
@@ -50,3 +53,20 @@ def test_tar_format_is_probed_and_paths_are_not_extracted(tmp_path):
         handle.addfile(member, io.BytesIO(raw))
     with pytest.raises(ValueError, match="path"):
         list(open_sph_records(archive))
+
+
+def test_native_inventory_receipt_is_not_a_performance_claim():
+    result = Path(__file__).resolve().parents[2] / (
+        "outputs/results/external_sph/source_inventory_32617.json"
+    )
+    raw = result.read_bytes()
+    assert hashlib.sha256(raw).hexdigest() == (
+        "8321abf1d91f0a97ae65b8e9d3a47ba4f5460055ac7780fd84ad2cc86efd2cf7"
+    )
+    audit = json.loads(raw)
+    assert audit["metadata_ecgs"] == audit["archive_ecgs"] == audit["valid_signal_ecgs"] == 25770
+    assert audit["metadata_patients"] == 24666
+    assert audit["exact_duplicate_signal_groups"] == 168
+    assert audit["technical_failures"] == {}
+    assert not audit["record_or_patient_identifiers_exported"]
+    assert not audit["model_inference_performed"]

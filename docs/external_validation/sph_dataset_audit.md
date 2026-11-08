@@ -44,3 +44,21 @@ inspection found 47 repeated-primary occurrences and no unknown primary
 or modifier in the inspected fields. The reader now preserves all
 occurrences (including distinct modifiers), counting primary support once
 per record. This is a parser correction, not a label remapping or exclusion.
+
+## Full source-only inventory
+
+Job `32617` completed `0:0` in 2m51s at commit `f6e27fa`. The
+[aggregate inventory](../../outputs/results/external_sph/source_inventory_32617.json)
+has SHA-256 `8321abf1d91f0a97ae65b8e9d3a47ba4f5460055ac7780fd84ad2cc86efd2cf7`.
+It accounts for **25,770** HDF5 records with matching metadata,
+**24,666** source patient IDs, **1,066** with more than one ECG,
+no unreadable arrays, no wholly flat leads, and **168 exact waveform
+duplicate groups**. The decoded arrays are float16, with 5,000–28,000
+samples per lead. The parser retained 47 repeated primary occurrences
+across 44 ECGs and counted each code once per ECG.
+
+Exact duplicates here are identical numerical arrays within SPH, not a
+cross-source or cross-patient match finding. Check duplicate groups for
+patient and label overlap before freezing the analysis unit. The aggregate
+contains neither patient/record identities nor model scores. These are
+inventory and annotation counts, not performance results.
