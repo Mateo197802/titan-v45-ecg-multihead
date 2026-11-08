@@ -1,0 +1,293 @@
+{
+  "schema": "TITAN_V45_REVIEWER_INDEX_PRE_SPH_V1",
+  "items": [
+    {
+      "id": "R1-1",
+      "concern": "Independent external validation",
+      "disposition": "EXPERIMENT_PENDING",
+      "evidence_and_action": "[SPH protocol](../external_validation/sph_protocol.md); incomplete training lineage limits independence."
+    },
+    {
+      "id": "R1-2",
+      "concern": "Population and flow denominator",
+      "disposition": "LIMITED",
+      "evidence_and_action": "[Selected-record waveform audit](../frozen-waveform-audit.md); historical preselection population unavailable."
+    },
+    {
+      "id": "R1-3",
+      "concern": "AF incidence versus ECG statement",
+      "disposition": "LIMITED",
+      "evidence_and_action": "[AF reference contract](../af-reference-contract.md); no incident-AF claim."
+    },
+    {
+      "id": "R1-4",
+      "concern": "Invalid artifact hashes",
+      "disposition": "LIMITED",
+      "evidence_and_action": "[Hash correction](../hash-correction-20261028.md); separate PR #4, missing historical artifacts remain unavailable."
+    },
+    {
+      "id": "R2-general",
+      "concern": "Excluded classes and Other",
+      "disposition": "LIMITED",
+      "evidence_and_action": "[Data dispositions](../revision-data-dispositions.md); Other is not a validated output."
+    },
+    {
+      "id": "R2-1a",
+      "concern": "Define P6 and P4 in abstract",
+      "disposition": "EDITORIAL",
+      "evidence_and_action": "Define terms in the future manuscript."
+    },
+    {
+      "id": "R2-1b",
+      "concern": "Define abbreviations on first use",
+      "disposition": "EDITORIAL",
+      "evidence_and_action": "Check first occurrence in the future manuscript."
+    },
+    {
+      "id": "R2-2a",
+      "concern": "Introduction references",
+      "disposition": "EDITORIAL",
+      "evidence_and_action": "Align citations with the final scope."
+    },
+    {
+      "id": "R2-2b",
+      "concern": "Origin and purpose of figures 1 and 2",
+      "disposition": "EDITORIAL",
+      "evidence_and_action": "Verify figure provenance and descriptions."
+    },
+    {
+      "id": "R2-2c",
+      "concern": "Comparator selection",
+      "disposition": "EDITORIAL",
+      "evidence_and_action": "Reassess comparison table against final scope."
+    },
+    {
+      "id": "R2-2d",
+      "concern": "Unreported parameters and comparability",
+      "disposition": "EDITORIAL",
+      "evidence_and_action": "Mark missing parameters and avoid unequal comparisons."
+    },
+    {
+      "id": "R2-2e",
+      "concern": "SCP and abbreviations",
+      "disposition": "EDITORIAL",
+      "evidence_and_action": "Define terms and verify usage."
+    },
+    {
+      "id": "R2-2f",
+      "concern": "Introduction table placement",
+      "disposition": "EDITORIAL",
+      "evidence_and_action": "Resolve placement and claims in the future manuscript."
+    },
+    {
+      "id": "R2-3a",
+      "concern": "Datasets and splits",
+      "disposition": "LIMITED",
+      "evidence_and_action": "[Recovery status](../recovery-status-20261029.md); historical patient isolation not established."
+    },
+    {
+      "id": "R2-3b",
+      "concern": "Design versus evaluation",
+      "disposition": "EDITORIAL",
+      "evidence_and_action": "Distinguish design, historical development and reconstructed evaluation."
+    },
+    {
+      "id": "R2-3c",
+      "concern": "Auxiliary classes and training",
+      "disposition": "LIMITED",
+      "evidence_and_action": "[Feature contract](../recovered-feature-contract.md); outputs alone do not prove supervision."
+    },
+    {
+      "id": "R2-3d",
+      "concern": "ALMI, ILMI and LAE training",
+      "disposition": "LIMITED",
+      "evidence_and_action": "[Data dispositions](../revision-data-dispositions.md); checkpoint-linked supervision remains unverified."
+    },
+    {
+      "id": "R2-3e",
+      "concern": "Role definitions",
+      "disposition": "LIMITED",
+      "evidence_and_action": "[Waveform audit](../frozen-waveform-audit.md); distinguish code roles from historical routing."
+    },
+    {
+      "id": "R2-3f",
+      "concern": "Morphology and feature architecture",
+      "disposition": "LIMITED",
+      "evidence_and_action": "[Replay diagnostics](../replay-residual-diagnostics.md); exact historical loader unavailable."
+    },
+    {
+      "id": "R2-3g",
+      "concern": "Brier score in methods",
+      "disposition": "EDITORIAL",
+      "evidence_and_action": "Add definition and remove unsupported numerical methods claim."
+    },
+    {
+      "id": "R2-3h",
+      "concern": "Accuracy equations and tasks",
+      "disposition": "EDITORIAL",
+      "evidence_and_action": "Define rhythm and pathology endpoints separately."
+    },
+    {
+      "id": "R2-4a",
+      "concern": "External-development terminology",
+      "disposition": "LIMITED",
+      "evidence_and_action": "[Evidence status](../evidence-status.md); do not call selected development evidence independent."
+    },
+    {
+      "id": "R2-4b",
+      "concern": "Figure cross-reference",
+      "disposition": "EDITORIAL",
+      "evidence_and_action": "Correct figure reference."
+    },
+    {
+      "id": "R2-4c",
+      "concern": "Overstated F1 interpretation",
+      "disposition": "EDITORIAL",
+      "evidence_and_action": "Use measured values and qualified language."
+    },
+    {
+      "id": "R2-4d",
+      "concern": "Figure metrics versus confidence intervals",
+      "disposition": "EDITORIAL",
+      "evidence_and_action": "Describe what is actually plotted."
+    },
+    {
+      "id": "R2-4e",
+      "concern": "No threshold crossed",
+      "disposition": "LIMITED",
+      "evidence_and_action": "[Waveform audit](../frozen-waveform-audit.md); P8 fallback is not a full-population evaluation."
+    },
+    {
+      "id": "R2-4f",
+      "concern": "Confusion matrix presentation",
+      "disposition": "EDITORIAL",
+      "evidence_and_action": "Harmonize labels and denominators."
+    },
+    {
+      "id": "R2-4g",
+      "concern": "Duplicated figures",
+      "disposition": "EDITORIAL",
+      "evidence_and_action": "Reconcile figures against their source data."
+    },
+    {
+      "id": "R2-4h",
+      "concern": "ROC and PR tracing definition",
+      "disposition": "EDITORIAL",
+      "evidence_and_action": "Define plotted units and derivation."
+    },
+    {
+      "id": "R2-4i",
+      "concern": "AUROC wording",
+      "disposition": "EDITORIAL",
+      "evidence_and_action": "Qualify the interpretation of the reported value."
+    },
+    {
+      "id": "R2-4j",
+      "concern": "Frequency versus accuracy plot",
+      "disposition": "EDITORIAL",
+      "evidence_and_action": "Verify axes, bins and denominators."
+    },
+    {
+      "id": "R2-4k",
+      "concern": "Quarantine and pre/post rates",
+      "disposition": "LIMITED",
+      "evidence_and_action": "[Waveform audit](../frozen-waveform-audit.md); historical quarantine ledger and policy unavailable."
+    },
+    {
+      "id": "R2-4l",
+      "concern": "Rhythm top-1",
+      "disposition": "EDITORIAL",
+      "evidence_and_action": "Define the decision and denominator."
+    },
+    {
+      "id": "R2-4m",
+      "concern": "Figure readability",
+      "disposition": "EDITORIAL",
+      "evidence_and_action": "Final layout and rendering remain pending."
+    },
+    {
+      "id": "R2-5",
+      "concern": "PVC record versus beat level",
+      "disposition": "LIMITED",
+      "evidence_and_action": "Report ECG-statement scope, not beat-detection performance."
+    },
+    {
+      "id": "R2-6",
+      "concern": "Distortion and citation claim",
+      "disposition": "EDITORIAL",
+      "evidence_and_action": "Remove unsupported general claim and verify citation."
+    },
+    {
+      "id": "A-01",
+      "concern": "P4 panel versus unique ECG count",
+      "disposition": "LIMITED",
+      "evidence_and_action": "[Data dispositions](../revision-data-dispositions.md); preserve 962 panel rows and 733 distinct record keys."
+    },
+    {
+      "id": "A-02",
+      "concern": "Source distribution and aliases",
+      "disposition": "LIMITED",
+      "evidence_and_action": "[Source evidence](../revision-evidence-20261029.md); aliases do not prove independence."
+    },
+    {
+      "id": "A-03",
+      "concern": "Per-class metric inconsistencies",
+      "disposition": "EDITORIAL",
+      "evidence_and_action": "Use audited source tables and verify the final manuscript values."
+    },
+    {
+      "id": "A-04",
+      "concern": "Thresholds and calibration isolation",
+      "disposition": "LIMITED",
+      "evidence_and_action": "[Data dispositions](../revision-data-dispositions.md); patient isolation remains unverified."
+    },
+    {
+      "id": "A-05",
+      "concern": "Backbone relationships",
+      "disposition": "EDITORIAL",
+      "evidence_and_action": "Describe shared V3F and separate V3AG accurately."
+    },
+    {
+      "id": "A-06",
+      "concern": "Optuna history and quarantine",
+      "disposition": "LIMITED",
+      "evidence_and_action": "Separate PR #4; original study database and promotion linkage are unavailable."
+    },
+    {
+      "id": "A-07",
+      "concern": "Data availability URL",
+      "disposition": "EDITORIAL",
+      "evidence_and_action": "Cite the verified final artifact and restricted inputs."
+    },
+    {
+      "id": "A-08",
+      "concern": "Missing supplement CSVs",
+      "disposition": "EDITORIAL",
+      "evidence_and_action": "Inventory only files actually included in the final supplement."
+    },
+    {
+      "id": "A-09",
+      "concern": "Incorrect DOI",
+      "disposition": "EDITORIAL",
+      "evidence_and_action": "Verify replacement reference in the final bibliography."
+    },
+    {
+      "id": "A-10",
+      "concern": "Mixed archive provenance and rights",
+      "disposition": "LIMITED",
+      "evidence_and_action": "[Licenses](../../data/licenses/README.md); mixed archive remains on HOLD."
+    },
+    {
+      "id": "A-11",
+      "concern": "MC/Grad-CAM clinical claims",
+      "disposition": "LIMITED",
+      "evidence_and_action": "No clinical adjudication established; remove unsupported claims."
+    },
+    {
+      "id": "A-12",
+      "concern": "Reader study",
+      "disposition": "LIMITED",
+      "evidence_and_action": "No reader study established; remove unsupported claims."
+    }
+  ]
+}
