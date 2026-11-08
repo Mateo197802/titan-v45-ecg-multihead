@@ -52,6 +52,8 @@ def audit_sph_duplicates(directory: Path, private_index: Path | None = None):
     attr_values = defaultdict(Counter)
     raw_ranges = []
     dtypes = Counter()
+    lead_std_below_native = 0
+    lead_std_below_scale_0_001 = 0
     seen = set()
     for key, content in open_sph_records(directory / "records.tar.gz"):
         if key in seen:
@@ -60,6 +62,8 @@ def audit_sph_duplicates(directory: Path, private_index: Path | None = None):
         if key not in metadata:
             continue
         info = inspect_sph_signal_metadata(content, metadata[key].samples)
+        lead_std_below_native += info["lead_std_min"] <= 1e-6
+        lead_std_below_scale_0_001 += info["lead_std_min"] <= 1e-3
         values = info.pop("attributes")
         dtypes[info["dtype"]] += 1
         for name, value in values.items():
@@ -70,12 +74,13 @@ def audit_sph_duplicates(directory: Path, private_index: Path | None = None):
         hashes[digest].append(key)
         raw_ranges.append([
             info["raw_min"], info["raw_max"], *info["raw_abs_quantiles"],
-            info["lead_std_median"],
+            info["lead_std_median"], info["lead_std_min"],
         ])
 
     exact_groups = [keys for keys in hashes.values() if len(keys) > 1]
     duplicate_cross_patient = 0
     label_conflict_groups = 0
+    code_conflict_groups = Counter()
     duplicate_records = set()
     parent, find, union = _union_find()
     for patient in {row.patient for row in metadata.values()}:
@@ -87,6 +92,9 @@ def audit_sph_duplicates(directory: Path, private_index: Path | None = None):
         conflicts = len(set(code_sets.values())) > 1
         if len(keys) > 1:
             duplicate_records.update(keys)
+            for code in primary:
+                if len({code in code_sets[key] for key in keys}) > 1:
+                    code_conflict_groups[str(code)] += 1
             for patient in patients[1:]:
                 union(patients[0], patient)
             duplicate_cross_patient += len(patients) > 1
@@ -114,10 +122,14 @@ def audit_sph_duplicates(directory: Path, private_index: Path | None = None):
         "exact_duplicate_excess_records": sum(len(keys) - 1 for keys in exact_groups),
         "groups_crossing_patient_ids": duplicate_cross_patient,
         "groups_with_primary_code_set_conflicts": label_conflict_groups,
+        "code_conflict_groups": dict(sorted(code_conflict_groups.items(), key=lambda item: int(item[0]))),
+        "patients_in_exact_duplicate_groups": len({
+            metadata[key].patient for key in duplicate_records
+        }),
         "records_in_exact_duplicate_groups": len(duplicate_records),
         "patient_components_linked_by_exact_duplicates": {
-            "patient_count": len(components),
-            "count": len(roots),
+            "patient_count": sum(components.values()),
+            "count": sum(roots.values()),
             "component_size_distribution": {str(k): v for k, v in sorted(roots.items())},
             "unit_for_cluster_bootstrap": "connected_component_of_source_patient_ids",
         },
@@ -135,7 +147,10 @@ def audit_sph_duplicates(directory: Path, private_index: Path | None = None):
                 for q, column in ((0.5, 2), (0.95, 3), (0.999, 4))
             },
             "median_of_record_median_lead_std": float(np.median(matrix[:, 5])),
-            "normalization_test": "per-lead z-score after source-backed filter/resampling",
+            "minimum_record_lead_std": float(matrix[:, 6].min()),
+            "records_with_any_lead_std_at_or_below_1e-6_native": lead_std_below_native,
+            "records_with_any_lead_std_at_or_below_1e-6_after_scale_0_001": lead_std_below_scale_0_001,
+            "normalization_test": "per-lead z-score after source-backed filter/resampling; prefilter branch uses std > 1e-6",
         },
         "source_inventory_sha256": hashlib.sha256(
             (directory / "metadata.csv").read_bytes()

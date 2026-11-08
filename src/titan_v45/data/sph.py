@@ -155,6 +155,7 @@ def inspect_sph_signal_metadata(content, samples):
             "raw_max": float(values.max()),
             "raw_abs_quantiles": np.quantile(np.abs(values), [0.5, 0.95, 0.999]).tolist(),
             "lead_std_median": float(np.median(values.std(axis=1))),
+            "lead_std_min": float(values.std(axis=1).min()),
         }
 
 

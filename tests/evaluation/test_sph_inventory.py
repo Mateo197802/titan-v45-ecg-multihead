@@ -111,6 +111,7 @@ def test_exact_duplicate_audit_reports_cross_patient_label_conflict_privately(tm
     assert report["groups_crossing_patient_ids"] == 1
     assert report["groups_with_primary_code_set_conflicts"] == 1
     assert report["patient_components_linked_by_exact_duplicates"]["count"] == 1
+    assert report["patient_components_linked_by_exact_duplicates"]["patient_count"] == 2
     assert not report["record_or_patient_identifiers_exported"]
     assert len(private.read_text().splitlines()) == 3
 
