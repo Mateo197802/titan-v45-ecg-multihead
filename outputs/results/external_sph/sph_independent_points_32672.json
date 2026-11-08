@@ -1,0 +1,69 @@
+{
+  "schema": "TITAN_V45_SPH_INDEPENDENT_POINTS_V1",
+  "endpoints": {
+    "P6:AFIB": {
+      "records": 25770,
+      "checks_passed": 8
+    },
+    "P6:SB": {
+      "records": 25770,
+      "checks_passed": 8
+    },
+    "P6:STACH": {
+      "records": 25770,
+      "checks_passed": 8
+    },
+    "P6:RBBB": {
+      "records": 25770,
+      "checks_passed": 8
+    },
+    "P6:PVC": {
+      "records": 25770,
+      "checks_passed": 8
+    },
+    "P8:AFIB": {
+      "records": 25770,
+      "checks_passed": 8
+    },
+    "P8:SB": {
+      "records": 25770,
+      "checks_passed": 8
+    },
+    "P8:STACH": {
+      "records": 25770,
+      "checks_passed": 8
+    },
+    "P8:RBBB": {
+      "records": 25770,
+      "checks_passed": 8
+    },
+    "P8:PAC": {
+      "records": 25770,
+      "checks_passed": 8
+    },
+    "P8:PVC": {
+      "records": 25770,
+      "checks_passed": 8
+    },
+    "P4:ASMI": {
+      "records": 25770,
+      "checks_passed": 8
+    },
+    "P4:LVH": {
+      "records": 25770,
+      "checks_passed": 8
+    },
+    "P4:IMI": {
+      "records": 25770,
+      "checks_passed": 8
+    }
+  },
+  "individual_records_exported": false,
+  "inputs": {
+    "metadata_sha256": "c6f8dc5197758a3970aae554f8b6ee884d96656b121879bc0eb1adf367ea6d86",
+    "ledger_sha256": "4a3a1e61b1784e06190d5caaa089fca04ef84792acb3a5f9fc1af3f9c1173462",
+    "aggregate_sha256": "09f93d9f310baaca672a33b0f369593cd88835a8ef08dc9929945c57cf18c988",
+    "protocol_sha256": "d788ad8cca94793cebb738496acc131e82b1ca1900976f11020b99a79a5fc366"
+  },
+  "script_sha256": "2e25962713b6b16fb105f0b0f7a64f75d6f279529974dff641a6d814f9134916"
+}
