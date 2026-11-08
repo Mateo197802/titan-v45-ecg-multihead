@@ -113,11 +113,26 @@ def run(args):
     import zstandard
 
     repo, source, release = args.repo.resolve(), args.source.resolve(), args.release_root.resolve()
-    if source.is_relative_to(repo) or args.ledger.resolve().is_relative_to(repo):
+    duplicate_index = args.duplicate_index.resolve()
+    if (source.is_relative_to(repo) or args.ledger.resolve().is_relative_to(repo)
+            or duplicate_index.is_relative_to(repo)):
         raise ValueError("SPH source and per-record ledger must stay outside Git")
     if args.output.resolve().is_relative_to(repo):
         raise ValueError("execution receipt must stay outside Git")
     protocol, config_hash, commit = _protocol(repo, args)
+    control_hashes = {}
+    for name, item in protocol["preperformance_controls"]["aggregates"].items():
+        path = (repo / item["path"]).resolve()
+        if not path.is_relative_to(repo) or _sha256(path) != item["sha256"]:
+            raise ValueError(f"pre-performance control aggregate mismatch: {name}")
+        control_hashes[name] = item["sha256"]
+        if name == "cross_source_signature":
+            audit = json.loads(path.read_text(encoding="utf-8"))
+            if audit.get("independence_certified") is not False:
+                raise ValueError("cross-source screen must not certify historical independence")
+    duplicate_index_sha256 = _sha256(duplicate_index)
+    if duplicate_index_sha256 != protocol["preperformance_controls"]["private_duplicate_index_sha256"]:
+        raise ValueError("private SPH duplicate index hash mismatch")
     for name, expected in protocol["source_sha256"].items():
         if _sha256(source / name) != expected:
             raise ValueError(f"SPH input digest mismatch: {name}")
@@ -226,6 +241,8 @@ def run(args):
         "protocol_sha256": config_hash,
         "source_sha256": protocol["source_sha256"],
         "model_sha256": digests,
+        "preperformance_control_sha256": control_hashes,
+        "private_duplicate_index_sha256": duplicate_index_sha256,
         "ledger_sha256": ledger_hash,
         "job_id": os.environ.get("SLURM_JOB_ID", "not_slurm"),
         "runtime_seconds": time.monotonic() - started,
@@ -269,6 +286,7 @@ def main():
     parser.add_argument("--repo", type=Path, default=ROOT)
     parser.add_argument("--source", type=Path, required=True)
     parser.add_argument("--release-root", type=Path, required=True)
+    parser.add_argument("--duplicate-index", type=Path, required=True)
     parser.add_argument("--ledger", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--expected-commit", required=True)

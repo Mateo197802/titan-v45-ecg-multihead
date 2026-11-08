@@ -24,9 +24,11 @@ def test_sph_endpoint_report_checks_sealed_ledger_and_patient_cluster_ci(tmp_pat
     ledger = tmp_path / "ledger.jsonl"
     rows = [
         {"record_id": "A00001", "status": "scored", "profiles": {
-            "P6": {"scores": {"AFIB": 0.9}, "labels": ["AFIB"]}}},
+            "P6": {"scores": {"AFIB": 0.9}, "labels": ["AFIB"],
+                   "top1": "AFIB", "used_fallback": False}}},
         {"record_id": "A00002", "status": "scored", "profiles": {
-            "P6": {"scores": {"AFIB": 0.1}, "labels": []}}},
+            "P6": {"scores": {"AFIB": 0.1}, "labels": [],
+                   "top1": "SB", "used_fallback": False}}},
         {"record_id": "A00003", "status": "technical_exclusion", "reason": "ValueError"},
     ]
     ledger.write_text("".join(json.dumps(row) + "\n" for row in rows), encoding="utf-8")
@@ -40,6 +42,8 @@ def test_sph_endpoint_report_checks_sealed_ledger_and_patient_cluster_ci(tmp_pat
         encoding="utf-8",
     )
     receipt = tmp_path / "receipt.json"
+    duplicate_index_sha256 = hashlib.sha256(duplicate_index.read_bytes()).hexdigest()
+    control_hashes = {"source_inventory": "c" * 64}
     receipt.write_text(json.dumps({
         "ledger_sha256": hashlib.sha256(ledger.read_bytes()).hexdigest(),
         "stage": "full_population",
@@ -47,6 +51,8 @@ def test_sph_endpoint_report_checks_sealed_ledger_and_patient_cluster_ci(tmp_pat
         "protocol_sha256": "b" * 64,
         "source_sha256": {},
         "model_sha256": {},
+        "preperformance_control_sha256": control_hashes,
+        "private_duplicate_index_sha256": duplicate_index_sha256,
         "flow": {"archive_records": 3},
     }), encoding="utf-8")
     protocol = {
@@ -55,6 +61,10 @@ def test_sph_endpoint_report_checks_sealed_ledger_and_patient_cluster_ci(tmp_pat
                        "reference": "defensible ECG statement"}],
         "metrics": {"ece_bins": 10},
         "bootstrap": {"seed": 197813, "replicates": 30},
+        "preperformance_controls": {
+            "aggregates": {"source_inventory": {"sha256": "c" * 64}},
+            "private_duplicate_index_sha256": duplicate_index_sha256,
+        },
     }
     report = evaluate_sph_ledger(
         source=source, ledger=ledger, scoring_receipt=receipt,
@@ -70,6 +80,9 @@ def test_sph_endpoint_report_checks_sealed_ledger_and_patient_cluster_ci(tmp_pat
     assert endpoint["cluster_bootstrap_ci95"]["_design"]["unit"].startswith("connected_component")
     assert endpoint["cluster_bootstrap_ci95"]["accuracy"]["valid_replicates"] > 0
     assert report["full_population_flow"]["quarantine_rate"] is None
+    assert report["profile_flow"]["P6"]["scored_records"] == 2
+    assert report["profile_flow"]["P6"]["coverage"] == 2 / 3
+    assert report["profile_flow"]["P6"]["empty_label_set_records"] == 1
 
 
 def test_sph_endpoint_report_rejects_unsealed_or_incomplete_ledger(tmp_path):
@@ -111,7 +124,8 @@ def test_endpoint_sensitivity_excludes_only_discordant_exact_signal_groups(tmp_p
         encoding="utf-8",
     )
     profiles = [
-        {"scores": {"AFIB": score}, "labels": ["AFIB"] if score >= 0.5 else []}
+        {"scores": {"AFIB": score}, "labels": ["AFIB"] if score >= 0.5 else [],
+         "top1": "AFIB" if score >= 0.5 else "SB", "used_fallback": False}
         for score in (0.9, 0.1, 0.8, 0.2)
     ]
     ledger = tmp_path / "ledger.jsonl"
@@ -126,10 +140,14 @@ def test_endpoint_sensitivity_excludes_only_discordant_exact_signal_groups(tmp_p
         encoding="utf-8",
     )
     receipt = tmp_path / "receipt.json"
+    duplicate_index_sha256 = hashlib.sha256(duplicate_index.read_bytes()).hexdigest()
+    control_hashes = {"source_inventory": "c" * 64}
     receipt.write_text(json.dumps({
         "ledger_sha256": hashlib.sha256(ledger.read_bytes()).hexdigest(),
         "stage": "full_population", "protocol_commit": "a" * 40,
         "protocol_sha256": "b" * 64, "source_sha256": {}, "model_sha256": {},
+        "preperformance_control_sha256": control_hashes,
+        "private_duplicate_index_sha256": duplicate_index_sha256,
         "flow": {"archive_records": 4},
     }), encoding="utf-8")
     protocol = {
@@ -138,6 +156,10 @@ def test_endpoint_sensitivity_excludes_only_discordant_exact_signal_groups(tmp_p
                        "reference": "documented ECG statement"}],
         "metrics": {"ece_bins": 10},
         "bootstrap": {"seed": 197813, "replicates": 30},
+        "preperformance_controls": {
+            "aggregates": {"source_inventory": {"sha256": "c" * 64}},
+            "private_duplicate_index_sha256": duplicate_index_sha256,
+        },
     }
 
     report = evaluate_sph_ledger(

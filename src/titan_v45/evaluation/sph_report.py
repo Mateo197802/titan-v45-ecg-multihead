@@ -176,6 +176,17 @@ def evaluate_sph_ledger(
         raise ValueError("scoring ledger hash does not match its sealed receipt")
     if receipt["stage"] != "full_population":
         raise ValueError("only the full-population scoring receipt is evaluable")
+    frozen_controls = protocol["preperformance_controls"]
+    duplicate_index_sha256 = _sha256(duplicate_index)
+    if (duplicate_index_sha256 != frozen_controls["private_duplicate_index_sha256"]
+            or duplicate_index_sha256 != receipt["private_duplicate_index_sha256"]):
+        raise ValueError("private duplicate index hash differs from the frozen protocol")
+    expected_control_hashes = {
+        name: item["sha256"]
+        for name, item in frozen_controls["aggregates"].items()
+    }
+    if receipt["preperformance_control_sha256"] != expected_control_hashes:
+        raise ValueError("pre-performance control hashes differ from the scoring receipt")
     primary, modifier = read_sph_dictionary((source / "code.csv").read_text(encoding="utf-8-sig"))
     metadata = read_sph_metadata(
         (source / "metadata.csv").read_text(encoding="utf-8-sig"), primary, modifier
@@ -270,6 +281,38 @@ def evaluate_sph_ledger(
             },
         }
     states = Counter(row["status"] for row in rows.values())
+    profile_flow = {}
+    for profile in ("P6", "P8", "P4"):
+        profile_rows = [
+            row for row in rows.values()
+            if row["status"] == "scored" and profile in row.get("profiles", {})
+        ]
+        class_counts = Counter()
+        top1_counts = Counter()
+        empty_decisions = 0
+        fallback_records = 0
+        for row in profile_rows:
+            decision = row["profiles"][profile]
+            class_counts.update(decision["labels"])
+            top1_counts.update([decision["top1"]])
+            empty_decisions += not decision["labels"]
+            fallback_records += bool(decision["used_fallback"])
+        profile_flow[profile] = {
+            "scored_records": len(profile_rows),
+            "source_records": len(metadata),
+            "coverage": len(profile_rows) / len(metadata),
+            "rhythm_windows": sum(
+                row.get("rhythm_windows", 0) for row in profile_rows
+            ) if profile in {"P6", "P8"} else None,
+            "predicted_label_records_by_class": dict(sorted(class_counts.items())),
+            "top1_records_by_class": dict(sorted(top1_counts.items())),
+            "empty_label_set_records": empty_decisions,
+            "fallback_records": fallback_records,
+        }
+    technical_failure_reasons = Counter(
+        row.get("reason", "unspecified") for row in rows.values()
+        if row["status"] == "technical_exclusion"
+    )
     return {
         "schema": "TITAN_V45_SPH_ENDPOINT_RESULTS_V1",
         "study_scope": "transfer_to_distinct_hospital_source_with_historical_traceability_limitations",
@@ -278,6 +321,7 @@ def evaluate_sph_ledger(
         "scoring_receipt_sha256": _sha256(scoring_receipt),
         "scoring_ledger_sha256": receipt["ledger_sha256"],
         "private_duplicate_index_sha256": _sha256(duplicate_index),
+        "preperformance_control_sha256": receipt["preperformance_control_sha256"],
         "data_hashes": receipt["source_sha256"],
         "model_hashes": receipt["model_sha256"],
         "full_population_flow": {
@@ -288,10 +332,12 @@ def evaluate_sph_ledger(
             "missing_signal": states.get("missing_signal", 0),
             "no_metadata": states.get("no_metadata", 0),
             "status_counts": dict(sorted(states.items())),
+            "technical_failure_reasons": dict(sorted(technical_failure_reasons.items())),
             "quarantine_assessed_records": 0,
             "quarantine_rate": None,
             "quarantine_reason": "no historically defined uncertainty or quarantine policy",
         },
+        "profile_flow": profile_flow,
         "endpoints": endpoint_reports,
         "limitations": [
             "No overall Primary6, Primary8 or Primary4 clinical accuracy is defined across incompatible or proxy-only references.",

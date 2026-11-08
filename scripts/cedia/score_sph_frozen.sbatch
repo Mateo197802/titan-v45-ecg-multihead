@@ -7,8 +7,8 @@
 #SBATCH --time=01:00:00
 set -euo pipefail
 umask 077
-if [[ $# != 9 ]]; then
-    printf 'Usage: sbatch %s SOURCE_TREE SPH_DIRECTORY RELEASE_ROOT PYTHON_DEPS H5PY_DEPS OUTPUT_DIR COMMIT CONFIG_SHA256 RECORDS_PER_BATCH\n' "$0" >&2
+if [[ $# != 10 ]]; then
+    printf 'Usage: sbatch %s SOURCE_TREE SPH_DIRECTORY RELEASE_ROOT PYTHON_DEPS H5PY_DEPS PRIVATE_DUPLICATE_INDEX OUTPUT_DIR COMMIT CONFIG_SHA256 RECORDS_PER_BATCH\n' "$0" >&2
     exit 2
 fi
 repo=$1
@@ -16,10 +16,11 @@ source=$2
 release=$3
 deps=$4
 h5py_deps=$5
-output=$6/sph-frozen-$SLURM_JOB_ID
-commit=$7
-config_sha256=$8
-batch=$9
+duplicate_index=$6
+output=$7/sph-frozen-$SLURM_JOB_ID
+commit=$8
+config_sha256=$9
+batch=${10}
 [[ "$commit" =~ ^[0-9a-f]{40}$ ]]
 [[ "$config_sha256" =~ ^[0-9a-f]{64}$ ]]
 [[ "$batch" == 16 ]]
@@ -42,6 +43,7 @@ print("wfdb", wfdb.__version__, "zstandard", zstandard.__version__)
 PY
 python -u scripts/external_validation/score_sph_frozen.py \
     --repo "$repo" --source "$source" --release-root "$release" \
+    --duplicate-index "$duplicate_index" \
     --ledger "$output/private-predictions.jsonl" \
     --output "$output/scoring-receipt.json" \
     --expected-commit "$commit" --expected-config-sha256 "$config_sha256"
