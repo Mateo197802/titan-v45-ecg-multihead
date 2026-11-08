@@ -9,13 +9,12 @@ from titan_v45.data.sph import open_sph_records, parse_aha, read_sph_metadata, r
 
 
 def test_primary_and_modifiers_do_not_become_interchangeable():
-    assert parse_aha("50+346;161+332", {50, 161}, {346, 332}) == {
-        50: (346,), 161: (332,),
-    }
+    assert parse_aha("50+346;161+332", {50, 161}, {346, 332}) == (
+        (50, (346,)), (161, (332,)),
+    )
     with pytest.raises(ValueError):
         parse_aha("346+50", {50}, {346})
-    with pytest.raises(ValueError):
-        parse_aha("50;50+346", {50}, {346})
+    assert parse_aha("50;50+346", {50}, {346}) == ((50, ()), (50, (346,)))
     with pytest.raises(ValueError):
         parse_aha("50+346+346", {50}, {346})
 

@@ -21,3 +21,26 @@ then measures SHA-256 and inventories the archive without extracting it. The
 actual archive format and HDF5 structure must be checked on the bytes before
 any extraction, even if the MIME and filename agree. Acquisition is separate
 from any cohort-label join or model execution.
+
+## Native acquisition receipt
+
+CEDIA SLURM job `32615`: `COMPLETED 0:0`, elapsed 3m47s. All three exact
+byte lengths and publisher MD5 digests passed. The signal archive is
+**POSIX TAR (GNU), not gzip**; the native listing counted 25,771 members,
+including directory entries. This is not yet an HDF5-record integrity count.
+
+| File | SHA-256 measured on CEDIA |
+| --- | --- |
+| `code.csv` | `4d22759fd19d37133c78d439a5726f9e0bc412cc17483c424926ce9abb33c8fc` |
+| `metadata.csv` | `c6f8dc5197758a3970aae554f8b6ee884d96656b121879bc0eb1adf367ea6d86` |
+| `records.tar.gz` | `cebad89d7d25663272eeb45545712d76302d334bb107cdc23fd15390c9194e55` |
+
+The publisher [Python example](https://doi.org/10.6084/m9.figshare.17914088.v1)
+reads the HDF5 dataset named `ecg`. It does not document a conversion to mV.
+
+The first inventory job, `32616`, failed before any HDF5/model output
+because the parser rejected repeated primary codes. A separate metadata
+inspection found 47 repeated-primary occurrences and no unknown primary
+or modifier in the inspected fields. The reader now preserves all
+occurrences (including distinct modifiers), counting primary support once
+per record. This is a parser correction, not a label remapping or exclusion.

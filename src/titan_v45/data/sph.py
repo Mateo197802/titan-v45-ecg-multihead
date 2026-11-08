@@ -22,7 +22,11 @@ METADATA_COLUMNS = ("ECG_ID", "AHA_Code", "Patient_ID", "Age", "Sex", "N", "Date
 class SphMetadata:
     patient: str
     samples: int
-    statements: dict[int, tuple[int, ...]]
+    statements: tuple[tuple[int, tuple[int, ...]], ...]
+
+    @property
+    def primary_codes(self):
+        return {code for code, _ in self.statements}
 
 
 def _csv(text, columns):
@@ -49,14 +53,14 @@ def read_sph_dictionary(text):
 
 
 def parse_aha(value, primary, modifier):
-    statements = {}
+    statements = []
     for statement in value.split(";"):
         core, *extra = [int(token) for token in statement.split("+")]
-        if (core not in primary or core in statements or len(set(extra)) != len(extra)
+        if (core not in primary or len(set(extra)) != len(extra)
                 or any(code not in modifier for code in extra)):
-            raise ValueError("unknown or duplicate SPH diagnostic statement")
-        statements[core] = tuple(sorted(extra))
-    return statements
+            raise ValueError("invalid SPH primary code or modifier")
+        statements.append((core, tuple(sorted(extra))))
+    return tuple(statements)
 
 
 def read_sph_metadata(text, primary, modifier):
@@ -154,8 +158,14 @@ def build_sph_inventory(directory: Path):
         "exact_duplicate_signal_excess_records": sum(n - 1 for n in duplicate_signals.values()),
         "native_fs_hz": FS_HZ, "lead_order": list(LEADS),
         "min_samples": min(sample_counts, default=None), "max_samples": max(sample_counts, default=None),
+        "records_with_repeated_primary_statements": sum(
+            len(row.statements) > len(row.primary_codes) for row in metadata.values()
+        ),
+        "repeated_primary_statement_excess": sum(
+            len(row.statements) - len(row.primary_codes) for row in metadata.values()
+        ),
         "primary_statement_counts": dict(sorted(Counter(
-            str(code) for record in metadata.values() for code in record.statements
+            str(code) for record in metadata.values() for code in record.primary_codes
         ).items(), key=lambda item: int(item[0]))),
         "primary_dictionary_entries": len(primary), "modifier_dictionary_entries": len(modifier),
         "record_or_patient_identifiers_exported": False,
