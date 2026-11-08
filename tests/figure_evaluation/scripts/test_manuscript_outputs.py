@@ -76,7 +76,7 @@ def test_historical_release_manifest_is_not_presented_as_provenance_complete() -
     ).read_text(encoding="utf-8")
 
 
-def test_repository_contains_only_the_manuscript_figure_images() -> None:
+def test_repository_contains_only_manifested_manuscript_and_sph_images() -> None:
     manifest_path = ROOT / "outputs" / "figures" / "figure_manifest.json"
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     assert manifest["schema"] == "TITAN_V45_MANUSCRIPT_IMAGE_MANIFEST_V1"
@@ -114,4 +114,16 @@ def test_repository_contains_only_the_manuscript_figure_images() -> None:
         and not {".git", ".pytest_cache", "__pycache__"}.intersection(path.parts)
         and path.suffix.lower() in media_suffixes
     }
-    assert actual_media == {f"outputs/figures/{name}" for name in expected}
+    sph_dir = ROOT / "outputs" / "figures" / "external_sph"
+    sph = json.loads((sph_dir / "figure_manifest.json").read_text(encoding="utf-8"))
+    assert sph["schema"] == "TITAN_V45_SPH_AGGREGATE_FIGURE_MANIFEST_V1"
+    sph_files = {f"sph_{stem}.{ext}" for stem in ("profile_coverage", "endpoint_metrics", "duplicate_sensitivity")
+                 for ext in ("png", "pdf")}
+    assert set(sph["assets"]) == sph_files
+    for name, digest in sph["assets"].items():
+        assert hashlib.sha256((sph_dir / name).read_bytes()).hexdigest() == digest
+    assert hashlib.sha256((ROOT / sph["source_aggregate"]).read_bytes()).hexdigest() == sph["source_aggregate_sha256"]
+    assert hashlib.sha256((ROOT / sph["renderer"]).read_bytes()).hexdigest() == sph["renderer_sha256"]
+    assert hashlib.sha256((ROOT / "scripts/external_validation/plot_sph_aggregate.py").read_bytes()).hexdigest() == sph["base_renderer_sha256"]
+    assert actual_media == ({f"outputs/figures/{name}" for name in expected}
+                            | {f"outputs/figures/external_sph/{name}" for name in sph_files})
