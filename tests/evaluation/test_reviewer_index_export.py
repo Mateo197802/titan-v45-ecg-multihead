@@ -1,5 +1,6 @@
 import importlib.util
 import json
+import re
 from pathlib import Path
 
 import pytest
@@ -20,3 +21,13 @@ def test_export_matches_all_48_unique_review_items():
     assert result == published
     with pytest.raises(ValueError, match="48 IDs"):
         MODULE.parse_index(text + "\n| R1-1 | duplicate | LIMITED | no |\n")
+    with pytest.raises(ValueError, match="48 IDs"):
+        MODULE.parse_index("\n".join(line for line in text.splitlines() if not line.startswith("| R1-1 |")))
+
+
+def test_reviewer_index_local_evidence_links_exist():
+    source = ROOT / "docs/reviewer_closure/REVIEWER_48_STATUS.md"
+    links = re.findall(r"\]\(([^)]+)\)", source.read_text(encoding="utf-8"))
+    assert links
+    for link in links:
+        assert (source.parent / link).is_file(), link
