@@ -12,6 +12,7 @@ import sys
 import time
 from pathlib import Path
 
+import numpy as np
 import torch
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -94,20 +95,36 @@ def _score_batch(records, rhythm_scorer, pathology_scorer, thresholds, writer):
     pathology_outputs = pathology_scorer(pathology_samples)
     if len(pathology_outputs) != len(records):
         raise ValueError("P4 scorer output count mismatch")
+    counts = {}
     for row, (primary, auxiliary) in zip(records, pathology_outputs, strict=True):
         offset, count = offsets[row["record_id"]]
         logits = {name: values[offset:offset + count] for name, values in rhythm_logits.items()}
         aux = rhythm_aux[offset:offset + count]
+        finite = all(np.isfinite(values).all() for values in logits.values())
+        finite = finite and np.isfinite(aux).all()
+        finite = finite and all(np.isfinite(np.asarray(list(values.values()), dtype=np.float64)).all()
+                                for values in (primary, auxiliary))
+        if not finite:
+            output = {
+                "record_id": row["record_id"],
+                "status": "technical_exclusion",
+                "reason": "nonfinite_model_output",
+            }
+            writer.write(json.dumps(output, sort_keys=True, separators=(",", ":")) + "\n")
+            counts[output["status"]] = counts.get(output["status"], 0) + 1
+            continue
         summary = summarize_sph_record(
             logits, aux, primary, auxiliary, thresholds, count, pathology_scorer.thresholds
         )
         output = {"record_id": row["record_id"], "status": "scored", **summary}
-        writer.write(json.dumps(output, sort_keys=True, separators=(",", ":")) + "\n")
+        writer.write(json.dumps(output, sort_keys=True, separators=(",", ":"),
+                                allow_nan=False) + "\n")
+        counts[output["status"]] = counts.get(output["status"], 0) + 1
+    return counts
 
 
 def run(args):
     import h5py
-    import numpy as np
     import scipy
     import wfdb
     import zstandard
@@ -238,9 +255,10 @@ def run(args):
                         "pathology_sample": pathology[0],
                     })
                     if len(pending) >= batch_size:
-                        _score_batch(pending, rhythm_scorer, pathology_scorer,
-                                     thresholds, ledger)
-                        status_counts["scored"] = status_counts.get("scored", 0) + len(pending)
+                        for state, count in _score_batch(
+                            pending, rhythm_scorer, pathology_scorer, thresholds, ledger
+                        ).items():
+                            status_counts[state] = status_counts.get(state, 0) + count
                         pending.clear()
                     continue
                 except (ValueError, OSError) as exc:
@@ -252,9 +270,10 @@ def run(args):
             ledger.write(json.dumps(row, sort_keys=True, separators=(",", ":")) + "\n")
             status_counts[row["status"]] = status_counts.get(row["status"], 0) + 1
         if pending:
-            _score_batch(pending, rhythm_scorer, pathology_scorer,
-                         thresholds, ledger)
-            status_counts["scored"] = status_counts.get("scored", 0) + len(pending)
+            for state, count in _score_batch(
+                pending, rhythm_scorer, pathology_scorer, thresholds, ledger
+            ).items():
+                status_counts[state] = status_counts.get(state, 0) + count
         for record_id in sorted(index.keys() - seen):
             row = {"record_id": record_id, "status": "missing_signal"}
             ledger.write(json.dumps(row, sort_keys=True, separators=(",", ":")) + "\n")

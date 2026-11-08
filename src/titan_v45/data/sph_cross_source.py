@@ -123,7 +123,7 @@ def audit_cross_source_signatures(source: Path, release_root: Path):
         "cross_source_record_pairs_by_source": dict(sorted(cross_pairs.items())),
         "technical_failures": dict(sorted(failures.items())),
         "record_or_patient_identifiers_exported": False,
-        "candidate_pairs_need_manual_signal_level_confirmation": True,
+        "candidate_pairs_need_manual_signal_level_confirmation": bool(candidate_rows),
         "not_compared": [
             "historical V3F/V3AG pretraining and fine-tuning inputs",
             "unreleased ECGs outside retained Chapman/Shaoxing/Ningbo and PTB-XL fold-10 packages",
