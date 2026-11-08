@@ -25,3 +25,5 @@ the corrected renderer's commit and SHA-256 in the figure receipt. This renderer
 correction was prepared using synthetic tests before SPH metrics were inspected.
 It also preserves endpoint labels on shared y-axes; the original renderer's
 empty labels on the later axes otherwise erase the shared tick formatter.
+Coverage and duplicate-sensitivity notes are included in the axis labels, and
+the duplicate-sensitivity legend is placed outside the data area to avoid overlap.

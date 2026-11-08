@@ -3,15 +3,16 @@ from __future__ import annotations
 
 import argparse
 import json
+import textwrap
 from pathlib import Path
 from unittest.mock import patch
 
 from matplotlib.axes import Axes
 
 if __package__:
-    from .plot_sph_aggregate import plot_sph_aggregate
+    from . import plot_sph_aggregate as base
 else:
-    from plot_sph_aggregate import plot_sph_aggregate
+    import plot_sph_aggregate as base
 
 
 def _absolute_interval(axis, x, y, *, xerr=None, fmt="o", color=None,
@@ -32,16 +33,37 @@ def _absolute_interval(axis, x, y, *, xerr=None, fmt="o", color=None,
 
 def plot_corrected(report, output_dir):
     original_set_yticks = Axes.set_yticks
+    original_save = base._save
 
     def preserve_shared_labels(axis, ticks, labels=None, *args, **kwargs):
         if isinstance(labels, list) and not labels:
             return original_set_yticks(axis, ticks, *args, **kwargs)
         return original_set_yticks(axis, ticks, labels, *args, **kwargs)
 
+    def save_with_clear_notes(fig, directory, stem):
+        axis = fig.axes[0]
+        if stem == "sph_profile_coverage" and fig.texts:
+            note = fig.texts[0]
+            axis.set_xlabel(axis.get_xlabel() + "\n" + textwrap.fill(note.get_text(), width=95), fontsize=8)
+            note.remove()
+        if stem == "sph_duplicate_sensitivity":
+            fig.set_size_inches(fig.get_figwidth(), fig.get_figheight() + 1.5, forward=True)
+            for note in list(axis.texts):
+                if note.get_text().startswith("Endpoint-specific exclusion"):
+                    axis.set_xlabel(axis.get_xlabel() + "\n" + note.get_text(), fontsize=8)
+                    note.remove()
+            handles, labels = axis.get_legend_handles_labels()
+            legend = axis.get_legend()
+            if legend is not None:
+                legend.remove()
+            axis.legend(handles, labels, frameon=False, loc="upper center",
+                        bbox_to_anchor=(0.5, -0.20), fontsize=8)
+        return original_save(fig, directory, stem)
+
     with patch.object(Axes, "errorbar", _absolute_interval), patch.object(
         Axes, "set_yticks", preserve_shared_labels
-    ):
-        return plot_sph_aggregate(report, output_dir)
+    ), patch.object(base, "_save", save_with_clear_notes):
+        return base.plot_sph_aggregate(report, output_dir)
 
 
 def main():

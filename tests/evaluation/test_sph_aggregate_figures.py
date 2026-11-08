@@ -103,3 +103,22 @@ def test_corrected_plot_preserves_endpoint_labels_on_shared_axes(tmp_path, monke
     assert labels == ["P6:TEST  (+1/-2)", "P8:TEST  (+1/-2)", "P4:TEST  (+1/-2)"]
     for figure in figures:
         plt.close(figure)
+
+
+def test_corrected_plot_notes_and_legend_do_not_overlap_axes(tmp_path, monkeypatch):
+    plt = pytest.importorskip("matplotlib.pyplot")
+    figures = []
+    with monkeypatch.context() as context:
+        context.setattr(plt, "close", lambda figure: figures.append(figure))
+        plot_corrected(_report(), tmp_path)
+    coverage, duplicate = figures[0], figures[2]
+    assert "Metadata" in coverage.axes[0].get_xlabel()
+    assert not coverage.texts
+    axis = duplicate.axes[0]
+    assert "Endpoint-specific exclusion" in axis.get_xlabel()
+    renderer = duplicate.canvas.get_renderer()
+    assert duplicate.bbox.contains(*axis.title.get_window_extent(renderer).get_points()[1])
+    assert not axis.get_legend().get_window_extent(renderer).overlaps(axis.get_window_extent(renderer))
+    assert not axis.get_legend().get_window_extent(renderer).overlaps(axis.xaxis.label.get_window_extent(renderer))
+    for figure in figures:
+        plt.close(figure)
