@@ -4,6 +4,7 @@ This is a technical index, not a response to reviewers or proof of editorial
 acceptance. SPH scoring was running when this baseline was prepared: no SPH
 performance is attributed to any item. The submitted manuscript is unchanged.
 The descriptions below are short project paraphrases, not reviewer quotations.
+The [commit and job index](EVIDENCE_COMMITS.md) records the public evidence chain.
 
 `EDITORIAL` means an edit or assembly remains; it does not imply that it has
 been incorporated. `LIMITED` means the evidence cannot support the original
