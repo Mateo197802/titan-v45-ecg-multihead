@@ -20,6 +20,16 @@ See [release evidence](../evidence-status.md), [selected waveform audit](../froz
 and [replay residuals](../replay-residual-diagnostics.md). Do not replace
 canonical results with reconstructed replay outputs or omit their discrepancies.
 
+## Known data and feature boundaries
+
+| Evidence | Verified scope | Not established |
+| --- | --- | --- |
+| PTB-XL official metadata | 21,799 ECG and 18,869 patients; official fold 10 has 2,198 ECG and 1,904 patients. The P4 subset includes 733 ECG from 676 fold-10 patients; 1,465 fold-10 ECG are not in that subset. | The absence of an ECG from the selected panel does not identify a historical exclusion reason or prove training/calibration isolation. [Audit](../replay-residual-diagnostics.md). |
+| Rhythm release cohort | 2,193 selected P8 records include multiple source labels; P6 is a 1,643-record diagnostic subset. | Source labels alone do not certify independent institutions or complete training lineage. [Attribution](../../data/licenses/README.md). |
+| P4 specialist input | 670 features: 640 backbone, 10 morphology, 8 categorical rhythm probabilities, 8 specialist-order rhythm probabilities and 4 pathology probabilities. | A matching width does not establish historical identity of a reconstructed extractor. [Feature contract](../recovered-feature-contract.md). |
+| P6/P8 specialist input | 681 features: 640 backbone, 10 morphology, 8 categorical rhythm probabilities, 7 specialist-order rhythm probabilities, 4 pathology probabilities and 12 event features. | The released checkpoints use 12 event features; proxies are not adjudicated clinical fiducials. [Feature contract](../recovered-feature-contract.md). |
+| SPH processing | The frozen transfer protocol specifies 500 Hz source input, 125 Hz model windows and a 12-by-1,250 model tensor. | This is the reconstructed SPH processing contract, not proof of the unavailable historical loader. [Protocol](../external_validation/sph_protocol.md). |
+
 ## Claims and evidence boundaries
 
 | Topic | Required treatment in the later manuscript |
