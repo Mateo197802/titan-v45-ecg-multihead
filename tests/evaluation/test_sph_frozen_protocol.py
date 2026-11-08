@@ -39,6 +39,7 @@ def test_frozen_sph_protocol_hashes_and_contracts_are_self_consistent():
         name: asset_hashes[name] for name in protocol["model_sha256"]
     }
     assert protocol["source_population"]["physical_units"].startswith("not provided")
+    assert protocol["thresholds"]["P4"]["ASMI"] == 0.6699999999999999
     assert protocol["quarantine"]["rate"] is None
     assert protocol["inference"]["route_uses_reference_labels"] is False
     assert protocol["reporting"]["input"].startswith("aggregate endpoint report")

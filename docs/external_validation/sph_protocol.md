@@ -1,5 +1,14 @@
 # Frozen SPH Model-Transfer Protocol
 
+## Pre-performance amendment
+
+The first full scoring attempt, CEDIA job 32665, stopped at its P4 threshold
+contract check before creating a prediction ledger. A metadata-only inspection
+of the checkpoint in job 32667 established that its ASMI threshold is stored
+as `0.6699999999999999`, not the rounded JSON value `0.67`; the other three
+P4 values agree. The configuration is amended to the exact checkpoint value.
+No SPH model-performance result was produced or consulted before this amendment.
+
 **State:** frozen before any SPH model-performance result is queried. The
 machine-readable companion is
 [`sph_frozen.json`](../../configs/external_validation/sph_frozen.json). The

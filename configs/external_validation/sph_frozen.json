@@ -154,7 +154,7 @@
       "PVC": 0.725
     },
     "P4": {
-      "ASMI": 0.67,
+      "ASMI": 0.6699999999999999,
       "LVH": 0.705,
       "IMI": 0.635,
       "ISC_": 0.595
@@ -267,7 +267,7 @@
     "interpretation": "not assessed, not zero; P8 top-1 fallback is a separate rule"
   },
   "implementation_sha256": {
-    "docs/external_validation/sph_protocol.md": "ab5c7676063f316fdd9f7fc073f78abf5949c20faeee3a758a479e76190857fc",
+    "docs/external_validation/sph_protocol.md": "4d03783deac6d749061dc2045a29b2443bc604eff52ef4fbc4ff8eb3bff14d2c",
     "docs/external_validation/sph_dataset_audit.md": "42149579bf57bf3024aef232681761558ec02d28fa0a52cfdbd930f61263b89b",
     "docs/external_validation/sph_independence_assessment.md": "d196df3dc4bc288c976410b475f87b8789093fb71f55d45af29350de07d5491e",
     "docs/external_validation/sph_label_harmonization.md": "b8d5506ab8593792a9590cae9b09b152bce52aa84d2d3f0e0ddf0a1ecfe41996",
