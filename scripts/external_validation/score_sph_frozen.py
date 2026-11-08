@@ -139,6 +139,28 @@ def run(args):
     duplicate_index_sha256 = _sha256(duplicate_index)
     if duplicate_index_sha256 != protocol["preperformance_controls"]["private_duplicate_index_sha256"]:
         raise ValueError("private SPH duplicate index hash mismatch")
+    dependency_hashes = {
+        "python_deps_archive_sha256": _sha256(args.python_deps_archive),
+        "h5py_deps_archive_sha256": _sha256(args.h5py_deps_archive),
+    }
+    if any(dependency_hashes[key] != protocol["environment"][key] for key in dependency_hashes):
+        raise ValueError("CEDIA dependency archive differs from the frozen environment")
+    actual_environment = {
+        "python": platform.python_version(),
+        "torch": torch.__version__,
+        "cuda": torch.version.cuda,
+        "numpy": np.__version__,
+        "scipy": scipy.__version__,
+        "h5py": h5py.__version__,
+        "wfdb": wfdb.__version__,
+        "zstandard": zstandard.__version__,
+    }
+    for name, expected in protocol["environment"]["versions"].items():
+        if actual_environment[name] != expected:
+            raise ValueError(f"runtime version mismatch: {name}")
+    device_name = torch.cuda.get_device_name()
+    if protocol["environment"]["device_contains"] not in device_name:
+        raise ValueError("GPU differs from the frozen protocol")
     for name, expected in protocol["source_sha256"].items():
         if _sha256(source / name) != expected:
             raise ValueError(f"SPH input digest mismatch: {name}")
@@ -250,19 +272,13 @@ def run(args):
         "implementation_sha256": implementation_hashes,
         "preperformance_control_sha256": control_hashes,
         "private_duplicate_index_sha256": duplicate_index_sha256,
+        "dependency_archive_sha256": dependency_hashes,
         "ledger_sha256": ledger_hash,
         "job_id": os.environ.get("SLURM_JOB_ID", "not_slurm"),
         "runtime_seconds": time.monotonic() - started,
         "environment": {
-            "python": platform.python_version(),
-            "torch": torch.__version__,
-            "cuda": torch.version.cuda,
-            "device": torch.cuda.get_device_name(),
-            "numpy": np.__version__,
-            "scipy": scipy.__version__,
-            "h5py": h5py.__version__,
-            "wfdb": wfdb.__version__,
-            "zstandard": zstandard.__version__,
+            **actual_environment,
+            "device": device_name,
         },
         "preprocessing_code_sha256_lf": _sha256(
             repo / "src/titan_v45/data/reconstructed.py"
@@ -294,6 +310,8 @@ def main():
     parser.add_argument("--source", type=Path, required=True)
     parser.add_argument("--release-root", type=Path, required=True)
     parser.add_argument("--duplicate-index", type=Path, required=True)
+    parser.add_argument("--python-deps-archive", type=Path, required=True)
+    parser.add_argument("--h5py-deps-archive", type=Path, required=True)
     parser.add_argument("--ledger", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--expected-commit", required=True)

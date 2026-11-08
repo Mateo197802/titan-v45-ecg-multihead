@@ -55,6 +55,10 @@ def test_sph_endpoint_report_checks_sealed_ledger_and_patient_cluster_ci(tmp_pat
         "preperformance_control_sha256": control_hashes,
         "private_duplicate_index_sha256": duplicate_index_sha256,
         "implementation_sha256": implementation_hashes,
+        "dependency_archive_sha256": {
+            "python_deps_archive_sha256": "e" * 64,
+            "h5py_deps_archive_sha256": "f" * 64,
+        },
         "flow": {"archive_records": 3},
     }), encoding="utf-8")
     protocol = {
@@ -68,6 +72,10 @@ def test_sph_endpoint_report_checks_sealed_ledger_and_patient_cluster_ci(tmp_pat
             "private_duplicate_index_sha256": duplicate_index_sha256,
         },
         "implementation_sha256": implementation_hashes,
+        "environment": {
+            "python_deps_archive_sha256": "e" * 64,
+            "h5py_deps_archive_sha256": "f" * 64,
+        },
     }
     report = evaluate_sph_ledger(
         source=source, ledger=ledger, scoring_receipt=receipt,
@@ -153,6 +161,10 @@ def test_endpoint_sensitivity_excludes_only_discordant_exact_signal_groups(tmp_p
         "preperformance_control_sha256": control_hashes,
         "private_duplicate_index_sha256": duplicate_index_sha256,
         "implementation_sha256": implementation_hashes,
+        "dependency_archive_sha256": {
+            "python_deps_archive_sha256": "e" * 64,
+            "h5py_deps_archive_sha256": "f" * 64,
+        },
         "flow": {"archive_records": 4},
     }), encoding="utf-8")
     protocol = {
@@ -166,6 +178,10 @@ def test_endpoint_sensitivity_excludes_only_discordant_exact_signal_groups(tmp_p
             "private_duplicate_index_sha256": duplicate_index_sha256,
         },
         "implementation_sha256": implementation_hashes,
+        "environment": {
+            "python_deps_archive_sha256": "e" * 64,
+            "h5py_deps_archive_sha256": "f" * 64,
+        },
     }
 
     report = evaluate_sph_ledger(

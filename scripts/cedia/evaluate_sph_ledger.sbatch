@@ -31,6 +31,7 @@ test -z "$(git status --porcelain)"
 python -u scripts/external_validation/evaluate_sph_ledger.py \
     --repo "$repo" --source "$source" --ledger "$ledger" \
     --scoring-receipt "$scoring_receipt" --duplicate-index "$duplicate_index" \
+    --python-deps-archive "$deps" \
     --output "$output/aggregate.json" \
     --receipt-output "$output/aggregation-receipt.json" \
     --expected-commit "$commit"

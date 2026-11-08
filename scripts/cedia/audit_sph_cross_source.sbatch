@@ -25,7 +25,7 @@ export PYTHONPATH="$repo/src:$scratch${PYTHONPATH:+:$PYTHONPATH}"
 export OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 PYTHONDONTWRITEBYTECODE=1
 release_scratch="$scratch/release-root"
 mkdir -p "$release_scratch"
-python -u scripts/external_validation/stage_retained_wfdb_archives.py \
+python -u "$repo/scripts/external_validation/stage_retained_wfdb_archives.py" \
     --release-root "$release" --output-root "$release_scratch" \
     --receipt "$output/staging-receipt.json"
 printf 'Waveform packages staged on node-local scratch.\n'

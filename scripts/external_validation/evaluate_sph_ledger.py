@@ -52,6 +52,16 @@ def run(args):
             )["source_sha256"]):
         raise ValueError("scoring receipt does not match frozen protocol inputs")
     protocol = json.loads(protocol_path.read_text(encoding="utf-8"))
+    dependencies = {
+        "python_deps_archive_sha256": _sha256(args.python_deps_archive),
+    }
+    if dependencies["python_deps_archive_sha256"] != protocol["environment"][
+        "python_deps_archive_sha256"
+    ]:
+        raise ValueError("aggregation dependency archive differs from the frozen protocol")
+    if (platform.python_version() != protocol["environment"]["versions"]["python"]
+            or np.__version__ != protocol["environment"]["versions"]["numpy"]):
+        raise ValueError("aggregation runtime version differs from the frozen protocol")
     implementation_hashes = {
         relative_path: _sha256(repo / relative_path)
         for relative_path in protocol["implementation_sha256"]
@@ -77,6 +87,7 @@ def run(args):
         "commit": commit,
         "protocol_sha256": protocol_sha256,
         "implementation_sha256": implementation_hashes,
+        "dependency_archive_sha256": dependencies,
         "inputs": {
             "scoring_receipt_sha256": _sha256(args.scoring_receipt),
             "ledger_sha256": _sha256(args.ledger),
@@ -103,6 +114,7 @@ def main():
     parser.add_argument("--ledger", type=Path, required=True)
     parser.add_argument("--scoring-receipt", type=Path, required=True)
     parser.add_argument("--duplicate-index", type=Path, required=True)
+    parser.add_argument("--python-deps-archive", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--receipt-output", type=Path, required=True)
     parser.add_argument("--expected-commit", required=True)

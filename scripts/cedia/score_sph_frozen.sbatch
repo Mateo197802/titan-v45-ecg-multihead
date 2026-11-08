@@ -44,6 +44,7 @@ PY
 python -u scripts/external_validation/score_sph_frozen.py \
     --repo "$repo" --source "$source" --release-root "$release" \
     --duplicate-index "$duplicate_index" \
+    --python-deps-archive "$deps" --h5py-deps-archive "$h5py_deps" \
     --ledger "$output/private-predictions.jsonl" \
     --output "$output/scoring-receipt.json" \
     --expected-commit "$commit" --expected-config-sha256 "$config_sha256"
