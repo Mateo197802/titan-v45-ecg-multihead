@@ -92,3 +92,62 @@ def test_sph_endpoint_report_rejects_unsealed_or_incomplete_ledger(tmp_path):
     with pytest.raises(ValueError, match="hash"):
         evaluate_sph_ledger(source=source, ledger=ledger, scoring_receipt=receipt,
                             duplicate_index=tmp_path / "missing.jsonl", protocol={})
+
+
+def test_endpoint_sensitivity_excludes_only_discordant_exact_signal_groups(tmp_path):
+    source = tmp_path / "source"
+    source.mkdir()
+    (source / "code.csv").write_text(
+        "Category,Code,Description\nPrimary,50,Atrial fibrillation\n"
+        "Primary,51,Other statement\nModifier,346,Example modifier\n",
+        encoding="utf-8",
+    )
+    (source / "metadata.csv").write_text(
+        "ECG_ID,AHA_Code,Patient_ID,Age,Sex,N,Date\n"
+        "A00001,50,P1,50,F,5000,2020-01-01\n"
+        "A00002,51,P2,50,F,5000,2020-01-01\n"
+        "A00003,50,P3,50,F,5000,2020-01-01\n"
+        "A00004,51,P4,50,F,5000,2020-01-01\n",
+        encoding="utf-8",
+    )
+    profiles = [
+        {"scores": {"AFIB": score}, "labels": ["AFIB"] if score >= 0.5 else []}
+        for score in (0.9, 0.1, 0.8, 0.2)
+    ]
+    ledger = tmp_path / "ledger.jsonl"
+    ledger.write_text("".join(json.dumps({
+        "record_id": f"A{i:05d}", "status": "scored", "profiles": {"P6": profile}
+    }) + "\n" for i, profile in enumerate(profiles, start=1)), encoding="utf-8")
+    duplicate_index = tmp_path / "duplicates.jsonl"
+    duplicate_index.write_text("".join(json.dumps({
+        "ecg_id": f"A{i:05d}", "patient_id": f"P{i}",
+        "signal_sha256_canonical_f64": digest,
+    }) + "\n" for i, digest in enumerate(("same", "same", "pos", "neg"), start=1)),
+        encoding="utf-8",
+    )
+    receipt = tmp_path / "receipt.json"
+    receipt.write_text(json.dumps({
+        "ledger_sha256": hashlib.sha256(ledger.read_bytes()).hexdigest(),
+        "stage": "full_population", "protocol_commit": "a" * 40,
+        "protocol_sha256": "b" * 64, "source_sha256": {}, "model_sha256": {},
+        "flow": {"archive_records": 4},
+    }), encoding="utf-8")
+    protocol = {
+        "expected_source_records": 4,
+        "endpoints": [{"profile": "P6", "name": "AFIB", "codes": [50],
+                       "reference": "documented ECG statement"}],
+        "metrics": {"ece_bins": 10},
+        "bootstrap": {"seed": 197813, "replicates": 30},
+    }
+
+    report = evaluate_sph_ledger(
+        source=source, ledger=ledger, scoring_receipt=receipt,
+        duplicate_index=duplicate_index, protocol=protocol,
+    )
+    endpoint = report["endpoints"]["P6:AFIB"]
+    sensitivity = endpoint["discordant_exact_duplicate_sensitivity"]
+    assert endpoint["metrics"]["rows"] == 4
+    assert sensitivity["conflicting_duplicate_groups"] == 1
+    assert sensitivity["source_records_excluded"] == 2
+    assert sensitivity["scored_records_retained"] == 2
+    assert sensitivity["metrics"]["rows"] == 2

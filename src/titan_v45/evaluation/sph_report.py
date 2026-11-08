@@ -44,6 +44,28 @@ def _clusters(private_index):
     return {row["ecg_id"]: find(row["patient_id"]) for row in rows}
 
 
+def _discordant_duplicate_records(private_index, metadata, codes):
+    rows = [json.loads(line) for line in Path(private_index).read_text().splitlines()]
+    by_signal = defaultdict(list)
+    for row in rows:
+        record_id = row["ecg_id"]
+        if record_id not in metadata:
+            raise ValueError("duplicate index contains an unknown ECG")
+        by_signal[row["signal_sha256_canonical_f64"]].append(record_id)
+    excluded = set()
+    groups = 0
+    for record_ids in by_signal.values():
+        if len(record_ids) < 2:
+            continue
+        reference_values = {
+            bool(codes & metadata[record_id].primary_codes) for record_id in record_ids
+        }
+        if len(reference_values) > 1:
+            groups += 1
+            excluded.update(record_ids)
+    return excluded, groups
+
+
 def _metric_values(truth, predicted, scores, weights, ece_bins):
     truth = np.asarray(truth, dtype=np.int8)
     predicted = np.asarray(predicted, dtype=np.int8)
@@ -79,6 +101,8 @@ def _metric_values(truth, predicted, scores, weights, ece_bins):
             ece += n / sw * abs(np.dot(w, scores - truth) / n)
     vals["ece"] = float(ece)
 
+    active = weights > 0
+    scores, truth, weights = scores[active], truth[active], weights[active]
     order = np.argsort(scores, kind="stable")
     sorted_scores, sorted_truth, sorted_weights = scores[order], truth[order], weights[order]
     starts = np.r_[0, np.flatnonzero(np.diff(sorted_scores)) + 1]
@@ -174,6 +198,10 @@ def evaluate_sph_ledger(
     for endpoint in protocol["endpoints"]:
         profile, name, codes = endpoint["profile"], endpoint["name"], set(endpoint["codes"])
         y, predicted, scores, cluster_ids = [], [], [], []
+        conflicting_records, conflicting_groups = _discordant_duplicate_records(
+            duplicate_index, metadata, codes
+        )
+        sensitivity_y, sensitivity_predicted, sensitivity_scores, sensitivity_clusters = [], [], [], []
         for record_id, metadata_row in metadata.items():
             row = rows[record_id]
             if row["status"] != "scored":
@@ -184,6 +212,11 @@ def evaluate_sph_ledger(
             predicted.append(int(name in row["profiles"][profile]["labels"]))
             scores.append(float(row["profiles"][profile]["scores"][name]))
             cluster_ids.append(clusters[record_id])
+            if record_id not in conflicting_records:
+                sensitivity_y.append(y[-1])
+                sensitivity_predicted.append(predicted[-1])
+                sensitivity_scores.append(scores[-1])
+                sensitivity_clusters.append(cluster_ids[-1])
         if not y:
             raise ValueError(f"endpoint has no scored rows: {name}")
         metrics = binary_metrics(y, predicted, scores, ece_bins=protocol["metrics"]["ece_bins"])
@@ -196,6 +229,21 @@ def evaluate_sph_ledger(
             replicates=protocol["bootstrap"]["replicates"],
             ece_bins=protocol["metrics"]["ece_bins"],
         )
+        sensitivity_metrics = binary_metrics(
+            sensitivity_y,
+            sensitivity_predicted,
+            sensitivity_scores,
+            ece_bins=protocol["metrics"]["ece_bins"],
+        ) if sensitivity_y else None
+        sensitivity_bootstrap = _cluster_bootstrap(
+            sensitivity_y,
+            sensitivity_predicted,
+            sensitivity_scores,
+            sensitivity_clusters,
+            seed=protocol["bootstrap"]["seed"] + protocol["endpoints"].index(endpoint),
+            replicates=protocol["bootstrap"]["replicates"],
+            ece_bins=protocol["metrics"]["ece_bins"],
+        ) if sensitivity_y else None
         endpoint_reports[f"{profile}:{name}"] = {
             "reference": endpoint["reference"],
             "reference_semantics": "SPH documented ECG statement; not clinical diagnosis",
@@ -212,6 +260,14 @@ def evaluate_sph_ledger(
             "metrics": metrics,
             "cluster_bootstrap_ci95": bootstrap,
             "patient_clusters_in_endpoint": len(set(cluster_ids)),
+            "discordant_exact_duplicate_sensitivity": {
+                "conflicting_duplicate_groups": conflicting_groups,
+                "source_records_excluded": len(conflicting_records),
+                "scored_records_retained": len(sensitivity_y),
+                "metrics": sensitivity_metrics,
+                "cluster_bootstrap_ci95": sensitivity_bootstrap,
+                "definition": "exclude every member of an exact-signal group whose SPH statement reference disagrees for this endpoint; primary analysis retains all records",
+            },
         }
     states = Counter(row["status"] for row in rows.values())
     return {
@@ -221,6 +277,7 @@ def evaluate_sph_ledger(
         "protocol_sha256": receipt["protocol_sha256"],
         "scoring_receipt_sha256": _sha256(scoring_receipt),
         "scoring_ledger_sha256": receipt["ledger_sha256"],
+        "private_duplicate_index_sha256": _sha256(duplicate_index),
         "data_hashes": receipt["source_sha256"],
         "model_hashes": receipt["model_sha256"],
         "full_population_flow": {

@@ -6,6 +6,7 @@ import csv
 import hashlib
 import json
 import os
+import platform
 import subprocess
 import sys
 import time
@@ -105,6 +106,12 @@ def _score_batch(records, rhythm_scorer, pathology_scorer, thresholds, writer):
 
 
 def run(args):
+    import h5py
+    import numpy as np
+    import scipy
+    import wfdb
+    import zstandard
+
     repo, source, release = args.repo.resolve(), args.source.resolve(), args.release_root.resolve()
     if source.is_relative_to(repo) or args.ledger.resolve().is_relative_to(repo):
         raise ValueError("SPH source and per-record ledger must stay outside Git")
@@ -129,9 +136,25 @@ def run(args):
     rhythm_scorer = FrozenRhythm(assets, contract, event_extractor, "cuda")
     pathology_scorer = FrozenPathology(assets, contract, "cuda")
     thresholds = protocol["thresholds"]
-    for profile, scorer in (("P4", pathology_scorer),):
-        if thresholds[profile] != scorer.thresholds:
-            raise ValueError("P4 checkpoint threshold mismatch")
+    p4_thresholds = {key: float(value) for key, value in pathology_scorer.thresholds.items()}
+    if thresholds["P4"] != p4_thresholds:
+        raise ValueError("P4 checkpoint threshold mismatch")
+    p6_lineage = json.loads(
+        (repo / "outputs/results/revision_20261029/p6_calibration_lineage_summary.json")
+        .read_text(encoding="utf-8")
+    )
+    p8_metrics = json.loads(
+        (repo / "outputs/results/external_dev/rhythm_primary8_metrics.json")
+        .read_text(encoding="utf-8")
+    )
+    if (tuple(p6_lineage["classes"]) != tuple(protocol["classes"]["P6"])
+            or p6_lineage["biases"] != [0] * 6
+            or p6_lineage["aggregation"] != "mean_logits"
+            or p6_lineage["thresholds"] != list(thresholds["P6"].values())):
+        raise ValueError("P6 threshold or aggregation contract mismatch")
+    if (tuple(p8_metrics["classes"]) != tuple(protocol["classes"]["P8"])
+            or p8_metrics["thresholds"] != list(thresholds["P8"].values())):
+        raise ValueError("P8 threshold contract mismatch")
     expected_rhythm = {
         "P6": tuple(protocol["classes"]["P6"]),
         "P8": tuple(protocol["classes"]["P8"]),
@@ -206,6 +229,24 @@ def run(args):
         "ledger_sha256": ledger_hash,
         "job_id": os.environ.get("SLURM_JOB_ID", "not_slurm"),
         "runtime_seconds": time.monotonic() - started,
+        "environment": {
+            "python": platform.python_version(),
+            "torch": torch.__version__,
+            "cuda": torch.version.cuda,
+            "device": torch.cuda.get_device_name(),
+            "numpy": np.__version__,
+            "scipy": scipy.__version__,
+            "h5py": h5py.__version__,
+            "wfdb": wfdb.__version__,
+            "zstandard": zstandard.__version__,
+        },
+        "preprocessing_code_sha256_lf": _sha256(
+            repo / "src/titan_v45/data/reconstructed.py"
+        ),
+        "morphology_candidate_sha256_lf": _sha256(
+            repo / "scripts/cedia/recovery_candidates/morphology_features_v4.py"
+        ),
+        "event_trainer_archive_sha256": _sha256(event_archive),
         "flow": {
             "metadata_records": len(index),
             "archive_records": archive_records,

@@ -14,13 +14,15 @@ def test_fixed_waveform_processing_is_label_free_and_gain_invariant_on_fixture()
     values = np.stack([np.sin(2 * np.pi * (i + 1) * t) for i in range(12)])
     for branch, expected in (("P4", 1), ("rhythm", 3)):
         samples = prepare_sph_waveform(values, _morph, branch=branch)
-        scaled = prepare_sph_waveform(10 * values, _morph, branch=branch)
-        assert len(samples) == len(scaled) == expected
-        for (signal, mask, morph), (signal_scaled, _, _) in zip(samples, scaled, strict=True):
-            assert signal.shape == (12, 1250)
-            assert np.all(mask) and morph.shape == (10,)
-            assert np.isfinite(signal).all()
-            np.testing.assert_allclose(signal, signal_scaled, atol=1e-5, rtol=1e-5)
+        assert len(samples) == expected
+        for factor in (0.001, 10, 1000):
+            scaled = prepare_sph_waveform(factor * values, _morph, branch=branch)
+            assert len(scaled) == expected
+            for (signal, mask, morph), (signal_scaled, _, _) in zip(samples, scaled, strict=True):
+                assert signal.shape == (12, 1250)
+                assert np.all(mask) and morph.shape == (10,)
+                assert np.isfinite(signal).all()
+                np.testing.assert_allclose(signal, signal_scaled, atol=1e-5, rtol=1e-5)
 
 
 def test_invalid_waveforms_do_not_become_negative_predictions():
