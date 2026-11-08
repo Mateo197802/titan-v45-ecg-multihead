@@ -15,6 +15,19 @@ def _equal(actual, expected, name):
         raise ValueError(f"{name}: inconsistent value")
 
 
+def _check_bootstrap(intervals, replicates, name):
+    if intervals["_design"]["replicates"] != replicates:
+        raise ValueError(f"{name}: incorrect bootstrap replicate count")
+    for metric, interval in intervals.items():
+        if metric == "_design":
+            continue
+        if interval["valid_replicates"] + interval["invalid_replicates"] != replicates:
+            raise ValueError(f"{name}: {metric} bootstrap count mismatch")
+        low, high = interval["low"], interval["high"]
+        if low is not None and (high is None or not 0 <= low <= high <= 1):
+            raise ValueError(f"{name}: {metric} interval invalid")
+
+
 def validate_report(report, protocol):
     if report.get("schema") != "TITAN_V45_SPH_ENDPOINT_RESULTS_V1":
         raise ValueError("unexpected aggregate schema")
@@ -60,17 +73,21 @@ def validate_report(report, protocol):
             value = metrics[metric]
             if value is not None and not 0 <= value <= 1:
                 raise ValueError(f"{name}: {metric} outside [0,1]")
-        intervals = endpoint["cluster_bootstrap_ci95"]
-        if intervals["_design"]["replicates"] != protocol["bootstrap"]["replicates"]:
-            raise ValueError(f"{name}: incorrect bootstrap replicate count")
-        for metric, interval in intervals.items():
-            if metric == "_design":
-                continue
-            if interval["valid_replicates"] + interval["invalid_replicates"] != protocol["bootstrap"]["replicates"]:
-                raise ValueError(f"{name}: {metric} bootstrap count mismatch")
-            low, high = interval["low"], interval["high"]
-            if low is not None and (high is None or not 0 <= low <= high <= 1):
-                raise ValueError(f"{name}: {metric} interval invalid")
+        replicates = protocol["bootstrap"]["replicates"]
+        _check_bootstrap(endpoint["cluster_bootstrap_ci95"], replicates, name)
+        sensitivity = endpoint["discordant_exact_duplicate_sensitivity"]
+        retained = sensitivity["scored_records_retained"]
+        if not 0 <= retained <= n or not 0 <= sensitivity["source_records_excluded"] <= source:
+            raise ValueError(f"{name}: invalid duplicate-sensitivity denominator")
+        alternate = sensitivity["metrics"]
+        intervals = sensitivity["cluster_bootstrap_ci95"]
+        if retained == 0:
+            if alternate is not None or intervals is not None:
+                raise ValueError(f"{name}: empty sensitivity analysis must be undefined")
+        else:
+            if alternate["rows"] != retained or sum(alternate[key] for key in ("tp", "tn", "fp", "fn")) != retained:
+                raise ValueError(f"{name}: duplicate-sensitivity confusion count mismatch")
+            _check_bootstrap(intervals, replicates, f"{name} duplicate sensitivity")
     return {"source_records": source, "endpoints_checked": len(expected), "profiles_checked": len(report["profile_flow"])}
 
 

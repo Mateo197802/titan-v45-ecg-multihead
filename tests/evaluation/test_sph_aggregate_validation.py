@@ -23,7 +23,13 @@ def _fixture():
                             "metrics": metrics, "cluster_bootstrap_ci95": {
                                 "_design": {"replicates": 10},
                                 "accuracy": {"low": 0.4, "high": 0.9, "valid_replicates": 10,
-                                             "invalid_replicates": 0}}}}}
+                                             "invalid_replicates": 0}},
+                            "discordant_exact_duplicate_sensitivity": {
+                                "scored_records_retained": 3, "source_records_excluded": 0,
+                                "metrics": metrics, "cluster_bootstrap_ci95": {
+                                    "_design": {"replicates": 10},
+                                    "accuracy": {"low": 0.4, "high": 0.9, "valid_replicates": 10,
+                                                 "invalid_replicates": 0}}}}}}
     return report, protocol
 
 
@@ -37,4 +43,8 @@ def test_validator_reconciles_aggregate_without_record_data():
     broken = copy.deepcopy(report)
     broken["endpoints"]["P6:AF"]["cluster_bootstrap_ci95"]["accuracy"]["valid_replicates"] = 9
     with pytest.raises(ValueError, match="bootstrap count"):
+        validate_report(broken, protocol)
+    broken = copy.deepcopy(report)
+    broken["endpoints"]["P6:AF"]["discordant_exact_duplicate_sensitivity"]["scored_records_retained"] = 2
+    with pytest.raises(ValueError, match="sensitivity confusion"):
         validate_report(broken, protocol)
