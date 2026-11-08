@@ -31,6 +31,7 @@ tar -xf "$deps" -C "$scratch"
 tar -xf "$h5py_deps" -C "$scratch"
 export PYTHONPATH="$repo/src:$scratch${PYTHONPATH:+:$PYTHONPATH}"
 export OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 PYTHONDONTWRITEBYTECODE=1
+export CUBLAS_WORKSPACE_CONFIG=:4096:8
 cd "$repo"
 test "$(git rev-parse HEAD)" = "$commit"
 test -z "$(git status --porcelain)"

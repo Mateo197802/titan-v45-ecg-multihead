@@ -18,7 +18,8 @@ def test_sph_endpoint_report_checks_sealed_ledger_and_patient_cluster_ci(tmp_pat
         "ECG_ID,AHA_Code,Patient_ID,Age,Sex,N,Date\n"
         "A00001,50,P1,50,F,5000,2020-01-01\n"
         "A00002,51,P1,50,F,5000,2020-01-01\n"
-        "A00003,50,P2,50,F,5000,2020-01-01\n",
+        "A00003,50,P2,50,F,5000,2020-01-01\n"
+        "A00004,51,P3,50,F,5000,2020-01-01\n",
         encoding="utf-8",
     )
     ledger = tmp_path / "ledger.jsonl"
@@ -30,6 +31,7 @@ def test_sph_endpoint_report_checks_sealed_ledger_and_patient_cluster_ci(tmp_pat
             "P6": {"scores": {"AFIB": 0.1}, "labels": [],
                    "top1": "SB", "used_fallback": False}}},
         {"record_id": "A00003", "status": "technical_exclusion", "reason": "ValueError"},
+        {"record_id": "A00004", "status": "inference_failure", "reason": "nonfinite_model_output"},
     ]
     ledger.write_text("".join(json.dumps(row) + "\n" for row in rows), encoding="utf-8")
     duplicate_index = tmp_path / "duplicates.jsonl"
@@ -38,6 +40,7 @@ def test_sph_endpoint_report_checks_sealed_ledger_and_patient_cluster_ci(tmp_pat
             {"ecg_id": "A00001", "patient_id": "P1", "signal_sha256_canonical_f64": "x"},
             {"ecg_id": "A00002", "patient_id": "P1", "signal_sha256_canonical_f64": "y"},
             {"ecg_id": "A00003", "patient_id": "P2", "signal_sha256_canonical_f64": "x"},
+            {"ecg_id": "A00004", "patient_id": "P3", "signal_sha256_canonical_f64": "z"},
         ]),
         encoding="utf-8",
     )
@@ -59,10 +62,10 @@ def test_sph_endpoint_report_checks_sealed_ledger_and_patient_cluster_ci(tmp_pat
             "python_deps_archive_sha256": "e" * 64,
             "h5py_deps_archive_sha256": "f" * 64,
         },
-        "flow": {"archive_records": 3},
+        "flow": {"archive_records": 4},
     }), encoding="utf-8")
     protocol = {
-        "expected_source_records": 3,
+        "expected_source_records": 4,
         "endpoints": [{"profile": "P6", "name": "AFIB", "codes": [50],
                        "reference": "defensible ECG statement"}],
         "metrics": {"ece_bins": 10},
@@ -82,8 +85,12 @@ def test_sph_endpoint_report_checks_sealed_ledger_and_patient_cluster_ci(tmp_pat
         duplicate_index=duplicate_index, protocol=protocol,
     )
     endpoint = report["endpoints"]["P6:AFIB"]
-    assert report["full_population_flow"]["source_metadata_records"] == 3
+    assert report["full_population_flow"]["source_metadata_records"] == 4
     assert report["full_population_flow"]["technical_exclusions"] == 1
+    assert report["full_population_flow"]["inference_failures"] == 1
+    assert report["full_population_flow"]["inference_failure_reasons"] == {
+        "nonfinite_model_output": 1
+    }
     assert endpoint["source_statement_positive"] == 2
     assert endpoint["scored_evaluable_records"] == 2
     assert endpoint["metrics"]["tp"] == 1
@@ -92,7 +99,7 @@ def test_sph_endpoint_report_checks_sealed_ledger_and_patient_cluster_ci(tmp_pat
     assert endpoint["cluster_bootstrap_ci95"]["accuracy"]["valid_replicates"] > 0
     assert report["full_population_flow"]["quarantine_rate"] is None
     assert report["profile_flow"]["P6"]["scored_records"] == 2
-    assert report["profile_flow"]["P6"]["coverage"] == 2 / 3
+    assert report["profile_flow"]["P6"]["coverage"] == 2 / 4
     assert report["profile_flow"]["P6"]["empty_label_set_records"] == 1
 
 

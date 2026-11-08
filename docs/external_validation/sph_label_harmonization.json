@@ -1,8 +1,9 @@
 {
   "schema": "TITAN_V45_SPH_LABEL_MAPPING_V1",
-  "status": "DRAFT_PREPERFORMANCE_NOT_PREREGISTERED",
+  "status": "FROZEN_BEFORE_PERFORMANCE",
   "dictionary_figshare_file_id": 32630954,
   "dictionary_md5": "9fafec6cc6e1ef8117e2964116654d05",
+  "dictionary_sha256": "4d22759fd19d37133c78d439a5726f9e0bc412cc17483c424926ce9abb33c8fc",
   "reference_target": "presence of a documented ECG statement, not adjudicated clinical disease",
   "mappings": {
     "AFIB": {"codes": [50], "status": "EXACT_OR_DEFENSIBLE", "meaning": "record-associated AF; not incident AF"},
@@ -20,5 +21,7 @@
   },
   "reference_negative_policy": "not coded is a negative for the ECG-statement endpoint only where the publisher coding contract is accepted; no clinical-negative claim",
   "allow_full_profile_accuracy": false,
-  "training_or_threshold_selection_using_sph": false
+  "training_or_threshold_selection_using_sph": false,
+  "performance_results_consulted_before_freeze": false,
+  "primary_endpoint_count": 14
 }

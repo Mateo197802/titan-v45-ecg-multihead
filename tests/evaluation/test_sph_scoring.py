@@ -75,7 +75,7 @@ def test_batch_keeps_nonfinite_model_outputs_in_the_flow_denominator():
                           thresholds, output)
     rows = [json.loads(line) for line in output.getvalue().splitlines()]
 
-    assert counts == {"scored": 1, "technical_exclusion": 1}
+    assert counts == {"scored": 1, "inference_failure": 1}
     assert [row["record_id"] for row in rows] == ["A00001", "A00002"]
-    assert rows[1]["status"] == "technical_exclusion"
+    assert rows[1]["status"] == "inference_failure"
     assert rows[1]["reason"] == "nonfinite_model_output"

@@ -1,6 +1,6 @@
-# SPH label harmonization before model evaluation
+# Frozen SPH label harmonization
 
-Status: draft; no SPH model scores or performance have been examined. The
+Status: frozen before any SPH model scores were queried. The
 [machine-readable mapping](sph_label_harmonization.json) was checked against
 the [official code dictionary](https://doi.org/10.6084/m9.figshare.17912507.v1)
 and the [dataset methods](https://doi.org/10.1038/s41597-022-01403-5). Code

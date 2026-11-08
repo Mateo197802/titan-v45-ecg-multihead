@@ -1,0 +1,20 @@
+{
+  "schema": "TITAN_V45_SPH_RETAINED_SOURCE_SIGNATURE_AUDIT_V1",
+  "scope": "label_blind_quantized_preprocessed_waveform_signature_screen",
+  "signature": "source-backed first 10 seconds, 12x1250, per-lead standardized, rounded to 0.001",
+  "sph_records_compared": 25770,
+  "retained_source_records_compared": {
+    "Chapman-Shaoxing-Ningbo": 2193,
+    "PTB-XL-fold10": 733
+  },
+  "candidate_signature_groups_crossing_sources": 0,
+  "cross_source_record_pairs_by_source": {},
+  "technical_failures": {},
+  "record_or_patient_identifiers_exported": false,
+  "candidate_pairs_need_manual_signal_level_confirmation": false,
+  "not_compared": [
+    "historical V3F/V3AG pretraining and fine-tuning inputs",
+    "unreleased ECGs outside retained Chapman/Shaoxing/Ningbo and PTB-XL fold-10 packages"
+  ],
+  "independence_certified": false
+}

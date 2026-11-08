@@ -1,0 +1,80 @@
+{
+  "schema": "TITAN_V45_SPH_PREPERFORMANCE_CONTROL_RECEIPT_V1",
+  "performance_results_consulted_before_protocol_freeze": false,
+  "source": {
+    "version": "SPH V1",
+    "records": 25770,
+    "patients": 24666,
+    "source_sha256": {
+      "code.csv": "4d22759fd19d37133c78d439a5726f9e0bc412cc17483c424926ce9abb33c8fc",
+      "metadata.csv": "c6f8dc5197758a3970aae554f8b6ee884d96656b121879bc0eb1adf367ea6d86",
+      "records.tar.gz": "cebad89d7d25663272eeb45545712d76302d334bb107cdc23fd15390c9194e55"
+    }
+  },
+  "controls": {
+    "source_inventory": {
+      "cedia_job_id": "32617",
+      "job_commit": "f6e27fa",
+      "aggregate_path": "outputs/results/external_sph/source_inventory_32617.json",
+      "aggregate_sha256": "8321abf1d91f0a97ae65b8e9d3a47ba4f5460055ac7780fd84ad2cc86efd2cf7",
+      "records_with_matching_metadata_and_readable_signal": 25770,
+      "technical_failures": 0,
+      "wholly_flat_records": 0,
+      "sampling_rate_hz": 500,
+      "stored_dtype": "float16",
+      "sample_count_range": [5000, 28000]
+    },
+    "duplicate_and_amplitude": {
+      "cedia_job_id": "32627",
+      "job_commit": "93e942328901d5fd7fa11f9bf2b3826317d235ed",
+      "aggregate_path": "outputs/results/external_sph/sph_duplicate_amplitude_audit_32627.json",
+      "aggregate_sha256": "8924d7331aaccc1dd0d86ddb3cbfe02f124bb410c067724842a1b88926469bbc",
+      "private_duplicate_index_sha256": "24eae465775c82c6ffa8fa9739a66d59f294f9de9190b903ea2b417b978f68ea",
+      "exact_duplicate_groups": 168,
+      "duplicate_excess_records": 168,
+      "records_in_duplicate_groups": 336,
+      "groups_crossing_patient_ids": 0,
+      "primary_code_set_conflict_groups": 25,
+      "hdf5_physical_unit_attributes": 0,
+      "minimum_native_record_lead_standard_deviation": 0.011316988074157897,
+      "physical_unit_conversion": false
+    },
+    "diagnostic_correspondence": {
+      "dictionary_sha256": "4d22759fd19d37133c78d439a5726f9e0bc412cc17483c424926ce9abb33c8fc",
+      "primary_endpoint_count": 14,
+      "reference_semantics": "presence or absence of a publisher-documented ECG statement, not adjudicated clinical disease",
+      "proxy_only_or_not_evaluable": {
+        "NSR": [1],
+        "1AVB": [82],
+        "ISC_": [145, 146]
+      },
+      "no_silent_code_pools": true
+    },
+    "retained_source_signature_screen": {
+      "cedia_job_id": "32633",
+      "job_commit": "ca6df11212cc3af9d19a7361bcc43eeffd70d899",
+      "aggregate_path": "outputs/results/external_sph/sph_retained_source_signature_audit_32633.json",
+      "aggregate_sha256": "6b290dd80d9d30aa0758aa16e7ac3963b950894ad43d501236804637dd9f47d8",
+      "staging_receipt_path": "outputs/results/external_sph/sph_retained_source_staging_receipt_32633.json",
+      "staging_receipt_sha256": "a117e0ed4df666ff3267120e7beb0070dcea1b3baefad0c0f56859615d5f329f",
+      "elapsed": "00:04:49",
+      "sph_records_compared": 25770,
+      "retained_chapman_shaoxing_ningbo_records": 2193,
+      "retained_ptbxl_fold10_records": 733,
+      "cross_source_signature_groups": 0,
+      "technical_failures": 0,
+      "private_candidate_rows": 0,
+      "independence_certified": false,
+      "not_compared": [
+        "historical V3F/V3AG pretraining and fine-tuning inputs",
+        "unreleased ECGs outside the retained public packages"
+      ]
+    }
+  },
+  "privacy": {
+    "record_or_patient_identifiers_exported": false,
+    "signals_exported": false,
+    "private_duplicate_index_and_candidate_links_remain_in_cedia": true
+  },
+  "scope_limit": "These controls establish source integrity, duplicate handling, units and a bounded retained-source signature screen. They do not certify complete historical independence or clinical validity."
+}

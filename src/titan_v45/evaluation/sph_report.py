@@ -321,6 +321,10 @@ def evaluate_sph_ledger(
         row.get("reason", "unspecified") for row in rows.values()
         if row["status"] == "technical_exclusion"
     )
+    inference_failure_reasons = Counter(
+        row.get("reason", "unspecified") for row in rows.values()
+        if row["status"] == "inference_failure"
+    )
     return {
         "schema": "TITAN_V45_SPH_ENDPOINT_RESULTS_V1",
         "study_scope": "transfer_to_distinct_hospital_source_with_historical_traceability_limitations",
@@ -339,10 +343,12 @@ def evaluate_sph_ledger(
             "archive_records": receipt["flow"]["archive_records"],
             "scored_records": states.get("scored", 0),
             "technical_exclusions": states.get("technical_exclusion", 0),
+            "inference_failures": states.get("inference_failure", 0),
             "missing_signal": states.get("missing_signal", 0),
             "no_metadata": states.get("no_metadata", 0),
             "status_counts": dict(sorted(states.items())),
             "technical_failure_reasons": dict(sorted(technical_failure_reasons.items())),
+            "inference_failure_reasons": dict(sorted(inference_failure_reasons.items())),
             "quarantine_assessed_records": 0,
             "quarantine_rate": None,
             "quarantine_reason": "no historically defined uncertainty or quarantine policy",

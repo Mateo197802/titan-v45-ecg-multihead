@@ -107,7 +107,7 @@ def _score_batch(records, rhythm_scorer, pathology_scorer, thresholds, writer):
         if not finite:
             output = {
                 "record_id": row["record_id"],
-                "status": "technical_exclusion",
+                "status": "inference_failure",
                 "reason": "nonfinite_model_output",
             }
             writer.write(json.dumps(output, sort_keys=True, separators=(",", ":")) + "\n")
@@ -175,6 +175,18 @@ def run(args):
     for name, expected in protocol["environment"]["versions"].items():
         if actual_environment[name] != expected:
             raise ValueError(f"runtime version mismatch: {name}")
+    inference = protocol["inference"]
+    if os.environ.get("CUBLAS_WORKSPACE_CONFIG") != inference["cublas_workspace_config"]:
+        raise ValueError("cuBLAS workspace configuration differs from the frozen protocol")
+    if not torch.cuda.is_available():
+        raise RuntimeError("CUDA is required for the frozen SPH scoring job")
+    torch.manual_seed(inference["seed"])
+    torch.cuda.manual_seed_all(inference["seed"])
+    torch.use_deterministic_algorithms(inference["deterministic_algorithms"])
+    torch.backends.cudnn.deterministic = inference["cudnn_deterministic"]
+    torch.backends.cudnn.benchmark = inference["cudnn_benchmark"]
+    torch.backends.cuda.matmul.allow_tf32 = inference["allow_tf32"]
+    torch.backends.cudnn.allow_tf32 = inference["allow_tf32"]
     device_name = torch.cuda.get_device_name()
     if protocol["environment"]["device_contains"] not in device_name:
         raise ValueError("GPU differs from the frozen protocol")
@@ -225,8 +237,6 @@ def run(args):
     index = _read_signal_index(source / "metadata.csv")
     if len(index) != protocol["expected_source_records"]:
         raise ValueError("source record count differs from preregistration")
-    if not torch.cuda.is_available():
-        raise RuntimeError("CUDA is required for the frozen SPH scoring job")
     torch.set_num_threads(2)
     args.ledger.parent.mkdir(parents=True, exist_ok=True)
     args.output.parent.mkdir(parents=True, exist_ok=True)
@@ -262,10 +272,23 @@ def run(args):
                         pending.clear()
                     continue
                 except (ValueError, OSError) as exc:
+                    message = str(exc).lower()
+                    if isinstance(exc, OSError):
+                        reason = "unreadable_signal_archive_member"
+                    elif "duration" in message or "sample" in message and "length" in message:
+                        reason = "unsupported_signal_duration"
+                    elif "flat" in message:
+                        reason = "all_leads_flat"
+                    elif "nonfinite" in message or "finite" in message:
+                        reason = "nonfinite_signal_or_features"
+                    elif "hdf5" in message or "dataset" in message or "shape" in message:
+                        reason = "invalid_hdf5_layout_or_signal_shape"
+                    else:
+                        reason = "invalid_signal_or_preprocessing_contract"
                     row = {
                         "record_id": record_id,
                         "status": "technical_exclusion",
-                        "reason": type(exc).__name__,
+                        "reason": reason,
                     }
             ledger.write(json.dumps(row, sort_keys=True, separators=(",", ":")) + "\n")
             status_counts[row["status"]] = status_counts.get(row["status"], 0) + 1
@@ -298,6 +321,13 @@ def run(args):
         "environment": {
             **actual_environment,
             "device": device_name,
+            "deterministic_algorithms": torch.are_deterministic_algorithms_enabled(),
+            "cudnn_deterministic": torch.backends.cudnn.deterministic,
+            "cudnn_benchmark": torch.backends.cudnn.benchmark,
+            "cuda_matmul_allow_tf32": torch.backends.cuda.matmul.allow_tf32,
+            "cudnn_allow_tf32": torch.backends.cudnn.allow_tf32,
+            "cublas_workspace_config": os.environ.get("CUBLAS_WORKSPACE_CONFIG"),
+            "seed": inference["seed"],
         },
         "preprocessing_code_sha256_lf": _sha256(
             repo / "src/titan_v45/data/reconstructed.py"
