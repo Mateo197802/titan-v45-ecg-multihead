@@ -31,7 +31,16 @@ def _absolute_interval(axis, x, y, *, xerr=None, fmt="o", color=None,
 
 
 def plot_corrected(report, output_dir):
-    with patch.object(Axes, "errorbar", _absolute_interval):
+    original_set_yticks = Axes.set_yticks
+
+    def preserve_shared_labels(axis, ticks, labels=None, *args, **kwargs):
+        if isinstance(labels, list) and not labels:
+            return original_set_yticks(axis, ticks, *args, **kwargs)
+        return original_set_yticks(axis, ticks, labels, *args, **kwargs)
+
+    with patch.object(Axes, "errorbar", _absolute_interval), patch.object(
+        Axes, "set_yticks", preserve_shared_labels
+    ):
         return plot_sph_aggregate(report, output_dir)
 
 

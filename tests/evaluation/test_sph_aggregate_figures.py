@@ -90,3 +90,16 @@ def test_corrected_plot_preserves_interval_excluding_point(tmp_path, monkeypatch
     monkeypatch.setattr(Axes, "hlines", capture)
     plot_corrected(report, tmp_path)
     assert any(low == pytest.approx(0.85) and high == pytest.approx(0.95) for low, high in intervals)
+
+
+def test_corrected_plot_preserves_endpoint_labels_on_shared_axes(tmp_path, monkeypatch):
+    plt = pytest.importorskip("matplotlib.pyplot")
+    figures = []
+    with monkeypatch.context() as context:
+        context.setattr(plt, "close", lambda figure: figures.append(figure))
+        plot_corrected(_report(), tmp_path)
+    endpoint_figure = figures[1]
+    labels = [label.get_text() for label in endpoint_figure.axes[0].get_yticklabels()]
+    assert labels == ["P6:TEST  (+1/-2)", "P8:TEST  (+1/-2)", "P4:TEST  (+1/-2)"]
+    for figure in figures:
+        plt.close(figure)
