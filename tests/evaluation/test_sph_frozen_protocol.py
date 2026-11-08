@@ -45,4 +45,3 @@ def test_frozen_sph_protocol_hashes_and_contracts_are_self_consistent():
     assert protocol["reporting"]["outputs"] == [
         "sph_profile_coverage", "sph_endpoint_metrics", "sph_duplicate_sensitivity"
     ]
-
