@@ -52,8 +52,8 @@
     {
       "id": "R2-2b",
       "concern": "Origin and purpose of figures 1 and 2",
-      "disposition": "MANUSCRIPT_UPDATE_ONLY",
-      "evidence_and_action": "Verify figure provenance and descriptions."
+      "disposition": "ACTIVE_RECOVERY_REQUIRED",
+      "evidence_and_action": "[Archive-level provenance](R2-2B_FIGURES_1_2_PROVENANCE.md) verifies purpose, paths and image hashes; author/source records for creation, third-party assets and permissions remain outstanding."
     },
     {
       "id": "R2-2c",

@@ -28,6 +28,7 @@ def parse_index(text):
             "CLAIM_WITHDRAWAL_REQUIRED",
             "EXPERIMENT_COMPLETED",
             "EXPERIMENT_COMPLETED_WITH_LIMITATIONS",
+            "ACTIVE_RECOVERY_REQUIRED",
         }:
             raise ValueError(f"unknown disposition for {cells[0]}")
         rows.append(dict(zip(("id", "concern", "disposition", "evidence_and_action"), cells, strict=True)))

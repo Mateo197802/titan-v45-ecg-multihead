@@ -17,6 +17,9 @@ def test_export_matches_all_48_unique_review_items():
     text = (ROOT / "docs/reviewer_closure/REVIEWER_48_STATUS.md").read_text(encoding="utf-8")
     result = MODULE.parse_index(text)
     assert len(result["items"]) == 48
+    figure_status = next(item for item in result["items"] if item["id"] == "R2-2b")
+    assert figure_status["disposition"] == "ACTIVE_RECOVERY_REQUIRED"
+    assert "author/source records" in figure_status["evidence_and_action"]
     published = json.loads((ROOT / "docs/reviewer_closure/REVIEWER_48_STATUS.json").read_text())
     assert result == published
     with pytest.raises(ValueError, match="48 IDs"):
