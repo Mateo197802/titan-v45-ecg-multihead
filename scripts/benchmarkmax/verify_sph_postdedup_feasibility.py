@@ -21,6 +21,8 @@ def sha256_file(path: Path) -> str:
 
 
 def _validate_support(support: dict, expected_records: int, endpoint_names: set[str]) -> None:
+    if set(support) != {"record_denominator", "splits", "individual_identifiers_exported"}:
+        raise ValueError("support artifact contains unexpected fields")
     if support.get("individual_identifiers_exported") is not False:
         raise ValueError("support artifact declares individual identifiers")
     if support.get("record_denominator") != expected_records:
@@ -31,6 +33,8 @@ def _validate_support(support: dict, expected_records: int, endpoint_names: set[
     if sum(item.get("records", -1) for item in splits.values()) != expected_records:
         raise ValueError("support split denominators do not reconcile")
     for item in splits.values():
+        if set(item) != {"records", "patients", "endpoints"}:
+            raise ValueError("support split contains unexpected fields")
         records = item.get("records")
         patients = item.get("patients")
         if (type(records) is not int or type(patients) is not int or records < 0
@@ -40,6 +44,10 @@ def _validate_support(support: dict, expected_records: int, endpoint_names: set[
         if not isinstance(endpoints, dict) or set(endpoints) != endpoint_names:
             raise ValueError("support endpoint set differs from frozen protocol")
         for values in endpoints.values():
+            if set(values) != {
+                "positive_records", "statement_not_recorded_records", "positive_patients",
+            }:
+                raise ValueError("support endpoint contains unexpected fields")
             positive = values.get("positive_records")
             not_recorded = values.get("statement_not_recorded_records")
             positive_patients = values.get("positive_patients")
@@ -57,8 +65,20 @@ def verify_report(report: dict, config: dict) -> dict[str, object]:
     endpoints = set(config["endpoints"])
     if report.get("schema") != "TITAN_V46_SPH_POSTDEDUP_SUPPORT_V1":
         raise ValueError("unexpected support report schema")
+    if set(report) != {
+        "schema", "status", "scope", "source", "runtime", "signal_audit", "split",
+        "reference", "endpoints", "support_before_signal_exclusions",
+        "support_after_signal_and_duplicate_exclusions", "model_specific_preprocessing_assessed",
+        "performance_metrics_computed", "individual_identifiers_exported", "execution",
+    }:
+        raise ValueError("support report contains unexpected fields")
     if report.get("status") != "completed_aggregate_support_audit":
         raise ValueError("support report is not marked completed")
+    if report.get("scope") != (
+        "Exploratory SPH development-support counts only. SPH has been previously observed; "
+        "this is not performance evaluation, independent validation, or model-specific input validation."
+    ):
+        raise ValueError("support report scope differs from the frozen audit boundary")
     if report.get("individual_identifiers_exported") is not False:
         raise ValueError("support report declares individual identifiers")
     if report.get("performance_metrics_computed") is not False:
@@ -69,8 +89,16 @@ def verify_report(report: dict, config: dict) -> dict[str, object]:
         raise ValueError("support endpoint contract differs from frozen configuration")
     if report.get("runtime") != config.get("runtime"):
         raise ValueError("support runtime differs from frozen configuration")
+    if report.get("reference") != (
+        "AHA code present on this ECG. Absence means statement not recorded, not adjudicated clinical absence."
+    ):
+        raise ValueError("support report reference semantics changed")
 
     source = report.get("source", {})
+    if set(source) != {
+        "name", "records", "patients", "input_sha256", "source_inventory_reference_sha256",
+    } or source.get("name") != "SPH ECG dataset V1":
+        raise ValueError("support source contains unexpected fields")
     if (source.get("records") != expected["records"]
             or source.get("patients") != expected["patients"]
             or source.get("input_sha256") != config["source"]["input_sha256"]
@@ -79,13 +107,29 @@ def verify_report(report: dict, config: dict) -> dict[str, object]:
         raise ValueError("support source provenance differs from frozen configuration")
 
     signal = report.get("signal_audit", {})
+    if set(signal) != {"eligibility", "fingerprint", "duplicate_policy", "near_duplicate_detection", "counts"}:
+        raise ValueError("signal audit contains unexpected fields")
+    if (signal.get("eligibility") != (
+            "10-60 seconds at 500 Hz; readable finite 12-lead HDF5; at least one non-flat lead"
+    ) or signal.get("fingerprint") != (
+            "SHA-256 of canonical little-endian float64 raw signal array bytes"
+    ) or signal.get("duplicate_policy") != (
+            "exclude every record participating in an exact-signal duplicate group before label join"
+    )):
+        raise ValueError("signal audit contract differs from the frozen protocol")
     counts = signal.get("counts", {})
+    if set(counts) != {
+        "archive_members_seen", "source_records", "valid_signal_records",
+        "exact_duplicate_signal_groups", "exact_duplicate_signal_excess_records",
+        "exact_duplicate_records_excluded", "unique_signal_records",
+    }:
+        raise ValueError("signal audit contains unexpected count fields")
     for field in (
-        "source_records", "valid_signal_records", "exact_duplicate_signal_groups",
+        "archive_members_seen", "source_records", "valid_signal_records", "exact_duplicate_signal_groups",
         "exact_duplicate_signal_excess_records", "exact_duplicate_records_excluded",
         "unique_signal_records",
     ):
-        expected_field = "records" if field == "source_records" else field
+        expected_field = "records" if field in {"archive_members_seen", "source_records"} else field
         if counts.get(field) != expected[expected_field]:
             raise ValueError(f"signal audit differs from frozen expectation: {field}")
     if signal.get("near_duplicate_detection") is not False:
@@ -95,6 +139,23 @@ def verify_report(report: dict, config: dict) -> dict[str, object]:
         raise ValueError("unique-signal denominator does not reconcile")
 
     split = report.get("split", {})
+    if set(split) != {
+        "namespace", "seed", "algorithm", "assignment", "labels_used_for_assignment",
+        "patient_overlap_across_splits", "third_partition_caveat",
+    }:
+        raise ValueError("split report contains unexpected fields")
+    if (split.get("namespace") != "TITAN-V46-SPH-DEV-SPLIT-V1:"
+            or split.get("seed") != "197802"
+            or split.get("algorithm") != (
+                "SHA-256(namespace + seed + patient ID); first 64 digest bits interpreted big-endian modulo 100"
+            )
+            or split.get("assignment") != {
+                "train": "0-69", "development": "70-84", "exploratory_holdout": "85-99",
+            }
+            or split.get("third_partition_caveat") != (
+                "This bucket was used as the exploratory holdout in the PAC pilot; it is not an untouched or confirmatory test."
+            )):
+        raise ValueError("split protocol differs from frozen assignment")
     if split.get("labels_used_for_assignment") is not False:
         raise ValueError("split assignment was not label-blind")
     if split.get("patient_overlap_across_splits") != 0:
@@ -133,6 +194,8 @@ def verify_report(report: dict, config: dict) -> dict[str, object]:
             raise ValueError(f"post-dedup support exceeds source support: {endpoint}")
 
     execution = report.get("execution", {})
+    if set(execution) != {"commit", "slurm_job_id", "script_sha256", "config_sha256"}:
+        raise ValueError("execution provenance contains unexpected fields")
     if (not re.fullmatch(r"[0-9a-f]{40}", execution.get("commit", ""))
             or not re.fullmatch(r"[0-9a-f]{64}", execution.get("script_sha256", ""))
             or not re.fullmatch(r"[0-9a-f]{64}", execution.get("config_sha256", ""))):
@@ -173,7 +236,6 @@ def main() -> None:
     parser.add_argument("--forbidden-root", action="append", default=[], type=Path)
     args = parser.parse_args()
     roots = [ROOT, *(path.resolve() for path in args.forbidden_root)]
-    _assert_outside(args.report, roots)
     _assert_outside(args.output, roots)
     if sha256_file(args.config) != args.expected_config_sha256:
         raise ValueError("frozen support configuration SHA-256 mismatch")

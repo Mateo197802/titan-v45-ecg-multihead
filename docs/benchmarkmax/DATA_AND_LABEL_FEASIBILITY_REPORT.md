@@ -74,8 +74,36 @@ and 3,745 / 3,580 to calibration-candidate, with zero patients crossing splits.
 These are source-statement supports, not candidate-model metrics. PAC has
 enough positive support for a limited exploratory head pilot; LVH is marginal
 for a reliable threshold claim; ASMI/IMI support is too sparse in
-development/calibration for stable claims or a robust threshold estimate. The
-separate PAC pilot has now completed on CEDIA job `32805` under a frozen
+development/calibration for stable claims or a robust threshold estimate.
+
+The table above predates waveform-level exact-duplicate exclusion. The frozen
+post-dedup audit on CEDIA job `32815` now gives the stricter support counts for
+new model development: all 25,770 source signals passed the technical signal
+gate, but all 336 records participating in 168 exact-duplicate groups were
+removed, leaving 25,434 ECGs from 24,509 patients. The audit cross-checked the
+metadata supports against the source inventory and found no technical signal
+exclusions. It did not inspect near-duplicates or run branch-specific model
+preprocessing.
+
+| Endpoint | Train records / patients | Development | Exploratory holdout | Total records / patients |
+| --- | ---: | ---: | ---: | ---: |
+| ASMI | 64 / 60 | 7 / 6 | 16 / 15 | 87 / 81 |
+| IMI | 84 / 83 | 21 / 20 | 13 / 13 | 118 / 116 |
+| LVH | 142 / 137 | 40 / 38 | 25 / 25 | 207 / 200 |
+| PAC | 361 / 356 | 87 / 83 | 84 / 82 | 532 / 521 |
+| PVC | 720 / 705 | 163 / 159 | 170 / 161 | 1,053 / 1,025 |
+| RBBB | 512 / 480 | 81 / 76 | 101 / 94 | 694 / 650 |
+
+ASMI and IMI have only 6 and 20 positive development patients, respectively;
+LVH has 38. This is weak support for stable operating-threshold claims and
+does not justify complex heads by itself. PAC, PVC, and RBBB have more support
+for limited exploratory head comparisons, but their labels remain ECG
+statements, and none of these splits is an independent test. Full denominators,
+protocol, hashes, CEDIA job, and verification receipt are documented in the
+[post-dedup results](SPH_POSTDEDUP_SUPPORT_RESULTS.md). The public JSON contains
+aggregates only; identifiers remain in CEDIA.
+
+The separate PAC pilot has now completed on CEDIA job `32805` under a frozen
 protocol. Its population was 25,770 source records; 336 records in 168 exact
 duplicate-signal groups were excluded before label join, leaving 25,434
 eligible records. The patient-grouped, label-blind split contained 17,916

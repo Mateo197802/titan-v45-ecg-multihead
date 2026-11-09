@@ -1,0 +1,315 @@
+{
+  "endpoints": {
+    "ASMI": {
+      "code": 165,
+      "description": "Anteroseptal MI"
+    },
+    "IMI": {
+      "code": 161,
+      "description": "Inferior MI"
+    },
+    "LVH": {
+      "code": 142,
+      "description": "Left ventricular hypertrophy"
+    },
+    "PAC": {
+      "code": 30,
+      "description": "Atrial premature complex(es)"
+    },
+    "PVC": {
+      "code": 60,
+      "description": "Ventricular premature complex(es)"
+    },
+    "RBBB": {
+      "code": 106,
+      "description": "Right bundle-branch block"
+    }
+  },
+  "execution": {
+    "commit": "158dce34588df2668703a3b4f73e907ddf5c39cc",
+    "config_sha256": "b4b05d848fdb432cd39375738209be21090a8c3f46230c3b19680567746d516f",
+    "script_sha256": "0468b2511fed6ea36206f1faa2419055f531bb532a7bd49822172b18a66253ba",
+    "slurm_job_id": "32815"
+  },
+  "individual_identifiers_exported": false,
+  "model_specific_preprocessing_assessed": false,
+  "performance_metrics_computed": false,
+  "reference": "AHA code present on this ECG. Absence means statement not recorded, not adjudicated clinical absence.",
+  "runtime": {
+    "h5py": "3.13.0",
+    "h5py_dependency_archive_sha256": "e2ad92e7a9258e6ca5872b87d5cdde2ab1b6fb2d80cf69f890043e58df8baf61",
+    "numpy": "2.2.6",
+    "python": "3.11.14",
+    "python_dependency_archive_sha256": "5ea9a481f100342a4b7c9aaf98294659340d05ba20dba645007f37a3fbb6cc45"
+  },
+  "schema": "TITAN_V46_SPH_POSTDEDUP_SUPPORT_V1",
+  "scope": "Exploratory SPH development-support counts only. SPH has been previously observed; this is not performance evaluation, independent validation, or model-specific input validation.",
+  "signal_audit": {
+    "counts": {
+      "archive_members_seen": 25770,
+      "exact_duplicate_records_excluded": 336,
+      "exact_duplicate_signal_excess_records": 168,
+      "exact_duplicate_signal_groups": 168,
+      "source_records": 25770,
+      "unique_signal_records": 25434,
+      "valid_signal_records": 25770
+    },
+    "duplicate_policy": "exclude every record participating in an exact-signal duplicate group before label join",
+    "eligibility": "10-60 seconds at 500 Hz; readable finite 12-lead HDF5; at least one non-flat lead",
+    "fingerprint": "SHA-256 of canonical little-endian float64 raw signal array bytes",
+    "near_duplicate_detection": false
+  },
+  "source": {
+    "input_sha256": {
+      "dictionary": "4d22759fd19d37133c78d439a5726f9e0bc412cc17483c424926ce9abb33c8fc",
+      "metadata": "c6f8dc5197758a3970aae554f8b6ee884d96656b121879bc0eb1adf367ea6d86",
+      "waveform_archive": "cebad89d7d25663272eeb45545712d76302d334bb107cdc23fd15390c9194e55"
+    },
+    "name": "SPH ECG dataset V1",
+    "patients": 24666,
+    "records": 25770,
+    "source_inventory_reference_sha256": "8321abf1d91f0a97ae65b8e9d3a47ba4f5460055ac7780fd84ad2cc86efd2cf7"
+  },
+  "split": {
+    "algorithm": "SHA-256(namespace + seed + patient ID); first 64 digest bits interpreted big-endian modulo 100",
+    "assignment": {
+      "development": "70-84",
+      "exploratory_holdout": "85-99",
+      "train": "0-69"
+    },
+    "labels_used_for_assignment": false,
+    "namespace": "TITAN-V46-SPH-DEV-SPLIT-V1:",
+    "patient_overlap_across_splits": 0,
+    "seed": "197802",
+    "third_partition_caveat": "This bucket was used as the exploratory holdout in the PAC pilot; it is not an untouched or confirmatory test."
+  },
+  "status": "completed_aggregate_support_audit",
+  "support_after_signal_and_duplicate_exclusions": {
+    "individual_identifiers_exported": false,
+    "record_denominator": 25434,
+    "splits": {
+      "development": {
+        "endpoints": {
+          "ASMI": {
+            "positive_patients": 6,
+            "positive_records": 7,
+            "statement_not_recorded_records": 3814
+          },
+          "IMI": {
+            "positive_patients": 20,
+            "positive_records": 21,
+            "statement_not_recorded_records": 3800
+          },
+          "LVH": {
+            "positive_patients": 38,
+            "positive_records": 40,
+            "statement_not_recorded_records": 3781
+          },
+          "PAC": {
+            "positive_patients": 83,
+            "positive_records": 87,
+            "statement_not_recorded_records": 3734
+          },
+          "PVC": {
+            "positive_patients": 159,
+            "positive_records": 163,
+            "statement_not_recorded_records": 3658
+          },
+          "RBBB": {
+            "positive_patients": 76,
+            "positive_records": 81,
+            "statement_not_recorded_records": 3740
+          }
+        },
+        "patients": 3686,
+        "records": 3821
+      },
+      "exploratory_holdout": {
+        "endpoints": {
+          "ASMI": {
+            "positive_patients": 15,
+            "positive_records": 16,
+            "statement_not_recorded_records": 3681
+          },
+          "IMI": {
+            "positive_patients": 13,
+            "positive_records": 13,
+            "statement_not_recorded_records": 3684
+          },
+          "LVH": {
+            "positive_patients": 25,
+            "positive_records": 25,
+            "statement_not_recorded_records": 3672
+          },
+          "PAC": {
+            "positive_patients": 82,
+            "positive_records": 84,
+            "statement_not_recorded_records": 3613
+          },
+          "PVC": {
+            "positive_patients": 161,
+            "positive_records": 170,
+            "statement_not_recorded_records": 3527
+          },
+          "RBBB": {
+            "positive_patients": 94,
+            "positive_records": 101,
+            "statement_not_recorded_records": 3596
+          }
+        },
+        "patients": 3558,
+        "records": 3697
+      },
+      "train": {
+        "endpoints": {
+          "ASMI": {
+            "positive_patients": 60,
+            "positive_records": 64,
+            "statement_not_recorded_records": 17852
+          },
+          "IMI": {
+            "positive_patients": 83,
+            "positive_records": 84,
+            "statement_not_recorded_records": 17832
+          },
+          "LVH": {
+            "positive_patients": 137,
+            "positive_records": 142,
+            "statement_not_recorded_records": 17774
+          },
+          "PAC": {
+            "positive_patients": 356,
+            "positive_records": 361,
+            "statement_not_recorded_records": 17555
+          },
+          "PVC": {
+            "positive_patients": 705,
+            "positive_records": 720,
+            "statement_not_recorded_records": 17196
+          },
+          "RBBB": {
+            "positive_patients": 480,
+            "positive_records": 512,
+            "statement_not_recorded_records": 17404
+          }
+        },
+        "patients": 17265,
+        "records": 17916
+      }
+    }
+  },
+  "support_before_signal_exclusions": {
+    "individual_identifiers_exported": false,
+    "record_denominator": 25770,
+    "splits": {
+      "development": {
+        "endpoints": {
+          "ASMI": {
+            "positive_patients": 6,
+            "positive_records": 7,
+            "statement_not_recorded_records": 3882
+          },
+          "IMI": {
+            "positive_patients": 20,
+            "positive_records": 21,
+            "statement_not_recorded_records": 3868
+          },
+          "LVH": {
+            "positive_patients": 38,
+            "positive_records": 40,
+            "statement_not_recorded_records": 3849
+          },
+          "PAC": {
+            "positive_patients": 84,
+            "positive_records": 89,
+            "statement_not_recorded_records": 3800
+          },
+          "PVC": {
+            "positive_patients": 160,
+            "positive_records": 165,
+            "statement_not_recorded_records": 3724
+          },
+          "RBBB": {
+            "positive_patients": 77,
+            "positive_records": 83,
+            "statement_not_recorded_records": 3806
+          }
+        },
+        "patients": 3718,
+        "records": 3889
+      },
+      "exploratory_holdout": {
+        "endpoints": {
+          "ASMI": {
+            "positive_patients": 15,
+            "positive_records": 16,
+            "statement_not_recorded_records": 3729
+          },
+          "IMI": {
+            "positive_patients": 13,
+            "positive_records": 13,
+            "statement_not_recorded_records": 3732
+          },
+          "LVH": {
+            "positive_patients": 25,
+            "positive_records": 25,
+            "statement_not_recorded_records": 3720
+          },
+          "PAC": {
+            "positive_patients": 83,
+            "positive_records": 85,
+            "statement_not_recorded_records": 3660
+          },
+          "PVC": {
+            "positive_patients": 161,
+            "positive_records": 170,
+            "statement_not_recorded_records": 3575
+          },
+          "RBBB": {
+            "positive_patients": 95,
+            "positive_records": 103,
+            "statement_not_recorded_records": 3642
+          }
+        },
+        "patients": 3580,
+        "records": 3745
+      },
+      "train": {
+        "endpoints": {
+          "ASMI": {
+            "positive_patients": 61,
+            "positive_records": 68,
+            "statement_not_recorded_records": 18068
+          },
+          "IMI": {
+            "positive_patients": 84,
+            "positive_records": 86,
+            "statement_not_recorded_records": 18050
+          },
+          "LVH": {
+            "positive_patients": 138,
+            "positive_records": 144,
+            "statement_not_recorded_records": 17992
+          },
+          "PAC": {
+            "positive_patients": 358,
+            "positive_records": 365,
+            "statement_not_recorded_records": 17771
+          },
+          "PVC": {
+            "positive_patients": 711,
+            "positive_records": 732,
+            "statement_not_recorded_records": 17404
+          },
+          "RBBB": {
+            "positive_patients": 486,
+            "positive_records": 524,
+            "statement_not_recorded_records": 17612
+          }
+        },
+        "patients": 17368,
+        "records": 18136
+      }
+    }
+  }
+}

@@ -58,7 +58,12 @@ def _report_and_config():
     report = {
         "schema": "TITAN_V46_SPH_POSTDEDUP_SUPPORT_V1",
         "status": "completed_aggregate_support_audit",
+        "scope": (
+            "Exploratory SPH development-support counts only. SPH has been previously observed; "
+            "this is not performance evaluation, independent validation, or model-specific input validation."
+        ),
         "source": {
+            "name": "SPH ECG dataset V1",
             "records": expected["records"],
             "patients": expected["patients"],
             "input_sha256": config["source"]["input_sha256"],
@@ -66,8 +71,12 @@ def _report_and_config():
         },
         "runtime": config["runtime"],
         "signal_audit": {
+            "eligibility": "10-60 seconds at 500 Hz; readable finite 12-lead HDF5; at least one non-flat lead",
+            "fingerprint": "SHA-256 of canonical little-endian float64 raw signal array bytes",
+            "duplicate_policy": "exclude every record participating in an exact-signal duplicate group before label join",
             "near_duplicate_detection": False,
             "counts": {
+                "archive_members_seen": expected["records"],
                 "source_records": expected["records"],
                 "valid_signal_records": expected["valid_signal_records"],
                 "exact_duplicate_signal_groups": expected["exact_duplicate_signal_groups"],
@@ -77,10 +86,15 @@ def _report_and_config():
             },
         },
         "split": {
+            "namespace": "TITAN-V46-SPH-DEV-SPLIT-V1:",
+            "seed": "197802",
+            "algorithm": "SHA-256(namespace + seed + patient ID); first 64 digest bits interpreted big-endian modulo 100",
             "assignment": {"train": "0-69", "development": "70-84", "exploratory_holdout": "85-99"},
             "labels_used_for_assignment": False,
             "patient_overlap_across_splits": 0,
+            "third_partition_caveat": "This bucket was used as the exploratory holdout in the PAC pilot; it is not an untouched or confirmatory test.",
         },
+        "reference": "AHA code present on this ECG. Absence means statement not recorded, not adjudicated clinical absence.",
         "endpoints": config["endpoints"],
         "support_before_signal_exclusions": {
             "record_denominator": expected["records"],
@@ -116,4 +130,9 @@ def test_verifier_rejects_bad_denominator_or_patient_leakage():
     report, config = _report_and_config()
     report["individual_identifiers_exported"] = True
     with pytest.raises(ValueError, match="identifiers"):
+        module.verify_report(report, config)
+
+    report, config = _report_and_config()
+    report["patient_ids"] = ["restricted-id"]
+    with pytest.raises(ValueError, match="unexpected fields"):
         module.verify_report(report, config)

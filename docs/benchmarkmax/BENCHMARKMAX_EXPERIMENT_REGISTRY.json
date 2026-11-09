@@ -235,6 +235,74 @@
       "external_claim_permitted": false
     },
     {
+      "id": "B2-V46-SPH-POSTDEDUP-SUPPORT",
+      "status": "completed_aggregate_support_only",
+      "purpose": "Label-blind signal eligibility, exact-duplicate exclusion, and aggregate patient/endpoint statement support for candidate V4.6 development. No inference, fitting, or performance metrics were computed.",
+      "protocol": "SPH_POSTDEDUP_SUPPORT_PROTOCOL.md",
+      "configuration": "../../configs/benchmarkmax/sph_postdedup_support.json",
+      "configuration_sha256": "b4b05d848fdb432cd39375738209be21090a8c3f46230c3b19680567746d516f",
+      "runner": "../../scripts/benchmarkmax/audit_sph_postdedup_feasibility.py",
+      "runner_sha256": "0468b2511fed6ea36206f1faa2419055f531bb532a7bd49822172b18a66253ba",
+      "verifier": "../../scripts/benchmarkmax/verify_sph_postdedup_feasibility.py",
+      "verifier_sha256": "78976cd9482f893431a2a4be5644a87baec4efe72f6184c711d5e99605a683e5",
+      "slurm_wrapper": "../../scripts/cedia/audit_sph_postdedup_support.sbatch",
+      "slurm_wrapper_sha256": "7ae39c908425825b9f1c35f4bc414033f4d431a082b9f6353de2683ebccf5a30",
+      "cedia_job": 32815,
+      "execution_commit": "158dce34588df2668703a3b4f73e907ddf5c39cc",
+      "runtime": "CEDIA SLURM cpu-dev, 1 CPU, 4 GB, no GPU; Python 3.11.14, NumPy 2.2.6, h5py 3.13.0.",
+      "elapsed_seconds": 78,
+      "input_sha256": {
+        "metadata": "c6f8dc5197758a3970aae554f8b6ee884d96656b121879bc0eb1adf367ea6d86",
+        "dictionary": "4d22759fd19d37133c78d439a5726f9e0bc412cc17483c424926ce9abb33c8fc",
+        "waveform_archive": "cebad89d7d25663272eeb45545712d76302d334bb107cdc23fd15390c9194e55",
+        "source_inventory_reference": "8321abf1d91f0a97ae65b8e9d3a47ba4f5460055ac7780fd84ad2cc86efd2cf7",
+        "python_dependency_archive": "5ea9a481f100342a4b7c9aaf98294659340d05ba20dba645007f37a3fbb6cc45",
+        "h5py_dependency_archive": "e2ad92e7a9258e6ca5872b87d5cdde2ab1b6fb2d80cf69f890043e58df8baf61"
+      },
+      "source_population": {"records": 25770, "patients": 24666},
+      "signal_audit": {
+        "valid_signal_records": 25770,
+        "exact_duplicate_groups": 168,
+        "duplicate_records_excluded": 336,
+        "unique_signal_records": 25434,
+        "patients_after_exclusion": 24509
+      },
+      "postdedup_positive_record_support": {
+        "ASMI": {"train": 64, "development": 7, "exploratory_holdout": 16},
+        "IMI": {"train": 84, "development": 21, "exploratory_holdout": 13},
+        "LVH": {"train": 142, "development": 40, "exploratory_holdout": 25},
+        "PAC": {"train": 361, "development": 87, "exploratory_holdout": 84},
+        "PVC": {"train": 720, "development": 163, "exploratory_holdout": 170},
+        "RBBB": {"train": 512, "development": 81, "exploratory_holdout": 101}
+      },
+      "aggregate_artifact": "../../outputs/results/benchmarkmax/sph_postdedup_support_32815.json",
+      "aggregate_sha256": "c267b6f47cfacc17b56fd95e4bf60bc4b56c7ebd818d33a5ad473771cd1c4306",
+      "verification_receipt": "../../outputs/results/benchmarkmax/sph_postdedup_support_32815.verification.json",
+      "verification_receipt_sha256": "286f85b34dd2f925a9f3d11395dc30fce0a080378c8878b88e522608a5ce1c37",
+      "results_document": "SPH_POSTDEDUP_SUPPORT_RESULTS.md",
+      "results_document_sha256": "bd63e99b65d0eca968ab66a7000618d3980db39b8b62a1dcf90849260c341098",
+      "publication_reverification": {
+        "status": "passed",
+        "verification_script_sha256": "a4e247101fb8e424b1f9118db7b90ce88296687eb5d886a6001e4f17793ece79",
+        "receipt_sha256": "286f85b34dd2f925a9f3d11395dc30fce0a080378c8878b88e522608a5ce1c37"
+      },
+      "performance_metrics_computed": false,
+      "model_specific_preprocessing_assessed": false,
+      "individual_identifiers_exported": false,
+      "external_claim_permitted": false,
+      "failed_attempts": [
+        {
+          "cedia_job_id": 32814,
+          "execution_commit": "c9e48080fd900a30b9838a211981480c3e6e3ed7",
+          "state": "FAILED",
+          "exit_code": "1:0",
+          "failure_stage": "runtime preflight before waveform archive open",
+          "reason": "The wrapper mounted h5py without the pinned NumPy dependency archive; h5py import failed with ModuleNotFoundError. No signals were read and no result was produced.",
+          "aggregate_created": false
+        }
+      ]
+    },
+    {
       "id": "B2-MIMIC-IV-ECG-MACHINE-REPORT-CONCORDANCE",
       "status": "parser_implemented_waiting_for_author_mapping_and_cedia_quota",
       "purpose": "Potential concordance with v1.0 machine-generated report statements only; not clinical-reference validation. The deterministic phrase parser is implemented, but the real mapping is empty/unapproved and no MIMIC data have been downloaded or processed.",
@@ -252,10 +320,12 @@
     },
     {
       "id": "B2-V46-NEW-SPECIALISTS",
-      "status": "partially_completed_pac_pilot_only",
-      "purpose": "The PAC-only head comparison has completed as exploratory development on previously observed SPH. Full P6/P8/P4 specialist-profile training and inference, all-input routing, and complete workflow metrics remain outside this pilot and are not implemented or claimed.",
+      "status": "partially_completed_pac_pilot_plus_support_audit",
+      "purpose": "The PAC-only head comparison has completed as exploratory development on previously observed SPH. A separate post-dedup support audit covers ASMI, IMI, LVH, PAC, PVC, and RBBB, but no new P4 specialist heads or complete routing flow have been trained or evaluated.",
       "pac_pilot_cedia_job": 32805,
       "pac_pilot_aggregate": "../../outputs/results/benchmarkmax/sph_pac_head_comparison_32805.json",
+      "postdedup_support_job": 32815,
+      "postdedup_support_aggregate": "../../outputs/results/benchmarkmax/sph_postdedup_support_32815.json",
       "external_claim_permitted": false
     },
     {

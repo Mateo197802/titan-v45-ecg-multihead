@@ -1,0 +1,17 @@
+{
+  "commit": "158dce34588df2668703a3b4f73e907ddf5c39cc",
+  "config_sha256": "b4b05d848fdb432cd39375738209be21090a8c3f46230c3b19680567746d516f",
+  "individual_identifiers_exported": false,
+  "report_sha256": "c267b6f47cfacc17b56fd95e4bf60bc4b56c7ebd818d33a5ad473771cd1c4306",
+  "schema": "TITAN_V46_SPH_POSTDEDUP_SUPPORT_VERIFICATION_V1",
+  "slurm_job_id": "32815",
+  "status": "passed",
+  "verified_checks": [
+    "frozen_input_and_inventory_hashes",
+    "source_population_and_exact_duplicate_counts",
+    "post-dedup_split_denominators",
+    "endpoint_support_reconciliation",
+    "patient-level split totals",
+    "aggregate-only output and non-performance scope"
+  ]
+}
