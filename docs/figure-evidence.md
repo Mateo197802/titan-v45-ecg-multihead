@@ -2,7 +2,7 @@
 
 ## Included Evidence
 
-`outputs/figures/` contains only the 14 PNG images referenced by the submitted manuscript. `figure_manifest.json` records their names, ZIP source paths, and SHA-256 hashes. The manuscript PDF, TeX source, and source ZIP are not committed. The verifier checks the exact image set and hashes; when given the original ZIP, it also checks the archive hash, TeX references, and byte-for-byte equality.
+The top level of `outputs/figures/` contains the 14 PNG images referenced by the submitted manuscript. `figure_manifest.json` records their names, ZIP source paths, and SHA-256 hashes. Separate report figures are stored in dedicated subdirectories with their own manifests and are not manuscript figures. The manuscript PDF, TeX source, and source ZIP are not committed. The verifier checks the exact top-level manuscript image set and hashes; when given the original ZIP, it also checks the archive hash, TeX references, and byte-for-byte equality. Figure-specific archive provenance for submitted Figures 1 and 2 is documented in [`reviewer_closure/R2-2B_FIGURES_1_2_PROVENANCE.md`](reviewer_closure/R2-2B_FIGURES_1_2_PROVENANCE.md).
 
 The figure generator still produces development figures for tests, but those are written to a temporary directory and are not the submitted manuscript assets. The committed tables and external-development evidence do not independently reproduce model training, establish that the upstream raw ECG cohort is complete, or validate a manuscript claim beyond the documented metric/profile contract.
 

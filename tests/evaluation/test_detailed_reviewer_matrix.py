@@ -89,6 +89,24 @@ def test_detailed_matrix_covers_48_items_and_keeps_two_status_dimensions():
             assert item["reviewer_satisfaction"] != "NOT_APPLICABLE_AUDIT"
 
 
+def test_figure_1_and_2_archive_evidence_keeps_authorship_and_execution_limits():
+    data = json.loads(
+        (ROOT / "docs/reviewer_closure/REVIEWER_48_DETAILED.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    item = next(row for row in data["items"] if row["id"] == "R2-2b")
+    evidence = (ROOT / "docs/reviewer_closure/R2-2B_FIGURES_1_2_PROVENANCE.md").read_text(
+        encoding="utf-8"
+    )
+
+    assert item["technical_status"] == "ACTIVE_RECOVERY_REQUIRED"
+    assert item["reviewer_satisfaction"] == "PARTIALLY_ADDRESSED"
+    assert "36c1c6db30a759ef9d349ae2e545577cfd7ce3af91a3b97fb459380113f294a8" in evidence
+    assert "does **not** establish who created or edited them" in evidence
+    assert "do not independently establish that every depicted operation was executed" in evidence
+
+
 def test_detailed_markdown_exposes_each_case_and_status_pair():
     data = json.loads(
         (ROOT / "docs/reviewer_closure/REVIEWER_48_DETAILED.json").read_text(
@@ -120,6 +138,7 @@ def test_closure_documents_have_no_broken_local_links():
         "docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md",
         "docs/reviewer_closure/AF_PVC_REFERENCE_DISPOSITION.md",
         "docs/reviewer_closure/REVIEWER_48_STATUS.md",
+        "docs/reviewer_closure/R2-2B_FIGURES_1_2_PROVENANCE.md",
     )
     for relative_path in documents:
         path = ROOT / relative_path

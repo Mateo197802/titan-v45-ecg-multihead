@@ -18,6 +18,8 @@ needs removal or restriction; that is not equivalent to the requested study.
 historical independence or reviewer acceptance.
 `EVIDENCE_CEILING_REACHED` records a bounded recovery conclusion, not a completed
 historical experiment or a reviewer acceptance; new evidence can reopen it.
+`ACTIVE_RECOVERY_REQUIRED` means a concrete provenance or rights fact remains
+actionable; it is not manuscript-only work.
 
 | ID | Concern | Disposition | Evidence / remaining action |
 | --- | --- | --- | --- |
@@ -29,7 +31,7 @@ historical experiment or a reviewer acceptance; new evidence can reopen it.
 | R2-1a | Define P6 and P4 in abstract | MANUSCRIPT_UPDATE_ONLY | Define terms in the future manuscript. |
 | R2-1b | Define abbreviations on first use | MANUSCRIPT_UPDATE_ONLY | Check first occurrence in the future manuscript. |
 | R2-2a | Introduction references | MANUSCRIPT_UPDATE_ONLY | Align citations with the final scope. |
-| R2-2b | Origin and purpose of figures 1 and 2 | MANUSCRIPT_UPDATE_ONLY | Verify figure provenance and descriptions. |
+| R2-2b | Origin and purpose of figures 1 and 2 | ACTIVE_RECOVERY_REQUIRED | [Archive-level provenance](R2-2B_FIGURES_1_2_PROVENANCE.md) verifies purpose, paths and image hashes; author/source records for creation, third-party assets and permissions remain outstanding. |
 | R2-2c | Comparator selection | MANUSCRIPT_UPDATE_ONLY | Reassess comparison table against final scope. |
 | R2-2d | Unreported parameters and comparability | MANUSCRIPT_UPDATE_ONLY | Mark missing parameters and avoid unequal comparisons. |
 | R2-2e | SCP and abbreviations | MANUSCRIPT_UPDATE_ONLY | Define terms and verify usage. |
