@@ -32,9 +32,9 @@ historical experiment or a reviewer acceptance; new evidence can reopen it.
 | R2-2f | Introduction table placement | MANUSCRIPT_UPDATE_ONLY | Resolve placement and claims in the future manuscript. |
 | R2-3a | Datasets and splits | VERIFIED_WITH_LIMITATIONS | [Recovery status](../recovery-status-20261029.md); historical patient isolation not established. |
 | R2-3b | Design versus evaluation | MANUSCRIPT_UPDATE_ONLY | Distinguish design, historical development and reconstructed evaluation. |
-| R2-3c | Auxiliary classes and training | VERIFIED_WITH_LIMITATIONS | [Feature contract](../recovered-feature-contract.md); outputs alone do not prove supervision. |
-| R2-3d | ALMI, ILMI and LAE training | VERIFIED_WITH_LIMITATIONS | [Data dispositions](../revision-data-dispositions.md); checkpoint-linked supervision remains unverified. |
-| R2-3e | Role definitions | VERIFIED_WITH_LIMITATIONS | [Waveform audit](../frozen-waveform-audit.md); distinguish code roles from historical routing. |
+| R2-3c | Auxiliary classes and training | VERIFIED_WITH_LIMITATIONS | [Role and supervision audit](ROLE_SUPERVISION_AND_ROUTING.md); output contracts alone do not establish checkpoint-linked training support. |
+| R2-3d | ALMI, ILMI and LAE training | EVIDENCE_CEILING_REACHED | [Role and supervision audit](ROLE_SUPERVISION_AND_ROUTING.md); checkpoint-linked supervision remains unverified; exact run manifests and loss masks would reopen recovery. |
+| R2-3e | Role definitions | VERIFIED_WITH_LIMITATIONS | [Role and routing audit](ROLE_SUPERVISION_AND_ROUTING.md); distinguish code roles and selected replay from historical all-input routing. |
 | R2-3f | Morphology and feature architecture | VERIFIED_WITH_LIMITATIONS | [Replay diagnostics](../replay-residual-diagnostics.md); exact historical loader unavailable. |
 | R2-3g | Brier score in methods | MANUSCRIPT_UPDATE_ONLY | Add definition and remove unsupported numerical methods claim. |
 | R2-3h | Accuracy equations and tasks | MANUSCRIPT_UPDATE_ONLY | Define rhythm and pathology endpoints separately. |
@@ -42,13 +42,13 @@ historical experiment or a reviewer acceptance; new evidence can reopen it.
 | R2-4b | Figure cross-reference | MANUSCRIPT_UPDATE_ONLY | Correct figure reference. |
 | R2-4c | Overstated F1 interpretation | MANUSCRIPT_UPDATE_ONLY | Use measured values and qualified language. |
 | R2-4d | Figure metrics versus confidence intervals | MANUSCRIPT_UPDATE_ONLY | Describe what is actually plotted. |
-| R2-4e | No threshold crossed | VERIFIED_WITH_LIMITATIONS | [Waveform audit](../frozen-waveform-audit.md); P8 fallback is not a full-population evaluation. |
+| R2-4e | No threshold crossed | VERIFIED_WITH_LIMITATIONS | [P6 and P8 decision audit](ROLE_SUPERVISION_AND_ROUTING.md); P8 fallback is not quarantine or a full-population evaluation. |
 | R2-4f | Confusion matrix presentation | MANUSCRIPT_UPDATE_ONLY | Harmonize labels and denominators. |
 | R2-4g | Duplicated figures | MANUSCRIPT_UPDATE_ONLY | Reconcile figures against their source data. |
 | R2-4h | ROC and PR tracing definition | MANUSCRIPT_UPDATE_ONLY | Define plotted units and derivation. |
 | R2-4i | AUROC wording | MANUSCRIPT_UPDATE_ONLY | Qualify the interpretation of the reported value. |
 | R2-4j | Frequency versus accuracy plot | MANUSCRIPT_UPDATE_ONLY | Verify axes, bins and denominators. |
-| R2-4k | Quarantine and pre/post rates | CLAIM_WITHDRAWAL_REQUIRED | [Waveform audit](../frozen-waveform-audit.md); historical policy and ledger unavailable; SPH quarantine is not assessed. |
+| R2-4k | Quarantine and pre/post rates | CLAIM_WITHDRAWAL_REQUIRED | [Role and routing audit](ROLE_SUPERVISION_AND_ROUTING.md); historical policy and ledger unavailable; SPH quarantine is not assessed. |
 | R2-4l | Rhythm top-1 | MANUSCRIPT_UPDATE_ONLY | Define the decision and denominator. |
 | R2-4m | Figure readability | MANUSCRIPT_UPDATE_ONLY | Final layout and rendering remain pending. |
 | R2-5 | PVC record versus beat level | VERIFIED_WITH_LIMITATIONS | Report ECG-statement scope, not beat-detection performance. |

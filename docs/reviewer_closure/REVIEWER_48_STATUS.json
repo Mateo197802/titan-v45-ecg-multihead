@@ -95,19 +95,19 @@
       "id": "R2-3c",
       "concern": "Auxiliary classes and training",
       "disposition": "VERIFIED_WITH_LIMITATIONS",
-      "evidence_and_action": "[Feature contract](../recovered-feature-contract.md); outputs alone do not prove supervision."
+      "evidence_and_action": "[Role and supervision audit](ROLE_SUPERVISION_AND_ROUTING.md); output contracts alone do not establish checkpoint-linked training support."
     },
     {
       "id": "R2-3d",
       "concern": "ALMI, ILMI and LAE training",
-      "disposition": "VERIFIED_WITH_LIMITATIONS",
-      "evidence_and_action": "[Data dispositions](../revision-data-dispositions.md); checkpoint-linked supervision remains unverified."
+      "disposition": "EVIDENCE_CEILING_REACHED",
+      "evidence_and_action": "[Role and supervision audit](ROLE_SUPERVISION_AND_ROUTING.md); checkpoint-linked supervision remains unverified; exact run manifests and loss masks would reopen recovery."
     },
     {
       "id": "R2-3e",
       "concern": "Role definitions",
       "disposition": "VERIFIED_WITH_LIMITATIONS",
-      "evidence_and_action": "[Waveform audit](../frozen-waveform-audit.md); distinguish code roles from historical routing."
+      "evidence_and_action": "[Role and routing audit](ROLE_SUPERVISION_AND_ROUTING.md); distinguish code roles and selected replay from historical all-input routing."
     },
     {
       "id": "R2-3f",
@@ -155,7 +155,7 @@
       "id": "R2-4e",
       "concern": "No threshold crossed",
       "disposition": "VERIFIED_WITH_LIMITATIONS",
-      "evidence_and_action": "[Waveform audit](../frozen-waveform-audit.md); P8 fallback is not a full-population evaluation."
+      "evidence_and_action": "[P6 and P8 decision audit](ROLE_SUPERVISION_AND_ROUTING.md); P8 fallback is not quarantine or a full-population evaluation."
     },
     {
       "id": "R2-4f",
@@ -191,7 +191,7 @@
       "id": "R2-4k",
       "concern": "Quarantine and pre/post rates",
       "disposition": "CLAIM_WITHDRAWAL_REQUIRED",
-      "evidence_and_action": "[Waveform audit](../frozen-waveform-audit.md); historical policy and ledger unavailable; SPH quarantine is not assessed."
+      "evidence_and_action": "[Role and routing audit](ROLE_SUPERVISION_AND_ROUTING.md); historical policy and ledger unavailable; SPH quarantine is not assessed."
     },
     {
       "id": "R2-4l",
