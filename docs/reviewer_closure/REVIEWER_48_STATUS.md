@@ -5,6 +5,10 @@ acceptance. SPH scoring and statement-level aggregation have been performed;
 their source-independence limitations remain. The submitted manuscript is unchanged.
 The descriptions below are short project paraphrases, not reviewer quotations.
 The [commit and job index](EVIDENCE_COMMITS.md) records the public evidence chain.
+The [detailed 48-item matrix](REVIEWER_48_DETAILED.md) is the authoritative
+point-by-point disposition; the [technical closure](FINAL_TECHNICAL_EVIDENCE_CLOSURE.md)
+and [evidence-to-claim map](EVIDENCE_TO_CLAIM_MAP.md) summarize it. The
+manuscript-readiness checklist is for the later editorial phase only.
 
 `MANUSCRIPT_UPDATE_ONLY` means editing or assembly remains, not that it has been
 incorporated. `VERIFIED_WITH_LIMITATIONS` identifies evidence that does not
