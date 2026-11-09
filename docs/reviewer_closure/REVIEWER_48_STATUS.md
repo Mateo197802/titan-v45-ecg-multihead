@@ -54,7 +54,7 @@ historical experiment or a reviewer acceptance; new evidence can reopen it.
 | R2-5 | PVC record versus beat level | VERIFIED_WITH_LIMITATIONS | Report ECG-statement scope, not beat-detection performance. |
 | R2-6 | Distortion and citation claim | MANUSCRIPT_UPDATE_ONLY | Remove unsupported general claim and verify citation. |
 | A-01 | P4 panel versus unique ECG count | VERIFIED_WITH_LIMITATIONS | [Data dispositions](../revision-data-dispositions.md); preserve 962 panel rows and 733 distinct record keys. |
-| A-02 | Source distribution and aliases | VERIFIED_WITH_LIMITATIONS | [Source evidence](../revision-evidence-20261029.md); aliases do not prove independence. |
+| A-02 | Source distribution and aliases | VERIFIED_WITH_LIMITATIONS | [Source and rights disposition](SOURCE_RIGHTS_DISPOSITION.md); checksum matches and source aliases do not prove independent institutions or patient isolation. |
 | A-03 | Per-class metric inconsistencies | MANUSCRIPT_UPDATE_ONLY | Use audited source tables and verify the final manuscript values. |
 | A-04 | Thresholds and calibration isolation | VERIFIED_WITH_LIMITATIONS | [Data dispositions](../revision-data-dispositions.md); patient isolation remains unverified. |
 | A-05 | Backbone relationships | MANUSCRIPT_UPDATE_ONLY | Describe shared V3F and separate V3AG accurately. |
@@ -62,7 +62,7 @@ historical experiment or a reviewer acceptance; new evidence can reopen it.
 | A-07 | Data availability URL | MANUSCRIPT_UPDATE_ONLY | Cite the verified final artifact and restricted inputs. |
 | A-08 | Missing supplement CSVs | MANUSCRIPT_UPDATE_ONLY | Inventory only files actually included in the final supplement. |
 | A-09 | Incorrect DOI | MANUSCRIPT_UPDATE_ONLY | Verify replacement reference in the final bibliography. |
-| A-10 | Mixed archive provenance and rights | VERIFIED_WITH_LIMITATIONS | [Licenses](../../data/licenses/README.md); mixed archive remains on HOLD. |
+| A-10 | Mixed archive provenance and rights | VERIFIED_WITH_LIMITATIONS | [Source and rights disposition](SOURCE_RIGHTS_DISPOSITION.md); 84 selected signals identified, package-wide additional redistribution remains on HOLD, and the existing release asset remains public. |
 | A-11 | MC/Grad-CAM clinical claims | CLAIM_WITHDRAWAL_REQUIRED | No clinical adjudication established; remove unsupported claims. |
 | A-12 | Reader study | CLAIM_WITHDRAWAL_REQUIRED | No reader study established; remove unsupported claims. |
 

@@ -227,7 +227,7 @@
       "id": "A-02",
       "concern": "Source distribution and aliases",
       "disposition": "VERIFIED_WITH_LIMITATIONS",
-      "evidence_and_action": "[Source evidence](../revision-evidence-20261029.md); aliases do not prove independence."
+      "evidence_and_action": "[Source and rights disposition](SOURCE_RIGHTS_DISPOSITION.md); checksum matches and source aliases do not prove independent institutions or patient isolation."
     },
     {
       "id": "A-03",
@@ -275,7 +275,7 @@
       "id": "A-10",
       "concern": "Mixed archive provenance and rights",
       "disposition": "VERIFIED_WITH_LIMITATIONS",
-      "evidence_and_action": "[Licenses](../../data/licenses/README.md); mixed archive remains on HOLD."
+      "evidence_and_action": "[Source and rights disposition](SOURCE_RIGHTS_DISPOSITION.md); 84 selected signals identified, package-wide additional redistribution remains on HOLD, and the existing release asset remains public."
     },
     {
       "id": "A-11",
