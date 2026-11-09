@@ -59,3 +59,28 @@ def test_benchmarkmax_status_documents_reflect_completed_b1_calibration():
     assert "B1_SPH_CALIBRATION_RESULTS.md" in baseline
     assert "No V4.6\ncheckpoint or trained specialist exists yet." in baseline
     assert "B1_SPH_CALIBRATION_RESULTS.md" in readme
+
+
+def test_scale_sensitivity_registry_reports_exact_runtime_blocker():
+    registry = json.loads(
+        (ROOT / "docs/benchmarkmax/BENCHMARKMAX_EXPERIMENT_REGISTRY.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    experiment = next(
+        item
+        for item in registry["experiments"]
+        if item["id"] == "B1-SPH-AMPLITUDE-SENSITIVITY"
+    )
+
+    assert experiment["status"] == "not_run_required_runtime_unavailable"
+    assert experiment["checks"]["frozen_source_commit"] == (
+        "eb1c67b9229af875a9f868797b0c2f5c546e3dac"
+    )
+    assert experiment["checks"]["model_hashes_match"] is True
+    assert experiment["checks"]["python_deps_archive_matches"] is True
+    assert experiment["checks"]["h5py_deps_archive_matches"] is True
+    assert experiment["checks"]["compatible_runtime_verified"] is False
+    assert experiment["checks"]["gpu_job_submitted"] is False
+    assert "torch 2.10.0+cu128" in experiment["blocker"]
+    assert "pytorch/2.2" in experiment["blocker"]

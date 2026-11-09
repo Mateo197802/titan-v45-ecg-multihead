@@ -50,14 +50,22 @@
     },
     {
       "id": "B1-SPH-AMPLITUDE-SENSITIVITY",
-      "status": "not_run_pending_exact_runtime_restore",
+      "status": "not_run_required_runtime_unavailable",
       "purpose": "Label-blind signal scale perturbation for sensitivity diagnostics only; not physical-unit certification or clinical performance.",
       "script": "../../scripts/benchmarkmax/sph_scale_sensitivity.py",
       "sample_size": 128,
       "factors": [0.5, 1.0, 2.0],
       "locked_v45_commit": "eb1c67b9229af875a9f868797b0c2f5c546e3dac",
       "individual_records_exported": false,
-      "blocker": "The five physical checkpoint files and pinned python dependency archive were not found in the inspected persistent CEDIA paths. The runner requires exact protocol versions and was not run with a substitute runtime."
+      "checks": {
+        "frozen_source_commit": "eb1c67b9229af875a9f868797b0c2f5c546e3dac",
+        "model_hashes_match": true,
+        "python_deps_archive_matches": true,
+        "h5py_deps_archive_matches": true,
+        "compatible_runtime_verified": false,
+        "gpu_job_submitted": false
+      },
+      "blocker": "The frozen protocol requires Python 3.11.14, torch 2.10.0+cu128, CUDA 12.8, NumPy 2.2.6, SciPy 1.15.3, h5py 3.13.0, wfdb 4.3.0 and zstandard 0.23.0. The checkpoint hashes, Python dependency archive, h5py archive, frozen source commit and sealed prediction ledger are present and match their pinned identifiers. CEDIA exposes pytorch/2.2; the existing project venv contains torch 2.5.1+cu121. Neither is the locked runtime, so no substitute was used and no GPU inference job was submitted."
     },
     {
       "id": "B1-V46-CALIBRATION",
