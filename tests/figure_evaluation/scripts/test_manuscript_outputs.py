@@ -114,4 +114,20 @@ def test_repository_contains_only_the_manuscript_figure_images() -> None:
         and not {".git", ".pytest_cache", "__pycache__"}.intersection(path.parts)
         and path.suffix.lower() in media_suffixes
     }
-    assert actual_media == {f"outputs/figures/{name}" for name in expected}
+    experimental_dir = ROOT / "outputs/figures/benchmarkmax"
+    experimental = json.loads((experimental_dir / "figure_manifest.json").read_text(encoding="utf-8"))
+    assert experimental["schema"] == "TITAN_V46_SPH_DIAGNOSTIC_FIGURES_V1"
+    expected_experimental = {
+        f"sph_baseline_{name}.{suffix}"
+        for name in ("roc", "pr", "calibration", "score_distributions")
+        for suffix in ("png", "pdf")
+    }
+    assert set(experimental["assets"]) == expected_experimental
+    for name, digest in experimental["assets"].items():
+        assert hashlib.sha256((experimental_dir / name).read_bytes()).hexdigest() == digest
+    for item in ("input", "generator"):
+        source = experimental[item]
+        assert hashlib.sha256((ROOT / source["path"]).read_bytes()).hexdigest() == source["sha256"]
+    assert actual_media == {f"outputs/figures/{name}" for name in expected} | {
+        f"outputs/figures/benchmarkmax/{name}" for name in expected_experimental
+    }
