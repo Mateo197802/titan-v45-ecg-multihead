@@ -1,19 +1,23 @@
 # Candidate external source audit
 
 Checked 2026-11-09, without downloading candidate waveforms, individual labels,
-reports or outcome metrics. The user reports that no author is known to have
-confirmed access to MIMIC-IV-ECG-Ext-ICD or an earlier report-bearing MIMIC
-copy; no restricted MIMIC data were accessed. This is an eligibility audit, not a reservation of
-an accessible cohort or a claim of independence. No candidate below is currently
-certified as a genuinely unseen final holdout for the V4.5-derived checkpoints.
-SPH has already been observed and is development data for any V4.6 adaptation.
+reports or outcome metrics. The user reports no known access to the credentialed
+MIMIC-IV-ECG-Ext-ICD release and no confirmed lawful copy of the older
+report-bearing MIMIC-IV-ECG beta. This is distinct from the currently open
+MIMIC-IV-ECG v1.0 release, which is publicly downloadable subject to its ODbL
+license; that release has not been downloaded or reserved for this study. No
+restricted MIMIC data were accessed. This is an eligibility audit, not a
+reservation of a cohort or a claim of independence. No candidate below is
+currently certified as a genuinely unseen final holdout for the V4.5-derived
+checkpoints. SPH has already been observed and is development data for any V4.6
+adaptation.
 
 | Candidate | Verified availability and reference | Consequence |
 | --- | --- | --- |
-| [MIMIC-IV-ECG 1.0](https://physionet.org/content/mimic-iv-ecg/1.0/) | Open waveforms and machine-generated report lines. The `waveform_note_links.csv` file contains links, not cardiologist report text. The source describes a future release of the ECG report text. | Machine statements can support a clearly labelled agreement study, not silently become expert-adjudicated clinical truth. Historical V3F/V3AG exposure and signal overlap are not certified. |
+| [MIMIC-IV-ECG 1.0](https://physionet.org/content/mimic-iv-ecg/1.0/) | Open under ODbL 1.0 subject to its terms. The release describes about 800,000 10-second, 12-lead, 500-Hz ECGs from nearly 160,000 subjects; about 5% were withheld. `machine_measurements.csv` has `report_0` through `report_17`, described by the official data dictionary as machine-generated cardiology report text. `waveform_note_links.csv` contains note links, not the report text. The currently documented [MIMIC-IV-Note 2.2](https://physionet.org/content/mimic-iv-note/2.2/) tables are discharge and radiology notes, not ECG reports. No MIMIC-IV-ECG data have been downloaded or inspected here. | Candidate for a frozen cross-source agreement study against ECG-machine statements only, not clinical truth. Any use needs a fixed statement mapping and patient-level lock before reading labels. Historical V3F/V3AG exposure and signal overlap are not certified; a V4.5-derived checkpoint therefore cannot be called fully independent on this source. |
 | [MIMIC-IV-Note 2.2](https://physionet.org/content/mimic-iv-note/2.2/) | Credentialed access and DUA required. Its documented tables are discharge and radiology notes, not ECG reports. | Access to this version alone does not establish that cardiologist ECG reports can be obtained. |
 | [MIMIC-IV-ECG 0.1](https://physionet.org/content/mimic-iv-ecg/0.1/) | Its documented beta included `reports.csv` cardiologist text, but PhysioNet states that this version's files are no longer available. | Do not claim that the reports are downloadable from the current project page; a lawful existing copy and permission would need separate confirmation. Beta identifiers and linkage must be verified before any use. |
-| [MIMIC-IV-ECG-Ext-ICD 1.0.0](https://physionet.org/content/mimic-iv-ecg-ext-icd-labels/1.0.0/) | Credentialing, training and DUA required. It links ECGs to ED or hospital discharge ICD diagnoses by encounter timing. | A discharge diagnosis is not automatically the rhythm present in an ECG, an ECG-localized infarct, or a negative reference. Any usable clinical endpoint and temporal window require a separately fixed, clinically reviewed definition. |
+| [MIMIC-IV-ECG-Ext-ICD 1.0.0](https://physionet.org/content/mimic-iv-ecg-ext-icd-labels/1.0.0/) | Credentialing, required training and DUA required; the user reports that author access is not known or confirmed. It links ECGs to ED or hospital discharge ICD diagnoses by encounter timing. | A discharge diagnosis is not automatically the rhythm present in an ECG, an ECG-localized infarct, or a negative reference. Any usable clinical endpoint and temporal window require a separately fixed, clinically reviewed definition. |
 | [KURIAS-ECG 1.0](https://physionet.org/content/kurias-ecg/1.0/) | PhysioNet currently reports that files are no longer available. Its standardized diagnoses are based on ECG-machine statements and the source reports category-balanced sampling. | Not an immediately accessible natural-prevalence independent clinical reference; no use without authorized access and validation of selection and mapping. |
 | [PTB-XL](https://physionet.org/content/ptb-xl/1.0.3/) and [Chapman/Shaoxing/Ningbo](https://physionet.org/content/ecg-arrhythmia/1.0.0/) | These sources occur in the V4.5 release evidence, development or retained source audit. | Do not relabel them as unseen external-final data for the historical checkpoints. |
 | [PTB Diagnostic ECG](https://physionet.org/content/ptbdb/1.0.0/) | Public, with 549 12-lead ECGs, repeated records, and broad clinical diagnostic classes. | Potential broad-MI exploration only; its labels do not directly match ASMI/IMI ECG statements, and full historical backbone-source exclusion is unavailable. |
@@ -28,9 +32,13 @@ used. A separate candidate institution does not resolve this limitation.
 For a possible final source, availability, legal conditions, reference
 semantics and historical exposure must be established; waveform duplicates
 must be checked against all accessible development data, while inaccessible
-historical inputs remain a disclosed uncertainty. Before any new model training,
-select and reserve an admissible final source and freeze the evaluation design.
-Do not inspect candidate final labels or outcomes to choose the source, its
-population, thresholds, model, or reference definition. If no source can meet
-these conditions, report that limitation; do not label SPH or a machine report
-as an independent adjudicated test to fill the gap.
+historical inputs remain a disclosed uncertainty. MIMIC-IV-ECG v1.0 is a
+technically plausible candidate only for machine-report agreement. It is not an
+adjudicated clinical reference, has not been reserved, and does not establish
+independence for checkpoints with incomplete V4.5 pretraining lineage. Before
+any new model training, select and reserve an admissible final source and
+freeze the evaluation design. Do not inspect candidate final labels or outcomes
+to choose the source, its population, thresholds, model, or reference
+definition. If no source can meet these conditions, report that limitation; do
+not label SPH or a machine report as an independent adjudicated test to fill the
+gap.

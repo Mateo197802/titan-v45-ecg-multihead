@@ -24,9 +24,11 @@ Absence of a coded ECG statement is not adjudicated absence of disease.
 The current data, rights, and label-feasibility assessment is recorded in
 [`DATA_AND_LABEL_FEASIBILITY_REPORT.md`](DATA_AND_LABEL_FEASIBILITY_REPORT.md).
 The SPH metadata can support exploratory development with patient-grouped
-splits, but those splits are not a locked test. The report also records that
-MIMIC access is not confirmed and that the public PTB/INCART/MIT-BIH sources do
-not directly satisfy the current endpoint contracts.
+splits, but those splits are not a locked test. The report distinguishes the
+open MIMIC-IV-ECG v1.0 machine-report resource, which is not yet reserved or
+inspected, from the credentialed MIMIC-IV-ECG-Ext-ICD resource, for which no
+author access is confirmed. The public PTB/INCART/MIT-BIH sources do not directly
+satisfy the current endpoint contracts.
 
 The first V4.6 calibration experiment is frozen in
 [`B1_SPH_CALIBRATION_PROTOCOL.md`](B1_SPH_CALIBRATION_PROTOCOL.md) and

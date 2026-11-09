@@ -136,7 +136,7 @@
       "aggregate_artifact": "../../outputs/results/benchmarkmax/sph_b1_prevalence_comparison_32763.json",
       "aggregate_sha256": "b7c5b29743fc6710ba486bb6e393a01ba216db9598ad5b74995ad6cedb0cf530",
       "result_document": "B1_SPH_PREVALENCE_RESULTS.md",
-      "result_document_sha256": "065d3e088579cbd66821c3eef59370bab9617d87952c82f140beccfb5e7d0bfc",
+      "result_document_sha256": "b78fdbbf601541f267622231acf324028d02cab290c39a75d1b087bec7176afd",
       "figure_manifest": "../../outputs/figures/benchmarkmax/sph_b1_prevalence_figure_manifest.json",
       "figure_manifest_sha256": "4b6409b87b1d2c0d3ca646400c15a07e5791ea1d75b746d2d0e8ca7fc881db67",
       "individual_records_exported": false,

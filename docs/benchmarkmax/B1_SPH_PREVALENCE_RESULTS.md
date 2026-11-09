@@ -147,6 +147,9 @@ python scripts/benchmarkmax/verify_sph_prevalence_comparison.py \
   --expected-job-id 32763
 ```
 
-The external evaluation remains deferred. MIMIC access is not confirmed; no
-MIMIC data were accessed. This result does not close any V4.5 reviewer point
-that requires an untouched external cohort.
+The external evaluation remains deferred. MIMIC-IV-ECG v1.0 is openly
+downloadable subject to ODbL, but it has not been downloaded, inspected or
+reserved here and its report lines are machine-generated, not adjudicated
+clinical references. Author access to credentialed MIMIC-IV-ECG-Ext-ICD is not
+confirmed. No MIMIC data were accessed. This result does not close any V4.5
+reviewer point that requires an untouched external cohort.
