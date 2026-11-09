@@ -102,6 +102,33 @@ def test_sph_prevalence_comparator_protocol_is_registered_as_exploratory():
     assert experiment["external_claim_permitted"] is False
 
 
+def test_sph_prevalence_comparator_freeze_hashes_match_tracked_sources():
+    registry = json.loads(
+        (ROOT / "docs/benchmarkmax/BENCHMARKMAX_EXPERIMENT_REGISTRY.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    experiment = next(
+        item
+        for item in registry["experiments"]
+        if item["id"] == "B1-V46-SPH-PREVALENCE-COMPARATOR"
+    )
+    config_path = ROOT / "configs/benchmarkmax/sph_b1_prevalence_comparison.json"
+    runner_path = ROOT / "scripts/benchmarkmax/compare_sph_prevalence_baseline.py"
+    verifier_path = ROOT / "scripts/benchmarkmax/verify_sph_prevalence_comparison.py"
+    protocol_path = ROOT / "docs/benchmarkmax/B1_SPH_PREVALENCE_COMPARATOR_PROTOCOL.md"
+    config = json.loads(config_path.read_text(encoding="utf-8"))
+
+    config_sha = hashlib.sha256(config_path.read_bytes()).hexdigest()
+    runner_sha = hashlib.sha256(runner_path.read_bytes()).hexdigest()
+    verifier_sha = hashlib.sha256(verifier_path.read_bytes()).hexdigest()
+    protocol_sha = hashlib.sha256(protocol_path.read_bytes()).hexdigest()
+    assert config_sha == experiment["configuration_sha256"]
+    assert runner_sha == experiment["runner_sha256"] == config["runner_sha256"]
+    assert verifier_sha == experiment["verifier_sha256"] == config["verifier_sha256"]
+    assert protocol_sha == experiment["protocol_sha256"] == config["protocol_sha256"]
+
+
 def test_scale_sensitivity_result_document_matches_aggregate():
     result = json.loads(
         (ROOT / "outputs/results/benchmarkmax/sph_scale_sensitivity_32761.json").read_text(

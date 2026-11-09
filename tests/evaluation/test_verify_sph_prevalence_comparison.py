@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import importlib.util
 import json
 from pathlib import Path
@@ -20,8 +21,22 @@ def _valid_fixture():
     )
     config["source"].update({"records": 10, "patients": 8})
     config["bootstrap"].update({"replicates": 10, "base_seed": 197823})
+    config["bootstrap"]["scope_limit"] = (
+        "conditional on fixed fold-specific Platt and prevalence estimates"
+    )
+    config["endpoints"] = [
+        {"name": "P4:ASMI", "reference": "ASMI reference"},
+        {"name": "P4:IMI", "reference": "IMI reference"},
+        {"name": "P4:LVH", "reference": "LVH reference"},
+        {"name": "P8:PAC", "reference": "PAC reference"},
+        {"name": "P6:PVC", "reference": "PVC reference"},
+        {"name": "P6:RBBB", "reference": "RBBB reference"},
+    ]
     config_sha = "a" * 64
-    script_sha = "b" * 64
+    runner_sha = "b" * 64
+    verifier_sha = "d" * 64
+    config["runner_sha256"] = runner_sha
+    config["verifier_sha256"] = verifier_sha
     metrics = {
         "raw_v45_oof": {
             "brier": 0.2,
@@ -56,7 +71,7 @@ def _valid_fixture():
             "method": "paired unstratified percentile bootstrap on pooled out-of-fold scores",
             "replicates": 10,
             "seed": 197823 + index,
-            "scope_limit": "conditional on the fitted fold-specific Platt and prevalence estimates",
+            "scope_limit": config["bootstrap"]["scope_limit"],
             "comparisons": {
                 comparison: {
                     metric: {
@@ -71,12 +86,13 @@ def _valid_fixture():
             },
         }
         endpoints[key] = {
+            "reference": config["endpoints"][index]["reference"],
             "source_support": {
                 "records": 10,
                 "patients": 8,
-                "positive_records": 2,
-                "negative_records": 8,
-                "positive_patients": 2,
+                "positive_records": 5,
+                "negative_records": 5,
+                "positive_patients": 5,
             },
             "metrics": metrics,
             "point_differences": differences,
@@ -94,21 +110,22 @@ def _valid_fixture():
                     "evaluation_support": {
                         "records": 2,
                         "patients": patient_count,
-                        "positive_records": positive_count,
-                        "negative_records": 2 - positive_count,
-                        "positive_patients": positive_count,
+                        "positive_records": 1,
+                        "negative_records": 1,
+                        "positive_patients": 1,
                     },
                     "fit_prevalence": 0.25,
                     "fit_test_patient_overlap": 0,
                 }
-                for fold, (patient_count, positive_count) in enumerate(
-                    [(2, 1), (2, 0), (1, 1), (2, 0), (1, 0)]
-                )
+                for fold, patient_count in enumerate([2, 2, 1, 2, 1])
             ],
         }
     report = {
         "schema": "TITAN_V46_SPH_B1_PREVALENCE_COMPARISON_V1",
-        "scope": "Supplementary exploratory analysis of previously observed SPH predictions.",
+        "scope": (
+            "Supplementary exploratory analysis of previously observed SPH predictions; "
+            "not an independent, locked, confirmatory, or clinical validation."
+        ),
         "source": {
             "records": 10,
             "patients": 8,
@@ -139,7 +156,8 @@ def _valid_fixture():
         "execution": {
             "commit": "c" * 40,
             "slurm_job_id": "32762",
-            "script_sha256": script_sha,
+            "runner_sha256": runner_sha,
+            "verifier_sha256": verifier_sha,
             "config_sha256": config_sha,
             "runtime": {
                 "environment": config["runtime"]["environment"],
@@ -147,32 +165,205 @@ def _valid_fixture():
             },
         },
     }
-    return report, config, config_sha, script_sha
+    registry_entry = {
+        "id": "B1-V46-SPH-PREVALENCE-COMPARATOR",
+        "status": "completed_aggregate_only_exploratory",
+        "configuration_sha256": config_sha,
+        "runner_sha256": runner_sha,
+        "verifier_sha256": verifier_sha,
+        "protocol_sha256": config["protocol_sha256"],
+        "cedia_job": 32762,
+        "execution_commit": "c" * 40,
+    }
+    registry_entry["aggregate_sha256"] = _aggregate_sha256(report)
+    return report, config, registry_entry, config_sha, runner_sha, verifier_sha
+
+
+def _aggregate_sha256(report):
+    payload = json.dumps(report, indent=2, sort_keys=True, allow_nan=False) + "\n"
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
 def test_verifier_accepts_aggregate_when_hashes_counts_and_metrics_reconcile():
-    report, config, config_sha, script_sha = _valid_fixture()
+    report, config, registry, config_sha, runner_sha, verifier_sha = _valid_fixture()
 
     result = MODULE.verify_aggregate(
         report,
         config,
+        registry_entry=registry,
         expected_job_id="32762",
+        aggregate_sha256=registry["aggregate_sha256"],
         config_sha256=config_sha,
-        script_sha256=script_sha,
+        runner_sha256=runner_sha,
+        verifier_sha256=verifier_sha,
     )
 
     assert result["endpoints"] == 6
 
 
 def test_verifier_rejects_any_record_level_identifier_field():
-    report, config, config_sha, script_sha = _valid_fixture()
-    report["endpoints"]["P8:PAC"]["patient_id"] = "private-id"
+    report, config, registry, config_sha, runner_sha, verifier_sha = _valid_fixture()
+    report["endpoints"]["P8:PAC"]["patient_ids"] = ["private-id"]
+    registry["aggregate_sha256"] = _aggregate_sha256(report)
 
-    with pytest.raises(ValueError, match="private row-level key"):
+    with pytest.raises(ValueError, match="unrecognized key"):
         MODULE.verify_aggregate(
             report,
             config,
+            registry_entry=registry,
             expected_job_id="32762",
+            aggregate_sha256=_aggregate_sha256(report),
             config_sha256=config_sha,
-            script_sha256=script_sha,
+            runner_sha256=runner_sha,
+            verifier_sha256=verifier_sha,
+        )
+
+
+@pytest.mark.parametrize(
+    ("path", "key", "value"),
+    [
+        (("endpoints", "P8:PAC"), "debug_records", [{"x": 1}]),
+        (("endpoints", "P8:PAC", "source_support"), "patient_identifiers", ["x"]),
+        ((), "patient_ids", ["x"]),
+    ],
+)
+def test_verifier_rejects_unknown_private_payloads_at_every_depth(path, key, value):
+    report, config, registry, config_sha, runner_sha, verifier_sha = _valid_fixture()
+    target = report
+    for part in path:
+        target = target[part]
+    target[key] = value
+    registry["aggregate_sha256"] = _aggregate_sha256(report)
+
+    with pytest.raises(ValueError, match="unrecognized key"):
+        MODULE.verify_aggregate(
+            report,
+            config,
+            registry_entry=registry,
+            expected_job_id="32762",
+            aggregate_sha256=_aggregate_sha256(report),
+            config_sha256=config_sha,
+            runner_sha256=runner_sha,
+            verifier_sha256=verifier_sha,
+        )
+
+
+@pytest.mark.parametrize(
+    ("support_path", "key", "value"),
+    [
+        (("source_support",), "negative_records", -1),
+        (("source_support",), "positive_records", 11),
+        (("source_support",), "positive_patients", 9),
+        (("fold_support", 0, "fit_support"), "negative_records", -1),
+        (("fold_support", 0, "evaluation_support"), "positive_patients", 3),
+        (("fold_support", 0, "evaluation_support"), "patients", 3),
+    ],
+)
+def test_verifier_rejects_impossible_support_counts(support_path, key, value):
+    report, config, registry, config_sha, runner_sha, verifier_sha = _valid_fixture()
+    target = report["endpoints"]["P8:PAC"]
+    for part in support_path:
+        target = target[part]
+    target[key] = value
+    registry["aggregate_sha256"] = _aggregate_sha256(report)
+
+    with pytest.raises(ValueError, match="support|denominator|patient|class"):
+        MODULE.verify_aggregate(
+            report,
+            config,
+            registry_entry=registry,
+            expected_job_id="32762",
+            aggregate_sha256=_aggregate_sha256(report),
+            config_sha256=config_sha,
+            runner_sha256=runner_sha,
+            verifier_sha256=verifier_sha,
+        )
+
+
+def test_verifier_rejects_runner_hash_not_pinned_by_registry():
+    report, config, registry, config_sha, runner_sha, verifier_sha = _valid_fixture()
+    registry["runner_sha256"] = "e" * 64
+
+    with pytest.raises(ValueError, match="registry.*runner|runner.*registry"):
+        MODULE.verify_aggregate(
+            report,
+            config,
+            registry_entry=registry,
+            expected_job_id="32762",
+            aggregate_sha256=registry["aggregate_sha256"],
+            config_sha256=config_sha,
+            runner_sha256=runner_sha,
+            verifier_sha256=verifier_sha,
+        )
+
+
+@pytest.mark.parametrize(
+    ("field", "actual_hash"),
+    [("runner_sha256", "e" * 64), ("verifier_sha256", "e" * 64)],
+)
+def test_verifier_rejects_code_hash_drift_in_frozen_configuration(field, actual_hash):
+    report, config, registry, config_sha, runner_sha, verifier_sha = _valid_fixture()
+    config[field] = actual_hash
+
+    with pytest.raises(ValueError, match="differs from frozen config"):
+        MODULE.verify_aggregate(
+            report,
+            config,
+            registry_entry=registry,
+            expected_job_id="32762",
+            aggregate_sha256=registry["aggregate_sha256"],
+            config_sha256=config_sha,
+            runner_sha256=runner_sha,
+            verifier_sha256=verifier_sha,
+        )
+
+
+def test_verifier_rejects_aggregate_hash_not_pinned_by_registry():
+    report, config, registry, config_sha, runner_sha, verifier_sha = _valid_fixture()
+    registry["aggregate_sha256"] = "e" * 64
+
+    with pytest.raises(ValueError, match="registry aggregate hash"):
+        MODULE.verify_aggregate(
+            report,
+            config,
+            registry_entry=registry,
+            expected_job_id="32762",
+            aggregate_sha256=_aggregate_sha256(report),
+            config_sha256=config_sha,
+            runner_sha256=runner_sha,
+            verifier_sha256=verifier_sha,
+        )
+
+
+def test_verifier_rejects_execution_commit_not_frozen_in_registry():
+    report, config, registry, config_sha, runner_sha, verifier_sha = _valid_fixture()
+    registry["execution_commit"] = "e" * 40
+
+    with pytest.raises(ValueError, match="execution commit"):
+        MODULE.verify_aggregate(
+            report,
+            config,
+            registry_entry=registry,
+            expected_job_id="32762",
+            aggregate_sha256=registry["aggregate_sha256"],
+            config_sha256=config_sha,
+            runner_sha256=runner_sha,
+            verifier_sha256=verifier_sha,
+        )
+
+
+def test_verifier_rejects_execution_job_not_frozen_in_registry():
+    report, config, registry, config_sha, runner_sha, verifier_sha = _valid_fixture()
+    registry["cedia_job"] = 99999
+
+    with pytest.raises(ValueError, match="registry CEDIA job"):
+        MODULE.verify_aggregate(
+            report,
+            config,
+            registry_entry=registry,
+            expected_job_id="32762",
+            aggregate_sha256=registry["aggregate_sha256"],
+            config_sha256=config_sha,
+            runner_sha256=runner_sha,
+            verifier_sha256=verifier_sha,
         )

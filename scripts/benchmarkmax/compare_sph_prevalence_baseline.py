@@ -48,6 +48,16 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
+def validate_frozen_code(config: dict, runner_path: Path, verifier_path: Path) -> tuple[str, str]:
+    runner_sha = sha256_file(runner_path)
+    verifier_sha = sha256_file(verifier_path)
+    if runner_sha != config.get("runner_sha256"):
+        raise ValueError("prevalence comparator runner hash differs from the frozen configuration")
+    if verifier_sha != config.get("verifier_sha256"):
+        raise ValueError("prevalence comparator verifier hash differs from the frozen configuration")
+    return runner_sha, verifier_sha
+
+
 def _binary_labels(labels: np.ndarray) -> np.ndarray:
     values = np.asarray(labels)
     if values.ndim != 1 or values.size == 0:
@@ -260,6 +270,12 @@ def build_report(
     b1_result_sha = sha256_file(b1_result_path)
     protocol_sha = sha256_file(protocol_path)
     script_sha = sha256_file(script_path)
+    verifier_path = ROOT / "scripts/benchmarkmax/verify_sph_prevalence_comparison.py"
+    verifier_sha = sha256_file(verifier_path)
+    if script_sha != config["runner_sha256"]:
+        raise ValueError("prevalence comparator runner hash differs from the frozen configuration")
+    if verifier_sha != config["verifier_sha256"]:
+        raise ValueError("prevalence comparator verifier hash differs from the frozen configuration")
     if b1_config_sha != config["source_b1_config_sha256"]:
         raise ValueError("source B1 configuration hash differs from the frozen comparator config")
     if b1_result_sha != config["source_b1_result_sha256"]:
@@ -286,6 +302,13 @@ def build_report(
         or int(b1_config["source"]["patients"]) != int(config["source"]["patients"])
     ):
         raise ValueError("source B1 split or population differs from the frozen comparator config")
+    configured_targets = config["endpoints"]
+    actual_targets = [
+        {"name": f"{item['profile']}:{item['name']}", "reference": item["reference"]}
+        for item in b1_config["endpoints"]
+    ]
+    if actual_targets != configured_targets:
+        raise ValueError("source B1 endpoint order or references differ from frozen comparator targets")
     b1_report = json.loads(b1_result_path.read_text(encoding="utf-8"))
     if b1_report.get("execution", {}).get("script_sha256") != config["source_b1_runner_sha256"]:
         raise ValueError("source B1 result does not identify the frozen calibration runner")
@@ -422,7 +445,8 @@ def build_report(
         "execution": {
             "commit": commit,
             "slurm_job_id": slurm_job_id,
-            "script_sha256": script_sha,
+            "runner_sha256": script_sha,
+            "verifier_sha256": verifier_sha,
             "config_sha256": sha256_file(config_path),
             "runtime": {
                 "environment": config["runtime"]["environment"],
@@ -462,6 +486,11 @@ def run(args: argparse.Namespace) -> None:
     if status:
         raise ValueError("BenchmarkMax checkout must be clean for frozen prevalence execution")
     config = json.loads(args.config.read_text(encoding="utf-8"))
+    runner_sha, verifier_sha = validate_frozen_code(
+        config,
+        Path(__file__),
+        ROOT / "scripts/benchmarkmax/verify_sph_prevalence_comparison.py",
+    )
     runtime = _runtime_versions()
     if runtime != config["runtime"]["versions"]:
         raise ValueError("runtime differs from the frozen prevalence comparator configuration")
@@ -483,6 +512,10 @@ def run(args: argparse.Namespace) -> None:
         slurm_job_id=os.environ.get("SLURM_JOB_ID", "not_slurm"),
         runtime=runtime,
     )
+    if report["execution"]["runner_sha256"] != runner_sha:
+        raise AssertionError("runner hash changed during frozen prevalence execution")
+    if report["execution"]["verifier_sha256"] != verifier_sha:
+        raise AssertionError("verifier hash changed during frozen prevalence execution")
     output.parent.mkdir(parents=True, exist_ok=True)
     with output.open("x", encoding="utf-8", newline="\n") as stream:
         json.dump(report, stream, indent=2, sort_keys=True, allow_nan=False)

@@ -59,8 +59,9 @@ paired, unstratified patient-cluster bootstrap replicates for Brier, ECE, and
 log-loss, seed `197823 + endpoint_index`, resampling all ECGs from a selected
 patient together. The intervals are conditional on the already-fitted
 fold-specific Platt and prevalence estimates; neither is refitted inside the
-bootstrap. AUROC and average-precision differences are descriptive point
-estimates only.
+bootstrap. AUROC and average precision remain descriptive outputs of the
+original B1 report only; no differences against the constant-prevalence
+baseline are computed.
 
 ## Execution And Interpretation
 
@@ -70,6 +71,22 @@ aggregate is written outside both Git checkouts with mode `0600`; no record or
 patient IDs, per-record scores, or ECG signals may be exported. The public
 receipt is eligible for publication only after its hash, source counts,
 patient-cluster split, B1 metric reconciliation, and privacy checks pass.
+
+Verify the sanitized aggregate after placing it at
+`outputs/results/benchmarkmax/sph_b1_prevalence_comparison_<job-id>.json`:
+
+```bash
+python scripts/benchmarkmax/verify_sph_prevalence_comparison.py \
+  --report outputs/results/benchmarkmax/sph_b1_prevalence_comparison_<job-id>.json \
+  --config configs/benchmarkmax/sph_b1_prevalence_comparison.json \
+  --runner scripts/benchmarkmax/compare_sph_prevalence_baseline.py \
+  --registry docs/benchmarkmax/BENCHMARKMAX_EXPERIMENT_REGISTRY.json \
+  --expected-job-id <job-id>
+```
+
+The verifier rejects unknown aggregate fields and checks the configuration,
+runner, verifier, protocol, execution commit, CEDIA job, and aggregate hashes
+against the public experiment registry.
 
 All SPH records and outcomes were previously examined in V4.5 transfer work.
 This comparator cannot make SPH independent again, establish clinical truth,

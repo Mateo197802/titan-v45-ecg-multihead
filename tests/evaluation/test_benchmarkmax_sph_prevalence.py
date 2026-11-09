@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import importlib.util
+import json
 from pathlib import Path
 
 import numpy as np
@@ -85,3 +86,34 @@ def test_cluster_bootstrap_compares_each_model_score_to_prevalence():
 
     assert set(results["comparisons"]) == {"raw_minus_prevalence", "platt_minus_prevalence"}
     assert results["comparisons"]["raw_minus_prevalence"] == results["comparisons"]["platt_minus_prevalence"]
+
+
+def test_frozen_comparator_rejects_runner_or_verifier_hash_drift():
+    config = {"runner_sha256": "0" * 64, "verifier_sha256": "0" * 64}
+
+    with pytest.raises(ValueError, match="runner hash"):
+        MODULE.validate_frozen_code(config, SCRIPT, SCRIPT)
+
+
+def test_frozen_comparator_rejects_verifier_hash_drift():
+    verifier = ROOT / "scripts/benchmarkmax/verify_sph_prevalence_comparison.py"
+    config = {
+        "runner_sha256": MODULE.sha256_file(SCRIPT),
+        "verifier_sha256": "0" * 64,
+    }
+
+    with pytest.raises(ValueError, match="verifier hash"):
+        MODULE.validate_frozen_code(config, SCRIPT, verifier)
+
+
+def test_frozen_endpoint_order_and_references_match_source_b1_config():
+    comparison = json.loads(
+        (ROOT / "configs/benchmarkmax/sph_b1_prevalence_comparison.json").read_text()
+    )
+    source = json.loads((ROOT / "configs/benchmarkmax/sph_b1_calibration.json").read_text())
+    actual_targets = [
+        {"name": f"{item['profile']}:{item['name']}", "reference": item["reference"]}
+        for item in source["endpoints"]
+    ]
+
+    assert comparison["endpoints"] == actual_targets
