@@ -105,8 +105,15 @@ def test_experiment_registry_records_success_without_erasing_failed_attempts() -
     assert pac["external_claim_permitted"] is False
 
     mimic = experiments["B2-MIMIC-IV-ECG-MACHINE-REPORT-CONCORDANCE"]
+    assert mimic["status"] == "parser_implemented_waiting_for_author_mapping_and_cedia_quota"
+    assert mimic["mapping_author_approved"] is False
     assert mimic["downloaded"] is False
+    assert mimic["metadata_downloaded"] is False
     assert mimic["performance_metrics_computed"] is False
+    parser = registry_root / mimic["parser"]
+    template = registry_root / mimic["mapping_template"]
+    assert hashlib.sha256(parser.read_bytes()).hexdigest() == mimic["parser_sha256"]
+    assert hashlib.sha256(template.read_bytes()).hexdigest() == mimic["mapping_template_sha256"]
 
 
 def test_pac_pilot_docs_no_longer_claim_execution_is_pending() -> None:
@@ -121,3 +128,5 @@ def test_pac_pilot_docs_no_longer_claim_execution_is_pending() -> None:
     assert "No candidate specialist has been trained or selected" not in feasibility
     assert "does not satisfy the external-validation requirement" in readme
     assert "source observed previously" in readme
+    assert "Full waveform acquisition remains blocked" in readme
+    assert "machine-report statements" in readme

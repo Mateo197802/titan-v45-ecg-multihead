@@ -1,0 +1,17 @@
+{
+  "schema": "TITAN_V46_MIMIC_PAC_REPORT_MAPPING_V1",
+  "mapping_id": "mimic-iv-ecg-v1-pac-machine-report-pending-review",
+  "status": "pending_author_approval",
+  "approval": null,
+  "phrases": {
+    "explicit_positive": [],
+    "explicit_negative": [],
+    "uncertain_or_qualified": []
+  },
+  "interpretation": {
+    "target": "explicit PAC statement in an ECG-machine-generated report",
+    "silence": "not_mentioned_or_report_missing; never an explicit negative",
+    "clinical_reference": false,
+    "author_review_required_before_use": true
+  }
+}

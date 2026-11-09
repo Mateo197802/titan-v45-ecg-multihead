@@ -1,9 +1,11 @@
 # MIMIC-IV-ECG Machine-Report Concordance Design
 
-**Status:** design only. No MIMIC-IV-ECG files have been downloaded, inspected,
-or scored for this project. The user approved exploring v1.0 only for
-concordance with automated machine report statements; this is not approval to
-call its machine reports clinical reference labels.
+**Status:** design approved for implementation; a generic phrase-parser utility
+and synthetic tests are implemented. No MIMIC-IV-ECG files have been
+downloaded, inspected, or scored for this project. The user approved exploring
+v1.0 only for concordance with automated machine-report statements; this does
+not approve any real phrase mapping or make machine reports clinical reference
+labels.
 
 ## Permitted Question
 
@@ -84,13 +86,17 @@ under this design.
 
 ## Human and Automated Responsibilities
 
+The implemented parser preserves all 18 report columns, classifies only with a
+versioned mapping carrying corresponding-author approval, and returns no raw
+text or identifiers. Its checked-in template is empty and not loadable. Unit
+tests use synthetic phrases only and are not evidence about MIMIC terminology.
 Codex can implement the version-pinned downloader after quota approval, schema
-and hash validation, exact duplicate scan, patient-level joins, frozen phrase
-matcher, tests, inference, aggregate metrics, confidence intervals, and
-privacy checks. The corresponding author must approve the phrase-to-PAC
-mapping, license/attribution treatment, whether model source exposure is
-adequately disclosed, and the wording that limits the result to automated
-report concordance. No such approval is implied by this design document.
+and hash validation, exact duplicate scan, patient-level joins, inference,
+aggregate metrics, confidence intervals, and privacy checks. The corresponding
+author must still approve the real phrase-to-PAC mapping, license/attribution
+treatment, whether model source exposure is adequately disclosed, and the
+wording that limits the result to automated-report concordance. Approval of
+this design does not imply approval of those separate decisions.
 
 ## Stop Conditions
 

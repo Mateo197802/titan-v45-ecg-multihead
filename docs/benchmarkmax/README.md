@@ -98,13 +98,21 @@ metadata, so the runner reports unitless amplitudes and applies no unsupported
 mV gate. Exact duplicate signals are excluded before labels are joined; this
 does not certify near-duplicate or cross-dataset training-source independence.
 
-## MIMIC Design
+## MIMIC Report Parser
 
-The user approved exploring MIMIC-IV-ECG v1.0 only for agreement with its
-automatically generated machine report lines. The dataset has not been
-downloaded or inspected in this project; those reports are not adjudicated
-clinical references. The design and stop gates are documented in
+The approved scope is agreement with MIMIC-IV-ECG v1.0 automatically generated
+machine-report statements only; these are not adjudicated clinical references.
+The deterministic parser in `src/titan_v45/benchmarkmax/mimic_reports.py`
+preserves all 18 `report_0..report_17` slots, recognizes four explicit states,
+and refuses to load a phrase mapping without corresponding-author approval.
+Its empty [mapping template](../../configs/benchmarkmax/mimic_pac_report_mapping.template.json)
+is intentionally not executable. Unit tests use synthetic phrases only; they
+do not approve real MIMIC terminology.
+
+No MIMIC files have been downloaded, parsed, or scored, and no MIMIC metrics
+exist. Full waveform acquisition remains blocked until per-user CEDIA quota,
+scratch capacity, retention and cleanup are confirmed. The design, endpoint
+limits and stop conditions are documented in
 [`MIMIC_IV_ECG_MACHINE_REPORT_CONCORDANCE_DESIGN.md`](MIMIC_IV_ECG_MACHINE_REPORT_CONCORDANCE_DESIGN.md).
-Any waveform download remains blocked until per-user CEDIA quota and storage
-headroom are confirmed. No MIMIC records or metrics are part of the SPH PAC
-pilot.
+The current parser implementation does not close external validation and is
+not part of the SPH PAC result.
