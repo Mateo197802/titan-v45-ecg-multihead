@@ -1,0 +1,135 @@
+{
+  "schema": "TITAN_V46_SPH_B1_CALIBRATION_PROTOCOL_V1",
+  "status": "frozen_before_b1_calibration_metrics",
+  "scope": "Previously observed SPH is used only for exploratory V4.6 development/adaptation; this is not an independent or confirmatory test.",
+  "source": {
+    "name": "SPH ECG dataset V1",
+    "records": 25770,
+    "patients": 24666,
+    "v45_protocol_commit": "eb1c67b9229af875a9f868797b0c2f5c546e3dac",
+    "v45_protocol_config_sha256": "d788ad8cca94793cebb738496acc131e82b1ca1900976f11020b99a79a5fc366",
+    "v45_scoring_receipt_sha256": "8abdc5f6561fc3fea77eeb68e8aa34bc2d02396cad9c2e9fbeea70b4188dac92",
+    "v45_prediction_ledger_sha256": "4a3a1e61b1784e06190d5caaa089fca04ef84792acb3a5f9fc1af3f9c1173462",
+    "v45_normalized_aggregate_sha256": "50487cd92a91924a0aa63549725eb26d9328f307a6a6d9cf57ac2655e85ad2ef",
+    "metadata_sha256": "c6f8dc5197758a3970aae554f8b6ee884d96656b121879bc0eb1adf367ea6d86"
+  },
+  "input_sha256": {
+    "metadata": "c6f8dc5197758a3970aae554f8b6ee884d96656b121879bc0eb1adf367ea6d86",
+    "ledger": "4a3a1e61b1784e06190d5caaa089fca04ef84792acb3a5f9fc1af3f9c1173462",
+    "v45_frozen_config": "d788ad8cca94793cebb738496acc131e82b1ca1900976f11020b99a79a5fc366",
+    "scoring_receipt": "8abdc5f6561fc3fea77eeb68e8aa34bc2d02396cad9c2e9fbeea70b4188dac92",
+    "baseline_aggregate": "50487cd92a91924a0aa63549725eb26d9328f307a6a6d9cf57ac2655e85ad2ef"
+  },
+  "expected_records": 25770,
+  "seed": 197802,
+  "partition": {
+    "outer_folds": 5,
+    "outer_namespace": "TITAN-V46-B1-OUTER-V1:",
+    "outer_assignment": "SHA-256(namespace + seed + patient ID); first 64 digest bits modulo 5",
+    "inner_namespace": "TITAN-V46-B1-INNER-V1:",
+    "inner_assignment": "SHA-256(namespace + seed + patient ID); first 64 digest bits modulo 4; bucket 3 is threshold-tune, buckets 0-2 are calibration-fit",
+    "approximate_patient_percentages": {
+      "calibration_fit": 60,
+      "threshold_tune": 20,
+      "outer_evaluation": 20
+    },
+    "patient_level_disjointness": true,
+    "labels_used_for_assignment": false,
+    "locked_external_test": false
+  },
+  "method": {
+    "name": "positive-slope Platt scaling",
+    "input": "frozen V4.5 class probability, clipped to [1e-6, 1 - 1e-6] and transformed to logit",
+    "fit": "unweighted record-level binary log loss on calibration-fit patients",
+    "slope_bounds": [0.05, 20.0],
+    "intercept_bounds": [-20.0, 20.0],
+    "optimizer": "SciPy L-BFGS-B, maxiter 1000, ftol 1e-12",
+    "weights_changed": false,
+    "isotonic_or_temperature_variants": "not run in this preregistered B1 experiment"
+  },
+  "threshold_selection": {
+    "objective": "maximize endpoint F1 on the disjoint threshold-tune patients",
+    "grid": "all distinct probabilities in the threshold-tune subset plus a no-positive-prediction sentinel",
+    "tie_break": "choose the highest threshold",
+    "clinical_threshold_claim": false,
+    "compare_raw_and_platt_thresholded_oof_predictions": true,
+    "report_platt_probability_0_5": true
+  },
+  "endpoints": [
+    {
+      "profile": "P4",
+      "name": "ASMI",
+      "code": 165,
+      "v45_frozen_threshold": 0.6699999999999999,
+      "reference": "Anteroseptal MI ECG statement; not acute or clinically adjudicated MI"
+    },
+    {
+      "profile": "P4",
+      "name": "IMI",
+      "code": 161,
+      "v45_frozen_threshold": 0.635,
+      "reference": "Inferior MI ECG statement; not acute or clinically adjudicated MI"
+    },
+    {
+      "profile": "P4",
+      "name": "LVH",
+      "code": 142,
+      "v45_frozen_threshold": 0.705,
+      "reference": "LVH ECG statement; not imaging-confirmed hypertrophy"
+    },
+    {
+      "profile": "P8",
+      "name": "PAC",
+      "code": 30,
+      "v45_frozen_threshold": 0.45,
+      "reference": "Atrial premature-complex ECG statement; not beat-level event detection"
+    },
+    {
+      "profile": "P6",
+      "name": "PVC",
+      "code": 60,
+      "v45_frozen_threshold": 0.42999999999999994,
+      "reference": "Ventricular premature-complex ECG statement; not beat-level event detection"
+    },
+    {
+      "profile": "P6",
+      "name": "RBBB",
+      "code": 106,
+      "v45_frozen_threshold": 0.5149999999999999,
+      "reference": "Complete RBBB ECG statement; code 105 is not pooled"
+    }
+  ],
+  "metrics": {
+    "probability_metrics": ["AUROC", "average_precision", "Brier", "10-bin_equal_width_ECE"],
+    "operating_metrics": ["TP", "FP", "TN", "FN", "accuracy", "sensitivity", "specificity", "PPV", "NPV", "F1"],
+    "baseline_decisions": "saved V4.5 output labels, including the existing P8 fallback where applicable",
+    "thresholded_oof_decisions": "nested-fold F1 thresholds selected without outer-evaluation labels",
+    "bootstrap": {
+      "unit": "patient cluster; repeated ECGs sampled together",
+      "method": "paired unstratified percentile bootstrap on out-of-fold predictions",
+      "replicates": 2000,
+      "base_seed": 197813,
+      "rng": "numpy.PCG64",
+      "delta_metrics": [
+        "accuracy",
+        "sensitivity",
+        "specificity",
+        "ppv",
+        "npv",
+        "f1",
+        "auroc",
+        "average_precision",
+        "brier",
+        "ece"
+      ],
+      "confidence_level": 0.95,
+      "scope_limit": "conditional on the fitted cross-fold calibrators; calibrators are not refit inside bootstrap replicates"
+    }
+  },
+  "privacy": {
+    "individual_identifiers_exported": false,
+    "record_level_scores_exported": false,
+    "raw_signals_exported": false,
+    "aggregate_receipt_mode": "0600 in CEDIA until sanitized aggregate is copied into the repository"
+  }
+}

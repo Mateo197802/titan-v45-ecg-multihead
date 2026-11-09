@@ -27,3 +27,11 @@ The SPH metadata can support exploratory development with patient-grouped
 splits, but those splits are not a locked test. The report also records that
 MIMIC access is not confirmed and that the public PTB/INCART/MIT-BIH sources do
 not directly satisfy the current endpoint contracts.
+
+The first V4.6 calibration experiment is frozen in
+[`B1_SPH_CALIBRATION_PROTOCOL.md`](B1_SPH_CALIBRATION_PROTOCOL.md) and
+[`sph_b1_calibration.json`](../../configs/benchmarkmax/sph_b1_calibration.json).
+It uses positive-slope Platt scaling on the already-observed V4.5 scores, with
+nested patient-grouped fitting, threshold tuning and evaluation. It does not
+train new weights or restore SPH as an external test. Its SLURM runner publishes
+aggregate metrics only after exact hash and baseline-confusion reconciliation.

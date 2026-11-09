@@ -61,8 +61,19 @@
     },
     {
       "id": "B1-V46-CALIBRATION",
-      "status": "not_run_insufficient_ASMI_IMI_calibration_support",
-      "purpose": "No new calibration fit or threshold selection has been run; ASMI and IMI have only 15 and 13 positive patients in the calibration-candidate split.",
+      "status": "protocol_frozen_pending_cedia_execution",
+      "purpose": "Nested patient-grouped Platt calibration and separate F1-threshold tuning on previously observed V4.5 SPH scores; no weights change.",
+      "protocol": "B1_SPH_CALIBRATION_PROTOCOL.md",
+      "configuration": "../../configs/benchmarkmax/sph_b1_calibration.json",
+      "targets": ["P4:ASMI", "P4:IMI", "P4:LVH", "P8:PAC", "P6:PVC", "P6:RBBB"],
+      "frozen_inputs": {
+        "ledger_sha256": "4a3a1e61b1784e06190d5caaa089fca04ef84792acb3a5f9fc1af3f9c1173462",
+        "v45_protocol_commit": "eb1c67b9229af875a9f868797b0c2f5c546e3dac",
+        "patient_grouped_nested_folds": 5,
+        "bootstrap_replicates": 2000
+      },
+      "support_caution": "ASMI/IMI calibration and tune-fold positive support is small; publish every fold denominator and do not promote a clinical threshold.",
+      "weights_changed": false,
       "external_claim_permitted": false
     },
     {
