@@ -30,7 +30,7 @@ historical experiment or a reviewer acceptance; new evidence can reopen it.
 | R2-2d | Unreported parameters and comparability | MANUSCRIPT_UPDATE_ONLY | Mark missing parameters and avoid unequal comparisons. |
 | R2-2e | SCP and abbreviations | MANUSCRIPT_UPDATE_ONLY | Define terms and verify usage. |
 | R2-2f | Introduction table placement | MANUSCRIPT_UPDATE_ONLY | Resolve placement and claims in the future manuscript. |
-| R2-3a | Datasets and splits | VERIFIED_WITH_LIMITATIONS | [Recovery status](../recovery-status-20261029.md); historical patient isolation not established. |
+| R2-3a | Datasets and splits | EVIDENCE_CEILING_REACHED | [Split and calibration audit](SPLIT_CALIBRATION_DISPOSITION.md); historical patient isolation not established, and actual job-linked split manifests would reopen the analysis. |
 | R2-3b | Design versus evaluation | MANUSCRIPT_UPDATE_ONLY | Distinguish design, historical development and reconstructed evaluation. |
 | R2-3c | Auxiliary classes and training | VERIFIED_WITH_LIMITATIONS | [Role and supervision audit](ROLE_SUPERVISION_AND_ROUTING.md); output contracts alone do not establish checkpoint-linked training support. |
 | R2-3d | ALMI, ILMI and LAE training | EVIDENCE_CEILING_REACHED | [Role and supervision audit](ROLE_SUPERVISION_AND_ROUTING.md); checkpoint-linked supervision remains unverified; exact run manifests and loss masks would reopen recovery. |
@@ -56,7 +56,7 @@ historical experiment or a reviewer acceptance; new evidence can reopen it.
 | A-01 | P4 panel versus unique ECG count | VERIFIED_WITH_LIMITATIONS | [Data dispositions](../revision-data-dispositions.md); preserve 962 panel rows and 733 distinct record keys. |
 | A-02 | Source distribution and aliases | VERIFIED_WITH_LIMITATIONS | [Source and rights disposition](SOURCE_RIGHTS_DISPOSITION.md); checksum matches and source aliases do not prove independent institutions or patient isolation. |
 | A-03 | Per-class metric inconsistencies | MANUSCRIPT_UPDATE_ONLY | Use audited source tables and verify the final manuscript values. |
-| A-04 | Thresholds and calibration isolation | VERIFIED_WITH_LIMITATIONS | [Data dispositions](../revision-data-dispositions.md); patient isolation remains unverified. |
+| A-04 | Thresholds and calibration isolation | VERIFIED_WITH_LIMITATIONS | [Split and calibration audit](SPLIT_CALIBRATION_DISPOSITION.md); saved threshold vectors agree but patient isolation remains unverified. |
 | A-05 | Backbone relationships | MANUSCRIPT_UPDATE_ONLY | Describe shared V3F and separate V3AG accurately. |
 | A-06 | Optuna history and quarantine | CLAIM_WITHDRAWAL_REQUIRED | Separate PR #4; remove unsupported historical optimization claims: original study database and promotion linkage are unavailable. |
 | A-07 | Data availability URL | MANUSCRIPT_UPDATE_ONLY | Cite the verified final artifact and restricted inputs. |

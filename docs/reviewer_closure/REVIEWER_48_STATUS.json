@@ -82,8 +82,8 @@
     {
       "id": "R2-3a",
       "concern": "Datasets and splits",
-      "disposition": "VERIFIED_WITH_LIMITATIONS",
-      "evidence_and_action": "[Recovery status](../recovery-status-20261029.md); historical patient isolation not established."
+      "disposition": "EVIDENCE_CEILING_REACHED",
+      "evidence_and_action": "[Split and calibration audit](SPLIT_CALIBRATION_DISPOSITION.md); historical patient isolation not established, and actual job-linked split manifests would reopen the analysis."
     },
     {
       "id": "R2-3b",
@@ -239,7 +239,7 @@
       "id": "A-04",
       "concern": "Thresholds and calibration isolation",
       "disposition": "VERIFIED_WITH_LIMITATIONS",
-      "evidence_and_action": "[Data dispositions](../revision-data-dispositions.md); patient isolation remains unverified."
+      "evidence_and_action": "[Split and calibration audit](SPLIT_CALIBRATION_DISPOSITION.md); saved threshold vectors agree but patient isolation remains unverified."
     },
     {
       "id": "A-05",
