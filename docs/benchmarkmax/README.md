@@ -41,10 +41,7 @@ aggregate metrics only after exact hash and baseline-confusion reconciliation.
 That B1 score-calibration diagnostic has completed on the previously observed
 SPH outcomes; see [`B1_SPH_CALIBRATION_RESULTS.md`](B1_SPH_CALIBRATION_RESULTS.md).
 It did not train or modify weights, produced no F1 decision improvement, and
-does not establish independent validation or a new V4.6 specialist. A separate
-PAC-head pipeline and protocol are now implemented and frozen, but no training
-or inference job has run yet; P6/P4 candidate heads and a genuinely independent
-final cohort remain unconfirmed.
+does not establish independent validation or a new V4.6 specialist.
 
 Because B1 did not include a constant-prevalence probability comparator, a
 separate, frozen patient-cross-fitted comparison was run against the same
@@ -72,19 +69,29 @@ patient-grouped 70/15/15 assignment, development-only early stopping and
 threshold selection, and paired patient-cluster bootstrap comparisons against
 P8; each MLP is also compared with logistic regression. The protocol,
 configuration, runner, CEDIA SLURM wrapper, privacy verifier, and focused tests
-are in the experiment registry. CEDIA jobs `32799`, `32800`, and `32802` failed
-for runner/configuration contract mismatches; their private logs and hashes are
-retained. Job `32802` completed signal embedding and fit the logistic baseline;
-P8 and logistic holdout metric objects were created transiently in memory but
-were not emitted, persisted, inspected, or used for selection. It failed
-before MLP fitting, bootstrap comparisons, or report/model-artifact writing.
-No reportable aggregate or persistent candidate weights exist yet. The frozen
-metric choices remain unchanged. A code-only alignment now validates all
-consumed config paths before waveform processing and uses the protocol's exact
-`patience_epochs` key. A fresh CEDIA run is still required. Even after
-execution, the held-out SPH subset is exploratory because the source was
-previously observed; this does not satisfy the external-validation
-requirement. The pilot is PAC-only, not a P6/P8/P4 full-profile evaluation.
+are in the experiment registry. Job `32805` completed on CEDIA using the frozen
+protocol and configuration. Its aggregate-only report records average
+precision of `0.307` for frozen P8, `0.450` for logistic, and `0.527`-`0.587`
+for the five MLP seeds; sensitivity was `0.583`, `0.607`, and `0.476`-`0.631`,
+respectively. The holdout contains 84 positive statements, so these values are
+exploratory and imprecise. See [SPH PAC results](SPH_PAC_HEAD_COMPARISON_RESULTS.md).
+CEDIA jobs `32799`, `32800`, and `32802` failed for runner/configuration
+contract mismatches; their private logs, hashes, and failure stages remain in
+the registry. Job `32802` completed signal embedding and fit the logistic
+baseline; its P8/logistic holdout metric objects existed transiently in memory
+but were not emitted, persisted, inspected, or used for selection. It stopped
+before MLP fitting, bootstrap comparisons, or artifact/report writing. Job
+`32805` used the already-frozen metric choices after code-to-config alignment,
+including the protocol's `patience_epochs` key.
+The PAC-only job's aggregate, verification receipt, results report and figures
+are linked in the registry. Fitted head weights and record-level data remain
+private in CEDIA. The held-out SPH subset
+is exploratory adaptation on a source observed previously; this is not
+independent, external, confirmatory, clinical, or prospective validation and
+does not satisfy the external-validation requirement. The pilot is PAC-only,
+not a P6/P8/P4 full-profile evaluation. Verify the public aggregate, receipt,
+report, and figures using the linked
+[SHA-256 inventory](SPH_PAC_HEAD_COMPARISON_32805.SHA256SUMS).
 
 The SPH source does not encode physical units as mV in the audited HDF5
 metadata, so the runner reports unitless amplitudes and applies no unsupported

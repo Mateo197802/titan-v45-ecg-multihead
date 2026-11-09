@@ -51,12 +51,12 @@ It exports no patient or ECG identifiers and is configured to refuse paths
 inside either repository checkout. It does not define a test set and does not
 change the fact that SPH is an already-observed development source.
 
-The audit is a feasibility gate, not a training result. No candidate specialist
-has been trained or selected. A B1 calibration diagnostic was completed
-separately on frozen V4.5 SPH scores: patient-grouped cross-fitting and
-threshold tuning were performed, but no weights changed. This score-only
-analysis is exploratory on previously observed SPH, not a trained candidate
-model or independent validation; see the [B1 results](B1_SPH_CALIBRATION_RESULTS.md).
+The audit is a feasibility gate, not the split or training result for the
+separate PAC pilot below. A B1 calibration diagnostic was completed separately
+on frozen V4.5 SPH scores: patient-grouped cross-fitting and threshold tuning
+were performed, but no weights changed. This score-only analysis is exploratory
+on previously observed SPH, not a trained candidate model or independent
+validation; see the [B1 results](B1_SPH_CALIBRATION_RESULTS.md).
 CEDIA CPU job `32754` completed this audit
 from commit `90483f5`; the aggregate is
 [`sph_training_feasibility_32754.json`](../../outputs/results/benchmarkmax/sph_training_feasibility_32754.json)
@@ -74,27 +74,46 @@ and 3,745 / 3,580 to calibration-candidate, with zero patients crossing splits.
 These are source-statement supports, not candidate-model metrics. PAC has
 enough positive support for a limited exploratory head pilot; LVH is marginal
 for a reliable threshold claim; ASMI/IMI support is too sparse in
-development/calibration for stable claims or a robust threshold estimate. A
-streaming SPH PAC feature builder and head-comparison runner are now
-implemented with a frozen protocol, exact input hashes, patient-level split,
-duplicate exclusion, and aggregate-only output. The frozen comparison uses
-the CEDIA job-32668 V4.5 P8 PAC score as a historical baseline, then fits one
-logistic head and five prespecified MLP seeds on the same V3F mean+max
-embeddings. The baseline ledger and receipt remain private and are hash-bound
-in configuration. CEDIA jobs `32799`, `32800`, and `32802` failed on
-runner/configuration contract mismatches; their private logs are preserved in
-the registry. Job `32802` completed signal embedding and fit the logistic
-baseline; P8 and logistic holdout metric objects existed transiently in
-memory, but were not emitted, persisted, inspected, or used for selection.
-That job stopped before MLP fitting, bootstrap comparisons, or report/model
-artifact writing. The runner now validates every consumed configuration path
-before waveform processing and reads `patience_epochs` from the frozen config.
-The builder does not persist an SPH feature matrix. The pilot covers PAC code 30 only; it
-does not execute the complete P6/P8/P4 profiles. B1's calibration result
-remains a score-only diagnostic, not a trained candidate model or independent
-validation; its interpretation and limitations are reported separately. Any
-within-SPH split metrics remain development/adaptation diagnostics, not
-external validation. Historical V4.5 metrics remain unchanged and are not
+development/calibration for stable claims or a robust threshold estimate. The
+separate PAC pilot has now completed on CEDIA job `32805` under a frozen
+protocol. Its population was 25,770 source records; 336 records in 168 exact
+duplicate-signal groups were excluded before label join, leaving 25,434
+eligible records. The patient-grouped, label-blind split contained 17,916
+train records / 17,265 patients, 3,821 development / 3,686 patients, and 3,697
+exploratory holdout / 3,558 patients. Holdout support was 84 code-30 statements
+among 3,697 records. This is not the earlier feasibility split reported above;
+the latter remains a separate support audit.
+
+The frozen comparison used the CEDIA job-32668 V4.5 P8 PAC score as a
+historical baseline, then fit one L2 logistic head and five prespecified MLP
+seeds on frozen V3F mean+max embeddings. The baseline ledger and receipt
+remain private and are hash-bound in configuration. New-head thresholds and
+MLP early stopping used development data only; no winner was chosen from the
+holdout. All 11 paired model comparisons used 2,000 patient-cluster bootstrap
+replicates (seed `197813`), with no multiplicity adjustment. The public
+[results report](SPH_PAC_HEAD_COMPARISON_RESULTS.md) links the aggregate,
+verification receipt, and figure provenance. Patient IDs, row-level scores,
+embeddings, signals and fitted head weights remain in CEDIA. CEDIA jobs
+`32799`, `32800`, and `32802` failed on runner/configuration contract
+mismatches; their private logs and hashes are preserved in the registry. Job
+`32802` completed embedding and fit the logistic head, but its transient P8
+and logistic holdout metric objects were neither emitted nor used for
+selection; it failed before MLP fitting, bootstrap, or report writing. The
+successful run followed code-to-config corrections without changing the
+frozen endpoint or statistical choices. The feature builder does not persist
+an SPH feature matrix.
+
+The endpoint is the presence of SPH code `30` (“Atrial premature complex(es)”),
+not adjudicated PAC disease; code `31` remains separate. The input pipeline
+uses reconstructed 500 Hz to 125 Hz preprocessing and V3F mean+max temporal
+embeddings; the historical loader was not recovered and equivalence is not
+claimed. SPH amplitudes are not documented as mV and no physical amplitude
+cutoff was applied. This experiment covers PAC only; it does not execute the
+complete P6/P8/P4 profiles, full workflow routing, or quarantine analysis.
+SPH was already observed in V4.5, so the holdout is exploratory development /
+adaptation evidence, not independent, external, confirmatory, or clinical
+validation. B1 remains a separate score-only calibration diagnostic, not a
+trained candidate model; historical V4.5 metrics remain unchanged and are not
 reported as V4.6 results.
 
 ## External Validation Gate

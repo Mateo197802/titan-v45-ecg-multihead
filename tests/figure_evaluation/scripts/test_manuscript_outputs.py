@@ -163,9 +163,27 @@ def test_repository_contains_only_the_manuscript_figure_images() -> None:
         source = prevalence_manifest[item]
         assert hashlib.sha256((ROOT / source["path"]).read_bytes()).hexdigest() == source["sha256"]
 
+    pac_manifest = json.loads(
+        (experimental_dir / "sph_pac_head_comparison_32805.figure_manifest.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert pac_manifest["schema"] == "TITAN_V46_SPH_PAC_HEAD_FIGURE_V1"
+    expected_pac = {
+        "sph_pac_head_comparison_32805.png",
+        "sph_pac_head_comparison_32805.pdf",
+    }
+    assert set(pac_manifest["files"]) == expected_pac
+    for name, digest in pac_manifest["files"].items():
+        assert hashlib.sha256((experimental_dir / name).read_bytes()).hexdigest() == digest
+    assert pac_manifest["source_aggregate_sha256"] == hashlib.sha256(
+        (ROOT / "outputs/results/benchmarkmax/sph_pac_head_comparison_32805.json").read_bytes()
+    ).hexdigest()
+
     assert actual_media == (
         {f"outputs/figures/{name}" for name in expected}
         | {f"outputs/figures/benchmarkmax/{name}" for name in expected_experimental}
         | {f"outputs/figures/benchmarkmax/{name}" for name in expected_b1}
         | {f"outputs/figures/benchmarkmax/{name}" for name in expected_prevalence}
+        | {f"outputs/figures/benchmarkmax/{name}" for name in expected_pac}
     )
