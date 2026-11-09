@@ -139,6 +139,7 @@ def test_closure_documents_have_no_broken_local_links():
         "docs/reviewer_closure/AF_PVC_REFERENCE_DISPOSITION.md",
         "docs/reviewer_closure/REVIEWER_48_STATUS.md",
         "docs/reviewer_closure/R2-2B_FIGURES_1_2_PROVENANCE.md",
+        "docs/reviewer_closure/EVIDENCE_COMMITS.md",
     )
     for relative_path in documents:
         path = ROOT / relative_path
