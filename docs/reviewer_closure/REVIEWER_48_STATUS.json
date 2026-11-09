@@ -5,7 +5,7 @@
       "id": "R1-1",
       "concern": "Independent external validation",
       "disposition": "EXPERIMENT_COMPLETED",
-      "evidence_and_action": "[SPH results](../../outputs/results/external_sph/sph_aggregate_normalized_32669.json), jobs 32668/32669/32672; 25,770 ECG, but historical independence is not certified."
+      "evidence_and_action": "[SPH delivery audit](SPH_DELIVERY_AUDIT.md), jobs 32668/32669/32672/32677/32728; 25,770 ECG, but complete historical independence and clinical adjudication are not certified."
     },
     {
       "id": "R1-2",

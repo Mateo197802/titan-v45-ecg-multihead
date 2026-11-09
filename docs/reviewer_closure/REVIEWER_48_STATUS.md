@@ -17,7 +17,7 @@ historical experiment or a reviewer acceptance; new evidence can reopen it.
 
 | ID | Concern | Disposition | Evidence / remaining action |
 | --- | --- | --- | --- |
-| R1-1 | Independent external validation | EXPERIMENT_COMPLETED | [SPH results](../../outputs/results/external_sph/sph_aggregate_normalized_32669.json), jobs 32668/32669/32672; 25,770 ECG, but historical independence is not certified. |
+| R1-1 | Independent external validation | EXPERIMENT_COMPLETED | [SPH delivery audit](SPH_DELIVERY_AUDIT.md), jobs 32668/32669/32672/32677/32728; 25,770 ECG, but complete historical independence and clinical adjudication are not certified. |
 | R1-2 | Population and flow denominator | EVIDENCE_CEILING_REACHED | [Bounded recovery disposition](R1_2_EVIDENCE_CEILING.md): selected denominators verified, historical preselection and exclusion ledger not recovered; reopening requires the specified parent manifests and job-linked evidence. SPH is a separate population. |
 | R1-3 | AF incidence versus ECG statement | VERIFIED_WITH_LIMITATIONS | [AF reference contract](../af-reference-contract.md); no incident-AF claim. |
 | R1-4 | Invalid artifact hashes | VERIFIED_WITH_LIMITATIONS | [Hash correction](../hash-correction-20261028.md); separate PR #4, missing historical artifacts remain unavailable. |
