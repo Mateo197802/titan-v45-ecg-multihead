@@ -5,19 +5,19 @@
       "id": "R1-1",
       "concern": "Independent external validation",
       "disposition": "EXPERIMENT_COMPLETED",
-      "evidence_and_action": "[SPH delivery audit](SPH_DELIVERY_AUDIT.md), jobs 32668/32669/32672/32677/32728; 25,770 ECG, but complete historical independence and clinical adjudication are not certified."
+      "evidence_and_action": "[SPH delivery audit](SPH_DELIVERY_AUDIT.md) and [all-input coverage](ALL_INPUT_FLOW_COVERAGE.md), jobs 32668/32669/32672/32677/32728; 25,770 ECG, but complete historical independence and clinical adjudication are not certified."
     },
     {
       "id": "R1-2",
       "concern": "Population and flow denominator",
       "disposition": "EVIDENCE_CEILING_REACHED",
-      "evidence_and_action": "[Bounded recovery disposition](R1_2_EVIDENCE_CEILING.md): selected denominators verified, historical preselection and exclusion ledger not recovered; reopening requires the specified parent manifests and job-linked evidence. SPH is a separate population."
+      "evidence_and_action": "[All-input coverage](ALL_INPUT_FLOW_COVERAGE.md) measures the later SPH population and selected replay; [bounded recovery](R1_2_EVIDENCE_CEILING.md) confirms that historical preselection and exclusion records remain unavailable."
     },
     {
       "id": "R1-3",
       "concern": "AF incidence versus ECG statement",
       "disposition": "VERIFIED_WITH_LIMITATIONS",
-      "evidence_and_action": "[AF reference contract](../af-reference-contract.md); no incident-AF claim."
+      "evidence_and_action": "[AF/PVC reference disposition](AF_PVC_REFERENCE_DISPOSITION.md); 390 retained AF flags agree with stored codes per overlapping profile, not an incident-AF study."
     },
     {
       "id": "R1-4",
@@ -29,7 +29,7 @@
       "id": "R2-general",
       "concern": "Excluded classes and Other",
       "disposition": "CLAIM_WITHDRAWAL_REQUIRED",
-      "evidence_and_action": "SPH covers 14 compatible endpoints; [data dispositions](../revision-data-dispositions.md) show Other is not a validated output."
+      "evidence_and_action": "[All-input coverage](ALL_INPUT_FLOW_COVERAGE.md) reports all three profiles across 25,770 SPH ECG and the 14 compatible endpoints; `Other` and incompatible references remain unvalidated."
     },
     {
       "id": "R2-1a",
@@ -154,8 +154,8 @@
     {
       "id": "R2-4e",
       "concern": "No threshold crossed",
-      "disposition": "VERIFIED_WITH_LIMITATIONS",
-      "evidence_and_action": "[P6 and P8 decision audit](ROLE_SUPERVISION_AND_ROUTING.md); P8 fallback is not quarantine or a full-population evaluation."
+      "disposition": "EXPERIMENT_COMPLETED_WITH_LIMITATIONS",
+      "evidence_and_action": "[All-input coverage](ALL_INPUT_FLOW_COVERAGE.md): P6 and P4 can return empty sets; P8 used fallback on 801/25,770 SPH ECG. Fallback is not quarantine or human review."
     },
     {
       "id": "R2-4f",
@@ -191,7 +191,7 @@
       "id": "R2-4k",
       "concern": "Quarantine and pre/post rates",
       "disposition": "CLAIM_WITHDRAWAL_REQUIRED",
-      "evidence_and_action": "[Role and routing audit](ROLE_SUPERVISION_AND_ROUTING.md); historical policy and ledger unavailable; SPH quarantine is not assessed."
+      "evidence_and_action": "[All-input coverage](ALL_INPUT_FLOW_COVERAGE.md) and [routing audit](ROLE_SUPERVISION_AND_ROUTING.md): no linked uncertainty-policy ledger; rate is not assessed, not zero."
     },
     {
       "id": "R2-4l",
@@ -209,7 +209,7 @@
       "id": "R2-5",
       "concern": "PVC record versus beat level",
       "disposition": "VERIFIED_WITH_LIMITATIONS",
-      "evidence_and_action": "Report ECG-statement scope, not beat-detection performance."
+      "evidence_and_action": "[AF/PVC reference disposition](AF_PVC_REFERENCE_DISPOSITION.md); SPH comparisons are ECG statements, not validated beat detection."
     },
     {
       "id": "R2-6",

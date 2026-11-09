@@ -17,11 +17,11 @@ historical experiment or a reviewer acceptance; new evidence can reopen it.
 
 | ID | Concern | Disposition | Evidence / remaining action |
 | --- | --- | --- | --- |
-| R1-1 | Independent external validation | EXPERIMENT_COMPLETED | [SPH delivery audit](SPH_DELIVERY_AUDIT.md), jobs 32668/32669/32672/32677/32728; 25,770 ECG, but complete historical independence and clinical adjudication are not certified. |
-| R1-2 | Population and flow denominator | EVIDENCE_CEILING_REACHED | [Bounded recovery disposition](R1_2_EVIDENCE_CEILING.md): selected denominators verified, historical preselection and exclusion ledger not recovered; reopening requires the specified parent manifests and job-linked evidence. SPH is a separate population. |
-| R1-3 | AF incidence versus ECG statement | VERIFIED_WITH_LIMITATIONS | [AF reference contract](../af-reference-contract.md); no incident-AF claim. |
+| R1-1 | Independent external validation | EXPERIMENT_COMPLETED | [SPH delivery audit](SPH_DELIVERY_AUDIT.md) and [all-input coverage](ALL_INPUT_FLOW_COVERAGE.md), jobs 32668/32669/32672/32677/32728; 25,770 ECG, but complete historical independence and clinical adjudication are not certified. |
+| R1-2 | Population and flow denominator | EVIDENCE_CEILING_REACHED | [All-input coverage](ALL_INPUT_FLOW_COVERAGE.md) measures the later SPH population and selected replay; [bounded recovery](R1_2_EVIDENCE_CEILING.md) confirms that historical preselection and exclusion records remain unavailable. |
+| R1-3 | AF incidence versus ECG statement | VERIFIED_WITH_LIMITATIONS | [AF/PVC reference disposition](AF_PVC_REFERENCE_DISPOSITION.md); 390 retained AF flags agree with stored codes per overlapping profile, not an incident-AF study. |
 | R1-4 | Invalid artifact hashes | VERIFIED_WITH_LIMITATIONS | [Hash correction](../hash-correction-20261028.md); separate PR #4, missing historical artifacts remain unavailable. |
-| R2-general | Excluded classes and Other | CLAIM_WITHDRAWAL_REQUIRED | SPH covers 14 compatible endpoints; [data dispositions](../revision-data-dispositions.md) show Other is not a validated output. |
+| R2-general | Excluded classes and Other | CLAIM_WITHDRAWAL_REQUIRED | [All-input coverage](ALL_INPUT_FLOW_COVERAGE.md) reports all three profiles across 25,770 SPH ECG and the 14 compatible endpoints; `Other` and incompatible references remain unvalidated. |
 | R2-1a | Define P6 and P4 in abstract | MANUSCRIPT_UPDATE_ONLY | Define terms in the future manuscript. |
 | R2-1b | Define abbreviations on first use | MANUSCRIPT_UPDATE_ONLY | Check first occurrence in the future manuscript. |
 | R2-2a | Introduction references | MANUSCRIPT_UPDATE_ONLY | Align citations with the final scope. |
@@ -42,16 +42,16 @@ historical experiment or a reviewer acceptance; new evidence can reopen it.
 | R2-4b | Figure cross-reference | MANUSCRIPT_UPDATE_ONLY | Correct figure reference. |
 | R2-4c | Overstated F1 interpretation | MANUSCRIPT_UPDATE_ONLY | Use measured values and qualified language. |
 | R2-4d | Figure metrics versus confidence intervals | MANUSCRIPT_UPDATE_ONLY | Describe what is actually plotted. |
-| R2-4e | No threshold crossed | VERIFIED_WITH_LIMITATIONS | [P6 and P8 decision audit](ROLE_SUPERVISION_AND_ROUTING.md); P8 fallback is not quarantine or a full-population evaluation. |
+| R2-4e | No threshold crossed | EXPERIMENT_COMPLETED_WITH_LIMITATIONS | [All-input coverage](ALL_INPUT_FLOW_COVERAGE.md): P6 and P4 can return empty sets; P8 used fallback on 801/25,770 SPH ECG. Fallback is not quarantine or human review. |
 | R2-4f | Confusion matrix presentation | MANUSCRIPT_UPDATE_ONLY | Harmonize labels and denominators. |
 | R2-4g | Duplicated figures | MANUSCRIPT_UPDATE_ONLY | Reconcile figures against their source data. |
 | R2-4h | ROC and PR tracing definition | MANUSCRIPT_UPDATE_ONLY | Define plotted units and derivation. |
 | R2-4i | AUROC wording | MANUSCRIPT_UPDATE_ONLY | Qualify the interpretation of the reported value. |
 | R2-4j | Frequency versus accuracy plot | MANUSCRIPT_UPDATE_ONLY | Verify axes, bins and denominators. |
-| R2-4k | Quarantine and pre/post rates | CLAIM_WITHDRAWAL_REQUIRED | [Role and routing audit](ROLE_SUPERVISION_AND_ROUTING.md); historical policy and ledger unavailable; SPH quarantine is not assessed. |
+| R2-4k | Quarantine and pre/post rates | CLAIM_WITHDRAWAL_REQUIRED | [All-input coverage](ALL_INPUT_FLOW_COVERAGE.md) and [routing audit](ROLE_SUPERVISION_AND_ROUTING.md): no linked uncertainty-policy ledger; rate is not assessed, not zero. |
 | R2-4l | Rhythm top-1 | MANUSCRIPT_UPDATE_ONLY | Define the decision and denominator. |
 | R2-4m | Figure readability | MANUSCRIPT_UPDATE_ONLY | Final layout and rendering remain pending. |
-| R2-5 | PVC record versus beat level | VERIFIED_WITH_LIMITATIONS | Report ECG-statement scope, not beat-detection performance. |
+| R2-5 | PVC record versus beat level | VERIFIED_WITH_LIMITATIONS | [AF/PVC reference disposition](AF_PVC_REFERENCE_DISPOSITION.md); SPH comparisons are ECG statements, not validated beat detection. |
 | R2-6 | Distortion and citation claim | MANUSCRIPT_UPDATE_ONLY | Remove unsupported general claim and verify citation. |
 | A-01 | P4 panel versus unique ECG count | VERIFIED_WITH_LIMITATIONS | [Data dispositions](../revision-data-dispositions.md); preserve 962 panel rows and 733 distinct record keys. |
 | A-02 | Source distribution and aliases | VERIFIED_WITH_LIMITATIONS | [Source and rights disposition](SOURCE_RIGHTS_DISPOSITION.md); checksum matches and source aliases do not prove independent institutions or patient isolation. |

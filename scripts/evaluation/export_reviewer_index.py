@@ -21,8 +21,14 @@ def parse_index(text):
         cells = [cell.strip() for cell in line.strip().strip("|").split("|")]
         if len(cells) != 4 or cells[0] not in expected_ids():
             continue
-        if cells[2] not in {"MANUSCRIPT_UPDATE_ONLY", "VERIFIED_WITH_LIMITATIONS", "EVIDENCE_CEILING_REACHED",
-                            "CLAIM_WITHDRAWAL_REQUIRED", "EXPERIMENT_COMPLETED"}:
+        if cells[2] not in {
+            "MANUSCRIPT_UPDATE_ONLY",
+            "VERIFIED_WITH_LIMITATIONS",
+            "EVIDENCE_CEILING_REACHED",
+            "CLAIM_WITHDRAWAL_REQUIRED",
+            "EXPERIMENT_COMPLETED",
+            "EXPERIMENT_COMPLETED_WITH_LIMITATIONS",
+        }:
             raise ValueError(f"unknown disposition for {cells[0]}")
         rows.append(dict(zip(("id", "concern", "disposition", "evidence_and_action"), cells, strict=True)))
     ids = [row["id"] for row in rows]
