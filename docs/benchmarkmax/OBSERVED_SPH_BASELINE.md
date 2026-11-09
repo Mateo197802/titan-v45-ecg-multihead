@@ -81,4 +81,11 @@ This verifies deterministic execution, not an independent patient cohort.
 SPH may be used as a disclosed adaptation/development source only with
 patient-separated splits and a predeclared analysis. A distinct eligible source
 is needed for any confirmatory external-generalization claim after adaptation.
-No V4.6 checkpoint, calibration method or improved result exists yet.
+The separate [B1 calibration diagnostic](B1_SPH_CALIBRATION_RESULTS.md) has
+since been completed on these previously observed frozen scores. It is a
+score-only exploratory analysis, not a newly trained V4.6 specialist or
+independent validation. Brier/ECE were lower than the raw scores, but nested
+F1 decisions were unchanged, AUROC/AP shifted slightly down, and no
+constant-prevalence comparator was included. Thus no model improvement or
+incremental probability value over prevalence alone is established. No V4.6
+checkpoint or trained specialist exists yet.

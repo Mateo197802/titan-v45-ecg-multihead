@@ -46,9 +46,13 @@ It exports no patient or ECG identifiers and is configured to refuse paths
 inside either repository checkout. It does not define a test set and does not
 change the fact that SPH is an already-observed development source.
 
-The audit is a feasibility gate, not a training result. No training, threshold
-selection, or candidate-model performance is reported until endpoint support
-and the data contract are reviewed. CEDIA CPU job `32754` completed this audit
+The audit is a feasibility gate, not a training result. No candidate specialist
+has been trained or selected. A B1 calibration diagnostic was completed
+separately on frozen V4.5 SPH scores: patient-grouped cross-fitting and
+threshold tuning were performed, but no weights changed. This score-only
+analysis is exploratory on previously observed SPH, not a trained candidate
+model or independent validation; see the [B1 results](B1_SPH_CALIBRATION_RESULTS.md).
+CEDIA CPU job `32754` completed this audit
 from commit `90483f5`; the aggregate is
 [`sph_training_feasibility_32754.json`](../../outputs/results/benchmarkmax/sph_training_feasibility_32754.json)
 (SHA-256 `5df61dbf6af4d6b9b5da6d8962ebfebb0f166299f9cf27acfe8d69a874d0830e`).
@@ -62,15 +66,17 @@ and 3,745 / 3,580 to calibration-candidate, with zero patients crossing splits.
 | LVH | 144 / 138 | 40 / 38 | 25 / 25 |
 | PAC | 365 / 358 | 89 / 84 | 85 / 83 |
 
-These are source-statement supports, not model metrics. PAC has enough positive
-support for a limited exploratory head pilot; LVH is marginal for any reliable
-threshold claim; ASMI/IMI support is too sparse in development/calibration for
-stable claims or a robust threshold estimate. The current training CLI consumes
-precomputed NPZ features, while the repository has no audited SPH feature
-builder or feature matrix. Therefore no V4.6 checkpoint, calibration, or
-performance result has been produced. Any future within-SPH split metrics will
-remain development diagnostics, not external validation. The source's
-previously reported V4.5 performance will not be reused as a V4.6 test result.
+These are source-statement supports, not candidate-model metrics. PAC has
+enough positive support for a limited exploratory head pilot; LVH is marginal
+for a reliable threshold claim; ASMI/IMI support is too sparse in
+development/calibration for stable claims or a robust threshold estimate. The
+current training CLI consumes precomputed NPZ features, while the repository
+has no audited SPH feature builder or feature matrix. No V4.6 checkpoint or
+trained candidate specialist exists. B1's calibration result is a score-only
+diagnostic, not a trained model result; its interpretation and limitations are
+reported separately. Any future within-SPH split metrics remain development
+diagnostics, not external validation. The source's previously reported V4.5
+performance will not be reused as a V4.6 test result.
 
 ## External Validation Gate
 

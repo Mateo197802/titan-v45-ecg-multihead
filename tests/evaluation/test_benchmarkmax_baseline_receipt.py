@@ -41,3 +41,21 @@ def test_diagnostic_table_values_are_derived_from_the_aggregate():
                f"{endpoint['frozen_auroc']:.4f} | {endpoint['frozen_average_precision']:.4f} | "
                f"{endpoint['frozen_brier']:.4f} | {endpoint['frozen_ece']:.4f} |")
         assert row in document
+
+
+def test_benchmarkmax_status_documents_reflect_completed_b1_calibration():
+    feasibility = (ROOT / "docs/benchmarkmax/DATA_AND_LABEL_FEASIBILITY_REPORT.md").read_text(
+        encoding="utf-8"
+    )
+    baseline = (ROOT / "docs/benchmarkmax/OBSERVED_SPH_BASELINE.md").read_text(
+        encoding="utf-8"
+    )
+    readme = (ROOT / "docs/benchmarkmax/README.md").read_text(encoding="utf-8")
+    feasibility_flat = " ".join(feasibility.split())
+
+    assert "B1 calibration diagnostic was completed" in feasibility_flat
+    assert "not a trained candidate model or independent validation" in feasibility_flat
+    assert "B1_SPH_CALIBRATION_RESULTS.md" in feasibility
+    assert "B1_SPH_CALIBRATION_RESULTS.md" in baseline
+    assert "No V4.6\ncheckpoint or trained specialist exists yet." in baseline
+    assert "B1_SPH_CALIBRATION_RESULTS.md" in readme

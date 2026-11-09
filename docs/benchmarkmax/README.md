@@ -35,3 +35,10 @@ It uses positive-slope Platt scaling on the already-observed V4.5 scores, with
 nested patient-grouped fitting, threshold tuning and evaluation. It does not
 train new weights or restore SPH as an external test. Its SLURM runner publishes
 aggregate metrics only after exact hash and baseline-confusion reconciliation.
+
+That B1 score-calibration diagnostic has completed on the previously observed
+SPH outcomes; see [`B1_SPH_CALIBRATION_RESULTS.md`](B1_SPH_CALIBRATION_RESULTS.md).
+It did not train or modify weights, produced no F1 decision improvement, and
+does not establish independent validation or a new V4.6 specialist. New-model
+training remains blocked on an audited feature pipeline and adequate
+development support; an independent final cohort is still unconfirmed.
