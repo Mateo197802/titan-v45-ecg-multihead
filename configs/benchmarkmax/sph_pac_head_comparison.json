@@ -161,6 +161,7 @@
   "metrics": {
     "threshold_metrics": ["confusion", "accuracy", "sensitivity", "specificity", "PPV", "NPV", "F1"],
     "probability_metrics": ["AUROC", "average_precision", "Brier", "10-bin equal-width ECE"],
+    "ece_bins": 10,
     "confidence_intervals": {
       "unit": "patient cluster; repeated ECGs sampled together",
       "method": "paired unstratified percentile bootstrap",

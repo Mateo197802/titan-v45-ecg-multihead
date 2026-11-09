@@ -179,6 +179,24 @@ def test_pac_config_freezes_all_declared_mlp_seeds_and_v45_baseline() -> None:
     }
 
 
+def test_pac_config_preflight_rejects_incomplete_metric_contract() -> None:
+    config = json.loads((ROOT / "configs/benchmarkmax/sph_pac_head_comparison.json").read_text())
+    config["metrics"].pop("ece_bins")
+
+    with pytest.raises(ValueError, match="ece_bins"):
+        RUNNER.validate_frozen_pac_config(config)
+
+
+def test_pac_config_metric_contract_matches_frozen_protocol() -> None:
+    config = json.loads((ROOT / "configs/benchmarkmax/sph_pac_head_comparison.json").read_text())
+
+    RUNNER.validate_frozen_pac_config(config)
+
+    assert config["metrics"]["ece_bins"] == 10
+    assert config["metrics"]["confidence_intervals"]["replicates"] == 2000
+    assert config["metrics"]["confidence_intervals"]["seed"] == 197813
+
+
 def test_streaming_meanmax_pool_matches_whole_record_pool_across_microbatches() -> None:
     model = _small_backbone()
     signals = torch.randn(3, 12, 1250)

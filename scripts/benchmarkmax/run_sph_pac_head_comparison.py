@@ -382,6 +382,45 @@ def validate_source_statement_counts(
     return actual
 
 
+def validate_frozen_pac_config(config: dict[str, object]) -> None:
+    metrics = config.get("metrics")
+    if not isinstance(metrics, dict):
+        raise ValueError("frozen PAC metrics configuration is missing")
+    if type(metrics.get("ece_bins")) is not int or metrics["ece_bins"] != 10:
+        raise ValueError("frozen metrics.ece_bins must be 10 as declared by the protocol")
+    if "10-bin equal-width ECE" not in metrics.get("probability_metrics", []):
+        raise ValueError("frozen probability metrics do not declare 10-bin equal-width ECE")
+
+    intervals = metrics.get("confidence_intervals")
+    if not isinstance(intervals, dict):
+        raise ValueError("frozen metrics.confidence_intervals are missing")
+    expected_intervals = {
+        "unit": "patient cluster; repeated ECGs sampled together",
+        "method": "paired unstratified percentile bootstrap",
+        "rng": "NumPy PCG64",
+        "confidence_level": 0.95,
+        "comparison_order": "MLP minus logistic regression",
+    }
+    if any(intervals.get(key) != value for key, value in expected_intervals.items()):
+        raise ValueError("frozen patient-cluster bootstrap contract is malformed")
+    if (type(intervals.get("replicates")) is not int or intervals["replicates"] != 2000
+            or type(intervals.get("seed")) is not int or intervals["seed"] != 197813):
+        raise ValueError("frozen bootstrap replicates and seed must be 2000 and 197813")
+
+    source = config.get("source")
+    supports = source.get("source_statement_counts_before_signal_exclusions") if isinstance(
+        source, dict
+    ) else None
+    if (not isinstance(supports, dict)
+            or set(supports) != {
+                "code_30_records", "code_31_records", "counts_verified_against_source_inventory",
+            }
+            or supports.get("counts_verified_against_source_inventory") is not True
+            or type(supports.get("code_30_records")) is not int
+            or type(supports.get("code_31_records")) is not int):
+        raise ValueError("frozen source statement support configuration is malformed")
+
+
 def _support_view(
     selected: dict[str, tuple[str, int, int]], row_split: dict[str, str]
 ) -> dict[str, dict[str, int]]:
@@ -436,6 +475,7 @@ def run(args: argparse.Namespace) -> None:
     config = json.loads(config_path.read_text(encoding="utf-8"))
     if config.get("schema") != PAC_AGGREGATE_SCHEMA:
         raise ValueError("unexpected frozen PAC protocol schema")
+    validate_frozen_pac_config(config)
     expected_hashes = config["input_sha256"]
     input_paths = {
         "metadata": metadata_path, "dictionary": dictionary_path,
@@ -648,13 +688,14 @@ def run(args: argparse.Namespace) -> None:
         name = f"mlp_seed_{seed}"
         bootstrap_pairs.extend((("frozen_v45_p8_pac", name), ("logistic_regression", name)))
     bootstrap_comparisons = {}
+    confidence_intervals = config["metrics"]["confidence_intervals"]
     for reference, candidate in bootstrap_pairs:
         key = f"{candidate}_minus_{reference}"
         pair = patient_cluster_bootstrap(
             y[holdout_mask], model_scores[reference][0], model_scores[candidate][0],
             patient_ids[holdout_mask], model_scores[reference][1], model_scores[candidate][1],
-            replicates=config["metrics"]["bootstrap_replicates"],
-            seed=config["metrics"]["bootstrap_seed"],
+            replicates=confidence_intervals["replicates"],
+            seed=confidence_intervals["seed"],
         )
         bootstrap_comparisons[key] = {
             "reference_model": reference,
@@ -666,8 +707,8 @@ def run(args: argparse.Namespace) -> None:
     bootstrap = {
         "unit": "patient_id cluster; repeated ECGs sampled together",
         "method": "paired unstratified percentile bootstrap",
-        "replicates": config["metrics"]["bootstrap_replicates"],
-        "seed": config["metrics"]["bootstrap_seed"],
+        "replicates": confidence_intervals["replicates"],
+        "seed": confidence_intervals["seed"],
         "comparisons": bootstrap_comparisons,
     }
 
