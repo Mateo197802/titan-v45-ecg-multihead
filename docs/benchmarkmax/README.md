@@ -72,12 +72,16 @@ patient-grouped 70/15/15 assignment, development-only early stopping and
 threshold selection, and paired patient-cluster bootstrap comparisons against
 P8; each MLP is also compared with logistic regression. The protocol,
 configuration, runner, CEDIA SLURM wrapper, privacy verifier, and focused tests
-are in the experiment registry. CEDIA jobs `32799` and `32800` failed before
-fitting: the first at source-support reconciliation, the second on the missing
-machine-readable ECE-bin setting. Both private logs are retained. Neither run
-produced an aggregate, trained head weights, or candidate PAC metrics. The
-runner now checks the complete frozen metrics/source-support contract before
-starting waveform processing. A fresh CEDIA run is still required. Even after
+are in the experiment registry. CEDIA jobs `32799`, `32800`, and `32802` failed
+for runner/configuration contract mismatches; their private logs and hashes are
+retained. Job `32802` completed signal embedding and fit the logistic baseline;
+P8 and logistic holdout metric objects were created transiently in memory but
+were not emitted, persisted, inspected, or used for selection. It failed
+before MLP fitting, bootstrap comparisons, or report/model-artifact writing.
+No reportable aggregate or persistent candidate weights exist yet. The frozen
+metric choices remain unchanged. A code-only alignment now validates all
+consumed config paths before waveform processing and uses the protocol's exact
+`patience_epochs` key. A fresh CEDIA run is still required. Even after
 execution, the held-out SPH subset is exploratory because the source was
 previously observed; this does not satisfy the external-validation
 requirement. The pilot is PAC-only, not a P6/P8/P4 full-profile evaluation.

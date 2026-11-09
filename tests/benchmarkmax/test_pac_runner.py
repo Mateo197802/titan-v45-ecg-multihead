@@ -197,6 +197,14 @@ def test_pac_config_metric_contract_matches_frozen_protocol() -> None:
     assert config["metrics"]["confidence_intervals"]["seed"] == 197813
 
 
+def test_pac_config_preflight_rejects_missing_mlp_patience_setting() -> None:
+    config = json.loads((ROOT / "configs/benchmarkmax/sph_pac_head_comparison.json").read_text())
+    config["training"]["mlp"].pop("patience_epochs")
+
+    with pytest.raises(ValueError, match="training.mlp.patience_epochs"):
+        RUNNER.validate_frozen_pac_config(config)
+
+
 def test_streaming_meanmax_pool_matches_whole_record_pool_across_microbatches() -> None:
     model = _small_backbone()
     signals = torch.randn(3, 12, 1250)

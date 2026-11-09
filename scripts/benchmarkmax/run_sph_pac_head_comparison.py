@@ -383,6 +383,38 @@ def validate_source_statement_counts(
 
 
 def validate_frozen_pac_config(config: dict[str, object]) -> None:
+    required_paths = (
+        ("input_sha256",),
+        ("source", "records"), ("source", "patients"),
+        ("source_inventory", "schema"), ("source_inventory", "records"),
+        ("source_inventory", "patients"), ("source_inventory", "valid_signal_records"),
+        ("source_inventory", "technical_failures"),
+        ("source_inventory", "exact_duplicate_signal_groups"),
+        ("source_inventory", "exact_duplicate_signal_excess_records"),
+        ("source_inventory", "scope"),
+        ("runtime", "python"), ("runtime", "numpy"), ("runtime", "scipy"),
+        ("runtime", "torch"), ("runtime", "cuda"), ("runtime", "h5py"),
+        ("runtime", "device"), ("runtime", "torch_threads"),
+        ("runtime_archives_sha256",),
+        ("inference", "record_batch_size"), ("inference", "windows_per_batch"),
+        ("p8_baseline", "job_id"), ("p8_baseline", "ledger_sha256"),
+        ("p8_baseline", "receipt_sha256"), ("p8_baseline", "checkpoint_sha256"),
+        ("p8_baseline", "threshold"), ("p8_baseline", "expected_records"),
+        ("training", "seed"), ("training", "logistic_regression", "c_value"),
+        ("training", "mlp", "seeds"), ("training", "mlp", "max_epochs"),
+        ("training", "mlp", "patience_epochs"), ("training", "mlp", "batch_size"),
+        ("training", "mlp", "learning_rate"), ("training", "mlp", "weight_decay"),
+        ("training", "mlp", "hidden_dim"), ("training", "mlp", "dropout"),
+        ("metrics", "threshold_metrics"), ("metrics", "probability_metrics"),
+        ("metrics", "ece_bins"), ("metrics", "confidence_intervals"),
+    )
+    for path in required_paths:
+        value: object = config
+        for key in path:
+            if not isinstance(value, dict) or key not in value:
+                raise ValueError(f"frozen config is missing {'.'.join(path)}")
+            value = value[key]
+
     metrics = config.get("metrics")
     if not isinstance(metrics, dict):
         raise ValueError("frozen PAC metrics configuration is missing")
@@ -653,7 +685,7 @@ def run(args: argparse.Namespace) -> None:
             standardized[train_mask], y[train_mask], standardized[dev_mask], y[dev_mask],
             seed=seed,
             max_epochs=config["training"]["mlp"]["max_epochs"],
-            patience=config["training"]["mlp"]["patience"],
+            patience=config["training"]["mlp"]["patience_epochs"],
             batch_size=config["training"]["mlp"]["batch_size"],
             learning_rate=config["training"]["mlp"]["learning_rate"],
             weight_decay=config["training"]["mlp"]["weight_decay"],
