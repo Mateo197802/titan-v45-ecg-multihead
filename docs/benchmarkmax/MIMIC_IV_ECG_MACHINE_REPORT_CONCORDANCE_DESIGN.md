@@ -1,8 +1,9 @@
 # MIMIC-IV-ECG Machine-Report Concordance Design
 
-**Status:** design approved for implementation; a generic phrase-parser utility
-and synthetic tests are implemented. No MIMIC-IV-ECG files have been
-downloaded, inspected, or scored for this project. The user approved exploring
+**Status:** design approved for implementation; the generic phrase parser,
+metadata join auditor, aggregate PAC statement auditor, and synthetic tests are
+implemented. No MIMIC-IV-ECG files have been downloaded, inspected, classified,
+or scored for this project. The user approved exploring
 v1.0 only for concordance with automated machine-report statements; this does
 not approve any real phrase mapping or make machine reports clinical reference
 labels.
@@ -109,20 +110,38 @@ must be reported as such; no zero-result or validation claim may be inferred.
 
 ## Metadata-Only Implementation Status (2026-11-09)
 
-The parser and an aggregate-only metadata auditor are implemented. The auditor
-accepts local copies of `record_list.csv` and `machine_measurements.csv`, checks
-the required `subject_id`/`study_id` keys and 18 report slots, counts duplicate
-keys, conflicting duplicate report rows, unmatched joins, unique subjects, and
+The deterministic parser, aggregate-only metadata auditor, and aggregate-only
+PAC statement auditor are implemented. The metadata auditor accepts local
+copies of `record_list.csv` and `machine_measurements.csv`, checks the required
+`subject_id`/`study_id` keys and 18 report slots, counts duplicate keys,
+conflicting duplicate report rows, unmatched joins, unique subjects, and
 whether any report text is present. It emits input SHA-256 values and aggregate
-counts only; it does not emit IDs, paths, report text, phrase classes, or model
-metrics. Invalid keys, missing report slots, duplicate keys, conflicts, or
-unmatched joins prevent a `valid` status. The command is
-`python scripts/benchmarkmax/audit_mimic_metadata.py --record-list ...
---machine-measurements ... --output ...`.
+counts only. Invalid keys, missing report slots, duplicate keys, conflicts, or
+unmatched joins prevent a `valid` status.
+
+The PAC statement auditor first requires a mapping that passes
+`load_approved_pac_mapping`, then requires a valid exact metadata join before
+classifying any report row. It outputs input and mapping hashes, cohort counts,
+and counts for explicit positive, explicit negative, uncertain/qualified, and
+not-mentioned/report-missing states. The aggregate omits all IDs, paths, report
+text, and row-level classifications. Its policy explicitly records that this
+is not clinical reference data and that waveform inference and performance
+metrics were not performed. The parser fails closed to uncertain when common
+unmapped negation or qualifier cues occur near a PAC match, and it does not
+match phrases across sentence or semicolon boundaries. These generic safeguards
+are not a substitute for author review of the real phrase mapping. Commands:
+
+```text
+python scripts/benchmarkmax/audit_mimic_metadata.py --record-list ... --machine-measurements ... --output ...
+python scripts/benchmarkmax/audit_mimic_pac_statements.py --record-list ... --machine-measurements ... --mapping ... --output ...
+```
 
 Synthetic tests pass for matching metadata, privacy of the output, conflicting
-duplicates, unmatched keys, missing report slots, and empty join keys. No real
-MIMIC metadata, report text, or waveform has been downloaded or processed.
+duplicates, unmatched keys, missing report slots, empty join keys, approved
+and pending phrase mappings, report-state aggregation, and aborting on an
+invalid join. No real MIMIC metadata, report text, or waveform has been
+downloaded or processed; the checked-in phrase mapping remains empty and
+unapproved.
 
 On 2026-11-09, `quota -s` on the configured CEDIA account returned no quota
 record. `df -Th /home` showed global NFS capacity only; this is not evidence of

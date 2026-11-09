@@ -9,10 +9,22 @@ from contextlib import contextmanager
 from pathlib import Path
 from typing import Any
 
+from titan_v45.benchmarkmax.mimic_reports import (
+    classify_measurement_row,
+    load_approved_pac_mapping,
+)
+
 REPORT_COLUMNS = tuple(f"report_{index}" for index in range(18))
 RECORD_COLUMNS = ("path", "subject_id", "study_id")
 MEASUREMENT_COLUMNS = ("subject_id", "study_id", *REPORT_COLUMNS)
 AUDIT_SCHEMA = "TITAN_V46_MIMIC_METADATA_AUDIT_V1"
+PAC_STATEMENT_AUDIT_SCHEMA = "TITAN_V46_MIMIC_PAC_REPORT_AUDIT_V1"
+PAC_REPORT_STATES = (
+    "explicit_positive",
+    "explicit_negative",
+    "uncertain_or_qualified",
+    "not_mentioned_or_report_missing",
+)
 
 
 def _sha256(path: Path) -> str:
@@ -158,6 +170,78 @@ def audit_mimic_metadata(record_list_path: Path, machine_measurements_path: Path
             "report_phrase_mapping_applied": False,
             "report_silence_is_negative": False,
             "waveform_inference_performed": False,
+            "row_level_data_exported": False,
+        },
+    }
+
+
+def audit_mimic_pac_statements(
+    record_list_path: Path,
+    machine_measurements_path: Path,
+    mapping_path: Path,
+) -> dict[str, Any]:
+    """Classify machine-report PAC statements and return aggregate counts only."""
+    record_list_path = Path(record_list_path)
+    machine_measurements_path = Path(machine_measurements_path)
+    mapping_path = Path(mapping_path)
+    resolved_inputs = {
+        record_list_path.resolve(),
+        machine_measurements_path.resolve(),
+        mapping_path.resolve(),
+    }
+    if len(resolved_inputs) != 3:
+        raise ValueError("record list, machine measurements, and mapping must be separate files")
+
+    mapping_hash_before = _sha256(mapping_path)
+    mapping = load_approved_pac_mapping(mapping_path)
+    if _sha256(mapping_path) != mapping_hash_before:
+        raise ValueError("the PAC phrase mapping changed while it was being validated")
+    metadata = audit_mimic_metadata(record_list_path, machine_measurements_path)
+    if metadata["status"] != "valid":
+        raise ValueError("metadata join is invalid; PAC statement classification aborted")
+
+    states = {state: 0 for state in PAC_REPORT_STATES}
+    with _reader(machine_measurements_path, MEASUREMENT_COLUMNS) as reader:
+        for row in reader:
+            if row.get(None) is not None:
+                raise ValueError("machine_measurements row has unexpected extra fields")
+            state = classify_measurement_row(row, mapping)
+            states[state] += 1
+
+    if sum(states.values()) != metadata["machine_measurements"]["rows"]:
+        raise ValueError("classified report count does not reconcile with metadata audit")
+
+    input_hashes_after = {
+        "record_list.csv": _sha256(record_list_path),
+        "machine_measurements.csv": _sha256(machine_measurements_path),
+    }
+    mapping_hash_after = _sha256(mapping_path)
+    if input_hashes_after != metadata["input_sha256"] or mapping_hash_after != mapping_hash_before:
+        raise ValueError("an input changed during the PAC statement audit")
+
+    return {
+        "schema": PAC_STATEMENT_AUDIT_SCHEMA,
+        "dataset_version": "1.0",
+        "status": "valid",
+        "input_sha256": input_hashes_after,
+        "mapping_sha256": mapping_hash_after,
+        "cohort": {
+            "matched_unique_ecgs": metadata["join"]["matched_unique_ecgs"],
+            "unique_patients": metadata["record_list"]["unique_patients"],
+            "rows_with_any_report_text": metadata["machine_measurements"][
+                "rows_with_any_report_text"
+            ],
+            "rows_with_no_report_text": metadata["machine_measurements"][
+                "rows_with_no_report_text"
+            ],
+        },
+        "report_states": states,
+        "policy": {
+            "endpoint": "PAC statements in automatically generated ECG machine reports",
+            "clinical_reference": False,
+            "silence_is_explicit_negative": False,
+            "model_inference_performed": False,
+            "performance_metrics_computed": False,
             "row_level_data_exported": False,
         },
     }

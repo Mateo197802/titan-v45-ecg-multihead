@@ -107,10 +107,20 @@ preserves all 18 `report_0..report_17` slots, recognizes four explicit states,
 and refuses to load a phrase mapping without corresponding-author approval.
 Its empty [mapping template](../../configs/benchmarkmax/mimic_pac_report_mapping.template.json)
 is intentionally not executable. Unit tests use synthetic phrases only; they
-do not approve real MIMIC terminology.
+do not approve real MIMIC terminology. Unmapped negation or qualification cues
+near a PAC match fail closed to `uncertain_or_qualified`; phrase matches do not
+cross sentence or semicolon boundaries.
 
-No MIMIC files have been downloaded, parsed, or scored, and no MIMIC metrics
-exist. Full waveform acquisition remains blocked until per-user CEDIA quota,
+Two local, aggregate-only commands are implemented: `audit_mimic_metadata.py`
+checks the `record_list.csv` to `machine_measurements.csv` key join, and
+`audit_mimic_pac_statements.py` classifies report statements only after that
+join is valid and the phrase mapping carries the required author approval. The
+statement audit emits input/mapping hashes and aggregate state counts; it does
+not emit IDs, paths, report text, row-level labels, or model metrics. Both
+commands have only been tested on synthetic fixtures.
+
+No real MIMIC files have been downloaded, parsed, or scored, and no MIMIC
+metrics exist. Full waveform acquisition remains blocked until per-user CEDIA quota,
 scratch capacity, retention and cleanup are confirmed. The design, endpoint
 limits and stop conditions are documented in
 [`MIMIC_IV_ECG_MACHINE_REPORT_CONCORDANCE_DESIGN.md`](MIMIC_IV_ECG_MACHINE_REPORT_CONCORDANCE_DESIGN.md).

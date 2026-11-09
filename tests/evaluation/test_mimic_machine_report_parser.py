@@ -99,6 +99,35 @@ def test_specific_negation_and_qualifier_override_their_positive_subphrase(
     )
 
 
+def test_unmapped_negation_and_qualifiers_fail_closed_as_uncertain(
+    tmp_path: Path,
+) -> None:
+    api = _api()
+    mapping = api.load_approved_pac_mapping(write_mapping(tmp_path, approved_mapping()))
+
+    for report in (
+        "PAC was not observed",
+        "PAC absent",
+        "No evidence of PAC",
+        "Consider PAC",
+        "PAC may be present",
+    ):
+        assert api.classify_report_lines([report], mapping) == "uncertain_or_qualified"
+
+
+def test_phrase_matching_does_not_cross_sentence_or_clause_boundaries(
+    tmp_path: Path,
+) -> None:
+    api = _api()
+    mapping_data = approved_mapping()
+    mapping_data["phrases"]["explicit_negative"] = ["no PAC"]
+    mapping = api.load_approved_pac_mapping(write_mapping(tmp_path, mapping_data))
+
+    assert api.classify_report_lines(["No. PAC"], mapping) == "uncertain_or_qualified"
+    assert api.classify_report_lines(["No.PAC"], mapping) == "uncertain_or_qualified"
+    assert api.classify_report_lines(["No; PAC"], mapping) == "uncertain_or_qualified"
+
+
 def test_conflicting_report_lines_are_uncertain_not_positive_or_negative(
     tmp_path: Path,
 ) -> None:

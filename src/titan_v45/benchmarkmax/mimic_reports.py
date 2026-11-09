@@ -24,6 +24,36 @@ ReportClass = Literal[
 REPORT_COLUMNS = tuple(f"report_{index}" for index in range(18))
 MAPPING_SCHEMA = "TITAN_V46_MIMIC_PAC_REPORT_MAPPING_V1"
 _TOKEN_PATTERN = re.compile(r"[^\W_]+", re.UNICODE)
+_CLAUSE_BOUNDARY_PATTERN = re.compile(r"[.!?;\r\n]+")
+_AMBIGUITY_CUES = (
+    (("no",), "before"),
+    (("without",), "before"),
+    (("absence", "of"), "before"),
+    (("lack", "of"), "before"),
+    (("lacks",), "before"),
+    (("none",), "before"),
+    (("not",), "either"),
+    (("absent",), "either"),
+    (("negative",), "either"),
+    (("possible",), "either"),
+    (("possibly",), "either"),
+    (("probable",), "either"),
+    (("probably",), "either"),
+    (("suspected",), "either"),
+    (("suspect",), "either"),
+    (("consider",), "either"),
+    (("considered",), "either"),
+    (("questionable",), "either"),
+    (("uncertain",), "either"),
+    (("may",), "either"),
+    (("could",), "either"),
+    (("cannot", "exclude"), "before"),
+    (("cannot", "be", "excluded"), "after"),
+    (("can", "t", "exclude"), "before"),
+    (("rule", "out"), "before"),
+    (("versus",), "either"),
+    (("vs",), "either"),
+)
 
 
 @dataclass(frozen=True, init=False)
@@ -166,8 +196,23 @@ def _phrase_hits(
     return hits
 
 
-def _classify_line(line: str, mapping: ApprovedPACPhraseMapping) -> ReportClass | None:
-    tokens = _tokens(line)
+def _context_has_ambiguity_cue(tokens: tuple[str, ...], target: _Hit) -> bool:
+    for cue, direction in _AMBIGUITY_CUES:
+        for start in range(len(tokens) - len(cue) + 1):
+            if tokens[start : start + len(cue)] != cue:
+                continue
+            end = start + len(cue)
+            before = 0 <= target.start - end <= 3
+            after = 0 <= start - target.end <= 3
+            if (direction in {"before", "either"} and before) or (
+                direction in {"after", "either"} and after
+            ):
+                return True
+    return False
+
+
+def _classify_segment(segment: str, mapping: ApprovedPACPhraseMapping) -> ReportClass | None:
+    tokens = _tokens(segment)
     hits = (
         _phrase_hits(tokens, mapping.explicit_positive, "explicit_positive")
         + _phrase_hits(tokens, mapping.explicit_negative, "explicit_negative")
@@ -187,10 +232,59 @@ def _classify_line(line: str, mapping: ApprovedPACPhraseMapping) -> ReportClass 
             for other in hits
         )
     ]
+    active_positive = [hit for hit in active if hit.category == "explicit_positive"]
+    if any(_context_has_ambiguity_cue(tokens, hit) for hit in active_positive):
+        return "uncertain_or_qualified"
+
     categories = {hit.category for hit in active}
     if len(categories) != 1:
         return "uncertain_or_qualified"
     return next(iter(categories))
+
+
+def _boundary_has_ambiguity_cue(
+    segments: tuple[tuple[str, ...], ...],
+    states: tuple[ReportClass | None, ...],
+    mapping: ApprovedPACPhraseMapping,
+) -> bool:
+    for index, (tokens, state) in enumerate(zip(segments, states, strict=True)):
+        if state != "explicit_positive":
+            continue
+        prefix = segments[index - 1][-3:] if index else ()
+        suffix = segments[index + 1][:3] if index + 1 < len(segments) else ()
+        context = prefix + tokens + suffix
+        offset = len(prefix)
+        positive_hits = _phrase_hits(tokens, mapping.explicit_positive, "explicit_positive")
+        if any(
+            _context_has_ambiguity_cue(
+                context,
+                _Hit(hit.start + offset, hit.end + offset, hit.category),
+            )
+            for hit in positive_hits
+        ):
+            return True
+    return False
+
+
+def _classify_line(line: str, mapping: ApprovedPACPhraseMapping) -> ReportClass | None:
+    token_segments = tuple(
+        tokens
+        for segment in _CLAUSE_BOUNDARY_PATTERN.split(line)
+        if (tokens := _tokens(segment))
+    )
+    states_by_segment = tuple(
+        _classify_segment(" ".join(tokens), mapping) for tokens in token_segments
+    )
+    if _boundary_has_ambiguity_cue(token_segments, states_by_segment, mapping):
+        return "uncertain_or_qualified"
+    states = {state for state in states_by_segment if state is not None}
+    if not states:
+        return None
+    if "uncertain_or_qualified" in states or (
+        "explicit_positive" in states and "explicit_negative" in states
+    ):
+        return "uncertain_or_qualified"
+    return next(iter(states))
 
 
 def classify_report_lines(

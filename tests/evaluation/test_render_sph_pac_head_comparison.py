@@ -105,24 +105,33 @@ def test_experiment_registry_records_success_without_erasing_failed_attempts() -
     assert pac["external_claim_permitted"] is False
 
     mimic = experiments["B2-MIMIC-IV-ECG-MACHINE-REPORT-CONCORDANCE"]
-    assert mimic["status"] == "metadata_audit_implemented_waiting_for_author_mapping_and_cedia_quota"
+    assert mimic["status"] == (
+        "metadata_and_statement_audit_implemented_waiting_for_author_mapping_and_cedia_quota"
+    )
     assert mimic["mapping_author_approved"] is False
     assert mimic["downloaded"] is False
     assert mimic["metadata_downloaded"] is False
     assert mimic["performance_metrics_computed"] is False
     assert mimic["metadata_auditor_scope"] == "synthetic_contract_only_no_real_mimic_files_read"
+    assert mimic["pac_statement_audit_scope"] == "synthetic_contract_only_no_real_mimic_files_read"
     assert mimic["cedia_quota_check_result"].startswith("quota_command_returned_no_quota_record")
     parser = registry_root / mimic["parser"]
+    parser_tests = registry_root / mimic["parser_tests"]
     template = registry_root / mimic["mapping_template"]
     metadata_auditor = registry_root / mimic["metadata_auditor"]
     metadata_module = registry_root / mimic["metadata_auditor_module"]
     metadata_tests = registry_root / mimic["metadata_auditor_tests"]
+    statement_auditor = registry_root / mimic["pac_statement_auditor"]
+    statement_audit_tests = registry_root / mimic["pac_statement_auditor_tests"]
     design = registry_root / mimic["design"]
     assert hashlib.sha256(parser.read_bytes()).hexdigest() == mimic["parser_sha256"]
+    assert hashlib.sha256(parser_tests.read_bytes()).hexdigest() == mimic["parser_tests_sha256"]
     assert hashlib.sha256(template.read_bytes()).hexdigest() == mimic["mapping_template_sha256"]
     assert hashlib.sha256(metadata_auditor.read_bytes()).hexdigest() == mimic["metadata_auditor_sha256"]
     assert hashlib.sha256(metadata_module.read_bytes()).hexdigest() == mimic["metadata_auditor_module_sha256"]
     assert hashlib.sha256(metadata_tests.read_bytes()).hexdigest() == mimic["metadata_auditor_tests_sha256"]
+    assert hashlib.sha256(statement_auditor.read_bytes()).hexdigest() == mimic["pac_statement_auditor_sha256"]
+    assert hashlib.sha256(statement_audit_tests.read_bytes()).hexdigest() == mimic["pac_statement_auditor_tests_sha256"]
     assert hashlib.sha256(design.read_bytes()).hexdigest() == mimic["design_sha256"]
 
 
