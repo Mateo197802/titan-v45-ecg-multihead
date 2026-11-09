@@ -358,6 +358,30 @@ def load_labels(metadata_path: Path, dictionary_path: Path) -> dict[str, tuple[s
     }
 
 
+def validate_source_statement_counts(
+    labels: dict[str, tuple[str, int, int]],
+    source_config: dict[str, object],
+) -> dict[str, int]:
+    expected = source_config.get("source_statement_counts_before_signal_exclusions")
+    if (not isinstance(expected, dict)
+            or set(expected) != {
+                "code_30_records", "code_31_records", "counts_verified_against_source_inventory",
+            }
+            or expected.get("counts_verified_against_source_inventory") is not True
+            or any(type(expected[key]) is not int or expected[key] < 0
+                   for key in ("code_30_records", "code_31_records"))):
+        raise ValueError("frozen source statement supports are malformed")
+    actual = {
+        "code_30_records": sum(code30 for _, code30, _ in labels.values()),
+        "code_31_records": sum(code31 for _, _, code31 in labels.values()),
+    }
+    if actual != {
+        key: expected[key] for key in ("code_30_records", "code_31_records")
+    }:
+        raise ValueError("source PAC statement supports differ from the frozen inventory")
+    return actual
+
+
 def _support_view(
     selected: dict[str, tuple[str, int, int]], row_split: dict[str, str]
 ) -> dict[str, dict[str, int]]:
@@ -510,17 +534,7 @@ def run(args: argparse.Namespace) -> None:
     labels = load_labels(metadata_path, dictionary_path)
     if len(labels) != expected_source["records"]:
         raise ValueError("SPH label population differs from the frozen protocol")
-    expected_statement_counts = expected_source["endpoint"][
-        "source_statement_counts_before_signal_exclusions"
-    ]
-    actual_statement_counts = {
-        "code_30_records": sum(code30 for _, code30, _ in labels.values()),
-        "code_31_records": sum(code31 for _, _, code31 in labels.values()),
-    }
-    if actual_statement_counts != {
-        key: expected_statement_counts[key] for key in actual_statement_counts
-    }:
-        raise ValueError("source PAC statement supports differ from the frozen inventory")
+    actual_statement_counts = validate_source_statement_counts(labels, expected_source)
     source_patients = len({patient for patient, _, _ in labels.values()})
     if source_patients != expected_source["patients"]:
         raise ValueError("SPH patient count differs from the frozen protocol")

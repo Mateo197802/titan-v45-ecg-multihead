@@ -72,11 +72,16 @@ patient-grouped 70/15/15 assignment, development-only early stopping and
 threshold selection, and paired patient-cluster bootstrap comparisons against
 P8; each MLP is also compared with logistic regression. The protocol,
 configuration, runner, CEDIA SLURM wrapper, privacy verifier, and focused tests
-are in the experiment registry. **The CEDIA V4.6 training/inference job has not
-run yet; no new head weights or comparison metrics are available.** Even after
+are in the experiment registry. **CEDIA job `32799` failed before fitting; no
+new head weights or PAC comparison metrics are available yet.** Even after
 execution, the held-out SPH subset is exploratory because the source was
 previously observed; this does not satisfy the external-validation
-requirement. The pilot is PAC-only, not a P6/P8/P4 full-profile evaluation.
+requirement. The first CEDIA attempt (`32799`) completed waveform embedding but
+failed at source-support reconciliation before fitting or metrics because the
+runner read one frozen count from the wrong JSON level. The failure is retained
+in the registry; no aggregate or candidate weights were produced. The runner
+now reads the source-level contract through a tested reconciliation helper.
+The pilot is PAC-only, not a P6/P8/P4 full-profile evaluation.
 
 The SPH source does not encode physical units as mV in the audited HDF5
 metadata, so the runner reports unitless amplitudes and applies no unsupported

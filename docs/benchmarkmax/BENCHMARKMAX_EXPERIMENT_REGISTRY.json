@@ -144,7 +144,7 @@
     },
     {
       "id": "B2-V46-SPH-PAC-HEAD-COMPARISON",
-      "status": "protocol_frozen_awaiting_cedia_execution",
+      "status": "protocol_frozen_retry_pending_after_failed_pre_fit_attempt",
       "purpose": "Exploratory patient-grouped comparison of the frozen V4.5 P8 PAC score, a V4.6 logistic head, and five fixed MLP sensitivity seeds for SPH code-30 ECG statements; no new metrics or trained candidate weights exist until the CEDIA run completes.",
       "protocol": "SPH_PAC_HEAD_COMPARISON_PROTOCOL.md",
       "configuration": "../../configs/benchmarkmax/sph_pac_head_comparison.json",
@@ -162,6 +162,19 @@
         "labels_used_for_inference_or_routing": false
       },
       "mlp_seed_set": [197802, 197803, 197804, 197805, 197806],
+      "failed_attempts": [
+        {
+          "cedia_job_id": "32799",
+          "execution_commit": "cf73ec5c864a9c622cb132292386680aa92fcd49",
+          "state": "FAILED",
+          "exit_code": "1:0",
+          "failure_stage": "after_label_blind_embedding; before PAC-support reconciliation, fitting, and metrics",
+          "reason": "Runner looked for source_statement_counts_before_signal_exclusions under endpoint although the frozen configuration places it at source level.",
+          "aggregate_created": false,
+          "head_weights_created": false,
+          "private_log_preserved": true
+        }
+      ],
       "input_hashes_pinned": true,
       "patient_grouped": true,
       "exploratory_holdout_used_for_selection": false,

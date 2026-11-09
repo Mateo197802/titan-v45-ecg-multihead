@@ -81,9 +81,12 @@ duplicate exclusion, and aggregate-only output. The frozen comparison uses
 the CEDIA job-32668 V4.5 P8 PAC score as a historical baseline, then fits one
 logistic head and five prespecified MLP seeds on the same V3F mean+max
 embeddings. The baseline ledger and receipt remain private and are hash-bound
-in configuration. The V4.6 CEDIA job has not yet run, so there is still no new
-V4.6 checkpoint, trained PAC head, or candidate performance metric. The builder
-does not persist an SPH feature matrix. The pilot covers PAC code 30 only; it
+in configuration. CEDIA job `32799` reached waveform embedding but failed at
+the source-support reconciliation step before fitting; its private log is
+preserved in the registry. No aggregate, trained PAC head, or candidate
+performance metric was produced. The corrected runner has a focused
+regression test. The builder does not persist an SPH feature matrix. The pilot
+covers PAC code 30 only; it
 does not execute the complete P6/P8/P4 profiles. B1's calibration result
 remains a score-only diagnostic, not a trained candidate model or independent
 validation; its interpretation and limitations are reported separately. Any

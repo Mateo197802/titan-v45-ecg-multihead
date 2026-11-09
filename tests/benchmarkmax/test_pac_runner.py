@@ -126,6 +126,39 @@ def test_frozen_p8_scores_reject_incomplete_or_label_aware_ledger(tmp_path: Path
         )
 
 
+def test_source_statement_support_reader_uses_source_level_contract() -> None:
+    source = {
+        "source_statement_counts_before_signal_exclusions": {
+            "code_30_records": 1,
+            "code_31_records": 1,
+            "counts_verified_against_source_inventory": True,
+        }
+    }
+    labels = {
+        "A00001": ("P00001", True, False),
+        "A00002": ("P00002", False, True),
+    }
+
+    assert RUNNER.validate_source_statement_counts(labels, source) == {
+        "code_30_records": 1,
+        "code_31_records": 1,
+    }
+
+
+def test_source_statement_support_reader_rejects_inventory_mismatch() -> None:
+    source = {
+        "source_statement_counts_before_signal_exclusions": {
+            "code_30_records": 0,
+            "code_31_records": 1,
+            "counts_verified_against_source_inventory": True,
+        }
+    }
+    labels = {"A00001": ("P00001", True, False)}
+
+    with pytest.raises(ValueError, match="source PAC statement supports"):
+        RUNNER.validate_source_statement_counts(labels, source)
+
+
 def test_pac_config_freezes_all_declared_mlp_seeds_and_v45_baseline() -> None:
     config = json.loads((ROOT / "configs/benchmarkmax/sph_pac_head_comparison.json").read_text())
 
@@ -134,6 +167,16 @@ def test_pac_config_freezes_all_declared_mlp_seeds_and_v45_baseline() -> None:
     assert config["training"]["mlp"]["dropout"] == 0.25
     assert config["p8_baseline"]["threshold"] == 0.45
     assert config["p8_baseline"]["job_id"] == "32668"
+    source_labels = {
+        f"A{index:05d}": (
+            f"P{index:05d}", index < 539, 539 <= index < 543,
+        )
+        for index in range(543)
+    }
+    assert RUNNER.validate_source_statement_counts(source_labels, config["source"]) == {
+        "code_30_records": 539,
+        "code_31_records": 4,
+    }
 
 
 def test_streaming_meanmax_pool_matches_whole_record_pool_across_microbatches() -> None:
