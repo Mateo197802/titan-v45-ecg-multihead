@@ -1,0 +1,70 @@
+{
+  "schema": "TITAN_V45_SPH_INDEPENDENT_SCORE_BOOTSTRAP_V1",
+  "endpoints": {
+    "P6:AFIB": {
+      "score_metrics": 4,
+      "primary_and_sensitivity": true
+    },
+    "P6:SB": {
+      "score_metrics": 4,
+      "primary_and_sensitivity": true
+    },
+    "P6:STACH": {
+      "score_metrics": 4,
+      "primary_and_sensitivity": true
+    },
+    "P6:RBBB": {
+      "score_metrics": 4,
+      "primary_and_sensitivity": true
+    },
+    "P6:PVC": {
+      "score_metrics": 4,
+      "primary_and_sensitivity": true
+    },
+    "P8:AFIB": {
+      "score_metrics": 4,
+      "primary_and_sensitivity": true
+    },
+    "P8:SB": {
+      "score_metrics": 4,
+      "primary_and_sensitivity": true
+    },
+    "P8:STACH": {
+      "score_metrics": 4,
+      "primary_and_sensitivity": true
+    },
+    "P8:RBBB": {
+      "score_metrics": 4,
+      "primary_and_sensitivity": true
+    },
+    "P8:PAC": {
+      "score_metrics": 4,
+      "primary_and_sensitivity": true
+    },
+    "P8:PVC": {
+      "score_metrics": 4,
+      "primary_and_sensitivity": true
+    },
+    "P4:ASMI": {
+      "score_metrics": 4,
+      "primary_and_sensitivity": true
+    },
+    "P4:LVH": {
+      "score_metrics": 4,
+      "primary_and_sensitivity": true
+    },
+    "P4:IMI": {
+      "score_metrics": 4,
+      "primary_and_sensitivity": true
+    }
+  },
+  "individual_records_exported": false,
+  "script_sha256": "261df827e3a79ee3b4f8b472fcf03f83a342cc528c70d028eb5d0928672996a3",
+  "inputs": {
+    "metadata": "c6f8dc5197758a3970aae554f8b6ee884d96656b121879bc0eb1adf367ea6d86",
+    "ledger": "4a3a1e61b1784e06190d5caaa089fca04ef84792acb3a5f9fc1af3f9c1173462",
+    "duplicate_index": "24eae465775c82c6ffa8fa9739a66d59f294f9de9190b903ea2b417b978f68ea",
+    "aggregate": "09f93d9f310baaca672a33b0f369593cd88835a8ef08dc9929945c57cf18c988",
+    "protocol": "d788ad8cca94793cebb738496acc131e82b1ca1900976f11020b99a79a5fc366"
+  }
+}
