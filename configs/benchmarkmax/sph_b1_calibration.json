@@ -2,6 +2,14 @@
   "schema": "TITAN_V46_SPH_B1_CALIBRATION_PROTOCOL_V1",
   "status": "frozen_before_b1_calibration_metrics",
   "scope": "Previously observed SPH is used only for exploratory V4.6 development/adaptation; this is not an independent or confirmatory test.",
+  "runtime": {
+    "environment": "CEDIA miniconda3/3 conda environment yc_env2",
+    "versions": {
+      "python": "3.10.18",
+      "numpy": "1.26.4",
+      "scipy": "1.15.3"
+    }
+  },
   "source": {
     "name": "SPH ECG dataset V1",
     "records": 25770,

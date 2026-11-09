@@ -77,8 +77,10 @@ is an engineering diagnostic only; it has no declared clinical utility.
 
 ## Execution And Interpretation
 
-Run the committed SLURM wrapper on a CEDIA CPU partition. The aggregate receipt
-is written outside both Git checkouts with mode `0600`; only after its schema,
+Run the committed SLURM wrapper in the pre-existing CEDIA `yc_env2` conda
+environment (Python 3.10.18, NumPy 1.26.4, SciPy 1.15.3) on a CPU partition.
+The runner checks these exact versions before reading study records. The
+aggregate receipt is written outside both Git checkouts with mode `0600`; only after its schema,
 hashes, denominator and privacy checks pass may the aggregate be added to this
 PR. The runner must reconcile the original V4.5 confusion counts exactly.
 

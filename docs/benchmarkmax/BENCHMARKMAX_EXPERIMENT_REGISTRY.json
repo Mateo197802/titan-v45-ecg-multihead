@@ -72,6 +72,7 @@
         "patient_grouped_nested_folds": 5,
         "bootstrap_replicates": 2000
       },
+      "runtime": "CEDIA miniconda3/3 conda environment yc_env2: Python 3.10.18, NumPy 1.26.4, SciPy 1.15.3",
       "support_caution": "ASMI/IMI calibration and tune-fold positive support is small; publish every fold denominator and do not promote a clinical threshold.",
       "weights_changed": false,
       "external_claim_permitted": false

@@ -23,13 +23,15 @@ v46_repo=${10}
 output_dir=${11}
 [[ "$script_sha" =~ ^[0-9a-f]{64}$ ]]
 test "$(sha256sum "$script" | cut -d ' ' -f 1)" = "$script_sha"
-module load python/3.11
-python3 --version
-python3 -c 'import numpy, scipy; print("numpy", numpy.__version__); print("scipy", scipy.__version__)'
+module load miniconda3/3
+source "$(conda info --base)/etc/profile.d/conda.sh"
+conda activate yc_env2
+python --version
+python -c 'import numpy, scipy; print("numpy", numpy.__version__); print("scipy", scipy.__version__)'
 mkdir -p -m 700 "$output_dir"
 chmod 700 "$output_dir"
 output="$output_dir/sph-b1-calibration-$SLURM_JOB_ID.json"
-python3 "$script" \
+python "$script" \
     --metadata "$metadata" \
     --ledger "$ledger" \
     --v45-config "$v45_config" \

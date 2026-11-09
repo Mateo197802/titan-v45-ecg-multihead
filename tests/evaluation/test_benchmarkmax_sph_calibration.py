@@ -27,6 +27,17 @@ def test_patient_folds_are_stable_and_keep_each_patient_in_one_fold():
     assert module.outer_fold("repeated-patient") == module.outer_fold("repeated-patient")
 
 
+def test_runtime_validation_rejects_unpinned_dependency_versions():
+    expected = {"python": "3.10.18", "numpy": "1.26.4", "scipy": "1.15.3"}
+
+    assert module.validate_runtime(expected, expected) == expected
+    with pytest.raises(ValueError, match="runtime differs"):
+        module.validate_runtime(
+            {**expected, "numpy": "1.26.3"},
+            expected,
+        )
+
+
 def test_platt_scaling_is_finite_monotone_and_corrects_miscalibration():
     rng = np.random.default_rng(197802)
     raw = np.linspace(0.01, 0.99, 1000)

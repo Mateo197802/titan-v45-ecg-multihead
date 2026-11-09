@@ -7,6 +7,7 @@ import hashlib
 import json
 import math
 import os
+import platform
 import subprocess
 from pathlib import Path
 
@@ -30,6 +31,22 @@ BOOTSTRAP_METRICS = (
     "brier",
     "ece",
 )
+
+
+def runtime_versions() -> dict[str, str]:
+    import scipy
+
+    return {
+        "python": platform.python_version(),
+        "numpy": np.__version__,
+        "scipy": scipy.__version__,
+    }
+
+
+def validate_runtime(actual: dict[str, str], expected: dict[str, str]) -> dict[str, str]:
+    if actual != expected:
+        raise ValueError(f"B1 runtime differs from frozen versions: {actual} != {expected}")
+    return dict(actual)
 
 
 def sha256_file(path: Path) -> str:
@@ -720,6 +737,8 @@ def run(args: argparse.Namespace) -> None:
     ).stdout.strip()
     if status:
         raise ValueError("BenchmarkMax checkout must be clean for frozen B1 execution")
+    runtime_config = json.loads(args.b1_config.read_text(encoding="utf-8"))["runtime"]
+    actual_runtime = validate_runtime(runtime_versions(), runtime_config["versions"])
     report = build_report(
         args.metadata,
         args.ledger,
@@ -731,6 +750,10 @@ def run(args: argparse.Namespace) -> None:
         slurm_job_id=os.environ.get("SLURM_JOB_ID", "not_slurm"),
         commit=commit,
     )
+    report["execution"]["runtime"] = {
+        "environment": runtime_config["environment"],
+        "versions": actual_runtime,
+    }
     output.parent.mkdir(parents=True, exist_ok=True)
     with output.open("x", encoding="utf-8", newline="\n") as stream:
         json.dump(report, stream, indent=2, sort_keys=True, allow_nan=False)
