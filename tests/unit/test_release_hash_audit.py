@@ -108,3 +108,23 @@ def test_tracked_release_declarations_agree_with_cedia_recovery_model_inventory(
         declared = models[measured["name"]]
         assert measured["bytes"] == declared["bytes"] > 0
         assert measured["sha256"] == declared["sha256"]
+
+
+def test_job_32733_receipt_reconciles_all_release_assets() -> None:
+    release = json.loads((ROOT / "release-manifest.json").read_text(encoding="utf-8"))
+    path = ROOT / "outputs/results/revision_20261028/release_model_hashes_32733.json"
+    receipt = json.loads(path.read_text(encoding="utf-8"))
+    assert hashlib.sha256(path.read_bytes()).hexdigest() == (
+        "b251d49f2e5a16cd7350e987fb85b609a97312cde19dda3647ef7c74113b269b"
+    )
+    assert receipt["declarations_valid"] is True
+    assert receipt["all_physical_assets_verified"] is True
+    assert receipt["missing_physical_assets"] == []
+    measured = {item["name"]: item for item in receipt["physical_assets_verified"]}
+    assert len(measured) == len(release["assets"]) == 7
+    for asset in release["assets"]:
+        assert measured[asset["name"]]["bytes"] == asset["bytes"]
+        assert measured[asset["name"]]["sha256"] == asset["sha256"]
+    assert receipt["manifest_sha256"] == hashlib.sha256(
+        (ROOT / "release-manifest.json").read_bytes()
+    ).hexdigest()

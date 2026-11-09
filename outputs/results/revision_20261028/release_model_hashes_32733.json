@@ -1,0 +1,51 @@
+{
+  "schema": "TITAN_V45_HASH_AUDIT_V1",
+  "scope": "manifest_and_available_physical_assets",
+  "manifest_sha256": "44ff950d0c64d78b3a8af11f8bc7e558707088d1e9dea127ecf9558012facedf",
+  "declarations_valid": true,
+  "declared_assets": 7,
+  "physical_assets_verified": [
+    {
+      "name": "backbone-v3f-original.pt",
+      "bytes": 233565900,
+      "sha256": "ca5d4dcb4b9828e6c4339800fe81ec27f32d9b09a090bb57503bfb56746a8da8"
+    },
+    {
+      "name": "specialists-v3p-e008-primary6-diagnostic.pt",
+      "bytes": 22354966,
+      "sha256": "9c5a9265a7155e1206c551cc4e6d645b86363ba3dbdeb7baf7b9f173c314be3d"
+    },
+    {
+      "name": "specialists-v3q-primary8-best-candidate.pt",
+      "bytes": 29498326,
+      "sha256": "b30cb2bbb45f1231c93ff1c196aa966b57b49831cadb296131c0283e7b0ceb02"
+    },
+    {
+      "name": "backbone-v3ag-pathology.pt",
+      "bytes": 233566092,
+      "sha256": "bf71e4cf8acc34031cb3611c7031e0649822e705fd7dcea354a3ea583ce920ee"
+    },
+    {
+      "name": "specialists-v3ag-primary4-calibrated.pt",
+      "bytes": 29413606,
+      "sha256": "cf5091e962fffb3254b1a71fe57236dd82ea0139093df192511499d931391dbc"
+    },
+    {
+      "name": "external-dev-rhythm-chapman-shaoxing.tar.zst",
+      "bytes": 97120385,
+      "sha256": "ec6ade27ab77b9807d41331016def56e54cbb96fba528fd7aca811e5a468f2fb"
+    },
+    {
+      "name": "external-dev-pathology-ptbxl-fold10.tar.zst",
+      "bytes": 10977160,
+      "sha256": "fc1c3fc5374af962a8fc5903b6d1dd99a44ebfd7c66e0dfceaa106167afee558"
+    }
+  ],
+  "missing_physical_assets": [],
+  "all_physical_assets_verified": true,
+  "require_models": true,
+  "limitations": [
+    "Metadata validation alone does not verify missing physical files.",
+    "Hash agreement does not certify clinical validity or waveform equivalence."
+  ]
+}
