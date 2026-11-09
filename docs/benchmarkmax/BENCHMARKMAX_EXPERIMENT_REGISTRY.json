@@ -116,6 +116,21 @@
       "external_claim_permitted": false
     },
     {
+      "id": "B1-V46-SPH-PREVALENCE-COMPARATOR",
+      "status": "protocol_frozen_pending_execution",
+      "purpose": "Supplementary comparison of raw and Platt SPH probabilities against a constant prevalence estimate fit only on each outer fold's calibration-fit patients.",
+      "protocol": "B1_SPH_PREVALENCE_COMPARATOR_PROTOCOL.md",
+      "configuration": "../../configs/benchmarkmax/sph_b1_prevalence_comparison.json",
+      "runner": "../../scripts/benchmarkmax/compare_sph_prevalence_baseline.py",
+      "verifier": "../../scripts/benchmarkmax/verify_sph_prevalence_comparison.py",
+      "source_b1_job": 32758,
+      "source_b1_result_sha256": "859b99a3208442a791badcbd9996001678e815b00d01194f9d521926feeb2272",
+      "targets": ["P4:ASMI", "P4:IMI", "P4:LVH", "P6:PVC", "P6:RBBB", "P8:PAC"],
+      "bootstrap_replicates": 2000,
+      "individual_records_exported": false,
+      "external_claim_permitted": false
+    },
+    {
       "id": "B2-V46-NEW-SPECIALISTS",
       "status": "blocked_pending_feature_pipeline_and_go_no_go",
       "purpose": "No V4.6 checkpoint or training metrics exist.",

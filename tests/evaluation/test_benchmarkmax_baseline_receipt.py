@@ -83,6 +83,25 @@ def test_scale_sensitivity_registry_records_completed_probe():
     assert experiment["result_document"] == "SPH_SCALE_SENSITIVITY_RESULTS.md"
 
 
+def test_sph_prevalence_comparator_protocol_is_registered_as_exploratory():
+    registry = json.loads(
+        (ROOT / "docs/benchmarkmax/BENCHMARKMAX_EXPERIMENT_REGISTRY.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    experiment = next(
+        item
+        for item in registry["experiments"]
+        if item["id"] == "B1-V46-SPH-PREVALENCE-COMPARATOR"
+    )
+
+    assert experiment["status"] == "protocol_frozen_pending_execution"
+    assert experiment["protocol"] == "B1_SPH_PREVALENCE_COMPARATOR_PROTOCOL.md"
+    assert experiment["bootstrap_replicates"] == 2000
+    assert experiment["individual_records_exported"] is False
+    assert experiment["external_claim_permitted"] is False
+
+
 def test_scale_sensitivity_result_document_matches_aggregate():
     result = json.loads(
         (ROOT / "outputs/results/benchmarkmax/sph_scale_sensitivity_32761.json").read_text(
