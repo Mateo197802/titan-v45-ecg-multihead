@@ -41,9 +41,10 @@ aggregate metrics only after exact hash and baseline-confusion reconciliation.
 That B1 score-calibration diagnostic has completed on the previously observed
 SPH outcomes; see [`B1_SPH_CALIBRATION_RESULTS.md`](B1_SPH_CALIBRATION_RESULTS.md).
 It did not train or modify weights, produced no F1 decision improvement, and
-does not establish independent validation or a new V4.6 specialist. New-model
-training remains blocked on an audited feature pipeline and adequate
-development support; an independent final cohort is still unconfirmed.
+does not establish independent validation or a new V4.6 specialist. A separate
+PAC-head pipeline and protocol are now implemented and frozen, but no training
+or inference job has run yet; P6/P4 candidate heads and a genuinely independent
+final cohort remain unconfirmed.
 
 Because B1 did not include a constant-prevalence probability comparator, a
 separate, frozen patient-cross-fitted comparison was run against the same
@@ -58,3 +59,37 @@ A separate label-blind scale-sensitivity probe replayed 128 records at 0.5x,
 scales under lead-wise z-score normalization; this is not physical-unit
 certification. See [`SPH_SCALE_SENSITIVITY_RESULTS.md`](SPH_SCALE_SENSITIVITY_RESULTS.md)
 and the aggregate-only [receipt](../../outputs/results/benchmarkmax/sph_scale_sensitivity_32761.json).
+
+## PAC Head Pilot
+
+A separate raw-signal pipeline and protocol define an exploratory SPH PAC
+statement-head comparison using frozen V3F mean+max token embeddings. The
+frozen comparison includes the historical V4.5 P8 PAC score (receipt-linked to
+CEDIA job `32668`, threshold `0.45`), a new L2 logistic head, and five fixed
+single-layer MLP seeds (`197802`-`197806`) reported individually without
+selecting a winner. All new heads use train-only feature scaling,
+patient-grouped 70/15/15 assignment, development-only early stopping and
+threshold selection, and paired patient-cluster bootstrap comparisons against
+P8; each MLP is also compared with logistic regression. The protocol,
+configuration, runner, CEDIA SLURM wrapper, privacy verifier, and focused tests
+are in the experiment registry. **The CEDIA V4.6 training/inference job has not
+run yet; no new head weights or comparison metrics are available.** Even after
+execution, the held-out SPH subset is exploratory because the source was
+previously observed; this does not satisfy the external-validation
+requirement. The pilot is PAC-only, not a P6/P8/P4 full-profile evaluation.
+
+The SPH source does not encode physical units as mV in the audited HDF5
+metadata, so the runner reports unitless amplitudes and applies no unsupported
+mV gate. Exact duplicate signals are excluded before labels are joined; this
+does not certify near-duplicate or cross-dataset training-source independence.
+
+## MIMIC Design
+
+The user approved exploring MIMIC-IV-ECG v1.0 only for agreement with its
+automatically generated machine report lines. The dataset has not been
+downloaded or inspected in this project; those reports are not adjudicated
+clinical references. The design and stop gates are documented in
+[`MIMIC_IV_ECG_MACHINE_REPORT_CONCORDANCE_DESIGN.md`](MIMIC_IV_ECG_MACHINE_REPORT_CONCORDANCE_DESIGN.md).
+Any waveform download remains blocked until per-user CEDIA quota and storage
+headroom are confirmed. No MIMIC records or metrics are part of the SPH PAC
+pilot.

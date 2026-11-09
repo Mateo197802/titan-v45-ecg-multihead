@@ -143,9 +143,44 @@
       "external_claim_permitted": false
     },
     {
+      "id": "B2-V46-SPH-PAC-HEAD-COMPARISON",
+      "status": "protocol_frozen_awaiting_cedia_execution",
+      "purpose": "Exploratory patient-grouped comparison of the frozen V4.5 P8 PAC score, a V4.6 logistic head, and five fixed MLP sensitivity seeds for SPH code-30 ECG statements; no new metrics or trained candidate weights exist until the CEDIA run completes.",
+      "protocol": "SPH_PAC_HEAD_COMPARISON_PROTOCOL.md",
+      "configuration": "../../configs/benchmarkmax/sph_pac_head_comparison.json",
+      "runner": "../../scripts/benchmarkmax/run_sph_pac_head_comparison.py",
+      "verifier": "../../scripts/benchmarkmax/verify_sph_pac_head_aggregate.py",
+      "slurm_wrapper": "../../scripts/cedia/run_sph_pac_head_comparison.sbatch",
+      "endpoint": "PAC code-30 statement only; historical P8 PAC probability is a comparator, not a new P6/P8/P4 profile evaluation",
+      "backbone_sha256": "ca5d4dcb4b9828e6c4339800fe81ec27f32d9b09a090bb57503bfb56746a8da8",
+      "frozen_v45_p8_baseline": {
+        "cedia_job_id": "32668",
+        "score_ledger_sha256": "4a3a1e61b1784e06190d5caaa089fca04ef84792acb3a5f9fc1af3f9c1173462",
+        "scoring_receipt_sha256": "8abdc5f6561fc3fea77eeb68e8aa34bc2d02396cad9c2e9fbeea70b4188dac92",
+        "specialist_sha256": "b30cb2bbb45f1231c93ff1c196aa966b57b49831cadb296131c0283e7b0ceb02",
+        "pac_threshold": 0.45,
+        "labels_used_for_inference_or_routing": false
+      },
+      "mlp_seed_set": [197802, 197803, 197804, 197805, 197806],
+      "input_hashes_pinned": true,
+      "patient_grouped": true,
+      "exploratory_holdout_used_for_selection": false,
+      "individual_records_exported": false,
+      "external_claim_permitted": false
+    },
+    {
+      "id": "B2-MIMIC-IV-ECG-MACHINE-REPORT-CONCORDANCE",
+      "status": "design_only_blocked_on_per_user_cedia_quota_and_source_gates",
+      "purpose": "Potential concordance with v1.0 machine-generated report statements only; not clinical-reference validation.",
+      "design": "MIMIC_IV_ECG_MACHINE_REPORT_CONCORDANCE_DESIGN.md",
+      "downloaded": false,
+      "performance_metrics_computed": false,
+      "external_clinical_validation_claim_permitted": false
+    },
+    {
       "id": "B2-V46-NEW-SPECIALISTS",
-      "status": "blocked_pending_feature_pipeline_and_go_no_go",
-      "purpose": "No V4.6 checkpoint or training metrics exist.",
+      "status": "partially_unblocked_pac_pilot_only",
+      "purpose": "PAC head pipeline and frozen protocol are ready but not executed. P6/P4 candidate heads and complete-profile metrics remain unimplemented; no V4.6 checkpoint or training metrics exist yet.",
       "external_claim_permitted": false
     },
     {

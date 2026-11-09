@@ -74,14 +74,22 @@ and 3,745 / 3,580 to calibration-candidate, with zero patients crossing splits.
 These are source-statement supports, not candidate-model metrics. PAC has
 enough positive support for a limited exploratory head pilot; LVH is marginal
 for a reliable threshold claim; ASMI/IMI support is too sparse in
-development/calibration for stable claims or a robust threshold estimate. The
-current training CLI consumes precomputed NPZ features, while the repository
-has no audited SPH feature builder or feature matrix. No V4.6 checkpoint or
-trained candidate specialist exists. B1's calibration result is a score-only
-diagnostic, not a trained model result; its interpretation and limitations are
-reported separately. Any future within-SPH split metrics remain development
-diagnostics, not external validation. The source's previously reported V4.5
-performance will not be reused as a V4.6 test result.
+development/calibration for stable claims or a robust threshold estimate. A
+streaming SPH PAC feature builder and head-comparison runner are now
+implemented with a frozen protocol, exact input hashes, patient-level split,
+duplicate exclusion, and aggregate-only output. The frozen comparison uses
+the CEDIA job-32668 V4.5 P8 PAC score as a historical baseline, then fits one
+logistic head and five prespecified MLP seeds on the same V3F mean+max
+embeddings. The baseline ledger and receipt remain private and are hash-bound
+in configuration. The V4.6 CEDIA job has not yet run, so there is still no new
+V4.6 checkpoint, trained PAC head, or candidate performance metric. The builder
+does not persist an SPH feature matrix. The pilot covers PAC code 30 only; it
+does not execute the complete P6/P8/P4 profiles. B1's calibration result
+remains a score-only diagnostic, not a trained candidate model or independent
+validation; its interpretation and limitations are reported separately. Any
+within-SPH split metrics remain development/adaptation diagnostics, not
+external validation. Historical V4.5 metrics remain unchanged and are not
+reported as V4.6 results.
 
 ## External Validation Gate
 
