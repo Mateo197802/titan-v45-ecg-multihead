@@ -10,7 +10,7 @@ The frozen machine-readable contract is [sph_postdedup_support.json](../../confi
 
 The protocol pins the SHA-256 digests of SPH `metadata.csv`, `code.csv`, and `records.tar.gz`, plus the existing source-inventory digest. The expected source population is 25,770 ECG records from 24,666 patients. The inventory reports 25,770 valid signals, no source technical failures, 168 exact duplicate groups, and 168 duplicate excess records. The PAC pilot previously counted 336 records participating in those groups; this audit independently rechecks that count.
 
-The runtime is Python 3.11.14, NumPy 2.4.3, and h5py 3.13.0. The h5py dependency archive is itself SHA-256 pinned in the configuration and checked by the SLURM wrapper.
+The runtime is Python 3.11.14, NumPy 2.2.6, and h5py 3.13.0. Both dependency archives are SHA-256 pinned in the configuration and checked by the SLURM wrapper. Job 32814 failed before reading the waveform archive because its wrapper omitted the NumPy dependency layer; it produced no audit result. The corrected wrapper explicitly mounts the already verified dependency archives.
 
 ## Signal-First Procedure
 

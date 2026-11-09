@@ -36,8 +36,9 @@
   },
   "runtime": {
     "python": "3.11.14",
-    "numpy": "2.4.3",
+    "numpy": "2.2.6",
     "h5py": "3.13.0",
+    "python_dependency_archive_sha256": "5ea9a481f100342a4b7c9aaf98294659340d05ba20dba645007f37a3fbb6cc45",
     "h5py_dependency_archive_sha256": "e2ad92e7a9258e6ca5872b87d5cdde2ab1b6fb2d80cf69f890043e58df8baf61"
   },
   "signal_eligibility": {

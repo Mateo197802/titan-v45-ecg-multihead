@@ -235,8 +235,11 @@ def _validate_config(config: dict[str, object]) -> None:
             or not isinstance(runtime, dict)):
         raise ValueError("frozen source/support expectations are malformed")
     if (set(runtime) != {
-            "python", "numpy", "h5py", "h5py_dependency_archive_sha256",
-    } or not re.fullmatch(r"[0-9a-f]{64}", runtime["h5py_dependency_archive_sha256"])):
+            "python", "numpy", "h5py", "python_dependency_archive_sha256",
+            "h5py_dependency_archive_sha256",
+    } or any(not re.fullmatch(r"[0-9a-f]{64}", runtime[key]) for key in (
+            "python_dependency_archive_sha256", "h5py_dependency_archive_sha256",
+    ))):
         raise ValueError("frozen runtime contract is malformed")
     hashes = source.get("input_sha256")
     if (not isinstance(hashes, dict)
@@ -316,6 +319,7 @@ def run(args) -> None:
         "python": platform.python_version(),
         "numpy": np.__version__,
         "h5py": h5py.__version__,
+        "python_dependency_archive_sha256": config["runtime"]["python_dependency_archive_sha256"],
         "h5py_dependency_archive_sha256": config["runtime"]["h5py_dependency_archive_sha256"],
     }
     if runtime != config["runtime"]:

@@ -8,8 +8,8 @@
 set -euo pipefail
 umask 077
 
-if [[ $# != 11 ]]; then
-    printf 'Usage: sbatch %s V46_REPO V45_REPO METADATA DICTIONARY WAVEFORMS SOURCE_INVENTORY PRIVATE_ROOT EXPECTED_COMMIT CONFIG_SHA256 SCRIPT_SHA256 VERIFIER_SHA256\n' "$0" >&2
+if [[ $# != 12 ]]; then
+    printf 'Usage: sbatch %s V46_REPO V45_REPO METADATA DICTIONARY WAVEFORMS SOURCE_INVENTORY PRIVATE_ROOT PYTHON_DEPS EXPECTED_COMMIT CONFIG_SHA256 SCRIPT_SHA256 VERIFIER_SHA256\n' "$0" >&2
     exit 2
 fi
 
@@ -20,10 +20,11 @@ dictionary=$4
 waveforms=$5
 source_inventory=$6
 private_root=$7
-commit=$8
-config_sha=$9
-script_sha=${10}
-verifier_sha=${11}
+python_deps=$8
+commit=$9
+config_sha=${10}
+script_sha=${11}
+verifier_sha=${12}
 config="$repo/configs/benchmarkmax/sph_postdedup_support.json"
 script="$repo/scripts/benchmarkmax/audit_sph_postdedup_feasibility.py"
 verifier="$repo/scripts/benchmarkmax/verify_sph_postdedup_feasibility.py"
@@ -35,18 +36,21 @@ run_dir="$private_root/postdedup-support-$SLURM_JOB_ID"
 [[ "$script_sha" =~ ^[0-9a-f]{64}$ ]]
 [[ "$verifier_sha" =~ ^[0-9a-f]{64}$ ]]
 [[ -d "$repo/.git" && -d "$v45_repo/.git" && -f "$metadata" && -f "$dictionary" && -f "$waveforms" ]]
-[[ -f "$source_inventory" && -f "$deps" && -d "$private_root" ]]
+[[ -f "$source_inventory" && -f "$python_deps" && -f "$deps" && -d "$private_root" ]]
 [[ ! -e "$run_dir" ]]
 test "$(sha256sum "$config" | cut -d ' ' -f 1)" = "$config_sha"
 test "$(sha256sum "$script" | cut -d ' ' -f 1)" = "$script_sha"
 test "$(sha256sum "$verifier" | cut -d ' ' -f 1)" = "$verifier_sha"
 test "$(sha256sum "$deps" | cut -d ' ' -f 1)" = \
     e2ad92e7a9258e6ca5872b87d5cdde2ab1b6fb2d80cf69f890043e58df8baf61
+test "$(sha256sum "$python_deps" | cut -d ' ' -f 1)" = \
+    5ea9a481f100342a4b7c9aaf98294659340d05ba20dba645007f37a3fbb6cc45
 mkdir -m 700 "$run_dir"
 
-module load python/3.11
+module load pytorch/2.2
 scratch=$(mktemp -d "${SLURM_TMPDIR:-/tmp}/titan-sph-support-XXXXXX")
 trap 'rm -rf "$scratch"' EXIT
+tar -xf "$python_deps" -C "$scratch"
 tar -xf "$deps" -C "$scratch"
 export PYTHONPATH="$repo/src:$scratch${PYTHONPATH:+:$PYTHONPATH}"
 export OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=197802
@@ -54,7 +58,7 @@ python3 - <<'PY'
 import h5py
 import numpy
 
-expected = {"numpy": "2.4.3", "h5py": "3.13.0"}
+expected = {"numpy": "2.2.6", "h5py": "3.13.0"}
 actual = {"numpy": numpy.__version__, "h5py": h5py.__version__}
 if actual != expected:
     raise SystemExit(f"runtime version mismatch: {actual} != {expected}")
