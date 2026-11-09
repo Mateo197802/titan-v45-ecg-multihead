@@ -106,3 +106,27 @@ concordance endpoint, patient linkage is ambiguous, frozen V3F weights cannot
 be loaded with a compatible input contract, or the model's prior MIMIC exposure
 would make the intended analysis misleading. A stopped or metadata-only stage
 must be reported as such; no zero-result or validation claim may be inferred.
+
+## Metadata-Only Implementation Status (2026-11-09)
+
+The parser and an aggregate-only metadata auditor are implemented. The auditor
+accepts local copies of `record_list.csv` and `machine_measurements.csv`, checks
+the required `subject_id`/`study_id` keys and 18 report slots, counts duplicate
+keys, conflicting duplicate report rows, unmatched joins, unique subjects, and
+whether any report text is present. It emits input SHA-256 values and aggregate
+counts only; it does not emit IDs, paths, report text, phrase classes, or model
+metrics. Invalid keys, missing report slots, duplicate keys, conflicts, or
+unmatched joins prevent a `valid` status. The command is
+`python scripts/benchmarkmax/audit_mimic_metadata.py --record-list ...
+--machine-measurements ... --output ...`.
+
+Synthetic tests pass for matching metadata, privacy of the output, conflicting
+duplicates, unmatched keys, missing report slots, and empty join keys. No real
+MIMIC metadata, report text, or waveform has been downloaded or processed.
+
+On 2026-11-09, `quota -s` on the configured CEDIA account returned no quota
+record. `df -Th /home` showed global NFS capacity only; this is not evidence of
+per-user or project quota, a reserved scratch allocation, or adequate retained
+space. Therefore the full download remains blocked. CEDIA storage support or
+the account owner must confirm the account/project quota, approved target
+filesystem, available capacity and retention before any dataset transfer.
