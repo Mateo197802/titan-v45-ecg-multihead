@@ -35,7 +35,7 @@ historical experiment or a reviewer acceptance; new evidence can reopen it.
 | R2-3c | Auxiliary classes and training | VERIFIED_WITH_LIMITATIONS | [Role and supervision audit](ROLE_SUPERVISION_AND_ROUTING.md); output contracts alone do not establish checkpoint-linked training support. |
 | R2-3d | ALMI, ILMI and LAE training | EVIDENCE_CEILING_REACHED | [Role and supervision audit](ROLE_SUPERVISION_AND_ROUTING.md); checkpoint-linked supervision remains unverified; exact run manifests and loss masks would reopen recovery. |
 | R2-3e | Role definitions | VERIFIED_WITH_LIMITATIONS | [Role and routing audit](ROLE_SUPERVISION_AND_ROUTING.md); distinguish code roles and selected replay from historical all-input routing. |
-| R2-3f | Morphology and feature architecture | VERIFIED_WITH_LIMITATIONS | [Replay diagnostics](../replay-residual-diagnostics.md); exact historical loader unavailable. |
+| R2-3f | Morphology and feature architecture | EVIDENCE_CEILING_REACHED | [Code, decision and numerical equivalence](REPLAY_EQUIVALENCE_DISPOSITION.md): exact loader and morphology identity remain unverified; matched P4 decisions do not satisfy the original probability tolerance. |
 | R2-3g | Brier score in methods | MANUSCRIPT_UPDATE_ONLY | Add definition and remove unsupported numerical methods claim. |
 | R2-3h | Accuracy equations and tasks | MANUSCRIPT_UPDATE_ONLY | Define rhythm and pathology endpoints separately. |
 | R2-4a | External-development terminology | VERIFIED_WITH_LIMITATIONS | [Evidence status](../evidence-status.md); do not call selected development evidence independent. |

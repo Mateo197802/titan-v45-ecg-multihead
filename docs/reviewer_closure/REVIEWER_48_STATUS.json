@@ -112,8 +112,8 @@
     {
       "id": "R2-3f",
       "concern": "Morphology and feature architecture",
-      "disposition": "VERIFIED_WITH_LIMITATIONS",
-      "evidence_and_action": "[Replay diagnostics](../replay-residual-diagnostics.md); exact historical loader unavailable."
+      "disposition": "EVIDENCE_CEILING_REACHED",
+      "evidence_and_action": "[Code, decision and numerical equivalence](REPLAY_EQUIVALENCE_DISPOSITION.md): exact loader and morphology identity remain unverified; matched P4 decisions do not satisfy the original probability tolerance."
     },
     {
       "id": "R2-3g",
