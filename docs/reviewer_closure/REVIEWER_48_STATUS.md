@@ -12,11 +12,13 @@ support the original claim in full. `CLAIM_WITHDRAWAL_REQUIRED` means the claim
 needs removal or restriction; that is not equivalent to the requested study.
 `EXPERIMENT_COMPLETED` describes the executed SPH analysis, not certified
 historical independence or reviewer acceptance.
+`EVIDENCE_CEILING_REACHED` records a bounded recovery conclusion, not a completed
+historical experiment or a reviewer acceptance; new evidence can reopen it.
 
 | ID | Concern | Disposition | Evidence / remaining action |
 | --- | --- | --- | --- |
 | R1-1 | Independent external validation | EXPERIMENT_COMPLETED | [SPH results](../../outputs/results/external_sph/sph_aggregate_normalized_32669.json), jobs 32668/32669/32672; 25,770 ECG, but historical independence is not certified. |
-| R1-2 | Population and flow denominator | VERIFIED_WITH_LIMITATIONS | [SPH full-source flow](../../outputs/results/external_sph/sph_aggregate_normalized_32669.json) covers 25,770 ECG; [historical selected-record audit](../frozen-waveform-audit.md) cannot recover the original preselection population. |
+| R1-2 | Population and flow denominator | EVIDENCE_CEILING_REACHED | [Bounded recovery disposition](R1_2_EVIDENCE_CEILING.md): selected denominators verified, historical preselection and exclusion ledger not recovered; reopening requires the specified parent manifests and job-linked evidence. SPH is a separate population. |
 | R1-3 | AF incidence versus ECG statement | VERIFIED_WITH_LIMITATIONS | [AF reference contract](../af-reference-contract.md); no incident-AF claim. |
 | R1-4 | Invalid artifact hashes | VERIFIED_WITH_LIMITATIONS | [Hash correction](../hash-correction-20261028.md); separate PR #4, missing historical artifacts remain unavailable. |
 | R2-general | Excluded classes and Other | CLAIM_WITHDRAWAL_REQUIRED | SPH covers 14 compatible endpoints; [data dispositions](../revision-data-dispositions.md) show Other is not a validated output. |

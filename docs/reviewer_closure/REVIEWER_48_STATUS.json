@@ -10,8 +10,8 @@
     {
       "id": "R1-2",
       "concern": "Population and flow denominator",
-      "disposition": "VERIFIED_WITH_LIMITATIONS",
-      "evidence_and_action": "[SPH full-source flow](../../outputs/results/external_sph/sph_aggregate_normalized_32669.json) covers 25,770 ECG; [historical selected-record audit](../frozen-waveform-audit.md) cannot recover the original preselection population."
+      "disposition": "EVIDENCE_CEILING_REACHED",
+      "evidence_and_action": "[Bounded recovery disposition](R1_2_EVIDENCE_CEILING.md): selected denominators verified, historical preselection and exclusion ledger not recovered; reopening requires the specified parent manifests and job-linked evidence. SPH is a separate population."
     },
     {
       "id": "R1-3",
