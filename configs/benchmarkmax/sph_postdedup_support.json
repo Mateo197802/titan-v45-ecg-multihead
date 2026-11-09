@@ -1,0 +1,82 @@
+{
+  "schema": "TITAN_V46_SPH_POSTDEDUP_SUPPORT_V1",
+  "status": "frozen_before_support_counts",
+  "scope": "Aggregate support feasibility only; no model inference, fitting, threshold selection, or performance metrics.",
+  "source": {
+    "name": "SPH ECG dataset V1",
+    "previously_observed": true,
+    "records": 25770,
+    "patients": 24666,
+    "native_sampling_hz": 500,
+    "input_sha256": {
+      "metadata": "c6f8dc5197758a3970aae554f8b6ee884d96656b121879bc0eb1adf367ea6d86",
+      "dictionary": "4d22759fd19d37133c78d439a5726f9e0bc412cc17483c424926ce9abb33c8fc",
+      "waveform_archive": "cebad89d7d25663272eeb45545712d76302d334bb107cdc23fd15390c9194e55"
+    },
+    "source_inventory_reference_sha256": "8321abf1d91f0a97ae65b8e9d3a47ba4f5460055ac7780fd84ad2cc86efd2cf7",
+    "source_inventory_expected": {
+      "schema": "TITAN_V45_SPH_V1_SOURCE_INVENTORY",
+      "metadata_ecgs": 25770,
+      "metadata_patients": 24666,
+      "archive_ecgs": 25770,
+      "valid_signal_ecgs": 25770,
+      "metadata_without_signal": 0,
+      "technical_failures": {},
+      "exact_duplicate_signal_groups": 168,
+      "exact_duplicate_signal_excess_records": 168
+    },
+    "source_statement_counts_before_signal_exclusions": {
+      "ASMI": 91,
+      "IMI": 120,
+      "LVH": 209,
+      "PAC": 539,
+      "PVC": 1067,
+      "RBBB": 710
+    }
+  },
+  "runtime": {
+    "python": "3.11.14",
+    "numpy": "2.4.3",
+    "h5py": "3.13.0",
+    "h5py_dependency_archive_sha256": "e2ad92e7a9258e6ca5872b87d5cdde2ab1b6fb2d80cf69f890043e58df8baf61"
+  },
+  "signal_eligibility": {
+    "duration_seconds_inclusive": [10, 60],
+    "expected_hdf5_shape": "[12, N]",
+    "requirements": ["readable HDF5", "finite values", "at least one non-flat lead"],
+    "physical_amplitude_threshold_applied": false,
+    "model_specific_preprocessing_assessed": false
+  },
+  "deduplication": {
+    "fingerprint": "SHA-256 of canonical little-endian float64 raw signal array bytes",
+    "policy": "exclude every record participating in an exact-signal duplicate group before joining diagnostic labels",
+    "scope": "within SPH source only",
+    "near_duplicate_detection": false
+  },
+  "expected_signal_audit": {
+    "records": 25770,
+    "patients": 24666,
+    "valid_signal_records": 25770,
+    "exact_duplicate_signal_groups": 168,
+    "exact_duplicate_signal_excess_records": 168,
+    "exact_duplicate_records_excluded": 336,
+    "unique_signal_records": 25434
+  },
+  "partition": {
+    "namespace": "TITAN-V46-SPH-DEV-SPLIT-V1:",
+    "seed": "197802",
+    "algorithm": "SHA-256(namespace + seed + patient ID); first 64 digest bits interpreted big-endian modulo 100",
+    "assignment": {"train": "0-69", "development": "70-84", "exploratory_holdout": "85-99"},
+    "labels_used_for_assignment": false,
+    "third_partition_caveat": "The 85-99 bucket was used as the exploratory holdout in the PAC pilot and is not an untouched or confirmatory test."
+  },
+  "endpoints": {
+    "ASMI": {"code": 165, "description": "Anteroseptal MI"},
+    "IMI": {"code": 161, "description": "Inferior MI"},
+    "LVH": {"code": 142, "description": "Left ventricular hypertrophy"},
+    "PAC": {"code": 30, "description": "Atrial premature complex(es)"},
+    "PVC": {"code": 60, "description": "Ventricular premature complex(es)"},
+    "RBBB": {"code": 106, "description": "Right bundle-branch block"}
+  },
+  "reference": "AHA code present on this ECG; absence is statement not recorded, not adjudicated clinical absence."
+}
