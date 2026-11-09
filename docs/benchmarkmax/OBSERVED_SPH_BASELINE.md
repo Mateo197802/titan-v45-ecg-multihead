@@ -49,6 +49,29 @@ python scripts/benchmarkmax/plot_sph_baseline.py \
 Image bytes can depend on the plotting environment, especially PDF metadata;
 the manifest certifies the published files, not bitwise identity across runs.
 
+## Illustrative prevalence sensitivity
+
+The [prevalence-only projection](../../outputs/results/benchmarkmax/sph_prevalence_projection_v1.json)
+uses the frozen SPH statement-level sensitivity and specificity at each
+original threshold. At hypothetical 1% and 5% statement prevalence, the
+projected PPV is respectively 67.80% and 91.65% for P6 AFIB, 8.76% and
+33.35% for P8 PAC, 6.71% and 27.26% for P4 ASMI, 2.30% and 10.93% for P4
+LVH, and 3.50% and 15.90% for P4 IMI. At the observed prevalence it reproduces
+the actual statement-level PPV.
+
+These are algebraic scenarios, not measured results in another population.
+They assume sensitivity, specificity, case mix and annotation process remain
+comparable as prevalence changes, and do not include uncertainty intervals.
+This is not evidence of disease prevalence, clinical performance, a pure
+prior-probability shift, or that prevalence alone caused the observed gaps.
+Recompute without changing the frozen baseline using:
+
+```bash
+python scripts/benchmarkmax/analyze_prevalence_shift.py \
+  --input outputs/results/benchmarkmax/sph_baseline_diagnostic_32726.json \
+  --output /path/to/new/projection.json
+```
+
 SPH may be used as a disclosed adaptation/development source only with
 patient-separated splits and a predeclared analysis. A distinct eligible source
 is needed for any confirmatory external-generalization claim after adaptation.

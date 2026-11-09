@@ -1,0 +1,204 @@
+{
+  "schema": "TITAN_V46_SPH_PREVALENCE_ONLY_PROJECTION_V1",
+  "scope": "Mathematical sensitivity analysis from previously observed SPH statements, not external validation or disease-risk prediction.",
+  "assumptions": [
+    "Conditional sensitivity and specificity remain fixed as prevalence changes.",
+    "The annotation process and population case mix remain comparable.",
+    "Absence of an ECG statement is not adjudicated disease absence.",
+    "No uncertainty intervals are estimated for these hypothetical projections."
+  ],
+  "endpoints": {
+    "P6:AFIB": {
+      "observed_records": 25770,
+      "observed_statement_prevalence": 0.02619324796274738,
+      "frozen_sensitivity": 0.9303703703703704,
+      "frozen_specificity": 0.9955369595536959,
+      "observed_ppv": 0.8486486486486486,
+      "projected_ppv_at_observed_prevalence": 0.8486486486486476,
+      "scenarios": [
+        {
+          "hypothetical_statement_prevalence": 0.001,
+          "projected_ppv": 0.1726441615326915
+        },
+        {
+          "hypothetical_statement_prevalence": 0.005,
+          "projected_ppv": 0.5116098332492517
+        },
+        {
+          "hypothetical_statement_prevalence": 0.01,
+          "projected_ppv": 0.6780080588330938
+        },
+        {
+          "hypothetical_statement_prevalence": 0.02,
+          "projected_ppv": 0.8096799948212232
+        },
+        {
+          "hypothetical_statement_prevalence": 0.05,
+          "projected_ppv": 0.9164692377207331
+        },
+        {
+          "hypothetical_statement_prevalence": 0.1,
+          "projected_ppv": 0.9586132897325189
+        },
+        {
+          "hypothetical_statement_prevalence": 0.2,
+          "projected_ppv": 0.9811730251287816
+        }
+      ]
+    },
+    "P8:PAC": {
+      "observed_records": 25770,
+      "observed_statement_prevalence": 0.02091579355840124,
+      "frozen_sensitivity": 0.6159554730983302,
+      "frozen_specificity": 0.9351987634259443,
+      "observed_ppv": 0.16878495170310118,
+      "projected_ppv_at_observed_prevalence": 0.1687849517031013,
+      "scenarios": [
+        {
+          "hypothetical_statement_prevalence": 0.001,
+          "projected_ppv": 0.009425140617787662
+        },
+        {
+          "hypothetical_statement_prevalence": 0.005,
+          "projected_ppv": 0.04558782971241438
+        },
+        {
+          "hypothetical_statement_prevalence": 0.01,
+          "projected_ppv": 0.08760220864404882
+        },
+        {
+          "hypothetical_statement_prevalence": 0.02,
+          "projected_ppv": 0.16246910292131828
+        },
+        {
+          "hypothetical_statement_prevalence": 0.05,
+          "projected_ppv": 0.3334573875986951
+        },
+        {
+          "hypothetical_statement_prevalence": 0.1,
+          "projected_ppv": 0.5136529585922364
+        },
+        {
+          "hypothetical_statement_prevalence": 0.2,
+          "projected_ppv": 0.7038200762375154
+        }
+      ]
+    },
+    "P4:ASMI": {
+      "observed_records": 25770,
+      "observed_statement_prevalence": 0.0035312378734963135,
+      "frozen_sensitivity": 0.6153846153846154,
+      "frozen_specificity": 0.913586977686047,
+      "observed_ppv": 0.024615384615384615,
+      "projected_ppv_at_observed_prevalence": 0.02461538461538463,
+      "scenarios": [
+        {
+          "hypothetical_statement_prevalence": 0.001,
+          "projected_ppv": 0.007078105616518432
+        },
+        {
+          "hypothetical_statement_prevalence": 0.005,
+          "projected_ppv": 0.034549700344013674
+        },
+        {
+          "hypothetical_statement_prevalence": 0.01,
+          "projected_ppv": 0.06710646019563685
+        },
+        {
+          "hypothetical_statement_prevalence": 0.02,
+          "projected_ppv": 0.12689329713669797
+        },
+        {
+          "hypothetical_statement_prevalence": 0.05,
+          "projected_ppv": 0.27262798181878517
+        },
+        {
+          "hypothetical_statement_prevalence": 0.1,
+          "projected_ppv": 0.44173699884959866
+        },
+        {
+          "hypothetical_statement_prevalence": 0.2,
+          "projected_ppv": 0.6403341437566238
+        }
+      ]
+    },
+    "P4:LVH": {
+      "observed_records": 25770,
+      "observed_statement_prevalence": 0.008110205665502522,
+      "frozen_sensitivity": 0.7177033492822966,
+      "frozen_specificity": 0.6921481945150816,
+      "observed_ppv": 0.01870557426112982,
+      "projected_ppv_at_observed_prevalence": 0.01870557426112981,
+      "scenarios": [
+        {
+          "hypothetical_statement_prevalence": 0.001,
+          "projected_ppv": 0.0023282277666321627
+        },
+        {
+          "hypothetical_statement_prevalence": 0.005,
+          "projected_ppv": 0.011579556098684147
+        },
+        {
+          "hypothetical_statement_prevalence": 0.01,
+          "projected_ppv": 0.023006975827401008
+        },
+        {
+          "hypothetical_statement_prevalence": 0.02,
+          "projected_ppv": 0.045417243584647764
+        },
+        {
+          "hypothetical_statement_prevalence": 0.05,
+          "projected_ppv": 0.10929124832830696
+        },
+        {
+          "hypothetical_statement_prevalence": 0.1,
+          "projected_ppv": 0.20574177391087095
+        },
+        {
+          "hypothetical_statement_prevalence": 0.2,
+          "projected_ppv": 0.36822095158631335
+        }
+      ]
+    },
+    "P4:IMI": {
+      "observed_records": 25770,
+      "observed_statement_prevalence": 0.004656577415599534,
+      "frozen_sensitivity": 0.8916666666666667,
+      "frozen_specificity": 0.7518518518518519,
+      "observed_ppv": 0.016532756489493202,
+      "projected_ppv_at_observed_prevalence": 0.016532756489493202,
+      "scenarios": [
+        {
+          "hypothetical_statement_prevalence": 0.001,
+          "projected_ppv": 0.0035839892815273827
+        },
+        {
+          "hypothetical_statement_prevalence": 0.005,
+          "projected_ppv": 0.017736439819504565
+        },
+        {
+          "hypothetical_statement_prevalence": 0.01,
+          "projected_ppv": 0.03502454991816695
+        },
+        {
+          "hypothetical_statement_prevalence": 0.02,
+          "projected_ppv": 0.06832210003547359
+        },
+        {
+          "hypothetical_statement_prevalence": 0.05,
+          "projected_ppv": 0.1590421139554088
+        },
+        {
+          "hypothetical_statement_prevalence": 0.1,
+          "projected_ppv": 0.2853333333333333
+        },
+        {
+          "hypothetical_statement_prevalence": 0.2,
+          "projected_ppv": 0.4732186732186732
+        }
+      ]
+    }
+  },
+  "source_sha256": "248b4857cbd4a92ad42bc96d78dab9f6431a0d572f9325684b520c31e27670c6",
+  "script_sha256": "a0fdfa251564e833c99312af094e813f4e15cc3e7b3bd89e11edd61ce66ba22d"
+}
