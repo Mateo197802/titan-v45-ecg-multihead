@@ -61,9 +61,10 @@
     },
     {
       "id": "B1-V46-CALIBRATION",
-      "status": "protocol_frozen_pending_cedia_execution",
-      "purpose": "Nested patient-grouped Platt calibration and separate F1-threshold tuning on previously observed V4.5 SPH scores; no weights change.",
+      "status": "completed_exploratory_diagnostic",
+      "purpose": "Nested patient-grouped Platt calibration and separate F1-threshold tuning on previously observed V4.5 SPH scores; no weights change and no independent validation.",
       "protocol": "B1_SPH_CALIBRATION_PROTOCOL.md",
+      "results": "B1_SPH_CALIBRATION_RESULTS.md",
       "configuration": "../../configs/benchmarkmax/sph_b1_calibration.json",
       "targets": ["P4:ASMI", "P4:IMI", "P4:LVH", "P8:PAC", "P6:PVC", "P6:RBBB"],
       "frozen_inputs": {
@@ -73,8 +74,28 @@
         "bootstrap_replicates": 2000
       },
       "runtime": "CEDIA miniconda3/3 conda environment yc_env2: Python 3.10.18, NumPy 1.26.4, SciPy 1.15.3",
-      "support_caution": "ASMI/IMI calibration and tune-fold positive support is small; publish every fold denominator and do not promote a clinical threshold.",
+      "cedia_job": 32758,
+      "failed_pre_metric_attempts": [
+        {
+          "cedia_job": 32757,
+          "status": "failed_before_label_parsing_or_metric_calculation",
+          "reason": "Runner initially read bootstrap settings from the wrong JSON level; no report artifact was created."
+        }
+      ],
+      "public_commit": "d65c6ed78cd27626de50ec12e3b7c649e472440b",
+      "public_tree": "79bce5b4ac94e5490b507d3b7e62e8b26fe897aa",
+      "cedia_delivery_commit": "62cff27a16f621d564a22bd3a50259a7b2d79745",
+      "aggregate_artifact": "../../outputs/results/benchmarkmax/sph_b1_calibration_32758.json",
+      "aggregate_sha256": "859b99a3208442a791badcbd9996001678e815b00d01194f9d521926feeb2272",
+      "figure_png": "../../outputs/figures/benchmarkmax/sph_b1_calibration_deltas.png",
+      "figure_png_sha256": "5454d855fb95f4c97ec1a4f508d1ae231e4a55b392c05361d9f9778a4c252d54",
+      "figure_pdf": "../../outputs/figures/benchmarkmax/sph_b1_calibration_deltas.pdf",
+      "figure_pdf_sha256": "3878fa1c6468574d84f87f53324bccc25edfc3c6cd2c4daa32d45ef622105de2",
+      "figure_manifest": "../../outputs/figures/benchmarkmax/sph_b1_calibration_figure_manifest.json",
+      "figure_manifest_sha256": "520bc68bf867359b4cdfcce9e7e62373fb9d6ead7811664b7a434eb15f98fea8",
+      "individual_records_exported": false,
       "weights_changed": false,
+      "support_caution": "ASMI/IMI calibration and tune-fold positive support is small; publish every fold denominator and do not promote a clinical threshold.",
       "external_claim_permitted": false
     },
     {

@@ -128,6 +128,26 @@ def test_repository_contains_only_the_manuscript_figure_images() -> None:
     for item in ("input", "generator"):
         source = experimental[item]
         assert hashlib.sha256((ROOT / source["path"]).read_bytes()).hexdigest() == source["sha256"]
-    assert actual_media == {f"outputs/figures/{name}" for name in expected} | {
-        f"outputs/figures/benchmarkmax/{name}" for name in expected_experimental
+
+    b1_manifest = json.loads(
+        (experimental_dir / "sph_b1_calibration_figure_manifest.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert b1_manifest["schema"] == "TITAN_V46_SPH_B1_CALIBRATION_FIGURES_V1"
+    expected_b1 = {
+        "sph_b1_calibration_deltas.png",
+        "sph_b1_calibration_deltas.pdf",
     }
+    assert set(b1_manifest["assets"]) == expected_b1
+    for name, digest in b1_manifest["assets"].items():
+        assert hashlib.sha256((experimental_dir / name).read_bytes()).hexdigest() == digest
+    for item in ("input", "generator"):
+        source = b1_manifest[item]
+        assert hashlib.sha256((ROOT / source["path"]).read_bytes()).hexdigest() == source["sha256"]
+
+    assert actual_media == (
+        {f"outputs/figures/{name}" for name in expected}
+        | {f"outputs/figures/benchmarkmax/{name}" for name in expected_experimental}
+        | {f"outputs/figures/benchmarkmax/{name}" for name in expected_b1}
+    )
