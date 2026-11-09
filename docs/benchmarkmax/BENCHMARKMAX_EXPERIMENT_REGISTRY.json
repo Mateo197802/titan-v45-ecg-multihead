@@ -1,0 +1,69 @@
+{
+  "schema": "TITAN_BENCHMARKMAX_EXPERIMENT_REGISTRY_V1",
+  "as_of": "2026-11-09",
+  "scope_warning": "SPH was previously evaluated and inspected; all V4.6 SPH work is development/adaptation, not independent confirmation.",
+  "experiments": [
+    {
+      "id": "B0-V45-SPH-FROZEN-TRANSFER",
+      "status": "completed_historical_baseline",
+      "purpose": "Frozen V4.5 reference transfer; not a V4.6 result.",
+      "cedia_jobs": [32668, 32669, 32672, 32677, 32728],
+      "artifact": "https://github.com/Mateo197802/titan-v45-ecg-multihead/blob/99b97b9/outputs/results/external_sph/sph_aggregate_32669.json",
+      "evidence": "OBSERVED_SPH_BASELINE.md",
+      "may_be_used_for_v46_model_selection": false
+    },
+    {
+      "id": "B0-V46-SPH-OBSERVED-DIAGNOSTIC",
+      "status": "completed_exploratory_diagnostic",
+      "purpose": "Aggregate-only reconciliation of the already-observed V4.5 SPH baseline.",
+      "cedia_job": 32726,
+      "artifact": "../../outputs/results/benchmarkmax/sph_baseline_diagnostic_32726.json",
+      "individual_records_exported": false
+    },
+    {
+      "id": "B0-V46-SPH-PREVALENCE-PROJECTION",
+      "status": "completed_algebraic_sensitivity_only",
+      "purpose": "Project fixed sensitivity and specificity at hypothetical prevalence values; not measured new-cohort performance.",
+      "cedia_job": 32730,
+      "artifact": "../../outputs/results/benchmarkmax/sph_prevalence_projection_v1.json",
+      "sha256": "5112a891b24ddcc3c71478723ecbad3a4a4301adb2aec2788df118569f508c93"
+    },
+    {
+      "id": "B1-SPH-PATIENT-SPLIT-SUPPORT-AUDIT",
+      "status": "not_run",
+      "purpose": "Aggregate statement support after a deterministic patient-grouped 70/15/15 development split.",
+      "script": "../../scripts/benchmarkmax/audit_sph_training_feasibility.py",
+      "split": {"train_percent": 70, "development_percent": 15, "calibration_candidate_percent": 15},
+      "test_split": false,
+      "patient_identifiers_exported": false
+    },
+    {
+      "id": "B1-SPH-AMPLITUDE-SENSITIVITY",
+      "status": "not_run",
+      "purpose": "Label-blind signal scale perturbation for sensitivity diagnostics only; not physical-unit certification or clinical performance.",
+      "script": "../../scripts/benchmarkmax/sph_scale_sensitivity.py",
+      "sample_size": 128,
+      "factors": [0.5, 1.0, 2.0],
+      "locked_v45_commit": "eb1c67b9229af875a9f868797b0c2f5c546e3dac",
+      "individual_records_exported": false
+    },
+    {
+      "id": "B1-V46-CALIBRATION",
+      "status": "blocked_pending_split_support_and_protocol_review",
+      "purpose": "No new calibration fit or threshold selection has been run.",
+      "external_claim_permitted": false
+    },
+    {
+      "id": "B2-V46-NEW-SPECIALISTS",
+      "status": "blocked_pending_feature_pipeline_and_go_no_go",
+      "purpose": "No V4.6 checkpoint or training metrics exist.",
+      "external_claim_permitted": false
+    },
+    {
+      "id": "V46-LOCKED-EXTERNAL-TEST",
+      "status": "blocked_no_admissible_authorized_source_confirmed",
+      "purpose": "No independent, endpoint-compatible source is currently reserved and verified.",
+      "external_claim_permitted": false
+    }
+  ]
+}

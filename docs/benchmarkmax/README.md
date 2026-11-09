@@ -20,3 +20,10 @@ emits only aggregated statement-level confusion counts and 20-bin score
 distributions. Binned threshold curves describe the already-observed dataset;
 they are not a selected policy, a validation study, or evidence of improvement.
 Absence of a coded ECG statement is not adjudicated absence of disease.
+
+The current data, rights, and label-feasibility assessment is recorded in
+[`DATA_AND_LABEL_FEASIBILITY_REPORT.md`](DATA_AND_LABEL_FEASIBILITY_REPORT.md).
+The SPH metadata can support exploratory development with patient-grouped
+splits, but those splits are not a locked test. The report also records that
+MIMIC access is not confirmed and that the public PTB/INCART/MIT-BIH sources do
+not directly satisfy the current endpoint contracts.
