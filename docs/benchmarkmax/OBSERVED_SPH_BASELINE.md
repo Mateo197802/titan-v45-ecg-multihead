@@ -72,6 +72,12 @@ python scripts/benchmarkmax/analyze_prevalence_shift.py \
   --output /path/to/new/projection.json
 ```
 
+CEDIA CPU job `32730` independently reran this exact aggregate calculation
+from commit `b8a4ce2` and exited `0:0`. Its output and the published JSON
+both have SHA-256
+`5112a891b24ddcc3c71478723ecbad3a4a4301adb2aec2788df118569f508c93`.
+This verifies deterministic execution, not an independent patient cohort.
+
 SPH may be used as a disclosed adaptation/development source only with
 patient-separated splits and a predeclared analysis. A distinct eligible source
 is needed for any confirmatory external-generalization claim after adaptation.
