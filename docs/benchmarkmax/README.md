@@ -44,10 +44,12 @@ training remains blocked on an audited feature pipeline and adequate
 development support; an independent final cohort is still unconfirmed.
 
 Because B1 did not include a constant-prevalence probability comparator, a
-separate, frozen patient-cross-fitted comparison is being run against the same
-saved scores. It is a diagnostic on previously observed SPH, not a new
-evaluation or model-selection result. The protocol and receipt are tracked in
-the [experiment registry](BENCHMARKMAX_EXPERIMENT_REGISTRY.json).
+separate, frozen patient-cross-fitted comparison was run against the same
+saved scores. It is an exploratory diagnostic on previously observed SPH, not
+independent, external, or clinical validation and not a model-selection
+result. The [protocol](B1_SPH_PREVALENCE_COMPARATOR_PROTOCOL.md),
+[aggregate-only results](B1_SPH_PREVALENCE_RESULTS.md), and receipt are
+tracked in the [experiment registry](BENCHMARKMAX_EXPERIMENT_REGISTRY.json).
 
 A separate label-blind scale-sensitivity probe replayed 128 records at 0.5x,
 1x and 2x waveform gain. Scores and decisions were invariant to these uniform

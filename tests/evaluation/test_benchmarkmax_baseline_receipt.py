@@ -95,9 +95,18 @@ def test_sph_prevalence_comparator_protocol_is_registered_as_exploratory():
         if item["id"] == "B1-V46-SPH-PREVALENCE-COMPARATOR"
     )
 
-    assert experiment["status"] == "protocol_frozen_pending_execution"
+    assert experiment["status"] == "completed_aggregate_only_exploratory"
     assert experiment["protocol"] == "B1_SPH_PREVALENCE_COMPARATOR_PROTOCOL.md"
     assert experiment["bootstrap_replicates"] == 2000
+    assert experiment["cedia_job"] == 32763
+    assert experiment["execution_commit"] == "bf5aab0264610235e79cda786e64c524637606ff"
+    assert experiment["aggregate_sha256"] == (
+        "b7c5b29743fc6710ba486bb6e393a01ba216db9598ad5b74995ad6cedb0cf530"
+    )
+    assert experiment["result_document"] == "B1_SPH_PREVALENCE_RESULTS.md"
+    assert experiment["figure_manifest"] == (
+        "../../outputs/figures/benchmarkmax/sph_b1_prevalence_figure_manifest.json"
+    )
     assert experiment["individual_records_exported"] is False
     assert experiment["external_claim_permitted"] is False
 
@@ -127,6 +136,30 @@ def test_sph_prevalence_comparator_freeze_hashes_match_tracked_sources():
     assert runner_sha == experiment["runner_sha256"] == config["runner_sha256"]
     assert verifier_sha == experiment["verifier_sha256"] == config["verifier_sha256"]
     assert protocol_sha == experiment["protocol_sha256"] == config["protocol_sha256"]
+
+
+def test_sph_prevalence_result_and_figure_manifest_hashes_match_registry():
+    registry = json.loads(
+        (ROOT / "docs/benchmarkmax/BENCHMARKMAX_EXPERIMENT_REGISTRY.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    experiment = next(
+        item
+        for item in registry["experiments"]
+        if item["id"] == "B1-V46-SPH-PREVALENCE-COMPARATOR"
+    )
+    result_path = ROOT / "docs/benchmarkmax" / experiment["result_document"]
+    manifest_path = (
+        ROOT / "docs/benchmarkmax" / experiment["figure_manifest"]
+    ).resolve()
+
+    assert experiment["result_document_sha256"] == hashlib.sha256(
+        result_path.read_bytes()
+    ).hexdigest()
+    assert experiment["figure_manifest_sha256"] == hashlib.sha256(
+        manifest_path.read_bytes()
+    ).hexdigest()
 
 
 def test_scale_sensitivity_result_document_matches_aggregate():

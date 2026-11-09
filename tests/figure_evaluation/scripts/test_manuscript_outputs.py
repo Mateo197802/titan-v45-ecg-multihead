@@ -146,8 +146,26 @@ def test_repository_contains_only_the_manuscript_figure_images() -> None:
         source = b1_manifest[item]
         assert hashlib.sha256((ROOT / source["path"]).read_bytes()).hexdigest() == source["sha256"]
 
+    prevalence_manifest = json.loads(
+        (experimental_dir / "sph_b1_prevalence_figure_manifest.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert prevalence_manifest["schema"] == "TITAN_V46_SPH_B1_PREVALENCE_FIGURE_MANIFEST_V1"
+    expected_prevalence = {
+        "sph_b1_prevalence_comparison.png",
+        "sph_b1_prevalence_comparison.pdf",
+    }
+    assert set(prevalence_manifest["assets"]) == expected_prevalence
+    for name, digest in prevalence_manifest["assets"].items():
+        assert hashlib.sha256((experimental_dir / name).read_bytes()).hexdigest() == digest
+    for item in ("input", "generator"):
+        source = prevalence_manifest[item]
+        assert hashlib.sha256((ROOT / source["path"]).read_bytes()).hexdigest() == source["sha256"]
+
     assert actual_media == (
         {f"outputs/figures/{name}" for name in expected}
         | {f"outputs/figures/benchmarkmax/{name}" for name in expected_experimental}
         | {f"outputs/figures/benchmarkmax/{name}" for name in expected_b1}
+        | {f"outputs/figures/benchmarkmax/{name}" for name in expected_prevalence}
     )
