@@ -109,3 +109,4 @@ def test_private_paths_cannot_be_written_inside_a_checkout(tmp_path):
     private = repository / "outputs" / "private.json"
     with pytest.raises(ValueError, match="outside all Git checkouts"):
         module._assert_outside(private, [repository], "private output")
+    module._assert_outside(tmp_path / "private.json", [repository], "private output")

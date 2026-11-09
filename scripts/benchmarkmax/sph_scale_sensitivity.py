@@ -29,6 +29,14 @@ def sha256(path):
     return digest.hexdigest()
 
 
+def is_within(path, root):
+    try:
+        path.relative_to(root)
+    except ValueError:
+        return False
+    return True
+
+
 def select_records(records, count=SAMPLE_SIZE):
     records = list(records)
     if len(set(records)) != len(records) or count < 1 or count > len(records):
@@ -75,7 +83,7 @@ def run(args):
     output = args.output.resolve()
     experiment_repo = Path(__file__).resolve().parents[2]
     private_paths = (source, args.ledger.resolve(), output)
-    if any(path.is_relative_to(repo) or path.is_relative_to(experiment_repo)
+    if any(is_within(path, repo) or is_within(path, experiment_repo)
            for path in private_paths):
         raise ValueError("source, ledger, and output must remain outside both Git checkouts")
     commit = subprocess.run(["git", "rev-parse", "HEAD"], cwd=repo, check=True,

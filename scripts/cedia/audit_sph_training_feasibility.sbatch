@@ -21,6 +21,8 @@ output_dir=$7
 test "$(sha256sum "$script" | cut -d ' ' -f 1)" = "$script_sha"
 mkdir -p -m 700 "$output_dir"
 output="$output_dir/sph-training-feasibility-$SLURM_JOB_ID.json"
+module load python/3.11
+python3 --version
 python3 "$script" --metadata "$metadata" --dictionary "$dictionary" \
     --output "$output" --forbidden-root "$v45_repo" --forbidden-root "$v46_repo"
 sha256sum "$output"

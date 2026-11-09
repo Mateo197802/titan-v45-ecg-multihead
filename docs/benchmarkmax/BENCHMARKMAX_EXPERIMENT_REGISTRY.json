@@ -35,7 +35,14 @@
       "script": "../../scripts/benchmarkmax/audit_sph_training_feasibility.py",
       "split": {"train_percent": 70, "development_percent": 15, "calibration_candidate_percent": 15},
       "test_split": false,
-      "patient_identifiers_exported": false
+      "patient_identifiers_exported": false,
+      "attempts": [
+        {
+          "cedia_job": 32752,
+          "status": "failed_before_data_read",
+          "reason": "CEDIA default Python lacked Path.is_relative_to; compatibility fix committed before retry."
+        }
+      ]
     },
     {
       "id": "B1-SPH-AMPLITUDE-SENSITIVITY",

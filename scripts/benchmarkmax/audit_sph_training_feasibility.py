@@ -172,8 +172,16 @@ def build_report(
 
 def _assert_outside(path: Path, roots: list[Path], label: str) -> None:
     resolved = path.resolve()
-    if any(resolved == root or resolved.is_relative_to(root) for root in roots):
+    if any(_is_within(resolved, root) for root in roots):
         raise ValueError(f"{label} must remain outside all Git checkouts")
+
+
+def _is_within(path: Path, root: Path) -> bool:
+    try:
+        path.relative_to(root)
+    except ValueError:
+        return False
+    return True
 
 
 def run(args) -> None:
