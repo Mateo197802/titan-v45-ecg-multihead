@@ -485,7 +485,8 @@ def _validate_inputs(
     b1_config_path: Path,
 ) -> tuple[dict, dict, dict, dict, dict]:
     config = json.loads(b1_config_path.read_text(encoding="utf-8"))
-    if tuple(config.get("bootstrap", {}).get("delta_metrics", ())) != BOOTSTRAP_METRICS:
+    bootstrap_config = config.get("metrics", {}).get("bootstrap", {})
+    if tuple(bootstrap_config.get("delta_metrics", ())) != BOOTSTRAP_METRICS:
         raise ValueError("B1 bootstrap metric list differs from the frozen implementation")
     expected = config["input_sha256"]
     actual = {
@@ -551,6 +552,7 @@ def build_report(
         raise ValueError("SPH source population differs from the frozen B1 configuration")
 
     endpoints = {}
+    bootstrap_config = config["metrics"]["bootstrap"]
     for index, target in enumerate(config["endpoints"]):
         profile = target["profile"]
         name = target["name"]
@@ -611,8 +613,8 @@ def build_report(
             nested["raw_threshold_decisions"],
             nested["calibrated_threshold_decisions"],
             patient_ids,
-            replicates=int(config["bootstrap"]["replicates"]),
-            seed=int(config["bootstrap"]["base_seed"]) + index,
+            replicates=int(bootstrap_config["replicates"]),
+            seed=int(bootstrap_config["base_seed"]) + index,
         )
         for metric, interval in bootstrap["intervals"].items():
             raw_value = raw_cv_metrics[metric]
@@ -696,7 +698,7 @@ def build_report(
             "threshold_objective": "maximum F1 on the separate threshold-tuning partition",
             "calibration_at_0_5": "reported as a descriptive reference point, not clinical decision policy",
             "ece_bins": ECE_BINS,
-            "bootstrap": config["bootstrap"],
+            "bootstrap": bootstrap_config,
             "all_spH_already_observed": True,
             "confirmatory_external_test": False,
         },

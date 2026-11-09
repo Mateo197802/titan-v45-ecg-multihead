@@ -245,10 +245,12 @@ def test_build_report_reconciles_baseline_and_exports_only_aggregates(tmp_path):
         "input_sha256": hashes,
         "expected_records": count,
         "seed": 197802,
-        "bootstrap": {
-            "replicates": 5,
-            "base_seed": 197813,
-            "delta_metrics": list(module.BOOTSTRAP_METRICS),
+        "metrics": {
+            "bootstrap": {
+                "replicates": 5,
+                "base_seed": 197813,
+                "delta_metrics": list(module.BOOTSTRAP_METRICS),
+            }
         },
         "endpoints": [target],
     }
@@ -274,7 +276,7 @@ def test_build_report_reconciles_baseline_and_exports_only_aggregates(tmp_path):
     assert report["endpoints"]["P4:ASMI"]["v45_frozen_baseline"]["metrics"]["confusion"] == frozen["confusion"]
     assert len(report["endpoints"]["P4:ASMI"]["fold_support"]) == module.OUTER_FOLDS
 
-    config["bootstrap"]["delta_metrics"] = ["f1"]
+    config["metrics"]["bootstrap"]["delta_metrics"] = ["f1"]
     b1_config_path.write_text(json.dumps(config), encoding="utf-8")
     with pytest.raises(ValueError, match="bootstrap metric list"):
         module.build_report(
@@ -289,7 +291,7 @@ def test_build_report_reconciles_baseline_and_exports_only_aggregates(tmp_path):
             commit="test-commit",
         )
 
-    config["bootstrap"]["delta_metrics"] = list(module.BOOTSTRAP_METRICS)
+    config["metrics"]["bootstrap"]["delta_metrics"] = list(module.BOOTSTRAP_METRICS)
     config["source"]["records"] = count + 1
     b1_config_path.write_text(json.dumps(config), encoding="utf-8")
     with pytest.raises(ValueError, match="source population"):
