@@ -33,7 +33,11 @@ missing target code is *not recorded*, not an adjudicated negative. The frozen
 V4.5 preprocessing record says the waveform store does not provide physical
 units in HDF5 attributes and applies no mV conversion. Thus an amplitude
 perturbation is a sensitivity probe only, not proof of physical calibration or
-an LVH mechanism.
+an LVH mechanism. A label-blind 128-record probe found exactly unchanged P4,
+P6 and P8 scores under uniform 0.5x and 2x scaling, consistent with the
+lead-wise z-score normalization. This does not certify mV units or robustness
+to per-lead gain changes, clipping, noise or other acquisition shifts; see the
+[scale-sensitivity result](SPH_SCALE_SENSITIVITY_RESULTS.md).
 
 ## Reproducible Development Split
 

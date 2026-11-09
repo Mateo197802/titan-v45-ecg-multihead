@@ -42,3 +42,9 @@ It did not train or modify weights, produced no F1 decision improvement, and
 does not establish independent validation or a new V4.6 specialist. New-model
 training remains blocked on an audited feature pipeline and adequate
 development support; an independent final cohort is still unconfirmed.
+
+A separate label-blind scale-sensitivity probe replayed 128 records at 0.5x,
+1x and 2x waveform gain. Scores and decisions were invariant to these uniform
+scales under lead-wise z-score normalization; this is not physical-unit
+certification. See [`SPH_SCALE_SENSITIVITY_RESULTS.md`](SPH_SCALE_SENSITIVITY_RESULTS.md)
+and the aggregate-only [receipt](../../outputs/results/benchmarkmax/sph_scale_sensitivity_32761.json).

@@ -50,22 +50,31 @@
     },
     {
       "id": "B1-SPH-AMPLITUDE-SENSITIVITY",
-      "status": "not_run_required_runtime_unavailable",
+      "status": "completed_label_blind_diagnostic",
       "purpose": "Label-blind signal scale perturbation for sensitivity diagnostics only; not physical-unit certification or clinical performance.",
       "script": "../../scripts/benchmarkmax/sph_scale_sensitivity.py",
       "sample_size": 128,
       "factors": [0.5, 1.0, 2.0],
       "locked_v45_commit": "eb1c67b9229af875a9f868797b0c2f5c546e3dac",
+      "public_source_commit": "5ea692c1a4b8c651700e9b03a34981a80b419488",
+      "cedia_experiment_commit": "a2353f0863f05e4b1ea844f9b0c4dd4e270a6c85",
+      "source_tree": "d70a7342a122a63e37a1f3d93dd9b626b4141298",
+      "runtime": "CEDIA GPU job; exact protocol runtime check passed: Python 3.11.14, torch 2.10.0+cu128, CUDA 12.8, NumPy 2.2.6, SciPy 1.15.3, h5py 3.13.0, wfdb 4.3.0, zstandard 0.23.0; NVIDIA A100-SXM4-40GB.",
+      "cedia_job": 32761,
+      "elapsed": "00:01:11",
+      "aggregate_artifact": "../../outputs/results/benchmarkmax/sph_scale_sensitivity_32761.json",
+      "aggregate_sha256": "63c03aabb91d9507ee19151b27a320c2c6faa4471f8eda1d2dccb33f4fa8c694",
+      "result_document": "SPH_SCALE_SENSITIVITY_RESULTS.md",
       "individual_records_exported": false,
-      "checks": {
-        "frozen_source_commit": "eb1c67b9229af875a9f868797b0c2f5c546e3dac",
-        "model_hashes_match": true,
-        "python_deps_archive_matches": true,
-        "h5py_deps_archive_matches": true,
-        "compatible_runtime_verified": false,
-        "gpu_job_submitted": false
-      },
-      "blocker": "The frozen protocol requires Python 3.11.14, torch 2.10.0+cu128, CUDA 12.8, NumPy 2.2.6, SciPy 1.15.3, h5py 3.13.0, wfdb 4.3.0 and zstandard 0.23.0. The checkpoint hashes, Python dependency archive, h5py archive, frozen source commit and sealed prediction ledger are present and match their pinned identifiers. CEDIA exposes pytorch/2.2; the existing project venv contains torch 2.5.1+cu121. Neither is the locked runtime, so no substitute was used and no GPU inference job was submitted."
+      "labels_used_for_selection_or_inference": false,
+      "interpretation": "Across the fixed 128-record sample, uniform 0.5x and 2x waveform scaling changed none of the 18 class scores or decisions. This is consistent with lead-wise z-score normalization and does not certify physical units or mV calibration.",
+      "failed_attempts": [
+        {
+          "cedia_job": 32760,
+          "status": "failed_before_result_artifact",
+          "reason": "SLURM stdout/stderr were directed to a nonexistent private directory; no aggregate was produced. The same frozen job was resubmitted with the existing private output directory."
+        }
+      ]
     },
     {
       "id": "B1-V46-CALIBRATION",

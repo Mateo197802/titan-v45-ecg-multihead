@@ -57,11 +57,13 @@ def test_benchmarkmax_status_documents_reflect_completed_b1_calibration():
     assert "not a trained candidate model or independent validation" in feasibility_flat
     assert "B1_SPH_CALIBRATION_RESULTS.md" in feasibility
     assert "B1_SPH_CALIBRATION_RESULTS.md" in baseline
+    assert "SPH_SCALE_SENSITIVITY_RESULTS.md" in feasibility
     assert "No V4.6\ncheckpoint or trained specialist exists yet." in baseline
     assert "B1_SPH_CALIBRATION_RESULTS.md" in readme
+    assert "SPH_SCALE_SENSITIVITY_RESULTS.md" in readme
 
 
-def test_scale_sensitivity_registry_reports_exact_runtime_blocker():
+def test_scale_sensitivity_registry_records_completed_probe():
     registry = json.loads(
         (ROOT / "docs/benchmarkmax/BENCHMARKMAX_EXPERIMENT_REGISTRY.json").read_text(
             encoding="utf-8"
@@ -73,14 +75,47 @@ def test_scale_sensitivity_registry_reports_exact_runtime_blocker():
         if item["id"] == "B1-SPH-AMPLITUDE-SENSITIVITY"
     )
 
-    assert experiment["status"] == "not_run_required_runtime_unavailable"
-    assert experiment["checks"]["frozen_source_commit"] == (
-        "eb1c67b9229af875a9f868797b0c2f5c546e3dac"
+    assert experiment["status"] == "completed_label_blind_diagnostic"
+    assert experiment["cedia_job"] == 32761
+    assert experiment["aggregate_sha256"] == (
+        "63c03aabb91d9507ee19151b27a320c2c6faa4471f8eda1d2dccb33f4fa8c694"
     )
-    assert experiment["checks"]["model_hashes_match"] is True
-    assert experiment["checks"]["python_deps_archive_matches"] is True
-    assert experiment["checks"]["h5py_deps_archive_matches"] is True
-    assert experiment["checks"]["compatible_runtime_verified"] is False
-    assert experiment["checks"]["gpu_job_submitted"] is False
-    assert "torch 2.10.0+cu128" in experiment["blocker"]
-    assert "pytorch/2.2" in experiment["blocker"]
+    assert experiment["result_document"] == "SPH_SCALE_SENSITIVITY_RESULTS.md"
+
+
+def test_scale_sensitivity_result_document_matches_aggregate():
+    result = json.loads(
+        (ROOT / "outputs/results/benchmarkmax/sph_scale_sensitivity_32761.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    document = (ROOT / "docs/benchmarkmax/SPH_SCALE_SENSITIVITY_RESULTS.md").read_text(
+        encoding="utf-8"
+    )
+    for factor in ("0.5", "2.0"):
+        for profile, profile_result in result["perturbations_vs_factor_1"][factor]["profiles"].items():
+            assert profile_result["top1_changes"] == 0
+            assert profile_result["fallback_changes"] == 0
+            for change in profile_result["score_changes"].values():
+                assert change["mean_absolute"] == 0
+                assert change["max_absolute"] == 0
+                assert change["label_changes"] == 0
+            class_outputs = len(profile_result["score_changes"]) * result["selected_records"]
+            row = f"| `{factor}x` | `{profile}` | 0 | 0/{class_outputs} | 0/128 | 0/128 |"
+            assert row in document
+
+    for profile, profile_result in result["baseline_replay_vs_archived"]["profiles"].items():
+        assert profile_result["top1_changes"] == 0
+        assert profile_result["fallback_changes"] == 0
+        assert sum(
+            change["label_changes"] for change in profile_result["score_changes"].values()
+        ) == 0
+        max_difference = max(
+            change["max_absolute"] for change in profile_result["score_changes"].values()
+        )
+        row = f"| {profile} | {max_difference:.6e} | 0 | 0 | 0 |"
+        assert row in document
+
+    assert result["selected_records"] == 128
+    assert "32761" in document
+    assert "63c03aabb91d9507ee19151b27a320c2c6faa4471f8eda1d2dccb33f4fa8c694" in document
