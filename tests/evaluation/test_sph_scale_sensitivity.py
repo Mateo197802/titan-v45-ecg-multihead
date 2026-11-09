@@ -30,6 +30,14 @@ def test_selection_is_order_independent_and_requires_full_sample():
         module.select_records(["same", "same"], 1)
 
 
+def test_private_paths_are_detected_without_new_pathlib_apis(tmp_path):
+    repository = tmp_path / "repository"
+    private_inside = repository / "output.json"
+    private_outside = tmp_path / "output.json"
+    assert module.is_within(private_inside.resolve(), repository.resolve())
+    assert not module.is_within(private_outside.resolve(), repository.resolve())
+
+
 def test_paired_changes_and_failure_detection():
     baseline = [sample_row(0.25, []), sample_row(0.75, ["A"])]
     modified = [sample_row(0.5, ["A"], "B", True), sample_row(0.5, [])]

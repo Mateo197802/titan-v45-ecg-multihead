@@ -48,10 +48,29 @@ change the fact that SPH is an already-observed development source.
 
 The audit is a feasibility gate, not a training result. No training, threshold
 selection, or candidate-model performance is reported until endpoint support
-and the data contract are reviewed. Any internal split metrics will be labeled
-development diagnostics, not external validation. The source's previously
-reported V4.5 performance cannot be reused as V4.6 model-selection evidence
-without explicit separation of development and calibration data.
+and the data contract are reviewed. CEDIA CPU job `32754` completed this audit
+from commit `90483f5`; the aggregate is
+[`sph_training_feasibility_32754.json`](../../outputs/results/benchmarkmax/sph_training_feasibility_32754.json)
+(SHA-256 `5df61dbf6af4d6b9b5da6d8962ebfebb0f166299f9cf27acfe8d69a874d0830e`).
+It assigned 18,136 ECG / 17,368 patients to train, 3,889 / 3,718 to development,
+and 3,745 / 3,580 to calibration-candidate, with zero patients crossing splits.
+
+| Endpoint | Train positive records / patients | Development | Calibration-candidate |
+| --- | ---: | ---: | ---: |
+| ASMI | 68 / 61 | 7 / 6 | 16 / 15 |
+| IMI | 86 / 84 | 21 / 20 | 13 / 13 |
+| LVH | 144 / 138 | 40 / 38 | 25 / 25 |
+| PAC | 365 / 358 | 89 / 84 | 85 / 83 |
+
+These are source-statement supports, not model metrics. PAC has enough positive
+support for a limited exploratory head pilot; LVH is marginal for any reliable
+threshold claim; ASMI/IMI support is too sparse in development/calibration for
+stable claims or a robust threshold estimate. The current training CLI consumes
+precomputed NPZ features, while the repository has no audited SPH feature
+builder or feature matrix. Therefore no V4.6 checkpoint, calibration, or
+performance result has been produced. Any future within-SPH split metrics will
+remain development diagnostics, not external validation. The source's
+previously reported V4.5 performance will not be reused as a V4.6 test result.
 
 ## External Validation Gate
 

@@ -1,0 +1,156 @@
+{
+  "endpoint_codes": {
+    "ASMI": 165,
+    "IMI": 161,
+    "LVH": 142,
+    "PAC": 30,
+    "PVC": 60,
+    "RBBB": 106
+  },
+  "endpoint_descriptions": {
+    "ASMI": "Anteroseptal MI",
+    "IMI": "Inferior MI",
+    "LVH": "Left ventricular hypertrophy",
+    "PAC": "Atrial premature complex(es)",
+    "PVC": "Ventricular premature complex(es)",
+    "RBBB": "Right bundle-branch block"
+  },
+  "execution": {
+    "commit": "90483f5739c2e26afe6208f04d40bd0400f25af9",
+    "slurm_job_id": "32754"
+  },
+  "individual_identifiers_exported": false,
+  "reference": "AHA code present on this ECG. Absence means statement not recorded, not adjudicated clinical absence.",
+  "schema": "TITAN_V46_SPH_TRAINING_FEASIBILITY_V1",
+  "scope": "Exploratory development support only. SPH is previously observed and is not a locked or confirmatory external test.",
+  "script_sha256": "62371bccab37de958fb4155fc663a10406131dd0be69b6e579a1eb4db5d1b8ec",
+  "source": {
+    "code_dictionary_sha256": "4d22759fd19d37133c78d439a5726f9e0bc412cc17483c424926ce9abb33c8fc",
+    "metadata_sha256": "c6f8dc5197758a3970aae554f8b6ee884d96656b121879bc0eb1adf367ea6d86",
+    "patients": 24666,
+    "records": 25770
+  },
+  "split": {
+    "algorithm": "SHA-256 of namespace, seed, and patient ID; first 64 bits modulo 100",
+    "assignment": {
+      "calibration": "85-99",
+      "development": "70-84",
+      "train": "0-69"
+    },
+    "labels_used_for_assignment": false,
+    "locked_test_split": false,
+    "namespace": "TITAN-V46-SPH-DEV-SPLIT-V1:",
+    "patient_overlap_across_splits": 0,
+    "seed": "197802"
+  },
+  "splits": {
+    "calibration": {
+      "endpoints": {
+        "ASMI": {
+          "positive_patients": 15,
+          "positive_records": 16,
+          "statement_not_recorded_records": 3729
+        },
+        "IMI": {
+          "positive_patients": 13,
+          "positive_records": 13,
+          "statement_not_recorded_records": 3732
+        },
+        "LVH": {
+          "positive_patients": 25,
+          "positive_records": 25,
+          "statement_not_recorded_records": 3720
+        },
+        "PAC": {
+          "positive_patients": 83,
+          "positive_records": 85,
+          "statement_not_recorded_records": 3660
+        },
+        "PVC": {
+          "positive_patients": 161,
+          "positive_records": 170,
+          "statement_not_recorded_records": 3575
+        },
+        "RBBB": {
+          "positive_patients": 95,
+          "positive_records": 103,
+          "statement_not_recorded_records": 3642
+        }
+      },
+      "patients": 3580,
+      "records": 3745
+    },
+    "development": {
+      "endpoints": {
+        "ASMI": {
+          "positive_patients": 6,
+          "positive_records": 7,
+          "statement_not_recorded_records": 3882
+        },
+        "IMI": {
+          "positive_patients": 20,
+          "positive_records": 21,
+          "statement_not_recorded_records": 3868
+        },
+        "LVH": {
+          "positive_patients": 38,
+          "positive_records": 40,
+          "statement_not_recorded_records": 3849
+        },
+        "PAC": {
+          "positive_patients": 84,
+          "positive_records": 89,
+          "statement_not_recorded_records": 3800
+        },
+        "PVC": {
+          "positive_patients": 160,
+          "positive_records": 165,
+          "statement_not_recorded_records": 3724
+        },
+        "RBBB": {
+          "positive_patients": 77,
+          "positive_records": 83,
+          "statement_not_recorded_records": 3806
+        }
+      },
+      "patients": 3718,
+      "records": 3889
+    },
+    "train": {
+      "endpoints": {
+        "ASMI": {
+          "positive_patients": 61,
+          "positive_records": 68,
+          "statement_not_recorded_records": 18068
+        },
+        "IMI": {
+          "positive_patients": 84,
+          "positive_records": 86,
+          "statement_not_recorded_records": 18050
+        },
+        "LVH": {
+          "positive_patients": 138,
+          "positive_records": 144,
+          "statement_not_recorded_records": 17992
+        },
+        "PAC": {
+          "positive_patients": 358,
+          "positive_records": 365,
+          "statement_not_recorded_records": 17771
+        },
+        "PVC": {
+          "positive_patients": 711,
+          "positive_records": 732,
+          "statement_not_recorded_records": 17404
+        },
+        "RBBB": {
+          "positive_patients": 486,
+          "positive_records": 524,
+          "statement_not_recorded_records": 17612
+        }
+      },
+      "patients": 17368,
+      "records": 18136
+    }
+  }
+}

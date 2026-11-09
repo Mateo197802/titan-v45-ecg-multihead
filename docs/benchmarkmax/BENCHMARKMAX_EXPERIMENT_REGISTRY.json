@@ -30,34 +30,39 @@
     },
     {
       "id": "B1-SPH-PATIENT-SPLIT-SUPPORT-AUDIT",
-      "status": "not_run",
+      "status": "completed_exploratory_feasibility_audit",
       "purpose": "Aggregate statement support after a deterministic patient-grouped 70/15/15 development split.",
       "script": "../../scripts/benchmarkmax/audit_sph_training_feasibility.py",
       "split": {"train_percent": 70, "development_percent": 15, "calibration_candidate_percent": 15},
       "test_split": false,
       "patient_identifiers_exported": false,
+      "cedia_job": 32754,
+      "commit": "90483f5739c2e26afe6208f04d40bd0400f25af9",
+      "artifact": "../../outputs/results/benchmarkmax/sph_training_feasibility_32754.json",
+      "artifact_sha256": "5df61dbf6af4d6b9b5da6d8962ebfebb0f166299f9cf27acfe8d69a874d0830e",
       "attempts": [
         {
           "cedia_job": 32752,
           "status": "failed_before_data_read",
-          "reason": "CEDIA default Python lacked Path.is_relative_to; compatibility fix committed before retry."
+          "reason": "CEDIA default Python lacked Path.is_relative_to; wrapper now pins the supported Python 3.11 module."
         }
       ]
     },
     {
       "id": "B1-SPH-AMPLITUDE-SENSITIVITY",
-      "status": "not_run",
+      "status": "not_run_pending_exact_runtime_restore",
       "purpose": "Label-blind signal scale perturbation for sensitivity diagnostics only; not physical-unit certification or clinical performance.",
       "script": "../../scripts/benchmarkmax/sph_scale_sensitivity.py",
       "sample_size": 128,
       "factors": [0.5, 1.0, 2.0],
       "locked_v45_commit": "eb1c67b9229af875a9f868797b0c2f5c546e3dac",
-      "individual_records_exported": false
+      "individual_records_exported": false,
+      "blocker": "The five physical checkpoint files and pinned python dependency archive were not found in the inspected persistent CEDIA paths. The runner requires exact protocol versions and was not run with a substitute runtime."
     },
     {
       "id": "B1-V46-CALIBRATION",
-      "status": "blocked_pending_split_support_and_protocol_review",
-      "purpose": "No new calibration fit or threshold selection has been run.",
+      "status": "not_run_insufficient_ASMI_IMI_calibration_support",
+      "purpose": "No new calibration fit or threshold selection has been run; ASMI and IMI have only 15 and 13 positive patients in the calibration-candidate split.",
       "external_claim_permitted": false
     },
     {
