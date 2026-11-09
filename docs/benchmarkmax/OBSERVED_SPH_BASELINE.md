@@ -28,6 +28,27 @@ The high AUROC values alone do not establish that recalibration will solve the
 low PPV or F1. The 20-bin curves in the diagnostic are descriptive approximations
 on previously inspected SPH data, not a protocol for selecting thresholds.
 
+## Diagnostic figures
+
+- [ROC](../../outputs/figures/benchmarkmax/sph_baseline_roc.png) ([PDF](../../outputs/figures/benchmarkmax/sph_baseline_roc.pdf))
+- [Precision-recall](../../outputs/figures/benchmarkmax/sph_baseline_pr.png) ([PDF](../../outputs/figures/benchmarkmax/sph_baseline_pr.pdf))
+- [Statement calibration](../../outputs/figures/benchmarkmax/sph_baseline_calibration.png) ([PDF](../../outputs/figures/benchmarkmax/sph_baseline_calibration.pdf))
+- [Score distributions](../../outputs/figures/benchmarkmax/sph_baseline_score_distributions.png) ([PDF](../../outputs/figures/benchmarkmax/sph_baseline_score_distributions.pdf))
+
+ROC and precision-recall lines use the 20-bin aggregates; legend AUROC and AP
+come from the original unbinned aggregate, not numerical integration of those
+lines. The [manifest](../../outputs/figures/benchmarkmax/figure_manifest.json)
+records SHA-256 for the input, generator and outputs. Recreate them with:
+
+```bash
+python scripts/benchmarkmax/plot_sph_baseline.py \
+  --input outputs/results/benchmarkmax/sph_baseline_diagnostic_32726.json \
+  --output-dir outputs/figures/benchmarkmax
+```
+
+Image bytes can depend on the plotting environment, especially PDF metadata;
+the manifest certifies the published files, not bitwise identity across runs.
+
 SPH may be used as a disclosed adaptation/development source only with
 patient-separated splits and a predeclared analysis. A distinct eligible source
 is needed for any confirmatory external-generalization claim after adaptation.
