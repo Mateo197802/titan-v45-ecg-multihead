@@ -23,8 +23,8 @@ actionable; it is not manuscript-only work.
 
 | ID | Concern | Disposition | Evidence / remaining action |
 | --- | --- | --- | --- |
-| R1-1 | Independent external validation | EXPERIMENT_COMPLETED | [SPH delivery audit](SPH_DELIVERY_AUDIT.md) and [all-input coverage](ALL_INPUT_FLOW_COVERAGE.md), jobs 32668/32669/32672/32677/32728; 25,770 ECG, but complete historical independence and clinical adjudication are not certified. |
-| R1-2 | Population and flow denominator | EVIDENCE_CEILING_REACHED | [All-input coverage](ALL_INPUT_FLOW_COVERAGE.md) measures the later SPH population and selected replay; [bounded recovery](R1_2_EVIDENCE_CEILING.md) confirms that historical preselection and exclusion records remain unavailable. |
+| R1-1 | Independent external validation | EXPERIMENT_COMPLETED | [SPH delivery audit](SPH_DELIVERY_AUDIT.md), [all-input coverage](ALL_INPUT_FLOW_COVERAGE.md), and [CEDIA lineage](CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md); 25,770 ECG. Jobs 17314/17315 show V3H informed P6 epoch selection; exact 17314 manifest is missing. SPH lineage and clinical adjudication are not certified. |
+| R1-2 | Population and flow denominator | EVIDENCE_CEILING_REACHED | [All-input coverage](ALL_INPUT_FLOW_COVERAGE.md), [bounded recovery](R1_2_EVIDENCE_CEILING.md), and [recovered-vs-missing inventory](RECOVERED_VS_MISSING_HISTORICAL_EVIDENCE.md); historical preselection population and exclusion reasons remain unavailable. |
 | R1-3 | AF incidence versus ECG statement | VERIFIED_WITH_LIMITATIONS | [AF/PVC reference disposition](AF_PVC_REFERENCE_DISPOSITION.md); 390 retained AF flags agree with stored codes per overlapping profile, not an incident-AF study. |
 | R1-4 | Invalid artifact hashes | VERIFIED_WITH_LIMITATIONS | [Hash correction](../hash-correction-20261028.md); separate PR #4, missing historical artifacts remain unavailable. |
 | R2-general | Excluded classes and Other | CLAIM_WITHDRAWAL_REQUIRED | [All-input coverage](ALL_INPUT_FLOW_COVERAGE.md) reports all three profiles across 25,770 SPH ECG and the 14 compatible endpoints; `Other` and incompatible references remain unvalidated. |
@@ -36,25 +36,25 @@ actionable; it is not manuscript-only work.
 | R2-2d | Unreported parameters and comparability | MANUSCRIPT_UPDATE_ONLY | Mark missing parameters and avoid unequal comparisons. |
 | R2-2e | SCP and abbreviations | MANUSCRIPT_UPDATE_ONLY | Define terms and verify usage. |
 | R2-2f | Introduction table placement | MANUSCRIPT_UPDATE_ONLY | Resolve placement and claims in the future manuscript. |
-| R2-3a | Datasets and splits | EVIDENCE_CEILING_REACHED | [Split and calibration audit](SPLIT_CALIBRATION_DISPOSITION.md); historical patient isolation not established, and actual job-linked split manifests would reopen the analysis. |
-| R2-3b | Design versus evaluation | MANUSCRIPT_UPDATE_ONLY | Distinguish design, historical development and reconstructed evaluation. |
-| R2-3c | Auxiliary classes and training | VERIFIED_WITH_LIMITATIONS | [Role and supervision audit](ROLE_SUPERVISION_AND_ROUTING.md); output contracts alone do not establish checkpoint-linked training support. |
-| R2-3d | ALMI, ILMI and LAE training | EVIDENCE_CEILING_REACHED | [Role and supervision audit](ROLE_SUPERVISION_AND_ROUTING.md); checkpoint-linked supervision remains unverified; exact run manifests and loss masks would reopen recovery. |
-| R2-3e | Role definitions | VERIFIED_WITH_LIMITATIONS | [Role and routing audit](ROLE_SUPERVISION_AND_ROUTING.md); distinguish code roles and selected replay from historical all-input routing. |
-| R2-3f | Morphology and feature architecture | EVIDENCE_CEILING_REACHED | [Code, decision and numerical equivalence](REPLAY_EQUIVALENCE_DISPOSITION.md): exact loader and morphology identity remain unverified; matched P4 decisions do not satisfy the original probability tolerance. |
+| R2-3a | Datasets and splits | EVIDENCE_CEILING_REACHED | [Split audit](SPLIT_CALIBRATION_DISPOSITION.md), [checkpoint-to-split lineage](CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md), and [recovery inventory](RECOVERED_VS_MISSING_HISTORICAL_EVIDENCE.md); SLURM records completed jobs, but linked split manifests and patient isolation remain unavailable. |
+| R2-3b | Design versus evaluation | MANUSCRIPT_UPDATE_ONLY | Distinguish architecture, historical development, V3H model selection, reconstructed replay and later SPH transfer; see [checkpoint lineage](CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md). |
+| R2-3c | Auxiliary classes and training | VERIFIED_WITH_LIMITATIONS | [Role/supervision audit](ROLE_SUPERVISION_AND_ROUTING.md) and [auxiliary-output disposition](OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md); output contracts alone do not establish checkpoint-linked training support. |
+| R2-3d | ALMI, ILMI and LAE training | EVIDENCE_CEILING_REACHED | [Role/supervision audit](ROLE_SUPERVISION_AND_ROUTING.md) and [auxiliary-output disposition](OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md); checkpoint-linked supervision remains unverified. |
+| R2-3e | Role definitions | VERIFIED_WITH_LIMITATIONS | [Role and routing audit](ROLE_SUPERVISION_AND_ROUTING.md) and [quarantine provenance](OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md); distinguish code roles and selected replay from historical all-input routing. |
+| R2-3f | Morphology and feature architecture | EVIDENCE_CEILING_REACHED | [Replay equivalence](REPLAY_EQUIVALENCE_DISPOSITION.md) and [loader identity audit](HISTORICAL_LOADER_IDENTITY_AND_REPLAY.md): exact loader remains absent; 962/962 decisions do not meet the 1e-5 probability tolerance. |
 | R2-3g | Brier score in methods | MANUSCRIPT_UPDATE_ONLY | Add definition and remove unsupported numerical methods claim. |
 | R2-3h | Accuracy equations and tasks | MANUSCRIPT_UPDATE_ONLY | Define rhythm and pathology endpoints separately. |
-| R2-4a | External-development terminology | VERIFIED_WITH_LIMITATIONS | [Evidence status](../evidence-status.md); do not call selected development evidence independent. |
+| R2-4a | External-development terminology | VERIFIED_WITH_LIMITATIONS | [Evidence status](../evidence-status.md) and [checkpoint lineage](CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md); V3H informed P6 selection, and SPH remains a separate transfer result with incomplete full-backbone lineage. |
 | R2-4b | Figure cross-reference | MANUSCRIPT_UPDATE_ONLY | Correct figure reference. |
 | R2-4c | Overstated F1 interpretation | MANUSCRIPT_UPDATE_ONLY | Use measured values and qualified language. |
 | R2-4d | Figure metrics versus confidence intervals | MANUSCRIPT_UPDATE_ONLY | Describe what is actually plotted. |
-| R2-4e | No threshold crossed | EXPERIMENT_COMPLETED_WITH_LIMITATIONS | [All-input coverage](ALL_INPUT_FLOW_COVERAGE.md): P6 and P4 can return empty sets; P8 used fallback on 801/25,770 SPH ECG. Fallback is not quarantine or human review. |
+| R2-4e | No threshold crossed | EXPERIMENT_COMPLETED_WITH_LIMITATIONS | [All-input coverage](ALL_INPUT_FLOW_COVERAGE.md) and [routing disposition](OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md): P6/P4 empty sets and P8 fallback on 801/25,770 SPH ECG are measured; they are not quarantine or human review. |
 | R2-4f | Confusion matrix presentation | MANUSCRIPT_UPDATE_ONLY | Harmonize labels and denominators. |
 | R2-4g | Duplicated figures | MANUSCRIPT_UPDATE_ONLY | Reconcile figures against their source data. |
 | R2-4h | ROC and PR tracing definition | MANUSCRIPT_UPDATE_ONLY | Define plotted units and derivation. |
 | R2-4i | AUROC wording | MANUSCRIPT_UPDATE_ONLY | Qualify the interpretation of the reported value. |
 | R2-4j | Frequency versus accuracy plot | MANUSCRIPT_UPDATE_ONLY | Verify axes, bins and denominators. |
-| R2-4k | Quarantine and pre/post rates | CLAIM_WITHDRAWAL_REQUIRED | [All-input coverage](ALL_INPUT_FLOW_COVERAGE.md) and [routing audit](ROLE_SUPERVISION_AND_ROUTING.md): no linked uncertainty-policy ledger; rate is not assessed, not zero. |
+| R2-4k | Quarantine and pre/post rates | CLAIM_WITHDRAWAL_REQUIRED | [All-input coverage](ALL_INPUT_FLOW_COVERAGE.md), [routing audit](ROLE_SUPERVISION_AND_ROUTING.md), and [quarantine provenance](OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md): no linked uncertainty-policy ledger; rate is not assessed, not zero. |
 | R2-4l | Rhythm top-1 | MANUSCRIPT_UPDATE_ONLY | Define the decision and denominator. |
 | R2-4m | Figure readability | MANUSCRIPT_UPDATE_ONLY | Final layout and rendering remain pending. |
 | R2-5 | PVC record versus beat level | VERIFIED_WITH_LIMITATIONS | [AF/PVC reference disposition](AF_PVC_REFERENCE_DISPOSITION.md); SPH comparisons are ECG statements, not validated beat detection. |
@@ -62,9 +62,9 @@ actionable; it is not manuscript-only work.
 | A-01 | P4 panel versus unique ECG count | VERIFIED_WITH_LIMITATIONS | [Data dispositions](../revision-data-dispositions.md); preserve 962 panel rows and 733 distinct record keys. |
 | A-02 | Source distribution and aliases | VERIFIED_WITH_LIMITATIONS | [Source and rights disposition](SOURCE_RIGHTS_DISPOSITION.md); checksum matches and source aliases do not prove independent institutions or patient isolation. |
 | A-03 | Per-class metric inconsistencies | MANUSCRIPT_UPDATE_ONLY | Use audited source tables and verify the final manuscript values. |
-| A-04 | Thresholds and calibration isolation | VERIFIED_WITH_LIMITATIONS | [Split and calibration audit](SPLIT_CALIBRATION_DISPOSITION.md); saved threshold vectors agree but patient isolation remains unverified. |
+| A-04 | Thresholds and calibration isolation | VERIFIED_WITH_LIMITATIONS | [Split and calibration audit](SPLIT_CALIBRATION_DISPOSITION.md) and [CEDIA source triage](EVIDENCE_SOURCE_TRIAGE.md); P4 thresholds and P6/P8 vector dimensions are reconciled, but released-checkpoint linkage and patient isolation remain unverified. |
 | A-05 | Backbone relationships | MANUSCRIPT_UPDATE_ONLY | Describe shared V3F and separate V3AG accurately. |
-| A-06 | Optuna history and quarantine | CLAIM_WITHDRAWAL_REQUIRED | Separate PR #4; remove unsupported historical optimization claims: original study database and promotion linkage are unavailable. |
+| A-06 | Optuna history and quarantine | CLAIM_WITHDRAWAL_REQUIRED | [Optuna/A10 evidence is tracked separately in PR #4](https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/4); nine trial rows survive, but the original study database, complete history and promotion linkage are unavailable. |
 | A-07 | Data availability URL | MANUSCRIPT_UPDATE_ONLY | Cite the verified final artifact and restricted inputs. |
 | A-08 | Missing supplement CSVs | MANUSCRIPT_UPDATE_ONLY | Inventory only files actually included in the final supplement. |
 | A-09 | Incorrect DOI | MANUSCRIPT_UPDATE_ONLY | Verify replacement reference in the final bibliography. |

@@ -40,13 +40,13 @@ The 12 `A-*` entries are internal audit observations and therefore use `NOT_APPL
 - **Affected manuscript scope:** Abstract, cohort description, Results, Discussion and deployment/generalizability claims.
 - **Technical status:** `EXPERIMENT_COMPLETED_WITH_LIMITATIONS`
 - **Reviewer satisfaction:** `PARTIALLY_ADDRESSED`
-- **Evidence:** [`docs/reviewer_closure/SPH_DELIVERY_AUDIT.md`](SPH_DELIVERY_AUDIT.md); [`docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md`](ALL_INPUT_FLOW_COVERAGE.md); [`docs/external_validation/sph_results.md`](../external_validation/sph_results.md); [`docs/external_validation/sph_independence_assessment.md`](../external_validation/sph_independence_assessment.md)
-- **Protocol, population and observed result:** Frozen transfer evaluated 25,770 SPH ECG from 24,666 source patients across P6, P8 and P4; all 14 compatible ECG-statement endpoints were scored with patient-component intervals. The source is distinct from retained evaluation sources, but complete V3F/V3AG pretraining and fine-tuning lineage is unavailable.
-- **What the evidence addresses:** A real full-source transfer analysis and endpoint-specific results now exist; this is stronger than selected development metrics alone.
-- **What remains unresolved:** Historical training/source overlap is not certified, labels are not clinical adjudication, and no truly untouched validation cohort has been selected.
-- **Recoverability:** Historical source exposure can reopen only with exact job-linked training manifests. A new independent cohort is not recoverable from the current SPH evaluation.
+- **Evidence:** [`docs/reviewer_closure/SPH_DELIVERY_AUDIT.md`](SPH_DELIVERY_AUDIT.md); [`docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md`](ALL_INPUT_FLOW_COVERAGE.md); [`docs/external_validation/sph_results.md`](../external_validation/sph_results.md); [`docs/external_validation/sph_independence_assessment.md`](../external_validation/sph_independence_assessment.md); [`docs/reviewer_closure/EVIDENCE_SOURCE_TRIAGE.md`](EVIDENCE_SOURCE_TRIAGE.md); [`docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md`](CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md)
+- **Protocol, population and observed result:** Frozen transfer evaluated 25,770 SPH ECG from 24,666 source patients across P6, P8 and P4; all 14 compatible ECG-statement endpoints were scored with patient-component intervals. Newly recovered job 17314 records a P6 epoch sweep; job 17315 explicitly evaluates epoch 8 on the V3H accepted/balanced manifest at 1,564/1,643, accuracy 0.951917 and macro-F1 0.800938. This makes V3H model-selection/development evidence, not an untouched test. The exact 17314 manifest is not recorded. Complete V3F/V3AG pretraining and fine-tuning lineage remains unavailable.
+- **What the evidence addresses:** A real full-source SPH transfer analysis and endpoint-specific results exist. New CEDIA accounting/logs also narrow the P6 validation claim by documenting V3H gate use and likely epoch-selection exposure.
+- **What remains unresolved:** The 17314 sweep log and submitted script do not preserve the exact manifest binding; the same epoch-8 metrics and threshold vector appear in the immediately subsequent 17315 V3H gate report, strongly supporting use of that development holdout for selection but not providing a cryptographic same-file proof. Historical backbone/source overlap is not certified, labels are not clinical adjudication, and no truly untouched cohort has been selected.
+- **Recoverability:** The current packages and NOC-reviewed backup do not recover the sweep script or full training manifests. Reopen only if exact job-linked scripts, manifests, checkpoint hashes and patient mappings are supplied. A new independent cohort is not recoverable from the current SPH evaluation.
 - **Experiment requirement:** A new, admissible, patient- and signal-disjoint cohort is required if independent generalization is claimed.
-- **Future editorial action:** Distinguish selected development, SPH transfer and independent validation; remove clinical deployment claims not tested.
+- **Future editorial action:** Describe V3H P6 as selected development/model-selection evidence, distinguish it from the later SPH transfer, and do not call either clinical validation or assert complete independence without the missing lineage. Remove untested deployment claims.
 - **Scientific risk:** High if SPH transfer is described as independent validation or clinical effectiveness.
 
 ### R1-2 - Reviewer 1, Round 1, second methodological comment
@@ -55,11 +55,11 @@ The 12 `A-*` entries are internal audit observations and therefore use `NOT_APPL
 - **Affected manuscript scope:** Primary denominator, Results tables, cascade and quarantine claims.
 - **Technical status:** `EXPERIMENT_COMPLETED_WITH_LIMITATIONS`
 - **Reviewer satisfaction:** `PARTIALLY_ADDRESSED`
-- **Evidence:** [`docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md`](ALL_INPUT_FLOW_COVERAGE.md); [`docs/reviewer_closure/R1_2_EVIDENCE_CEILING.md`](R1_2_EVIDENCE_CEILING.md); [`docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md`](ROLE_SUPERVISION_AND_ROUTING.md); [`outputs/results/external_sph/sph_aggregate_32669.json`](../../outputs/results/external_sph/sph_aggregate_32669.json)
+- **Evidence:** [`docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md`](ALL_INPUT_FLOW_COVERAGE.md); [`docs/reviewer_closure/R1_2_EVIDENCE_CEILING.md`](R1_2_EVIDENCE_CEILING.md); [`docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md`](ROLE_SUPERVISION_AND_ROUTING.md); [`outputs/results/external_sph/sph_aggregate_32669.json`](../../outputs/results/external_sph/sph_aggregate_32669.json); [`docs/reviewer_closure/RECOVERED_VS_MISSING_HISTORICAL_EVIDENCE.md`](RECOVERED_VS_MISSING_HISTORICAL_EVIDENCE.md)
 - **Protocol, population and observed result:** The later SPH source has 25,770/25,770 scores per profile and all 14 compatible endpoint comparisons. The retained selected development replay has 2,193 P8 keys, including 1,643 P6 keys, plus 733 P4 keys: a verified 2,926-key P8/P4 union, not a patient count. Routing was computed without reference labels.
 - **What the evidence addresses:** The measured all-source SPH profile coverage, empty-set/fallback counts and compatible predictive results are documented separately from selected-cohort replays.
-- **What remains unresolved:** The June preselection population, exclusion reasons, complete all-class reference ontology and authentic historical quarantine policy/ledger remain unavailable. No pre/post quarantine rate can be calculated.
-- **Recoverability:** The examined backups and manifests do not recover the historical parent population. Reopen only on receipt of parent manifests, exclusion reasons and checkpoint/job-linked routing ledger.
+- **What remains unresolved:** The June preselection population, exclusion reasons, complete all-class reference ontology and authentic historical quarantine policy/ledger remain unavailable. The recovered V3H accepted/balanced manifest is selected data, not the parent population. No pre/post quarantine rate can be calculated.
+- **Recoverability:** The supplied archives, exact historical paths and NOC-reviewed backup do not recover the historical parent population. Reopen only on receipt of parent manifests, exclusion reasons and checkpoint/job-linked routing ledger; this is not a global-absence finding.
 - **Experiment requirement:** A complete all-class workflow with compatible reference labels and an explicit quarantine policy is required to satisfy the original request; SPH cannot retroactively supply the missing historical flow.
 - **Future editorial action:** Report selected denominators and measured SPH coverage; do not call either a reconstructed historical all-input workflow.
 - **Scientific risk:** High if restricted Primary results are described as full clinical workflow accuracy or unmeasured quarantine benefit.
@@ -235,11 +235,11 @@ The 12 `A-*` entries are internal audit observations and therefore use `NOT_APPL
 - **Affected manuscript scope:** Materials and Methods dataset subsection and split tables.
 - **Technical status:** `EVIDENCE_CEILING_REACHED`
 - **Reviewer satisfaction:** `PARTIALLY_ADDRESSED`
-- **Evidence:** [`docs/reviewer_closure/SPLIT_CALIBRATION_DISPOSITION.md`](SPLIT_CALIBRATION_DISPOSITION.md); [`docs/reviewer_closure/R1_2_EVIDENCE_CEILING.md`](R1_2_EVIDENCE_CEILING.md); [`outputs/results/revision_replay_diagnostics_20261107/p4_official_fold_coverage.json`](../../outputs/results/revision_replay_diagnostics_20261107/p4_official_fold_coverage.json); [`docs/reviewer_closure/HISTORICAL_EVIDENCE_HANDOFF.md`](HISTORICAL_EVIDENCE_HANDOFF.md)
-- **Protocol, population and observed result:** Verified selected counts are P6 1,643 ECG, P8 2,193 ECG, and P4 962 panel rows over 733 ECG/676 patients. PTB-XL fold 10 has 2,198 ECG/1,904 patients; 733 P4 ECG map to 676 fold-10 patients with no overlap with official folds 1-9.
-- **What the evidence addresses:** Selected counts, available official fold relation and surviving calibration evidence are documented.
-- **What remains unresolved:** Historical train/validation/calibration manifests and full per-class source counts are not all linked to the released checkpoints; official fold membership does not certify historical patient isolation.
-- **Recoverability:** Reopen only with exact job/checkpoint-linked split manifests and exclusions; the bounded backup search did not recover them.
+- **Evidence:** [`docs/reviewer_closure/SPLIT_CALIBRATION_DISPOSITION.md`](SPLIT_CALIBRATION_DISPOSITION.md); [`docs/reviewer_closure/R1_2_EVIDENCE_CEILING.md`](R1_2_EVIDENCE_CEILING.md); [`outputs/results/revision_replay_diagnostics_20261107/p4_official_fold_coverage.json`](../../outputs/results/revision_replay_diagnostics_20261107/p4_official_fold_coverage.json); [`docs/reviewer_closure/HISTORICAL_EVIDENCE_HANDOFF.md`](HISTORICAL_EVIDENCE_HANDOFF.md); [`docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md`](CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md); [`docs/reviewer_closure/RECOVERED_VS_MISSING_HISTORICAL_EVIDENCE.md`](RECOVERED_VS_MISSING_HISTORICAL_EVIDENCE.md)
+- **Protocol, population and observed result:** Verified selected counts are P6 1,643 ECG, P8 2,193 ECG, and P4 962 panel rows over 733 ECG/676 patients. PTB-XL fold 10 has 2,198 ECG/1,904 patients; 733 P4 ECG map to 676 fold-10 patients with no overlap with official folds 1-9. SLURM records V3H jobs 16785/16786 and V3M jobs 16816/16819 as completed, but their exact historical work directories and full split files are absent at the checked paths.
+- **What the evidence addresses:** Selected counts, official fold relation, completed-job accounting, checkpoint-declared manifest names and surviving calibration logs are documented with their different evidentiary strength.
+- **What remains unresolved:** Historical train/validation/calibration manifests, patient mappings and full per-class source counts are not all linked to released checkpoints; official fold membership and a completed job do not certify historical patient isolation.
+- **Recoverability:** Reopen only with exact job/checkpoint-linked split manifests and exclusions. The supplied archives, exact work-directory checks and NOC-reviewed backup did not recover them; this is not a global-absence finding.
 - **Experiment requirement:** A new split analysis is required for any new model; historical split claims cannot be recreated from selected results.
 - **Future editorial action:** Report known selected counts and explicitly mark unrecovered historical counts/isolation as unknown.
 - **Scientific risk:** High if official folds or selected cohorts are presented as proof of historical train/test isolation.
@@ -250,8 +250,8 @@ The 12 `A-*` entries are internal audit observations and therefore use `NOT_APPL
 - **Affected manuscript scope:** Materials and Methods opening statement and study aim.
 - **Technical status:** `MANUSCRIPT_ONLY_PENDING`
 - **Reviewer satisfaction:** `EDITORIAL_ACTION_ONLY`
-- **Evidence:** [`docs/architecture.md`](../architecture.md); [`docs/reviewer_closure/REVIEWER_48_STATUS.md`](REVIEWER_48_STATUS.md)
-- **Protocol, population and observed result:** Available evidence covers architecture contracts, selected historical predictions, reconstructed replay and later SPH transfer; it does not make these evidence types interchangeable.
+- **Evidence:** [`docs/architecture.md`](../architecture.md); [`docs/reviewer_closure/REVIEWER_48_STATUS.md`](REVIEWER_48_STATUS.md); [`docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md`](CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md)
+- **Protocol, population and observed result:** Available evidence covers architecture contracts, selected historical predictions, reconstructed replay and later SPH transfer; it does not make these evidence types interchangeable. CEDIA job 17314 records a multi-epoch P6 gate sweep, and job 17315 reports epoch 8 against the named V3H manifest, so V3H must be treated as development/model-selection evidence.
 - **What the evidence addresses:** The technical package distinguishes design from evaluation stages.
 - **What remains unresolved:** The manuscript has not yet stated the exact retrospective scope and what was designed versus evaluated.
 - **Recoverability:** Editorially recoverable using existing evidence; no historical search required.
@@ -265,7 +265,7 @@ The 12 `A-*` entries are internal audit observations and therefore use `NOT_APPL
 - **Affected manuscript scope:** Methods class-role description and training/evaluation flow.
 - **Technical status:** `VERIFIED_WITH_LIMITATIONS`
 - **Reviewer satisfaction:** `PARTIALLY_ADDRESSED`
-- **Evidence:** [`docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md`](ROLE_SUPERVISION_AND_ROUTING.md); [`outputs/models/heads/global_head_contracts.json`](../../outputs/models/heads/global_head_contracts.json); [`docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md`](ALL_INPUT_FLOW_COVERAGE.md)
+- **Evidence:** [`docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md`](ROLE_SUPERVISION_AND_ROUTING.md); [`outputs/models/heads/global_head_contracts.json`](../../outputs/models/heads/global_head_contracts.json); [`docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md`](ALL_INPUT_FLOW_COVERAGE.md); [`docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md`](OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md)
 - **Protocol, population and observed result:** The contract declares P8's eight outputs, including NSR, plus six additional global rhythm outputs. SPH P8 predicts NSR top-1 on 16,700 records; P8 fallback is separately recorded. The code and outputs do not prove run-specific training support for each auxiliary class.
 - **What the evidence addresses:** Implemented output and fallback roles are described; NSR is a rhythm category, not an arrhythmia class by that fact alone.
 - **What remains unresolved:** Checkpoint-linked positive/negative training supports and exact historical class selection remain unavailable for auxiliary outputs.
@@ -280,7 +280,7 @@ The 12 `A-*` entries are internal audit observations and therefore use `NOT_APPL
 - **Affected manuscript scope:** Methods pathology head, training masks and results scope.
 - **Technical status:** `EVIDENCE_CEILING_REACHED`
 - **Reviewer satisfaction:** `NOT_SATISFIED`
-- **Evidence:** [`docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md`](ROLE_SUPERVISION_AND_ROUTING.md); [`docs/revision-data-dispositions.md`](../revision-data-dispositions.md); [`outputs/models/heads/global_head_contracts.json`](../../outputs/models/heads/global_head_contracts.json)
+- **Evidence:** [`docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md`](ROLE_SUPERVISION_AND_ROUTING.md); [`docs/revision-data-dispositions.md`](../revision-data-dispositions.md); [`outputs/models/heads/global_head_contracts.json`](../../outputs/models/heads/global_head_contracts.json); [`docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md`](OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md)
 - **Protocol, population and observed result:** The global contract has seven pathology outputs, and reconstructed P4 inference emitted ALMI/ILMI/LAE scores on 733 selected ECG. A candidate manifest has positives, but it is not linked to the released checkpoint's training run.
 - **What the evidence addresses:** It is verified that outputs are emitted in the reconstructed path, not that the historical checkpoint was trained on those labels.
 - **What remains unresolved:** Historical supervision supports, loss masks, selection policy and evaluation metrics for these outputs are not certified.
@@ -295,7 +295,7 @@ The 12 `A-*` entries are internal audit observations and therefore use `NOT_APPL
 - **Affected manuscript scope:** Table 5 and Methods role/route definitions.
 - **Technical status:** `VERIFIED_WITH_LIMITATIONS`
 - **Reviewer satisfaction:** `PARTIALLY_ADDRESSED`
-- **Evidence:** [`docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md`](ROLE_SUPERVISION_AND_ROUTING.md); [`src/titan_v45/cascade/policy.py`](../../src/titan_v45/cascade/policy.py); [`docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md`](ALL_INPUT_FLOW_COVERAGE.md)
+- **Evidence:** [`docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md`](ROLE_SUPERVISION_AND_ROUTING.md); [`src/titan_v45/cascade/policy.py`](../../src/titan_v45/cascade/policy.py); [`docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md`](ALL_INPUT_FLOW_COVERAGE.md); [`docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md`](OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md)
 - **Protocol, population and observed result:** The code declares primary, auxiliary and cascade roles; the selected replay measures only implemented decision behavior. The historic per-record role/transition ledger is unavailable; SPH fallback counts are not quarantine transitions.
 - **What the evidence addresses:** Code roles, predicted outputs and observed transitions are explicitly distinguished.
 - **What remains unresolved:** Historical assignment and role-transition counts for the original all-input pathway are not recoverable from the selected panels.
@@ -310,7 +310,7 @@ The 12 `A-*` entries are internal audit observations and therefore use `NOT_APPL
 - **Affected manuscript scope:** Methods architecture and Figures 5-6 plus captions.
 - **Technical status:** `EVIDENCE_CEILING_REACHED`
 - **Reviewer satisfaction:** `PARTIALLY_ADDRESSED`
-- **Evidence:** [`docs/recovered-feature-contract.md`](../recovered-feature-contract.md); [`docs/reviewer_closure/REPLAY_EQUIVALENCE_DISPOSITION.md`](REPLAY_EQUIVALENCE_DISPOSITION.md); [`docs/figure-evidence.md`](../figure-evidence.md)
+- **Evidence:** [`docs/recovered-feature-contract.md`](../recovered-feature-contract.md); [`docs/reviewer_closure/REPLAY_EQUIVALENCE_DISPOSITION.md`](REPLAY_EQUIVALENCE_DISPOSITION.md); [`docs/figure-evidence.md`](../figure-evidence.md); [`docs/reviewer_closure/HISTORICAL_LOADER_IDENTITY_AND_REPLAY.md`](HISTORICAL_LOADER_IDENTITY_AND_REPLAY.md)
 - **Protocol, population and observed result:** Ten-feature candidate code and several historical event sources were recovered; 10 of 11 inventoried files match known hashes. The exact original loader is absent. P4 replay matched 962/962 decisions but maximum probability residual 0.0006194115 exceeds historical tolerance 1e-5.
 - **What the evidence addresses:** The candidate feature contract and its provenance boundary are documented, and strict score equivalence is explicitly recorded as failed.
 - **What remains unresolved:** Exact historical feature implementation, loader identity and the figure-to-runtime arrow semantics are not fully verified.
@@ -355,10 +355,10 @@ The 12 `A-*` entries are internal audit observations and therefore use `NOT_APPL
 - **Affected manuscript scope:** Results Table 8 and cohort/methods description.
 - **Technical status:** `VERIFIED_WITH_LIMITATIONS`
 - **Reviewer satisfaction:** `PARTIALLY_ADDRESSED`
-- **Evidence:** [`docs/evidence-status.md`](../evidence-status.md); [`docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md`](ALL_INPUT_FLOW_COVERAGE.md); [`docs/external_validation/sph_results.md`](../external_validation/sph_results.md)
-- **Protocol, population and observed result:** The release separates selected external-development predictions from a later frozen SPH transfer. Primary6 contains 1,643 ECG; P8 contains 2,193 with P6 nested; P4 uses 962 panel rows/733 ECG. SPH is 25,770 ECG from another source.
+- **Evidence:** [`docs/evidence-status.md`](../evidence-status.md); [`docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md`](ALL_INPUT_FLOW_COVERAGE.md); [`docs/external_validation/sph_results.md`](../external_validation/sph_results.md); [`docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md`](CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md)
+- **Protocol, population and observed result:** The release separates selected development predictions from the later frozen SPH transfer. Primary6 contains 1,643 ECG; P8 contains 2,193 with P6 nested; P4 uses 962 panel rows/733 ECG. SPH is 25,770 ECG from another source. CEDIA jobs 17314/17315 show that the V3H P6 gate informed epoch selection and is not an untouched test.
 - **What the evidence addresses:** The evidence packages and populations are now named and numerically distinguished in technical documentation.
-- **What remains unresolved:** Complete historical usage and selection lineage of every development package remain unknown; the manuscript terminology has not been harmonized.
+- **What remains unresolved:** Complete historical usage and selection lineage of every development package remain unknown; V3H selection exposure is now documented, but the exact 17314 manifest and complete backbone lineage remain unavailable. The manuscript terminology has not been harmonized.
 - **Recoverability:** Historical usage is bounded by the recovery ceiling; terminology is editorially recoverable.
 - **Experiment requirement:** None for definition; new evidence is needed for any independent-test interpretation.
 - **Future editorial action:** Define each package as a concrete artifact/population and use one term consistently.
@@ -415,7 +415,7 @@ The 12 `A-*` entries are internal audit observations and therefore use `NOT_APPL
 - **Affected manuscript scope:** Decision policy in Methods and all-input Results.
 - **Technical status:** `EXPERIMENT_COMPLETED_WITH_LIMITATIONS`
 - **Reviewer satisfaction:** `PARTIALLY_ADDRESSED`
-- **Evidence:** [`docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md`](ALL_INPUT_FLOW_COVERAGE.md); [`docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md`](ROLE_SUPERVISION_AND_ROUTING.md); [`outputs/results/revision_20261107/rhythm_waveform.json`](../../outputs/results/revision_20261107/rhythm_waveform.json); [`outputs/results/revision_20261107/pathology_waveform.json`](../../outputs/results/revision_20261107/pathology_waveform.json)
+- **Evidence:** [`docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md`](ALL_INPUT_FLOW_COVERAGE.md); [`docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md`](ROLE_SUPERVISION_AND_ROUTING.md); [`outputs/results/revision_20261107/rhythm_waveform.json`](../../outputs/results/revision_20261107/rhythm_waveform.json); [`outputs/results/revision_20261107/pathology_waveform.json`](../../outputs/results/revision_20261107/pathology_waveform.json); [`docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md`](OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md)
 - **Protocol, population and observed result:** On all 25,770 SPH ECG, P6 had 16,785 empty threshold sets; P4 had 8,343; P8 applied top-1 fallback on 801. In the selected replay P8 fallback was 58/2,193. No reference labels were used to route.
 - **What the evidence addresses:** No-crossing behavior and complete-source counts are now measured for the frozen profiles.
 - **What remains unresolved:** P6/P4 empty sets and P8 fallback do not establish a quarantine rate, an Other class, or human review; historical all-input June routes remain unknown.
@@ -505,7 +505,7 @@ The 12 `A-*` entries are internal audit observations and therefore use `NOT_APPL
 - **Affected manuscript scope:** Methods quarantine policy and Results figures/tables reporting rates or accuracy.
 - **Technical status:** `EVIDENCE_CEILING_REACHED`
 - **Reviewer satisfaction:** `NOT_SATISFIED`
-- **Evidence:** [`docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md`](ROLE_SUPERVISION_AND_ROUTING.md); [`docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md`](ALL_INPUT_FLOW_COVERAGE.md); [`outputs/results/revision_20261107/rhythm_waveform.json`](../../outputs/results/revision_20261107/rhythm_waveform.json); [`outputs/results/revision_20261107/pathology_waveform.json`](../../outputs/results/revision_20261107/pathology_waveform.json)
+- **Evidence:** [`docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md`](ROLE_SUPERVISION_AND_ROUTING.md); [`docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md`](ALL_INPUT_FLOW_COVERAGE.md); [`outputs/results/revision_20261107/rhythm_waveform.json`](../../outputs/results/revision_20261107/rhythm_waveform.json); [`outputs/results/revision_20261107/pathology_waveform.json`](../../outputs/results/revision_20261107/pathology_waveform.json); [`docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md`](OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md)
 - **Protocol, population and observed result:** The selected reconstruction and all-input SPH flow contain no checkpoint-linked uncertainty score plus verified quarantine policy; quarantine is not assessed, not 0%. P8 fallback and empty sets are not quarantine.
 - **What the evidence addresses:** The invalid inference from fallback to quarantine is explicitly rejected; routing counts are documented with their actual semantics.
 - **What remains unresolved:** No historic pre/post ledger, quarantine denominator, policy version or uncertainty inputs are available; rates and pre/post accuracy cannot be reconstructed.
@@ -625,9 +625,9 @@ The 12 `A-*` entries are internal audit observations and therefore use `NOT_APPL
 - **Affected manuscript scope:** Threshold tables, calibration methods and patient-level split claims.
 - **Technical status:** `EVIDENCE_CEILING_REACHED`
 - **Reviewer satisfaction:** `NOT_APPLICABLE_AUDIT`
-- **Evidence:** [`docs/reviewer_closure/SPLIT_CALIBRATION_DISPOSITION.md`](SPLIT_CALIBRATION_DISPOSITION.md); [`outputs/results/internal/pathology_primary4_calibration.json`](../../outputs/results/internal/pathology_primary4_calibration.json); [`outputs/results/revision_20261029/p6_calibration_lineage_summary.json`](../../outputs/results/revision_20261029/p6_calibration_lineage_summary.json)
-- **Protocol, population and observed result:** P4 grid, saved threshold vector, four panel thresholds and reported values were cross-checked. Calibration metadata and selected P4 patients are available, but exact historical patient separation from training/checkpoint selection is not certified.
-- **What the evidence addresses:** Threshold definitions are reconciled with available artifacts.
+- **Evidence:** [`docs/reviewer_closure/SPLIT_CALIBRATION_DISPOSITION.md`](SPLIT_CALIBRATION_DISPOSITION.md); [`outputs/results/internal/pathology_primary4_calibration.json`](../../outputs/results/internal/pathology_primary4_calibration.json); [`outputs/results/revision_20261029/p6_calibration_lineage_summary.json`](../../outputs/results/revision_20261029/p6_calibration_lineage_summary.json); [`docs/reviewer_closure/EVIDENCE_SOURCE_TRIAGE.md`](EVIDENCE_SOURCE_TRIAGE.md); [`docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md`](CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md)
+- **Protocol, population and observed result:** P4 grid, saved threshold vector, four panel thresholds and reported values were cross-checked. Job 17296's retained V3D calibration log/script records the same final four thresholds as P4 checkpoint metadata, but the calibration output is not hash-linked to the released checkpoint. The P6 six-class vector in job 17315 matches its six-class profile config; the checkpoint metadata's separate eight-class vector is a different profile contract. Patient separation remains uncertified.
+- **What the evidence addresses:** Threshold values and the P6 six-class versus P8 eight-class vector distinction are reconciled against surviving job logs, metadata and profile configs.
 - **What remains unresolved:** The original calibration patient manifest and full training/checkpoint lineage remain unavailable.
 - **Recoverability:** Requires exact job-linked calibration manifest and checkpoint lineage; official dataset folds alone do not establish isolation.
 - **Experiment requirement:** A new calibration/test design is required for new models; no new threshold fitting on SPH confirmatory data.
@@ -655,8 +655,8 @@ The 12 `A-*` entries are internal audit observations and therefore use `NOT_APPL
 - **Affected manuscript scope:** Optuna appendix/table, training-method claims and checkpoint provenance.
 - **Technical status:** `EVIDENCE_CEILING_REACHED`
 - **Reviewer satisfaction:** `NOT_APPLICABLE_AUDIT`
-- **Evidence:** [`docs/hash-correction-20261028.md`](../hash-correction-20261028.md); [`outputs/results/optuna/v3c_promoted_configuration.json`](../../outputs/results/optuna/v3c_promoted_configuration.json); [`outputs/results/optuna/README.md`](../../outputs/results/optuna/README.md)
-- **Protocol, population and observed result:** Two archived trial outputs with values/parameters and one failed trial were found, but the original SQLite database, complete history and a verifiable trial-to-published-checkpoint chain were not.
+- **Evidence:** [`docs/hash-correction-20261028.md`](../hash-correction-20261028.md); [`outputs/results/optuna/v3c_promoted_configuration.json`](../../outputs/results/optuna/v3c_promoted_configuration.json); [`outputs/results/optuna/README.md`](../../outputs/results/optuna/README.md); [https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/4](https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/4)
+- **Protocol, population and observed result:** The repository retains nine trial rows and a best-parameter snapshot; the V3C promoted configuration declares 9 completed/12 planned trials. SLURM jobs 13169/13172/13181 are recorded as failed. The original SQLite database, complete history and a verifiable trial-to-published-checkpoint chain were not recovered.
 - **What the evidence addresses:** Partial trial traces and the limits of historical Optuna reconstruction are documented in separate PR #4 evidence.
 - **What remains unresolved:** Full search history, candidate failures, objective/config linkage and promotion to released weights remain unverified.
 - **Recoverability:** Reopen only with the original DB/WAL/SHM or complete authenticated study export plus checkpoint-linked run receipts.

@@ -33,4 +33,6 @@ def test_reviewer_index_local_evidence_links_exist():
     links = re.findall(r"\]\(([^)]+)\)", source.read_text(encoding="utf-8"))
     assert links
     for link in links:
+        if link.startswith(("http://", "https://")):
+            continue
         assert (source.parent / link).is_file(), link

@@ -89,6 +89,20 @@ def test_detailed_matrix_covers_48_items_and_keeps_two_status_dimensions():
             assert item["reviewer_satisfaction"] != "NOT_APPLICABLE_AUDIT"
 
 
+def test_optuna_a10_disposition_is_linked_to_separate_pr_not_embedded_in_pr3():
+    data = json.loads(
+        (ROOT / "docs/reviewer_closure/REVIEWER_48_DETAILED.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    item = next(row for row in data["items"] if row["id"] == "A-06")
+
+    assert "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/4" in item[
+        "evidence"
+    ]
+    assert all("OPTUNA_A10_RESCUE_AND_RIGHTS.md" not in ref for ref in item["evidence"])
+
+
 def test_figure_1_and_2_archive_evidence_keeps_authorship_and_execution_limits():
     data = json.loads(
         (ROOT / "docs/reviewer_closure/REVIEWER_48_DETAILED.json").read_text(
@@ -140,6 +154,13 @@ def test_closure_documents_have_no_broken_local_links():
         "docs/reviewer_closure/REVIEWER_48_STATUS.md",
         "docs/reviewer_closure/R2-2B_FIGURES_1_2_PROVENANCE.md",
         "docs/reviewer_closure/EVIDENCE_COMMITS.md",
+        "docs/reviewer_closure/EVIDENCE_SOURCE_TRIAGE.md",
+        "docs/reviewer_closure/RECOVERED_VS_MISSING_HISTORICAL_EVIDENCE.md",
+        "docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md",
+        "docs/reviewer_closure/HISTORICAL_LOADER_IDENTITY_AND_REPLAY.md",
+        "docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md",
+        "docs/reviewer_closure/CUSTODIAN_BACKUP_REQUEST.md",
+        "docs/reviewer_closure/SPLIT_CALIBRATION_DISPOSITION.md",
     )
     for relative_path in documents:
         path = ROOT / relative_path

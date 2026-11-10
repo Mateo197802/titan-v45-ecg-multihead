@@ -5,13 +5,13 @@
       "id": "R1-1",
       "concern": "Independent external validation",
       "disposition": "EXPERIMENT_COMPLETED",
-      "evidence_and_action": "[SPH delivery audit](SPH_DELIVERY_AUDIT.md) and [all-input coverage](ALL_INPUT_FLOW_COVERAGE.md), jobs 32668/32669/32672/32677/32728; 25,770 ECG, but complete historical independence and clinical adjudication are not certified."
+      "evidence_and_action": "[SPH delivery audit](SPH_DELIVERY_AUDIT.md), [all-input coverage](ALL_INPUT_FLOW_COVERAGE.md), and [CEDIA lineage](CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md); 25,770 ECG. Jobs 17314/17315 show V3H informed P6 epoch selection; exact 17314 manifest is missing. SPH lineage and clinical adjudication are not certified."
     },
     {
       "id": "R1-2",
       "concern": "Population and flow denominator",
       "disposition": "EVIDENCE_CEILING_REACHED",
-      "evidence_and_action": "[All-input coverage](ALL_INPUT_FLOW_COVERAGE.md) measures the later SPH population and selected replay; [bounded recovery](R1_2_EVIDENCE_CEILING.md) confirms that historical preselection and exclusion records remain unavailable."
+      "evidence_and_action": "[All-input coverage](ALL_INPUT_FLOW_COVERAGE.md), [bounded recovery](R1_2_EVIDENCE_CEILING.md), and [recovered-vs-missing inventory](RECOVERED_VS_MISSING_HISTORICAL_EVIDENCE.md); historical preselection population and exclusion reasons remain unavailable."
     },
     {
       "id": "R1-3",
@@ -83,37 +83,37 @@
       "id": "R2-3a",
       "concern": "Datasets and splits",
       "disposition": "EVIDENCE_CEILING_REACHED",
-      "evidence_and_action": "[Split and calibration audit](SPLIT_CALIBRATION_DISPOSITION.md); historical patient isolation not established, and actual job-linked split manifests would reopen the analysis."
+      "evidence_and_action": "[Split audit](SPLIT_CALIBRATION_DISPOSITION.md), [checkpoint-to-split lineage](CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md), and [recovery inventory](RECOVERED_VS_MISSING_HISTORICAL_EVIDENCE.md); SLURM records completed jobs, but linked split manifests and patient isolation remain unavailable."
     },
     {
       "id": "R2-3b",
       "concern": "Design versus evaluation",
       "disposition": "MANUSCRIPT_UPDATE_ONLY",
-      "evidence_and_action": "Distinguish design, historical development and reconstructed evaluation."
+      "evidence_and_action": "Distinguish architecture, historical development, V3H model selection, reconstructed replay and later SPH transfer; see [checkpoint lineage](CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md)."
     },
     {
       "id": "R2-3c",
       "concern": "Auxiliary classes and training",
       "disposition": "VERIFIED_WITH_LIMITATIONS",
-      "evidence_and_action": "[Role and supervision audit](ROLE_SUPERVISION_AND_ROUTING.md); output contracts alone do not establish checkpoint-linked training support."
+      "evidence_and_action": "[Role/supervision audit](ROLE_SUPERVISION_AND_ROUTING.md) and [auxiliary-output disposition](OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md); output contracts alone do not establish checkpoint-linked training support."
     },
     {
       "id": "R2-3d",
       "concern": "ALMI, ILMI and LAE training",
       "disposition": "EVIDENCE_CEILING_REACHED",
-      "evidence_and_action": "[Role and supervision audit](ROLE_SUPERVISION_AND_ROUTING.md); checkpoint-linked supervision remains unverified; exact run manifests and loss masks would reopen recovery."
+      "evidence_and_action": "[Role/supervision audit](ROLE_SUPERVISION_AND_ROUTING.md) and [auxiliary-output disposition](OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md); checkpoint-linked supervision remains unverified."
     },
     {
       "id": "R2-3e",
       "concern": "Role definitions",
       "disposition": "VERIFIED_WITH_LIMITATIONS",
-      "evidence_and_action": "[Role and routing audit](ROLE_SUPERVISION_AND_ROUTING.md); distinguish code roles and selected replay from historical all-input routing."
+      "evidence_and_action": "[Role and routing audit](ROLE_SUPERVISION_AND_ROUTING.md) and [quarantine provenance](OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md); distinguish code roles and selected replay from historical all-input routing."
     },
     {
       "id": "R2-3f",
       "concern": "Morphology and feature architecture",
       "disposition": "EVIDENCE_CEILING_REACHED",
-      "evidence_and_action": "[Code, decision and numerical equivalence](REPLAY_EQUIVALENCE_DISPOSITION.md): exact loader and morphology identity remain unverified; matched P4 decisions do not satisfy the original probability tolerance."
+      "evidence_and_action": "[Replay equivalence](REPLAY_EQUIVALENCE_DISPOSITION.md) and [loader identity audit](HISTORICAL_LOADER_IDENTITY_AND_REPLAY.md): exact loader remains absent; 962/962 decisions do not meet the 1e-5 probability tolerance."
     },
     {
       "id": "R2-3g",
@@ -131,7 +131,7 @@
       "id": "R2-4a",
       "concern": "External-development terminology",
       "disposition": "VERIFIED_WITH_LIMITATIONS",
-      "evidence_and_action": "[Evidence status](../evidence-status.md); do not call selected development evidence independent."
+      "evidence_and_action": "[Evidence status](../evidence-status.md) and [checkpoint lineage](CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md); V3H informed P6 selection, and SPH remains a separate transfer result with incomplete full-backbone lineage."
     },
     {
       "id": "R2-4b",
@@ -155,7 +155,7 @@
       "id": "R2-4e",
       "concern": "No threshold crossed",
       "disposition": "EXPERIMENT_COMPLETED_WITH_LIMITATIONS",
-      "evidence_and_action": "[All-input coverage](ALL_INPUT_FLOW_COVERAGE.md): P6 and P4 can return empty sets; P8 used fallback on 801/25,770 SPH ECG. Fallback is not quarantine or human review."
+      "evidence_and_action": "[All-input coverage](ALL_INPUT_FLOW_COVERAGE.md) and [routing disposition](OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md): P6/P4 empty sets and P8 fallback on 801/25,770 SPH ECG are measured; they are not quarantine or human review."
     },
     {
       "id": "R2-4f",
@@ -191,7 +191,7 @@
       "id": "R2-4k",
       "concern": "Quarantine and pre/post rates",
       "disposition": "CLAIM_WITHDRAWAL_REQUIRED",
-      "evidence_and_action": "[All-input coverage](ALL_INPUT_FLOW_COVERAGE.md) and [routing audit](ROLE_SUPERVISION_AND_ROUTING.md): no linked uncertainty-policy ledger; rate is not assessed, not zero."
+      "evidence_and_action": "[All-input coverage](ALL_INPUT_FLOW_COVERAGE.md), [routing audit](ROLE_SUPERVISION_AND_ROUTING.md), and [quarantine provenance](OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md): no linked uncertainty-policy ledger; rate is not assessed, not zero."
     },
     {
       "id": "R2-4l",
@@ -239,7 +239,7 @@
       "id": "A-04",
       "concern": "Thresholds and calibration isolation",
       "disposition": "VERIFIED_WITH_LIMITATIONS",
-      "evidence_and_action": "[Split and calibration audit](SPLIT_CALIBRATION_DISPOSITION.md); saved threshold vectors agree but patient isolation remains unverified."
+      "evidence_and_action": "[Split and calibration audit](SPLIT_CALIBRATION_DISPOSITION.md) and [CEDIA source triage](EVIDENCE_SOURCE_TRIAGE.md); P4 thresholds and P6/P8 vector dimensions are reconciled, but released-checkpoint linkage and patient isolation remain unverified."
     },
     {
       "id": "A-05",
@@ -251,7 +251,7 @@
       "id": "A-06",
       "concern": "Optuna history and quarantine",
       "disposition": "CLAIM_WITHDRAWAL_REQUIRED",
-      "evidence_and_action": "Separate PR #4; remove unsupported historical optimization claims: original study database and promotion linkage are unavailable."
+      "evidence_and_action": "[Optuna/A10 evidence is tracked separately in PR #4](https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/4); nine trial rows survive, but the original study database, complete history and promotion linkage are unavailable."
     },
     {
       "id": "A-07",

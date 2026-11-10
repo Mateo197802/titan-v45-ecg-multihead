@@ -23,6 +23,20 @@ P8's separate specialist and retained development results do not supply an
 independent train/calibration/patient-overlap audit. See
 [historical artifact recovery](../../outputs/results/revision_20261028/cedia_artifact_recovery.json).
 
+The live CEDIA Slurm accounting and logs add a selection warning: job `17314`
+(`p6_v3p_sweep`) records 12 distinct V3O checkpoint epochs with external
+metrics; epoch 8 is the only logged epoch passing both the 0.95 accuracy and
+0.80 macro-F1 gates. Job `17315` names the V3H accepted/balanced manifest,
+`v3o_rhythm_specialist_epoch_008.pt`, and reports the same 1,564/1,643
+decisions, 0.951917 accuracy, 0.800938 macro-F1 and six thresholds. This is
+strong evidence that the V3H gate informed P6 selection, not a pristine final
+test. The 17314 submitted script and exact manifest name are missing, so the
+same-file linkage remains an inference, not a cryptographic proof. The P6
+six-class threshold vector matches its profile configuration; the separate
+eight-class vector in checkpoint metadata belongs to Primary8 and is not a
+threshold discrepancy. See the detailed
+[checkpoint-to-split lineage](CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md).
+
 ## Pathology P4
 
 The [P4 internal calibration summary](../../outputs/results/internal/pathology_primary4_calibration.json)
@@ -33,6 +47,12 @@ independent reconstruction of all patients or upstream backbone exposures.
 The historical job `17296` is recorded as completed and its retained log is
 fingerprinted in the artifact receipt. Archived log summaries describe 1,492
 window-panel observations; they are not 1,492 unique ECG or patients.
+The recovered submit-script candidate and live CEDIA copy have matching
+SHA-256 values, and the log's final four thresholds match the P4 checkpoint
+metadata. The script calls V3D calibration code and writes a V3D-named output
+checkpoint, however; no output hash binds that result to the released P4
+artifact. The missing V3M panel files and patient rows still prevent a
+calibration-isolation check.
 
 The [official PTB-XL fold audit](../../outputs/results/revision_replay_diagnostics_20261107/p4_official_fold_coverage.json)
 links 733 selected P4 ECG to 676 patients in official fold 10 and finds no
