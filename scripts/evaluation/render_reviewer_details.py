@@ -25,7 +25,7 @@ def render(payload: dict, output_path: Path = DEFAULT_OUTPUT) -> str:
     lines = [
         "# Detailed disposition of the 48 review and audit observations",
         "",
-        f"**As of:** {payload['as_of']}  ",
+        f"**As of:** {payload['as_of']}",
         f"**Counts:** {payload['counts']['peer_review']} peer-review observations; "
         f"{payload['counts']['project_audit']} project-audit observations; "
         f"{payload['counts']['total']} total.",

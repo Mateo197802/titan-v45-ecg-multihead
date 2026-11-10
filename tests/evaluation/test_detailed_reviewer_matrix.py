@@ -136,6 +136,7 @@ def test_detailed_markdown_exposes_each_case_and_status_pair():
         assert item["technical_status"] in markdown
         assert item["reviewer_satisfaction"] in markdown
     assert RENDERER.render(data) == markdown
+    assert all(line == line.rstrip(" \t") for line in markdown.splitlines())
 
 
 @pytest.mark.parametrize("filename", ["REVIEWER_48_DETAILED.md", "REVIEWER_48_DETAILED.json"])

@@ -5,7 +5,7 @@
       "id": "R1-1",
       "concern": "Independent external validation",
       "disposition": "EXPERIMENT_COMPLETED",
-      "evidence_and_action": "[SPH delivery audit](SPH_DELIVERY_AUDIT.md), [all-input coverage](ALL_INPUT_FLOW_COVERAGE.md), [CEDIA lineage](CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md), and the separate [exploratory PAC probe](../external_validation/sph_pac_probe_results.md). The new PAC probe is same-source, previously exposed, and nonconfirmatory; it does not supply independent clinical validation. Jobs 17314/17315 show V3H informed P6 epoch selection; exact 17314 manifest is missing."
+      "evidence_and_action": "[SPH delivery audit](SPH_DELIVERY_AUDIT.md), [all-input coverage](ALL_INPUT_FLOW_COVERAGE.md), [CEDIA lineage](CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md), and the separate [exploratory PAC probe](../external_validation/sph_pac_probe_results.md). Commit `99b1065` adds a PAC-scoped, hash-pinned publication receipt and code-30/31 audit; code-31-only rows remain included, and the probe remains same-source, previously exposed and nonconfirmatory. Confusion-derived metrics are recalculated publicly; score metrics/intervals are bound to the CEDIA execution digests, not recomputed from restricted rows. This does not supply independent clinical validation. Jobs 17314/17315 show V3H informed P6 epoch selection; exact 17314 manifest is missing."
     },
     {
       "id": "R1-2",
