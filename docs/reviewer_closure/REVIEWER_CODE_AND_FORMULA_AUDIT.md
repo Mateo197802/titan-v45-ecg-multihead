@@ -19,6 +19,12 @@ The factory constructs 12 input channels, 14 backbone rhythm logits and seven pa
 
 P6 contains AFIB, SB, STACH, RBBB, 1AVB and PVC; it excludes NSR and PAC. P8 contains AFIB, SB, STACH, NSR, RBBB, PAC, 1AVB and PVC. P4 contains ASMI, LVH, IMI and ISC_. NSR is sinus rhythm, not an `Other arrhythmia` class.
 
+## Specialist width metadata discrepancy
+
+The retained reconstructed rhythm run reports `rhythm_hidden_dim=192` in each P6/P8 checkpoint's metadata while the stored specialist tensor has width 512. The current [`build_frozen_rhythm_head`](../../src/titan_v45/models/frozen_rhythm.py) takes the width from the tensor shape, constructs the head at that width and calls `load_state_dict(..., strict=True)`. The selected waveform receipt therefore records `declared=192`, `stored=512`, `metadata_matches=false`. The unit test verifies this loading rule with a synthetic state dict; it does not independently inspect the original training process.
+
+This is an architecture-metadata inconsistency, not evidence that the weights are invalid or that training definitely used either metadata value. It does not change the global backbone parameter count. Do not edit the archived metadata or weights; disclose that the saved tensor shape governs the reconstruction and that the historical training-time intent remains unknown.
+
 ## Decision and metric equations in the current implementation
 
 Let `z[w,k]` be specialist logit for window `w` and class `k`, `W` the number of windows, and `sigma(x)=1/(1+exp(-x))`.

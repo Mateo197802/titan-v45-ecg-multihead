@@ -1,0 +1,398 @@
+{
+  "schema": "TITAN_V45_TECHNICAL_15_EVIDENCE_EXECUTION_V1",
+  "as_of": "2026-11-10",
+  "baseline_commit": "0a32a57a32b50c421fc05323454507dba4265bb0",
+  "baseline_matrix_path": "docs/reviewer_closure/REVIEWER_48_DETAILED.json",
+  "baseline_matrix_sha256": "f268bf878f4f198b630e8251c4f42f07d61bedc2c9082df1b604d7a91a3e7e53",
+  "matrix_counts": {
+    "peer_review_total": 36,
+    "project_audits_total": 12,
+    "technical_peer_review_items_in_this_register": 15,
+    "editorial_only_peer_review_items_unchanged": 21
+  },
+  "disposition_counts_for_targeted_reviewer_items": {
+    "PARTIALLY_ADDRESSED": 12,
+    "NOT_SATISFIED": 3,
+    "technical_status_reclassified": 0,
+    "reviewer_satisfaction_reclassified": 0
+  },
+  "guardrails": {
+    "manuscript_state": "SIN_EDITAR",
+    "submitted_pdf_and_response_letter_changed": false,
+    "historical_weights_predictions_thresholds_changed": false,
+    "retraining_or_new_external_data_downloaded": false,
+    "gpu_job_launched_in_this_execution": false,
+    "new_cedia_search_performed": false,
+    "pr3_merged": false,
+    "pr4_or_pr5_modified": false,
+    "private_zip_reingested": false,
+    "private_data_or_individual_ids_in_receipts": false,
+    "evidence_ceiling_note": "The 2026-11-09 source triage remains bounded to the paths, archives and backup listing it names. No global-absence claim is made."
+  },
+  "execution_receipts": [
+    {
+      "id": "AF_REFERENCE_RECHECK",
+      "command": "python scripts/evaluation/audit_af_reference_contract.py --output docs/reviewer_closure/receipts/AF_REFERENCE_RECHECK_2026-11-10.json",
+      "status": "PASS",
+      "path": "docs/reviewer_closure/receipts/AF_REFERENCE_RECHECK_2026-11-10.json",
+      "sha256": "42199ccc5392daec3ce0fa0be793917509af7de3973d29e7a3418c3aab85300e",
+      "result": "P6 1,643 rows and P8 2,193 rows; 390 AF-positive rows in each overlapping profile; zero unresolved code rows and zero flag/code mismatches. One AF/NSR code co-occurrence is retained, not adjudicated. P6 is nested in P8.",
+      "does_not_prove": "Clinical adjudication, incident or first-diagnosed AF, longitudinal truth, or independent validation."
+    },
+    {
+      "id": "RELEASE_METRICS_RECOMPUTE",
+      "command": "python scripts/evaluation/verify_release_evidence.py --output docs/reviewer_closure/receipts/RELEASE_METRICS_RECHECK_2026-11-10.json",
+      "status": "PASS",
+      "path": "docs/reviewer_closure/receipts/RELEASE_METRICS_RECHECK_2026-11-10.json",
+      "sha256": "749c1e0f3127daa8f60f29da2cf6dd1f00357794e854514f490139bc74e136b6",
+      "result": "Recomputed released cohort, panel and metric summaries from saved prediction tables and manifests: P6 1,564/1,643, 95.1917% accuracy, 80.0938% macro-F1; P8 1,987/2,193 accepted-label accuracy, 76.1425% macro-F1; P4 962 panel rows, 80.2290% mean binary accuracy, 79.3456% macro-F1.",
+      "does_not_prove": "Fresh ECG inference, training replay, checkpoint-to-job linkage, patient isolation, or independent validation. The verifier reads row-level files locally but emits only aggregates and whole-artifact hashes."
+    },
+    {
+      "id": "SPH_AGGREGATE_VALIDATION",
+      "command": "python scripts/external_validation/validate_sph_aggregate.py --aggregate outputs/results/external_sph/sph_aggregate_32669.json --protocol configs/external_validation/sph_frozen.json",
+      "status": "PASS",
+      "path": "docs/reviewer_closure/receipts/SPH_AGGREGATE_VALIDATION_2026-11-10.json",
+      "sha256": "9100d70600709bfe6b8ab932efe8b07e86b622838e80e1de0c6bcbbe6bdaa9dc",
+      "result": "25,770 source ECG reconcile; three profiles and 14 compatible endpoints reconcile to the frozen protocol, including denominators, confusion counts, reported metrics, bootstrap metadata and duplicate-sensitivity denominators.",
+      "does_not_prove": "New model inference, adjudicated labels, complete historical training-source independence, or a quarantine rate."
+    }
+  ],
+  "artifact_fingerprints": [
+    {
+      "path": "outputs/results/external_sph/sph_aggregate_32669.json",
+      "bytes": 106915,
+      "sha256": "09f93d9f310baaca672a33b0f369593cd88835a8ef08dc9929945c57cf18c988"
+    },
+    {
+      "path": "configs/external_validation/sph_frozen.json",
+      "bytes": 16731,
+      "sha256": "d788ad8cca94793cebb738496acc131e82b1ca1900976f11020b99a79a5fc366"
+    },
+    {
+      "path": "outputs/results/revision_20261107/rhythm_waveform.json",
+      "bytes": 3415,
+      "sha256": "123d21f4512b988eb24bcff90b971c62510c547b7f766e059137f072c2d871b4"
+    },
+    {
+      "path": "outputs/results/revision_20261107/pathology_waveform.json",
+      "bytes": 2186,
+      "sha256": "592e2bbab96cd03e23caf5ba4c29b746293a0f6e7584ed4b6fc069160c2d5f46"
+    },
+    {
+      "path": "outputs/models/heads/global_head_contracts.json",
+      "bytes": 1605,
+      "sha256": "ac73de5baf2e1b5416b37611c173f7d4979627639477fae2c68197e50c37d5fc"
+    },
+    {
+      "path": "scripts/cedia/recovery_candidates/morphology_features_v4.py",
+      "bytes": 6611,
+      "sha256": "2bd1c1822ed72d1531b1f62712d8007c7e2f21009056ad1a3ee905f37051fc3d"
+    }
+  ],
+  "reviewer_items": [
+    {
+      "id": "R1-1",
+      "request": "Clarify that an external-development holdout from public sources used during development is not equivalent to independent external validation; provide source-level training, validation and holdout counts or evaluate a truly independent cohort, and moderate generalizability and deployment claims.",
+      "baseline_technical_status": "EXPERIMENT_COMPLETED_WITH_LIMITATIONS",
+      "baseline_reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+      "technical_subrequirement_coverage": [
+        {"requirement": "Full-source SPH transfer denominator and compatible endpoint coverage", "status": "VERIFIED_BOUNDED", "evidence_refs": ["SPH_AGGREGATE_VALIDATION"], "boundary": "25,770 ECG from 24,666 source patients; three profiles and 14 compatible ECG-statement endpoints."},
+        {"requirement": "Historical training-source, patient and signal independence", "status": "NOT_CERTIFIED", "evidence_refs": ["docs/external_validation/sph_independence_assessment.md", "docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md"], "boundary": "The bounded retained-source signature screen found no candidates, but full V3F/V3AG lineage and historical manifests are missing."},
+        {"requirement": "V3H status as independent test versus model-selection evidence", "status": "DEVELOPMENT_SELECTION_EXPOSURE_SUPPORTED_WITHOUT_EXACT_17314_MANIFEST_BINDING", "evidence_refs": ["docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md", "docs/reviewer_closure/EVIDENCE_SOURCE_TRIAGE.md"], "boundary": "Jobs 17314/17315 support V3H selection use; the exact 17314 submitted script and manifest binding are absent."}
+      ],
+      "scientific_evidence_status": "PARTIAL_TRANSFER_EVIDENCE_NO_CERTIFIED_INDEPENDENT_CLINICAL_VALIDATION",
+      "historical_provenance_status": "UNVERIFIED_BACKBONE_SOURCE_AND_P6_SWEEP_MANIFEST_EDGES",
+      "editorial_status": "SIN_EDITAR",
+      "evidence_recovered_or_verified": ["SPH aggregate and protocol revalidated", "bounded cross-source signature screen and its limits documented", "V3H gate-selection evidence documented"],
+      "what_this_does_not_prove": ["complete source independence from all pretraining and fine-tuning", "clinical adjudication", "prospective performance", "deployment safety or utility"],
+      "recoverability": "Historical lineage can reopen only with exact job-linked scripts, manifests, checkpoint hashes and patient/signal mappings. Independent generalization requires a separately eligible, untouched cohort if retained as a claim.",
+      "remaining_action": "Keep source-transfer and independence terminology distinct; authors decide whether to run a new admissible external study after technical evidence closure.",
+      "unverified_claims": ["fully independent external validation", "complete historical patient isolation", "clinical or deployment generalizability"]
+    },
+    {
+      "id": "R1-2",
+      "request": "Report the complete clinical workflow, including primary and cascade classes, complete denominators, quarantine proportions, errors inside and outside quarantine, and predictive values under original prevalence; do not present a restricted denominator as end-to-end performance.",
+      "baseline_technical_status": "EXPERIMENT_COMPLETED_WITH_LIMITATIONS",
+      "baseline_reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+      "technical_subrequirement_coverage": [
+        {"requirement": "Full eligible denominator for the later SPH transfer", "status": "VERIFIED_BOUNDED", "evidence_refs": ["SPH_AGGREGATE_VALIDATION"], "boundary": "All 25,770 source ECG were technically scored under P6, P8 and P4; endpoint denominators are separately defined."},
+        {"requirement": "June historical parent population and exclusion reasons", "status": "NOT_RECOVERED_IN_INSPECTED_SOURCES", "evidence_refs": ["docs/reviewer_closure/R1_2_EVIDENCE_CEILING.md", "docs/reviewer_closure/RECOVERED_VS_MISSING_HISTORICAL_EVIDENCE.md"], "boundary": "Selected P6/P8/P4 manifests do not recover the preselection population."},
+        {"requirement": "Original quarantine pre/post accuracy and rate", "status": "NOT_ASSESSED", "evidence_refs": ["docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md", "docs/reviewer_closure/QUARANTINE_HISTORICAL_VS_PROSPECTIVE.md"], "boundary": "No linked historical score, policy, ledger or complete denominator; no rate is inferred."}
+      ],
+      "scientific_evidence_status": "PARTIAL_LATER_COHORT_FLOW_ONLY",
+      "historical_provenance_status": "PARENT_POPULATION_EXCLUSIONS_AND_HISTORICAL_ROUTING_UNAVAILABLE_IN_CHECKED_SOURCES",
+      "editorial_status": "SIN_EDITAR",
+      "evidence_recovered_or_verified": ["SPH full-source denominator and endpoint reconciliation", "selected external-development record-key union and its unit limitation"],
+      "what_this_does_not_prove": ["the June end-to-end population", "all-class compatible labels", "historical quarantine rate or pre/post performance", "patient count from record-key counts"],
+      "recoverability": "Reopen historical claims only with parent manifests, exclusion ledgers, ontology, uncertainty scores, policy version and checkpoint/job-linked transitions. A new all-input workflow is a separate study.",
+      "remaining_action": "Do not label selected panels or SPH as the original clinical workflow; retain quarantine as not assessed until a valid ledger exists.",
+      "unverified_claims": ["original-prevalence end-to-end performance", "historical quarantine effectiveness", "complete all-class routing"]
+    },
+    {
+      "id": "R1-3",
+      "request": "Describe how AF reference labels were created and harmonized by source, how multiple or conflicting labels were handled, and restrict language to ECG-level AF rather than incident or first-diagnosed AF without longitudinal evidence.",
+      "baseline_technical_status": "VERIFIED_WITH_LIMITATIONS",
+      "baseline_reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+      "technical_subrequirement_coverage": [
+        {"requirement": "Stored AF flag versus retained code 164889003", "status": "VERIFIED_BOUNDED", "evidence_refs": ["AF_REFERENCE_RECHECK"], "boundary": "P6 1,643/1,643 and P8 2,193/2,193 rows reconciled; 390 AF-positive rows per overlapping profile; zero mismatches/unresolved rows."},
+        {"requirement": "Conflicting AF/NSR code handling", "status": "COOCCURRENCE_RETAINED_NOT_ADJUDICATED", "evidence_refs": ["AF_REFERENCE_RECHECK", "docs/reviewer_closure/AF_PVC_REFERENCE_DISPOSITION.md"], "boundary": "One code-level AF/NSR co-occurrence remains visible; no inferred correction."},
+        {"requirement": "Incident, first-diagnosis or longitudinal AF", "status": "NOT_ESTABLISHED", "evidence_refs": ["docs/reviewer_closure/AF_PVC_REFERENCE_DISPOSITION.md"], "boundary": "No event dates or longitudinal adjudication."}
+      ],
+      "scientific_evidence_status": "SAVED_ECG_REFERENCE_CONSISTENCY_VERIFIED_ONLY",
+      "historical_provenance_status": "REFERENCE_FIELDS_LINKED_WITHIN_SAVED_PREDICTION_ROWS; ORIGINAL_CLINICAL_ADJUDICATION_UNKNOWN",
+      "editorial_status": "SIN_EDITAR",
+      "evidence_recovered_or_verified": ["fresh aggregate-only AF reference audit", "source-level counts in receipt", "co-occurring code not silently recoded"],
+      "what_this_does_not_prove": ["clinical correctness of source labels", "AF onset or first diagnosis", "independent patient-level validation"],
+      "recoverability": "The bounded flag/code audit is reproducible. Longitudinal claims require a new patient-timeline reference study or removal of those claims.",
+      "remaining_action": "Constrain any later wording to AF statement presence on the ECG unless adjudicated longitudinal evidence is supplied.",
+      "unverified_claims": ["incident AF", "first-diagnosed AF", "clinical adjudication for all records"]
+    },
+    {
+      "id": "R1-4",
+      "request": "Replace the empty-file and placeholder values in A10 with checksums for actual archived artifacts and provide an accessible verification route; otherwise remove unsupported cryptographic reproducibility claims.",
+      "baseline_technical_status": "VERIFIED_WITH_LIMITATIONS",
+      "baseline_reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+      "technical_subrequirement_coverage": [
+        {"requirement": "Correction of measured checkpoint hashes and sizes", "status": "VERIFIED_IN_SEPARATE_PR_4_EVIDENCE_NOT_REEXECUTED_HERE", "evidence_refs": ["https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/4", "docs/hash-correction-20261028.md", "docs/reviewer_closure/EVIDENCE_COMMITS.md"], "boundary": "Five physical model files were previously measured and documented; this PR3 pass did not modify or independently re-hash PR4 assets."},
+        {"requirement": "Original Optuna SQLite and generic prediction artifact", "status": "NOT_RECOVERED", "evidence_refs": ["docs/reviewer_closure/OPTUNA_A10_RESCUE_AND_RIGHTS.md", "docs/reviewer_closure/REVIEWER_48_DETAILED.json"], "boundary": "No substitute DB or hash is fabricated; PR4 remains separate."}
+      ],
+      "scientific_evidence_status": "ARTIFACT_HASH_CORRECTION_BOUNDED; ORIGINAL_A10_SET_NOT_FULLY_RECOVERED",
+      "historical_provenance_status": "FIVE_CHECKPOINT_ARTIFACTS_VERIFIED_IN_PRIOR_RECEIPTS; OPTUNA_AND_GENERIC_PREDICTION_EDGES_MISSING",
+      "editorial_status": "SIN_EDITAR",
+      "evidence_recovered_or_verified": ["existing PR4 correction and release verification route retained by reference"],
+      "what_this_does_not_prove": ["recovery of every A10-announced artifact", "Optuna trial-to-checkpoint lineage", "that PR4 is merged or accepted"],
+      "recoverability": "A newly authenticated backup catalog could reopen the missing database or generic prediction file. Do not substitute similarly named artifacts.",
+      "remaining_action": "Keep A10/Optuna work isolated in PR4; preserve explicit unavailable rows and verify its live CI before any later merge decision.",
+      "unverified_claims": ["complete original A10 package", "complete Optuna history", "trial-to-promoted-checkpoint provenance"]
+    },
+    {
+      "id": "R2-general",
+      "request": "Represent excluded rhythm and pathology classes as Other arrhythmia/Other pathologies, or otherwise report them so excluded classes and NSR are not hidden from realistic performance assessment.",
+      "baseline_technical_status": "NEW_EXPERIMENT_REQUIRED",
+      "baseline_reviewer_satisfaction": "NOT_SATISFIED",
+      "technical_subrequirement_coverage": [
+        {"requirement": "Declared output and operational profile classes", "status": "VERIFIED_BOUNDED", "evidence_refs": ["outputs/models/heads/global_head_contracts.json", "docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md"], "boundary": "Backbone declares 14 rhythm and seven pathology outputs; P6 has six, P8 eight, P4 four."},
+        {"requirement": "All-class compatible reference performance or validated Other", "status": "NOT_AVAILABLE", "evidence_refs": ["SPH_AGGREGATE_VALIDATION", "docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md"], "boundary": "SPH has 14 compatible endpoints; no validated Other output or complete ontology is present. NSR is not Other."}
+      ],
+      "scientific_evidence_status": "NOT_SATISFIED_FOR_OTHER_OR_COMPLETE_ALL_CLASS_PERFORMANCE",
+      "historical_provenance_status": "NO_HISTORICAL_OTHER_CLASS_TRAINING_OR_EVALUATION_LINK",
+      "editorial_status": "SIN_EDITAR",
+      "evidence_recovered_or_verified": ["full declared output contract", "SPH aggregate endpoint inventory validated"],
+      "what_this_does_not_prove": ["Other-class training, calibration or performance", "absence of excluded disease", "all-class clinical accuracy"],
+      "recoverability": "Not recoverable by relabeling or inferring from existing logits. Requires a justified ontology, compatible references and a prespecified new training/evaluation study if this request is retained.",
+      "remaining_action": "Do not describe NSR, empty sets or fallbacks as Other; authors must choose between a new all-class study and a narrower claim.",
+      "unverified_claims": ["validated Other arrhythmia", "validated Other pathology", "complete all-class accuracy"]
+    },
+    {
+      "id": "R2-2b",
+      "request": "Explain the purpose of Figures 1 and 2 and identify their sources or provenance.",
+      "baseline_technical_status": "ACTIVE_RECOVERY_REQUIRED",
+      "baseline_reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+      "technical_subrequirement_coverage": [
+        {"requirement": "Archive and exact figure-file provenance", "status": "VERIFIED_BOUNDED", "evidence_refs": ["docs/reviewer_closure/R2-2B_FIGURES_1_2_PROVENANCE.md", "outputs/figures/figure_manifest.json"], "boundary": "Source ZIP, archived callouts/captions and PNG hashes are recorded and matched to the repository manifest."},
+        {"requirement": "Creator identity, third-party rights and execution truth of depicted process", "status": "REQUIRES_AUTHOR_OR_RIGHTSHOLDER_CONFIRMATION", "evidence_refs": ["docs/reviewer_closure/R2-2B_FIGURES_1_2_PROVENANCE.md"], "boundary": "Hash identity does not establish authorship, permission or that every diagrammed operation ran."}
+      ],
+      "scientific_evidence_status": "FIGURE_IDENTITY_AND_STATED_PURPOSE_BOUNDED; RIGHTS_AND_PROCESS_CLAIMS_OPEN",
+      "historical_provenance_status": "SOURCE_ARCHIVE_LINKED; CREATOR_AND_EXECUTION_EDGES_UNVERIFIED",
+      "editorial_status": "SIN_EDITAR",
+      "evidence_recovered_or_verified": ["source archive SHA and byte-identical figure assets recorded"],
+      "what_this_does_not_prove": ["creator or editor identity", "third-party permissions", "patient split or workflow execution depicted in Figure 2"],
+      "recoverability": "Reopen with source author, license or project records. Replace/remove content if rights or process claims cannot be substantiated.",
+      "remaining_action": "Author review of creator, rights and execution claim is needed before the manuscript figure is retained.",
+      "unverified_claims": ["unqualified ownership", "permission for all embedded elements", "all depicted processes actually executed"]
+    },
+    {
+      "id": "R2-3a",
+      "request": "Describe each database, available and used classes, segment counts, and ECG/patient numbers by training, validation and test split; explain what happened to remaining classes.",
+      "baseline_technical_status": "EVIDENCE_CEILING_REACHED",
+      "baseline_reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+      "technical_subrequirement_coverage": [
+        {"requirement": "Selected evaluation denominators", "status": "VERIFIED_BOUNDED", "evidence_refs": ["RELEASE_METRICS_RECOMPUTE", "outputs/results/external_sph/sph_aggregate_32669.json"], "boundary": "P6 1,643 ECG; P8 2,193 including P6; P4 962 panel rows across 733 ECG/676 linked patients; SPH 25,770 ECG/24,666 source patients."},
+        {"requirement": "Selected P4 mapping to official PTB-XL folds", "status": "VERIFIED_FOR_SELECTED_MAPPING_ONLY", "evidence_refs": ["outputs/results/revision_replay_diagnostics_20261107/p4_official_fold_coverage.json", "docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md"], "boundary": "Selected P4 mapping falls in fold 10 with no overlap against official folds 1-9; this is not proof of historical job inputs."},
+        {"requirement": "Actual historical train/validation/calibration/selection manifests linked to checkpoints", "status": "UNVERIFIED_EDGE", "evidence_refs": ["docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md", "docs/reviewer_closure/SPLIT_CALIBRATION_DISPOSITION.md"], "boundary": "Key manifests and complete patient maps are absent; no leakage finding is made, but patient isolation is not certified."}
+      ],
+      "scientific_evidence_status": "SELECTED_COHORT_COUNTS_VERIFIED; HISTORICAL_SPLIT_ISOLATION_NOT_CERTIFIED",
+      "historical_provenance_status": "CHECKPOINT_TO_JOB_TO_EXACT_MANIFEST_AND_PATIENT_MAP_CHAIN_INCOMPLETE",
+      "editorial_status": "SIN_EDITAR",
+      "evidence_recovered_or_verified": ["release cohort counts and SPH denominator rechecked", "official fold audit remains scoped to selected P4 identifiers"],
+      "what_this_does_not_prove": ["which exact manifests jobs consumed", "complete per-class counts for each historical split", "patient or signal disjointness across all training stages"],
+      "recoverability": "Potentially recoverable only from exact job-linked manifests, patient mappings and checkpoint promotion receipts in an authorized backup. NOC's checked 2026-09-04 listing is a bounded negative result.",
+      "remaining_action": "Keep every missing lineage edge explicit; do not claim leakage or no leakage from fold names or selected manifests.",
+      "unverified_claims": ["historical patient-disjoint train/calibration/test", "all training and excluded-class counts"]
+    },
+    {
+      "id": "R2-3c",
+      "request": "Explain how primary, cascade and auxiliary rhythm labels are used in training and evaluation, and do not describe NSR as a low-prevalence arrhythmia.",
+      "baseline_technical_status": "VERIFIED_WITH_LIMITATIONS",
+      "baseline_reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+      "technical_subrequirement_coverage": [
+        {"requirement": "Primary/global rhythm class contract", "status": "VERIFIED_BOUNDED", "evidence_refs": ["outputs/models/heads/global_head_contracts.json", "docs/reviewer_closure/FULL_CLASS_COVERAGE_AND_ROUTING_AUDIT.md"], "boundary": "14 global outputs; P8 has eight, P6 six; six additional rhythm outputs are declared secondary scores."},
+        {"requirement": "NSR interpretation and observed SPH decisions", "status": "VERIFIED_BOUNDED", "evidence_refs": ["SPH_AGGREGATE_VALIDATION"], "boundary": "NSR is normal sinus rhythm, not Other or a rare arrhythmia class; SPH P8 had 16,700 NSR top-1 outputs."},
+        {"requirement": "Historical auxiliary class supervision and performance", "status": "NOT_LINKED_TO_CHECKPOINT_RUNS", "evidence_refs": ["docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md"], "boundary": "Per-class positive/negative supports, loss masks and checkpoint-linked metrics are missing."}
+      ],
+      "scientific_evidence_status": "CONTRACT_AND_OUTPUT_COUNTS_VERIFIED; AUXILIARY_TRAINING_AND_PERFORMANCE_UNPROVEN",
+      "historical_provenance_status": "RUN_SPECIFIC_AUXILIARY_LABEL_AND_LOSS_MASK_EDGES_MISSING",
+      "editorial_status": "SIN_EDITAR",
+      "evidence_recovered_or_verified": ["global output order", "P6/P8 class distinction", "SPH NSR top-1 count"],
+      "what_this_does_not_prove": ["training support for six secondary rhythm labels", "calibration or clinical performance for auxiliary scores"],
+      "recoverability": "Historical supervision reopens only with exact manifests, labels/masks, configuration, logs and checkpoint linkage. New performance claims require a new evaluation.",
+      "remaining_action": "Separate declared, supervised, emitted and evaluated class statuses in any later explanation.",
+      "unverified_claims": ["all declared rhythm outputs were supervised", "all secondary outputs are clinically validated"]
+    },
+    {
+      "id": "R2-3d",
+      "request": "Clarify whether ALMI, ILMI and LAE were trained and evaluated or merely logged as auxiliary pathology labels.",
+      "baseline_technical_status": "EVIDENCE_CEILING_REACHED",
+      "baseline_reviewer_satisfaction": "NOT_SATISFIED",
+      "technical_subrequirement_coverage": [
+        {"requirement": "Declared auxiliary pathology outputs", "status": "VERIFIED_BOUNDED", "evidence_refs": ["outputs/models/heads/global_head_contracts.json"], "boundary": "ALMI, ILMI and LAE are three of seven global pathology outputs."},
+        {"requirement": "Reconstructed score emission", "status": "VERIFIED_BOUNDED", "evidence_refs": ["outputs/results/revision_20261107/pathology_waveform.json"], "boundary": "All three scores were emitted for 733 selected P4 ECG with no frozen action policy."},
+        {"requirement": "Historical supervised supports and evaluated performance", "status": "NOT_ESTABLISHED", "evidence_refs": ["docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md"], "boundary": "A candidate manifest is not linked to the released checkpoint's training run; score emission is not evidence of supervision."}
+      ],
+      "scientific_evidence_status": "AUXILIARY_OUTPUTS_EMITTED_BUT_HISTORICAL_SUPERVISION_AND_PERFORMANCE_NOT_SATISFIED",
+      "historical_provenance_status": "TRAINING_MANIFESTS_MASKS_SUPPORTS_AND_CHECKPOINT_LINKS_MISSING",
+      "editorial_status": "SIN_EDITAR",
+      "evidence_recovered_or_verified": ["global contract and reconstructed emission support rechecked"],
+      "what_this_does_not_prove": ["positive/negative examples used in training", "loss participation", "calibration", "held-out performance"],
+      "recoverability": "Historical proof requires exact train/validation files, labels/masks, job records and checkpoint hashes; otherwise a new training/evaluation is required for performance claims.",
+      "remaining_action": "Do not describe ALMI/ILMI/LAE as trained or validated until checkpoint-linked evidence exists.",
+      "unverified_claims": ["historically trained ALMI/ILMI/LAE", "validated auxiliary pathology accuracy"]
+    },
+    {
+      "id": "R2-3e",
+      "request": "Define what Role means in Table 5 and how role assignments are determined.",
+      "baseline_technical_status": "VERIFIED_WITH_LIMITATIONS",
+      "baseline_reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+      "technical_subrequirement_coverage": [
+        {"requirement": "Current code-level primary/secondary class role contract", "status": "VERIFIED_BOUNDED", "evidence_refs": ["src/titan_v45/cascade/policy.py", "src/titan_v45/cascade/run_rhythm.py", "src/titan_v45/cascade/run_pathology.py"], "boundary": "The implementation scores selected waveforms and records class outputs; auxiliary action is no_frozen_policy."},
+        {"requirement": "Selected reconstructed transitions and fallback counts", "status": "VERIFIED_FROM_RETAINED_AGGREGATE", "evidence_refs": ["outputs/results/revision_20261107/rhythm_waveform.json", "outputs/results/revision_20261107/pathology_waveform.json"], "boundary": "P8 has 58 selected-cohort fallbacks; transitions end in quarantine_not_assessed because no policy exists, not because a quarantine action occurred."},
+        {"requirement": "Historical per-record role assignment or actual human review", "status": "NOT_RECOVERED", "evidence_refs": ["docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md", "docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md"], "boundary": "No authentic historical role/transition ledger or reviewer actions/outcomes."}
+      ],
+      "scientific_evidence_status": "SOFTWARE_ROLE_BEHAVIOR_BOUNDED; HISTORICAL_OPERATIONAL_AND_HUMAN_ACTION_UNPROVEN",
+      "historical_provenance_status": "PER_RECORD_ROLE_LEDGER_POLICY_VERSION_AND_HUMAN_ACTION_RECORDS_ABSENT",
+      "editorial_status": "SIN_EDITAR",
+      "evidence_recovered_or_verified": ["implementation paths and selected aggregate transitions reviewed", "reference labels not used for routing in the reconstructed runner"],
+      "what_this_does_not_prove": ["June all-input transitions", "historical assignment rules", "clinician review or intervention", "clinical benefit"],
+      "recoverability": "Historical behavior can reopen only with a checkpoint/job-linked route ledger and policy. Human-in-the-loop performance requires measured reviewer records or a new study.",
+      "remaining_action": "Define Role as an implementation/evidence field only unless source and action records substantiate a stronger meaning.",
+      "unverified_claims": ["historical all-input role assignment", "human review actually occurred", "human review improved performance"]
+    },
+    {
+      "id": "R2-3f",
+      "request": "Name and define the ten morphology features, explain asymmetric arrows and every block-diagram connection, and correct or remove unsupported flow arrows.",
+      "baseline_technical_status": "EVIDENCE_CEILING_REACHED",
+      "baseline_reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+      "technical_subrequirement_coverage": [
+        {"requirement": "Candidate morphology feature implementation and hash", "status": "VERIFIED_AS_RECONSTRUCTED_CANDIDATE", "evidence_refs": ["scripts/cedia/recovery_candidates/morphology_features_v4.py", "docs/recovered-feature-contract.md"], "boundary": "Ten deterministic descriptors are identified; exact historical loader is not recovered."},
+        {"requirement": "Exact original loader identity", "status": "NOT_RECOVERED", "evidence_refs": ["docs/reviewer_closure/HISTORICAL_LOADER_IDENTITY_AND_REPLAY.md"], "boundary": "Expected loader 36,271 bytes, SHA-256 fc8d7367f9f2c108376839435021ec3172fe2757faa4a615f0ef5d39cbf1e855; none of 34 examined candidates matched."},
+        {"requirement": "Numerical replay under frozen tolerance", "status": "STRICT_EQUIVALENCE_FAILS", "evidence_refs": ["outputs/results/revision_20261107/pathology_waveform.json", "docs/reviewer_closure/REPLAY_EQUIVALENCE_DISPOSITION.md"], "boundary": "P4 decisions agree 962/962, but max score residual 0.0006194114685058594 exceeds 1e-5; P6 has one top-1 mismatch/1,643 and P8 top-1/binary sets agree 2,193/2,193."},
+        {"requirement": "Specialist hidden-width metadata", "status": "CHECKPOINT_METADATA_MISMATCH_RECORDED", "evidence_refs": ["src/titan_v45/models/frozen_rhythm.py", "tests/evaluation/test_frozen_rhythm_contract.py", "outputs/results/revision_20261107/rhythm_waveform.json"], "boundary": "The saved reconstructed run reports declared width 192 and tensor width 512; inference code uses the stored tensor shape and strict state-dict loading. The training-time architecture is not established by this replay."}
+      ],
+      "scientific_evidence_status": "RECONSTRUCTED_FEATURE_CONTRACT_AND_DECISION_REPLAY_ONLY; STRICT_SCORE_EQUIVALENCE_NOT_MET",
+      "historical_provenance_status": "EXPECTED_LOADER_HASH_ABSENT; FIGURE_TO_RUNTIME_AND_TRAINING_WIDTH_EDGES_NOT_FULLY_VERIFIED",
+      "editorial_status": "SIN_EDITAR",
+      "evidence_recovered_or_verified": ["candidate morphology source hash", "recorded event extractor hash in the waveform report", "P4 tolerance failure preserved", "stale hidden-width metadata surfaced"],
+      "what_this_does_not_prove": ["the candidate is the original loader", "all figure arrows match historical runtime", "strict probability equivalence", "training used the metadata-declared hidden width"],
+      "recoverability": "The exact loader or a job-linked immutable source snapshot could reopen historical identity. Do not adjust tolerance or substitute a similarly named file.",
+      "remaining_action": "Keep reconstruction labels and numeric residuals explicit; verify Figure 5/6 arrows against code only during the later author-approved figure phase.",
+      "unverified_claims": ["exact original preprocessing", "strict historical replay equivalence", "training-time 192-versus-512 width interpretation"]
+    },
+    {
+      "id": "R2-4a",
+      "request": "Define the external-development evidence package, say whether it is the test dataset, use consistent terminology and describe it in the database or Methods section.",
+      "baseline_technical_status": "VERIFIED_WITH_LIMITATIONS",
+      "baseline_reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+      "technical_subrequirement_coverage": [
+        {"requirement": "Selected external-development cohorts and units", "status": "VERIFIED_BOUNDED", "evidence_refs": ["RELEASE_METRICS_RECOMPUTE", "docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md"], "boundary": "P6 1,643 ECG; P8 2,193 including P6; P4 962 panel rows/733 ECG; all remain selected development evidence."},
+        {"requirement": "SPH source relation to retained development data", "status": "BOUNDED_SIGNATURE_SCREEN_NO_CANDIDATES; FULL_HISTORY_UNCERTIFIED", "evidence_refs": ["docs/external_validation/sph_independence_assessment.md"], "boundary": "The screen compared SPH to retained Chapman/Shaoxing/Ningbo and selected PTB-XL data only; missing backbone sources prevent complete independence certification."}
+      ],
+      "scientific_evidence_status": "TERMINOLOGY_CAN_BE_DEFINED; HISTORICAL_USAGE_AND_FULL_INDEPENDENCE_LIMITED",
+      "historical_provenance_status": "V3H_SELECTION_EXPOSURE_DOCUMENTED; EXACT_SWEEP_MANIFEST_AND_FULL_BACKBONE_LINEAGE_MISSING",
+      "editorial_status": "SIN_EDITAR",
+      "evidence_recovered_or_verified": ["release cohorts and overlapping units recalculated", "SPH transfer aggregate validated", "bounded source-screen scope reviewed"],
+      "what_this_does_not_prove": ["SPH disjoint from every historical pretraining source", "all historical development-package selection events", "an untouched independent test for V4.5"],
+      "recoverability": "Historical package usage may reopen with exact job-linked source manifests; full source independence needs complete training inputs or a new clean cohort.",
+      "remaining_action": "Use 'selected external-development evidence' for P6/P8/P4 and distinguish SPH source transfer from independent clinical validation in the later manuscript phase.",
+      "unverified_claims": ["all development packages were untouched", "SPH is fully independent of every model-development source"]
+    },
+    {
+      "id": "R2-4e",
+      "request": "Explain what happens when no class score crosses its threshold and how such cases are counted.",
+      "baseline_technical_status": "EXPERIMENT_COMPLETED_WITH_LIMITATIONS",
+      "baseline_reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+      "technical_subrequirement_coverage": [
+        {"requirement": "Frozen SPH profile scores and thresholds reconcile to full denominator", "status": "VERIFIED_BOUNDED", "evidence_refs": ["SPH_AGGREGATE_VALIDATION"], "boundary": "Each profile scores 25,770/25,770; P6 has 16,785 empty sets; P4 8,343; P8 forced top-1 fallback 801."},
+        {"requirement": "Selected waveform fallback and no-label-routing behavior", "status": "VERIFIED_FROM_RETAINED_AGGREGATE", "evidence_refs": ["outputs/results/revision_20261107/rhythm_waveform.json", "outputs/results/revision_20261107/pathology_waveform.json"], "boundary": "P8 selected replay had 58 fallbacks; reference labels were not used for routing."},
+        {"requirement": "Historical quarantine meaning or rate", "status": "NOT_ASSESSED", "evidence_refs": ["docs/reviewer_closure/QUARANTINE_HISTORICAL_VS_PROSPECTIVE.md"], "boundary": "Fallbacks and empty sets are not quarantine or clinician review."}
+      ],
+      "scientific_evidence_status": "FROZEN_THRESHOLD_BEHAVIOR_VERIFIED_FOR_SPH_AND_SELECTED_REPLAY; HISTORICAL_QUARANTINE_UNASSESSED",
+      "historical_provenance_status": "NO_LINKED_HISTORICAL_UNCERTAINTY_POLICY_OR_TRANSITION_LEDGER",
+      "editorial_status": "SIN_EDITAR",
+      "evidence_recovered_or_verified": ["SPH aggregate reconciled to frozen protocol", "selected replay report hash and transition states inspected"],
+      "what_this_does_not_prove": ["quarantine rate", "error reduction from quarantine", "human review or abstention"],
+      "recoverability": "The frozen SPH counts are complete for this report. Historical quarantine requires the authentic policy, scores, ledger and denominator.",
+      "remaining_action": "Keep empty sets, forced fallback and quarantine as separate states; do not report a quarantine percentage from these counts.",
+      "unverified_claims": ["fallback equals quarantine", "historical quarantine percentage", "quarantine improves accuracy"]
+    },
+    {
+      "id": "R2-4k",
+      "request": "Define the quarantine rate and pre/post-quarantine accuracy and explain how these values are estimated.",
+      "baseline_technical_status": "EVIDENCE_CEILING_REACHED",
+      "baseline_reviewer_satisfaction": "NOT_SATISFIED",
+      "technical_subrequirement_coverage": [
+        {"requirement": "Authentic historical quarantine denominator, policy and score", "status": "NOT_RECOVERED", "evidence_refs": ["docs/reviewer_closure/QUARANTINE_HISTORICAL_VS_PROSPECTIVE.md", "docs/reviewer_closure/EVIDENCE_SOURCE_TRIAGE.md"], "boundary": "No checkpoint/job-linked uncertainty score and frozen policy tied to the original inputs."},
+        {"requirement": "SPH quarantine rate", "status": "NOT_ASSESSED_NOT_ZERO", "evidence_refs": ["SPH_AGGREGATE_VALIDATION"], "boundary": "The aggregate records zero assessed quarantine records and a null rate; this is not a measured zero rate."}
+      ],
+      "scientific_evidence_status": "NOT_SATISFIED_FOR_HISTORICAL_QUARANTINE_EFFECTIVENESS",
+      "historical_provenance_status": "POLICY_SCORE_LEDGER_AND_PRE_POST_REFERENCE_LINKS_ABSENT",
+      "editorial_status": "SIN_EDITAR",
+      "evidence_recovered_or_verified": ["none for historical rate; all current outputs explicitly leave it unassessed"],
+      "what_this_does_not_prove": ["pre/post accuracy", "quarantine error rate", "human action", "zero quarantine"],
+      "recoverability": "Only an authentic ledger, policy version, score inputs, truth labels and complete denominator can reopen the historical estimate. Otherwise this requires a new study if retained.",
+      "remaining_action": "Do not infer rates from empty sets, fallback counts or selected cohort aggregates; preserve null/not-assessed status.",
+      "unverified_claims": ["historical quarantine rate", "pre/post performance improvement", "measured human-in-the-loop benefit"]
+    },
+    {
+      "id": "R2-5",
+      "request": "Acknowledge that PVC is often analyzed at heartbeat level and avoid treating 10-second ECG-level classification as beat-level detection.",
+      "baseline_technical_status": "VERIFIED_WITH_LIMITATIONS",
+      "baseline_reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+      "technical_subrequirement_coverage": [
+        {"requirement": "SPH PVC statement denominator and endpoint consistency", "status": "VERIFIED_BOUNDED", "evidence_refs": ["SPH_AGGREGATE_VALIDATION", "docs/reviewer_closure/AF_PVC_REFERENCE_DISPOSITION.md"], "boundary": "1,067 positive and 24,703 negative ECG-statement rows; P6/P8 F1 are distinct profile results."},
+        {"requirement": "Beat-level detection, localization or episode count", "status": "NOT_MEASURED", "evidence_refs": ["docs/reviewer_closure/AF_PVC_REFERENCE_DISPOSITION.md"], "boundary": "No beat annotations, timing-matching rule or beat denominator."}
+      ],
+      "scientific_evidence_status": "RECORD_LEVEL_STATEMENT_EVALUATION_ONLY",
+      "historical_provenance_status": "SOURCE_STATEMENT_CODE_LINKED; NO_BEAT_LEVEL_REFERENCE",
+      "editorial_status": "SIN_EDITAR",
+      "evidence_recovered_or_verified": ["PVC statement mapping and aggregate denominator validated"],
+      "what_this_does_not_prove": ["PVC beat sensitivity", "beat localization", "episode counts", "clinical adjudication"],
+      "recoverability": "Beat-level claims require a new beat-annotated dataset and prespecified temporal matching; record-level statements cannot reconstruct beat labels.",
+      "remaining_action": "Restrict any later claim to record-level ECG statement classification unless a dedicated beat study is approved and performed.",
+      "unverified_claims": ["beat-level PVC detection", "PVC localization or episode counting"]
+    }
+  ],
+  "project_audit_snapshot": [
+    {"id": "A-01", "technical_status": "VERIFIED_COMPLETE", "reviewer_satisfaction": "NOT_APPLICABLE_AUDIT"},
+    {"id": "A-02", "technical_status": "VERIFIED_WITH_LIMITATIONS", "reviewer_satisfaction": "NOT_APPLICABLE_AUDIT"},
+    {"id": "A-03", "technical_status": "VERIFIED_WITH_LIMITATIONS", "reviewer_satisfaction": "NOT_APPLICABLE_AUDIT"},
+    {"id": "A-04", "technical_status": "EVIDENCE_CEILING_REACHED", "reviewer_satisfaction": "NOT_APPLICABLE_AUDIT"},
+    {"id": "A-05", "technical_status": "VERIFIED_COMPLETE", "reviewer_satisfaction": "NOT_APPLICABLE_AUDIT", "note": "The bounded shared-backbone and parameter-accounting audit remains as in the source matrix; the separate specialist hidden-width metadata discrepancy is documented under R2-3f and does not change the global backbone count."},
+    {"id": "A-06", "technical_status": "EVIDENCE_CEILING_REACHED", "reviewer_satisfaction": "NOT_APPLICABLE_AUDIT"},
+    {"id": "A-07", "technical_status": "VERIFIED_WITH_LIMITATIONS", "reviewer_satisfaction": "NOT_APPLICABLE_AUDIT"},
+    {"id": "A-08", "technical_status": "MANUSCRIPT_ONLY_PENDING", "reviewer_satisfaction": "NOT_APPLICABLE_AUDIT"},
+    {"id": "A-09", "technical_status": "MANUSCRIPT_ONLY_PENDING", "reviewer_satisfaction": "NOT_APPLICABLE_AUDIT"},
+    {"id": "A-10", "technical_status": "ACTIVE_RECOVERY_REQUIRED", "reviewer_satisfaction": "NOT_APPLICABLE_AUDIT"},
+    {"id": "A-11", "technical_status": "NEW_EXPERIMENT_REQUIRED", "reviewer_satisfaction": "NOT_APPLICABLE_AUDIT"},
+    {"id": "A-12", "technical_status": "NEW_EXPERIMENT_REQUIRED", "reviewer_satisfaction": "NOT_APPLICABLE_AUDIT"}
+  ],
+  "editorial_materials_already_present_not_rewritten": [
+    "docs/reviewer_closure/REVIEWER_36_CLOSURE_ACTION_PLAN.md",
+    "docs/reviewer_closure/REVIEWER_REPRODUCIBILITY_GAPS.md",
+    "docs/reviewer_closure/REVIEWER_CODE_AND_FORMULA_AUDIT.md",
+    "docs/reviewer_closure/REVIEWER_FIGURE_TABLE_CORRECTIONS.md",
+    "docs/reviewer_closure/REVIEWER_PROPOSED_TABLES.md",
+    "docs/reviewer_closure/REVIEWER_CLAIM_WITHDRAWAL_DECISIONS.md",
+    "docs/reviewer_closure/REVIEWER_RESPONSE_EVIDENCE_DRAFT.md"
+  ]
+}
