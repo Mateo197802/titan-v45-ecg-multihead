@@ -1,0 +1,37 @@
+{
+  "figures": {
+    "sph_pac_probe_exploratory.pdf": {
+      "bytes": 24402,
+      "sha256": "6401648b2fd018bdfd488e0126edd895ddae48f1344c2b8499fff54e711148f5"
+    },
+    "sph_pac_probe_exploratory.png": {
+      "bytes": 149431,
+      "sha256": "a82ea907842e6964ff8cfc879cf6cabb1da08e40218707dafe5858ebd4d6a8a7"
+    }
+  },
+  "generator": {
+    "matplotlib": "3.11.0",
+    "path": "scripts/external_validation/plot_sph_pac_probe.py",
+    "python": "3.12.10",
+    "sha256": "c405ea08f8d8b1f7f174b1e8b95d23fa56598b338c5660bf317885902ecdcd5b"
+  },
+  "inputs": {
+    "aggregate_sha256": "702022c4ee1e0672649dd732777c357952119fa268cee47f9309ad273765c54a",
+    "cedia_fit_job_id": "32884",
+    "embedding_archive_sha256": "a15f1d4c8ab95174a57d1782b4dbd25d79200f04a633f2ad58351a9a152670b6",
+    "embedding_receipt_sha256": "d7f34320dbb3e77f412b9b10b510a0db2b571028c111ac9b06ecaebd130f3529",
+    "execution_receipt_sha256": "a25466470b1fcbde4966c8b98db23cee342e5e22026f98148ee69535b0b85071",
+    "protocol_commit": "73a167f51c35b10a825854a9d0f6591eb5754e4c",
+    "protocol_config_sha256": "2a3f81fb0304030b9738c79fba5507a750452b0d1a89fcaa0980d5adf8e6b921",
+    "v3f_checkpoint_sha256": "ca5d4dcb4b9828e6c4339800fe81ec27f32d9b09a090bb57503bfb56746a8da8"
+  },
+  "interpretation": "Exploratory SPH primary-code 30 statement endpoint; not clinical adjudication or independent external validation.",
+  "privacy": {
+    "individual_identifiers_present": false,
+    "mimic_data_consulted": false,
+    "probe_weights_present": false,
+    "row_level_predictions_present": false
+  },
+  "schema": "TITAN_V45_SPH_PAC_FIGURE_MANIFEST_V1",
+  "status": "exploratory_aggregate_only_postprocessing"
+}

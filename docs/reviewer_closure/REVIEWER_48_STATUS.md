@@ -23,11 +23,11 @@ actionable; it is not manuscript-only work.
 
 | ID | Concern | Disposition | Evidence / remaining action |
 | --- | --- | --- | --- |
-| R1-1 | Independent external validation | EXPERIMENT_COMPLETED | [SPH delivery audit](SPH_DELIVERY_AUDIT.md), [all-input coverage](ALL_INPUT_FLOW_COVERAGE.md), and [CEDIA lineage](CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md); 25,770 ECG. Jobs 17314/17315 show V3H informed P6 epoch selection; exact 17314 manifest is missing. SPH lineage and clinical adjudication are not certified. |
+| R1-1 | Independent external validation | EXPERIMENT_COMPLETED | [SPH delivery audit](SPH_DELIVERY_AUDIT.md), [all-input coverage](ALL_INPUT_FLOW_COVERAGE.md), [CEDIA lineage](CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md), and the separate [exploratory PAC probe](../external_validation/sph_pac_probe_results.md). The new PAC probe is same-source, previously exposed, and nonconfirmatory; it does not supply independent clinical validation. Jobs 17314/17315 show V3H informed P6 epoch selection; exact 17314 manifest is missing. |
 | R1-2 | Population and flow denominator | EVIDENCE_CEILING_REACHED | [All-input coverage](ALL_INPUT_FLOW_COVERAGE.md), [bounded recovery](R1_2_EVIDENCE_CEILING.md), and [recovered-vs-missing inventory](RECOVERED_VS_MISSING_HISTORICAL_EVIDENCE.md); historical preselection population and exclusion reasons remain unavailable. |
 | R1-3 | AF incidence versus ECG statement | VERIFIED_WITH_LIMITATIONS | [AF/PVC reference disposition](AF_PVC_REFERENCE_DISPOSITION.md); 390 retained AF flags agree with stored codes per overlapping profile, not an incident-AF study. |
 | R1-4 | Invalid artifact hashes | VERIFIED_WITH_LIMITATIONS | [Hash correction](../hash-correction-20261028.md); separate PR #4, missing historical artifacts remain unavailable. |
-| R2-general | Excluded classes and Other | CLAIM_WITHDRAWAL_REQUIRED | [All-input coverage](ALL_INPUT_FLOW_COVERAGE.md) reports all three profiles across 25,770 SPH ECG and the 14 compatible endpoints; `Other` and incompatible references remain unvalidated. |
+| R2-general | Excluded classes and Other | CLAIM_WITHDRAWAL_REQUIRED | [All-input coverage](ALL_INPUT_FLOW_COVERAGE.md) reports all three profiles across 25,770 SPH ECG and the 14 compatible endpoints; the [PAC-only exploratory probe](../external_validation/sph_pac_probe_results.md) does not evaluate `Other` or the full cascade. `Other` and incompatible references remain unvalidated. |
 | R2-1a | Define P6 and P4 in abstract | MANUSCRIPT_UPDATE_ONLY | Define terms in the future manuscript. |
 | R2-1b | Define abbreviations on first use | MANUSCRIPT_UPDATE_ONLY | Check first occurrence in the future manuscript. |
 | R2-2a | Introduction references | MANUSCRIPT_UPDATE_ONLY | Align citations with the final scope. |

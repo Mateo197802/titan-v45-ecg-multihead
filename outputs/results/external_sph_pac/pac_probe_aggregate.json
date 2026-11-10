@@ -1,0 +1,434 @@
+{
+  "duplicate_audit": {
+    "cross_patient_exact_duplicate_groups": 0,
+    "duplicate_training_weighting": "each exact waveform hash has total base weight 1, then class weights are balanced using training rows only",
+    "exact_duplicate_groups": 168,
+    "groups_with_pac_label_conflict": 1,
+    "holdout_rows_excluded_in_sensitivity": 2
+  },
+  "limitations": [
+    "SPH report-level PAC labels are not clinical adjudication.",
+    "The holdout is exploratory and is not independent external validation.",
+    "The previously published SPH Primary8 PAC result was already observed.",
+    "V3F historical training-source overlap is not certified."
+  ],
+  "models": {
+    "fixed_mlp_sensitivity": {
+      "holdout": {
+        "patient_cluster_bootstrap": {
+          "confidence_level": 0.95,
+          "intervals": {
+            "accuracy": {
+              "invalid_replicates": 0,
+              "lower": 0.946098081652012,
+              "upper": 0.9574063344048724,
+              "valid_replicates": 2000
+            },
+            "auroc": {
+              "invalid_replicates": 0,
+              "lower": 0.8776585210044782,
+              "upper": 0.9386255598963531,
+              "valid_replicates": 2000
+            },
+            "average_precision": {
+              "invalid_replicates": 0,
+              "lower": 0.3352840649478162,
+              "upper": 0.5465627140710422,
+              "valid_replicates": 2000
+            },
+            "brier_score": {
+              "invalid_replicates": 0,
+              "lower": 0.03270507583869571,
+              "upper": 0.04147348010370612,
+              "valid_replicates": 2000
+            },
+            "ece": {
+              "invalid_replicates": 0,
+              "lower": 0.039055345644635905,
+              "upper": 0.04916074458743164,
+              "valid_replicates": 2000
+            },
+            "f1": {
+              "invalid_replicates": 0,
+              "lower": 0.30600314278433705,
+              "upper": 0.4261501210653753,
+              "valid_replicates": 2000
+            },
+            "precision": {
+              "invalid_replicates": 0,
+              "lower": 0.20356986215538847,
+              "upper": 0.3039242620124973,
+              "valid_replicates": 2000
+            },
+            "recall": {
+              "invalid_replicates": 0,
+              "lower": 0.5794373980121643,
+              "upper": 0.7567567567567568,
+              "valid_replicates": 2000
+            },
+            "sensitivity": {
+              "invalid_replicates": 0,
+              "lower": 0.5794373980121643,
+              "upper": 0.7567567567567568,
+              "valid_replicates": 2000
+            },
+            "specificity": {
+              "invalid_replicates": 0,
+              "lower": 0.9524942977792161,
+              "upper": 0.9634632472680718,
+              "valid_replicates": 2000
+            }
+          },
+          "method": "unstratified percentile bootstrap",
+          "replicates_requested": 2000,
+          "seed": 20261109,
+          "unit": "patient/exact-waveform connected component"
+        },
+        "point_estimates": {
+          "accuracy": 0.952167995333463,
+          "auroc": 0.9095944726008668,
+          "average_precision": 0.4358511281181867,
+          "brier_score": 0.03689897412186231,
+          "confusion": {
+            "fn": 35,
+            "fp": 211,
+            "tn": 4826,
+            "tp": 71
+          },
+          "ece": 0.04396627928398415,
+          "ece_bins": 10,
+          "f1": 0.36597938144329895,
+          "n": 5143,
+          "precision": 0.25177304964539005,
+          "recall": 0.6698113207547169,
+          "sensitivity": 0.6698113207547169,
+          "specificity": 0.958109986102839,
+          "support": {
+            "negative": 5037,
+            "positive": 106
+          },
+          "threshold": 0.5
+        }
+      },
+      "holdout_without_pac_discordant_exact_duplicate_groups": {
+        "patient_cluster_bootstrap": {
+          "confidence_level": 0.95,
+          "intervals": {
+            "accuracy": {
+              "invalid_replicates": 0,
+              "lower": 0.9464563862928349,
+              "upper": 0.9580511242279263,
+              "valid_replicates": 2000
+            },
+            "auroc": {
+              "invalid_replicates": 0,
+              "lower": 0.8777285997059779,
+              "upper": 0.938083213341399,
+              "valid_replicates": 2000
+            },
+            "average_precision": {
+              "invalid_replicates": 0,
+              "lower": 0.33386596309266375,
+              "upper": 0.5403922242814545,
+              "valid_replicates": 2000
+            },
+            "brier_score": {
+              "invalid_replicates": 0,
+              "lower": 0.03251786321098514,
+              "upper": 0.04095921621229174,
+              "valid_replicates": 2000
+            },
+            "ece": {
+              "invalid_replicates": 0,
+              "lower": 0.03886402307213759,
+              "upper": 0.048970196327419495,
+              "valid_replicates": 2000
+            },
+            "f1": {
+              "invalid_replicates": 0,
+              "lower": 0.3015674079658248,
+              "upper": 0.4234724653936642,
+              "valid_replicates": 2000
+            },
+            "precision": {
+              "invalid_replicates": 0,
+              "lower": 0.2,
+              "upper": 0.3015267175572519,
+              "valid_replicates": 2000
+            },
+            "recall": {
+              "invalid_replicates": 0,
+              "lower": 0.5738944856839873,
+              "upper": 0.75454974271012,
+              "valid_replicates": 2000
+            },
+            "sensitivity": {
+              "invalid_replicates": 0,
+              "lower": 0.5738944856839873,
+              "upper": 0.75454974271012,
+              "valid_replicates": 2000
+            },
+            "specificity": {
+              "invalid_replicates": 0,
+              "lower": 0.952530941012608,
+              "upper": 0.9637551990493167,
+              "valid_replicates": 2000
+            }
+          },
+          "method": "unstratified percentile bootstrap",
+          "replicates_requested": 2000,
+          "seed": 20261109,
+          "unit": "patient/exact-waveform connected component"
+        },
+        "point_estimates": {
+          "accuracy": 0.9523439019645983,
+          "auroc": 0.908958356972654,
+          "average_precision": 0.43552146868028463,
+          "brier_score": 0.036757411881024285,
+          "confusion": {
+            "fn": 35,
+            "fp": 210,
+            "tn": 4826,
+            "tp": 70
+          },
+          "ece": 0.043832319433557296,
+          "ece_bins": 10,
+          "f1": 0.36363636363636365,
+          "n": 5141,
+          "precision": 0.25,
+          "recall": 0.6666666666666666,
+          "sensitivity": 0.6666666666666666,
+          "specificity": 0.9583002382843526,
+          "support": {
+            "negative": 5036,
+            "positive": 105
+          },
+          "threshold": 0.5
+        }
+      }
+    },
+    "weighted_l2_logistic": {
+      "holdout": {
+        "patient_cluster_bootstrap": {
+          "confidence_level": 0.95,
+          "intervals": {
+            "accuracy": {
+              "invalid_replicates": 0,
+              "lower": 0.8378374450792587,
+              "upper": 0.8575029449010264,
+              "valid_replicates": 2000
+            },
+            "auroc": {
+              "invalid_replicates": 0,
+              "lower": 0.8832073508144079,
+              "upper": 0.9346966204635228,
+              "valid_replicates": 2000
+            },
+            "average_precision": {
+              "invalid_replicates": 0,
+              "lower": 0.32002555415456296,
+              "upper": 0.5129113562219025,
+              "valid_replicates": 2000
+            },
+            "brier_score": {
+              "invalid_replicates": 0,
+              "lower": 0.10641921841463041,
+              "upper": 0.11631600189492863,
+              "valid_replicates": 2000
+            },
+            "ece": {
+              "invalid_replicates": 0,
+              "lower": 0.22987422116030912,
+              "upper": 0.24295063250874857,
+              "valid_replicates": 2000
+            },
+            "f1": {
+              "invalid_replicates": 0,
+              "lower": 0.14595137539700795,
+              "upper": 0.20958757004192893,
+              "valid_replicates": 2000
+            },
+            "precision": {
+              "invalid_replicates": 0,
+              "lower": 0.08070233356599822,
+              "upper": 0.12009934292866083,
+              "valid_replicates": 2000
+            },
+            "recall": {
+              "invalid_replicates": 0,
+              "lower": 0.7142857142857143,
+              "upper": 0.8613861386138614,
+              "valid_replicates": 2000
+            },
+            "sensitivity": {
+              "invalid_replicates": 0,
+              "lower": 0.7142857142857143,
+              "upper": 0.8613861386138614,
+              "valid_replicates": 2000
+            },
+            "specificity": {
+              "invalid_replicates": 0,
+              "lower": 0.8387657932617775,
+              "upper": 0.8590752119983837,
+              "valid_replicates": 2000
+            }
+          },
+          "method": "unstratified percentile bootstrap",
+          "replicates_requested": 2000,
+          "seed": 20261109,
+          "unit": "patient/exact-waveform connected component"
+        },
+        "point_estimates": {
+          "accuracy": 0.847948668092553,
+          "auroc": 0.9102481261307831,
+          "average_precision": 0.41549702652868903,
+          "brier_score": 0.11116466231876582,
+          "confusion": {
+            "fn": 22,
+            "fp": 760,
+            "tn": 4277,
+            "tp": 84
+          },
+          "ece": 0.23645928092293045,
+          "ece_bins": 10,
+          "f1": 0.17684210526315788,
+          "n": 5143,
+          "precision": 0.0995260663507109,
+          "recall": 0.7924528301886793,
+          "sensitivity": 0.7924528301886793,
+          "specificity": 0.8491165376216001,
+          "support": {
+            "negative": 5037,
+            "positive": 106
+          },
+          "threshold": 0.5
+        }
+      },
+      "holdout_without_pac_discordant_exact_duplicate_groups": {
+        "patient_cluster_bootstrap": {
+          "confidence_level": 0.95,
+          "intervals": {
+            "accuracy": {
+              "invalid_replicates": 0,
+              "lower": 0.8377323866994449,
+              "upper": 0.8577543294726389,
+              "valid_replicates": 2000
+            },
+            "auroc": {
+              "invalid_replicates": 0,
+              "lower": 0.8821090456196369,
+              "upper": 0.934928179610817,
+              "valid_replicates": 2000
+            },
+            "average_precision": {
+              "invalid_replicates": 0,
+              "lower": 0.3190507896619059,
+              "upper": 0.5120085149061185,
+              "valid_replicates": 2000
+            },
+            "brier_score": {
+              "invalid_replicates": 0,
+              "lower": 0.10635843072782691,
+              "upper": 0.11592937360267212,
+              "valid_replicates": 2000
+            },
+            "ece": {
+              "invalid_replicates": 0,
+              "lower": 0.2298018846021346,
+              "upper": 0.24272439866081968,
+              "valid_replicates": 2000
+            },
+            "f1": {
+              "invalid_replicates": 0,
+              "lower": 0.14300804828973843,
+              "upper": 0.2084142351717783,
+              "valid_replicates": 2000
+            },
+            "precision": {
+              "invalid_replicates": 0,
+              "lower": 0.07885047043010752,
+              "upper": 0.11952662721893491,
+              "valid_replicates": 2000
+            },
+            "recall": {
+              "invalid_replicates": 0,
+              "lower": 0.7119927927927927,
+              "upper": 0.8636473962930273,
+              "valid_replicates": 2000
+            },
+            "sensitivity": {
+              "invalid_replicates": 0,
+              "lower": 0.7119927927927927,
+              "upper": 0.8636473962930273,
+              "valid_replicates": 2000
+            },
+            "specificity": {
+              "invalid_replicates": 0,
+              "lower": 0.8391362380450845,
+              "upper": 0.859326791853195,
+              "valid_replicates": 2000
+            }
+          },
+          "method": "unstratified percentile bootstrap",
+          "replicates_requested": 2000,
+          "seed": 20261109,
+          "unit": "patient/exact-waveform connected component"
+        },
+        "point_estimates": {
+          "accuracy": 0.848084030344291,
+          "auroc": 0.9099890313551949,
+          "average_precision": 0.4173107492983121,
+          "brier_score": 0.11109282786993922,
+          "confusion": {
+            "fn": 22,
+            "fp": 759,
+            "tn": 4277,
+            "tp": 83
+          },
+          "ece": 0.23646800087195788,
+          "ece_bins": 10,
+          "f1": 0.17529039070749736,
+          "n": 5141,
+          "precision": 0.09857482185273159,
+          "recall": 0.7904761904761904,
+          "sensitivity": 0.7904761904761904,
+          "specificity": 0.8492851469420175,
+          "support": {
+            "negative": 5036,
+            "positive": 105
+          },
+          "threshold": 0.5
+        }
+      }
+    }
+  },
+  "patient_or_record_identifiers_present": false,
+  "probe_weights_present": false,
+  "row_level_predictions_present": false,
+  "schema": "TITAN_V45_SPH_PAC_PROBE_AGGREGATE_V1",
+  "source": {
+    "embedding_eligible_records": 25770,
+    "embedding_rows": 25770,
+    "metadata_records": 25770,
+    "technical_status_counts": {
+      "embedded": 25770
+    },
+    "unique_source_patients_in_eligible_rows": 24666,
+    "window_count_total": 34200
+  },
+  "split": {
+    "holdout_negative": 5037,
+    "holdout_patient_count": 4933,
+    "holdout_positive": 106,
+    "holdout_records": 5143,
+    "private_split_assignment_sha256": "a15145722cd23269a59cdf5affab1e75ede67a4c7ca40f20a772d7f5662b7ea4",
+    "seed": 20261109,
+    "train_fraction": 0.8,
+    "train_negative": 20194,
+    "train_patient_count": 19733,
+    "train_positive": 433,
+    "train_records": 20627
+  },
+  "status": "exploratory_patient_split_holdout",
+  "target": "SPH primary code 30; code 31 excluded; ECG statement, not clinical adjudication"
+}

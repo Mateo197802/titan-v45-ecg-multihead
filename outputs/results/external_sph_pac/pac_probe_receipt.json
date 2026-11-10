@@ -1,0 +1,30 @@
+{
+  "dependency_archive_sha256": {
+    "python_deps": "5ea9a481f100342a4b7c9aaf98294659340d05ba20dba645007f37a3fbb6cc45"
+  },
+  "embedding_archive_sha256": "a15f1d4c8ab95174a57d1782b4dbd25d79200f04a633f2ad58351a9a152670b6",
+  "embedding_receipt_sha256": "d7f34320dbb3e77f412b9b10b510a0db2b571028c111ac9b06ecaebd130f3529",
+  "labels_used_for_head_fitting": true,
+  "mimic_data_consulted": false,
+  "private_model_bundle_sha256": "72a53a331017ab0e20fa33ad4fcd090a7edf498d2ebfa8fffffd6937cbfa8bf6",
+  "protocol_commit": "73a167f51c35b10a825854a9d0f6591eb5754e4c",
+  "protocol_config_sha256": "2a3f81fb0304030b9738c79fba5507a750452b0d1a89fcaa0980d5adf8e6b921",
+  "public_aggregate_sha256": "702022c4ee1e0672649dd732777c357952119fa268cee47f9309ad273765c54a",
+  "row_level_data_in_repository": false,
+  "runtime": {
+    "cuda": "12.8",
+    "numpy": "2.2.6",
+    "python": "3.11.14",
+    "scipy": "1.15.3",
+    "torch": "2.10.0+cu128"
+  },
+  "schema": "TITAN_V45_SPH_PAC_PROBE_RECEIPT_V1",
+  "slurm_job_id": "32884",
+  "source_sha256": {
+    "code.csv": "4d22759fd19d37133c78d439a5726f9e0bc412cc17483c424926ce9abb33c8fc",
+    "metadata.csv": "c6f8dc5197758a3970aae554f8b6ee884d96656b121879bc0eb1adf367ea6d86",
+    "records.tar.gz": "cebad89d7d25663272eeb45545712d76302d334bb107cdc23fd15390c9194e55"
+  },
+  "threshold_or_model_tuning_on_holdout": false,
+  "v3f_checkpoint_sha256": "ca5d4dcb4b9828e6c4339800fe81ec27f32d9b09a090bb57503bfb56746a8da8"
+}

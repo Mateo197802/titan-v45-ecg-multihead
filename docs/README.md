@@ -6,4 +6,6 @@ See [Evidence and Claim Boundaries](evidence-status.md) for the current Primary6
 
 The [frozen waveform audit](frozen-waveform-audit.md) reports the newer CEDIA inference and matched-reference comparison. The [disposition index](revision-data-dispositions.md) distinguishes new results, absent historical evidence and deferred external evaluation.
 
+The [`exploratory SPH PAC probe`](external_validation/sph_pac_probe_results.md) records its frozen inputs, CEDIA execution receipts, aggregate metrics, duplicate sensitivity and privacy-safe figure. It is not independent external or clinical validation.
+
 The [29 October historical recovery update](recovery-status-20261029.md) documents recovered source identity, header modifications, search coverage and remaining reproducibility gaps without regenerating the manuscript or asserting that reviewer requests are all closed.

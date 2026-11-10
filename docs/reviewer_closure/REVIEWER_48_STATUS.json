@@ -5,7 +5,7 @@
       "id": "R1-1",
       "concern": "Independent external validation",
       "disposition": "EXPERIMENT_COMPLETED",
-      "evidence_and_action": "[SPH delivery audit](SPH_DELIVERY_AUDIT.md), [all-input coverage](ALL_INPUT_FLOW_COVERAGE.md), and [CEDIA lineage](CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md); 25,770 ECG. Jobs 17314/17315 show V3H informed P6 epoch selection; exact 17314 manifest is missing. SPH lineage and clinical adjudication are not certified."
+      "evidence_and_action": "[SPH delivery audit](SPH_DELIVERY_AUDIT.md), [all-input coverage](ALL_INPUT_FLOW_COVERAGE.md), [CEDIA lineage](CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md), and the separate [exploratory PAC probe](../external_validation/sph_pac_probe_results.md). The new PAC probe is same-source, previously exposed, and nonconfirmatory; it does not supply independent clinical validation. Jobs 17314/17315 show V3H informed P6 epoch selection; exact 17314 manifest is missing."
     },
     {
       "id": "R1-2",
@@ -29,7 +29,7 @@
       "id": "R2-general",
       "concern": "Excluded classes and Other",
       "disposition": "CLAIM_WITHDRAWAL_REQUIRED",
-      "evidence_and_action": "[All-input coverage](ALL_INPUT_FLOW_COVERAGE.md) reports all three profiles across 25,770 SPH ECG and the 14 compatible endpoints; `Other` and incompatible references remain unvalidated."
+      "evidence_and_action": "[All-input coverage](ALL_INPUT_FLOW_COVERAGE.md) reports all three profiles across 25,770 SPH ECG and the 14 compatible endpoints; the [PAC-only exploratory probe](../external_validation/sph_pac_probe_results.md) does not evaluate `Other` or the full cascade. `Other` and incompatible references remain unvalidated."
     },
     {
       "id": "R2-1a",

@@ -125,5 +125,19 @@ def test_repository_contains_only_manifested_manuscript_and_sph_images() -> None
     assert hashlib.sha256((ROOT / sph["source_aggregate"]).read_bytes()).hexdigest() == sph["source_aggregate_sha256"]
     assert hashlib.sha256((ROOT / sph["renderer"]).read_bytes()).hexdigest() == sph["renderer_sha256"]
     assert hashlib.sha256((ROOT / "scripts/external_validation/plot_sph_aggregate.py").read_bytes()).hexdigest() == sph["base_renderer_sha256"]
-    assert actual_media == ({f"outputs/figures/{name}" for name in expected}
-                            | {f"outputs/figures/external_sph/{name}" for name in sph_files})
+
+    pac_dir = ROOT / "outputs" / "figures" / "external_sph_pac"
+    pac = json.loads((pac_dir / "pac_probe_figure_manifest.json").read_text(encoding="utf-8"))
+    assert pac["schema"] == "TITAN_V45_SPH_PAC_FIGURE_MANIFEST_V1"
+    pac_files = {"sph_pac_probe_exploratory.png", "sph_pac_probe_exploratory.pdf"}
+    assert set(pac["figures"]) == pac_files
+    for name, asset in pac["figures"].items():
+        path = pac_dir / name
+        assert asset["bytes"] == path.stat().st_size > 0
+        assert hashlib.sha256(path.read_bytes()).hexdigest() == asset["sha256"]
+
+    assert actual_media == (
+        {f"outputs/figures/{name}" for name in expected}
+        | {f"outputs/figures/external_sph/{name}" for name in sph_files}
+        | {f"outputs/figures/external_sph_pac/{name}" for name in pac_files}
+    )
