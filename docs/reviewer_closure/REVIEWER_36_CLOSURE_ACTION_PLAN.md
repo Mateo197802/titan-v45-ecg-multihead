@@ -2,7 +2,9 @@
 
 **As of:** 2026-11-10
 
-**Source of truth:** `docs/reviewer_closure/REVIEWER_48_DETAILED.json` at `575c5a5fa4dbcf658308c928aa7d08259fd61c9f`
+**Source of truth:** `docs/reviewer_closure/REVIEWER_48_DETAILED.json` last updated at `b7d904a5b95e7c2476f60b3a47a1590719381667`
+
+**PR #3 HEAD checked:** `2b2e28839573206ee45e8bba7fbd0a67f23b1d68` (OPEN_DRAFT; merge performed: `false`).
 
 **Manuscript state:** `SIN_EDITAR`; submitted manuscript, PDF and response letter were not changed.
 

@@ -18,6 +18,11 @@ RENDERER_SPEC = importlib.util.spec_from_file_location(
 )
 RENDERER = importlib.util.module_from_spec(RENDERER_SPEC)
 RENDERER_SPEC.loader.exec_module(RENDERER)
+ACTION_PLAN_SPEC = importlib.util.spec_from_file_location(
+    "reviewer_action_plan", ROOT / "scripts/evaluation/export_reviewer_36_closure_plan.py"
+)
+ACTION_PLAN = importlib.util.module_from_spec(ACTION_PLAN_SPEC)
+ACTION_PLAN_SPEC.loader.exec_module(ACTION_PLAN)
 
 TECHNICAL_STATUSES = {
     "VERIFIED_COMPLETE",
@@ -87,6 +92,61 @@ def test_detailed_matrix_covers_48_items_and_keeps_two_status_dimensions():
             assert item["reviewer_satisfaction"] == "NOT_APPLICABLE_AUDIT"
         else:
             assert item["reviewer_satisfaction"] != "NOT_APPLICABLE_AUDIT"
+
+
+def test_reviewer_action_plan_separates_matrix_revision_from_live_pr_head():
+    source = json.loads(
+        (ROOT / "docs/reviewer_closure/REVIEWER_48_DETAILED.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    plan = ACTION_PLAN.build_plan(
+        source,
+        source_matrix_commit="matrix-commit",
+        pr_head="live-pr-head",
+        as_of="2026-11-10",
+    )
+
+    assert plan["source_matrix_commit"] == "matrix-commit"
+    assert plan["pr_state_checked"]["head"] == "live-pr-head"
+    assert len(plan["items"]) == 36
+    assert len(plan["internal_audit_ids"]) == 12
+    expected_reviewer_ids = {
+        item["id"] for item in source["items"] if not item["id"].startswith("A-")
+    }
+    assert {item["id"] for item in plan["items"]} == expected_reviewer_ids
+
+    markdown = ACTION_PLAN.render_markdown(plan)
+    response = ACTION_PLAN.render_response_draft(plan)
+    for reviewer_id in expected_reviewer_ids:
+        assert f"### {reviewer_id} —" in markdown
+        assert f"### {reviewer_id} —" in response
+    assert "Source of truth" in markdown
+    assert "PR #3 HEAD checked" in markdown
+    assert "NOT FOR SUBMISSION" in response
+
+
+def test_editorial_crosswalk_covers_exactly_the_editorial_only_reviewer_items():
+    source = json.loads(
+        (ROOT / "docs/reviewer_closure/REVIEWER_48_DETAILED.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    editorial_ids = {
+        item["id"]
+        for item in source["items"]
+        if item["reviewer_satisfaction"] == "EDITORIAL_ACTION_ONLY"
+    }
+    document = (ROOT / "docs/reviewer_closure/REVIEWER_FIGURE_TABLE_CORRECTIONS.md").read_text(
+        encoding="utf-8"
+    )
+    crosswalk = document.split("## Editorial-only reviewer crosswalk", maxsplit=1)[1]
+    crosswalk_ids = set(re.findall(r"^\| (R[12]-[^|]+) \|", crosswalk, flags=re.MULTILINE))
+
+    assert len(editorial_ids) == 21
+    assert crosswalk_ids == editorial_ids
+    assert "## Proposed text for author review (not inserted)" in document
+    assert "## Figure and caption proposals" in document
 
 
 def test_optuna_a10_disposition_is_linked_to_separate_pr_not_embedded_in_pr3():
@@ -162,6 +222,13 @@ def test_closure_documents_have_no_broken_local_links():
         "docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md",
         "docs/reviewer_closure/CUSTODIAN_BACKUP_REQUEST.md",
         "docs/reviewer_closure/SPLIT_CALIBRATION_DISPOSITION.md",
+        "docs/reviewer_closure/REVIEWER_36_CLOSURE_ACTION_PLAN.md",
+        "docs/reviewer_closure/REVIEWER_15_TECHNICAL_FINAL_MATRIX.md",
+        "docs/reviewer_closure/REVIEWER_REPRODUCIBILITY_GAPS.md",
+        "docs/reviewer_closure/REVIEWER_CODE_AND_FORMULA_AUDIT.md",
+        "docs/reviewer_closure/REVIEWER_FIGURE_TABLE_CORRECTIONS.md",
+        "docs/reviewer_closure/REVIEWER_CLAIM_WITHDRAWAL_DECISIONS.md",
+        "docs/reviewer_closure/REVIEWER_RESPONSE_EVIDENCE_DRAFT.md",
     )
     for relative_path in documents:
         path = ROOT / relative_path

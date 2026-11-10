@@ -50,7 +50,9 @@ def _reviewer_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return [row for row in rows if not row["id"].startswith("A-")]
 
 
-def build_plan(source: dict[str, Any], *, source_commit: str, as_of: str) -> dict[str, Any]:
+def build_plan(
+    source: dict[str, Any], *, source_matrix_commit: str, pr_head: str, as_of: str
+) -> dict[str, Any]:
     rows = source.get("items")
     if not isinstance(rows, list) or len(rows) != 48:
         raise ValueError("source matrix must contain exactly 48 items")
@@ -129,10 +131,10 @@ def build_plan(source: dict[str, Any], *, source_commit: str, as_of: str) -> dic
         "schema": SCHEMA,
         "as_of": as_of,
         "source_matrix": SOURCE_PATH,
-        "source_commit": source_commit,
+        "source_matrix_commit": source_matrix_commit,
         "pr_state_checked": {
             "number": 3,
-            "head": source_commit,
+            "head": pr_head,
             "base": "main",
             "state": "OPEN_DRAFT",
             "merge_performed": False,
@@ -167,7 +169,9 @@ def render_markdown(plan: dict[str, Any]) -> str:
         "",
         f"**As of:** {plan['as_of']}",
         "",
-        f"**Source of truth:** `{plan['source_matrix']}` at `{plan['source_commit']}`",
+        f"**Source of truth:** `{plan['source_matrix']}` last updated at `{plan['source_matrix_commit']}`",
+        "",
+        f"**PR #3 HEAD checked:** `{plan['pr_state_checked']['head']}` ({plan['pr_state_checked']['state']}; merge performed: `{str(plan['pr_state_checked']['merge_performed']).lower()}`).",
         "",
         "**Manuscript state:** `SIN_EDITAR`; submitted manuscript, PDF and response letter were not changed.",
         "",
@@ -287,7 +291,7 @@ def render_response_draft(plan: dict[str, Any]) -> str:
         "**NOT FOR SUBMISSION — requires author review and approval.**",
         "**The manuscript has not been edited; the submitted PDF and response letter are unchanged.**",
         "",
-        f"Source: [`{plan['source_matrix']}`]({Path(plan['source_matrix']).name}) at `{plan['source_commit']}`. This document turns the existing technical disposition into provisional evidence language; it does not assert that a proposed manuscript change has already been made or that the reviewer is satisfied.",
+        f"Source: [`{plan['source_matrix']}`]({Path(plan['source_matrix']).name}), last updated at `{plan['source_matrix_commit']}`; PR #3 HEAD checked at `{plan['pr_state_checked']['head']}`. This document turns the existing technical disposition into provisional evidence language; it does not assert that a proposed manuscript change has already been made or that the reviewer is satisfied.",
         "",
         "Each reply below is conditional on authors approving and actually implementing the associated manuscript change. Keep the scientific limitation in the final response even when the proposed editorial action is accepted.",
         "",
@@ -326,11 +330,21 @@ def render_response_draft(plan: dict[str, Any]) -> str:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[2])
-    parser.add_argument("--source-commit", required=True)
+    parser.add_argument(
+        "--source-matrix-commit",
+        required=True,
+        help="Commit that last changed the source matrix.",
+    )
+    parser.add_argument("--pr-head", required=True, help="Live-verified PR #3 branch head.")
     parser.add_argument("--as-of", required=True)
     args = parser.parse_args()
     source = json.loads((args.root / SOURCE_PATH).read_text(encoding="utf-8"))
-    plan = build_plan(source, source_commit=args.source_commit, as_of=args.as_of)
+    plan = build_plan(
+        source,
+        source_matrix_commit=args.source_matrix_commit,
+        pr_head=args.pr_head,
+        as_of=args.as_of,
+    )
     out = args.root / "docs/reviewer_closure"
     out.mkdir(parents=True, exist_ok=True)
     (out / "REVIEWER_36_CLOSURE_ACTION_PLAN.json").write_text(

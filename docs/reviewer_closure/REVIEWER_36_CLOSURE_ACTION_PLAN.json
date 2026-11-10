@@ -2,10 +2,10 @@
   "schema": "TITAN_V45_REVIEWER_36_CLOSURE_ACTION_PLAN_V1",
   "as_of": "2026-11-10",
   "source_matrix": "docs/reviewer_closure/REVIEWER_48_DETAILED.json",
-  "source_commit": "575c5a5fa4dbcf658308c928aa7d08259fd61c9f",
+  "source_matrix_commit": "b7d904a5b95e7c2476f60b3a47a1590719381667",
   "pr_state_checked": {
     "number": 3,
-    "head": "575c5a5fa4dbcf658308c928aa7d08259fd61c9f",
+    "head": "2b2e28839573206ee45e8bba7fbd0a67f23b1d68",
     "base": "main",
     "state": "OPEN_DRAFT",
     "merge_performed": false
