@@ -20,6 +20,13 @@ contracts without attributing them to a historically demonstrated search.
 The V3C summary can be cited as a partial archival record, separate from the
 canonical specialist metrics and from any new external-source study.
 
+New receipt-level findings for jobs 13169, 13172 and 13181 are documented in
+[Optuna 41M archived evidence reconciliation](OPTUNA_41M_NEW_EVIDENCE.md).
+They distinguish two database generations, record two bounded completed-trial
+observations and retain the failed SLURM states. They do not recover SQLite
+bytes or establish a trial-to-published-checkpoint link; the original database
+remains unavailable in the inspected package.
+
 To close historical reconstruction, recover the original study or a complete
 export with its version, objective, trial states and values, dataset/split
 identities, and a job/configuration receipt binding the promoted trial to
