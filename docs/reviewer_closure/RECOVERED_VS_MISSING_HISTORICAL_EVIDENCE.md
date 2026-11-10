@@ -21,3 +21,5 @@
 NOC reported that its reviewed 2026-09-04 17:00:01 backup listing did not contain the requested `20260623_*` directories or the exact loader/Optuna database. The supplied archive inventories and bounded CEDIA search also did not recover the target files. These results support a narrow conclusion about the sources checked; they do not prove that every collaborator, offline copy, or institutional cold archive was searched.
 
 No historical result, split, threshold, quarantine rate or patient count has been imputed from a selected panel or a job name. Reopen an item only when the missing artifact and its checkpoint/job association are supplied with a verifiable hash and authorized provenance.
+
+The CEDIA cleanup manifest was separately searched for the exact split, panel-index, loader and quarantine filenames listed in the current recovery request; it contains none of them. It lists only the six Optuna log names described above among the searched terms. See the [sanitized cleanup-manifest receipt](receipts/CEDIA_CLEANUP_MANIFEST_TRIAGE_2026-11-10.json). This narrows one inventory source and does not establish global absence.

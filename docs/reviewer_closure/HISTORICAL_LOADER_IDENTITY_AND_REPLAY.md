@@ -27,3 +27,5 @@ Jobs 17296 and 17305 provide calibration/gate summaries but do not identify the 
 ## Closure rule
 
 Do not claim the original waveform pipeline was exactly reproduced unless an independently linked source snapshot matching the expected identity is recovered and the complete input/checkpoint/configuration chain is demonstrated. Preserve the observed residuals and discrepancies. No model tuning, threshold search on evaluation data, tolerance relaxation or replacement historical prediction has been performed for this audit.
+
+The recovered CEDIA cleanup manifest did not list the expected `data_loader_ultra.py` name or any V3H/V3S/V3M/V3P split or panel-index names. The check is limited to that path/size inventory; it does not prove absence from every CEDIA backup. See the [sanitized manifest receipt](receipts/CEDIA_CLEANUP_MANIFEST_TRIAGE_2026-11-10.json).

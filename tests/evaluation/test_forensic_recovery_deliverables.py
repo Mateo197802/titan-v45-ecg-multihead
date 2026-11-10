@@ -67,6 +67,22 @@ def test_cedia_cleanup_manifest_receipt_is_bounded_and_sanitized():
     assert receipt["bounded_search"]["directory_count"] == 4914
     assert receipt["bounded_search"]["stage_archive_optuna_name_hits"] == 0
     assert receipt["bounded_search"]["archive_extracted"] is False
+    target_search = receipt["historical_target_name_search"]
+    assert target_search["exact_target_match_count"] == 0
+    assert target_search["term_entry_counts"] == {
+        "v3h": 0,
+        "v3s": 0,
+        "v3m": 0,
+        "v3p": 0,
+        "loader": 0,
+        "quarantine": 0,
+        "split90": 0,
+        "split10": 0,
+        "panel_index": 0,
+        "optuna": 6,
+        "sqlite": 0,
+        "manifest": 0,
+    }
 
     public_text = json.dumps(receipt)
     assert "/home/diego." not in public_text

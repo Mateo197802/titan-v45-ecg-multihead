@@ -22,6 +22,8 @@ No authentic V4.5 ledger links an uncertainty score, frozen quarantine policy/ve
 
 Therefore, historical quarantine is **not assessed**, not 0%. Do not infer quarantine from P8 fallback, empty threshold sets, `cascade` role constants, or an unlinked uncertainty module. The SPH evaluation did not introduce or validate a quarantine policy; it records quarantine as not assessed.
 
+The recovered CEDIA cleanup manifest contained no basename matching the requested quarantine-ledger or policy artifacts. This only means those names were not present in that inventory; the historical quarantine rate remains **not assessed**, not zero. See the [sanitized manifest receipt](receipts/CEDIA_CLEANUP_MANIFEST_TRIAGE_2026-11-10.json).
+
 ## What would support stronger claims
 
 A new and explicitly labeled experiment would need a complete eligible-input denominator, compatible reference ontology, frozen policy and uncertainty score, record-level transition ledger, failure states, and patient-clustered metrics. To claim human review, it would additionally need a measured referral workflow and evidence of reviewer actions/outcomes. None of those missing historical records can be recreated from the selected panels or aggregate counts.

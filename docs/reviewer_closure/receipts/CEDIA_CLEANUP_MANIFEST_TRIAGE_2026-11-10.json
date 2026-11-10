@@ -65,6 +65,35 @@
     "stage_archive_optuna_name_hits": 0,
     "archive_extracted": false
   },
+  "historical_target_name_search": {
+    "exact_target_names_checked": [
+      "v3m_ptbxl_full_p4_folds1_9_train_split90_manifest.csv",
+      "v3m_ptbxl_full_p4_folds1_9_val_split10_manifest.csv",
+      "v3m_internal_val_p4_panel_index.json",
+      "v3p_rhythm_train_v3j_plus_incart_svdb_virtual_manifest.csv",
+      "label_separator_validation_strict_primary_model_ready.csv",
+      "data_loader_ultra.py",
+      "titan_v45_41m_multihead_optuna.db",
+      "p0_curated_quarantine_manifest.csv",
+      "run_ood_quarantine.py"
+    ],
+    "exact_target_match_count": 0,
+    "term_entry_counts": {
+      "v3h": 0,
+      "v3s": 0,
+      "v3m": 0,
+      "v3p": 0,
+      "loader": 0,
+      "quarantine": 0,
+      "split90": 0,
+      "split10": 0,
+      "panel_index": 0,
+      "optuna": 6,
+      "sqlite": 0,
+      "manifest": 0
+    },
+    "scope": "Basename search of this cleanup manifest only; not a search of all CEDIA storage or all backups."
+  },
   "interpretation": {
     "classification": "REFERENCED_ONLY",
     "demonstrates": "The cleanup manifest lists six Optuna-related log entries and their sizes.",
