@@ -36,6 +36,7 @@
       "status": "PASS",
       "path": "docs/reviewer_closure/receipts/AF_REFERENCE_RECHECK_2026-11-10.json",
       "sha256": "42199ccc5392daec3ce0fa0be793917509af7de3973d29e7a3418c3aab85300e",
+      "sha256_basis": "UTF-8 text with CRLF normalized to LF",
       "result": "P6 1,643 rows and P8 2,193 rows; 390 AF-positive rows in each overlapping profile; zero unresolved code rows and zero flag/code mismatches. One AF/NSR code co-occurrence is retained, not adjudicated. P6 is nested in P8.",
       "does_not_prove": "Clinical adjudication, incident or first-diagnosed AF, longitudinal truth, or independent validation."
     },
@@ -44,7 +45,8 @@
       "command": "python scripts/evaluation/verify_release_evidence.py --output docs/reviewer_closure/receipts/RELEASE_METRICS_RECHECK_2026-11-10.json",
       "status": "PASS",
       "path": "docs/reviewer_closure/receipts/RELEASE_METRICS_RECHECK_2026-11-10.json",
-      "sha256": "749c1e0f3127daa8f60f29da2cf6dd1f00357794e854514f490139bc74e136b6",
+      "sha256": "86f6920813fb79b256c73903e9a91ad8eb0255f1ad995dd4f139737fd82b0647",
+      "sha256_basis": "UTF-8 text with CRLF normalized to LF",
       "result": "Recomputed released cohort, panel and metric summaries from saved prediction tables and manifests: P6 1,564/1,643, 95.1917% accuracy, 80.0938% macro-F1; P8 1,987/2,193 accepted-label accuracy, 76.1425% macro-F1; P4 962 panel rows, 80.2290% mean binary accuracy, 79.3456% macro-F1.",
       "does_not_prove": "Fresh ECG inference, training replay, checkpoint-to-job linkage, patient isolation, or independent validation. The verifier reads row-level files locally but emits only aggregates and whole-artifact hashes."
     },
@@ -54,6 +56,7 @@
       "status": "PASS",
       "path": "docs/reviewer_closure/receipts/SPH_AGGREGATE_VALIDATION_2026-11-10.json",
       "sha256": "9100d70600709bfe6b8ab932efe8b07e86b622838e80e1de0c6bcbbe6bdaa9dc",
+      "sha256_basis": "UTF-8 text with CRLF normalized to LF",
       "result": "25,770 source ECG reconcile; three profiles and 14 compatible endpoints reconcile to the frozen protocol, including denominators, confusion counts, reported metrics, bootstrap metadata and duplicate-sensitivity denominators.",
       "does_not_prove": "New model inference, adjudicated labels, complete historical training-source independence, or a quarantine rate."
     }

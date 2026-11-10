@@ -5,6 +5,8 @@ import json
 import re
 from pathlib import Path
 
+from titan_v45.evaluation.release_evidence import _sha256_lf_normalized
+
 ROOT = Path(__file__).resolve().parents[2]
 DOCS = ROOT / "docs/reviewer_closure"
 REPORT = DOCS / "TECHNICAL_15_EVIDENCE_CEILING_EXECUTION.json"
@@ -128,7 +130,8 @@ def test_execution_receipts_are_aggregate_only_and_hash_pinned():
     for receipt in receipts:
         path = ROOT / receipt["path"]
         assert path.is_file(), receipt["path"]
-        assert hashlib.sha256(path.read_bytes()).hexdigest() == receipt["sha256"]
+        assert receipt["sha256_basis"] == "UTF-8 text with CRLF normalized to LF"
+        assert _sha256_lf_normalized(path) == receipt["sha256"]
         assert receipt["sha256"] in reproduction_doc
         data = _load_json(path)
         keys = set(_nested_keys(data))

@@ -10,9 +10,11 @@
 | Check | Command | Result | Receipt |
 | --- | --- | --- | --- |
 | AF code/flag consistency | `python scripts/evaluation/audit_af_reference_contract.py --output docs/reviewer_closure/receipts/AF_REFERENCE_RECHECK_2026-11-10.json` | PASS. P6 1,643 records; P8 2,193; 390 AF reference positives in each overlapping profile; zero flag/code mismatches and unresolved rows. | SHA-256 `42199ccc5392daec3ce0fa0be793917509af7de3973d29e7a3418c3aab85300e`. |
-| Release metric/manifest verification | `python scripts/evaluation/verify_release_evidence.py --output docs/reviewer_closure/receipts/RELEASE_METRICS_RECHECK_2026-11-10.json` | PASS. Recomputed P6/P8/P4 summaries from released predictions and manifests. | SHA-256 `749c1e0f3127daa8f60f29da2cf6dd1f00357794e854514f490139bc74e136b6`. |
+| Release metric/manifest verification | `python scripts/evaluation/verify_release_evidence.py --output docs/reviewer_closure/receipts/RELEASE_METRICS_RECHECK_2026-11-10.json` | PASS. Recomputed P6/P8/P4 summaries from released predictions and manifests. | SHA-256 `86f6920813fb79b256c73903e9a91ad8eb0255f1ad995dd4f139737fd82b0647`. |
 | SPH aggregate/protocol validation | `python scripts/external_validation/validate_sph_aggregate.py --aggregate outputs/results/external_sph/sph_aggregate_32669.json --protocol configs/external_validation/sph_frozen.json` | PASS. `source_records=25770`, `profiles_checked=3`, `endpoints_checked=14`. | SHA-256 `9100d70600709bfe6b8ab932efe8b07e86b622838e80e1de0c6bcbbe6bdaa9dc`. |
 | AF reference regression tests | `python -m pytest tests/evaluation/test_af_pvc_reference_disposition.py tests/evaluation/test_label_reference.py -q` | PASS, 6 tests. | Console result: `6 passed in 0.07s`. |
+
+Receipt hashes are computed from UTF-8 text after normalizing CRLF to LF. This makes the hash invariant to Git checkout line-ending conversion; the JSON values and evidence are unchanged.
 
 The release recomputation produced P6 accuracy `0.9519172245891662` and macro-F1 `0.8009383239876122`; P8 accepted-label accuracy `0.9060647514819882` and macro-F1 `0.7614253535094375`; P4 mean binary accuracy `0.8022904853689048` and macro-F1 `0.7934563704063461`. These are recomputations from archived prediction rows, not a new signal inference or training reproduction.
 
