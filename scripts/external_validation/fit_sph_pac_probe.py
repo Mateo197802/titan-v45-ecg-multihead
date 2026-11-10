@@ -103,7 +103,8 @@ def run(args):
         "cuda": torch.version.cuda,
         "numpy": np.__version__,
         "scipy": scipy.__version__,
-    }, config["environment"]["versions"])
+    }, {name: config["environment"]["versions"][name]
+        for name in ("python", "torch", "cuda", "numpy", "scipy")})
     for name, expected in config["source"]["sha256"].items():
         if sha256_file(source / name) != expected:
             raise ValueError(f"SPH source hash mismatch: {name}")

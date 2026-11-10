@@ -4,6 +4,7 @@ from __future__ import annotations
 import csv
 import hashlib
 import re
+from collections import Counter
 from pathlib import Path, PurePosixPath
 
 _REPORT_COLUMNS = tuple(f"report_{index}" for index in range(18))
@@ -18,6 +19,12 @@ _NEGATION_RE = re.compile(
     r"no\s+evidence\s+(?:of|for))\b(?:\W+\w+){0,5}\W*$",
     re.IGNORECASE,
 )
+_POST_NEGATION_RE = re.compile(
+    r"^\W*(?:(?:are|is|was|were|have\s+been|has\s+been)\s+)?"
+    r"(?:absent\b|absence\b|none\b|negative\b|"
+    r"not\s+(?:seen|observed|detected|present|identified|recorded)\b)",
+    re.IGNORECASE,
+)
 _ID_RE = re.compile(r"^[0-9]{8}$")
 
 
@@ -30,7 +37,9 @@ def classify_machine_pac_report(reports):
     for match in _PAC_RE.finditer(text):
         context = text[max(0, match.start() - 80):match.start()]
         context = re.split(r"[;.!?\n]", context)[-1]
-        if _NEGATION_RE.search(context):
+        following = text[match.end():match.end() + 80]
+        following = re.split(r"[;.!?\n]", following)[0]
+        if _NEGATION_RE.search(context) or _POST_NEGATION_RE.search(following):
             negative = True
         else:
             positive = True
@@ -106,6 +115,108 @@ def iter_mimic_machine_reports(machine_measurements_path, record_list_path):
     missing = set(paths) - seen
     if missing:
         raise ValueError("record_list has missing machine-measurement rows")
+
+
+def audit_mimic_metadata_source(dataset_root):
+    """Return aggregate metadata-join evidence without opening ECG waveforms."""
+    root = Path(dataset_root).resolve()
+    integrity = verify_mimic_metadata_sha256_manifest(root)
+    subjects = set()
+    report_states = Counter()
+    total = 0
+    for row in iter_mimic_machine_reports(
+        root / "machine_measurements.csv", root / "record_list.csv"
+    ):
+        total += 1
+        subjects.add(row["subject_id"])
+        report_states[row["report_state"]] += 1
+    if total == 0 or total != sum(report_states.values()):
+        raise ValueError("MIMIC metadata preflight has no reconciled report rows")
+    state_names = (
+        "positive_mention", "explicit_negative_mention", "not_mentioned",
+        "ambiguous_mention", "missing_report_text",
+    )
+    return {
+        "schema": "TITAN_V45_MIMIC_PAC_METADATA_PREFLIGHT_V1",
+        "status": "metadata_only_preflight_no_waveform_read",
+        "metadata_source_integrity": integrity,
+        "denominators": {
+            "paired_metadata_records": total,
+            "unique_subjects": len(subjects),
+            "report_state_counts": {name: int(report_states[name]) for name in state_names},
+        },
+        "preperformance_controls": {
+            "waveform_files_read": False,
+            "waveform_inference_performed": False,
+            "model_performance_metrics_computed": False,
+            "machine_reports_used_as_clinical_labels": False,
+        },
+        "privacy": {
+            "subject_or_study_identifiers_exported": False,
+            "waveform_paths_or_hashes_exported": False,
+            "waveforms_or_report_text_exported": False,
+        },
+    }
+
+
+def verify_mimic_metadata_sha256_manifest(dataset_root):
+    """Verify metadata files against the supplied manifest, without opening waveforms."""
+    root = Path(dataset_root).resolve()
+    manifest = root / "SHA256SUMS.txt"
+    if not manifest.is_file() or manifest.is_symlink():
+        raise ValueError("MIMIC source lacks a regular SHA256SUMS.txt")
+    manifest_hash = hashlib.sha256(manifest.read_bytes()).hexdigest()
+    required = {
+        "LICENSE.txt", "RECORDS", "record_list.csv", "machine_measurements.csv",
+        "machine_measurements_data_dictionary.csv", "waveform_note_links.csv",
+    }
+    entries = {}
+    with manifest.open(encoding="ascii", newline="") as stream:
+        for line_number, raw_line in enumerate(stream, 1):
+            line = raw_line.rstrip("\r\n")
+            if len(line) < 67 or not re.fullmatch(r"[0-9a-fA-F]{64}", line[:64]):
+                raise ValueError(f"invalid MIMIC SHA256SUMS entry at line {line_number}")
+            if line[64:66] not in {"  ", " *"}:
+                raise ValueError(f"invalid MIMIC SHA256SUMS separator at line {line_number}")
+            name = line[66:]
+            if name.startswith("./"):
+                name = name[2:]
+            relative = PurePosixPath(name)
+            if (relative.is_absolute() or ".." in relative.parts or "\\" in name
+                    or not relative.parts or name in entries):
+                raise ValueError("unsafe or duplicate path in MIMIC SHA256SUMS")
+            entries[name] = line[:64].lower()
+    if not required.issubset(entries):
+        raise ValueError("MIMIC SHA256SUMS lacks required metadata entries")
+    metadata_hashes = {}
+    verified_bytes = 0
+    for name in sorted(required):
+        path = root / name
+        if path.is_symlink() or not path.is_file() or not path.resolve().is_relative_to(root):
+            raise ValueError(f"MIMIC metadata file is missing or unsafe: {name}")
+        digest = hashlib.sha256()
+        size = 0
+        with path.open("rb") as source:
+            for block in iter(lambda: source.read(1024 * 1024), b""):
+                digest.update(block)
+                size += len(block)
+        actual = digest.hexdigest()
+        if actual != entries[name]:
+            raise ValueError(f"MIMIC metadata hash mismatch: {name}")
+        metadata_hashes[name] = actual
+        verified_bytes += size
+    return {
+        "schema": "TITAN_V45_MIMIC_IV_ECG_V1_METADATA_INTEGRITY_V1",
+        "dataset_version": "MIMIC-IV-ECG 1.0",
+        "source_manifest_sha256": manifest_hash,
+        "manifest_entries": len(entries),
+        "metadata_files_verified": len(metadata_hashes),
+        "metadata_bytes_verified": verified_bytes,
+        "metadata_file_sha256": metadata_hashes,
+        "waveform_files_verified": False,
+        "manifest_origin_independently_authenticated": False,
+        "subject_or_study_identifiers_exported": False,
+    }
 
 
 def verify_mimic_sha256_manifest(dataset_root):

@@ -11,11 +11,13 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 import numpy as np
+import scipy
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 
 from titan_v45.data.mimic_ecg_reports import (
+    audit_mimic_metadata_source,
     iter_mimic_machine_reports,
     verify_mimic_sha256_manifest,
 )
@@ -78,7 +80,46 @@ def _write_exclusive(path, payload):
         stream.write("\n")
 
 
-def run(args):
+def _run_metadata_only(args):
+    repo, source = args.repo.resolve(), args.source.resolve()
+    output = args.output.resolve()
+    if (source.is_relative_to(repo) or repo.is_relative_to(source)
+            or not output.is_relative_to(repo)):
+        raise ValueError("MIMIC source must stay outside Git; source-control output must be in Git")
+    config, config_hash, commit = _verify_tree(
+        repo, args.expected_commit, args.expected_config_sha256
+    )
+    if config["mimic_iv_ecg_v1"].get("metadata_only_preflight_allowed") is not True:
+        raise PermissionError("MIMIC metadata-only preflight is not authorized by the frozen protocol")
+    dependency_hashes = read_required_sha256_environment({
+        "python_deps": "TITAN_PYTHON_DEPS_SHA256",
+    }, expected_hashes=config["environment"]["dependency_archive_sha256"])
+    runtime_versions = verify_runtime_versions(
+        {
+            "python": platform.python_version(),
+            "numpy": np.__version__,
+            "scipy": scipy.__version__,
+        },
+        {name: config["environment"]["versions"][name]
+         for name in ("python", "numpy", "scipy")},
+    )
+    metadata = audit_mimic_metadata_source(source)
+    receipt = {
+        **metadata,
+        "protocol_commit": commit,
+        "protocol_config_sha256": config_hash,
+        "implementation_sha256": config["implementation_sha256"],
+        "dependency_archive_sha256": dependency_hashes,
+        "dataset_doi": config["mimic_iv_ecg_v1"]["dataset_doi"],
+        "dataset_version": config["mimic_iv_ecg_v1"]["version"],
+        "license": config["mimic_iv_ecg_v1"]["license"],
+        "runtime": runtime_versions,
+    }
+    _write_exclusive(output, receipt)
+    return receipt
+
+
+def _run_full_source_audit(args):
     import wfdb
 
     repo, source = args.repo.resolve(), args.source.resolve()
@@ -95,8 +136,10 @@ def run(args):
     runtime_versions = verify_runtime_versions({
         "python": platform.python_version(),
         "numpy": np.__version__,
+        "scipy": scipy.__version__,
         "wfdb": wfdb.__version__,
-    }, config["environment"]["versions"])
+    }, {name: config["environment"]["versions"][name]
+        for name in ("python", "numpy", "scipy", "wfdb")})
     mimic = config["mimic_iv_ecg_v1"]
     if mimic["complete_download_authorized"] is not True:
         raise PermissionError("MIMIC source audit is blocked pending CEDIA quota/storage approval")
@@ -201,6 +244,12 @@ def run(args):
     return source_control
 
 
+def run(args):
+    if args.metadata_only:
+        return _run_metadata_only(args)
+    return _run_full_source_audit(args)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--repo", type=Path, default=ROOT)
@@ -208,14 +257,26 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--expected-commit", required=True)
     parser.add_argument("--expected-config-sha256", required=True)
+    parser.add_argument(
+        "--metadata-only", action="store_true",
+        help="verify metadata joins and report mentions without opening waveform files",
+    )
     args = parser.parse_args()
     receipt = run(args)
-    print(json.dumps({
-        "record_count": receipt["denominators"]["paired_record_list_and_machine_report_rows"],
-        "valid_waveforms": receipt["denominators"]["waveforms_with_valid_contract"],
-        "source_manifest_sha256": receipt["source_integrity"]["source_manifest_sha256"],
-        "output_sha256": sha256_file(args.output),
-    }, sort_keys=True))
+    if args.metadata_only:
+        summary = {
+            "paired_metadata_records": receipt["denominators"]["paired_metadata_records"],
+            "waveform_files_read": receipt["preperformance_controls"]["waveform_files_read"],
+            "source_manifest_sha256": receipt["metadata_source_integrity"]["source_manifest_sha256"],
+        }
+    else:
+        summary = {
+            "record_count": receipt["denominators"]["paired_record_list_and_machine_report_rows"],
+            "valid_waveforms": receipt["denominators"]["waveforms_with_valid_contract"],
+            "source_manifest_sha256": receipt["source_integrity"]["source_manifest_sha256"],
+        }
+    summary["output_sha256"] = sha256_file(args.output)
+    print(json.dumps(summary, sort_keys=True))
 
 
 if __name__ == "__main__":

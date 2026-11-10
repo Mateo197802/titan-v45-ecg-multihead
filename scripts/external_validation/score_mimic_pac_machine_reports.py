@@ -179,7 +179,8 @@ def run(args):
         "numpy": np.__version__,
         "scipy": scipy.__version__,
         "wfdb": wfdb.__version__,
-    }, config["environment"]["versions"])
+    }, {name: config["environment"]["versions"][name]
+        for name in ("python", "torch", "cuda", "numpy", "scipy", "wfdb")})
     mimic = config["mimic_iv_ecg_v1"]
     if mimic["complete_download_authorized"] is not True:
         raise PermissionError("MIMIC scoring is blocked pending CEDIA quota/storage approval")

@@ -49,6 +49,14 @@ def test_runtime_receipt_rejects_version_mismatch():
         )
 
 
+def test_runtime_receipt_rejects_missing_frozen_components():
+    with pytest.raises(ValueError, match="runtime receipt components differ"):
+        verify_runtime_versions(
+            {"python": "3.11.14"},
+            {"python": "3.11.14", "scipy": "1.15.3"},
+        )
+
+
 def test_implementation_manifest_requires_every_expected_file_and_exact_hash(tmp_path):
     relative = "src/model.py"
     target = tmp_path / relative

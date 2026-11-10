@@ -1,11 +1,13 @@
 import csv
 import hashlib
 import importlib.util
+import json
 from pathlib import Path
 
 import pytest
 import torch
 
+import titan_v45.data.mimic_ecg_reports as mimic_reports
 from titan_v45.data.mimic_ecg_reports import (
     classify_machine_pac_report,
     iter_mimic_machine_reports,
@@ -43,6 +45,11 @@ def _write_checksum_tree(root, *, extra_files=None):
     [
         (["Premature atrial complexes"], "positive_mention"),
         (["No premature atrial complexes"], "explicit_negative_mention"),
+        (["PACs absent"], "explicit_negative_mention"),
+        (["PACs are absent"], "explicit_negative_mention"),
+        (["PACs not seen"], "explicit_negative_mention"),
+        (["PACs were not observed"], "explicit_negative_mention"),
+        (["PACs present; PACs are absent"], "ambiguous_mention"),
         (["Sinus rhythm, normal ECG"], "not_mentioned"),
         (["No PACs; occasional PACs"], "ambiguous_mention"),
         ([""], "missing_report_text"),
@@ -51,6 +58,42 @@ def _write_checksum_tree(root, *, extra_files=None):
 )
 def test_report_parser_uses_explicit_three_state_mentions(reports, expected):
     assert classify_machine_pac_report(reports) == expected
+
+
+def test_metadata_preflight_joins_reports_without_reading_waveforms_or_exporting_ids(tmp_path):
+    audit = getattr(mimic_reports, "audit_mimic_metadata_source", None)
+    assert callable(audit)
+
+    root = tmp_path / "metadata-only"
+    record_list = (
+        b"subject_id,study_id,file_name,ecg_time,path\n"
+        b"10000001,40000001,40000001,2150-01-01 00:00:00,"
+        b"files/p1000/p10000001/s40000001/40000001\n"
+    )
+    measurements = b"subject_id,study_id,report_0\n10000001,40000001,PACs are absent\n"
+    _write_checksum_tree(
+        root,
+        extra_files={
+            "record_list.csv": record_list,
+            "machine_measurements.csv": measurements,
+        },
+    )
+    manifest = root / "SHA256SUMS.txt"
+    with manifest.open("a", encoding="ascii") as stream:
+        stream.write(f"{'a' * 64}  files/p1000/p10000001/s40000001/40000001.hea\n")
+
+    report = audit(root)
+
+    assert report["denominators"]["paired_metadata_records"] == 1
+    assert report["denominators"]["unique_subjects"] == 1
+    assert report["denominators"]["report_state_counts"]["explicit_negative_mention"] == 1
+    assert report["preperformance_controls"]["waveform_files_read"] is False
+    assert report["preperformance_controls"]["model_performance_metrics_computed"] is False
+    assert report["metadata_source_integrity"]["waveform_files_verified"] is False
+    assert report["metadata_source_integrity"]["metadata_files_verified"] == len(_MIMIC_REQUIRED)
+    serialized = json.dumps(report)
+    assert "10000001" not in serialized
+    assert "40000001" not in serialized
 
 
 def test_join_uses_subject_and_study_ids_and_rejects_ambiguous_pairs(tmp_path):

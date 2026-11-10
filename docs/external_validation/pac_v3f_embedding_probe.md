@@ -90,26 +90,29 @@ concordance comparison; all states and their denominators are reported. This
 is not clinical accuracy or external clinical validation. No MIMIC report is
 used for training, threshold selection, or recalibration.
 
-MIMIC execution is deliberately two-stage. First, a no-model preflight verifies
-the complete official SHA-256 manifest, requires a one-to-one
-`record_list.csv`/`machine_measurements.csv` join, checks every waveform's
+MIMIC preflight has two distinct scopes. The metadata-only preflight verifies
+the supplied manifest entries for metadata files, enforces a one-to-one
+`record_list.csv`/`machine_measurements.csv` join, and counts report-mention
+states without opening waveform files. It emits no performance metrics and is
+not sufficient to unlock scoring. When an approved full source is available,
+the separate full-source audit verifies every manifest entry, checks waveform
 duration, sampling rate, canonical leads and declared mV units, and records
-amplitude quantiles, exact-duplicate counts, PAC-mention state counts and all
-technical exclusions. It emits only an aggregate source-control receipt; it
-does not load TITAN weights or calculate performance. That receipt must be
-reviewed, added to the repository, hash-pinned in a new protocol commit, and
-re-verified before the GPU scorer can run. The scorer then checks the same
-source-manifest digest, the committed receipt, the frozen V3F checkpoint and
-the private SPH-trained probe bundle. Its output contains aggregate
-concordance and patient/exact-waveform-clustered intervals only.
+amplitude quantiles, exact-duplicate counts and technical exclusions. Only
+that full-source receipt can be reviewed, committed, hash-pinned and consumed
+by the GPU scorer. The scorer then checks the same source-manifest digest, the
+committed full-source receipt, the frozen V3F checkpoint and the private
+SPH-trained probe bundle. Its output contains aggregate concordance and
+patient/exact-waveform-clustered intervals only.
 
 MIMIC-IV-ECG v1.0 is openly accessible subject to its Open Data Commons ODbL
 terms. However, CEDIA has not returned a readable per-user/project quota
 limit. The full download is blocked pending quota and storage approval; no
-MIMIC data have been downloaded or analyzed. Space available on the shared
-filesystem is not equivalent to the project's quota. The configuration keeps
-`complete_download_authorized=false` and has no committed MIMIC source-control
-receipt, so the MIMIC jobs are not currently executable.
+MIMIC dataset has been found in the authorized project area, and none has been
+downloaded or analyzed here. Space available on the shared filesystem is not
+equivalent to the project's quota. The configuration keeps
+`complete_download_authorized=false` and has no committed full-source control
+receipt. The metadata-only job is implemented but has not been run because
+its metadata inputs are absent; full-source audit and scoring remain gated.
 
 ## Privacy and claims
 
@@ -125,8 +128,9 @@ not modified by this pilot.
 Each CEDIA runner verifies the complete SHA-256 manifest of the protocol,
 implementation, tests, and SLURM launchers before processing data. It rejects
 dependency archives whose measured hashes differ from the protocol pins and
-runtime versions that differ from the recorded CEDIA Python, PyTorch, CUDA,
-NumPy, SciPy, h5py, and WFDB versions. Public-safe receipts record the exact
-code/configuration commit, verified runtime subset, and dependency archive
-hashes. Private embeddings, model bundles, and row-level outputs remain
-outside Git.
+requires an exact runtime-component set for each job. Missing or extra
+components fail closed; every required version is compared with the frozen
+CEDIA Python, PyTorch, CUDA, NumPy, SciPy, h5py, or WFDB pins as applicable.
+Public-safe receipts record the exact code/configuration commit, verified
+runtime subset, and dependency archive hashes. Private embeddings, model
+bundles, and row-level outputs remain outside Git.

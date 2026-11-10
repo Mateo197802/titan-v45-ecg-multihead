@@ -12,6 +12,7 @@ _SHA256 = re.compile(r"^[0-9a-f]{64}$")
 PAC_IMPLEMENTATION_FILES = (
     "docs/external_validation/pac_v3f_embedding_probe.md",
     "scripts/cedia/audit_mimic_pac_source.sbatch",
+    "scripts/cedia/audit_mimic_metadata_preflight.sbatch",
     "scripts/cedia/extract_sph_pac_embeddings.sbatch",
     "scripts/cedia/fit_sph_pac_probe.sbatch",
     "scripts/cedia/score_mimic_pac_machine_reports.sbatch",
@@ -69,8 +70,8 @@ def verify_runtime_versions(
     expected: Mapping[str, str],
 ) -> dict[str, str]:
     """Reject runtime components that do not match the frozen protocol pins."""
-    if not actual:
-        raise ValueError("runtime version receipt is empty")
+    if not actual or set(actual) != set(expected):
+        raise ValueError("runtime receipt components differ from the frozen protocol")
     for name, version in actual.items():
         if not isinstance(version, str) or expected.get(name) != version:
             raise ValueError(f"runtime version differs from frozen protocol: {name}")

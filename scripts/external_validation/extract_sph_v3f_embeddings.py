@@ -13,6 +13,7 @@ from collections import Counter
 from pathlib import Path
 
 import numpy as np
+import scipy
 import torch
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -124,8 +125,10 @@ def run(args):
         "torch": torch.__version__,
         "cuda": torch.version.cuda,
         "numpy": np.__version__,
+        "scipy": scipy.__version__,
         "h5py": h5py.__version__,
-    }, config["environment"]["versions"])
+    }, {name: config["environment"]["versions"][name]
+        for name in ("python", "torch", "cuda", "numpy", "scipy", "h5py")})
     for name, expected in config["source"]["sha256"].items():
         if sha256_file(source / name) != expected:
             raise ValueError(f"SPH source hash mismatch: {name}")
