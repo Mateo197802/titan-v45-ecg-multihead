@@ -57,3 +57,11 @@ The incremental inventory examined 3,613 CEDIA entries with bounded depth and me
 ## Publication boundary
 
 Only hashes, job IDs, class-level aggregates, source-level counts and sanitized interpretations belong in PR #3. Keep all signals, patient/record IDs, manifest rows, row-level predictions, duplicate links and per-patient bootstrap assignments in authorized CEDIA storage. PR #3 remains separate from PR #4 (A10/Optuna) and PR #5 (V4.6); this audit changes neither the manuscript nor the submission PDF.
+
+## Reconciliation update (2026-11-10)
+
+The original triage above is a 2026-11-09 snapshot at `a07e6c8`; it has not been rewritten as if it were created at the current head. The current PR #3 head was rechecked on GitHub as `31c4ccf2a7a899f1d38a2800f290472040becd06`, open and draft against `main`. CI at that head reports Python 3.10, 3.11 and 3.12 checks all passing in workflow run [42764288859](https://github.com/Mateo197802/titan-v45-ecg-multihead/actions/runs/42764288859). The PR adds the exploratory SPH PAC embedding probe after the original snapshot; that probe is post hoc, the PAC target had already been inspected, and it does not establish V4.5 historical PAC-head performance or clinical/independent validation.
+
+The two user-authorized ZIPs were rechecked against their declared whole-archive SHA-256 values. Static central-directory inspection found 97 incremental-archive entries and 797 private-archive entries, with zero absolute/traversal paths and zero symlink entries. No archive was extracted and no bundled script, notebook or model was executed in this check. The separately named `TITAN_TRIAGE_EVIDENCIA_CEDIA_2026-11-09.md` was not present in the checked local Downloads/attachment locations, so it is not treated as a source.
+
+A read-only CEDIA check confirmed that the authorized project checkout's `HEAD` equals the public PR #3 head and its working tree had no listed modifications. Its cached upstream-tracking status showed it one commit ahead; no fetch was performed, so this does not independently establish that the remote ref is current. Read-only accounting reports PAC jobs 32883 and 32884 as `COMPLETED`, exit `0:0`. No new historical train/validation manifests, exact loader, Optuna database or quarantine ledger were recovered by these checks. The evidence ceiling for those historical claims is unchanged.
