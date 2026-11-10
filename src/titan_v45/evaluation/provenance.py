@@ -115,4 +115,3 @@ def verify_implementation_sha256(
             raise ValueError(f"PAC implementation hash mismatch: {relative}")
         verified[relative] = actual
     return verified
-
