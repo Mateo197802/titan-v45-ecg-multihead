@@ -209,6 +209,7 @@ def render_markdown(plan: dict[str, Any]) -> str:
         "- [Selective prediction and quarantine](SELECTIVE_PREDICTION_EXPERIMENT.md)",
         "- [15-comment technical closure matrix](REVIEWER_15_TECHNICAL_FINAL_MATRIX.md)",
         "- [CEDIA sanitized job receipt](receipts/CEDIA_JOB_LOGS_2026-11-10.json)",
+        "- [CEDIA targeted Slurm accounting](receipts/CEDIA_TARGETED_SACCT_RECONCILIATION_2026-11-10.json)",
         "",
         "## How to read each item",
         "",

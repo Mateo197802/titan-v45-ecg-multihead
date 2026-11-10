@@ -155,6 +155,15 @@ def test_new_reviewer_closure_markdown_links_resolve_locally():
             assert (path.parent / target).is_file(), f"{path.name}: {link}"
 
 
+def test_action_plan_links_targeted_cedia_accounting_receipt():
+    markdown = PLAN_MD.read_text(encoding="utf-8")
+    receipt = DOCS / "receipts/CEDIA_TARGETED_SACCT_RECONCILIATION_2026-11-10.json"
+
+    assert receipt.is_file()
+    assert "CEDIA targeted Slurm accounting" in markdown
+    assert "CEDIA_TARGETED_SACCT_RECONCILIATION_2026-11-10.json" in markdown
+
+
 def test_every_editorial_only_reviewer_has_a_proposal_crosswalk():
     source = json.loads(SOURCE.read_text(encoding="utf-8"))
     editorial_ids = [

@@ -2,7 +2,7 @@
 
 **As of:** 2026-11-10
 
-**Source of truth:** `docs/reviewer_closure/REVIEWER_48_DETAILED.json` at `381c8943189ade49ca1cb29b3b65be97133ada83`
+**Source of truth:** `docs/reviewer_closure/REVIEWER_48_DETAILED.json` at `01beb7a68077a44560b037dbee9b5deace557b8d`
 
 **Manuscript state:** `SIN_EDITAR`; submitted manuscript, PDF and response letter were not changed.
 
@@ -44,6 +44,7 @@ This reviewer-only view preserves each source record verbatim under `source_reco
 - [Selective prediction and quarantine](SELECTIVE_PREDICTION_EXPERIMENT.md)
 - [15-comment technical closure matrix](REVIEWER_15_TECHNICAL_FINAL_MATRIX.md)
 - [CEDIA sanitized job receipt](receipts/CEDIA_JOB_LOGS_2026-11-10.json)
+- [CEDIA targeted Slurm accounting](receipts/CEDIA_TARGETED_SACCT_RECONCILIATION_2026-11-10.json)
 
 ## How to read each item
 

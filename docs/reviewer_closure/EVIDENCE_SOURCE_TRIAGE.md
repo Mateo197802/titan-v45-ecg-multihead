@@ -1,6 +1,6 @@
 # Evidence source triage
 
-**Audit date:** 2026-11-09
+**Audit date:** 2026-11-10
 **Scope:** Read-only comparison of the authorized CEDIA evidence archives, the live CEDIA account and Slurm accounting, and the current public repository. This is a forensic evidence index, not a manuscript revision or reviewer response.
 
 ## Handling and integrity
@@ -20,6 +20,7 @@ Read-only `sacct` queries covered the account's TITAN-named jobs from 2026-06-20
 
 | Job | Slurm name | State / exit | What the record supports | Missing link |
 | ---: | --- | --- | --- | --- |
+| 16781 / 16782 / 16783 | V3F fine-tune / specialist / external evaluation | COMPLETED / `0:0` | New `SubmitLine` digests preserve explicit submitted artifact-path categories, including a declared 16781-to-16782 checkpoint path. | The referenced inputs, outputs and dedicated run directories were absent at the exact checked paths; no manifest-read or producing-checkpoint hash receipt survives. |
 | 16785 / 16786 | V3H train / evaluation | COMPLETED / `0:0` | Training and a separate evaluation job were recorded. | Both exact work directories and standard Slurm logs are absent at their recorded locations; selected manifest is not the preselection population. |
 | 16816 / 16819 | V3M download / P4-only training | COMPLETED / `0:0` | The P4 source download and training job were recorded. | Work directories and standard logs are absent; training and validation manifests are not recovered. |
 | 16887 | V3O P8 retry 1 | COMPLETED / `0:0` | A P8 training job was recorded. | Work directory, training receipt and checkpoint-to-job hash link are absent. |
@@ -54,14 +55,18 @@ Consequently, V3H P6 results are development/model-selection evidence, not an un
 
 The incremental inventory examined 3,613 CEDIA entries with bounded depth and metadata rules; it reported no target-header or SQLite database candidates. A separate recursive listing across multiple Slurm work directories did not finish within the execution window and was canceled; it is not used as evidence of absence. Exact expected manifest paths, selected work-directory paths, the NOC-reviewed backup result, and retained log/script paths were checked separately. No global-absence claim is made.
 
+On 2026-11-10, a new read-only accounting pass covered 15 explicitly named jobs. Exact V3F input/checkpoint paths and the listed V3H/V3M/V3O/V3P/V3Q/V3S work directories were checked and were absent at those recorded locations; three retained logs and the P4 calibration submit script were re-hashed. A broader exact-name search for the historical loader under the full authorized project tree exceeded the 30-second command window and was stopped; it returned no usable result and is not evidence of absence. See [the sanitized targeted receipt](receipts/CEDIA_TARGETED_SACCT_RECONCILIATION_2026-11-10.json).
+
 ## Publication boundary
 
 Only hashes, job IDs, class-level aggregates, source-level counts and sanitized interpretations belong in PR #3. Keep all signals, patient/record IDs, manifest rows, row-level predictions, duplicate links and per-patient bootstrap assignments in authorized CEDIA storage. PR #3 remains separate from PR #4 (A10/Optuna) and PR #5 (V4.6); this audit changes neither the manuscript nor the submission PDF.
 
 ## Reconciliation update (2026-11-10)
 
-The original triage above is a 2026-11-09 snapshot at `a07e6c8`; it has not been rewritten as if it were created at the current head. The current PR #3 head was rechecked on GitHub as `31c4ccf2a7a899f1d38a2800f290472040becd06`, open and draft against `main`. CI at that head reports Python 3.10, 3.11 and 3.12 checks all passing in workflow run [42764288859](https://github.com/Mateo197802/titan-v45-ecg-multihead/actions/runs/42764288859). The PR adds the exploratory SPH PAC embedding probe after the original snapshot; that probe is post hoc, the PAC target had already been inspected, and it does not establish V4.5 historical PAC-head performance or clinical/independent validation.
+The inventory and tables above preserve the 2026-11-09 source snapshot; this addendum records the later checks without rewriting that history. GitHub currently reports PR #3 at `01beb7a68077a44560b037dbee9b5deace557b8d`, open and draft against `main`. CI for that exact head passed in workflow run [42886694683](https://github.com/Mateo197802/titan-v45-ecg-multihead/actions/runs/42886694683). The post-hoc SPH PAC probe remains exploratory: the target had already been inspected, and it does not establish V4.5 historical PAC-head performance or clinical/independent validation.
 
 The two user-authorized ZIPs were rechecked against their declared whole-archive SHA-256 values. Static central-directory inspection found 97 incremental-archive entries and 797 private-archive entries, with zero absolute/traversal paths and zero symlink entries. No archive was extracted and no bundled script, notebook or model was executed in this check. The separately named `TITAN_TRIAGE_EVIDENCIA_CEDIA_2026-11-09.md` was not present in the checked local Downloads/attachment locations, so it is not treated as a source.
 
-A read-only CEDIA check confirmed that the authorized project checkout's `HEAD` equals the public PR #3 head and its working tree had no listed modifications. Its cached upstream-tracking status showed it one commit ahead; no fetch was performed, so this does not independently establish that the remote ref is current. Read-only accounting reports PAC jobs 32883 and 32884 as `COMPLETED`, exit `0:0`. No new historical train/validation manifests, exact loader, Optuna database or quarantine ledger were recovered by these checks. The evidence ceiling for those historical claims is unchanged.
+A read-only CEDIA check found the PR #3 clone at `31c4ccf2a7a899f1d38a2800f290472040becd06`, parent `99b1065f37fcb3cdb6adc70dfbbc6ebc93e2fb12`, with a clean worktree and one local commit ahead of its cached upstream ref. This is not the current GitHub head; the CEDIA commit is based on the earlier `99b1065` state and was not reset, rebased, cherry-picked or overwritten. Hash checks showed four of its seven changed files byte-identical to the newer PR #3 tree; three matrix snapshots differ. The overlapping PAC facts are present in the current PR #3 evidence, but the CEDIA-only commit remains preserved and the CEDIA clone is not yet synchronized to the GitHub head.
+
+The new read-only `sacct` query verified all 15 requested job IDs as `COMPLETED`, exit `0:0`, and hashed their `SubmitLine` strings without publishing the raw path-bearing commands. For jobs 16781-16783, those strings declare V3F training, validation, parent-checkpoint and external-manifest path categories. The exact referenced files/directories were absent at the checked paths; the submission record is not a manifest-read receipt. Existing hashes for jobs 17296/17314/17315 were independently recomputed and match the retained aggregate receipt. No new historical train/validation manifest bytes, exact loader, Optuna database or authentic quarantine ledger were recovered. The evidence ceiling remains for those claims, bounded to the sources and paths actually checked.

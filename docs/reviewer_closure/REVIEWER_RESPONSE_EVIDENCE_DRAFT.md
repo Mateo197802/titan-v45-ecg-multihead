@@ -3,7 +3,7 @@
 **NOT FOR SUBMISSION — requires author review and approval.**
 **The manuscript has not been edited; the submitted PDF and response letter are unchanged.**
 
-Source: [`docs/reviewer_closure/REVIEWER_48_DETAILED.json`](REVIEWER_48_DETAILED.json) at `381c8943189ade49ca1cb29b3b65be97133ada83`. This document turns the existing technical disposition into provisional evidence language; it does not assert that a proposed manuscript change has already been made or that the reviewer is satisfied.
+Source: [`docs/reviewer_closure/REVIEWER_48_DETAILED.json`](REVIEWER_48_DETAILED.json) at `01beb7a68077a44560b037dbee9b5deace557b8d`. This document turns the existing technical disposition into provisional evidence language; it does not assert that a proposed manuscript change has already been made or that the reviewer is satisfied.
 
 Each reply below is conditional on authors approving and actually implementing the associated manuscript change. Keep the scientific limitation in the final response even when the proposed editorial action is accepted.
 
