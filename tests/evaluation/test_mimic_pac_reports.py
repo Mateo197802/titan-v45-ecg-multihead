@@ -280,4 +280,3 @@ def test_mimic_scorer_rejects_nonfinite_or_nonpositive_probe_scaling(tmp_path):
             bundle_path, bundle_hash, commit="a" * 40,
             config_hash="b" * 64, model_sha256="c" * 64,
         )
-

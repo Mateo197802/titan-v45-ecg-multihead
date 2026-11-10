@@ -120,4 +120,3 @@ def test_patient_cluster_bootstrap_indexes_groups_without_scanning_all_rows_per_
 
     assert report["replicates_requested"] == 2
     assert calls <= 1
-
