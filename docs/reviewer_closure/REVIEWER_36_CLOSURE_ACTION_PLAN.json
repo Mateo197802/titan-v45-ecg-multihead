@@ -2,10 +2,10 @@
   "schema": "TITAN_V45_REVIEWER_36_CLOSURE_ACTION_PLAN_V1",
   "as_of": "2026-11-10",
   "source_matrix": "docs/reviewer_closure/REVIEWER_48_DETAILED.json",
-  "source_commit": "31c4ccf2a7a899f1d38a2800f290472040becd06",
+  "source_commit": "381c8943189ade49ca1cb29b3b65be97133ada83",
   "pr_state_checked": {
     "number": 3,
-    "head": "31c4ccf2a7a899f1d38a2800f290472040becd06",
+    "head": "381c8943189ade49ca1cb29b3b65be97133ada83",
     "base": "main",
     "state": "OPEN_DRAFT",
     "merge_performed": false
@@ -58,7 +58,13 @@
           "docs/external_validation/sph_independence_assessment.md",
           "docs/external_validation/sph_pac_probe_results.md",
           "docs/reviewer_closure/EVIDENCE_SOURCE_TRIAGE.md",
-          "docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md"
+          "docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md",
+          "docs/reviewer_closure/GENERALIZATION_DATASET_ELIGIBILITY.md",
+          "docs/reviewer_closure/GENERALIZATION_EXPERIMENT_PROTOCOL.md",
+          "docs/reviewer_closure/GENERALIZATION_EXPERIMENT_RESULTS.md",
+          "docs/reviewer_closure/GENERALIZATION_PER_CLASS_METRICS.json",
+          "docs/reviewer_closure/GENERALIZATION_ERROR_ANALYSIS.md",
+          "docs/reviewer_closure/receipts/CEDIA_JOB_LOGS_2026-11-10.json"
         ],
         "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
       },
@@ -96,7 +102,13 @@
           "docs/external_validation/sph_independence_assessment.md",
           "docs/external_validation/sph_pac_probe_results.md",
           "docs/reviewer_closure/EVIDENCE_SOURCE_TRIAGE.md",
-          "docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md"
+          "docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md",
+          "docs/reviewer_closure/GENERALIZATION_DATASET_ELIGIBILITY.md",
+          "docs/reviewer_closure/GENERALIZATION_EXPERIMENT_PROTOCOL.md",
+          "docs/reviewer_closure/GENERALIZATION_EXPERIMENT_RESULTS.md",
+          "docs/reviewer_closure/GENERALIZATION_PER_CLASS_METRICS.json",
+          "docs/reviewer_closure/GENERALIZATION_ERROR_ANALYSIS.md",
+          "docs/reviewer_closure/receipts/CEDIA_JOB_LOGS_2026-11-10.json"
         ],
         "protocol_population_result": "Frozen transfer evaluated 25,770 SPH ECG from 24,666 source patients across P6, P8 and P4; all 14 compatible ECG-statement endpoints were scored with patient-component intervals. Newly recovered job 17314 records a P6 epoch sweep; job 17315 explicitly evaluates epoch 8 on the V3H accepted/balanced manifest at 1,564/1,643, accuracy 0.951917 and macro-F1 0.800938. This makes V3H model-selection/development evidence, not an untouched test. A separate fixed V3F-embedding PAC probe used the same SPH source and a 5,143-record exploratory patient holdout; its AUROCs were 0.910 (logistic) and 0.910 (MLP sensitivity), with no holdout tuning. The CEDIA audit found 539 code-30 records and 4 code-31 records (1 both, 3 code-31-only); all eligible rows remain in the code-30 statement endpoint, and absence is not a clinical negative. Commit 99b1065 publishes a scoped receipt binding the unchanged CEDIA aggregate and execution receipt. Confusion-derived metrics are recomputed publicly, while score metrics and intervals are digest-bound but not recalculated from restricted row scores. Prior Primary8 PAC target exposure and incomplete V3F source lineage keep this result nonconfirmatory. The exact 17314 manifest is not recorded. Complete V3F/V3AG pretraining and fine-tuning lineage remains unavailable.",
         "addressed_scope": "A real full-source SPH transfer analysis and endpoint-specific results exist. New CEDIA accounting/logs also narrow the P6 validation claim by documenting V3H gate use and likely epoch-selection exposure. The PAC probe has a reproducible, hash-pinned aggregate publication and explicit code-30/31 target semantics, but does not establish an independent cohort, clinical adjudication or clinical validity.",
@@ -120,7 +132,10 @@
           "docs/reviewer_closure/R1_2_EVIDENCE_CEILING.md",
           "docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md",
           "outputs/results/external_sph/sph_aggregate_32669.json",
-          "docs/reviewer_closure/RECOVERED_VS_MISSING_HISTORICAL_EVIDENCE.md"
+          "docs/reviewer_closure/RECOVERED_VS_MISSING_HISTORICAL_EVIDENCE.md",
+          "docs/reviewer_closure/SELECTIVE_PREDICTION_EXPERIMENT.md",
+          "docs/reviewer_closure/OTHER_CLASS_COVERAGE_EXPERIMENT.md",
+          "docs/reviewer_closure/GENERALIZATION_EXPERIMENT_RESULTS.md"
         ],
         "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
       },
@@ -156,7 +171,10 @@
           "docs/reviewer_closure/R1_2_EVIDENCE_CEILING.md",
           "docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md",
           "outputs/results/external_sph/sph_aggregate_32669.json",
-          "docs/reviewer_closure/RECOVERED_VS_MISSING_HISTORICAL_EVIDENCE.md"
+          "docs/reviewer_closure/RECOVERED_VS_MISSING_HISTORICAL_EVIDENCE.md",
+          "docs/reviewer_closure/SELECTIVE_PREDICTION_EXPERIMENT.md",
+          "docs/reviewer_closure/OTHER_CLASS_COVERAGE_EXPERIMENT.md",
+          "docs/reviewer_closure/GENERALIZATION_EXPERIMENT_RESULTS.md"
         ],
         "protocol_population_result": "The later SPH source has 25,770/25,770 scores per profile and all 14 compatible endpoint comparisons. The retained selected development replay has 2,193 P8 keys, including 1,643 P6 keys, plus 733 P4 keys: a verified 2,926-key P8/P4 union, not a patient count. Routing was computed without reference labels.",
         "addressed_scope": "The measured all-source SPH profile coverage, empty-set/fallback counts and compatible predictive results are documented separately from selected-cohort replays.",
@@ -292,7 +310,9 @@
           "docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md",
           "docs/revision-data-dispositions.md",
           "docs/external_validation/sph_pac_probe_results.md",
-          "outputs/models/heads/global_head_contracts.json"
+          "outputs/models/heads/global_head_contracts.json",
+          "docs/reviewer_closure/OTHER_CLASS_COVERAGE_EXPERIMENT.md",
+          "docs/reviewer_closure/GENERALIZATION_EXPERIMENT_RESULTS.md"
         ],
         "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
       },
@@ -328,7 +348,9 @@
           "docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md",
           "docs/revision-data-dispositions.md",
           "docs/external_validation/sph_pac_probe_results.md",
-          "outputs/models/heads/global_head_contracts.json"
+          "outputs/models/heads/global_head_contracts.json",
+          "docs/reviewer_closure/OTHER_CLASS_COVERAGE_EXPERIMENT.md",
+          "docs/reviewer_closure/GENERALIZATION_EXPERIMENT_RESULTS.md"
         ],
         "protocol_population_result": "The published architecture declares 14 rhythm and 7 pathology outputs; P8 includes NSR and PAC. SPH measured all profile predictions on 25,770 ECG, but only 14 endpoints have compatible statement references. P8 produced 16,700 NSR top-1 outputs; no validated Other output exists. The additional code-30 PAC probe reports one statement endpoint from the same SPH source; it is not an all-class evaluation and does not define or validate Other.",
         "addressed_scope": "All-input profile decisions and the limits of declared auxiliary outputs are now visible; missing scores and incompatible labels are not converted to negatives. The separate PAC probe adds a fully reported model comparison for one endpoint only; it does not close the Other/cascade request.",
@@ -785,7 +807,9 @@
           "outputs/results/revision_replay_diagnostics_20261107/p4_official_fold_coverage.json",
           "docs/reviewer_closure/HISTORICAL_EVIDENCE_HANDOFF.md",
           "docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md",
-          "docs/reviewer_closure/RECOVERED_VS_MISSING_HISTORICAL_EVIDENCE.md"
+          "docs/reviewer_closure/RECOVERED_VS_MISSING_HISTORICAL_EVIDENCE.md",
+          "docs/reviewer_closure/CHECKPOINT_JOB_MANIFEST_VERIFICATION_FINAL.md",
+          "docs/reviewer_closure/receipts/CEDIA_JOB_LOGS_2026-11-10.json"
         ],
         "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
       },
@@ -822,7 +846,9 @@
           "outputs/results/revision_replay_diagnostics_20261107/p4_official_fold_coverage.json",
           "docs/reviewer_closure/HISTORICAL_EVIDENCE_HANDOFF.md",
           "docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md",
-          "docs/reviewer_closure/RECOVERED_VS_MISSING_HISTORICAL_EVIDENCE.md"
+          "docs/reviewer_closure/RECOVERED_VS_MISSING_HISTORICAL_EVIDENCE.md",
+          "docs/reviewer_closure/CHECKPOINT_JOB_MANIFEST_VERIFICATION_FINAL.md",
+          "docs/reviewer_closure/receipts/CEDIA_JOB_LOGS_2026-11-10.json"
         ],
         "protocol_population_result": "Verified selected counts are P6 1,643 ECG, P8 2,193 ECG, and P4 962 panel rows over 733 ECG/676 patients. PTB-XL fold 10 has 2,198 ECG/1,904 patients; 733 P4 ECG map to 676 fold-10 patients with no overlap with official folds 1-9. SLURM records V3H jobs 16785/16786 and V3M jobs 16816/16819 as completed, but their exact historical work directories and full split files are absent at the checked paths.",
         "addressed_scope": "Selected counts, official fold relation, completed-job accounting, checkpoint-declared manifest names and surviving calibration logs are documented with their different evidentiary strength.",
@@ -901,7 +927,9 @@
           "docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md",
           "outputs/models/heads/global_head_contracts.json",
           "docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md",
-          "docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md"
+          "docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md",
+          "docs/reviewer_closure/AUXILIARY_CLASS_TRAINING_EVIDENCE.md",
+          "docs/reviewer_closure/OTHER_CLASS_COVERAGE_EXPERIMENT.md"
         ],
         "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
       },
@@ -936,7 +964,9 @@
           "docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md",
           "outputs/models/heads/global_head_contracts.json",
           "docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md",
-          "docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md"
+          "docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md",
+          "docs/reviewer_closure/AUXILIARY_CLASS_TRAINING_EVIDENCE.md",
+          "docs/reviewer_closure/OTHER_CLASS_COVERAGE_EXPERIMENT.md"
         ],
         "protocol_population_result": "The contract declares P8's eight outputs, including NSR, plus six additional global rhythm outputs. SPH P8 predicts NSR top-1 on 16,700 records; P8 fallback is separately recorded. The code and outputs do not prove run-specific training support for each auxiliary class.",
         "addressed_scope": "Implemented output and fallback roles are described; NSR is a rhythm category, not an arrhythmia class by that fact alone.",
@@ -959,7 +989,8 @@
           "docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md",
           "docs/revision-data-dispositions.md",
           "outputs/models/heads/global_head_contracts.json",
-          "docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md"
+          "docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md",
+          "docs/reviewer_closure/AUXILIARY_CLASS_TRAINING_EVIDENCE.md"
         ],
         "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
       },
@@ -994,7 +1025,8 @@
           "docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md",
           "docs/revision-data-dispositions.md",
           "outputs/models/heads/global_head_contracts.json",
-          "docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md"
+          "docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md",
+          "docs/reviewer_closure/AUXILIARY_CLASS_TRAINING_EVIDENCE.md"
         ],
         "protocol_population_result": "The global contract has seven pathology outputs, and reconstructed P4 inference emitted ALMI/ILMI/LAE scores on 733 selected ECG. A candidate manifest has positives, but it is not linked to the released checkpoint's training run.",
         "addressed_scope": "It is verified that outputs are emitted in the reconstructed path, not that the historical checkpoint was trained on those labels.",
@@ -1017,7 +1049,8 @@
           "docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md",
           "src/titan_v45/cascade/policy.py",
           "docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md",
-          "docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md"
+          "docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md",
+          "docs/reviewer_closure/SELECTIVE_PREDICTION_EXPERIMENT.md"
         ],
         "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
       },
@@ -1052,7 +1085,8 @@
           "docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md",
           "src/titan_v45/cascade/policy.py",
           "docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md",
-          "docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md"
+          "docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md",
+          "docs/reviewer_closure/SELECTIVE_PREDICTION_EXPERIMENT.md"
         ],
         "protocol_population_result": "The code declares primary, auxiliary and cascade roles; the selected replay measures only implemented decision behavior. The historic per-record role/transition ledger is unavailable; SPH fallback counts are not quarantine transitions.",
         "addressed_scope": "Code roles, predicted outputs and observed transitions are explicitly distinguished.",
@@ -1075,7 +1109,9 @@
           "docs/recovered-feature-contract.md",
           "docs/reviewer_closure/REPLAY_EQUIVALENCE_DISPOSITION.md",
           "docs/figure-evidence.md",
-          "docs/reviewer_closure/HISTORICAL_LOADER_IDENTITY_AND_REPLAY.md"
+          "docs/reviewer_closure/HISTORICAL_LOADER_IDENTITY_AND_REPLAY.md",
+          "docs/reviewer_closure/HISTORICAL_RECOVERY_FINAL_EXECUTION.md",
+          "docs/reviewer_closure/SPECIALIST_192_512_ARCHITECTURE_RESOLUTION.md"
         ],
         "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
       },
@@ -1110,7 +1146,9 @@
           "docs/recovered-feature-contract.md",
           "docs/reviewer_closure/REPLAY_EQUIVALENCE_DISPOSITION.md",
           "docs/figure-evidence.md",
-          "docs/reviewer_closure/HISTORICAL_LOADER_IDENTITY_AND_REPLAY.md"
+          "docs/reviewer_closure/HISTORICAL_LOADER_IDENTITY_AND_REPLAY.md",
+          "docs/reviewer_closure/HISTORICAL_RECOVERY_FINAL_EXECUTION.md",
+          "docs/reviewer_closure/SPECIALIST_192_512_ARCHITECTURE_RESOLUTION.md"
         ],
         "protocol_population_result": "Ten-feature candidate code and several historical event sources were recovered; 10 of 11 inventoried files match known hashes. The exact original loader is absent. P4 replay matched 962/962 decisions but maximum probability residual 0.0006194115 exceeds historical tolerance 1e-5.",
         "addressed_scope": "The candidate feature contract and its provenance boundary are documented, and strict score equivalence is explicitly recorded as failed.",
@@ -1241,7 +1279,9 @@
           "docs/evidence-status.md",
           "docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md",
           "docs/external_validation/sph_results.md",
-          "docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md"
+          "docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md",
+          "docs/reviewer_closure/GENERALIZATION_DATASET_ELIGIBILITY.md",
+          "docs/reviewer_closure/GENERALIZATION_EXPERIMENT_RESULTS.md"
         ],
         "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
       },
@@ -1276,7 +1316,9 @@
           "docs/evidence-status.md",
           "docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md",
           "docs/external_validation/sph_results.md",
-          "docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md"
+          "docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md",
+          "docs/reviewer_closure/GENERALIZATION_DATASET_ELIGIBILITY.md",
+          "docs/reviewer_closure/GENERALIZATION_EXPERIMENT_RESULTS.md"
         ],
         "protocol_population_result": "The release separates selected development predictions from the later frozen SPH transfer. Primary6 contains 1,643 ECG; P8 contains 2,193 with P6 nested; P4 uses 962 panel rows/733 ECG. SPH is 25,770 ECG from another source. CEDIA jobs 17314/17315 show that the V3H P6 gate informed epoch selection and is not an untouched test.",
         "addressed_scope": "The evidence packages and populations are now named and numerically distinguished in technical documentation.",
@@ -1460,7 +1502,8 @@
           "docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md",
           "outputs/results/revision_20261107/rhythm_waveform.json",
           "outputs/results/revision_20261107/pathology_waveform.json",
-          "docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md"
+          "docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md",
+          "docs/reviewer_closure/SELECTIVE_PREDICTION_EXPERIMENT.md"
         ],
         "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
       },
@@ -1496,7 +1539,8 @@
           "docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md",
           "outputs/results/revision_20261107/rhythm_waveform.json",
           "outputs/results/revision_20261107/pathology_waveform.json",
-          "docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md"
+          "docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md",
+          "docs/reviewer_closure/SELECTIVE_PREDICTION_EXPERIMENT.md"
         ],
         "protocol_population_result": "On all 25,770 SPH ECG, P6 had 16,785 empty threshold sets; P4 had 8,343; P8 applied top-1 fallback on 801. In the selected replay P8 fallback was 58/2,193. No reference labels were used to route.",
         "addressed_scope": "No-crossing behavior and complete-source counts are now measured for the frozen profiles.",
@@ -1788,7 +1832,8 @@
           "docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md",
           "outputs/results/revision_20261107/rhythm_waveform.json",
           "outputs/results/revision_20261107/pathology_waveform.json",
-          "docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md"
+          "docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md",
+          "docs/reviewer_closure/SELECTIVE_PREDICTION_EXPERIMENT.md"
         ],
         "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
       },
@@ -1824,7 +1869,8 @@
           "docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md",
           "outputs/results/revision_20261107/rhythm_waveform.json",
           "outputs/results/revision_20261107/pathology_waveform.json",
-          "docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md"
+          "docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md",
+          "docs/reviewer_closure/SELECTIVE_PREDICTION_EXPERIMENT.md"
         ],
         "protocol_population_result": "The selected reconstruction and all-input SPH flow contain no checkpoint-linked uncertainty score plus verified quarantine policy; quarantine is not assessed, not 0%. P8 fallback and empty sets are not quarantine.",
         "addressed_scope": "The invalid inference from fallback to quarantine is explicitly rejected; routing counts are documented with their actual semantics.",
@@ -1956,7 +2002,9 @@
         "evidence_refs": [
           "docs/reviewer_closure/AF_PVC_REFERENCE_DISPOSITION.md",
           "docs/external_validation/sph_results.md",
-          "configs/external_validation/sph_frozen.json"
+          "configs/external_validation/sph_frozen.json",
+          "docs/reviewer_closure/GENERALIZATION_PER_CLASS_METRICS.json",
+          "docs/reviewer_closure/GENERALIZATION_ERROR_ANALYSIS.md"
         ],
         "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
       },
@@ -1990,7 +2038,9 @@
         "evidence": [
           "docs/reviewer_closure/AF_PVC_REFERENCE_DISPOSITION.md",
           "docs/external_validation/sph_results.md",
-          "configs/external_validation/sph_frozen.json"
+          "configs/external_validation/sph_frozen.json",
+          "docs/reviewer_closure/GENERALIZATION_PER_CLASS_METRICS.json",
+          "docs/reviewer_closure/GENERALIZATION_ERROR_ANALYSIS.md"
         ],
         "protocol_population_result": "SPH PVC uses ECG statement code 60: 1,067 positive and 24,703 negative recorded-statement comparisons per P6/P8; F1 is 54.08% for P6 and 66.16% for P8. No beat annotations or localization metric are present.",
         "addressed_scope": "The available result is correctly bounded to record-level ECG statement agreement.",

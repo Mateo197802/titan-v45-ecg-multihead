@@ -1,0 +1,139 @@
+{
+  "schema": "TITAN_V45_CEDIA_JOB_LOG_AGGREGATE_RECEIPT_V1",
+  "as_of": "2026-11-10",
+  "collection": {
+    "method": "Read-only SSH, Slurm accounting and filtered aggregate extraction from retained job logs.",
+    "jobs_submitted": 0,
+    "raw_logs_transferred": false,
+    "raw_logs_published": false,
+    "record_level_data_in_receipt": false,
+    "raw_sources_remain_in_authorized_cedia_storage": true,
+    "scheduler_timezone": "Not emitted by sacct; displayed timestamps are not labeled UTC."
+  },
+  "jobs": [
+    {
+      "job_id": "17296",
+      "job_name": "v3ag_p4cal_r1",
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "scheduler_start": "2026-06-27T20:38:19",
+      "scheduler_end": "2026-06-27T20:42:10",
+      "submit_script": {
+        "basename": "submit_v3ag_p4_internal_threshold_calibration_retry1.sbatch",
+        "bytes": 3533,
+        "sha256": "8ff857b1e79cb9ccadaa657d52004120fc65eaa220fef5a0f75f554152acb615"
+      },
+      "stdout_log": {
+        "basename": "slurm-17296.out",
+        "bytes": 96324,
+        "sha256": "1f0b29540c84cb68a5719e74e02ce3c58a1a4c38da66a8b39c9862913d2b18e8"
+      },
+      "calibration": {
+        "internal_panel_index_alias": "v3m_internal_val_p4_panel_index.json",
+        "external_evaluation_panel_index_alias": "v3s_p4_highconf_panel_index.json",
+        "calibration_windows_across_four_panels": 1492,
+        "calibration_windows_are_unique_ecgs": false,
+        "target_accuracy": 0.9,
+        "minimum_f1": 0.7,
+        "threshold_grid": {
+          "minimum": 0.05,
+          "maximum": 0.95,
+          "steps": 181
+        },
+        "class_candidate_pass_flags": {
+          "false": 16,
+          "true": 0
+        },
+        "selected_release_thresholds": [0.67, 0.705, 0.635, 0.595],
+        "release_config_thresholds_match": true
+      },
+      "external_panel_evaluation": {
+        "panel_observations": 962,
+        "panel_observations_are_unique_ecgs": false,
+        "per_endpoint_observations": {
+          "ASMI": {"positive": 147, "negative": 147, "total": 294},
+          "LVH": {"positive": 112, "negative": 112, "total": 224},
+          "IMI": {"positive": 103, "negative": 103, "total": 206},
+          "ISC_": {"positive": 119, "negative": 119, "total": 238}
+        },
+        "accuracy": 0.8022904853689048,
+        "macro_f1": 0.793456370406346,
+        "matches_release_headline_after_rounding_to_percent_2dp": true,
+        "checkpoint_sha256_link_to_released_p4_asset": false,
+        "patient_separation_certified": false
+      },
+      "interpretation": "The launcher and output log connect the internal calibration panel names, external panel names, threshold vector and aggregate evaluation. The threshold vector and rounded metrics match the released P4 profile. Missing panel bytes, patient maps and checkpoint hash linkage prevent certification of patient isolation or byte identity with the released specialist."
+    },
+    {
+      "job_id": "17314",
+      "job_name": "p6_v3p_sweep",
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "scheduler_start": "2026-06-27T23:05:00",
+      "scheduler_end": "2026-06-27T23:11:09",
+      "submit_script_basename_from_sacct": "submit_primary6_no_nsr_pac_v3p_checkpoint_sweep.sbatch",
+      "submit_script_bytes_recovered": false,
+      "stdout_log": {
+        "basename": "slurm-17314.out",
+        "bytes": 57887,
+        "sha256": "19df83ca78f0688a99e06a967611e04b4f308d0fd5a1af8df1bdd3efe144452e"
+      },
+      "epochs": [
+        {"epoch": 1, "external_top1_accuracy": 0.9409616555082166, "external_macro_f1": 0.7607891950678868, "external_correct_top1": 1546, "gate_pass": false},
+        {"epoch": 2, "external_top1_accuracy": 0.9391357273280584, "external_macro_f1": 0.7778468809327138, "external_correct_top1": 1543, "gate_pass": false},
+        {"epoch": 3, "external_top1_accuracy": 0.9440048691418138, "external_macro_f1": 0.7390796671625575, "external_correct_top1": 1551, "gate_pass": false},
+        {"epoch": 4, "external_top1_accuracy": 0.9415702982349361, "external_macro_f1": 0.7415887248754288, "external_correct_top1": 1547, "gate_pass": false},
+        {"epoch": 5, "external_top1_accuracy": 0.9452221545952526, "external_macro_f1": 0.7691075091301259, "external_correct_top1": 1553, "gate_pass": false},
+        {"epoch": 6, "external_top1_accuracy": 0.9470480827754109, "external_macro_f1": 0.774513710085779, "external_correct_top1": 1556, "gate_pass": false},
+        {"epoch": 7, "external_top1_accuracy": 0.9464394400486914, "external_macro_f1": 0.7900414709310208, "external_correct_top1": 1555, "gate_pass": false},
+        {"epoch": 8, "external_top1_accuracy": 0.9519172245891662, "external_macro_f1": 0.8009383239876123, "external_correct_top1": 1564, "gate_pass": true},
+        {"epoch": 9, "external_top1_accuracy": 0.9494826536822885, "external_macro_f1": 0.7999706488569429, "external_correct_top1": 1560, "gate_pass": false},
+        {"epoch": 10, "external_top1_accuracy": 0.9488740109555691, "external_macro_f1": 0.8052797608893928, "external_correct_top1": 1559, "gate_pass": false},
+        {"epoch": 11, "external_top1_accuracy": 0.953134510042605, "external_macro_f1": 0.793959982585116, "external_correct_top1": 1566, "gate_pass": false},
+        {"epoch": 12, "external_top1_accuracy": 0.9433962264150944, "external_macro_f1": 0.7704933568049498, "external_correct_top1": 1550, "gate_pass": false}
+      ],
+      "passing_epochs": [8],
+      "external_manifest_binding_in_sweep_log": "Not recorded in the retained sweep output; the exact submitted sweep script is not present at its recorded path.",
+      "interpretation": "Per-epoch external metrics and one passing epoch establish use of external performance during candidate gating. The exact same-file link between this sweep and the V3H manifest printed by job 17315 is strongly supported by the matching epoch-8 checkpoint and exact metrics, but is not cryptographically established."
+    },
+    {
+      "job_id": "17315",
+      "job_name": "p6_e8_gate",
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "scheduler_start": "2026-06-27T23:13:49",
+      "scheduler_end": "2026-06-27T23:14:34",
+      "submit_script_basename_from_sacct": "submit_primary6_no_nsr_pac_epoch8_gate_audit.sbatch",
+      "submit_script_bytes_recovered": false,
+      "stdout_log": {
+        "basename": "slurm-17315.out",
+        "bytes": 15278,
+        "sha256": "74e03a97067b176c758c2c28b2faf0888c0bb555eb6a20a732b05f81385d43ec"
+      },
+      "evaluated_checkpoint_basename": "v3o_rhythm_specialist_epoch_008.pt",
+      "internal_manifest_alias": "label_separator_validation_strict_primary_model_ready.csv",
+      "external_manifest_alias": "v3h_rhythm_external_gate_holdout_accepted_balanced_manifest.csv",
+      "gate": {"top1_accuracy_min": 0.95, "macro_f1_min": 0.8},
+      "selected_external_population": 1643,
+      "top1_correct": 1564,
+      "top1_accuracy": 0.9519172245891662,
+      "macro_f1": 0.8009383239876123,
+      "gate_pass": true,
+      "independent_test": false,
+      "released_p6_asset_sha256_linked_to_epoch_checkpoint": false,
+      "interpretation": "The retained gate report names the internal and V3H external manifests and evaluates epoch 8 using explicit accuracy and macro-F1 thresholds. These values match the P6 reported headline after rounding. This is model-selection/development evidence, not an independent test."
+    }
+  ],
+  "related_optuna_scheduler_status_only": [
+    {"job_id": "13169", "state": "FAILED", "exit_code": "1:0"},
+    {"job_id": "13172", "state": "FAILED", "exit_code": "9:0"},
+    {"job_id": "13181", "state": "FAILED", "exit_code": "9:0"}
+  ],
+  "limitations": [
+    "This receipt contains sanitized aggregate findings, scheduler metadata and hashes; it is not a substitute for the raw CEDIA logs, which remain private.",
+    "Job completion and a launcher path do not prove the bytes of every input manifest or checkpoint consumed.",
+    "The 17296 panel counts are observations across endpoint panels, not unique ECG or patient counts.",
+    "The 17314 sweep output lacks an exact manifest digest; the 17315 report provides the explicit V3H manifest alias for the selected epoch-8 gate.",
+    "No job was submitted and no GPU work was run during this audit."
+  ]
+}

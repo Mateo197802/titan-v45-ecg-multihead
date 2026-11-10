@@ -2,7 +2,7 @@
 
 **As of:** 2026-11-10
 
-**Source of truth:** `docs/reviewer_closure/REVIEWER_48_DETAILED.json` at `31c4ccf2a7a899f1d38a2800f290472040becd06`
+**Source of truth:** `docs/reviewer_closure/REVIEWER_48_DETAILED.json` at `381c8943189ade49ca1cb29b3b65be97133ada83`
 
 **Manuscript state:** `SIN_EDITAR`; submitted manuscript, PDF and response letter were not changed.
 
@@ -27,6 +27,23 @@ This reviewer-only view preserves each source record verbatim under `source_reco
 - [Populated reviewer-proposed tables](REVIEWER_PROPOSED_TABLES.md)
 - [Claim disposition](REVIEWER_CLAIM_WITHDRAWAL_DECISIONS.md)
 - [Response evidence draft](REVIEWER_RESPONSE_EVIDENCE_DRAFT.md)
+
+## Recovery and experiment evidence
+
+- [Historical recovery execution](HISTORICAL_RECOVERY_FINAL_EXECUTION.md)
+- [Checkpoint-to-job-to-manifest verification](CHECKPOINT_JOB_MANIFEST_VERIFICATION_FINAL.md)
+- [Specialist 192/512 architecture disposition](SPECIALIST_192_512_ARCHITECTURE_RESOLUTION.md)
+- [Reproducibility execution matrix](REPRODUCIBILITY_EXECUTION_MATRIX.json)
+- [External dataset eligibility](GENERALIZATION_DATASET_ELIGIBILITY.md)
+- [Future independent-evaluation protocol](GENERALIZATION_EXPERIMENT_PROTOCOL.md)
+- [Evaluation run status and existing results](GENERALIZATION_EXPERIMENT_RESULTS.md)
+- [Per-class aggregate metrics](GENERALIZATION_PER_CLASS_METRICS.json)
+- [Aggregate error analysis](GENERALIZATION_ERROR_ANALYSIS.md)
+- [Other-class boundary](OTHER_CLASS_COVERAGE_EXPERIMENT.md)
+- [Auxiliary training evidence](AUXILIARY_CLASS_TRAINING_EVIDENCE.md)
+- [Selective prediction and quarantine](SELECTIVE_PREDICTION_EXPERIMENT.md)
+- [15-comment technical closure matrix](REVIEWER_15_TECHNICAL_FINAL_MATRIX.md)
+- [CEDIA sanitized job receipt](receipts/CEDIA_JOB_LOGS_2026-11-10.json)
 
 ## How to read each item
 
@@ -54,6 +71,12 @@ This reviewer-only view preserves each source record verbatim under `source_reco
 - `docs/external_validation/sph_pac_probe_results.md`
 - `docs/reviewer_closure/EVIDENCE_SOURCE_TRIAGE.md`
 - `docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md`
+- `docs/reviewer_closure/GENERALIZATION_DATASET_ELIGIBILITY.md`
+- `docs/reviewer_closure/GENERALIZATION_EXPERIMENT_PROTOCOL.md`
+- `docs/reviewer_closure/GENERALIZATION_EXPERIMENT_RESULTS.md`
+- `docs/reviewer_closure/GENERALIZATION_PER_CLASS_METRICS.json`
+- `docs/reviewer_closure/GENERALIZATION_ERROR_ANALYSIS.md`
+- `docs/reviewer_closure/receipts/CEDIA_JOB_LOGS_2026-11-10.json`
 
 **Traceability confidence:** An experiment was executed; this does not imply that the original request is fully satisfied.
 
@@ -97,6 +120,9 @@ This reviewer-only view preserves each source record verbatim under `source_reco
 - `docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md`
 - `outputs/results/external_sph/sph_aggregate_32669.json`
 - `docs/reviewer_closure/RECOVERED_VS_MISSING_HISTORICAL_EVIDENCE.md`
+- `docs/reviewer_closure/SELECTIVE_PREDICTION_EXPERIMENT.md`
+- `docs/reviewer_closure/OTHER_CLASS_COVERAGE_EXPERIMENT.md`
+- `docs/reviewer_closure/GENERALIZATION_EXPERIMENT_RESULTS.md`
 
 **Traceability confidence:** An experiment was executed; this does not imply that the original request is fully satisfied.
 
@@ -222,6 +248,8 @@ This reviewer-only view preserves each source record verbatim under `source_reco
 - `docs/revision-data-dispositions.md`
 - `docs/external_validation/sph_pac_probe_results.md`
 - `outputs/models/heads/global_head_contracts.json`
+- `docs/reviewer_closure/OTHER_CLASS_COVERAGE_EXPERIMENT.md`
+- `docs/reviewer_closure/GENERALIZATION_EXPERIMENT_RESULTS.md`
 
 **Traceability confidence:** Current evidence does not satisfy the request; a distinct new experiment is required.
 
@@ -586,6 +614,8 @@ This reviewer-only view preserves each source record verbatim under `source_reco
 - `docs/reviewer_closure/HISTORICAL_EVIDENCE_HANDOFF.md`
 - `docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md`
 - `docs/reviewer_closure/RECOVERED_VS_MISSING_HISTORICAL_EVIDENCE.md`
+- `docs/reviewer_closure/CHECKPOINT_JOB_MANIFEST_VERIFICATION_FINAL.md`
+- `docs/reviewer_closure/receipts/CEDIA_JOB_LOGS_2026-11-10.json`
 
 **Traceability confidence:** The searched sources reached a documented evidence ceiling; absence is limited to those sources.
 
@@ -669,6 +699,8 @@ This reviewer-only view preserves each source record verbatim under `source_reco
 - `outputs/models/heads/global_head_contracts.json`
 - `docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md`
 - `docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md`
+- `docs/reviewer_closure/AUXILIARY_CLASS_TRAINING_EVIDENCE.md`
+- `docs/reviewer_closure/OTHER_CLASS_COVERAGE_EXPERIMENT.md`
 
 **Traceability confidence:** A bounded result is verified; residual limitations remain open.
 
@@ -711,6 +743,7 @@ This reviewer-only view preserves each source record verbatim under `source_reco
 - `docs/revision-data-dispositions.md`
 - `outputs/models/heads/global_head_contracts.json`
 - `docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md`
+- `docs/reviewer_closure/AUXILIARY_CLASS_TRAINING_EVIDENCE.md`
 
 **Traceability confidence:** The searched sources reached a documented evidence ceiling; absence is limited to those sources.
 
@@ -753,6 +786,7 @@ This reviewer-only view preserves each source record verbatim under `source_reco
 - `src/titan_v45/cascade/policy.py`
 - `docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md`
 - `docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md`
+- `docs/reviewer_closure/SELECTIVE_PREDICTION_EXPERIMENT.md`
 
 **Traceability confidence:** A bounded result is verified; residual limitations remain open.
 
@@ -795,6 +829,8 @@ This reviewer-only view preserves each source record verbatim under `source_reco
 - `docs/reviewer_closure/REPLAY_EQUIVALENCE_DISPOSITION.md`
 - `docs/figure-evidence.md`
 - `docs/reviewer_closure/HISTORICAL_LOADER_IDENTITY_AND_REPLAY.md`
+- `docs/reviewer_closure/HISTORICAL_RECOVERY_FINAL_EXECUTION.md`
+- `docs/reviewer_closure/SPECIALIST_192_512_ARCHITECTURE_RESOLUTION.md`
 
 **Traceability confidence:** The searched sources reached a documented evidence ceiling; absence is limited to those sources.
 
@@ -917,6 +953,8 @@ This reviewer-only view preserves each source record verbatim under `source_reco
 - `docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md`
 - `docs/external_validation/sph_results.md`
 - `docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md`
+- `docs/reviewer_closure/GENERALIZATION_DATASET_ELIGIBILITY.md`
+- `docs/reviewer_closure/GENERALIZATION_EXPERIMENT_RESULTS.md`
 
 **Traceability confidence:** A bounded result is verified; residual limitations remain open.
 
@@ -1079,6 +1117,7 @@ This reviewer-only view preserves each source record verbatim under `source_reco
 - `outputs/results/revision_20261107/rhythm_waveform.json`
 - `outputs/results/revision_20261107/pathology_waveform.json`
 - `docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md`
+- `docs/reviewer_closure/SELECTIVE_PREDICTION_EXPERIMENT.md`
 
 **Traceability confidence:** An experiment was executed; this does not imply that the original request is fully satisfied.
 
@@ -1321,6 +1360,7 @@ This reviewer-only view preserves each source record verbatim under `source_reco
 - `outputs/results/revision_20261107/rhythm_waveform.json`
 - `outputs/results/revision_20261107/pathology_waveform.json`
 - `docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md`
+- `docs/reviewer_closure/SELECTIVE_PREDICTION_EXPERIMENT.md`
 
 **Traceability confidence:** The searched sources reached a documented evidence ceiling; absence is limited to those sources.
 
@@ -1443,6 +1483,8 @@ This reviewer-only view preserves each source record verbatim under `source_reco
 - `docs/reviewer_closure/AF_PVC_REFERENCE_DISPOSITION.md`
 - `docs/external_validation/sph_results.md`
 - configs/external_validation/sph_frozen.json
+- `docs/reviewer_closure/GENERALIZATION_PER_CLASS_METRICS.json`
+- `docs/reviewer_closure/GENERALIZATION_ERROR_ANALYSIS.md`
 
 **Traceability confidence:** A bounded result is verified; residual limitations remain open.
 

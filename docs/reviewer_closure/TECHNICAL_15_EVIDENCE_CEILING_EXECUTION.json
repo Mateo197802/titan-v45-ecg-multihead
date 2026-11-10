@@ -3,7 +3,7 @@
   "as_of": "2026-11-10",
   "baseline_commit": "0a32a57a32b50c421fc05323454507dba4265bb0",
   "baseline_matrix_path": "docs/reviewer_closure/REVIEWER_48_DETAILED.json",
-  "baseline_matrix_sha256": "f268bf878f4f198b630e8251c4f42f07d61bedc2c9082df1b604d7a91a3e7e53",
+  "baseline_matrix_sha256": "2586de1a1212dd898a9c4201e39e6dda18b59c11e74d7369da02bb1ec2290b52",
   "matrix_counts": {
     "peer_review_total": 36,
     "project_audits_total": 12,
@@ -158,7 +158,7 @@
       "baseline_reviewer_satisfaction": "PARTIALLY_ADDRESSED",
       "technical_subrequirement_coverage": [
         {"requirement": "Correction of measured checkpoint hashes and sizes", "status": "VERIFIED_IN_SEPARATE_PR_4_EVIDENCE_NOT_REEXECUTED_HERE", "evidence_refs": ["https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/4", "docs/hash-correction-20261028.md", "docs/reviewer_closure/EVIDENCE_COMMITS.md"], "boundary": "Five physical model files were previously measured and documented; this PR3 pass did not modify or independently re-hash PR4 assets."},
-        {"requirement": "Original Optuna SQLite and generic prediction artifact", "status": "NOT_RECOVERED", "evidence_refs": ["docs/reviewer_closure/OPTUNA_A10_RESCUE_AND_RIGHTS.md", "docs/reviewer_closure/REVIEWER_48_DETAILED.json"], "boundary": "No substitute DB or hash is fabricated; PR4 remains separate."}
+        {"requirement": "Original Optuna SQLite and generic prediction artifact", "status": "NOT_RECOVERED", "evidence_refs": ["docs/reviewer_closure/REVIEWER_48_DETAILED.json", "docs/reviewer_closure/HISTORICAL_RECOVERY_FINAL_EXECUTION.md", "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/4"], "boundary": "No substitute DB or hash is fabricated; PR4 remains separate."}
       ],
       "scientific_evidence_status": "ARTIFACT_HASH_CORRECTION_BOUNDED; ORIGINAL_A10_SET_NOT_FULLY_RECOVERED",
       "historical_provenance_status": "FIVE_CHECKPOINT_ARTIFACTS_VERIFIED_IN_PRIOR_RECEIPTS; OPTUNA_AND_GENERIC_PREDICTION_EDGES_MISSING",
