@@ -3,7 +3,16 @@
   "as_of": "2026-11-10",
   "baseline_commit": "0a32a57a32b50c421fc05323454507dba4265bb0",
   "baseline_matrix_path": "docs/reviewer_closure/REVIEWER_48_DETAILED.json",
+  "baseline_matrix_commit": "01beb7a68077a44560b037dbee9b5deace557b8d",
   "baseline_matrix_sha256": "2586de1a1212dd898a9c4201e39e6dda18b59c11e74d7369da02bb1ec2290b52",
+  "current_matrix_sha256": "6ee14c3e75d2dc75c85b5f1367be6cee4ae7b6fc30c78157492c9deec80b5b21",
+  "matrix_evidence_addendum": {
+    "source_commit": "575c5a5fa4dbcf658308c928aa7d08259fd61c9f",
+    "updated_ids": ["A-06"],
+    "status_reclassifications": 0,
+    "evidence_receipt": "docs/reviewer_closure/receipts/CEDIA_CLEANUP_MANIFEST_TRIAGE_2026-11-10.json",
+    "note": "The current source matrix adds a bounded cleanup-manifest reference for A-06; the original baseline matrix digest and the 15 reviewer-item dispositions are preserved."
+  },
   "matrix_counts": {
     "peer_review_total": 36,
     "project_audits_total": 12,

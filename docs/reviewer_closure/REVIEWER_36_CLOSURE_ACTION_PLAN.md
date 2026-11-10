@@ -2,7 +2,7 @@
 
 **As of:** 2026-11-10
 
-**Source of truth:** `docs/reviewer_closure/REVIEWER_48_DETAILED.json` at `01beb7a68077a44560b037dbee9b5deace557b8d`
+**Source of truth:** `docs/reviewer_closure/REVIEWER_48_DETAILED.json` at `575c5a5fa4dbcf658308c928aa7d08259fd61c9f`
 
 **Manuscript state:** `SIN_EDITAR`; submitted manuscript, PDF and response letter were not changed.
 

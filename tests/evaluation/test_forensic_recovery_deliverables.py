@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -43,3 +44,36 @@ def test_reviewer_matrix_links_the_new_p6_selection_evidence():
     ]["evidence"]
     assert "17314" in items["R1-1"]["protocol_population_result"]
     assert "17314" in items["R1-1"]["unresolved"]
+
+
+def test_cedia_cleanup_manifest_receipt_is_bounded_and_sanitized():
+    receipt_path = DOCS / "receipts/CEDIA_CLEANUP_MANIFEST_TRIAGE_2026-11-10.json"
+    receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+
+    assert receipt["schema"] == "TITAN_V45_CEDIA_CLEANUP_MANIFEST_TRIAGE_V1"
+    manifest = receipt["manifest"]
+    assert manifest["bytes"] == 225427
+    assert re.fullmatch(r"[0-9a-f]{64}", manifest["sha256"])
+    assert manifest["candidate_count"] == 1438
+    assert manifest["per_entry_sha256_present"] is False
+    assert manifest["per_entry_mtime_present"] is False
+    assert manifest["embedded_confirmation_digest_matches_file"] is False
+    assert manifest["embedded_confirmation_digest_semantics_verified"] is False
+
+    optuna = receipt["optuna_inventory"]
+    assert len(optuna["nonempty_logs_listed"]) == 3
+    assert len(optuna["zero_byte_error_logs_listed"]) == 3
+    assert optuna["database_listed"] is False
+    assert receipt["bounded_search"]["directory_count"] == 4914
+    assert receipt["bounded_search"]["stage_archive_optuna_name_hits"] == 0
+    assert receipt["bounded_search"]["archive_extracted"] is False
+
+    public_text = json.dumps(receipt)
+    assert "/home/diego." not in public_text
+    assert "C:\\Users\\" not in public_text
+    assert "legacy_root" not in public_text
+    assert "patient_id" not in public_text
+
+    matrix = json.loads((DOCS / "REVIEWER_48_DETAILED.json").read_text(encoding="utf-8"))
+    audit = next(item for item in matrix["items"] if item["id"] == "A-06")
+    assert receipt_path.relative_to(ROOT).as_posix() in audit["evidence"]

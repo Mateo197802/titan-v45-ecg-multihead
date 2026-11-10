@@ -67,9 +67,15 @@ def test_execution_register_covers_the_15_technical_reviewer_items_without_relab
     rows_by_id = {row["id"]: row for row in rows}
 
     assert report["schema"] == "TITAN_V45_TECHNICAL_15_EVIDENCE_EXECUTION_V1"
-    assert report["baseline_matrix_sha256"] == hashlib.sha256(
+    assert report["baseline_matrix_commit"] == "01beb7a68077a44560b037dbee9b5deace557b8d"
+    assert report["baseline_matrix_sha256"] == (
+        "2586de1a1212dd898a9c4201e39e6dda18b59c11e74d7369da02bb1ec2290b52"
+    )
+    assert report["current_matrix_sha256"] == hashlib.sha256(
         matrix_path.read_bytes()
     ).hexdigest()
+    assert report["matrix_evidence_addendum"]["updated_ids"] == ["A-06"]
+    assert report["matrix_evidence_addendum"]["status_reclassifications"] == 0
     assert len(rows) == 15
     assert set(rows_by_id) == EXPECTED_IDS
     assert report["matrix_counts"] == {
