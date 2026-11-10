@@ -1,6 +1,6 @@
 # Evidence source triage
 
-**Audit date:** 2026-11-09  
+**Audit date:** 2026-11-09
 **Scope:** Read-only comparison of the authorized CEDIA evidence archives, the live CEDIA account and Slurm accounting, and the current public repository. This is a forensic evidence index, not a manuscript revision or reviewer response.
 
 ## Handling and integrity
