@@ -98,6 +98,76 @@ def test_rejects_metrics_that_do_not_match_confusion_counts(tmp_path):
         validate_public_pac_artifacts(aggregate, receipt, CONFIG)
 
 
+def test_rejects_protocol_commit_substitution_even_with_a_valid_sha_shape(tmp_path):
+    aggregate, receipt = _copy_inputs(tmp_path)
+    receipt_value = json.loads(receipt.read_text(encoding="utf-8"))
+    receipt_value["protocol_commit"] = "a" * 40
+    _write_json(receipt, receipt_value)
+
+    with pytest.raises(ValueError, match="frozen protocol commit"):
+        validate_public_pac_artifacts(aggregate, receipt, CONFIG)
+
+
+def test_rejects_publication_normalizer_substitution(tmp_path):
+    aggregate, receipt = _copy_inputs(tmp_path)
+    receipt_value = json.loads(receipt.read_text(encoding="utf-8"))
+    receipt_value["publication_normalizer_sha256"] = "a" * 64
+    _write_json(receipt, receipt_value)
+
+    with pytest.raises(ValueError, match="normalizer SHA-256"):
+        validate_public_pac_artifacts(aggregate, receipt, CONFIG)
+
+
+def test_rejects_unrecognized_row_hash_fields_even_when_receipt_is_resealed(tmp_path):
+    aggregate, receipt = _copy_inputs(tmp_path)
+    aggregate_value = json.loads(aggregate.read_text(encoding="utf-8"))
+    aggregate_value["duplicate_audit"]["record_sha256"] = "f" * 64
+    _write_json(aggregate, aggregate_value)
+    receipt_value = json.loads(receipt.read_text(encoding="utf-8"))
+    receipt_value["public_aggregate_sha256"] = hashlib.sha256(aggregate.read_bytes()).hexdigest()
+    _write_json(receipt, receipt_value)
+
+    with pytest.raises(ValueError, match="row-level field"):
+        validate_public_pac_artifacts(aggregate, receipt, CONFIG)
+
+
+def test_rejects_row_prediction_arrays_even_when_receipt_is_resealed(tmp_path):
+    aggregate, receipt = _copy_inputs(tmp_path)
+    aggregate_value = json.loads(aggregate.read_text(encoding="utf-8"))
+    aggregate_value["models"]["weighted_l2_logistic"]["holdout"]["row_predictions"] = [0, 1]
+    _write_json(aggregate, aggregate_value)
+    receipt_value = json.loads(receipt.read_text(encoding="utf-8"))
+    receipt_value["public_aggregate_sha256"] = hashlib.sha256(aggregate.read_bytes()).hexdigest()
+    _write_json(receipt, receipt_value)
+
+    with pytest.raises(ValueError, match="row-level field"):
+        validate_public_pac_artifacts(aggregate, receipt, CONFIG)
+
+
+def test_rejects_fitted_weights_in_receipt_even_when_aggregate_is_unchanged(tmp_path):
+    aggregate, receipt = _copy_inputs(tmp_path)
+    receipt_value = json.loads(receipt.read_text(encoding="utf-8"))
+    receipt_value["fitted_weights"] = [0.25, -0.25]
+    _write_json(receipt, receipt_value)
+
+    with pytest.raises(ValueError, match="row-level field"):
+        validate_public_pac_artifacts(aggregate, receipt, CONFIG)
+
+
+def test_rejects_score_metric_substitution_even_when_receipt_is_resealed(tmp_path):
+    aggregate, receipt = _copy_inputs(tmp_path)
+    aggregate_value = json.loads(aggregate.read_text(encoding="utf-8"))
+    points = aggregate_value["models"]["weighted_l2_logistic"]["holdout"]["point_estimates"]
+    points["auroc"] += 0.001
+    _write_json(aggregate, aggregate_value)
+    receipt_value = json.loads(receipt.read_text(encoding="utf-8"))
+    receipt_value["public_aggregate_sha256"] = hashlib.sha256(aggregate.read_bytes()).hexdigest()
+    _write_json(receipt, receipt_value)
+
+    with pytest.raises(ValueError, match="published aggregate SHA-256"):
+        validate_public_pac_artifacts(aggregate, receipt, CONFIG)
+
+
 def test_generates_aggregate_only_figure_and_hash_manifest(tmp_path):
     pytest.importorskip("matplotlib")
     manifest = generate_report(AGGREGATE, RECEIPT, CONFIG, tmp_path)

@@ -29,8 +29,13 @@ The SPH source files were hash-pinned in the protocol: `code.csv`
 The CEDIA Python dependency archive SHA-256 is
 `5ea9a481f100342a4b7c9aaf98294659340d05ba20dba645007f37a3fbb6cc45`.
 
-The positive target is SPH primary code `30`; code `31` is excluded. This is
-an ECG-level recorded statement. A missing code is not a clinical negative.
+The positive target is presence of SPH primary code `30`. A record carrying
+code `31` without code `30` remains in the eligible population and is
+code-30-absent for this statement endpoint; it is not removed and is not a
+clinically adjudicated negative. The CEDIA metadata audit found 539 code-30
+records, 4 code-31 records, 1 with both, 538 with code 30 only, 3 with code 31
+only, and 25,228 with neither. All 25,770 technically eligible records remain
+in the primary analysis. A missing code 30 is not a clinical negative.
 Preprocessing used the pinned reconstructed SPH rhythm pipeline (12 leads,
 causal 0.5-45 Hz filter, polyphase 500-to-125 Hz resampling, per-lead z-score,
 and 1,250-sample windows); physical-unit conversion was not inferred. The
@@ -105,25 +110,51 @@ does not resolve source-label validity or historical source independence.
 
 - Frozen protocol: [`pac_v3f_embedding_probe.md`](pac_v3f_embedding_probe.md)
   and [`pac_v3f_embedding_probe.json`](../../configs/external_validation/pac_v3f_embedding_probe.json).
-- CEDIA aggregate: [`pac_probe_aggregate.json`](../../outputs/results/external_sph_pac/pac_probe_aggregate.json), SHA-256 `702022c4ee1e0672649dd732777c357952119fa268cee47f9309ad273765c54a`.
-- CEDIA execution receipt: [`pac_probe_receipt.json`](../../outputs/results/external_sph_pac/pac_probe_receipt.json), SHA-256 `a25466470b1fcbde4966c8b98db23cee342e5e22026f98148ee69535b0b85071`.
+- Sanitized public aggregate: [`pac_probe_aggregate.json`](../../outputs/results/external_sph_pac/pac_probe_aggregate.json), SHA-256 `f006a0e11142cd52a22843877cb92c509fd982136f69560e2d6744eae1e56f8d`.
+- PAC-scoped publication receipt: [`pac_probe_receipt.json`](../../outputs/results/external_sph_pac/pac_probe_receipt.json), SHA-256 `48437ba2d026f89a420e8aa365d4e5b20a2db0bef784717686bf854d04919ad7`; normalizer SHA-256 `3e174f3159d3e651532f73d4dead5ed90e5ad7f9b0a6e20429ad0c935699129f`.
+- The source CEDIA aggregate and execution receipt remain unchanged in restricted CEDIA storage; their SHA-256 values are recorded in the publication receipt as `source_execution_aggregate_sha256` (`702022c4ee1e0672649dd732777c357952119fa268cee47f9309ad273765c54a`) and `source_execution_receipt_sha256` (`a25466470b1fcbde4966c8b98db23cee342e5e22026f98148ee69535b0b85071`).
 - Aggregate-only figure: [`PNG`](../../outputs/figures/external_sph_pac/sph_pac_probe_exploratory.png) and [`PDF`](../../outputs/figures/external_sph_pac/sph_pac_probe_exploratory.pdf).
 - Figure hashes, input hashes and generator hash: [`pac_probe_figure_manifest.json`](../../outputs/figures/external_sph_pac/pac_probe_figure_manifest.json).
 - Validator and figure generator: [`plot_sph_pac_probe.py`](../../scripts/external_validation/plot_sph_pac_probe.py).
+- Aggregate-only publisher: [`prepare_sph_pac_publication.py`](../../scripts/external_validation/prepare_sph_pac_publication.py).
 - Regression tests: [`test_sph_pac_public_artifacts.py`](../../tests/evaluation/test_sph_pac_public_artifacts.py).
 
-From the repository root, regenerate the figure and its hash manifest with:
+In the authorized CEDIA environment, regenerate the sanitized public aggregate
+and receipt from the original execution outputs and the pinned SPH source files
+(this exports counts and complete-artifact hashes only):
+
+```bash
+python scripts/external_validation/prepare_sph_pac_publication.py \
+  --source-dir /authorized/path/to/sph-v1-private \
+  --raw-aggregate /authorized/path/to/pac_probe_aggregate.json \
+  --raw-receipt /authorized/path/to/pac_probe_receipt.json \
+  --output-dir outputs/results/external_sph_pac
+```
+
+From the repository root, regenerate the figure and its hash manifest and run
+the public-artifact checks with:
 
 ```powershell
 python scripts/external_validation/plot_sph_pac_probe.py
 python -m pytest tests/evaluation/test_sph_pac_public_artifacts.py -q
+python -m pytest tests/evaluation/test_sph_pac_publication.py -q
 python scripts/external_validation/audit_sph_public_json.py outputs/results/external_sph_pac
 ```
 
-The postprocessor fails closed on aggregate/receipt hash mismatch, configuration
-hash mismatch, incompatible counts, confusion/metric disagreement, bootstrap
-accounting errors or detected individual identifiers. It consumes only the
-aggregate JSON, execution receipt and frozen configuration. Embeddings,
+The publication normalizer verifies the exact source CEDIA aggregate/receipt
+digests, protocol commit/configuration, and source CSV hashes before producing
+the PAC-scoped public receipt. The public postprocessor fails closed on
+aggregate/receipt hash mismatch, protocol or configuration substitution,
+incompatible counts, confusion/metric disagreement, bootstrap accounting
+errors, unknown schema fields, row-level hashes, predictions, weights or
+detected identifiers. It consumes only the public aggregate JSON, publication
+receipt and frozen configuration. The validator independently recomputes
+confusion-derived accuracy, sensitivity, specificity, precision, recall and F1.
+AUROC, average precision, Brier score, ECE and patient-component bootstrap
+intervals cannot be recomputed from the public aggregate because row-level
+scores are intentionally withheld; those values are bound to the immutable
+CEDIA execution aggregate and receipt by SHA-256, not independently recalculated
+from private rows in this repository. Embeddings,
 patient/record identifiers, waveform hashes, split assignments, row predictions
 and fitted weights are not inputs to this postprocessing step and remain in
 CEDIA.

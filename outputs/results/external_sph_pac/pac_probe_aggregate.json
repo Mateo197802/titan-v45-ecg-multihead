@@ -6,6 +6,17 @@
     "groups_with_pac_label_conflict": 1,
     "holdout_rows_excluded_in_sensitivity": 2
   },
+  "label_code_audit": {
+    "code_30_description": "Atrial premature complex(es)",
+    "code_30_only_records": 538,
+    "code_30_records": 539,
+    "code_31_description": "Atrial premature complexes, nonconducted",
+    "code_31_only_records": 3,
+    "code_31_records": 4,
+    "neither_code_records": 25228,
+    "records": 25770,
+    "records_with_both_codes": 1
+  },
   "limitations": [
     "SPH report-level PAC labels are not clinical adjudication.",
     "The holdout is exploratory and is not independent external validation.",
@@ -405,7 +416,7 @@
   "patient_or_record_identifiers_present": false,
   "probe_weights_present": false,
   "row_level_predictions_present": false,
-  "schema": "TITAN_V45_SPH_PAC_PROBE_AGGREGATE_V1",
+  "schema": "TITAN_V45_SPH_PAC_PROBE_AGGREGATE_V2",
   "source": {
     "embedding_eligible_records": 25770,
     "embedding_rows": 25770,
@@ -430,5 +441,5 @@
     "train_records": 20627
   },
   "status": "exploratory_patient_split_holdout",
-  "target": "SPH primary code 30; code 31 excluded; ECG statement, not clinical adjudication"
+  "target": "SPH primary code 30 present; code 31-only records remain included as code-30-absent target-negative observations, not clinical negatives; all technically eligible ECGs remain"
 }

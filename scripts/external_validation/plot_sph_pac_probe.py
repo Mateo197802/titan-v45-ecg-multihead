@@ -31,7 +31,33 @@ MODELS = {
     "fixed_mlp_sensitivity": ("Fixed MLP (sensitivity analysis)", "#C44735", "s", 0.11),
 }
 IDENTIFIER_KEYS = {"record_id", "patient_id", "ecg_id", "subject_id", "study_id"}
+ROW_LEVEL_KEYS = {
+    "record_hash", "record_sha256", "patient_hash", "patient_sha256", "signal_hash",
+    "signal_sha256", "waveform_hash", "waveform_sha256", "prediction", "predictions",
+    "row_scores", "row_predictions", "embeddings", "fitted_weights", "probe_weights",
+}
 SPH_RECORD_ID = re.compile(r"(?<![A-Za-z0-9])A[0-9]{5}(?![A-Za-z0-9])")
+EXPECTED_PROTOCOL_COMMIT = "73a167f51c35b10a825854a9d0f6591eb5754e4c"
+EXPECTED_PROTOCOL_CONFIG_SHA256 = "2a3f81fb0304030b9738c79fba5507a750452b0d1a89fcaa0980d5adf8e6b921"
+EXPECTED_EXECUTION_AGGREGATE_SHA256 = "702022c4ee1e0672649dd732777c357952119fa268cee47f9309ad273765c54a"
+EXPECTED_EXECUTION_RECEIPT_SHA256 = "a25466470b1fcbde4966c8b98db23cee342e5e22026f98148ee69535b0b85071"
+EXPECTED_PUBLIC_AGGREGATE_SHA256 = "f006a0e11142cd52a22843877cb92c509fd982136f69560e2d6744eae1e56f8d"
+EXPECTED_PUBLIC_RECEIPT_SHA256 = "48437ba2d026f89a420e8aa365d4e5b20a2db0bef784717686bf854d04919ad7"
+EXPECTED_LABEL_CODE_AUDIT = {
+    "records": 25_770,
+    "code_30_records": 539,
+    "code_31_records": 4,
+    "records_with_both_codes": 1,
+    "code_31_only_records": 3,
+    "code_30_only_records": 538,
+    "neither_code_records": 25_228,
+    "code_30_description": "Atrial premature complex(es)",
+    "code_31_description": "Atrial premature complexes, nonconducted",
+}
+PAC_TARGET = (
+    "SPH primary code 30 present; code 31-only records remain included as code-30-absent "
+    "target-negative observations, not clinical negatives; all technically eligible ECGs remain"
+)
 
 
 def _sha256_bytes(data: bytes) -> str:
@@ -74,14 +100,102 @@ def _metric_close(observed: float, expected: float) -> bool:
 def _inspect_identifiers(value) -> None:
     if isinstance(value, dict):
         for key, child in value.items():
-            if str(key).lower() in IDENTIFIER_KEYS or SPH_RECORD_ID.search(str(key)):
+            lowered = str(key).lower()
+            if lowered in IDENTIFIER_KEYS or SPH_RECORD_ID.search(str(key)):
                 raise ValueError("individual identifier field found in public JSON")
+            if lowered in ROW_LEVEL_KEYS:
+                raise ValueError("row-level field found in public JSON")
             _inspect_identifiers(child)
     elif isinstance(value, list):
         for child in value:
             _inspect_identifiers(child)
     elif isinstance(value, str) and SPH_RECORD_ID.search(value):
         raise ValueError("individual SPH record identifier found in public JSON")
+
+
+def _require_exact_keys(value: dict, expected: set[str], label: str) -> None:
+    _require(isinstance(value, dict), f"{label} must be an object")
+    extra = set(value) - expected
+    missing = expected - set(value)
+    _require(not extra, f"unexpected {label} field: {sorted(extra)[0] if extra else ''}")
+    _require(not missing, f"missing {label} field: {sorted(missing)[0] if missing else ''}")
+
+
+def _validate_public_schema(aggregate: dict, receipt: dict) -> None:
+    _require_exact_keys(aggregate, {
+        "duplicate_audit", "label_code_audit", "limitations", "models",
+        "patient_or_record_identifiers_present", "probe_weights_present",
+        "row_level_predictions_present", "schema", "source", "split", "status", "target",
+    }, "aggregate")
+    _require_exact_keys(aggregate["source"], {
+        "embedding_eligible_records", "embedding_rows", "metadata_records",
+        "technical_status_counts", "unique_source_patients_in_eligible_rows", "window_count_total",
+    }, "aggregate source")
+    _require_exact_keys(aggregate["source"]["technical_status_counts"], {"embedded"},
+                        "technical status counts")
+    _require_exact_keys(aggregate["split"], {
+        "holdout_negative", "holdout_patient_count", "holdout_positive", "holdout_records",
+        "private_split_assignment_sha256", "seed", "train_fraction", "train_negative",
+        "train_patient_count", "train_positive", "train_records",
+    }, "aggregate split")
+    _require_exact_keys(aggregate["duplicate_audit"], {
+        "cross_patient_exact_duplicate_groups", "duplicate_training_weighting",
+        "exact_duplicate_groups", "groups_with_pac_label_conflict",
+        "holdout_rows_excluded_in_sensitivity",
+    }, "duplicate audit")
+    _require_exact_keys(aggregate["label_code_audit"], set(EXPECTED_LABEL_CODE_AUDIT),
+                        "label-code audit")
+    _require(isinstance(aggregate["limitations"], list)
+             and all(isinstance(item, str) for item in aggregate["limitations"]),
+             "aggregate limitations must be a string list")
+    _require_exact_keys(aggregate["models"], set(MODELS), "aggregate models")
+    for model_name, model in aggregate["models"].items():
+        _require_exact_keys(model, {
+            "holdout", "holdout_without_pac_discordant_exact_duplicate_groups",
+        }, f"{model_name} model")
+        for scope_name, package in model.items():
+            _require_exact_keys(package, {"patient_cluster_bootstrap", "point_estimates"},
+                                f"{model_name} {scope_name}")
+            points = package["point_estimates"]
+            _require_exact_keys(points, {
+                "accuracy", "auroc", "average_precision", "brier_score", "confusion", "ece",
+                "ece_bins", "f1", "n", "precision", "recall", "sensitivity", "specificity",
+                "support", "threshold",
+            }, f"{model_name} {scope_name} point estimates")
+            _require_exact_keys(points["support"], {"negative", "positive"}, "class support")
+            _require_exact_keys(points["confusion"], {"fn", "fp", "tn", "tp"}, "confusion counts")
+            bootstrap = package["patient_cluster_bootstrap"]
+            _require_exact_keys(bootstrap, {
+                "confidence_level", "intervals", "method", "replicates_requested", "seed", "unit",
+            }, f"{model_name} {scope_name} bootstrap")
+            _require_exact_keys(bootstrap["intervals"], set(METRICS), "bootstrap intervals")
+            for metric, interval in bootstrap["intervals"].items():
+                _require_exact_keys(interval, {
+                    "invalid_replicates", "lower", "upper", "valid_replicates",
+                }, f"{metric} interval")
+
+    _require_exact_keys(receipt, {
+        "artifact_scope", "dependency_archive_sha256", "embedding_archive_sha256",
+        "embedding_receipt_sha256", "labels_used_for_head_fitting", "metric_validation",
+        "mimic_data_consulted", "pac_individual_identifiers_in_public_artifacts",
+        "pac_probe_weights_in_public_artifacts", "pac_row_level_data_in_public_artifacts",
+        "publication_normalizer_sha256", "protocol_commit", "protocol_config_sha256",
+        "public_aggregate_sha256",
+        "runtime", "schema", "slurm_job_id", "source_execution_aggregate_sha256",
+        "source_execution_receipt_sha256", "source_sha256", "status",
+        "threshold_or_model_tuning_on_holdout", "v3f_checkpoint_sha256",
+    }, "publication receipt")
+    _require_exact_keys(receipt["source_sha256"], {"code.csv", "metadata.csv", "records.tar.gz"},
+                        "source hashes")
+    _require_exact_keys(receipt["dependency_archive_sha256"], {"python_deps"},
+                        "dependency hashes")
+    _require_exact_keys(receipt["runtime"], {"cuda", "numpy", "python", "scipy", "torch"},
+                        "runtime")
+    _require_exact_keys(receipt["metric_validation"], {
+        "bootstrap_intervals_recomputed_from_row_scores", "confusion_derived_metrics_recomputed",
+        "score_metrics_and_bootstrap_bound_to_cedia_execution_digests",
+        "score_metrics_recomputed_from_row_scores",
+    }, "metric validation")
 
 
 def _validate_confusion_and_metrics(package: dict, expected_config: dict) -> None:
@@ -169,16 +283,32 @@ def validate_public_pac_artifacts(
     receipt_sha256 = _sha256_bytes(receipt_bytes)
     config_sha256 = _sha256_file(protocol_config_path)
 
-    _require(aggregate.get("schema") == "TITAN_V45_SPH_PAC_PROBE_AGGREGATE_V1",
+    _inspect_identifiers(aggregate)
+    _inspect_identifiers(receipt)
+    _validate_public_schema(aggregate, receipt)
+    _require(aggregate.get("schema") == "TITAN_V45_SPH_PAC_PROBE_AGGREGATE_V2",
              "unexpected aggregate schema")
-    _require(receipt.get("schema") == "TITAN_V45_SPH_PAC_PROBE_RECEIPT_V1",
-             "unexpected execution receipt schema")
+    _require(receipt.get("schema") == "TITAN_V45_SPH_PAC_PUBLICATION_RECEIPT_V1",
+             "unexpected publication receipt schema")
+    _require(receipt.get("status") == "exploratory_nonclinical_nonindependent"
+             and receipt.get("artifact_scope") == "PAC probe public artifacts only",
+             "publication receipt scope or status is not explicit")
     _require(receipt.get("public_aggregate_sha256") == aggregate_sha256,
-             "aggregate SHA-256 does not match execution receipt")
-    _require(receipt.get("protocol_config_sha256") == config_sha256,
-             "protocol configuration SHA-256 does not match execution receipt")
-    _require(re.fullmatch(r"[0-9a-f]{40}", str(receipt.get("protocol_commit", ""))) is not None,
-             "invalid frozen protocol commit")
+             "aggregate SHA-256 does not match publication receipt")
+    _require(receipt.get("protocol_commit") == EXPECTED_PROTOCOL_COMMIT,
+             "protocol commit differs from frozen protocol commit")
+    normalizer_path = Path(__file__).with_name("prepare_sph_pac_publication.py")
+    _require(receipt.get("publication_normalizer_sha256") == _sha256_file(normalizer_path),
+             "publication normalizer SHA-256 mismatch")
+    _require(config_sha256 == EXPECTED_PROTOCOL_CONFIG_SHA256
+             and receipt.get("protocol_config_sha256") == EXPECTED_PROTOCOL_CONFIG_SHA256,
+             "protocol configuration SHA-256 differs from frozen configuration")
+    _require(receipt.get("source_execution_aggregate_sha256")
+             == EXPECTED_EXECUTION_AGGREGATE_SHA256,
+             "source execution aggregate digest differs from frozen CEDIA output")
+    _require(receipt.get("source_execution_receipt_sha256")
+             == EXPECTED_EXECUTION_RECEIPT_SHA256,
+             "source execution receipt digest differs from frozen CEDIA output")
     _require(receipt.get("v3f_checkpoint_sha256") == config["model"]["sha256"],
              "checkpoint hash does not match frozen protocol")
     _require(receipt.get("source_sha256") == config["source"]["sha256"],
@@ -194,22 +324,30 @@ def validate_public_pac_artifacts(
              "MIMIC data must not be represented as consulted")
     _require(receipt.get("threshold_or_model_tuning_on_holdout") is False,
              "holdout tuning is prohibited by the frozen protocol")
-    _require(receipt.get("row_level_data_in_repository") is False,
-             "row-level data must remain outside the public repository")
+    _require(receipt.get("pac_row_level_data_in_public_artifacts") is False
+             and receipt.get("pac_individual_identifiers_in_public_artifacts") is False
+             and receipt.get("pac_probe_weights_in_public_artifacts") is False,
+             "PAC row-level values and fitted weights must remain outside public artifacts")
     _require(receipt.get("labels_used_for_head_fitting") is True,
              "receipt must disclose training-label use for probe fitting")
+    metric_validation = receipt["metric_validation"]
+    _require(metric_validation["confusion_derived_metrics_recomputed"] is True,
+             "confusion-derived metrics must be independently recomputed")
+    _require(metric_validation["score_metrics_recomputed_from_row_scores"] is False
+             and metric_validation["bootstrap_intervals_recomputed_from_row_scores"] is False
+             and metric_validation["score_metrics_and_bootstrap_bound_to_cedia_execution_digests"]
+             is True,
+             "score-metric verification boundary must be explicit")
 
-    _inspect_identifiers(aggregate)
-    _inspect_identifiers(receipt)
     _require(aggregate.get("status") == "exploratory_patient_split_holdout",
              "aggregate status must remain exploratory")
     _require(aggregate.get("patient_or_record_identifiers_present") is False
              and aggregate.get("row_level_predictions_present") is False
              and aggregate.get("probe_weights_present") is False,
              "aggregate privacy declarations are not safe")
-    _require(aggregate.get("target") == (
-        "SPH primary code 30; code 31 excluded; ECG statement, not clinical adjudication"
-    ), "unexpected target definition")
+    _require(aggregate.get("target") == PAC_TARGET, "unexpected target definition")
+    _require(aggregate.get("label_code_audit") == EXPECTED_LABEL_CODE_AUDIT,
+             "SPH code 30/31 aggregate audit differs from the verified source")
 
     source = aggregate.get("source", {})
     split = aggregate.get("split", {})
@@ -274,6 +412,11 @@ def validate_public_pac_artifacts(
                          == split["holdout_records"]
                          - duplicates["holdout_rows_excluded_in_sensitivity"],
                          f"{name} duplicate-sensitivity denominator mismatch")
+
+    _require(aggregate_sha256 == EXPECTED_PUBLIC_AGGREGATE_SHA256,
+             "published aggregate SHA-256 differs from the reviewed artifact")
+    _require(receipt_sha256 == EXPECTED_PUBLIC_RECEIPT_SHA256,
+             "publication receipt SHA-256 differs from the reviewed artifact")
 
     return {
         "aggregate": aggregate,
@@ -371,6 +514,9 @@ def generate_report(
             "execution_receipt_sha256": checked["execution_receipt_sha256"],
             "protocol_config_sha256": checked["protocol_config_sha256"],
             "protocol_commit": checked["receipt"]["protocol_commit"],
+            "publication_normalizer_sha256": checked["receipt"][
+                "publication_normalizer_sha256"
+            ],
             "embedding_archive_sha256": checked["receipt"]["embedding_archive_sha256"],
             "embedding_receipt_sha256": checked["receipt"]["embedding_receipt_sha256"],
             "v3f_checkpoint_sha256": checked["receipt"]["v3f_checkpoint_sha256"],

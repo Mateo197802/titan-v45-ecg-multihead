@@ -13,16 +13,17 @@
     "matplotlib": "3.11.0",
     "path": "scripts/external_validation/plot_sph_pac_probe.py",
     "python": "3.12.10",
-    "sha256": "c405ea08f8d8b1f7f174b1e8b95d23fa56598b338c5660bf317885902ecdcd5b"
+    "sha256": "448adf47d626a4ddbc73816b6adda7977dc861209180993bd07cb3fd9070d34d"
   },
   "inputs": {
-    "aggregate_sha256": "702022c4ee1e0672649dd732777c357952119fa268cee47f9309ad273765c54a",
+    "aggregate_sha256": "f006a0e11142cd52a22843877cb92c509fd982136f69560e2d6744eae1e56f8d",
     "cedia_fit_job_id": "32884",
     "embedding_archive_sha256": "a15f1d4c8ab95174a57d1782b4dbd25d79200f04a633f2ad58351a9a152670b6",
     "embedding_receipt_sha256": "d7f34320dbb3e77f412b9b10b510a0db2b571028c111ac9b06ecaebd130f3529",
-    "execution_receipt_sha256": "a25466470b1fcbde4966c8b98db23cee342e5e22026f98148ee69535b0b85071",
+    "execution_receipt_sha256": "48437ba2d026f89a420e8aa365d4e5b20a2db0bef784717686bf854d04919ad7",
     "protocol_commit": "73a167f51c35b10a825854a9d0f6591eb5754e4c",
     "protocol_config_sha256": "2a3f81fb0304030b9738c79fba5507a750452b0d1a89fcaa0980d5adf8e6b921",
+    "publication_normalizer_sha256": "3e174f3159d3e651532f73d4dead5ed90e5ad7f9b0a6e20429ad0c935699129f",
     "v3f_checkpoint_sha256": "ca5d4dcb4b9828e6c4339800fe81ec27f32d9b09a090bb57503bfb56746a8da8"
   },
   "interpretation": "Exploratory SPH primary-code 30 statement endpoint; not clinical adjudication or independent external validation.",
