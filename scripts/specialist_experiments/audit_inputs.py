@@ -69,19 +69,14 @@ def _read_dx(header: Path) -> set[str]:
     return values
 
 
-def _header_summary(header: Path) -> dict[str, float | int]:
-    lines = header.read_text(encoding="utf-8", errors="replace").splitlines()
-    if not lines:
-        raise ValueError("empty WFDB header")
-    fields = lines[0].split()
-    if len(fields) < 4:
-        raise ValueError("WFDB header lacks signal count, sample rate, or length")
+def _header_summary(header: Path, wfdb_module) -> dict[str, float | int]:
+    parsed = wfdb_module.rdheader(str(header.with_suffix("")))
     try:
-        lead_count = int(fields[1])
-        sample_rate = float(fields[2].split("/")[0])
-        sample_count = int(fields[3])
-    except ValueError as exc:
-        raise ValueError("WFDB header has invalid sampling metadata") from exc
+        lead_count = int(parsed.n_sig)
+        sample_rate = float(parsed.fs)
+        sample_count = int(parsed.sig_len)
+    except (TypeError, ValueError) as exc:
+        raise ValueError("WFDB parser returned invalid sampling metadata") from exc
     if lead_count < 1 or sample_rate <= 0 or sample_count < 1:
         raise ValueError("WFDB header contains nonpositive sampling metadata")
     return {"lead_count": lead_count, "sample_rate_hz": sample_rate,
@@ -116,7 +111,9 @@ def _public_exposed_georgia(repo: Path) -> set[str]:
     return exposed
 
 
-def _challenge_records(data_root: Path, config: dict[str, Any], repo: Path) -> list[dict[str, Any]]:
+def _challenge_records(
+    data_root: Path, config: dict[str, Any], repo: Path, *, wfdb_module
+) -> list[dict[str, Any]]:
     raw = data_root / "00_FUENTES_FISICAS_RAW"
     exposed_georgia = _public_exposed_georgia(repo)
     rows: list[dict[str, Any]] = []
@@ -138,7 +135,7 @@ def _challenge_records(data_root: Path, config: dict[str, Any], repo: Path) -> l
             dx = _read_dx(header)
             if not dx:
                 continue
-            signal_spec = _header_summary(header)
+            signal_spec = _header_summary(header, wfdb_module)
             classes = RHYTHM_CLASSES_P8
             supported = tuple(name for name in classes if name in RHYTHM_SUPPORT[source])
             targets, mask = rhythm_targets(dx, classes, supported_classes=supported)
@@ -173,7 +170,9 @@ def _challenge_records(data_root: Path, config: dict[str, Any], repo: Path) -> l
     return rows
 
 
-def _ptbxl_records(data_root: Path, config: dict[str, Any]) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+def _ptbxl_records(
+    data_root: Path, config: dict[str, Any], *, wfdb_module
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     root = data_root / "00_FUENTES_FISICAS_RAW" / "ptb-xl"
     if not root.is_dir() or root.is_symlink():
         raise ValueError("PTB-XL source root is missing or a symlink")
@@ -213,7 +212,7 @@ def _ptbxl_records(data_root: Path, config: dict[str, Any]) -> tuple[list[dict[s
             if not header.is_file() or not signal.is_file() or header.is_symlink() or signal.is_symlink():
                 continue
             waveform_count_by_fold[fold] += 1
-            signal_spec = _header_summary(header)
+            signal_spec = _header_summary(header, wfdb_module)
             scp_codes = _read_scp_codes(row["scp_codes"])
             targets, mask = ptbxl_p4_targets(scp_codes)
             if fold <= 7:
@@ -402,13 +401,15 @@ def run_audit(data_root: Path, output_dir: Path, repo: Path) -> dict[str, Any]:
     if not data_root.is_dir() or output_dir == data_root or output_dir.is_relative_to(data_root):
         raise ValueError("private output must be outside the authorized raw data cache")
     config = json.loads(CONFIG.read_text(encoding="utf-8"))
+    import wfdb
+
     output_dir.mkdir(parents=True, exist_ok=True, mode=0o700)
     os.chmod(output_dir, 0o700)
-    rows = _challenge_records(data_root, config, repo)
-    pathology, ptbxl_receipt = _ptbxl_records(data_root, config)
+    rows = _challenge_records(data_root, config, repo, wfdb_module=wfdb)
+    pathology, ptbxl_receipt = _ptbxl_records(data_root, config, wfdb_module=wfdb)
     rows.extend(pathology)
     _deduplicate(rows)
-    waveform_qc = _waveform_qc(data_root, rows)
+    waveform_qc = _waveform_qc(data_root, rows, wfdb_module=wfdb)
 
     inventory = output_dir / "private_inventory.json"
     inventory.write_text(json.dumps({"schema": "TITAN_PRIVATE_SPECIALIST_INVENTORY_V1", "rows": rows},

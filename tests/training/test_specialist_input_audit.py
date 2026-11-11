@@ -20,6 +20,35 @@ def _write(path, content):
     return path
 
 
+class FakeHeaderWFDB:
+    @staticmethod
+    def rdheader(_):
+        return SimpleNamespace(n_sig=12, fs=500, sig_len=1000)
+
+
+def test_header_summary_uses_wfdb_for_physical_header_fields(tmp_path):
+    header = _write(
+        tmp_path / "chapman.hea",
+        b"chapman 12 500 500000/mV 16 0 15 31255\n",
+    )
+    calls = []
+
+    class Parser:
+        @staticmethod
+        def rdheader(record_name):
+            calls.append(record_name)
+            return SimpleNamespace(n_sig=12, fs=500, sig_len=31255)
+
+    summary = audit_inputs._header_summary(header, Parser)
+
+    assert calls == [str(header.with_suffix(""))]
+    assert summary == {
+        "lead_count": 12,
+        "sample_rate_hz": 500.0,
+        "duration_seconds": 62.51,
+    }
+
+
 def test_exact_duplicate_prefers_training_and_is_scoped_to_task():
     rows = [
         {"task": "rhythm", "source": "georgia", "split": "source_holdout",
@@ -54,7 +83,9 @@ def test_challenge_inventory_excludes_previously_public_georgia_record(tmp_path)
         _write(raw / source / f"{name}.mat", f"waveform-{source}".encode())
     config = {"study_id": "test", "rhythm": {"chapman_split": {"seed": 1}}}
 
-    rows = audit_inputs._challenge_records(tmp_path / "cache", config, repo)
+    rows = audit_inputs._challenge_records(
+        tmp_path / "cache", config, repo, wfdb_module=FakeHeaderWFDB
+    )
 
     georgia = next(row for row in rows if row["source"] == "georgia")
     assert georgia["split"] == "source_holdout"
@@ -88,7 +119,9 @@ def test_ptbxl_audit_never_opens_fold10_and_uses_patient_grouped_fold9(tmp_path,
     monkeypatch.setattr(audit_inputs, "PTBXL_SCP_SHA256", hashlib.sha256(statements.read_bytes()).hexdigest())
     config = {"study_id": "test", "pathology": {"split": {"seed": 20261111}}}
 
-    records, receipt = audit_inputs._ptbxl_records(tmp_path / "cache", config)
+    records, receipt = audit_inputs._ptbxl_records(
+        tmp_path / "cache", config, wfdb_module=FakeHeaderWFDB
+    )
 
     assert len(records) == 9
     assert receipt["fold10_accessed"] is False
