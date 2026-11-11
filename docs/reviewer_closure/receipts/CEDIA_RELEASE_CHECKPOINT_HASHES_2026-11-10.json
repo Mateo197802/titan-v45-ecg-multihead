@@ -1,0 +1,46 @@
+{
+  "schema": "TITAN_CEDIA_RELEASE_CHECKPOINT_HASH_AUDIT_V1",
+  "date": "2026-11-10",
+  "method": "Read-only stat and SHA-256 of physical files in the authorized CEDIA project store; compared with outputs/models/release_weight_manifest.json at PR3 HEAD 4d5e7cc6928c23d9088e20182cc5937b53ab3058.",
+  "internal_paths_omitted": true,
+  "assets": [
+    {
+      "name": "backbone-v3f-original.pt",
+      "bytes": 233565900,
+      "sha256": "ca5d4dcb4b9828e6c4339800fe81ec27f32d9b09a090bb57503bfb56746a8da8",
+      "manifest_size_match": true,
+      "manifest_sha256_match": true
+    },
+    {
+      "name": "backbone-v3ag-pathology.pt",
+      "bytes": 233566092,
+      "sha256": "bf71e4cf8acc34031cb3611c7031e0649822e705fd7dcea354a3ea583ce920ee",
+      "manifest_size_match": true,
+      "manifest_sha256_match": true
+    },
+    {
+      "name": "specialists-v3p-e008-primary6-diagnostic.pt",
+      "bytes": 22354966,
+      "sha256": "9c5a9265a7155e1206c551cc4e6d645b86363ba3dbdeb7baf7b9f173c314be3d",
+      "manifest_size_match": true,
+      "manifest_sha256_match": true
+    },
+    {
+      "name": "specialists-v3q-primary8-best-candidate.pt",
+      "bytes": 29498326,
+      "sha256": "b30cb2bbb45f1231c93ff1c196aa966b57b49831cadb296131c0283e7b0ceb02",
+      "manifest_size_match": true,
+      "manifest_sha256_match": true
+    },
+    {
+      "name": "specialists-v3ag-primary4-calibrated.pt",
+      "bytes": 29413606,
+      "sha256": "cf5091e962fffb3254b1a71fe57236dd82ea0139093df192511499d931391dbc",
+      "manifest_size_match": true,
+      "manifest_sha256_match": true
+    }
+  ],
+  "all_five_assets_match": true,
+  "job_output_lineage_verified": false,
+  "training_source_linkage_verified": false
+}

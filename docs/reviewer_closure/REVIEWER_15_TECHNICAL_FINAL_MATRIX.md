@@ -2,7 +2,7 @@
 
 **As of:** 2026-11-10
 
-**Source:** [`REVIEWER_48_DETAILED.json`](REVIEWER_48_DETAILED.json), PR #3 HEAD checked at `381c8943189ade49ca1cb29b3b65be97133ada83`.
+**Source:** [`REVIEWER_48_DETAILED.json`](REVIEWER_48_DETAILED.json), PR #3 HEAD checked at `4d5e7cc6928c23d9088e20182cc5937b53ab3058`; recovery ZIP SHA-256 `23523fb59501b916cc6cea55ad0ae669387dbd0b10267a2d4bac7d353f8b5d06`.
 
 **New CEDIA receipt:** [`CEDIA_JOB_LOGS_2026-11-10.json`](receipts/CEDIA_JOB_LOGS_2026-11-10.json).
 
@@ -32,6 +32,32 @@ This matrix covers the 15 technically substantive reviewer comments, not all 36 
 
 No reviewer-satisfaction label was upgraded during this pass. A reproducible bounded finding does not satisfy broader clinical, independence or historical requests.
 
+## Recovery ZIP Reconciliation (2026-11-10)
+
+The archive and its internal inventory/checksum list passed byte-level verification (95/95 inventory rows and 96/96 SHA-256 entries; CRC valid). The per-item updates below distinguish bounded subrequirements that are now `VERIFIED_COMPLETE_WITHIN_SCOPE` from the original reviewer request, which remains at its prior satisfaction state. “No new evidence” means the ZIP did not add authenticated material for that requirement; it does not mean the requirement was met.
+
+| ID | New evidence and verification | Subrequirement complete within scope | Overall reviewer status | Exact remaining requirement |
+|---|---|---|---|---|
+| R1-1 | V3C selection records, scheduler receipts and the SPH aggregate were reconciled. SPH is a previously consulted transfer set, not an untouched cohort. | `VERIFIED_COMPLETE_WITHIN_SCOPE`: SPH denominator/endpoint aggregate and V3C route-reference status are explicitly bounded. | `EXPERIMENT_COMPLETED_WITH_LIMITATIONS` / `PARTIALLY_ADDRESSED` | Eligible untouched cohort and checkpoint-to-training-source lineage, including pretraining overlap. |
+| R1-2 | Independently recomputed the V4 May Primary-9 matrix and error-subset routing: 672 total, 461 correct, 211 errors; 107/211 accepted, 53 known-boundary, 51 `ood_real`. | `VERIFIED_COMPLETE_WITHIN_SCOPE`: V4 May aggregate arithmetic and its 211-error denominator. | `EXPERIMENT_COMPLETED_WITH_LIMITATIONS` / `PARTIALLY_ADDRESSED` | V4.5 June preselection denominator, exclusions, and authentic checkpoint-linked pre/post quarantine ledger. V4 May is not transferable. |
+| R1-3 | No new clinical or longitudinal reference was present in the recovery archive. | None. | `VERIFIED_WITH_LIMITATIONS` / `PARTIALLY_ADDRESSED` | Source-specific clinical reference and temporal evidence before incident/first-diagnosis AF claims. |
+| R1-4 | V3C nine-trial export/configuration were exact Git duplicates. PR #4's 41M receipts document two distinct generations, but no original SQLite bytes or trial-to-published-checkpoint edge. | `VERIFIED_COMPLETE_WITHIN_SCOPE`: available V3C ranking versus peak-score distinction; bounded 41M log-derived trial observations are separately documented in PR #4. | `VERIFIED_WITH_LIMITATIONS` / `PARTIALLY_ADDRESSED` | Original Optuna DB/WAL/SHM or authenticated complete export, study configuration, and promotion link; resolve A10 artifacts/rights separately. |
+| R2-general | Checkpoint tensor audit confirms output dimensions only; no all-class model, label ontology or evaluation was added. | `VERIFIED_COMPLETE_WITHIN_SCOPE`: current global output widths are 14 rhythm and 7 pathology; this is not evidence that all requested `Other` classes were trained/evaluated. | `NEW_EXPERIMENT_REQUIRED` / `NOT_SATISFIED` | Approved ontology/reference and a prospectively specified all-input/all-class experiment, or author-approved claim restriction. |
+| R2-2b | No new primary source for the creator or redistribution permissions of the figures was authenticated. | None. | `ACTIVE_RECOVERY_REQUIRED` / `PARTIALLY_ADDRESSED` | Author/rightsholder confirmation and source files/permissions; do not infer rights from a figure hash. |
+| R2-3a | Reconciled cohort counts, release checkpoint hashes and V3C submission references. Job names and split filenames are not proof that the job read those manifest bytes. | `VERIFIED_COMPLETE_WITHIN_SCOPE`: selected P6/P8/P4 denominators and published checkpoint identity; selected cohorts are not training splits. | `EVIDENCE_CEILING_REACHED` / `PARTIALLY_ADDRESSED` | Job-linked train/validation/calibration manifests, source versions, patient maps, exclusions and overlap results. |
+| R2-3c | Serialized global/head shapes were inspected without unpickling. They establish architecture dimensions, not class support, loss masks or target participation. | `VERIFIED_COMPLETE_WITHIN_SCOPE`: tensor output/head dimensions as recorded in the architecture receipt. | `VERIFIED_WITH_LIMITATIONS` / `PARTIALLY_ADDRESSED` | Historical loss masks, per-class supports, consumed manifests and evidence that cascade/auxiliary labels participated in each checkpoint's training. |
+| R2-3d | No job-linked ALMI/ILMI/LAE supervision or evaluation record was authenticated. Output presence alone is not supervision evidence. | None. | `EVIDENCE_CEILING_REACHED` / `NOT_SATISFIED` | Historical label masks/supports and validation metrics tied to the relevant checkpoint, or restrict the claims. |
+| R2-3e | Recovered routing aggregate belongs to V4 May and only to the 211-error subset; it contains no V4.5 June human-review ledger. | `VERIFIED_COMPLETE_WITHIN_SCOPE`: V4 May action arithmetic and explicit separation from V4.5. | `VERIFIED_WITH_LIMITATIONS` / `PARTIALLY_ADDRESSED` | Historical V4.5 role definitions, complete transition ledger and evidence of actual human review, if claimed. |
+| R2-3f | Physical V3F/V3AG and specialist hashes and serialized shapes were verified. Loader candidates remain nonidentical to the required original. P4 replay remains 962/962 decisions but max probability difference `0.0006194115` > `1e-5`. | `VERIFIED_COMPLETE_WITHIN_SCOPE`: public checkpoint file identity/shapes and preservation of the replay discrepancy. | `EVIDENCE_CEILING_REACHED` / `PARTIALLY_ADDRESSED` | Exact original loader and checkpoint-linked preprocessing/morphology/event implementation; strict score equivalence is not met. |
+| R2-4a | SPH aggregate/protocol are byte-identical to prior Git evidence; the package adds no untouched-cohort or historical source-selection proof. | `VERIFIED_COMPLETE_WITHIN_SCOPE`: distinction between external-development evidence and independent validation. | `VERIFIED_WITH_LIMITATIONS` / `PARTIALLY_ADDRESSED` | Complete historical source-selection lineage or eligible independent evaluation. |
+| R2-4e | Existing SPH summaries confirm empty threshold sets and top-1 fallback are separate states; no new result converts them to `Other`, abstention or quarantine. | `VERIFIED_COMPLETE_WITHIN_SCOPE`: current reported empty-set/fallback counts and their semantics. | `EXPERIMENT_COMPLETED_WITH_LIMITATIONS` / `PARTIALLY_ADDRESSED` | Keep these states distinct; a new `Other` or abstention claim requires its own frozen policy and evaluation. |
+| R2-4k | V4 May quarantine-related arithmetic was independently recomputed; the global 672-record quarantine rate is null because routing was only reported for errors. | `VERIFIED_COMPLETE_WITHIN_SCOPE`: V4 May error-subset denominator and arithmetic. | `EVIDENCE_CEILING_REACHED` / `NOT_SATISFIED` | V4.5 June uncertainty score, frozen policy, complete eligible denominator, per-record transitions and outcomes, or withdraw the historical-rate claim. |
+| R2-5 | The package does not add beat-level timing/localization labels or a PVC episode reference. | None. | `VERIFIED_WITH_LIMITATIONS` / `PARTIALLY_ADDRESSED` | Keep PVC interpretation at ECG-statement level unless a new beat-level dataset and protocol are supplied. |
+
+The `VERIFIED_COMPLETE_WITHIN_SCOPE` labels above apply only to the stated subrequirements. They do not change any reviewer-satisfaction status, certify historical patient independence, or establish exact reproduction of the original loader.
+
+The 12 internal-audit addenda A-01–A-12 are recorded in the [separate ZIP addendum](REVIEWER_48_RECOVERY_ZIP_ADDENDUM.md) and the machine-readable [48-item matrix](REVIEWER_48_DETAILED.json). Their high-level audit statuses are unchanged. The 21 editorial-only reviewer items were not modified.
+
 ## Companion Evidence
 
 - [CEDIA job-log receipt](receipts/CEDIA_JOB_LOGS_2026-11-10.json)
@@ -42,6 +68,7 @@ No reviewer-satisfaction label was upgraded during this pass. A reproducible bou
 - [Dataset eligibility](GENERALIZATION_DATASET_ELIGIBILITY.md), [future independent-evaluation protocol](GENERALIZATION_EXPERIMENT_PROTOCOL.md), and [run status/results](GENERALIZATION_EXPERIMENT_RESULTS.md)
 - [Per-class aggregate metrics](GENERALIZATION_PER_CLASS_METRICS.json) and [aggregate error analysis](GENERALIZATION_ERROR_ANALYSIS.md)
 - [Other-class boundary](OTHER_CLASS_COVERAGE_EXPERIMENT.md), [auxiliary training evidence](AUXILIARY_CLASS_TRAINING_EVIDENCE.md), and [selective-prediction/quarantine disposition](SELECTIVE_PREDICTION_EXPERIMENT.md)
+- [Recovery ZIP reconciliation and verification receipt](FORENSIC_ZIP_RECONCILIATION.md) and [V4 May quarantine arithmetic, explicitly separate from V4.5](V4_LEGACY_QUARANTINE_DISPOSITION.md)
 
 ## Individual Findings
 

@@ -2,7 +2,7 @@
   "schema": "TITAN_V45_REVIEWER_15_TECHNICAL_FINAL_MATRIX_V1",
   "as_of": "2026-11-10",
   "source_matrix": "docs/reviewer_closure/REVIEWER_48_DETAILED.json",
-  "source_head_checked": "381c8943189ade49ca1cb29b3b65be97133ada83",
+  "source_head_checked": "4d5e7cc6928c23d9088e20182cc5937b53ab3058",
   "new_execution_receipt": "docs/reviewer_closure/receipts/CEDIA_JOB_LOGS_2026-11-10.json",
   "counts": {
     "technical_reviewer_comments": 15,
@@ -434,5 +434,42 @@
       ],
       "remaining_actions": ["Restrict claims to ECG-level PVC statement classification.", "A beat-level study needs appropriate annotations and a separate protocol."]
     }
-  ]
+  ],
+  "recovery_zip_reconciliation": {
+    "as_of": "2026-11-10",
+    "archive": "TITAN_V45_RECUPERACION_COMPLETA_2026-11-10.zip",
+    "archive_sha256": "23523fb59501b916cc6cea55ad0ae669387dbd0b10267a2d4bac7d353f8b5d06",
+    "integrity_receipt": "docs/reviewer_closure/receipts/RECOVERY_ZIP_AUDIT_2026-11-10.json",
+    "pr3_head_checked": "4d5e7cc6928c23d9088e20182cc5937b53ab3058",
+    "pr4_head_checked": "54ef45e3b79e5b14f41d9e3edae084eb3f4e9bcf",
+    "verification": {
+      "inventory_rows_verified": "95/95",
+      "sha256sum_entries_verified": "96/96",
+      "crc_valid": true,
+      "payloads_byte_identical_to_tracked_pr3_or_pr4_files": 11,
+      "payloads_not_byte_identical": 84,
+      "archive_extracted": false,
+      "recovered_code_executed": false,
+      "reviewer_satisfaction_changes": 0,
+      "manuscript_edited": false
+    },
+    "item_updates": [
+      {"id":"R1-1","new_evidence":"V3C scheduler/path receipts and previously fixed SPH aggregate reconciled; SPH is previously consulted, not independent.","verified_complete_within_scope":["SPH aggregate denominator/endpoints and bounded V3C route-reference status"],"overall_status_unchanged":"EXPERIMENT_COMPLETED_WITH_LIMITATIONS / PARTIALLY_ADDRESSED","remaining":"Untouched eligible cohort and full checkpoint-to-training-source/pretraining-overlap lineage."},
+      {"id":"R1-2","new_evidence":"Independent recomputation of V4 May Primary-9 aggregate and error-subset routing: 672 total, 461 correct, 211 errors; 107 accepted, 53 known-boundary, 51 ood_real.","verified_complete_within_scope":["V4 May aggregate arithmetic and 211-error denominator"],"overall_status_unchanged":"EXPERIMENT_COMPLETED_WITH_LIMITATIONS / PARTIALLY_ADDRESSED","remaining":"V4.5 June preselection denominator/exclusions and authentic checkpoint-linked pre/post quarantine ledger; V4 May is not transferable."},
+      {"id":"R1-3","new_evidence":"No clinical or longitudinal reference was authenticated in the recovery package.","verified_complete_within_scope":[],"overall_status_unchanged":"VERIFIED_WITH_LIMITATIONS / PARTIALLY_ADDRESSED","remaining":"Source-specific clinical reference and temporal evidence before incident/first-diagnosis AF claims."},
+      {"id":"R1-4","new_evidence":"V3C nine-trial export/config are exact Git duplicates; PR4 receipts describe two separate 41M generations but no original SQLite bytes or checkpoint promotion edge.","verified_complete_within_scope":["Available V3C ranking-versus-peak distinction","Bounded 41M log-derived trial observations, documented separately in PR4"],"overall_status_unchanged":"VERIFIED_WITH_LIMITATIONS / PARTIALLY_ADDRESSED","remaining":"Original Optuna DB/WAL/SHM or authenticated complete export, configuration and promotion link; A10 rights/artifacts remain separate."},
+      {"id":"R2-general","new_evidence":"Serialized architecture confirms output dimensions only; no all-class model, approved ontology or all-input evaluation was added.","verified_complete_within_scope":["Current global output widths: 14 rhythm and 7 pathology, not proof of Other-class training/evaluation"],"overall_status_unchanged":"NEW_EXPERIMENT_REQUIRED / NOT_SATISFIED","remaining":"Approved ontology/reference and frozen all-input/all-class experiment, or author-approved claim restriction."},
+      {"id":"R2-2b","new_evidence":"No new authenticated source for figure creator or redistribution rights.","verified_complete_within_scope":[],"overall_status_unchanged":"ACTIVE_RECOVERY_REQUIRED / PARTIALLY_ADDRESSED","remaining":"Author/rightsholder confirmation, source files and permissions."},
+      {"id":"R2-3a","new_evidence":"Selected cohort counts, public checkpoint identities and V3C submission references reconciled; job names and filenames do not prove manifest reads.","verified_complete_within_scope":["Selected P6/P8/P4 denominators and published checkpoint file identity; selected cohorts are not training splits"],"overall_status_unchanged":"EVIDENCE_CEILING_REACHED / PARTIALLY_ADDRESSED","remaining":"Job-linked train/validation/calibration manifests, source versions, patient maps, exclusions and overlap results."},
+      {"id":"R2-3c","new_evidence":"Global and specialist tensor dimensions statically inspected without unpickling; no loss-mask/support proof.","verified_complete_within_scope":["Serialized global/head dimensions"],"overall_status_unchanged":"VERIFIED_WITH_LIMITATIONS / PARTIALLY_ADDRESSED","remaining":"Historical loss masks, per-class supports, consumed manifests and proof of cascade/auxiliary label participation."},
+      {"id":"R2-3d","new_evidence":"No job-linked ALMI/ILMI/LAE supervision or evaluation record authenticated.","verified_complete_within_scope":[],"overall_status_unchanged":"EVIDENCE_CEILING_REACHED / NOT_SATISFIED","remaining":"Historical label masks/supports and validation metrics tied to the checkpoint, or restrict claims."},
+      {"id":"R2-3e","new_evidence":"Recovered routing aggregate is V4 May and covers only 211 errors; it contains no V4.5 June human-review ledger.","verified_complete_within_scope":["V4 May action arithmetic and separation from V4.5"],"overall_status_unchanged":"VERIFIED_WITH_LIMITATIONS / PARTIALLY_ADDRESSED","remaining":"Historical V4.5 role definitions, full transition ledger and evidence of actual human review if claimed."},
+      {"id":"R2-3f","new_evidence":"Physical checkpoint hashes and tensor dimensions verified; candidate loaders remain nonidentical; replay remains 962/962 decisions with max probability difference 0.0006194115 > 1e-5.","verified_complete_within_scope":["Published checkpoint identity/dimensions and preserved replay discrepancy"],"overall_status_unchanged":"EVIDENCE_CEILING_REACHED / PARTIALLY_ADDRESSED","remaining":"Exact original loader and checkpoint-linked preprocessing/morphology/event implementation; strict numerical equivalence is not met."},
+      {"id":"R2-4a","new_evidence":"SPH aggregate/protocol are exact Git duplicates; no untouched-cohort or historical source-selection proof added.","verified_complete_within_scope":["External-development versus independent-validation distinction"],"overall_status_unchanged":"VERIFIED_WITH_LIMITATIONS / PARTIALLY_ADDRESSED","remaining":"Complete source-selection lineage or eligible independent evaluation."},
+      {"id":"R2-4e","new_evidence":"Existing SPH summaries preserve empty threshold sets and top-1 fallback as separate states; none becomes Other, abstention or quarantine.","verified_complete_within_scope":["Current reported empty-set/fallback counts and semantics"],"overall_status_unchanged":"EXPERIMENT_COMPLETED_WITH_LIMITATIONS / PARTIALLY_ADDRESSED","remaining":"Any Other/abstention claim needs a separate frozen policy and evaluation."},
+      {"id":"R2-4k","new_evidence":"V4 May routing arithmetic recomputed; global 672-record quarantine rate is null because routing covered only the 211 errors.","verified_complete_within_scope":["V4 May error-subset denominator and arithmetic"],"overall_status_unchanged":"EVIDENCE_CEILING_REACHED / NOT_SATISFIED","remaining":"V4.5 June score, frozen policy, complete eligible denominator, per-record transitions/outcomes, or withdraw historical-rate claim."},
+      {"id":"R2-5","new_evidence":"No beat-level timing/localization labels or PVC episode reference were added.","verified_complete_within_scope":[],"overall_status_unchanged":"VERIFIED_WITH_LIMITATIONS / PARTIALLY_ADDRESSED","remaining":"Keep PVC at ECG-statement level unless beat-level data and a new protocol are supplied."}
+    ],
+    "scope_note": "VERIFIED_COMPLETE_WITHIN_SCOPE applies only to the listed bounded subrequirements. It does not upgrade reviewer satisfaction, certify historical patient independence, or establish exact original-loader reproduction."
+  }
 }

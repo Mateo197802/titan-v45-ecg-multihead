@@ -1,0 +1,36 @@
+{
+  "schema": "TITAN_V4_LEGACY_ERROR_SUBSET_RECOMPUTATION_V1",
+  "source_scope": "V4 May 2026 legacy Primary-9 diagnostic; not V4.5 June",
+  "primary9": {
+    "classes": 9,
+    "records": 672,
+    "correct_diagonal": 461,
+    "off_diagonal_errors": 211,
+    "accuracy_recomputed": 0.6860119047619048,
+    "macro_f1_recomputed": 0.681162272058885,
+    "csv_matches_report_matrix": true,
+    "reported_metrics_match": true
+  },
+  "routing_on_error_subset_only": {
+    "records": 211,
+    "accepted_prediction": 107,
+    "known_boundary": 53,
+    "rare_rhythm_quarantine": 0,
+    "pathology_quarantine": 0,
+    "ood_real_label": 51,
+    "action_sum": 211,
+    "coverage_fraction": 0.5071090047393365,
+    "nonacceptance_fraction": 0.4928909952606635,
+    "full_672_record_quarantine_rate": null
+  },
+  "aggregate_source_sha256": {
+    "confusion_matrix_csv": "88246c9c82ae9684bae90b22ee96c168085ae11a4a1c79a328995769e41876e9",
+    "error_subset_routing_json": "9a7d026c95e084c955321d9f8f613542201ad435c88f32d2b4ff551f0b94cf2f"
+  },
+  "limits": [
+    "The routing counts apply only to the 211-error subset, not all 672 records.",
+    "ood_real is an archived algorithmic label, not clinical adjudication.",
+    "No June 2026 V4.5 quarantine policy, ledger, checkpoint or job is established here.",
+    "No post-routing outcomes, human review or corrected predictions are measured."
+  ]
+}

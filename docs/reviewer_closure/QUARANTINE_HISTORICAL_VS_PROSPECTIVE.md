@@ -31,6 +31,8 @@ An aggregate prediction count cannot identify which original records entered a q
 
 The examined source ceiling is documented in [source triage](EVIDENCE_SOURCE_TRIAGE.md) and [recovered versus missing evidence](RECOVERED_VS_MISSING_HISTORICAL_EVIDENCE.md). The NOC checked a particular backup listing and did not find the requested historical directories, loader or Optuna database; that response does not prove absence from all institutional backups.
 
+A separate legacy V4 May diagnostic has now been recomputed from its aggregate confusion matrix and error-subset routing totals. See [V4 May legacy quarantine disposition](V4_LEGACY_QUARANTINE_DISPOSITION.md) and its sanitized [recomputation receipt](receipts/LEGACY_V4_QUARANTINE_RECOMPUTATION_2026-11-10.json). It verifies only the 672-record Primary-9 aggregate and routing of 211 errors; it does not change the V4.5 June `NOT_ASSESSED` disposition above.
+
 ## Prospective workflow needed if the claim is retained
 
 Freeze the design before evaluating any held-out outcomes:

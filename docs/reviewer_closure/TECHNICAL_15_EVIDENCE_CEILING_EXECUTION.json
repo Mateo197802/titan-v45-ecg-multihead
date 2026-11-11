@@ -5,7 +5,7 @@
   "baseline_matrix_path": "docs/reviewer_closure/REVIEWER_48_DETAILED.json",
   "baseline_matrix_commit": "01beb7a68077a44560b037dbee9b5deace557b8d",
   "baseline_matrix_sha256": "2586de1a1212dd898a9c4201e39e6dda18b59c11e74d7369da02bb1ec2290b52",
-  "current_matrix_sha256": "6ee14c3e75d2dc75c85b5f1367be6cee4ae7b6fc30c78157492c9deec80b5b21",
+  "current_matrix_sha256": "c77580d55d940ce55cf5588873a7bb9f5ca8efb476b77c4083b1a1500b943420",
   "matrix_evidence_addendum": {
     "source_commit": "575c5a5fa4dbcf658308c928aa7d08259fd61c9f",
     "updated_ids": ["A-06"],
