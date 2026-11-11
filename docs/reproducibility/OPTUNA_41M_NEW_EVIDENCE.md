@@ -50,3 +50,11 @@ The package names `titan_v45_41m_multihead_optuna_before_resume.db` in a histori
 This evidence improves the bounded historical record: two distinct database generations, two log/query-recorded completed-trial observations, their objectives/parameters, scheduler failures, and an objective-form cross-check are now explicit. It does **not** recover the SQLite database, establish the complete search, or connect either trial to released checkpoints. Do not merge these two generations, the V3C trial 6 result, or V4.6 experiments into one Optuna history. The reviewer point remains partial; the missing database and model-promotion edge remain unverified.
 
 No SQLite binary, private raw receipt, row-level clinical data, or CEDIA-internal path is published here. The raw receipt remains in authorized storage.
+
+## REV6 static objective source: separate, unlinked observation
+
+The PR #3 integration reviewed a CEDIA-exclusive REV6 export containing a text copy of `TRAINING/optuna_search_hpc.py`, 63,398 bytes, SHA-256 `dbfeea1d46f93f23297a74194ecd9e06d72e78f8163bdaab8db9767c2de0715c`. Its in-package export record matches the member bytes. Static inspection shows a base objective of `0.60 × macro-F1 Primary-8 + 0.40 × macro-F1 Pathology-4`, with optional active-rhythm/clinical-axis modifiers, missing-class penalties, and a stability-ranking rule.
+
+This source is not cryptographically linked to jobs 13169, 13172, 13181, 13239, or 13304, and effective CLI arguments are not recovered. It therefore does not replace or reconcile the captured May objective formula documented above (`0.45/0.35/0.10/0.10`). The difference is retained as two source observations with unresolved job/version attribution; it is not evidence that either formula produced a released checkpoint. The original SQLite generations, WAL/SHM files, complete trial history, and trial-to-checkpoint lineage remain absent.
+
+The source copy is not republished in this PR. Its sanitized hash and interpretation are recorded in PR #3's evidence report, while this paragraph keeps the A-06/Optuna disposition visible in the PR #4 workstream. No artifact, trial row, A10 checksum, or historical result was changed.
