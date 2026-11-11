@@ -10,6 +10,8 @@ The execution baseline is commit `0a32a57`. The matrix bytes used for the record
 
 **Recovery round 2:** the 2026-11-10 directed package has been validated and reconciled in [`NEW_RECOVERY_EVIDENCE_INTEGRATION.md`](NEW_RECOVERY_EVIDENCE_INTEGRATION.md). It adds authenticated source bytes for S4/S5/U plans and bounded SLURM metadata, but does not complete an original reviewer subrequirement. The 15-item update and its explicit coverage rubric are in [`REVIEWER_15_EVIDENCE_UPDATE.md`](REVIEWER_15_EVIDENCE_UPDATE.md); the source/job/checkpoint graph is in [`HISTORICAL_PROVENANCE_GRAPH.md`](HISTORICAL_PROVENANCE_GRAPH.md). Technical and reviewer-satisfaction states remain unchanged.
 
+**CEDIA REV2 follow-up:** the newer CEDIA export is reconciled in [`HISTORICAL_RECOVERY_CANONICAL_INDEX.md`](HISTORICAL_RECOVERY_CANONICAL_INDEX.md) and [`REVIEWER_15_CEDIA_REV2_ADDENDUM.md`](REVIEWER_15_CEDIA_REV2_ADDENDUM.md). It adds reported job/AF summaries and bounded cache-key checks, not original policy/ledger bytes, job-consumed manifests or independent patient/signal certification. The 15 technical item states, satisfaction labels and coverage values remain unchanged; the current matrix SHA-256 is pinned in the JSON execution record.
+
 ## Result
 
 No targeted reviewer-satisfaction label changed: 12 items remain `PARTIALLY_ADDRESSED`, and R2-general, R2-3d and R2-4k remain `NOT_SATISFIED`. The new checks verify several bounded subrequirements, but do not turn selected development results into independent validation, recover missing historical lineage, or satisfy a missing experiment. No percentages are used as proxies for scientific completion.

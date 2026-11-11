@@ -40,3 +40,5 @@ Queda respaldado que el snapshot V3C registró trial 6 como ganador de `ranking_
 ## Recibo de recuperacion dirigida 2
 
 El recibo CEDIA incluido en la ronda 2 vuelve a registrar `COMPLETED 0:0` para 16748-16759, 16768 y 16781, y conserva SHA-256 de los registros de envio de 16768/16781. Tambien confirma que el envio referencia el JSON de trial 6 y la ruta del checkpoint base. No aporta stdout/stderr, digest de lectura, archivo JSON, checkpoint intermedio ni digest de salida. Los doce jobs 16748-16759 siguen sin equivaler a doce trials completos. Esta es corroboracion de metadatos de envio/estado, no una nueva arista verificada; el grafo actualizado esta en [`HISTORICAL_PROVENANCE_GRAPH.md`](HISTORICAL_PROVENANCE_GRAPH.md).
+
+La exportación CEDIA REV2 vuelve a listar esa cadena, pero no aporta bytes o digests de ejecución nuevos. Se clasifica como `DUPLICATED_EVIDENCE` en el [índice canónico](HISTORICAL_RECOVERY_CANONICAL_INDEX.md); trial 6, trial 8 y todos los vínculos no verificados quedan sin cambios.

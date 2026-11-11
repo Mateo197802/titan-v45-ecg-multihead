@@ -2,9 +2,11 @@
   "schema": "TITAN_V45_HISTORICAL_PROVENANCE_GRAPH_V1",
   "as_of": "2026-11-10",
   "repository": "Mateo197802/titan-v45-ecg-multihead",
-  "pr3_head_audited": "e8f3179866d1199cbb98966f328d37774baa646d",
+  "pr3_head_audited": "307ddaf3e3d840a624009d10f53923db307a500c",
   "pr4_head_audited": "3cfedf39a81a22c867fde04faf9b1a1dd2f60448",
   "pr5_used": false,
+  "pr4_modified": false,
+  "pr5_modified": false,
   "recovery_bundle": {
     "id": "BUNDLE-ROUND2",
     "filename": "TITAN_V45_RECUPERACION_DIRIGIDA_2_2026-11-10.zip",
@@ -17,6 +19,13 @@
     "checksum_manifest_ok": true,
     "raw_bundle_published": false
   },
+  "recovery_packages": [
+    {"id":"PKG-COMPLETE-20261110","sha256":"23523fb59501b916cc6cea55ad0ae669387dbd0b10267a2d4bac7d353f8b5d06","members":97,"inventory_rows":95,"checksum_entries":96,"integrity":"PASS","prior_evidence":true},
+    {"id":"PKG-DIRECTED2-20261110","sha256":"d1d77535d2b1995fc8a1ba5e3b47cf9c63703cd29d4ef63334e5402fe731e82f","members":38,"inventory_rows":36,"checksum_entries":37,"integrity":"PASS","prior_evidence":true},
+    {"id":"PKG-CEDIA-OUTER-20261110","sha256":"4e7b9dcfbecf90a0427a60972a03020aaeb5a5e7e279ae0b826aa47cc252298b","members":2,"integrity":"PASS","new_export":true},
+    {"id":"PKG-CEDIA-REV1-20261110","sha256":"29c66d104bc9cda5676c31add41070ed3a63cfec4d714fcaa009f222b84f2513","members":27,"inventory_rows":75,"integrity":"PASS","new_export":true},
+    {"id":"PKG-CEDIA-REV2-20261110","sha256":"e9fa64ee9c8adbc21414be1a4939a0ae4e1aa04f366d8a3b5dace686cc2a6b44","members":29,"inventory_rows":145,"integrity":"PASS","new_export":true,"source_bytes_reauthenticated":false}
+  ],
   "source_archives": [
     {"id":"ARCH-S4-BASE","name":"plan_s4_binary_split_20260617.tgz","bytes":9813,"sha256":"8425019f660c6646190028dab0d4d7076225077efa34ae4aeb29e4551ed025b5","members":6},
     {"id":"ARCH-S4-REPAIR","name":"plan_s4_binary_split_repair_20260617.tgz","bytes":10122,"sha256":"f0f281fd87c7d92d4bc22c3a227e0d344dbb370fefc1d043c6f4cd9b324a94bb","members":7},
@@ -60,7 +69,9 @@
     {"id":"JOB-15504","job_id":"15504","plan":"U_DECISION","status":"COMPLETED","exit_code":"0:0","submit_sha256":"95ad6ea83e10df1c452a0e4a891652f6f95d3e2c71e42293e22462e4e51d861e","exact_script_digest_or_decision_output_recovered":false},
     {"id":"JOB-15488-15492","job_ids":"15488,15492","plan":"S4_DECISION","status":"FAILED","exit_code":"2:0"},
     {"id":"JOB-13169","job_id":"13169","plan":"OPTUNA_41M","status":"FAILED","exit_code":"1:0"},
-    {"id":"JOB-13172-13181","job_ids":"13172,13181","plan":"OPTUNA_41M","status":"FAILED","exit_code":"9:0"}
+    {"id":"JOB-13172-13181","job_ids":"13172,13181","plan":"OPTUNA_41M","status":"FAILED","exit_code":"9:0"},
+    {"id":"JOB-15874-15905","job_ids":["15874","15880","15885","15886","15887","15903","15905"],"plans":["W","Z","AC","AD","AE","AF"],"reported_status":"COMPLETED","exit_codes":"0:0","reported_submitline_sha256":{"15874":"a9c5b892601a56be77bccc97a17aec124d0111e6f124e7d668a104371e37cf8e","15880":"385187c18c83805bec946c5586e4ee33a82c00846b620e47a652574aa705cec7","15885":"5ceec0766b8a60f2065f7ca129fa5cab691ed86c803fca0a09d97bbeb4392acf","15886":"f2a8a301b1e80c4fab3241cad839941e809eeb267b30fdcc16ca34afe5563fc5","15887":"ce57150d90a5d616099586be91ec054148467e66f495b6b4328b73fa777f97f4","15903":"3e68abe1aee3dd9963a86645354ae7c087c4b4587a42ac3f95f70ed678645bfd","15905":"3e68abe1aee3dd9963a86645354ae7c087c4b4587a42ac3f95f70ed678645bfd"},"known_external_dependency":{"job_id":"15874","type":"afterok","depends_on":"15873","within_W_to_AF_chain":false},"afterok_edges_within_chain":0,"input_consumption_verified":false,"submitline_hashes_are_source_hashes":false,"basis":"CEDIA export receipt; raw scheduler logs and source-input read digests were not transferred"},
+    {"id":"JOB-15903-15905","job_ids":["15903","15905"],"plan":"AF","reported_status":"COMPLETED","reported_handoff_rows":23,"reported_valid_for_gate":0,"reported_external_gate_allowed":false,"reported_stdout_sha256":{"15903":"ed9e3bc4b3ea169649050bea9ada71c7ac33b8bfe118ef9ee421f025e6d4981a","15905":"93f6a9c95d9b03f723a177a8e09adfddd7c496d55b20f9029a8857df1923cd91"},"reported_stdout_bytes":{"15903":3799,"15905":4708},"raw_stdout_transferred_or_rehashed":false,"profile_metrics_recomputed":false,"quarantine_denominator_available":false}
   ],
   "artifact_nodes": [
     {"id":"TRIAL6-JSON","name":"selected_candidate_v3c_trial6_final.json","status":"REFERENCED_NOT_RECOVERED"},
@@ -74,7 +85,12 @@
     {"id":"V45-SPLITS","name":"job-consumed train/validation/calibration and V3H/V3S parent manifests","status":"NOT_RECOVERED"},
     {"id":"V45-QUARANTINE","name":"June V4.5 per-record uncertainty/quarantine ledger and complete denominator","status":"NOT_RECOVERED"},
     {"id":"V4-MAY-LEGACY-QUARANTINE","name":"May V4 Primary-9 error-subset routing","records":672,"status":"VERIFIED_AS_DIFFERENT_MODEL_VERSION"},
-    {"id":"SPH-EXTERNAL-DEV","name":"SPH transfer report","records":25770,"patients":24666,"status":"EXISTING_EVIDENCE_UNCHANGED_INDEPENDENCE_NOT_CERTIFIED"}
+    {"id":"SPH-EXTERNAL-DEV","name":"SPH transfer report","records":25770,"patients":24666,"status":"EXISTING_EVIDENCE_UNCHANGED_INDEPENDENCE_NOT_CERTIFIED"},
+    {"id":"PLAN-AE-POLICY","name":"Plan AE quarantine policy","sha256_as_reported":"14c4e62376d7fdfe86221648d153170c164392f633bd3864225bb25f3dd8a14e","source_bytes_available":false,"status":"REPORTED_HASH_ONLY"},
+    {"id":"PLAN-AE-MANIFEST","name":"Plan AE quarantine manifest","sha256_as_reported":"9a08a369c563576947a0a9da9b916db376efe6c582c9e0e6563b36589d841bad","source_bytes_available":false,"status":"REPORTED_HASH_ONLY"},
+    {"id":"PLAN-AF-REPORTS","name":"Plan AF aggregate summaries","records":23,"status":"CEDIA_REPORTED_NOT_RECOMPUTED"},
+    {"id":"MAY-CACHE-SPLIT-SUMMARY","name":"Four May cache train/validation key comparisons","status":"CEDIA_REPORTED_KEY_LEVEL_ONLY","patient_or_signal_independence_certified":false},
+    {"id":"V4-MAY-LEGACY-RECOMPUTATION","name":"V4 May Primary-9 confusion and error-subset routing recomputation","source_package_sha256":"23523fb59501b916cc6cea55ad0ae669387dbd0b10267a2d4bac7d353f8b5d06","receipt":"docs/reviewer_closure/receipts/LEGACY_V4_QUARANTINE_RECOMPUTATION_2026-11-10.json","records":672,"correct":461,"errors":211,"accepted_errors":107,"status":"RECOMPUTED_AGGREGATE_DIFFERENT_MODEL_VERSION"}
   ],
   "edges": [
     {"from":"BUNDLE-ROUND2","to":"ARCH-S4-BASE","status":"HASH_VERIFIED_IN_PACKAGE"},
@@ -97,7 +113,20 @@
     {"from":"OPTUNA-41M-DB","to":"JOB-13172-13181","status":"NOT_RECOVERED"},
     {"from":"V4-MAY-LEGACY-QUARANTINE","to":"V45-QUARANTINE","status":"WRONG_MODEL_VERSION","basis":"May V4 error-subset routing cannot establish June V4.5 quarantine"},
     {"from":"V45-SPLITS","to":"CKPT-V3F-RELEASE","status":"UNVERIFIED","basis":"exact job-consumed manifests and patient map absent"},
-    {"from":"SPH-EXTERNAL-DEV","to":"CKPT-V3F-RELEASE","status":"INDEPENDENCE_NOT_CERTIFIED","basis":"full backbone/pretraining source lineage unavailable"}
+    {"from":"SPH-EXTERNAL-DEV","to":"CKPT-V3F-RELEASE","status":"INDEPENDENCE_NOT_CERTIFIED","basis":"full backbone/pretraining source lineage unavailable"},
+    {"from":"PKG-CEDIA-OUTER-20261110","to":"PKG-CEDIA-REV1-20261110","status":"HASH_VERIFIED_IN_PACKAGE"},
+    {"from":"PKG-CEDIA-OUTER-20261110","to":"PKG-CEDIA-REV2-20261110","status":"HASH_VERIFIED_IN_PACKAGE"},
+    {"from":"PKG-CEDIA-REV2-20261110","to":"JOB-16748-16759","status":"DUPLICATED_EVIDENCE","basis":"CEDIA REV2 repeats the earlier job-state receipt; no new trial row or output/input digest is added"},
+    {"from":"PKG-CEDIA-REV2-20261110","to":"JOB-16768","status":"DUPLICATED_EVIDENCE","basis":"submission/path reference and terminal state already documented; exact JSON bytes and input-read digest remain absent"},
+    {"from":"PKG-CEDIA-REV2-20261110","to":"JOB-16781","status":"DUPLICATED_EVIDENCE","basis":"submission/path reference and terminal state already documented; output digest linking the release remains absent"},
+    {"from":"PKG-CEDIA-REV2-20261110","to":"JOB-15874-15905","status":"CONTAINS_REPORTED_JOB_RECEIPTS","basis":"export package integrity verified; receipt claims remain historical indirect evidence"},
+    {"from":"JOB-15874-15905","to":"PLAN-AE-POLICY","status":"SUPPORTED_NOT_CRYPTO_LINKED","basis":"reported submit/input metadata; policy bytes and read digest absent"},
+    {"from":"JOB-15874-15905","to":"PLAN-AE-MANIFEST","status":"SUPPORTED_NOT_CRYPTO_LINKED","basis":"reported submit/input metadata; manifest bytes and read digest absent"},
+    {"from":"JOB-15903-15905","to":"PLAN-AF-REPORTS","status":"REPORTED_NOT_RECOMPUTED","basis":"stdout hash/size reported by CEDIA; raw stdout and row-level outputs unavailable"},
+    {"from":"JOB-15903-15905","to":"V45-QUARANTINE","status":"NOT_LINKED","basis":"23 handoff rows and profile aggregates are not a complete eligible ECG denominator or quarantine transition ledger"},
+    {"from":"MAY-CACHE-SPLIT-SUMMARY","to":"V45-SPLITS","status":"NOT_LINKED","basis":"cache-key disjointness does not establish June job-consumed manifests or patient/signal separation"},
+    {"from":"PKG-COMPLETE-20261110","to":"V4-MAY-LEGACY-RECOMPUTATION","status":"RECOMPUTED_FROM_HASHED_AGGREGATES","basis":"versioned verifier recomputed counts and metrics from aggregate files whose SHA-256 values are recorded in the receipt"},
+    {"from":"V4-MAY-LEGACY-RECOMPUTATION","to":"V45-QUARANTINE","status":"WRONG_MODEL_VERSION","basis":"legacy V4 May error-subset result is not V4.5 June workflow/quarantine evidence"}
   ],
   "interpretation_guardrails": [
     "Hashes prove byte identity, not historical job consumption or source authenticity by themselves.",

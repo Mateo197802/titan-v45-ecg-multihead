@@ -1,0 +1,170 @@
+{
+  "git_refs": {
+    "comparison": {
+      "byte_identical_to_any_tracked_file_count": 0,
+      "exact_relative_path_and_bytes_count": 0,
+      "nonidentical_payload_count": 28,
+      "payload_count": 28,
+      "same_basename_different_bytes_count": 0,
+      "tracked_file_count": 951
+    },
+    "ref_count": 2,
+    "refs": [
+      "307ddaf3e3d840a624009d10f53923db307a500c",
+      "3cfedf39a81a22c867fde04faf9b1a1dd2f60448"
+    ],
+    "tracked_file_count": 951
+  },
+  "interpretation": [
+    "Archive hashes establish byte identity only; they do not independently authenticate historical origin.",
+    "CEDIA inventory hashes are validated as recorded fields, not recomputed against original CEDIA files absent from this transfer.",
+    "Exported payload hashes and inner checksum manifests are recomputed from ZIP bytes.",
+    "Static privacy screening is bounded and does not certify licensing or authorize publication of source contents."
+  ],
+  "outer": {
+    "archive_sha256": "4e7b9dcfbecf90a0427a60972a03020aaeb5a5e7e279ae0b826aa47cc252298b",
+    "duplicate_name_count": 0,
+    "expected_sha256_match": true,
+    "member_count": 2,
+    "nested_zip_count": 2,
+    "unsafe_member_count": 0,
+    "valid": true,
+    "zip_crc_ok": true
+  },
+  "prior_bundle_1": {
+    "archive_sha256": "23523fb59501b916cc6cea55ad0ae669387dbd0b10267a2d4bac7d353f8b5d06",
+    "cedia_rev2_member_count": 28,
+    "payload_count": 95,
+    "shared_content_digest_count": 0,
+    "valid": true
+  },
+  "prior_bundle_2": {
+    "archive_sha256": "d1d77535d2b1995fc8a1ba5e3b47cf9c63703cd29d4ef63334e5402fe731e82f",
+    "cedia_rev2_member_count": 28,
+    "payload_count": 35,
+    "shared_content_digest_count": 0,
+    "valid": true
+  },
+  "revision_comparison": {
+    "rev2_added_member_count": 2,
+    "rev2_removed_member_count": 0,
+    "same_path_changed_content_count": 8,
+    "same_path_same_content_count": 18,
+    "shared_content_digest_count": 18,
+    "shared_member_path_count": 26
+  },
+  "revisions": {
+    "REV1": {
+      "archive_sha256": "29c66d104bc9cda5676c31add41070ed3a63cfec4d714fcaa009f222b84f2513",
+      "checksum_entry_count": 26,
+      "checksum_error_count": 0,
+      "checksum_manifest_ok": true,
+      "duplicate_name_count": 0,
+      "expected_sha256_match": true,
+      "export_provenance": {
+        "identical_copy_count": 13,
+        "identity_claim_errors": 0,
+        "payload_hash_match_count": 24,
+        "row_count": 24,
+        "sanitized_copy_count": 11,
+        "source_hashes_independently_recomputed": false,
+        "valid": true
+      },
+      "member_count": 27,
+      "privacy_screening": {
+        "common_private_key_or_token_markers": 0,
+        "csv_headers_with_record_or_patient_id_fields": 0,
+        "json_record_identifier_values_detected": 0,
+        "oversize_text_members_not_scanned": 0,
+        "scope": "Static bounded text scan only; not a universal privacy or licensing certification.",
+        "source_receipts_contain_internal_paths": true,
+        "text_members_scanned": 27
+      },
+      "single_root": true,
+      "source_inventory": {
+        "classification_counts": {
+          "CEDIA_CANDIDATE_NOT_AUTHENTICATED": 1,
+          "CEDIA_HISTORICAL_COPY_VERIFIED": 24,
+          "CEDIA_ORIGINAL_VERIFIED": 5,
+          "CEDIA_REFERENCE_ONLY": 10,
+          "CUSTODIAN_RECOVERY_REQUIRED": 6,
+          "NOT_FOUND_IN_SEARCHED_CEDIA_SOURCES": 29
+        },
+        "digest_field_errors": 0,
+        "digest_nature_counts": {
+          "NOT_PRESENT_IN_REV1_SCHEMA": 75
+        },
+        "digest_nature_field_available": false,
+        "duplicate_content_extra_row_count": 2,
+        "duplicate_hash_group_count": 2,
+        "hash_field_count": 30,
+        "row_count": 75,
+        "schema_ok": true,
+        "source_file_bytes_recomputed_here": false,
+        "unique_hash_count": 28,
+        "valid_digest_fields": true
+      },
+      "unsafe_member_count": 0,
+      "valid": true,
+      "zip_crc_ok": true
+    },
+    "REV2": {
+      "archive_sha256": "e9fa64ee9c8adbc21414be1a4939a0ae4e1aa04f366d8a3b5dace686cc2a6b44",
+      "checksum_entry_count": 28,
+      "checksum_error_count": 0,
+      "checksum_manifest_ok": true,
+      "duplicate_name_count": 0,
+      "expected_sha256_match": true,
+      "export_provenance": {
+        "identical_copy_count": 14,
+        "identity_claim_errors": 0,
+        "payload_hash_match_count": 26,
+        "row_count": 26,
+        "sanitized_copy_count": 12,
+        "source_hashes_independently_recomputed": false,
+        "valid": true
+      },
+      "member_count": 29,
+      "privacy_screening": {
+        "common_private_key_or_token_markers": 0,
+        "csv_headers_with_record_or_patient_id_fields": 0,
+        "json_record_identifier_values_detected": 0,
+        "oversize_text_members_not_scanned": 0,
+        "scope": "Static bounded text scan only; not a universal privacy or licensing certification.",
+        "source_receipts_contain_internal_paths": true,
+        "text_members_scanned": 29
+      },
+      "single_root": true,
+      "source_inventory": {
+        "classification_counts": {
+          "CEDIA_CANDIDATE_NOT_AUTHENTICATED": 1,
+          "CEDIA_HISTORICAL_COPY_VERIFIED": 28,
+          "CEDIA_ORIGINAL_VERIFIED": 5,
+          "CEDIA_REFERENCE_ONLY": 76,
+          "CUSTODIAN_RECOVERY_REQUIRED": 6,
+          "NOT_FOUND_IN_SEARCHED_CEDIA_SOURCES": 29
+        },
+        "digest_field_errors": 0,
+        "digest_nature_counts": {
+          "": 109,
+          "calculado_sobre_bytes": 34,
+          "reportado_en_stdout_no_recalculado": 2
+        },
+        "digest_nature_field_available": true,
+        "duplicate_content_extra_row_count": 3,
+        "duplicate_hash_group_count": 3,
+        "hash_field_count": 36,
+        "row_count": 145,
+        "schema_ok": true,
+        "source_file_bytes_recomputed_here": false,
+        "unique_hash_count": 33,
+        "valid_digest_fields": true
+      },
+      "unsafe_member_count": 0,
+      "valid": true,
+      "zip_crc_ok": true
+    }
+  },
+  "schema": "TITAN_CEDIA_NESTED_RECOVERY_AUDIT_V1",
+  "valid": true
+}

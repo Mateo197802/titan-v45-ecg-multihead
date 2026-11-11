@@ -5,13 +5,22 @@
   "baseline_matrix_path": "docs/reviewer_closure/REVIEWER_48_DETAILED.json",
   "baseline_matrix_commit": "01beb7a68077a44560b037dbee9b5deace557b8d",
   "baseline_matrix_sha256": "2586de1a1212dd898a9c4201e39e6dda18b59c11e74d7369da02bb1ec2290b52",
-  "current_matrix_sha256": "c77580d55d940ce55cf5588873a7bb9f5ca8efb476b77c4083b1a1500b943420",
+  "current_matrix_sha256": "b5da4a21a5bd968ccf11c005c34888592ee2e41d004e808952c87b62f9d2e9af",
   "matrix_evidence_addendum": {
     "source_commit": "575c5a5fa4dbcf658308c928aa7d08259fd61c9f",
     "updated_ids": ["A-06"],
     "status_reclassifications": 0,
     "evidence_receipt": "docs/reviewer_closure/receipts/CEDIA_CLEANUP_MANIFEST_TRIAGE_2026-11-10.json",
     "note": "The current source matrix adds a bounded cleanup-manifest reference for A-06; the original baseline matrix digest and the 15 reviewer-item dispositions are preserved."
+  },
+  "cedia_rev2_addendum": {
+    "reviewer_addendum": "docs/reviewer_closure/REVIEWER_15_CEDIA_REV2_ADDENDUM.json",
+    "canonical_claim_index": "docs/reviewer_closure/HISTORICAL_RECOVERY_CANONICAL_INDEX.json",
+    "reviewer_ids": ["R1-1", "R1-2", "R1-3", "R1-4", "R2-general", "R2-2b", "R2-3a", "R2-3c", "R2-3d", "R2-3e", "R2-3f", "R2-4a", "R2-4e", "R2-4k", "R2-5"],
+    "internal_audit_ids": ["A-01", "A-02", "A-03", "A-04", "A-05", "A-06", "A-07", "A-08", "A-09", "A-10", "A-11", "A-12"],
+    "status_changes": 0,
+    "coverage_percentage_point_changes": 0,
+    "note": "CEDIA REV2 adds bounded receipt/inventory evidence; item states, satisfaction and coverage remain unchanged."
   },
   "matrix_counts": {
     "peer_review_total": 36,

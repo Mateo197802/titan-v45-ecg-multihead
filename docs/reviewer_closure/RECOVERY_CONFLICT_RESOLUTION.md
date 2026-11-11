@@ -1,6 +1,8 @@
-# Recovery Round-2 Conflict Resolution
+# Recovery Conflict Resolution: Directed2 And CEDIA REV2
 
 As of 2026-11-10. This note distinguishes actual contradictions from differences in scope, time or evidentiary level. No historical metric, checkpoint, threshold or matrix status was rewritten.
+
+The first temporal comparison records the live PR #3 head as it stood during the directed2 review. The later CEDIA REV2 audit rechecked the current PR #3 head as `307ddaf3e3d840a624009d10f53923db307a500c`; see the canonical index for current package comparisons.
 
 | Observation A | Observation B | Resolution | Status |
 |---|---|---|---|
@@ -13,6 +15,13 @@ As of 2026-11-10. This note distinguishes actual contradictions from differences
 | The P6/P8 serialized field says 192 while specialist tensors store width 512. | Recovered trainer/source excerpts include explicit 512 classwise construction and other defaults/metadata. | The source read is corroborative and does not prove which exact code wrote the released checkpoint metadata. Keep the mismatch and its cause open. | Not resolved |
 | Fourteen delivered source members match their source digest; eleven sanitized files do not. | The inventory gives different hashes for source and delivered sanitized copies. | This is expected for marked sanitization, not corruption. Only the 14 identical members are treated as byte-identical to the supplied source-member digest. | Resolved by identity class |
 | The package re-reads two trainer/runtime sources already discussed in the prior report. | It provides a more specific interpretation of the 192/512 discrepancy. | The source bytes are not a new recovery. The interpretation may be recorded as corroboration but does not increase technical coverage or establish a new job edge. | Duplicate/corroborative, not new primary |
+| CEDIA REV1 has a 75-row inventory; REV2 has 145 rows. | REV2 contains more references and additional export-provenance rows. | The revisions differ in scope and bytes (26 shared paths: 18 same, eight changed, two added, none removed). This is an export update, not evidence that the V4.5 experiment or population changed. | Resolved as version/scope expansion |
+| REV2 labels five inventory rows `CEDIA_ORIGINAL_VERIFIED` and 28 `CEDIA_HISTORICAL_COPY_VERIFIED`. | The underlying source-side bytes and all experiment chain links are not independently available in this audit. | Preserve the export's classifications as CEDIA-reported inventory metadata. They do not, by themselves, establish that a job consumed those files or that a result is reproducible. | Provenance level bounded |
+| Two AF summaries report the same AE policy and quarantine-manifest SHA-256 values. | The original policy/manifest bytes, raw stdout, and read receipts are absent. | Matching reported hashes corroborate consistency between summaries, not byte authenticity or job input consumption. Do not calculate a quarantine rate. | Corroborated, not independently authenticated |
+| AF reports 23 handoff rows, `valid_for_gate=0`, and `external_gate_allowed=false`; it also reports 1,895 rhythm and 2,105 pathology evaluated rows. | A complete eligible ECG denominator and record-level pre/post routing ledger are unavailable. | These are bounded AF summary facts. Handoff rows and profile-evaluated rows are not a quarantine numerator/denominator or full workflow population. V4.5 quarantine remains `NOT_ASSESSED`. | Scope boundary resolved; experiment unmet |
+| Four May cache train/validation pairs are reported to have zero exact `(source, record)` key overlap. | Patient IDs, signal fingerprints and job-linked evidence that June checkpoints consumed these caches are absent. | The finding is key-level only. It does not certify patient/signal independence or V4.5 split isolation. `PATHOLOGY_10_V2` duplicates `PATHOLOGY_10` bytes. | Partial check; independence not certified |
+| The new CEDIA loader candidate is 32,051 bytes with a different raw and LF-normalized hash. | The expected original loader is 36,271 bytes LF with SHA-256 `fc8d7367f9f2c108376839435021ec3172fe2757faa4a615f0ef5d39cbf1e855`. | The candidate is not the requested original. Keep the P4 replay residual `0.0006194115` versus frozen tolerance `1e-5`; do not relabel it as exact-loader replay. | Candidate rejected as original |
+| CEDIA reports V3F/V3AG release hashes matching the published artifacts. | No authenticated output digest links either artifact to jobs 16768/16781. | This corroborates release-file identity only. It does not complete `V3C study → trial 6 → job 16768 → job 16781 → released V3F` lineage. | Hash corroborated; job edge unverified |
 
 ## Unresolved items
 
@@ -21,4 +30,4 @@ As of 2026-11-10. This note distinguishes actual contradictions from differences
 3. Why the V3F release artifact has no authenticated output-hash link to job 16781.
 4. Whether any external institutional backup exists beyond the bounded records and the custodian's previously reported September listing. A failed Windows shadow-copy catalog query is not evidence that no snapshot exists.
 
-The package report's custody request is an unsent draft. This integration did not contact CEDIA/NOC, inspect new backup sources, or infer that absent paths mean no backup exists.
+The package report's custody request is an unsent draft. This integration did not contact CEDIA/NOC, perform a new CEDIA search, inspect additional backup sources, or infer that absent paths mean no backup exists. All new archive, revision and claim counts are in [`HISTORICAL_RECOVERY_CANONICAL_INDEX.md`](HISTORICAL_RECOVERY_CANONICAL_INDEX.md); item-level consequences are in [`REVIEWER_15_CEDIA_REV2_ADDENDUM.md`](REVIEWER_15_CEDIA_REV2_ADDENDUM.md).

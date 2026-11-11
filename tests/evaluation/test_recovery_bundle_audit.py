@@ -9,6 +9,8 @@ from pathlib import Path
 
 import pytest
 
+from scripts.evaluation import audit_cedia_recovery_bundle as cedia_recovery_audit
+from scripts.evaluation.audit_cedia_recovery_bundle import audit_cedia_recovery_bundle
 from scripts.evaluation.audit_recovery_bundle import (
     audit_recovery_bundle,
     compare_bundle_to_bundle,
@@ -73,6 +75,123 @@ def _matrix_and_reports() -> dict[str, bytes]:
 
 
 ROOT = Path(__file__).resolve().parents[2]
+
+
+def _synthetic_cedia_inner(
+    report_value: bytes,
+    *,
+    bad_checksum: bool = False,
+    legacy_inventory_schema: bool = False,
+) -> bytes:
+    report_hash = hashlib.sha256(report_value).hexdigest()
+    inventory_buffer = io.StringIO(newline="")
+    inventory_fields = ["ruta_o_objetivo", "bytes", "sha256"]
+    if not legacy_inventory_schema:
+        inventory_fields.append("naturaleza_sha256")
+    inventory_fields.append("clasificacion")
+    inventory_writer = csv.DictWriter(
+        inventory_buffer,
+        fieldnames=inventory_fields,
+        lineterminator="\n",
+    )
+    inventory_writer.writeheader()
+    inventory_row = {
+        "ruta_o_objetivo": "receipts/report.txt",
+        "bytes": len(report_value),
+        "sha256": report_hash,
+        "clasificacion": "CEDIA_HISTORICAL_COPY_VERIFIED",
+    }
+    if not legacy_inventory_schema:
+        inventory_row["naturaleza_sha256"] = "calculado_sobre_bytes"
+    inventory_writer.writerow(inventory_row)
+    provenance_buffer = io.StringIO(newline="")
+    provenance_writer = csv.DictWriter(
+        provenance_buffer,
+        fieldnames=["archivo_zip", "sha256_entrada", "sha256_exportado", "tipo"],
+        lineterminator="\n",
+    )
+    provenance_writer.writeheader()
+    provenance_writer.writerow(
+        {
+            "archivo_zip": "receipts/report.txt",
+            "sha256_entrada": report_hash,
+            "sha256_exportado": report_hash,
+            "tipo": "identico",
+        }
+    )
+    payload = {
+        "receipts/report.txt": report_value,
+        "receipts/CEDIA_RECOVERED_ORIGINALS.csv": inventory_buffer.getvalue().encode(),
+        "receipts/PROCEDENCIA_EXPORTACION.csv": provenance_buffer.getvalue().encode(),
+    }
+    checksums = {
+        name: hashlib.sha256(data).hexdigest()
+        for name, data in payload.items()
+    }
+    if bad_checksum:
+        checksums["receipts/report.txt"] = "0" * 64
+    sums = "".join(f"{digest}  {name}\n" for name, digest in checksums.items()).encode()
+    members = {**payload, "SHA256SUMS.txt": sums}
+    buffer = io.BytesIO()
+    with zipfile.ZipFile(buffer, "w", compression=zipfile.ZIP_DEFLATED) as archive:
+        for name, data in members.items():
+            archive.writestr(f"cedia/{name}", data)
+    return buffer.getvalue()
+
+
+def _synthetic_cedia_outer(path: Path, *, bad_rev2_checksum: bool = False) -> dict[str, str]:
+    first = _synthetic_cedia_inner(b"same report", legacy_inventory_schema=True)
+    second = _synthetic_cedia_inner(
+        b"changed report", bad_checksum=bad_rev2_checksum
+    )
+    members = {
+        "TITAN_V45_CEDIA_EXCLUSIVO_2026-11-10.zip": first,
+        "TITAN_V45_CEDIA_EXCLUSIVO_2026-11-10_REV2.zip": second,
+    }
+    with zipfile.ZipFile(path, "w", compression=zipfile.ZIP_DEFLATED) as archive:
+        for name, data in members.items():
+            archive.writestr(name, data)
+    return {"REV1": hashlib.sha256(first).hexdigest(), "REV2": hashlib.sha256(second).hexdigest()}
+
+
+def test_cedia_nested_zip_audit_validates_hashes_and_sanitizes_member_paths(tmp_path: Path):
+    bundle = tmp_path / "cedia-outer.zip"
+    expected_inner = _synthetic_cedia_outer(bundle)
+
+    report = audit_cedia_recovery_bundle(bundle, expected_inner_sha256=expected_inner)
+
+    assert report["valid"] is True
+    assert report["outer"]["zip_crc_ok"] is True
+    assert report["revisions"]["REV1"]["checksum_manifest_ok"] is True
+    assert report["revisions"]["REV2"]["export_provenance"]["identical_copy_count"] == 1
+    assert report["revision_comparison"]["same_path_changed_content_count"] == 3
+    assert "cedia/" not in json.dumps(report)
+    assert "receipts/report.txt" not in json.dumps(report)
+
+
+def test_cedia_nested_zip_audit_rejects_bad_inner_checksum(tmp_path: Path):
+    bundle = tmp_path / "bad-cedia.zip"
+    expected_inner = _synthetic_cedia_outer(bundle, bad_rev2_checksum=True)
+
+    report = audit_cedia_recovery_bundle(bundle, expected_inner_sha256=expected_inner)
+
+    assert report["valid"] is False
+    assert report["revisions"]["REV2"]["checksum_manifest_ok"] is False
+
+
+def test_cedia_nested_zip_audit_bounds_uncompressed_member_reads(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+):
+    bundle = tmp_path / "oversize-cedia.zip"
+    expected_inner = _synthetic_cedia_outer(bundle)
+    monkeypatch.setattr(cedia_recovery_audit, "_MAX_MEMBER_UNCOMPRESSED_BYTES", 1)
+
+    report = cedia_recovery_audit.audit_cedia_recovery_bundle(
+        bundle, expected_inner_sha256=expected_inner
+    )
+
+    assert report["valid"] is False
+    assert report["revisions"]["REV1"]["scan_bound_exceeded"] is True
 
 
 def _write_bundle(

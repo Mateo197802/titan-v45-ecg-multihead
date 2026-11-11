@@ -2,9 +2,9 @@
 
 **As of:** 2026-11-10
 
-**Source of truth:** `docs/reviewer_closure/REVIEWER_48_DETAILED.json` last updated at `b7d904a5b95e7c2476f60b3a47a1590719381667`
+**Source of truth:** `docs/reviewer_closure/REVIEWER_48_DETAILED.json` last updated at `e8f3179866d1199cbb98966f328d37774baa646d`
 
-**PR #3 HEAD checked:** `2b2e28839573206ee45e8bba7fbd0a67f23b1d68` (OPEN_DRAFT; merge performed: `false`).
+**PR #3 HEAD checked:** `307ddaf3e3d840a624009d10f53923db307a500c` (OPEN_DRAFT; merge performed: `false`).
 
 **Manuscript state:** `SIN_EDITAR`; submitted manuscript, PDF and response letter were not changed.
 
@@ -74,6 +74,7 @@ This reviewer-only view preserves each source record verbatim under `source_reco
 - `docs/external_validation/sph_pac_probe_results.md`
 - `docs/reviewer_closure/EVIDENCE_SOURCE_TRIAGE.md`
 - `docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md`
+- `docs/reviewer_closure/V3C_TRIAL6_CHECKPOINT_LINEAGE.md`
 - `docs/reviewer_closure/GENERALIZATION_DATASET_ELIGIBILITY.md`
 - `docs/reviewer_closure/GENERALIZATION_EXPERIMENT_PROTOCOL.md`
 - `docs/reviewer_closure/GENERALIZATION_EXPERIMENT_RESULTS.md`
@@ -126,6 +127,8 @@ This reviewer-only view preserves each source record verbatim under `source_reco
 - `docs/reviewer_closure/SELECTIVE_PREDICTION_EXPERIMENT.md`
 - `docs/reviewer_closure/OTHER_CLASS_COVERAGE_EXPERIMENT.md`
 - `docs/reviewer_closure/GENERALIZATION_EXPERIMENT_RESULTS.md`
+- `docs/reviewer_closure/V4_LEGACY_QUARANTINE_DISPOSITION.md`
+- `docs/reviewer_closure/receipts/LEGACY_V4_QUARANTINE_RECOMPUTATION_2026-11-10.json`
 
 **Traceability confidence:** An experiment was executed; this does not imply that the original request is fully satisfied.
 
@@ -1364,6 +1367,8 @@ This reviewer-only view preserves each source record verbatim under `source_reco
 - `outputs/results/revision_20261107/pathology_waveform.json`
 - `docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md`
 - `docs/reviewer_closure/SELECTIVE_PREDICTION_EXPERIMENT.md`
+- `docs/reviewer_closure/V4_LEGACY_QUARANTINE_DISPOSITION.md`
+- `docs/reviewer_closure/receipts/LEGACY_V4_QUARANTINE_RECOMPUTATION_2026-11-10.json`
 
 **Traceability confidence:** The searched sources reached a documented evidence ceiling; absence is limited to those sources.
 

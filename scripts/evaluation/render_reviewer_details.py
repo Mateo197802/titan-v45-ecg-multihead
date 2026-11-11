@@ -36,13 +36,47 @@ def render(payload: dict, output_path: Path = DEFAULT_OUTPUT) -> str:
         "decision or a claim that the submitted manuscript has been revised. The "
         "manuscript and editor response remain unchanged.",
         "",
-        "## Status counts",
-        "",
-        "### Technical status",
-        "",
-        "| Status | Count |",
-        "| --- | ---: |",
     ]
+    supplemental = payload.get("supplemental_evidence")
+    if supplemental:
+        reviewer_ids = ", ".join(f"`{value}`" for value in supplemental["reviewer_ids"])
+        audit_ids = ", ".join(f"`{value}`" for value in supplemental["internal_audit_ids"])
+        legacy = supplemental.get("legacy_v4_may_recheck")
+        lines.extend(
+            [
+                "## Supplemental CEDIA REV2 Evidence",
+                "",
+                "The bounded CEDIA REV2 export is documented in the separate technical addendum "
+                f"{evidence_link(supplemental['reviewer_addendum'], output_path)} and claim index "
+                f"{evidence_link(supplemental['canonical_claim_index'], output_path)}.",
+                f"- **Reviewer items covered:** {reviewer_ids}",
+                f"- **Internal audits covered:** {audit_ids}",
+                f"- **Disposition:** {supplemental['status_changes']} status changes; "
+                f"{supplemental['coverage_percentage_point_changes']} coverage percentage-point changes; "
+                f"manuscript edited: `{str(supplemental['manuscript_edited']).lower()}`.",
+            ]
+        )
+        if legacy:
+            legacy_ids = ", ".join(f"`{value}`" for value in legacy["reviewer_ids"])
+            lines.extend(
+                [
+                    f"- **Separate V4 May aggregate recheck:** {evidence_link(legacy['receipt'], output_path)}; "
+                    f"applies to {legacy_ids} only as legacy-version evidence. {legacy['meaning']}",
+                    "",
+                ]
+            )
+        else:
+            lines.append("")
+    lines.extend(
+        [
+            "## Status counts",
+            "",
+            "### Technical status",
+            "",
+            "| Status | Count |",
+            "| --- | ---: |",
+        ]
+    )
     lines.extend(f"| `{status}` | {count} |" for status, count in sorted(technical_counts.items()))
     lines.extend(["", "### Reviewer satisfaction", "", "| Status | Count |", "| --- | ---: |"])
     lines.extend(

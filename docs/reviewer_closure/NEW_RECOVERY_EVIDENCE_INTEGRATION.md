@@ -1,6 +1,6 @@
-# Round 2 Historical Recovery Evidence Integration
+# Directed2 Historical Recovery Evidence Integration
 
-As of 2026-11-10. This document reconciles `TITAN_V45_RECUPERACION_DIRIGIDA_2_2026-11-10.zip` with the live PR #3 and PR #4 heads. It does not replace the prior recovery audit or claim that the submitted study has been reproduced.
+As of 2026-11-10. This document records the `TITAN_V45_RECUPERACION_DIRIGIDA_2_2026-11-10.zip` findings. It is specific to that package and does not replace the separate reconciliation of the later CEDIA REV1/REV2 export in [`HISTORICAL_RECOVERY_CANONICAL_INDEX.md`](HISTORICAL_RECOVERY_CANONICAL_INDEX.md). Neither report claims that the submitted study has been reproduced.
 
 ## Package validation
 
@@ -11,7 +11,7 @@ As of 2026-11-10. This document reconciles `TITAN_V45_RECUPERACION_DIRIGIDA_2_20
 - Static privacy screen: 38 text members scanned; no common private-key/token markers, record/patient-ID CSV headers, or selected JSON record-identifier values were detected. The receipts do contain internal paths. This bounded scan is not a universal privacy certification, so raw receipts and the ZIP are not published.
 - The archive inventory and checksums establish package-byte integrity. They do not independently authenticate the CEDIA custody chain or prove that a job consumed a particular source file.
 
-The existing versioned verifier was extended to accept this package's `ruta` inventory schema as well as the prior `ruta_relativa` schema. A regression test rejects traversal in inventory paths. The verifier produced `valid=true` against PR #3 commit `e8f3179866d1199cbb98966f328d37774baa646d` and PR #4 commit `3cfedf39a81a22c867fde04faf9b1a1dd2f60448`.
+The existing versioned verifier was extended to accept this package's `ruta` inventory schema as well as the prior `ruta_relativa` schema. A regression test rejects traversal in inventory paths. The original round-2 audit compared PR #3 commit `e8f3179866d1199cbb98966f328d37774baa646d` and PR #4 commit `3cfedf39a81a22c867fde04faf9b1a1dd2f60448`; the later CEDIA REV2 audit used the live PR #3 HEAD recorded in the canonical index.
 
 ## What is genuinely new
 
@@ -56,8 +56,8 @@ No original SQLite database, before-resume SQLite snapshot, WAL/SHM set, complet
 
 ## Reviewer impact
 
-The round adds bounded historical context for R1-2, R1-4, R2-3a/c/e, R2-4e and R2-4k, and corroborates existing boundaries in R1-1, R2-3f and other technical items. It closes no previously unmet original reviewer subrequirement. The 15 technical item states therefore remain 12 `PARTIALLY_ADDRESSED` and 3 `NOT_SATISFIED`; all 21 editorial-only items remain untouched. Per-item evidence and coverage calculations are in [`REVIEWER_15_EVIDENCE_UPDATE.md`](REVIEWER_15_EVIDENCE_UPDATE.md). The authoritative 48-item matrix is not edited because no satisfaction or technical-status transition is justified.
+The round adds bounded historical context for R1-2, R1-4, R2-3a/c/e, R2-4e and R2-4k, and corroborates existing boundaries in R1-1, R2-3f and other technical items. It closes no previously unmet original reviewer subrequirement. The 15 technical item states therefore remain 12 `PARTIALLY_ADDRESSED` and 3 `NOT_SATISFIED`; all 21 editorial-only items remain unchanged. Per-item evidence and coverage calculations are in [`REVIEWER_15_EVIDENCE_UPDATE.md`](REVIEWER_15_EVIDENCE_UPDATE.md). The later CEDIA REV2 addendum is linked from the authoritative 48-item matrix, with no status or coverage change.
 
 ## Reproducibility and publication boundary
 
-No recovered code, shell script, test, notebook, job, model or dataset was executed. No training, inference, CEDIA search, manuscript/PDF/figure/response edit, PR #4 modification, PR #5 use, merge, or historical artifact modification occurred. The only implementation change is the read-only bundle verifier's compatibility with this inventory schema and its path-traversal regression test. The full verification and publication state is recorded in the PR commit that adds this report.
+No recovered code, shell script, notebook, model or dataset was executed. The original directed2 review did not launch training/inference or query CEDIA. The subsequent CEDIA REV2 integration added a bounded in-memory archive verifier and regression tests; its receipt, package counts and privacy limits are recorded in [`receipts/CEDIA_REV2_INTEGRATION_2026-11-10.json`](receipts/CEDIA_REV2_INTEGRATION_2026-11-10.json). No manuscript/PDF/figure/response edit, PR #4/#5 modification, merge or historical artifact modification occurred.
