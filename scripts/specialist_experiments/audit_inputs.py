@@ -10,6 +10,7 @@ import os
 import re
 import sys
 from collections import Counter, defaultdict
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from typing import Any
 
@@ -46,6 +47,21 @@ PUBLIC_RHYTHM_SOURCE_ALIASES = {
     "training/cpsc_2018_extra": "cpsc2018",
     "training/georgia": "georgia",
 }
+IO_WORKERS = 4
+PROGRESS_INTERVAL = 1000
+
+
+def _parallel_map(stage: str, function, items: list[Any]) -> list[Any]:
+    if not items:
+        return []
+    results: list[Any] = [None] * len(items)
+    with ThreadPoolExecutor(max_workers=min(IO_WORKERS, len(items))) as executor:
+        futures = {executor.submit(function, item): index for index, item in enumerate(items)}
+        for completed, future in enumerate(as_completed(futures), start=1):
+            results[futures[future]] = future.result()
+            if completed == 1 or completed % PROGRESS_INTERVAL == 0 or completed == len(items):
+                print(f"[preflight] {stage}: {completed}/{len(items)}", flush=True)
+    return results
 
 
 def _sha256(path: Path) -> str:
@@ -172,66 +188,75 @@ def _challenge_records(
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     raw = data_root / "00_FUENTES_FISICAS_RAW"
     exposed_records, prior_eval_receipt = _public_exposed_rhythm_records(repo, config)
-    rows: list[dict[str, Any]] = []
-    for source in RHYTHM_ROOTS:
+
+    def discover(source: str) -> tuple[str, Path, list[Path]]:
         source_root = raw / source
         if not source_root.is_dir() or source_root.is_symlink():
             raise ValueError(f"required authorized source is missing or a symlink: {source}")
-        for header in source_root.rglob("*.hea"):
-            relative = _safe_relative(header, source_root)
-            signal = header.with_suffix(".mat")
-            if not signal.exists():
-                signal = header.with_suffix(".dat")
-            if signal.is_symlink():
-                raise ValueError(f"signal file is a symlink within source: {source}")
-            if not signal.is_file():
-                continue
-            if not signal.resolve().is_relative_to(source_root.resolve()):
-                raise ValueError(f"signal file escapes authorized source root: {source}")
-            dx = _read_dx(header)
-            if not dx:
-                continue
-            classes = RHYTHM_CLASSES_P8
-            supported = tuple(name for name in classes if name in RHYTHM_SUPPORT[source])
-            targets, mask = rhythm_targets(dx, classes, supported_classes=supported)
-            identity = _hash_identity(source, relative)
-            record_name = Path(relative).stem.casefold()
-            split = "train"
-            reason = None
-            if source == "chapman_shaoxing":
-                split = split_bucket(
-                    relative.replace("\\", "/"), seed=int(config["rhythm"]["chapman_split"]["seed"]),
-                    namespace=config["study_id"], train_fraction=0.8, validation_fraction=0.1,
-                )
-            elif source == "georgia":
-                split = "source_holdout"
-            if record_name in exposed_records.get(source, set()):
-                reason = "previous_public_v45_evaluation_record"
-            try:
-                signal_spec = _header_summary(header, wfdb_module)
-            except (OSError, TypeError, ValueError) as exc:
-                signal_spec = {}
-                reason = reason or "invalid_wfdb_header"
-                header_parse_error = type(exc).__name__
-            else:
-                header_parse_error = None
-            row = {
-                "task": "rhythm",
-                "source": source,
-                "relative_record": relative[:-4] if relative.lower().endswith(".hea") else relative,
-                "identity_hash": identity,
-                "group_hash": identity if source == "chapman_shaoxing" else None,
-                "signal_sha256": _sha256(signal),
-                "split": split,
-                "excluded_reason": reason,
-                "targets": targets.astype(int).tolist(),
-                "mask": mask.astype(int).tolist(),
-                "classes": list(classes),
-                **signal_spec,
-            }
-            if header_parse_error is not None:
-                row["header_parse_error_type"] = header_parse_error
-            rows.append(row)
+        return source, source_root, sorted(source_root.rglob("*.hea"))
+
+    discovered = _parallel_map("rhythm source discovery", discover, list(RHYTHM_ROOTS))
+    candidates = [(source, source_root, header) for source, source_root, headers in discovered
+                  for header in headers]
+
+    def build_row(item: tuple[str, Path, Path]) -> dict[str, Any] | None:
+        source, source_root, header = item
+        relative = _safe_relative(header, source_root)
+        signal = header.with_suffix(".mat")
+        if not signal.exists():
+            signal = header.with_suffix(".dat")
+        if signal.is_symlink():
+            raise ValueError(f"signal file is a symlink within source: {source}")
+        if not signal.is_file():
+            return None
+        if not signal.resolve().is_relative_to(source_root.resolve()):
+            raise ValueError(f"signal file escapes authorized source root: {source}")
+        dx = _read_dx(header)
+        if not dx:
+            return None
+        classes = RHYTHM_CLASSES_P8
+        supported = tuple(name for name in classes if name in RHYTHM_SUPPORT[source])
+        targets, mask = rhythm_targets(dx, classes, supported_classes=supported)
+        identity = _hash_identity(source, relative)
+        record_name = Path(relative).stem.casefold()
+        split = "train"
+        reason = None
+        if source == "chapman_shaoxing":
+            split = split_bucket(
+                relative.replace("\\", "/"), seed=int(config["rhythm"]["chapman_split"]["seed"]),
+                namespace=config["study_id"], train_fraction=0.8, validation_fraction=0.1,
+            )
+        elif source == "georgia":
+            split = "source_holdout"
+        if record_name in exposed_records.get(source, set()):
+            reason = "previous_public_v45_evaluation_record"
+        try:
+            signal_spec = _header_summary(header, wfdb_module)
+        except (OSError, TypeError, ValueError) as exc:
+            signal_spec = {}
+            reason = reason or "invalid_wfdb_header"
+            header_parse_error = type(exc).__name__
+        else:
+            header_parse_error = None
+        row = {
+            "task": "rhythm",
+            "source": source,
+            "relative_record": relative[:-4] if relative.lower().endswith(".hea") else relative,
+            "identity_hash": identity,
+            "group_hash": identity if source == "chapman_shaoxing" else None,
+            "signal_sha256": _sha256(signal),
+            "split": split,
+            "excluded_reason": reason,
+            "targets": targets.astype(int).tolist(),
+            "mask": mask.astype(int).tolist(),
+            "classes": list(classes),
+            **signal_spec,
+        }
+        if header_parse_error is not None:
+            row["header_parse_error_type"] = header_parse_error
+        return row
+
+    rows = [row for row in _parallel_map("rhythm records", build_row, candidates) if row is not None]
     rows.sort(key=lambda row: (SOURCE_PRIORITY[row["source"]], row["relative_record"].casefold()))
     return rows, prior_eval_receipt
 
@@ -250,10 +275,9 @@ def _ptbxl_records(
     if metadata_hash != PTBXL_DATABASE_SHA256 or statements_hash != PTBXL_SCP_SHA256:
         raise ValueError("PTB-XL metadata or statement file hash differs from the audited v1.0.3 copy")
 
-    result: list[dict[str, Any]] = []
+    prepared_rows: list[dict[str, Any]] = []
     patients_by_fold: dict[str, set[str]] = defaultdict(set)
     metadata_count = 0
-    waveform_count_by_fold = Counter()
     with metadata_path.open(encoding="utf-8-sig", newline="") as handle:
         reader = csv.DictReader(handle)
         for row in reader:
@@ -271,23 +295,6 @@ def _ptbxl_records(
                 raise ValueError("unsafe PTB-XL relative waveform path")
             base = root / relative
             header, signal = base.with_suffix(".hea"), base.with_suffix(".dat")
-            if not header.resolve().is_relative_to(root.resolve()) or not signal.resolve().is_relative_to(
-                root.resolve()
-            ):
-                raise ValueError("PTB-XL waveform path escapes its authorized root")
-            if not header.is_file() or not signal.is_file() or header.is_symlink() or signal.is_symlink():
-                continue
-            waveform_count_by_fold[fold] += 1
-            try:
-                signal_spec = _header_summary(header, wfdb_module)
-                header_parse_error = None
-                excluded_reason = None
-            except (OSError, TypeError, ValueError) as exc:
-                signal_spec = {}
-                header_parse_error = type(exc).__name__
-                excluded_reason = "invalid_wfdb_header"
-            scp_codes = _read_scp_codes(row["scp_codes"])
-            targets, mask = ptbxl_p4_targets(scp_codes)
             if fold <= 7:
                 split = "train"
             elif fold == 8:
@@ -298,7 +305,40 @@ def _ptbxl_records(
                     namespace=f"{config['study_id']}:ptbxl-fold9",
                 )
                 split = "calibration" if bucket < 0.5 else "internal_evaluation"
-            result.append({
+            prepared_rows.append({
+                "row": row,
+                "fold": fold,
+                "patient_hash": patient_hash,
+                "relative": relative,
+                "header": header,
+                "signal": signal,
+                "split": split,
+            })
+
+    def build_pathology_record(item: dict[str, Any]) -> tuple[dict[str, Any] | None, bool]:
+        row = item["row"]
+        fold = item["fold"]
+        patient_hash = item["patient_hash"]
+        relative = item["relative"]
+        header = item["header"]
+        signal = item["signal"]
+        if (not header.resolve().is_relative_to(root.resolve())
+                or not signal.resolve().is_relative_to(root.resolve())):
+            raise ValueError("PTB-XL waveform path escapes its authorized root")
+        if (not header.is_file() or not signal.is_file() or header.is_symlink()
+                or signal.is_symlink()):
+            return None, False
+        try:
+            signal_spec = _header_summary(header, wfdb_module)
+            header_parse_error = None
+            excluded_reason = None
+        except (OSError, TypeError, ValueError) as exc:
+            signal_spec = {}
+            header_parse_error = type(exc).__name__
+            excluded_reason = "invalid_wfdb_header"
+        scp_codes = _read_scp_codes(row["scp_codes"])
+        targets, mask = ptbxl_p4_targets(scp_codes)
+        record = {
                 "task": "pathology",
                 "source": "ptbxl",
                 "relative_record": relative.as_posix(),
@@ -307,15 +347,25 @@ def _ptbxl_records(
                 "patient_hash": patient_hash,
                 "fold": fold,
                 "signal_sha256": _sha256(signal),
-                "split": split,
+                "split": item["split"],
                 "excluded_reason": excluded_reason,
                 "targets": targets.astype(int).tolist(),
                 "mask": mask.astype(int).tolist(),
                 "classes": list(P4_CLASSES),
                 **signal_spec,
-            })
-            if header_parse_error is not None:
-                result[-1]["header_parse_error_type"] = header_parse_error
+            }
+        if header_parse_error is not None:
+            record["header_parse_error_type"] = header_parse_error
+        return record, True
+
+    processed = _parallel_map("PTB-XL records", build_pathology_record, prepared_rows)
+    result = []
+    waveform_count_by_fold = Counter()
+    for item, (record, present) in zip(prepared_rows, processed, strict=True):
+        if present:
+            waveform_count_by_fold[item["fold"]] += 1
+        if record is not None:
+            result.append(record)
     if any(len(folds) > 1 for folds in patients_by_fold.values()):
         raise ValueError("PTB-XL patient appears in multiple official folds 1..9")
     return result, {
@@ -369,10 +419,9 @@ def _waveform_qc(
         import wfdb as wfdb_module
 
     raw_root = data_root / "00_FUENTES_FISICAS_RAW"
-    by_source: dict[str, list[dict[str, Any]]] = defaultdict(list)
-    for row in rows:
-        if row["excluded_reason"]:
-            continue
+    eligible_rows = [row for row in rows if not row["excluded_reason"]]
+
+    def inspect_waveform(row: dict[str, Any]) -> tuple[str, dict[str, Any]]:
         source_root = raw_root / row["source"]
         base = source_root / row["relative_record"]
         try:
@@ -391,7 +440,7 @@ def _waveform_qc(
                     bool(len(finite_lead) and float(np.std(finite_lead)) <= 1e-12)
                 )
             units = tuple(sorted({str(unit) for unit in (record.units or [])}))
-            by_source[row["source"]].append({
+            sample = {
                 "finite_fraction": float(finite.mean()),
                 "nonfinite_values": int((~finite).sum()),
                 "sample_values": int(finite.size),
@@ -402,9 +451,14 @@ def _waveform_qc(
                     float(finite_values.max()) if len(finite_values) else None
                 ),
                 "units": ",".join(units) if units else "unknown",
-            })
+            }
         except (OSError, ValueError, RuntimeError) as exc:
-            by_source[row["source"]].append({"read_error": type(exc).__name__})
+            sample = {"read_error": type(exc).__name__}
+        return row["source"], sample
+
+    by_source: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for source, sample in _parallel_map("initial-window waveform QC", inspect_waveform, eligible_rows):
+        by_source[source].append(sample)
 
     result = {}
     for source, samples in sorted(by_source.items()):

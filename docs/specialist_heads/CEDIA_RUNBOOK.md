@@ -8,6 +8,8 @@ Use a new clone of the experiment branch and an output directory outside the raw
 
 The CPU preflight requests `cpu-dev`, 4 CPUs, 24 GB RAM, and up to 12 hours. Feature extraction requests one A100 40 GB, 8 CPUs, 64 GB RAM, and up to 12 hours. Stage A requests one A100 40 GB, 8 CPUs, 48 GB RAM, and up to 24 hours. The jobs use CEDIA `pytorch/2.2` and the existing Python 3.11 dependency archive; they do not unpack dependencies into the login environment. Repository-revision receipts use the system Git from inside the checkout for compatibility with the login environment.
 
+The preflight uses at most four I/O workers, matching its CPU allocation, and emits aggregate stage counts only. This changes execution scheduling, not hashing, eligibility, duplicate handling, split assignment, QC, or metric definitions. Preserve each attempt's log and output directory; do not run overlapping scans against the same NFS cache.
+
 ## Submission template
 
 Set these values in a shell on the authorized CEDIA login node, after cloning the exact pushed branch commit into a new, clean experiment checkout:

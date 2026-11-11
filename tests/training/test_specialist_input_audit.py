@@ -69,6 +69,13 @@ def test_header_summary_uses_wfdb_for_physical_header_fields(tmp_path):
     }
 
 
+def test_parallel_audit_helper_preserves_order_and_logs_only_progress_counts(capsys):
+    result = audit_inputs._parallel_map("fixture stage", lambda value: value * 2, [1, 2, 3])
+
+    assert result == [2, 4, 6]
+    assert capsys.readouterr().out.endswith("[preflight] fixture stage: 3/3\n")
+
+
 def test_exact_duplicate_prefers_training_and_is_scoped_to_task():
     rows = [
         {"task": "rhythm", "source": "georgia", "split": "source_holdout",
