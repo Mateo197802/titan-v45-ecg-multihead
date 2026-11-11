@@ -1,10 +1,10 @@
 # Reviewer 36 Closure Action Plan
 
-**As of:** 2026-11-10
+**As of:** 2026-11-11
 
-**Source of truth:** `docs/reviewer_closure/REVIEWER_48_DETAILED.json` last updated at `e8f3179866d1199cbb98966f328d37774baa646d`
+**Source of truth:** `docs/reviewer_closure/REVIEWER_48_DETAILED.json` last updated at `34ef99dcd5de5e49e062eb10b0878da3a3731b51`
 
-**PR #3 HEAD checked:** `307ddaf3e3d840a624009d10f53923db307a500c` (OPEN_DRAFT; merge performed: `false`).
+**PR #3 HEAD checked:** `52ae5743f33419e3d045d4e0c9ab58d93607e90a` (OPEN_DRAFT; merge performed: `false`).
 
 **Manuscript state:** `SIN_EDITAR`; submitted manuscript, PDF and response letter were not changed.
 
@@ -62,7 +62,7 @@ This reviewer-only view preserves each source record verbatim under `source_reco
 
 **Evidence recorded:** Frozen transfer evaluated 25,770 SPH ECG from 24,666 source patients across P6, P8 and P4; all 14 compatible ECG-statement endpoints were scored with patient-component intervals. Newly recovered job 17314 records a P6 epoch sweep; job 17315 explicitly evaluates epoch 8 on the V3H accepted/balanced manifest at 1,564/1,643, accuracy 0.951917 and macro-F1 0.800938. This makes V3H model-selection/development evidence, not an untouched test. A separate fixed V3F-embedding PAC probe used the same SPH source and a 5,143-record exploratory patient holdout; its AUROCs were 0.910 (logistic) and 0.910 (MLP sensitivity), with no holdout tuning. The CEDIA audit found 539 code-30 records and 4 code-31 records (1 both, 3 code-31-only); all eligible rows remain in the code-30 statement endpoint, and absence is not a clinical negative. Commit 99b1065 publishes a scoped receipt binding the unchanged CEDIA aggregate and execution receipt. Confusion-derived metrics are recomputed publicly, while score metrics and intervals are digest-bound but not recalculated from restricted row scores. Prior Primary8 PAC target exposure and incomplete V3F source lineage keep this result nonconfirmatory. The exact 17314 manifest is not recorded. Complete V3F/V3AG pretraining and fine-tuning lineage remains unavailable.
 
-**What the available evidence addresses:** A real full-source SPH transfer analysis and endpoint-specific results exist. New CEDIA accounting/logs also narrow the P6 validation claim by documenting V3H gate use and likely epoch-selection exposure. The PAC probe has a reproducible, hash-pinned aggregate publication and explicit code-30/31 target semantics, but does not establish an independent cohort, clinical adjudication or clinical validity.
+**What the available evidence addresses:** A real full-source SPH transfer analysis and endpoint-specific results exist. New CEDIA accounting/logs also narrow the P6 validation claim by documenting V3H gate use and likely epoch-selection exposure. REV6 adds only a parent_checkpoint path-text concordance with job 16781, not a verified checkpoint-production edge. The PAC probe has a reproducible, hash-pinned aggregate publication and explicit code-30/31 target semantics, but does not establish an independent cohort, clinical adjudication or clinical validity.
 
 **What it does not establish / what remains:** The 17314 sweep log and submitted script do not preserve the exact manifest binding; the same epoch-8 metrics and threshold vector appear in the immediately subsequent 17315 V3H gate report, strongly supporting use of that development holdout for selection but not providing a cryptographic same-file proof. Historical backbone/source overlap is not certified, labels are not clinical adjudication, and no truly untouched cohort has been selected.
 
@@ -75,6 +75,8 @@ This reviewer-only view preserves each source record verbatim under `source_reco
 - `docs/reviewer_closure/EVIDENCE_SOURCE_TRIAGE.md`
 - `docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md`
 - `docs/reviewer_closure/V3C_TRIAL6_CHECKPOINT_LINEAGE.md`
+- `docs/reviewer_closure/CEDIA_FINAL_RECOVERY_REPORT.md`
+- `docs/reviewer_closure/receipts/CEDIA_TARGETED_RECOVERY_SEARCH_2026-11-11.json`
 - `docs/reviewer_closure/GENERALIZATION_DATASET_ELIGIBILITY.md`
 - `docs/reviewer_closure/GENERALIZATION_EXPERIMENT_PROTOCOL.md`
 - `docs/reviewer_closure/GENERALIZATION_EXPERIMENT_RESULTS.md`
@@ -88,7 +90,7 @@ This reviewer-only view preserves each source record verbatim under `source_reco
 
 **Repeat verification:** Repeat only if new source bytes, code, data or a protocol change affects this item; use the existing linked receipt as the current evidence.
 
-**Recoverability assessment:** The current packages and NOC-reviewed backup do not recover the sweep script or full training manifests. Reopen only if exact job-linked scripts, manifests, checkpoint hashes and patient mappings are supplied. A new independent cohort is not recoverable from the current SPH evaluation.
+**Recoverability assessment:** The REV3-REV6 export, NOC-reviewed backup listing and a bounded 2026-11-11 filename search in the known project/backup roots did not locate the exact sweep script or full training manifests. Reopen only if exact job-linked scripts, manifests, checkpoint hashes and patient mappings are supplied. A new independent cohort is not recoverable from the current SPH evaluation.
 
 **Experiment needed:** A new, admissible, patient- and signal-disjoint cohort is required if independent generalization is claimed.
 
@@ -129,6 +131,7 @@ This reviewer-only view preserves each source record verbatim under `source_reco
 - `docs/reviewer_closure/GENERALIZATION_EXPERIMENT_RESULTS.md`
 - `docs/reviewer_closure/V4_LEGACY_QUARANTINE_DISPOSITION.md`
 - `docs/reviewer_closure/receipts/LEGACY_V4_QUARANTINE_RECOMPUTATION_2026-11-10.json`
+- `docs/reviewer_closure/receipts/CEDIA_TARGETED_RECOVERY_SEARCH_2026-11-11.json`
 
 **Traceability confidence:** An experiment was executed; this does not imply that the original request is fully satisfied.
 
@@ -136,7 +139,7 @@ This reviewer-only view preserves each source record verbatim under `source_reco
 
 **Repeat verification:** Repeat only if new source bytes, code, data or a protocol change affects this item; use the existing linked receipt as the current evidence.
 
-**Recoverability assessment:** The supplied archives, exact historical paths and NOC-reviewed backup do not recover the historical parent population. Reopen only on receipt of parent manifests, exclusion reasons and checkpoint/job-linked routing ledger; this is not a global-absence finding.
+**Recoverability assessment:** The supplied archives, exact historical paths, NOC-reviewed backup listing and bounded 2026-11-11 filename search do not locate the parent population or quarantine artifacts in the searched roots. Reopen only on receipt of parent manifests, exclusion reasons and checkpoint/job-linked routing ledger; this is not a global-absence finding.
 
 **Experiment needed:** A complete all-class workflow with compatible reference labels and an explicit quarantine policy is required to satisfy the original request; SPH cannot retroactively supply the missing historical flow.
 
@@ -203,14 +206,17 @@ This reviewer-only view preserves each source record verbatim under `source_reco
 
 **Evidence recorded:** The submitted A10 contained one empty-file SHA-256 and four patterned example values. Five physical V3F/V3AG and specialist checkpoints have measured hashes, sizes and a release manifest in PR #4; Optuna DB and generic prediction artifact were not certified as recovered.
 
-**What the available evidence addresses:** Actual model checkpoint identities are verifiable from the public release and separate correction evidence.
+**What the available evidence addresses:** Actual model checkpoint identities are verifiable from the public release and separate correction evidence. REV6 adds a hash-pinned static 60/40 objective-source copy, separately handed to PR #4.
 
-**What it does not establish / what remains:** The original Optuna database and generic prediction file are not located; the corrected artifact list is not a one-to-one substitute for every original A10 row.
+**What it does not establish / what remains:** The original Optuna database and generic prediction file are not located; the 60/40 source copy is not linked to the May jobs and does not reconcile their separate captured 0.45/0.35/0.10/0.10 formula. The corrected artifact list is not a one-to-one substitute for every original A10 row.
 
 **Evidence references:**
 - `docs/hash-correction-20261028.md`
 - `docs/reviewer_closure/EVIDENCE_COMMITS.md`
 - `docs/reviewer_closure/HISTORICAL_EVIDENCE_HANDOFF.md`
+- `docs/reviewer_closure/OPTUNA_HISTORICAL_OBJECTIVE_AND_LINEAGE.md`
+- `docs/reviewer_closure/OPTUNA_PR4_EVIDENCE_HANDOFF.md`
+- `docs/reviewer_closure/receipts/CEDIA_TARGETED_RECOVERY_SEARCH_2026-11-11.json`
 
 **Traceability confidence:** A bounded result is verified; residual limitations remain open.
 
@@ -218,7 +224,7 @@ This reviewer-only view preserves each source record verbatim under `source_reco
 
 **Repeat verification:** Repeat only if new source bytes, code, data or a protocol change affects this item; use the existing linked receipt as the current evidence.
 
-**Recoverability assessment:** Bounded local/CEDIA/release checks found no verified copies of the two missing generic artifacts; a new authenticated backup listing could reopen this.
+**Recoverability assessment:** Bounded local/CEDIA/release checks, including the 2026-11-11 filename search in the known V4.5 and backup roots, found no verified copies of the missing database or generic artifact; a new authenticated institutional backup catalog result could reopen this.
 
 **Experiment needed:** No model experiment is needed for the five checkpoint hashes; do not fabricate hashes for missing files.
 
@@ -609,9 +615,9 @@ This reviewer-only view preserves each source record verbatim under `source_reco
 
 **Evidence recorded:** Verified selected counts are P6 1,643 ECG, P8 2,193 ECG, and P4 962 panel rows over 733 ECG/676 patients. PTB-XL fold 10 has 2,198 ECG/1,904 patients; 733 P4 ECG map to 676 fold-10 patients with no overlap with official folds 1-9. SLURM records V3H jobs 16785/16786 and V3M jobs 16816/16819 as completed, but their exact historical work directories and full split files are absent at the checked paths.
 
-**What the available evidence addresses:** Selected counts, official fold relation, completed-job accounting, checkpoint-declared manifest names and surviving calibration logs are documented with their different evidentiary strength.
+**What the available evidence addresses:** Selected counts, official fold relation, completed-job accounting, checkpoint-declared manifest names and surviving calibration logs are documented with their different evidentiary strength. REV3-REV6 corroborates the parent-checkpoint path recorded in V3F/V3AG metadata and the 16781 submission.
 
-**What it does not establish / what remains:** Historical train/validation/calibration manifests, patient mappings and full per-class source counts are not all linked to released checkpoints; official fold membership and a completed job do not certify historical patient isolation.
+**What it does not establish / what remains:** Historical train/validation/calibration manifests, patient mappings and full per-class source counts are not all linked to released checkpoints; the matching parent path is not a file-read/hash edge. Official fold membership and a completed job do not certify historical patient isolation.
 
 **Evidence references:**
 - `docs/reviewer_closure/SPLIT_CALIBRATION_DISPOSITION.md`
@@ -622,6 +628,9 @@ This reviewer-only view preserves each source record verbatim under `source_reco
 - `docs/reviewer_closure/RECOVERED_VS_MISSING_HISTORICAL_EVIDENCE.md`
 - `docs/reviewer_closure/CHECKPOINT_JOB_MANIFEST_VERIFICATION_FINAL.md`
 - `docs/reviewer_closure/receipts/CEDIA_JOB_LOGS_2026-11-10.json`
+- `docs/reviewer_closure/V3C_TRIAL6_CHECKPOINT_LINEAGE.md`
+- `docs/reviewer_closure/CEDIA_FINAL_RECOVERY_REPORT.md`
+- `docs/reviewer_closure/receipts/CEDIA_TARGETED_RECOVERY_SEARCH_2026-11-11.json`
 
 **Traceability confidence:** The searched sources reached a documented evidence ceiling; absence is limited to those sources.
 
@@ -629,7 +638,7 @@ This reviewer-only view preserves each source record verbatim under `source_reco
 
 **Repeat verification:** Repeat only if new source bytes, code, data or a protocol change affects this item; use the existing linked receipt as the current evidence.
 
-**Recoverability assessment:** Reopen only with exact job/checkpoint-linked split manifests and exclusions. The supplied archives, exact work-directory checks and NOC-reviewed backup did not recover them; this is not a global-absence finding.
+**Recoverability assessment:** Reopen only with exact job/checkpoint-linked split manifests and exclusions. The supplied archives, bounded CEDIA filename search and NOC-reviewed backup listing did not recover them; this is not a global-absence finding.
 
 **Experiment needed:** A new split analysis is required for any new model; historical split claims cannot be recreated from selected results.
 
@@ -696,9 +705,9 @@ This reviewer-only view preserves each source record verbatim under `source_reco
 
 **Evidence recorded:** The contract declares P8's eight outputs, including NSR, plus six additional global rhythm outputs. SPH P8 predicts NSR top-1 on 16,700 records; P8 fallback is separately recorded. The code and outputs do not prove run-specific training support for each auxiliary class.
 
-**What the available evidence addresses:** Implemented output and fallback roles are described; NSR is a rhythm category, not an arrhythmia class by that fact alone.
+**What the available evidence addresses:** Implemented output/fallback roles and the NSR distinction remain documented. REV6 adds static evidence of a generic 14-output rhythm-loss path and a separate V3F routine that directly indexes P8/P4.
 
-**What it does not establish / what remains:** Checkpoint-linked positive/negative training supports and exact historical class selection remain unavailable for auxiliary outputs.
+**What it does not establish / what remains:** The exact runtime label map, per-class support/masks, effective job configuration and checkpoint-producing source are unavailable; these code copies do not show which rhythm classes were historically supervised or evaluated.
 
 **Evidence references:**
 - `docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md`
@@ -707,6 +716,7 @@ This reviewer-only view preserves each source record verbatim under `source_reco
 - `docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md`
 - `docs/reviewer_closure/AUXILIARY_CLASS_TRAINING_EVIDENCE.md`
 - `docs/reviewer_closure/OTHER_CLASS_COVERAGE_EXPERIMENT.md`
+- `docs/reviewer_closure/CEDIA_SOURCE_CODE_AUTHENTICATION.md`
 
 **Traceability confidence:** A bounded result is verified; residual limitations remain open.
 
@@ -740,9 +750,9 @@ This reviewer-only view preserves each source record verbatim under `source_reco
 
 **Evidence recorded:** The global contract has seven pathology outputs, and reconstructed P4 inference emitted ALMI/ILMI/LAE scores on 733 selected ECG. A candidate manifest has positives, but it is not linked to the released checkpoint's training run.
 
-**What the available evidence addresses:** It is verified that outputs are emitted in the reconstructed path, not that the historical checkpoint was trained on those labels.
+**What the available evidence addresses:** Outputs are emitted in the reconstructed path. REV6 also shows a generic seven-output pathology loss path using a row-level label-presence mask, alongside a separate V3F P4-only loss path.
 
-**What it does not establish / what remains:** Historical supervision supports, loss masks, selection policy and evaluation metrics for these outputs are not certified.
+**What it does not establish / what remains:** The code's row mask is not a per-class unknown mask, and omitted labels enter the seven-wide loss as zero. Historical label completeness, positive/negative supports, job execution, checkpoint linkage, selection policy and evaluation metrics remain uncertified.
 
 **Evidence references:**
 - `docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md`
@@ -750,6 +760,7 @@ This reviewer-only view preserves each source record verbatim under `source_reco
 - `outputs/models/heads/global_head_contracts.json`
 - `docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md`
 - `docs/reviewer_closure/AUXILIARY_CLASS_TRAINING_EVIDENCE.md`
+- `docs/reviewer_closure/CEDIA_SOURCE_CODE_AUTHENTICATION.md`
 
 **Traceability confidence:** The searched sources reached a documented evidence ceiling; absence is limited to those sources.
 
@@ -826,9 +837,9 @@ This reviewer-only view preserves each source record verbatim under `source_reco
 
 **Evidence recorded:** Ten-feature candidate code and several historical event sources were recovered; 10 of 11 inventoried files match known hashes. The exact original loader is absent. P4 replay matched 962/962 decisions but maximum probability residual 0.0006194115 exceeds historical tolerance 1e-5.
 
-**What the available evidence addresses:** The candidate feature contract and its provenance boundary are documented, and strict score equivalence is explicitly recorded as failed.
+**What the available evidence addresses:** The candidate feature contract and its provenance boundary are documented, and strict score equivalence is explicitly recorded as failed. REV6 exposes a separate P4 epoch-report path that constructs 512-wide class heads but writes a 192 width field; this is a possible report-writer mismatch only.
 
-**What it does not establish / what remains:** Exact historical feature implementation, loader identity and the figure-to-runtime arrow semantics are not fully verified.
+**What it does not establish / what remains:** That path is not linked to the released P4 checkpoint and does not explain the P6/P8 runtime width fields. Exact historical feature implementation, loader identity and figure-to-runtime arrow semantics remain unverified.
 
 **Evidence references:**
 - `docs/recovered-feature-contract.md`
@@ -837,6 +848,8 @@ This reviewer-only view preserves each source record verbatim under `source_reco
 - `docs/reviewer_closure/HISTORICAL_LOADER_IDENTITY_AND_REPLAY.md`
 - `docs/reviewer_closure/HISTORICAL_RECOVERY_FINAL_EXECUTION.md`
 - `docs/reviewer_closure/SPECIALIST_192_512_ARCHITECTURE_RESOLUTION.md`
+- `docs/reviewer_closure/CEDIA_SOURCE_CODE_AUTHENTICATION.md`
+- `docs/reviewer_closure/receipts/CEDIA_TARGETED_RECOVERY_SEARCH_2026-11-11.json`
 
 **Traceability confidence:** The searched sources reached a documented evidence ceiling; absence is limited to those sources.
 
@@ -844,7 +857,7 @@ This reviewer-only view preserves each source record verbatim under `source_reco
 
 **Repeat verification:** Repeat only if new source bytes, code, data or a protocol change affects this item; use the existing linked receipt as the current evidence.
 
-**Recoverability assessment:** The exact loader may reopen this only if supplied with its expected hash fc8d7367f9f2c108376839435021ec3172fe2757faa4a615f0ef5d39cbf1e855 or an independently linked source snapshot.
+**Recoverability assessment:** The exact loader may reopen this only if supplied with its expected hash fc8d7367f9f2c108376839435021ec3172fe2757faa4a615f0ef5d39cbf1e855 or an independently linked source snapshot. The latest filename search did not locate the expected basename in the searched project root.
 
 **Experiment needed:** No threshold retuning; a future replay may test equivalence only if the exact loader and inputs are recovered.
 
@@ -1356,9 +1369,9 @@ This reviewer-only view preserves each source record verbatim under `source_reco
 
 **Evidence recorded:** The selected reconstruction and all-input SPH flow contain no checkpoint-linked uncertainty score plus verified quarantine policy; quarantine is not assessed, not 0%. P8 fallback and empty sets are not quarantine.
 
-**What the available evidence addresses:** The invalid inference from fallback to quarantine is explicitly rejected; routing counts are documented with their actual semantics.
+**What the available evidence addresses:** The invalid inference from fallback to quarantine is explicitly rejected; routing counts are documented with their actual semantics. REV6 reports 23 Plan AF handoff rows and reported policy/manifest hashes, but the source bytes are absent and hashes were not recomputed.
 
-**What it does not establish / what remains:** No historic pre/post ledger, quarantine denominator, policy version or uncertainty inputs are available; rates and pre/post accuracy cannot be reconstructed.
+**What it does not establish / what remains:** The 23 rows are not a complete denominator. No historic pre/post ledger, quarantine denominator, policy version or uncertainty inputs are available; rates and pre/post accuracy cannot be reconstructed.
 
 **Evidence references:**
 - `docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md`
@@ -1369,6 +1382,9 @@ This reviewer-only view preserves each source record verbatim under `source_reco
 - `docs/reviewer_closure/SELECTIVE_PREDICTION_EXPERIMENT.md`
 - `docs/reviewer_closure/V4_LEGACY_QUARANTINE_DISPOSITION.md`
 - `docs/reviewer_closure/receipts/LEGACY_V4_QUARANTINE_RECOMPUTATION_2026-11-10.json`
+- `docs/reviewer_closure/QUARANTINE_HISTORICAL_VS_PROSPECTIVE.md`
+- `docs/reviewer_closure/CEDIA_FINAL_RECOVERY_REPORT.md`
+- `docs/reviewer_closure/receipts/CEDIA_TARGETED_RECOVERY_SEARCH_2026-11-11.json`
 
 **Traceability confidence:** The searched sources reached a documented evidence ceiling; absence is limited to those sources.
 
@@ -1376,7 +1392,7 @@ This reviewer-only view preserves each source record verbatim under `source_reco
 
 **Repeat verification:** Repeat only if new source bytes, code, data or a protocol change affects this item; use the existing linked receipt as the current evidence.
 
-**Recoverability assessment:** Reopen only if an authentic policy, ledger, score inputs and checkpoint/job linkage are recovered.
+**Recoverability assessment:** Reopen only if an authentic policy, ledger, score inputs and checkpoint/job linkage are recovered. The direct filename search found no match for the named AE policy, quarantine manifest or identified AF jobs in the scoped roots.
 
 **Experiment needed:** Required to support any quarantine effectiveness claim; otherwise the claim and rate must be removed.
 

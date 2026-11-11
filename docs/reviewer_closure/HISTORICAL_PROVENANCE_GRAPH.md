@@ -1,6 +1,6 @@
 # Historical Provenance Graph: CEDIA Recovery Rounds
 
-This is the human-readable index for [`HISTORICAL_PROVENANCE_GRAPH.json`](HISTORICAL_PROVENANCE_GRAPH.json). Its Round 2 section below remains a dated historical record; the REV3-REV6 addendum began from PR #3 HEAD `52ae5743f33419e3d045d4e0c9ab58d93607e90a` and PR #4 HEAD `3cfedf39a81a22c867fde04faf9b1a1dd2f60448`. PR #4 was subsequently updated in its separate branch to `1d556ba5a58255b1eef97221da8107a9c8d120b0`. `VERIFIED` always refers to the narrow edge described; it does not imply that a full training chain is verified.
+This is the human-readable index for [`HISTORICAL_PROVENANCE_GRAPH.json`](HISTORICAL_PROVENANCE_GRAPH.json). Its Round 2 section below remains a dated historical record; the REV3-REV6 addendum began from PR #3 HEAD `52ae5743f33419e3d045d4e0c9ab58d93607e90a` and PR #4 HEAD `3cfedf39a81a22c867fde04faf9b1a1dd2f60448`. PR #3's core evidence integration is commit `34ef99dcd5de5e49e062eb10b0878da3a3731b51`; PR #4 was updated in its separate branch to `1d556ba5a58255b1eef97221da8107a9c8d120b0`. `VERIFIED` always refers to the narrow edge described; it does not imply that a full training chain is verified.
 
 ## Evidence roots
 

@@ -41,6 +41,7 @@
     "targeted_cedia_search_matches": 0,
     "targeted_cedia_search_status_or_coverage_change": false,
     "pr3_head_at_start": "52ae5743f33419e3d045d4e0c9ab58d93607e90a",
+    "pr3_head_after_evidence_integration": "34ef99dcd5de5e49e062eb10b0878da3a3731b51",
     "pr4_head_at_start": "3cfedf39a81a22c867fde04faf9b1a1dd2f60448",
     "pr4_head_after_update": "1d556ba5a58255b1eef97221da8107a9c8d120b0",
     "note": "REV6 establishes static source semantics and a metadata-path concordance, not job execution or checkpoint lineage; the bounded follow-up CEDIA filename search found no target artifact. No original V4.5 execution artifact was newly linked."

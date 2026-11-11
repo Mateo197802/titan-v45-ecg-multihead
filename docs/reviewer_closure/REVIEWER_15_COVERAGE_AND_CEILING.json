@@ -34,6 +34,12 @@
     "reason": "The complete universe of institutional backups is not enumerable; the REV3-REV6 CEDIA search is bounded to sources stated in its read-only receipt.",
     "qualitative": "Use per-item recovery categories below. Do not describe a bounded negative search as global nonexistence."
   },
+  "latest_bounded_search": {
+    "receipt": "docs/reviewer_closure/receipts/CEDIA_TARGETED_RECOVERY_SEARCH_2026-11-11.json",
+    "matching_named_artifacts": 0,
+    "coverage_or_status_change": false,
+    "interpretation": "The search extends the documented filename-search boundary in the named CEDIA roots; it found no matching names and does not establish global absence or add scientific coverage."
+  },
   "items": [
     {"id":"R1-1","previous_pct":50.0,"new_pct":50.0,"delta_pp":0.0,"satisfaction":"PARTIALLY_ADDRESSED","historical_ceiling":"RECOVERY_LIMITED_BY_MISSING_JOB_MANIFESTS_AND_PATIENT_LINEAGE","scientific_requirement":"INDEPENDENT_VALIDATION_REQUIRES_A_NEW_ELIGIBLE_COHORT_IF_CLAIMED","next_action":"Custodian search for exact checkpoint/source manifests and read/write digests; otherwise retain independence limitation."},
     {"id":"R1-2","previous_pct":33.3,"new_pct":33.3,"delta_pp":0.0,"satisfaction":"PARTIALLY_ADDRESSED","historical_ceiling":"CUSTODIAN_RECOVERY_MAY_FIND_PARENT_POPULATION_OR_LEDGER","scientific_requirement":"ORIGINAL_PREPOST_QUARANTINE_NOT_DEMONSTRATED","next_action":"Request original eligible population, exclusion ledger, score/policy and record-level pre/post transitions; never infer rate from handoff rows."},

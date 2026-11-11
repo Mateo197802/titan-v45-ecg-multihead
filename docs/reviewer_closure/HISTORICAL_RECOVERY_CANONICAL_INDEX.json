@@ -4,7 +4,7 @@
   "repository": "Mateo197802/titan-v45-ecg-multihead",
   "pull_requests": {
     "pr3": {
-      "head": "52ae5743f33419e3d045d4e0c9ab58d93607e90a",
+      "head": "34ef99dcd5de5e49e062eb10b0878da3a3731b51",
       "state": "open_draft",
       "merge_performed": false
     },
@@ -396,6 +396,7 @@
     "targeted_search_receipt": "docs/reviewer_closure/receipts/CEDIA_TARGETED_RECOVERY_SEARCH_2026-11-11.json",
     "report": "docs/reviewer_closure/CEDIA_FINAL_RECOVERY_REPORT.md",
     "pr3_head_at_start": "52ae5743f33419e3d045d4e0c9ab58d93607e90a",
+    "pr3_head_after_evidence_integration": "34ef99dcd5de5e49e062eb10b0878da3a3731b51",
     "pr4_head_at_start": "3cfedf39a81a22c867fde04faf9b1a1dd2f60448",
     "pr4_head_after_update": "1d556ba5a58255b1eef97221da8107a9c8d120b0",
     "adjacent_revision_comparison": {
