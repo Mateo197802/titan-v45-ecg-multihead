@@ -32,3 +32,24 @@ def test_bounded_parallel_reader_rejects_zero_pending_limit():
             assert "positive" in str(error)
         else:
             raise AssertionError("zero pending limit must be rejected")
+
+
+def test_rhythm_reader_passes_suffixless_signal_path(monkeypatch, tmp_path):
+    signal_path = tmp_path / "record.mat"
+    monkeypatch.setattr(extractor, "_signal_path", lambda source, relative: signal_path)
+    monkeypatch.setattr(extractor, "_sha256", lambda path: "expected")
+    observed = {}
+
+    def prepare(record_path, morphology):
+        observed["record_path"] = record_path
+        observed["morphology"] = morphology
+        return ["prepared-window"]
+
+    monkeypatch.setattr(extractor, "prepare_rhythm_record", prepare)
+    result = extractor._read_rhythm_record(
+        tmp_path, "morphology", 3,
+        {"source": "source", "relative_record": "record", "signal_sha256": "expected"},
+    )
+
+    assert result == (3, ["prepared-window"], None)
+    assert observed == {"record_path": tmp_path / "record", "morphology": "morphology"}

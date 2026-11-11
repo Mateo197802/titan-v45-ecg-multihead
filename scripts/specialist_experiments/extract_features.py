@@ -131,7 +131,7 @@ def _read_rhythm_record(data_root: Path, morphology, record_index: int, row: dic
         signal_path = _signal_path(source_root, row["relative_record"])
         if _sha256(signal_path) != row["signal_sha256"]:
             raise ValueError("waveform hash differs from preflight inventory")
-        samples = prepare_rhythm_record(signal_path.with_suffix(), morphology)
+        samples = prepare_rhythm_record(signal_path.with_suffix(""), morphology)
         if not samples:
             raise ValueError("preprocessor returned no windows")
         return record_index, samples, None
