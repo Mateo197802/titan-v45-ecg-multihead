@@ -8,6 +8,7 @@ import hashlib
 import json
 import os
 import re
+import shutil
 import sys
 from collections import Counter, defaultdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -39,6 +40,7 @@ RHYTHM_SUPPORT = {
 RHYTHM_ROOTS = tuple(RHYTHM_SUPPORT)
 GEORGIA_SOURCE_HOLDOUT_SUPPORT = frozenset(RHYTHM_SUPPORT["georgia"])
 SOURCE_PRIORITY = {"chapman_shaoxing": 0, "cpsc2018": 1, "georgia": 2, "ptbxl": 3}
+SOURCE_DIRECTORY_NAMES = {"ptbxl": "ptb-xl"}
 SPLIT_PRIORITY = {"train": 0, "validation": 1, "calibration": 2, "internal_evaluation": 3,
                   "source_holdout": 4}
 PUBLIC_RHYTHM_SOURCE_ALIASES = {
@@ -49,6 +51,10 @@ PUBLIC_RHYTHM_SOURCE_ALIASES = {
 }
 IO_WORKERS = 4
 PROGRESS_INTERVAL = 1000
+
+
+class WaveformIntegrityError(Exception):
+    """Raised when a waveform changed after its private inventory was sealed."""
 
 
 def _parallel_map(stage: str, function, items: list[Any]) -> list[Any]:
@@ -412,7 +418,7 @@ def _deduplicate(rows: list[dict[str, Any]]) -> None:
 
 
 def _waveform_qc(
-    data_root: Path, rows: list[dict[str, Any]], *, wfdb_module=None
+    data_root: Path, rows: list[dict[str, Any]], *, wfdb_module=None, verify_hash: bool = False
 ) -> dict[str, Any]:
     """Summarize initial-window physical signal properties without filtering records."""
     if wfdb_module is None:
@@ -422,9 +428,11 @@ def _waveform_qc(
     eligible_rows = [row for row in rows if not row["excluded_reason"]]
 
     def inspect_waveform(row: dict[str, Any]) -> tuple[str, dict[str, Any]]:
-        source_root = raw_root / row["source"]
+        source_root = raw_root / SOURCE_DIRECTORY_NAMES.get(row["source"], row["source"])
         base = source_root / row["relative_record"]
         try:
+            if verify_hash and _sha256(base.with_suffix(".dat")) != row["signal_sha256"]:
+                raise WaveformIntegrityError("waveform hash differs from sealed inventory")
             header = wfdb_module.rdheader(str(base))
             sample_count = min(int(header.sig_len), max(1, int(round(10 * header.fs))))
             record = wfdb_module.rdrecord(str(base), sampfrom=0, sampto=sample_count)
@@ -452,6 +460,8 @@ def _waveform_qc(
                 ),
                 "units": ",".join(units) if units else "unknown",
             }
+        except WaveformIntegrityError:
+            raise
         except (OSError, ValueError, RuntimeError) as exc:
             sample = {"read_error": type(exc).__name__}
         return row["source"], sample
@@ -582,6 +592,74 @@ def run_audit(data_root: Path, output_dir: Path, repo: Path) -> dict[str, Any]:
     return receipt
 
 
+def run_qc_reuse(
+    data_root: Path,
+    output_dir: Path,
+    previous_preflight_dir: Path,
+    repo: Path,
+    *,
+    wfdb_module=None,
+) -> dict[str, Any]:
+    data_root, output_dir = data_root.resolve(), output_dir.resolve()
+    previous_preflight_dir, repo = previous_preflight_dir.resolve(), repo.resolve()
+    if (not data_root.is_dir() or output_dir == data_root or output_dir.is_relative_to(data_root)
+            or previous_preflight_dir.is_relative_to(data_root)):
+        raise ValueError("preflight inputs/outputs must remain outside the authorized raw cache")
+    if output_dir == previous_preflight_dir:
+        raise ValueError("QC recomputation must use a new output directory")
+    if output_dir.exists() and any(output_dir.iterdir()):
+        raise FileExistsError("QC recomputation output directory must be new or empty")
+
+    config = json.loads(CONFIG.read_text(encoding="utf-8"))
+    config_hash = _sha256(CONFIG)
+    repo_config = repo / "configs/specialist_heads/study_20261111_v2.json"
+    if not repo_config.is_file() or _sha256(repo_config) != config_hash:
+        raise ValueError("repo configuration does not match the script's frozen study configuration")
+    source_receipt_path = previous_preflight_dir / "preflight_receipt.json"
+    source_inventory_path = previous_preflight_dir / "private_inventory.json"
+    source_receipt_hash = _sha256(source_receipt_path)
+    source_receipt = json.loads(source_receipt_path.read_text(encoding="utf-8"))
+    if (source_receipt.get("schema") != "TITAN_SPECIALIST_INPUT_PREFLIGHT_V1"
+            or source_receipt.get("study_id") != config["study_id"]
+            or source_receipt.get("config_sha256") != config_hash):
+        raise ValueError("source preflight receipt does not match the frozen study configuration")
+    inventory_hash = _sha256(source_inventory_path)
+    if inventory_hash != source_receipt.get("private_inventory_sha256"):
+        raise ValueError("source private inventory hash differs from its sealed receipt")
+    inventory = json.loads(source_inventory_path.read_text(encoding="utf-8"))
+    if inventory.get("schema") != "TITAN_PRIVATE_SPECIALIST_INVENTORY_V1":
+        raise ValueError("unexpected private inventory schema")
+    ptbxl_rows = [row for row in inventory["rows"] if row["task"] == "pathology"]
+    if not ptbxl_rows or any(row["source"] != "ptbxl" for row in ptbxl_rows):
+        raise ValueError("source inventory does not contain the expected PTB-XL rows")
+    if wfdb_module is None:
+        import wfdb as wfdb_module
+    qc = _waveform_qc(data_root, ptbxl_rows, wfdb_module=wfdb_module, verify_hash=True)
+
+    receipt = dict(source_receipt)
+    receipt["waveform_qc_initial_window"] = dict(source_receipt["waveform_qc_initial_window"])
+    receipt["waveform_qc_initial_window"]["ptbxl"] = qc["ptbxl"]
+    receipt["qc_recomputation"] = {
+        "source_receipt_sha256": source_receipt_hash,
+        "source_private_inventory_sha256": inventory_hash,
+        "recomputed_source": "ptbxl",
+        "current_waveform_hashes_reverified": True,
+        "performance_metrics_read_or_computed": False,
+    }
+
+    output_dir.mkdir(parents=True, exist_ok=True, mode=0o700)
+    os.chmod(output_dir, 0o700)
+    inventory_path = output_dir / "private_inventory.json"
+    shutil.copyfile(source_inventory_path, inventory_path)
+    os.chmod(inventory_path, 0o600)
+    if _sha256(inventory_path) != inventory_hash:
+        raise ValueError("copied private inventory hash differs from its source")
+    receipt_path = output_dir / "preflight_receipt.json"
+    receipt_path.write_text(json.dumps(receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    os.chmod(receipt_path, 0o600)
+    return receipt
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--data-root", type=Path, required=True,
@@ -589,8 +667,13 @@ def main() -> int:
     parser.add_argument("--output-dir", type=Path, required=True,
                         help="private CEDIA experiment directory outside the raw data cache")
     parser.add_argument("--repo", type=Path, default=ROOT)
+    parser.add_argument("--reuse-qc-from", type=Path,
+                        help="reuse a sealed inventory and recompute only PTB-XL waveform QC")
     args = parser.parse_args()
-    receipt = run_audit(args.data_root, args.output_dir, args.repo)
+    if args.reuse_qc_from:
+        receipt = run_qc_reuse(args.data_root, args.output_dir, args.reuse_qc_from, args.repo)
+    else:
+        receipt = run_audit(args.data_root, args.output_dir, args.repo)
     print(json.dumps({
         "schema": receipt["schema"], "study_id": receipt["study_id"],
         "private_inventory_sha256": receipt["private_inventory_sha256"],

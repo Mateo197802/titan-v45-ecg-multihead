@@ -1,6 +1,7 @@
 import csv
 import hashlib
 import importlib.util
+import json
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -269,3 +270,109 @@ def test_waveform_qc_is_descriptive_and_reports_nonfinite_and_flat_leads(tmp_pat
     assert source_qc["units_by_record"] == {"mV": 1}
     assert source_qc["max_abs_physical_value_by_unit"]["mV"]["maximum_record_peak"] == 1.0
     assert source_qc["exclusion_policy"] == "descriptive_only_no_records_removed_by_this_qc"
+
+
+def test_ptbxl_qc_uses_physical_directory_and_reverifies_inventory_hash(tmp_path):
+    data_root = tmp_path / "cache"
+    ptbxl_root = data_root / "00_FUENTES_FISICAS_RAW/ptb-xl"
+    relative = "records100/00000/record_lr"
+    _write(ptbxl_root / f"{relative}.hea", b"header")
+    signal = _write(ptbxl_root / f"{relative}.dat", b"waveform-bytes")
+    row = {
+        "source": "ptbxl",
+        "relative_record": relative,
+        "excluded_reason": None,
+        "signal_sha256": hashlib.sha256(signal.read_bytes()).hexdigest(),
+    }
+
+    class FakeWFDB:
+        @staticmethod
+        def rdheader(record_name):
+            assert Path(record_name).is_relative_to(ptbxl_root)
+            return SimpleNamespace(sig_len=20, fs=2)
+
+        @staticmethod
+        def rdrecord(record_name, *, sampfrom, sampto):
+            assert Path(record_name).is_relative_to(ptbxl_root)
+            assert (sampfrom, sampto) == (0, 20)
+            return SimpleNamespace(p_signal=np.asarray([[0.0], [1.0]]), units=["mV"])
+
+    result = audit_inputs._waveform_qc(
+        data_root, [row], wfdb_module=FakeWFDB, verify_hash=True
+    )
+
+    assert result["ptbxl"]["records_readable"] == 1
+    assert result["ptbxl"]["read_errors_by_type"] == {}
+    row["signal_sha256"] = "0" * 64
+    try:
+        audit_inputs._waveform_qc(data_root, [row], wfdb_module=FakeWFDB, verify_hash=True)
+    except audit_inputs.WaveformIntegrityError:
+        pass
+    else:
+        raise AssertionError("changed waveform must fail closed during QC reuse")
+
+
+def test_qc_reuse_preserves_source_receipt_and_inventory_hash(tmp_path, monkeypatch):
+    data_root = tmp_path / "cache"
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    config_path = repo / "configs/specialist_heads/study_20261111_v2.json"
+    config = _write(config_path, b'{"study_id":"test"}\n')
+    monkeypatch.setattr(audit_inputs, "CONFIG", config)
+    physical_root = data_root / "00_FUENTES_FISICAS_RAW/ptb-xl"
+    relative = "records100/00000/record_lr"
+    _write(physical_root / f"{relative}.hea", b"header")
+    signal = _write(physical_root / f"{relative}.dat", b"waveform-bytes")
+    inventory = {
+        "schema": "TITAN_PRIVATE_SPECIALIST_INVENTORY_V1",
+        "rows": [{
+            "task": "pathology", "source": "ptbxl", "relative_record": relative,
+            "excluded_reason": None,
+            "signal_sha256": hashlib.sha256(signal.read_bytes()).hexdigest(),
+        }],
+    }
+    source_dir = tmp_path / "previous/preflight"
+    source_dir.mkdir(parents=True)
+    inventory_path = _write(
+        source_dir / "private_inventory.json",
+        json.dumps(inventory, sort_keys=True, separators=(",", ":")).encode(),
+    )
+    source_receipt = {
+        "schema": "TITAN_SPECIALIST_INPUT_PREFLIGHT_V1",
+        "study_id": "test",
+        "config_sha256": hashlib.sha256(config.read_bytes()).hexdigest(),
+        "private_inventory_sha256": hashlib.sha256(inventory_path.read_bytes()).hexdigest(),
+        "waveform_qc_initial_window": {"chapman_shaoxing": {"records_readable": 1}},
+    }
+    source_receipt_path = _write(
+        source_dir / "preflight_receipt.json",
+        json.dumps(source_receipt).encode(),
+    )
+
+    class FakeWFDB:
+        @staticmethod
+        def rdheader(record_name):
+            assert Path(record_name).is_relative_to(physical_root)
+            return SimpleNamespace(sig_len=20, fs=2)
+
+        @staticmethod
+        def rdrecord(record_name, *, sampfrom, sampto):
+            assert Path(record_name).is_relative_to(physical_root)
+            assert (sampfrom, sampto) == (0, 20)
+            return SimpleNamespace(p_signal=np.asarray([[0.0], [1.0]]), units=["mV"])
+
+    output_dir = tmp_path / "corrected/preflight"
+    receipt = audit_inputs.run_qc_reuse(
+        data_root, output_dir, source_dir, repo, wfdb_module=FakeWFDB
+    )
+
+    assert receipt["waveform_qc_initial_window"]["chapman_shaoxing"] == {
+        "records_readable": 1
+    }
+    assert receipt["waveform_qc_initial_window"]["ptbxl"]["records_readable"] == 1
+    assert receipt["qc_recomputation"]["source_receipt_sha256"] == hashlib.sha256(
+        source_receipt_path.read_bytes()
+    ).hexdigest()
+    assert hashlib.sha256((output_dir / "private_inventory.json").read_bytes()).hexdigest() == (
+        source_receipt["private_inventory_sha256"]
+    )

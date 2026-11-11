@@ -29,6 +29,8 @@ sbatch --output="$EXPERIMENT_ROOT/logs/preflight-%j.out" \
 
 Inspect only the aggregate `preflight_receipt.json` and the public-safe job log before authorizing the next stage. The initial-window signal QC reports finite-value fractions, flat leads, all-zero records, physical-unit summaries, and read failures descriptively; it does not filter records or apply a post hoc amplitude cutoff. Do not proceed if required classes lack positive/negative training support, a required source is missing, the configuration hash differs, or the label/source contract is contradicted.
 
+If an implementation defect affects only PTB-XL window QC after a sealed inventory has been produced, preserve the original receipt and use `scripts/cedia/specialist_qc_reuse.sbatch` with a new output directory. This verifies the source receipt, inventory, frozen config, and current PTB-XL waveform hashes, then writes a separate receipt; it does not reuse a failed QC summary or compute model performance.
+
 After preflight review, feature extraction and training use:
 
 ```bash
