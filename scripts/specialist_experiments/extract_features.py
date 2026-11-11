@@ -9,7 +9,8 @@ import os
 import platform
 import subprocess
 import sys
-from collections import Counter
+from collections import Counter, deque
+from concurrent.futures import ThreadPoolExecutor
 from importlib.metadata import version
 from pathlib import Path
 from tempfile import NamedTemporaryFile
@@ -53,6 +54,8 @@ CONFIG = ROOT / "configs/specialist_heads/study_20261111_v2.json"
 EXPECTED_MORPHOLOGY_SHA = MORPHOLOGY_SHA
 RHYTHM_BATCH_SIZE = 64
 PATHOLOGY_BATCH_SIZE = 64
+IO_WORKERS = 4
+IO_PREFETCH = 8
 
 
 def _sha256(path: Path) -> str:
@@ -96,6 +99,56 @@ def _signal_path(source_root: Path, relative_base: str) -> Path:
         ):
             return signal
     raise FileNotFoundError("waveform signal is unavailable")
+
+
+def _bounded_ordered_map(executor, function, items, limit: int):
+    """Run bounded concurrent I/O while yielding results in input order."""
+    if limit < 1:
+        raise ValueError("pending task limit must be positive")
+    iterator = iter(items)
+    pending = deque()
+
+    def submit_next() -> bool:
+        try:
+            item = next(iterator)
+        except StopIteration:
+            return False
+        pending.append(executor.submit(function, item))
+        return True
+
+    for _ in range(limit):
+        if not submit_next():
+            break
+    while pending:
+        yield pending.popleft().result()
+        submit_next()
+
+
+def _read_rhythm_record(data_root: Path, morphology, record_index: int, row: dict[str, Any]):
+    raw_root = data_root / "00_FUENTES_FISICAS_RAW"
+    source_root = raw_root / row["source"]
+    try:
+        signal_path = _signal_path(source_root, row["relative_record"])
+        if _sha256(signal_path) != row["signal_sha256"]:
+            raise ValueError("waveform hash differs from preflight inventory")
+        samples = prepare_rhythm_record(signal_path.with_suffix(), morphology)
+        if not samples:
+            raise ValueError("preprocessor returned no windows")
+        return record_index, samples, None
+    except (OSError, ValueError, RuntimeError, ImportError) as exc:
+        return record_index, None, type(exc).__name__
+
+
+def _read_pathology_record(data_root: Path, morphology, record_index: int, row: dict[str, Any]):
+    source_root = data_root / "00_FUENTES_FISICAS_RAW" / "ptb-xl"
+    try:
+        signal_path = _signal_path(source_root, row["relative_record"])
+        if _sha256(signal_path) != row["signal_sha256"]:
+            raise ValueError("waveform hash differs from preflight inventory")
+        sample = prepare_p4_record(signal_path.with_suffix(""), morphology)
+        return record_index, sample, None
+    except (OSError, ValueError, RuntimeError, ImportError) as exc:
+        return record_index, None, type(exc).__name__
 
 
 @torch.no_grad()
@@ -255,33 +308,46 @@ def run(data_root: Path, preflight_dir: Path, output_dir: Path, repo: Path, devi
         pending_samples.clear()
         pending_links.clear()
 
-    raw_root = data_root / "00_FUENTES_FISICAS_RAW"
-    for row in rows:
-        if row["task"] != "rhythm" or row["excluded_reason"]:
-            continue
-        record_index = rhythm_lookup[row["identity_hash"]]
-        source_root = raw_root / row["source"]
-        try:
-            signal_path = _signal_path(source_root, row["relative_record"])
-            if _sha256(signal_path) != row["signal_sha256"]:
-                raise ValueError("waveform hash differs from preflight inventory")
-            samples = prepare_rhythm_record(signal_path.with_suffix(""), morphology)
-            if not samples:
-                raise ValueError("preprocessor returned no windows")
-        except (OSError, ValueError, RuntimeError, ImportError) as exc:
-            errors[f"rhythm:{row['source']}:{type(exc).__name__}"] += 1
-            rhythm_records[record_index]["error_type"] = type(exc).__name__
-            continue
-        for window_index, sample in enumerate(samples):
-            pending_samples.append(sample)
-            pending_links.append((record_index, window_index))
-            if len(pending_samples) >= RHYTHM_BATCH_SIZE:
-                flush_rhythm()
+    rhythm_items = (
+        (rhythm_lookup[row["identity_hash"]], row)
+        for row in rows if row["task"] == "rhythm" and not row["excluded_reason"]
+    )
+
+    def read_rhythm(item):
+        return _read_rhythm_record(data_root, morphology, *item)
+
+    with ThreadPoolExecutor(max_workers=IO_WORKERS) as executor:
+        rhythm_results = _bounded_ordered_map(executor, read_rhythm, rhythm_items, IO_PREFETCH)
+        for completed, (record_index, samples, error_type) in enumerate(rhythm_results, start=1):
+            if error_type:
+                source = rhythm_records[record_index]["source"]
+                errors[f"rhythm:{source}:{error_type}"] += 1
+                rhythm_records[record_index]["error_type"] = error_type
+            else:
+                for window_index, sample in enumerate(samples):
+                    pending_samples.append(sample)
+                    pending_links.append((record_index, window_index))
+                    if len(pending_samples) >= RHYTHM_BATCH_SIZE:
+                        flush_rhythm()
+            if completed % 256 == 0:
+                print(json.dumps({
+                    "stage": "rhythm_feature_extraction_progress",
+                    "records_completed": completed,
+                    "records_total": len(rhythm_records),
+                    "records_scored": sum(row["scored"] for row in rhythm_records),
+                    "errors": sum(errors.values()),
+                }, sort_keys=True), flush=True)
     flush_rhythm()
 
     pathology_records, pathology_features, pathology_scores = [], [], []
     pending_p4_samples, pending_p4_records = [], []
     row_lookup = [row for row in rows if row["task"] == "pathology" and not row["excluded_reason"]]
+    for row in row_lookup:
+        record = {key: row[key] for key in (
+            "source", "split", "identity_hash", "group_hash", "targets", "mask", "classes", "fold"
+        )}
+        record.update({"scored": False, "error_type": None})
+        pathology_records.append(record)
 
     def flush_pathology():
         if not pending_p4_samples:
@@ -294,27 +360,31 @@ def run(data_root: Path, preflight_dir: Path, output_dir: Path, repo: Path, devi
         pending_p4_samples.clear()
         pending_p4_records.clear()
 
-    for row in row_lookup:
-        record_index = len(pathology_records)
-        record = {key: row[key] for key in (
-            "source", "split", "identity_hash", "group_hash", "targets", "mask", "classes", "fold"
-        )}
-        record.update({"scored": False, "error_type": None})
-        pathology_records.append(record)
-        source_root = raw_root / "ptb-xl"
-        try:
-            signal_path = _signal_path(source_root, row["relative_record"])
-            if _sha256(signal_path) != row["signal_sha256"]:
-                raise ValueError("waveform hash differs from preflight inventory")
-            sample = prepare_p4_record(signal_path.with_suffix(""), morphology)
-        except (OSError, ValueError, RuntimeError, ImportError) as exc:
-            errors[f"pathology:{type(exc).__name__}"] += 1
-            pathology_records[record_index]["error_type"] = type(exc).__name__
-            continue
-        pending_p4_samples.append(sample)
-        pending_p4_records.append(record_index)
-        if len(pending_p4_samples) >= PATHOLOGY_BATCH_SIZE:
-            flush_pathology()
+    def read_pathology(item):
+        return _read_pathology_record(data_root, morphology, *item)
+
+    pathology_items = enumerate(row_lookup)
+    with ThreadPoolExecutor(max_workers=IO_WORKERS) as executor:
+        pathology_results = _bounded_ordered_map(
+            executor, read_pathology, pathology_items, IO_PREFETCH
+        )
+        for completed, (record_index, sample, error_type) in enumerate(pathology_results, start=1):
+            if error_type:
+                errors[f"pathology:{error_type}"] += 1
+                pathology_records[record_index]["error_type"] = error_type
+            else:
+                pending_p4_samples.append(sample)
+                pending_p4_records.append(record_index)
+                if len(pending_p4_samples) >= PATHOLOGY_BATCH_SIZE:
+                    flush_pathology()
+            if completed % 256 == 0:
+                print(json.dumps({
+                    "stage": "pathology_feature_extraction_progress",
+                    "records_completed": completed,
+                    "records_total": len(pathology_records),
+                    "records_scored": sum(row["scored"] for row in pathology_records),
+                    "errors": sum(errors.values()),
+                }, sort_keys=True), flush=True)
     flush_pathology()
 
     rhythm_record_index = np.asarray(window_record_ids, dtype=np.int32)
@@ -363,6 +433,8 @@ def run(data_root: Path, preflight_dir: Path, output_dir: Path, repo: Path, devi
         "cuda_version": torch.version.cuda,
         "device": device,
         "device_name": torch.cuda.get_device_name(0) if device == "cuda" else platform.processor(),
+        "input_io_workers": IO_WORKERS,
+        "input_prefetch_limit": IO_PREFETCH,
         "window_aggregation": config["rhythm"]["window_aggregation"],
         "rhythm_records": rhythm_records,
         "pathology_records": pathology_records,
