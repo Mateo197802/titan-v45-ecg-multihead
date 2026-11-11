@@ -49,7 +49,7 @@ from titan_v45.models.frozen_rhythm import (
     load_recorded_event_extractor,
 )
 
-CONFIG = ROOT / "configs/specialist_heads/study_20261111_v1.json"
+CONFIG = ROOT / "configs/specialist_heads/study_20261111_v2.json"
 EXPECTED_MORPHOLOGY_SHA = MORPHOLOGY_SHA
 RHYTHM_BATCH_SIZE = 64
 PATHOLOGY_BATCH_SIZE = 64

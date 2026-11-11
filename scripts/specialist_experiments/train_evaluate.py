@@ -37,7 +37,7 @@ from titan_v45.training.specialist_heads import (  # noqa: E402
     source_balanced_element_weights,
 )
 
-CONFIG = ROOT / "configs/specialist_heads/study_20261111_v1.json"
+CONFIG = ROOT / "configs/specialist_heads/study_20261111_v2.json"
 BOOTSTRAP_REPLICATES = 2000
 BOOTSTRAP_SEED = 20261111
 

@@ -27,7 +27,7 @@ from titan_v45.training.specialist_heads import (  # noqa: E402
     stable_fraction,
 )
 
-CONFIG = ROOT / "configs/specialist_heads/study_20261111_v1.json"
+CONFIG = ROOT / "configs/specialist_heads/study_20261111_v2.json"
 PTBXL_DATABASE_SHA256 = "7600de9c1b27d181d850b3c6038a35d7c3ddb6bb33b702e3a20252a6859d216b"
 PTBXL_SCP_SHA256 = "ad05b0b1fcae83bb1230755ad9cfc7c96f303feddc08a4a9ad5bdc9ca63bac8f"
 RHYTHM_SUPPORT = {
@@ -40,6 +40,12 @@ GEORGIA_SOURCE_HOLDOUT_SUPPORT = frozenset(RHYTHM_SUPPORT["georgia"])
 SOURCE_PRIORITY = {"chapman_shaoxing": 0, "cpsc2018": 1, "georgia": 2, "ptbxl": 3}
 SPLIT_PRIORITY = {"train": 0, "validation": 1, "calibration": 2, "internal_evaluation": 3,
                   "source_holdout": 4}
+PUBLIC_RHYTHM_SOURCE_ALIASES = {
+    "chapman_shaoxing": "chapman_shaoxing",
+    "training/cpsc_2018": "cpsc2018",
+    "training/cpsc_2018_extra": "cpsc2018",
+    "training/georgia": "georgia",
+}
 
 
 def _sha256(path: Path) -> str:
@@ -98,30 +104,80 @@ def _read_scp_codes(value: str) -> dict[str, float]:
     return result
 
 
-def _public_exposed_georgia(repo: Path) -> set[str]:
-    path = repo / "data/manifests/external_dev/rhythm_primary8_records.csv"
-    exposed: set[str] = set()
-    with path.open(encoding="utf-8", newline="") as handle:
-        for row in csv.DictReader(handle):
-            source = row.get("source", "").casefold()
-            if source not in {"training/georgia", "georgia"}:
-                continue
-            record = Path(row["record_id"]).name
-            exposed.add(Path(record).stem.casefold())
-    return exposed
+def _public_exposed_rhythm_records(
+    repo: Path, config: dict[str, Any]
+) -> tuple[dict[str, set[str]], dict[str, Any]]:
+    policy = config["data_policy"]["prior_v45_public_rhythm_evaluation_records"]
+    exposed: dict[str, set[str]] = defaultdict(set)
+    manifest_keys: dict[str, dict[str, set[str]]] = {}
+    manifest_rows: dict[str, int] = {}
+    manifest_hashes: dict[str, str] = {}
+    for item in policy["manifests"]:
+        path = repo / item["path"]
+        if not path.is_file() or _sha256(path) != item["sha256"]:
+            raise ValueError("pinned prior V4.5 evaluation manifest is missing or has a hash mismatch")
+        manifest_keys[item["path"]] = defaultdict(set)
+        manifest_rows[item["path"]] = 0
+        manifest_hashes[item["path"]] = item["sha256"]
+        with path.open(encoding="utf-8", newline="") as handle:
+            for row in csv.DictReader(handle):
+                manifest_rows[item["path"]] += 1
+                source = PUBLIC_RHYTHM_SOURCE_ALIASES.get(row.get("source", "").casefold())
+                if source is None:
+                    continue
+                for field in ("record_id", "record_base"):
+                    value = row.get(field, "")
+                    if value:
+                        record_name = Path(value).stem.casefold()
+                        exposed[source].add(record_name)
+                        manifest_keys[item["path"]][source].add(record_name)
+    p8_path = "data/manifests/external_dev/rhythm_primary8_records.csv"
+    p6_path = "data/manifests/external_dev/rhythm_primary6_diagnostic_records.csv"
+    sources = sorted(set(exposed) | {
+        source for records in manifest_keys.values() for source in records
+    })
+    receipt = {
+        "manifests": [
+            {
+                "path": path,
+                "sha256": manifest_hashes[path],
+                "rows": manifest_rows[path],
+                "matched_unique_records_by_source": {
+                    source: len(records) for source, records in sorted(manifest_keys[path].items())
+                },
+            }
+            for path in sorted(manifest_keys)
+        ],
+        "p6_p8_overlap_unique_records_by_source": {
+            source: len(
+                manifest_keys.get(p6_path, {}).get(source, set())
+                & manifest_keys.get(p8_path, {}).get(source, set())
+            )
+            for source in sources
+        },
+        "union_unique_records_by_source": {
+            source: len(
+                manifest_keys.get(p6_path, {}).get(source, set())
+                | manifest_keys.get(p8_path, {}).get(source, set())
+            )
+            for source in sources
+        },
+        "matching_policy": "source alias plus case-folded record basename; IDs are not emitted",
+    }
+    return dict(exposed), receipt
 
 
 def _challenge_records(
     data_root: Path, config: dict[str, Any], repo: Path, *, wfdb_module
-) -> list[dict[str, Any]]:
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     raw = data_root / "00_FUENTES_FISICAS_RAW"
-    exposed_georgia = _public_exposed_georgia(repo)
+    exposed_records, prior_eval_receipt = _public_exposed_rhythm_records(repo, config)
     rows: list[dict[str, Any]] = []
     for source in RHYTHM_ROOTS:
         source_root = raw / source
         if not source_root.is_dir() or source_root.is_symlink():
             raise ValueError(f"required authorized source is missing or a symlink: {source}")
-        for header in sorted(source_root.rglob("*.hea"), key=lambda item: item.as_posix().casefold()):
+        for header in source_root.rglob("*.hea"):
             relative = _safe_relative(header, source_root)
             signal = header.with_suffix(".mat")
             if not signal.exists():
@@ -135,7 +191,6 @@ def _challenge_records(
             dx = _read_dx(header)
             if not dx:
                 continue
-            signal_spec = _header_summary(header, wfdb_module)
             classes = RHYTHM_CLASSES_P8
             supported = tuple(name for name in classes if name in RHYTHM_SUPPORT[source])
             targets, mask = rhythm_targets(dx, classes, supported_classes=supported)
@@ -150,8 +205,16 @@ def _challenge_records(
                 )
             elif source == "georgia":
                 split = "source_holdout"
-                if record_name in exposed_georgia:
-                    reason = "previous_public_v45_evaluation_record"
+            if record_name in exposed_records.get(source, set()):
+                reason = "previous_public_v45_evaluation_record"
+            try:
+                signal_spec = _header_summary(header, wfdb_module)
+            except (OSError, TypeError, ValueError) as exc:
+                signal_spec = {}
+                reason = reason or "invalid_wfdb_header"
+                header_parse_error = type(exc).__name__
+            else:
+                header_parse_error = None
             row = {
                 "task": "rhythm",
                 "source": source,
@@ -166,8 +229,11 @@ def _challenge_records(
                 "classes": list(classes),
                 **signal_spec,
             }
+            if header_parse_error is not None:
+                row["header_parse_error_type"] = header_parse_error
             rows.append(row)
-    return rows
+    rows.sort(key=lambda row: (SOURCE_PRIORITY[row["source"]], row["relative_record"].casefold()))
+    return rows, prior_eval_receipt
 
 
 def _ptbxl_records(
@@ -212,7 +278,14 @@ def _ptbxl_records(
             if not header.is_file() or not signal.is_file() or header.is_symlink() or signal.is_symlink():
                 continue
             waveform_count_by_fold[fold] += 1
-            signal_spec = _header_summary(header, wfdb_module)
+            try:
+                signal_spec = _header_summary(header, wfdb_module)
+                header_parse_error = None
+                excluded_reason = None
+            except (OSError, TypeError, ValueError) as exc:
+                signal_spec = {}
+                header_parse_error = type(exc).__name__
+                excluded_reason = "invalid_wfdb_header"
             scp_codes = _read_scp_codes(row["scp_codes"])
             targets, mask = ptbxl_p4_targets(scp_codes)
             if fold <= 7:
@@ -235,12 +308,14 @@ def _ptbxl_records(
                 "fold": fold,
                 "signal_sha256": _sha256(signal),
                 "split": split,
-                "excluded_reason": None,
+                "excluded_reason": excluded_reason,
                 "targets": targets.astype(int).tolist(),
                 "mask": mask.astype(int).tolist(),
                 "classes": list(P4_CLASSES),
                 **signal_spec,
             })
+            if header_parse_error is not None:
+                result[-1]["header_parse_error_type"] = header_parse_error
     if any(len(folds) > 1 for folds in patients_by_fold.values()):
         raise ValueError("PTB-XL patient appears in multiple official folds 1..9")
     return result, {
@@ -254,6 +329,19 @@ def _ptbxl_records(
 
 
 def _deduplicate(rows: list[dict[str, Any]]) -> None:
+    public_evaluation_hashes = {
+        row["signal_sha256"]
+        for row in rows
+        if row["excluded_reason"] == "previous_public_v45_evaluation_record"
+    }
+    for row in rows:
+        if (
+            row["task"] == "rhythm"
+            and row["excluded_reason"] is None
+            and row["signal_sha256"] in public_evaluation_hashes
+        ):
+            row["excluded_reason"] = "byte_identical_previous_public_v45_evaluation_waveform"
+
     groups: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
     for row in rows:
         if not row["excluded_reason"]:
@@ -405,7 +493,7 @@ def run_audit(data_root: Path, output_dir: Path, repo: Path) -> dict[str, Any]:
 
     output_dir.mkdir(parents=True, exist_ok=True, mode=0o700)
     os.chmod(output_dir, 0o700)
-    rows = _challenge_records(data_root, config, repo, wfdb_module=wfdb)
+    rows, prior_eval_receipt = _challenge_records(data_root, config, repo, wfdb_module=wfdb)
     pathology, ptbxl_receipt = _ptbxl_records(data_root, config, wfdb_module=wfdb)
     rows.extend(pathology)
     _deduplicate(rows)
@@ -424,6 +512,7 @@ def run_audit(data_root: Path, output_dir: Path, repo: Path) -> dict[str, Any]:
         "record_level_ids_or_hashes_in_public_receipt": False,
         "data_cache_paths_in_public_receipt": False,
         "ptbxl": ptbxl_receipt,
+        "prior_v45_rhythm_evaluation_manifest_audit": prior_eval_receipt,
         "aggregates": aggregate,
         "waveform_qc_initial_window": waveform_qc,
         "duplicate_policy": "raw signal file SHA-256; exact-byte duplicates excluded before splitting; near-duplicate detection not claimed",

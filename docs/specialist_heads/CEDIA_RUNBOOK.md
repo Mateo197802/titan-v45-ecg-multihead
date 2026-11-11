@@ -1,6 +1,6 @@
 # CEDIA Runbook: Frozen-Backbone Specialist Stage A
 
-This runbook executes the already frozen `specialist-heads-20261111-v1` study. It does not modify historical weights, thresholds, or prediction files. Do not submit the GPU jobs until the CPU preflight has been inspected and its split/label support is adequate.
+This runbook executes `specialist-heads-20261111-v2`, frozen before any new performance metric. V1 preflight jobs 33021 and 33026 failed before writing an inventory, extracting features, or training; V1 is superseded by [protocol amendment 01](PROTOCOL_AMENDMENT_20261111_01.md). No V1 results are carried forward. Historical weights, thresholds, and predictions remain unchanged. Do not submit GPU jobs until the V2 CPU preflight has been inspected and its split/label support is adequate.
 
 ## Isolation and resources
 
@@ -13,10 +13,10 @@ The CPU preflight requests `cpu-dev`, 4 CPUs, 24 GB RAM, and up to 12 hours. Fea
 Set these values in a shell on the authorized CEDIA login node, after cloning the exact pushed branch commit into a new, clean experiment checkout:
 
 ```bash
-REPO="$HOME/Mateo Gavilanes/specialist-heads-20261111-v1/repo"
+REPO="$HOME/Mateo Gavilanes/specialist-heads-20261111-v2/repo"
 DATA_ROOT="$HOME/Mateo Gavilanes/titan_v45_data_cache"
 DEPS_TAR="$HOME/Mateo Gavilanes/life-4620846-revision-20261028/python_deps.tar"
-EXPERIMENT_ROOT="$HOME/Mateo Gavilanes/specialist-heads-20261111-v1"
+EXPERIMENT_ROOT="$HOME/Mateo Gavilanes/specialist-heads-20261111-v2"
 mkdir -p "$EXPERIMENT_ROOT/logs"
 chmod 700 "$EXPERIMENT_ROOT" "$EXPERIMENT_ROOT/logs"
 umask 077
@@ -47,6 +47,8 @@ Submit each stage only after the prior job completed successfully and its receip
 
 - The head-only candidates are new experiments on frozen released backbones, not recovered historical training.
 - Chapman validation selects epochs; Chapman calibration selects new candidate thresholds. Georgia and CPSC source-held-out results do not tune the candidate.
+- Every record in either pinned public V4.5 P6/P8 evaluation manifest is excluded from all new rhythm training, validation, calibration, and source-holdout splits. Exact-byte copies of those known evaluation waveforms are excluded too; manifest hashes are checked before inventory creation.
+- Records whose header WFDB cannot parse are retained in the private inventory as explicitly excluded with `invalid_wfdb_header`; sampling metadata is never guessed or repaired. Their counts reduce reported class support.
 - PTB-XL folds 1-7 train, fold 8 selects epoch, and fold 9 is patient-hash split into calibration/internal evaluation. Fold 10 is never read.
 - CPSC patient identifiers are unavailable and Georgia patient identifiers are not supplied. Rhythm intervals on those sources are record-clustered, not patient-clustered.
 - Exact raw-file SHA-256 duplicates are excluded. Near-duplicate signals are not ruled out.

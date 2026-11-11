@@ -1,7 +1,8 @@
 {
-  "schema": "TITAN_SPECIALIST_TRAINING_PLAN_V1",
-  "study_id": "specialist-heads-20261111-v1",
-  "protocol_file": "configs/specialist_heads/study_20261111_v1.json",
+  "schema": "TITAN_SPECIALIST_TRAINING_PLAN_V2",
+  "study_id": "specialist-heads-20261111-v2",
+  "protocol_file": "configs/specialist_heads/study_20261111_v2.json",
+  "protocol_amendment": "docs/specialist_heads/PROTOCOL_AMENDMENT_20261111_01.md",
   "baseline_audit": "docs/specialist_heads/SPECIALIST_BASELINE_AUDIT.md",
   "stage_a": {
     "status": "IMPLEMENTED_NOT_YET_EXECUTED",
@@ -27,8 +28,8 @@
     "compare_to": "immutable published weights on the same raw eligible records and endpoint masks"
   },
   "source_holdouts": {
-    "primary_rhythm": "train Chapman plus CPSC; calibration and early stopping on separate Chapman partitions; evaluate Georgia records after excluding known prior public-release records and exact signal duplicates; historical backbone exposure remains unknown",
-    "complementary_loso": "train Chapman plus eligible Georgia records; evaluate CPSC; development-domain sensitivity only",
+    "primary_rhythm": "train Chapman plus CPSC after excluding every record in the pinned public V4.5 P6/P8 evaluation manifests and exact waveform duplicates; calibrate and early-stop on separate Chapman partitions; evaluate remaining Georgia source records; historical backbone exposure remains unknown",
+    "complementary_loso": "train Chapman plus eligible Georgia records after excluding all known public V4.5 P6/P8 evaluation records and exact waveform duplicates; evaluate CPSC; development-domain sensitivity only",
     "pathology": "PTB-XL folds 1-7 train, fold 8 early stopping, patient-hash split of fold 9 for calibration/internal evaluation; fold 10 excluded"
   },
   "stage_b": {

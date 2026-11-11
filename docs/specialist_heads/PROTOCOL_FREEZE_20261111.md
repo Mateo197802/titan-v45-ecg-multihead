@@ -4,6 +4,8 @@
 **Protocol source:** [`study_20261111_v1.json`](../../configs/specialist_heads/study_20261111_v1.json)
 **Scope:** new post-hoc development experiment. It does not reproduce or replace historical V4.5 training, checkpoints, thresholds, or reported metrics.
 
+**Status:** Superseded before any feature extraction or performance evaluation. The V1 preflight attempts failed before creating an inventory or receipt. See [protocol amendment 01](PROTOCOL_AMENDMENT_20261111_01.md) and use V2 only.
+
 ## Models
 
 The five published V3F/V3AG backbone and specialist assets are read-only baselines. Only new class-wise specialist heads may be optimized. The V3F/V3AG feature extractors remain frozen. Primary6 is trained as a six-output head; Primary8 as an eight-output head; P4 as four independent binary outputs.
