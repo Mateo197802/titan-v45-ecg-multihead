@@ -39,7 +39,15 @@ sbatch --output="$EXPERIMENT_ROOT/logs/assets-%j.out" \
   "$REPO/scripts/cedia/specialist_fetch_assets.sbatch" "$REPO" "$ASSET_ROOT"
 ```
 
-Before using the GPU, compare all five cache files' sizes and SHA-256 values with `release-manifest.json`. Feature extraction and training then use:
+Before using the GPU, compare all five cache files' sizes and SHA-256 values with `release-manifest.json`, then run the CPU-only restricted-load smoke test:
+
+```bash
+sbatch --output="$EXPERIMENT_ROOT/logs/asset-smoke-%j.out" \
+  "$REPO/scripts/cedia/specialist_verify_assets.sbatch" \
+  "$REPO" "$ASSET_ROOT" "$EXPERIMENT_ROOT/checks/release-weight-smoke.json"
+```
+
+Proceed only if all five weights pass `torch.load(weights_only=True)`. The smoke test does not instantiate the models or score any ECG. Feature extraction and training then use:
 
 ```bash
 sbatch --output="$EXPERIMENT_ROOT/logs/features-%j.out" \
