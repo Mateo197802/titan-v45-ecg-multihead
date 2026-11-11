@@ -66,7 +66,8 @@ def test_canonical_index_and_graph_keep_cedia_claims_bounded() -> None:
     assert index["pull_requests"]["pr3"]["head"] == graph["pr3_head_audited"]
     assert graph["pr4_head_audited"] == index["pull_requests"]["pr4"]["head"]
     assert graph["pr5_used"] is False
-    assert graph["pr4_modified"] is False
+    assert graph["pr4_modified"] is True
+    assert graph["pr4_modified_before_rev3_rev6_integration"] is False
     assert graph["pr5_modified"] is False
     assert {
         "CEDIA-ASSERT-PLAN-LINEAGE",

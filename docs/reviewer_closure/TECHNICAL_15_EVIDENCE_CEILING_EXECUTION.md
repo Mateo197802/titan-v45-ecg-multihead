@@ -1,6 +1,6 @@
 # Technical Closure Execution: 15 Reviewer Items
 
-**As of:** 2026-11-10<br>
+**As of:** 2026-11-11<br>
 **Baseline:** PR #3 branch at `0a32a57a32b50c421fc05323454507dba4265bb0`<br>
 **Manuscript:** `SIN_EDITAR`. No submission PDF, response letter, historical checkpoint, prediction table or threshold was modified.
 
@@ -10,11 +10,13 @@ The execution baseline is commit `0a32a57`. The matrix bytes used for the record
 
 **Recovery round 2:** the 2026-11-10 directed package has been validated and reconciled in [`NEW_RECOVERY_EVIDENCE_INTEGRATION.md`](NEW_RECOVERY_EVIDENCE_INTEGRATION.md). It adds authenticated source bytes for S4/S5/U plans and bounded SLURM metadata, but does not complete an original reviewer subrequirement. The 15-item update and its explicit coverage rubric are in [`REVIEWER_15_EVIDENCE_UPDATE.md`](REVIEWER_15_EVIDENCE_UPDATE.md); the source/job/checkpoint graph is in [`HISTORICAL_PROVENANCE_GRAPH.md`](HISTORICAL_PROVENANCE_GRAPH.md). Technical and reviewer-satisfaction states remain unchanged.
 
-**CEDIA REV2 follow-up:** the newer CEDIA export is reconciled in [`HISTORICAL_RECOVERY_CANONICAL_INDEX.md`](HISTORICAL_RECOVERY_CANONICAL_INDEX.md) and [`REVIEWER_15_CEDIA_REV2_ADDENDUM.md`](REVIEWER_15_CEDIA_REV2_ADDENDUM.md). It adds reported job/AF summaries and bounded cache-key checks, not original policy/ledger bytes, job-consumed manifests or independent patient/signal certification. The 15 technical item states, satisfaction labels and coverage values remain unchanged; the current matrix SHA-256 is pinned in the JSON execution record.
+**CEDIA REV2 follow-up:** the newer CEDIA export is reconciled in [`HISTORICAL_RECOVERY_CANONICAL_INDEX.md`](HISTORICAL_RECOVERY_CANONICAL_INDEX.md) and [`REVIEWER_15_CEDIA_REV2_ADDENDUM.md`](REVIEWER_15_CEDIA_REV2_ADDENDUM.md). It adds reported job/AF summaries and bounded cache-key checks, not original policy/ledger bytes, job-consumed manifests or independent patient/signal certification. Its item states and coverage values are preserved as the previous-round record.
+
+**CEDIA REV3-REV6 integration (2026-11-11):** all four cumulative packages passed the supplied-byte audit. The [recovery report](CEDIA_FINAL_RECOVERY_REPORT.md), [audit receipt](receipts/CEDIA_REV3_REV6_PACKAGE_AUDIT_2026-11-11.json), and [source-copy authentication table](CEDIA_SOURCE_CODE_AUTHENTICATION.md) record hashes and boundaries. Zero new original V4.5 artifacts are newly linked to both a producing job and released checkpoint. Static source evidence adds 0.5 credit to one subrequirement each for R2-3c and R2-3d; reviewer-satisfaction labels and overall item statuses do not change. Coverage is now 19.5/40 = 48.75% (+2.5 pp). R2-3f's possible P4 512/192 report-writer mismatch is not job-linked and does not explain P6/P8; it earns no added credit. No change to the manuscript, historical metrics, weights or thresholds was made.
 
 ## Result
 
-No targeted reviewer-satisfaction label changed: 12 items remain `PARTIALLY_ADDRESSED`, and R2-general, R2-3d and R2-4k remain `NOT_SATISFIED`. The new checks verify several bounded subrequirements, but do not turn selected development results into independent validation, recover missing historical lineage, or satisfy a missing experiment. No percentages are used as proxies for scientific completion.
+No targeted reviewer-satisfaction label changed: 12 items remain `PARTIALLY_ADDRESSED`, and R2-general, R2-3d and R2-4k remain `NOT_SATISFIED`. The new checks verify two static-source subrequirements, but do not turn selected development results into independent validation, recover missing historical lineage, or satisfy a missing experiment. Coverage is a count of rubric subrequirements, not a proxy for scientific completion.
 
 | ID | Bounded evidence now verified or retained | What remains open |
 | --- | --- | --- |
@@ -140,3 +142,9 @@ Commands, artifact hashes, output hashes and limits are recorded in [reproducibi
 No human decision is required to interpret the software checks above. Custodian evidence is needed only if an exact missing historical artifact or rights record is claimed to exist. Authors must approve scientific scope, attribution/rights, the manuscript changes and any new protocol; an editor's acceptance cannot be inferred. A truly independent validation, all-class `Other` assessment, beat-labeled PVC study or quarantine-effectiveness study must be performed as a separately declared experiment if those claims are retained.
 
 The [checkpoint-manifest-job edge audit](CHECKPOINT_MANIFEST_JOB_EDGE_VERIFICATION.md), [cohort independence audit](GENERALIZATION_AND_COHORT_INDEPENDENCE_AUDIT.md), [class and routing audit](FULL_CLASS_COVERAGE_AND_ROUTING_AUDIT.md) and [quarantine disposition](QUARANTINE_HISTORICAL_VS_PROSPECTIVE.md) contain the supporting technical detail.
+
+## CEDIA REV3–REV6 and targeted follow-up (2026-11-11)
+
+The four cumulative packages passed the bounded static validation recorded in [`CEDIA_REV3_REV6_PACKAGE_AUDIT_2026-11-11.json`](receipts/CEDIA_REV3_REV6_PACKAGE_AUDIT_2026-11-11.json). REV6 adds static source evidence for a generic 14-rhythm/7-pathology loss route, a separate P8/P4 fine-tuning route, and a possible P4-only 512/192 report-writer mismatch; none is linked to the published checkpoint-producing job. It also corroborates a `parent_checkpoint` path string, not file identity or job read/write hashes. These source findings account only for the existing +2.5 pp partial coverage increase on R2-3c/R2-3d; they do not change reviewer satisfaction.
+
+A live, read-only CEDIA filename/metadata follow-up found no matching target in the known V4.5 project root or filename-matching candidate archives/bundles under the named backup directories. The bounded receipt is [`CEDIA_TARGETED_RECOVERY_SEARCH_2026-11-11.json`](receipts/CEDIA_TARGETED_RECOVERY_SEARCH_2026-11-11.json). This adds no subrequirement points and does not establish global nonexistence. Consequently, all 15 reviewer statuses, all 40 subrequirement scores other than the prior static-code gains, and the 21 editorial-only items remain unchanged. PR #4's separate update is commit `1d556ba5a58255b1eef97221da8107a9c8d120b0`; PR #5 was not touched.

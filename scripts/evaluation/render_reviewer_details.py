@@ -67,6 +67,26 @@ def render(payload: dict, output_path: Path = DEFAULT_OUTPUT) -> str:
             )
         else:
             lines.append("")
+        rev3_rev6 = supplemental.get("rev3_rev6_addendum")
+        if rev3_rev6:
+            reviewer_ids = ", ".join(f"`{value}`" for value in rev3_rev6["reviewer_ids"])
+            audit_ids = ", ".join(f"`{value}`" for value in rev3_rev6["internal_audit_ids"])
+            lines.extend(
+                [
+                    "## Supplemental CEDIA REV3-REV6 Evidence",
+                    "",
+                    f"The package reconciliation is in {evidence_link(rev3_rev6['report'], output_path)}; "
+                    f"the receipt is {evidence_link(rev3_rev6['package_receipt'], output_path)} and "
+                    f"the coverage calculation is {evidence_link(rev3_rev6['coverage_matrix'], output_path)}.",
+                    f"- **Reviewer items covered:** {reviewer_ids}",
+                    f"- **Internal audits covered:** {audit_ids}",
+                    f"- **Disposition:** {rev3_rev6['status_changes']} status changes; "
+                    f"{rev3_rev6['coverage_percentage_point_changes']} coverage percentage-point changes; "
+                    f"manuscript edited: `{str(rev3_rev6['manuscript_edited']).lower()}`.",
+                    f"- **Limit:** {rev3_rev6['meaning']}",
+                    "",
+                ]
+            )
     lines.extend(
         [
             "## Status counts",

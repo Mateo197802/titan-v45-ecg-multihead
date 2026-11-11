@@ -104,8 +104,9 @@ def test_execution_register_covers_the_15_technical_reviewer_items_without_relab
         item for item in rows_by_id["R2-3f"]["technical_subrequirement_coverage"]
         if item["requirement"] == "Specialist hidden-width metadata"
     )
-    assert width_finding["status"] == "CHECKPOINT_METADATA_MISMATCH_RECORDED"
+    assert width_finding["status"] == "STATIC_SOURCE_MISMATCH_MECHANISM_VERIFIED_NOT_JOB_LINKED"
     assert "192" in width_finding["boundary"] and "512" in width_finding["boundary"]
+    assert "not linked" in width_finding["boundary"].lower()
 
     audits = report["project_audit_snapshot"]
     assert len(audits) == 12

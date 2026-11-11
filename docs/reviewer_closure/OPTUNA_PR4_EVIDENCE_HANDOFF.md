@@ -1,6 +1,6 @@
 # Recovery Evidence Handoff to PR #4
 
-As of 2026-11-10. This memo transfers only relevant outcomes of the directed recovery packages and CEDIA REV2 export to the independent A10/Optuna workstream. PR #4 remains the governing branch; no PR #4 files were changed by this integration.
+Updated 2026-11-11. This memo transfers only relevant outcomes of the directed recovery packages and CEDIA REV2/REV6 exports to the independent A10/Optuna workstream. PR #4 remains the governing branch; this PR #3 checkout did not edit its files. The isolated PR #4 documentation update is recorded below.
 
 ## New observations
 
@@ -23,4 +23,10 @@ The existing A10 correction and existing bounded Optuna evidence remain unchange
 
 If new custodian evidence later becomes available, it should include the original DB and a consistent same-time WAL/SHM/journal set for each generation, file sizes and SHA-256 computed by the custodian, trial states/objectives/parameters, associated logs/configuration, and evidence linking any selected trial to the exact checkpoint bytes. A filename or job reference alone is insufficient.
 
-Live PR #4 head at this audit: `3cfedf39a81a22c867fde04faf9b1a1dd2f60448`, open draft. See [`OPTUNA_41M_NEW_EVIDENCE.md`](https://github.com/Mateo197802/titan-v45-ecg-multihead/blob/codex/titan-a10-optuna-evidence/docs/reproducibility/OPTUNA_41M_NEW_EVIDENCE.md) for the prior evidence already governed there and [`HISTORICAL_PROVENANCE_GRAPH.json`](HISTORICAL_PROVENANCE_GRAPH.json) for the round-2 job receipts.
+PR #4 was at `3cfedf39a81a22c867fde04faf9b1a1dd2f60448` when this update began. The separate documentation-only update is commit `1d556ba5a58255b1eef97221da8107a9c8d120b0`; PR #4 remains open and draft, with no merge, and GitHub CI passes 3/3 for Python 3.10/3.11/3.12. See [`OPTUNA_41M_NEW_EVIDENCE.md`](https://github.com/Mateo197802/titan-v45-ecg-multihead/blob/codex/titan-a10-optuna-evidence/docs/reproducibility/OPTUNA_41M_NEW_EVIDENCE.md) and [`HISTORICAL_PROVENANCE_GRAPH.json`](HISTORICAL_PROVENANCE_GRAPH.json) for the separate evidence and lineage status.
+
+## REV6 source-copy handoff
+
+The REV6 package adds a static copy of `TRAINING/optuna_search_hpc.py` (63,398 bytes, SHA-256 `dbfeea1d46f93f23297a74194ecd9e06d72e78f8163bdaab8db9767c2de0715c`). Its base objective is `0.60 × macro-F1 Primary-8 + 0.40 × macro-F1 Pathology-4`, with optional modifiers and missing-class penalties documented in [the source analysis](OPTUNA_HISTORICAL_OBJECTIVE_AND_LINEAGE.md). The export receipt matches the copied member bytes; this does not prove the original CEDIA bytes were independently rehashed or that any May job consumed this source.
+
+This is a distinct objective implementation from the 0.45/0.35/0.10/0.10 formula in the PR #4 log-derived receipt. The two observations are preserved as different source versions with unresolved job attribution; do not merge formulas, studies, trial rows or database generations. A corresponding note is added to PR #4 in its own commit. The SQLite databases, sidecars, full trial history and trial-to-checkpoint links remain unrecovered.

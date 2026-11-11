@@ -31,3 +31,9 @@ There is no authenticated P6/P8 training source, serialization record or checkpo
 The physical release checkpoints and static dimensions are now verified. To resolve the historical cause, an authorized source must still supply the original training launcher/configuration, the exact job output hashes and the serialization code that wrote `rhythm_hidden_dim`. Compare those sources with the checkpoint bytes; do not rewrite checkpoint metadata or change the released files. Record the discrepancy even if the authentic cause remains unknown.
 
 **Conclusion:** The tensor-width evidence supports 512 as the width used by the retained replay for those release checkpoints. The discrepancy's historical cause remains unresolved, so the required classification is `CAUSA_HISTÓRICA_NO_RECUPERADA`, not “metadata obsolete” or “explained.”
+
+## REV6 source-code comparison
+
+The newly delivered static copy of `TRAINING/train_v3d_specialists_hpc.py` has SHA-256 `8e8d59889a0458c47a90f9735ff6ba017c7e1a79582d11529a608e1816e671fe` (147,362 bytes). It contains a classwise pathology constructor that selects hidden width 512, and an epoch-checkpoint report writer in a separate training branch that hardcodes `hidden_dim=192` when classwise pathology heads are enabled. Another P4-only epoch writer records the validation width, defaulting to 512 for classwise heads.
+
+This is a concrete **possible metadata-writing mismatch** in the recovered source copy. It does not identify the code path or checkpoint that was executed, does not explain the P6/P8 `rhythm_hidden_dim=192` field, and does not establish a mismatch in the final released P4 metadata. No job-read digest, serialization log, or output hash links this source to the release checkpoints. The evidence therefore narrows a plausible mechanism but does not resolve the historical root cause or change the classification above.

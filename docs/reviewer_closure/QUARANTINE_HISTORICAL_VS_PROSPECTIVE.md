@@ -33,6 +33,12 @@ The examined source ceiling is documented in [source triage](EVIDENCE_SOURCE_TRI
 
 A separate legacy V4 May diagnostic has now been recomputed from its aggregate confusion matrix and error-subset routing totals. See [V4 May legacy quarantine disposition](V4_LEGACY_QUARANTINE_DISPOSITION.md) and its sanitized [recomputation receipt](receipts/LEGACY_V4_QUARANTINE_RECOMPUTATION_2026-11-10.json). It verifies only the 672-record Primary-9 aggregate and routing of 211 errors; it does not change the V4.5 June `NOT_ASSESSED` disposition above.
 
+## REV3–REV6 update
+
+The latest CEDIA-exclusive export adds corroborating summaries for Plan AE/AF, not the missing source bytes. Two AF stdout summaries report the same AE policy and manifest hashes, 23 handoff rows, and `valid_for_gate=0`. The policy and manifest bytes were not available to recalculate those hashes; the 23 rows are not a complete eligible population, and neither the denominator, checkpoint identity, nor per-ECG pre/post outcomes is established. The submission records also do not establish an `afterok` dependency across the W/Z/AC/AD/AE/AF jobs.
+
+Accordingly, REV3–REV6 does not change the V4.5 June quarantine state: **`NOT_ASSESSED`**. Do not calculate a rate from 23 handoff rows or from profile-specific AF row counts. The [CEDIA recovery report](CEDIA_FINAL_RECOVERY_REPORT.md) and [provenance graph](HISTORICAL_PROVENANCE_GRAPH.md) summarize the bounded Plan AE/AF evidence and its unresolved inputs.
+
 ## Prospective workflow needed if the claim is retained
 
 Freeze the design before evaluating any held-out outcomes:

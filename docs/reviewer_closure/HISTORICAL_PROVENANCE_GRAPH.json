@@ -1,11 +1,16 @@
 {
   "schema": "TITAN_V45_HISTORICAL_PROVENANCE_GRAPH_V1",
-  "as_of": "2026-11-10",
+  "as_of": "2026-11-11",
   "repository": "Mateo197802/titan-v45-ecg-multihead",
-  "pr3_head_audited": "307ddaf3e3d840a624009d10f53923db307a500c",
-  "pr4_head_audited": "3cfedf39a81a22c867fde04faf9b1a1dd2f60448",
+  "pr3_head_audited": "52ae5743f33419e3d045d4e0c9ab58d93607e90a",
+  "pr3_head_at_integration_start": "52ae5743f33419e3d045d4e0c9ab58d93607e90a",
+  "pr4_head_audited": "1d556ba5a58255b1eef97221da8107a9c8d120b0",
+  "pr4_head_at_integration_start": "3cfedf39a81a22c867fde04faf9b1a1dd2f60448",
+  "pr4_head_after_evidence_update": "1d556ba5a58255b1eef97221da8107a9c8d120b0",
+  "pr4_ci_after_evidence_update": {"state":"PASS","checks":3,"matrix":["3.10","3.11","3.12"]},
   "pr5_used": false,
-  "pr4_modified": false,
+  "pr4_modified": true,
+  "pr4_modified_before_rev3_rev6_integration": false,
   "pr5_modified": false,
   "recovery_bundle": {
     "id": "BUNDLE-ROUND2",
@@ -24,7 +29,11 @@
     {"id":"PKG-DIRECTED2-20261110","sha256":"d1d77535d2b1995fc8a1ba5e3b47cf9c63703cd29d4ef63334e5402fe731e82f","members":38,"inventory_rows":36,"checksum_entries":37,"integrity":"PASS","prior_evidence":true},
     {"id":"PKG-CEDIA-OUTER-20261110","sha256":"4e7b9dcfbecf90a0427a60972a03020aaeb5a5e7e279ae0b826aa47cc252298b","members":2,"integrity":"PASS","new_export":true},
     {"id":"PKG-CEDIA-REV1-20261110","sha256":"29c66d104bc9cda5676c31add41070ed3a63cfec4d714fcaa009f222b84f2513","members":27,"inventory_rows":75,"integrity":"PASS","new_export":true},
-    {"id":"PKG-CEDIA-REV2-20261110","sha256":"e9fa64ee9c8adbc21414be1a4939a0ae4e1aa04f366d8a3b5dace686cc2a6b44","members":29,"inventory_rows":145,"integrity":"PASS","new_export":true,"source_bytes_reauthenticated":false}
+    {"id":"PKG-CEDIA-REV2-20261110","sha256":"e9fa64ee9c8adbc21414be1a4939a0ae4e1aa04f366d8a3b5dace686cc2a6b44","members":29,"inventory_rows":145,"integrity":"PASS","new_export":true,"source_bytes_reauthenticated":false},
+    {"id":"PKG-CEDIA-REV3-20261110","sha256":"1975a1bbc65a004b444676e7627349e43d9516898215a3b5ecbf242539c9c986","members":31,"inventory_rows":147,"checksum_entries":30,"integrity":"PASS","source_bytes_reauthenticated":false},
+    {"id":"PKG-CEDIA-REV4-20261110","sha256":"3a87a980c76c1602f450e1aaab720245b566aee4807c21e3f779b73c0469b77a","members":33,"inventory_rows":200,"checksum_entries":32,"integrity":"PASS","source_bytes_reauthenticated":false},
+    {"id":"PKG-CEDIA-REV5-20261110","sha256":"0e88146b007f68feba2ff643f6d98126d139f19d37fe395931bd640453005773","members":35,"inventory_rows":260,"checksum_entries":34,"integrity":"PASS","source_bytes_reauthenticated":false},
+    {"id":"PKG-CEDIA-REV6-20261110","sha256":"4bf835059dfdf40f7fd4b0c1879d94b1175efcb091f6cf9065a5e482a3ad2b11","members":48,"inventory_rows":273,"checksum_entries":47,"integrity":"PASS","source_bytes_reauthenticated":false}
   ],
   "source_archives": [
     {"id":"ARCH-S4-BASE","name":"plan_s4_binary_split_20260617.tgz","bytes":9813,"sha256":"8425019f660c6646190028dab0d4d7076225077efa34ae4aeb29e4551ed025b5","members":6},
@@ -59,7 +68,17 @@
     {"id":"SRC-22","plan":"U_ROBUST_CORE","name":"submit_plan_u_robust_core_a100.sh","packaged_bytes":2774,"source_sha256":"d405b3aeaf35803bb5b73f7d9bc00e914da91b653b89cd4504ef009fa95aac06","delivered_sha256":"37282b95f0a529fedb004ea6c28657e26c6574156517d6d00e43b61ec2a670e8","copy":"SANITIZED_SOURCE_HASH_DIFFERS"},
     {"id":"SRC-23","plan":"U_ROBUST_CORE","name":"submit_plan_u_decision_cpu.sh","packaged_bytes":1816,"source_sha256":"9418ccd6d795eb6e4dba977ae42c0cc8c1f0c7dfee484b091b26b0a1c9a880be","delivered_sha256":"0067c46209fe9608d9cd4a9e5987586c28c86730d78230f75fb25ac5931782c4","copy":"SANITIZED_SOURCE_HASH_DIFFERS"},
     {"id":"SRC-24","plan":"U_ROBUST_CORE","name":"test_plan_u_robust_core.py","packaged_bytes":4389,"source_sha256":"a11fc84ec7ab26c178b5285963c7dd8f8d1d09934a1e73aa7b3a6843e139c88e","delivered_sha256":"a11fc84ec7ab26c178b5285963c7dd8f8d1d09934a1e73aa7b3a6843e139c88e","copy":"BYTE_IDENTICAL_TO_RECEIPT"},
-    {"id":"SRC-25","plan":"U_ROBUST_CORE","name":"lanzar_plan_u_robust_core_20260618.sh","packaged_bytes":2914,"source_sha256":"6222e084b7417a7755b516fdb3fdaa8d3f108b2b4d9469d12b0fb164e6fbc178","delivered_sha256":"40605eaa5392a78543e61e48f3d541f41c0fdc381e6c204586386bbfba2e4d7b","copy":"SANITIZED_SOURCE_HASH_DIFFERS"}
+    {"id":"SRC-25","plan":"U_ROBUST_CORE","name":"lanzar_plan_u_robust_core_20260618.sh","packaged_bytes":2914,"source_sha256":"6222e084b7417a7755b516fdb3fdaa8d3f108b2b4d9469d12b0fb164e6fbc178","delivered_sha256":"40605eaa5392a78543e61e48f3d541f41c0fdc381e6c204586386bbfba2e4d7b","copy":"SANITIZED_SOURCE_HASH_DIFFERS"},
+    {"id":"SRC-REV6-01","plan":"V45_STATIC_SOURCE_COPY","name":"MODEL_CORE/titan_v4_hybrid.py.txt","packaged_bytes":9189,"delivered_sha256":"46bb36737a93a4cfe4be4417f6c62bcbfd0e8e7e8356f31f532ad21662075c80","copy":"DUPLICATE_OF_TRACKED_CANDIDATE","tracked_path":"scripts/cedia/recovery_candidates/backbone_20260629.py","source_bytes_reauthenticated":false,"job_link":"UNVERIFIED"},
+    {"id":"SRC-REV6-02","plan":"V45_STATIC_SOURCE_COPY","name":"TRAINING/build_v3ag_replacement_manifests.py.txt","packaged_bytes":19107,"delivered_sha256":"1c0c290dee89985243a0402d5ea8663bb94d11b7fbd658788b41f0a7faece13f","copy":"NEW_CONTENT_VS_TRACKED_PR3_TREE","source_bytes_reauthenticated":false,"job_link":"UNVERIFIED"},
+    {"id":"SRC-REV6-03","plan":"V45_STATIC_SOURCE_COPY","name":"TRAINING/calibrate_primary6_no_nsr_pac.py.txt","packaged_bytes":12760,"delivered_sha256":"caeaf533e9195cd56e52813dce5691ffb52b26abd928060b5767a17c3371cd11","copy":"NEW_CONTENT_VS_TRACKED_PR3_TREE","source_bytes_reauthenticated":false,"job_link":"UNVERIFIED"},
+    {"id":"SRC-REV6-04","plan":"V45_STATIC_SOURCE_COPY","name":"TRAINING/evaluate_external_v3c_adapted_hpc.py.txt","packaged_bytes":20937,"delivered_sha256":"c03213c02f6432172259a08910b9cc62d2f6419cd6ada7fcead61baa13587f67","copy":"NEW_CONTENT_VS_TRACKED_PR3_TREE","source_bytes_reauthenticated":false,"job_link":"UNVERIFIED"},
+    {"id":"SRC-REV6-05","plan":"V45_STATIC_SOURCE_COPY","name":"TRAINING/optuna_search_hpc.py.txt","packaged_bytes":63398,"delivered_sha256":"dbfeea1d46f93f23297a74194ecd9e06d72e78f8163bdaab8db9767c2de0715c","copy":"NEW_CONTENT_VS_TRACKED_PR3_TREE","source_bytes_reauthenticated":false,"job_link":"UNVERIFIED"},
+    {"id":"SRC-REV6-06","plan":"V45_STATIC_SOURCE_COPY","name":"TRAINING/titan_v45_multihead_contract.py.txt","packaged_bytes":23314,"delivered_sha256":"fb64ce8f57119de896812c1d6609f1431e9fad4180605f73cb77eb25adacfd53","copy":"NEW_CONTENT_VS_TRACKED_PR3_TREE","source_bytes_reauthenticated":false,"job_link":"UNVERIFIED"},
+    {"id":"SRC-REV6-07","plan":"V45_STATIC_SOURCE_COPY","name":"TRAINING/titan_v45_multihead_runtime.py.txt","packaged_bytes":22488,"delivered_sha256":"f5161ac848b9012c0d541fba49a1a061c8258cb10e32fde75341934f21c90af3","copy":"NEW_CONTENT_VS_TRACKED_PR3_TREE","source_bytes_reauthenticated":false,"job_link":"UNVERIFIED"},
+    {"id":"SRC-REV6-08","plan":"V45_STATIC_SOURCE_COPY","name":"TRAINING/train_v3d_specialists_hpc.py.txt","packaged_bytes":147362,"delivered_sha256":"8e8d59889a0458c47a90f9735ff6ba017c7e1a79582d11529a608e1816e671fe","copy":"NEW_CONTENT_VS_TRACKED_PR3_TREE","source_bytes_reauthenticated":false,"job_link":"UNVERIFIED"},
+    {"id":"SRC-REV6-09","plan":"V45_STATIC_SOURCE_COPY","name":"TRAINING/v3ag_source_cv.py.txt","packaged_bytes":3247,"delivered_sha256":"fc4d9e7f99bae13a2e4ceeb2937824dc605f4d3631518229db9df5db130a12ea","copy":"NEW_CONTENT_VS_TRACKED_PR3_TREE","source_bytes_reauthenticated":false,"job_link":"UNVERIFIED"},
+    {"id":"SRC-REV6-10","plan":"V45_STATIC_SOURCE_COPY","name":"TRAINING/v3d_gate_tools.py.txt","packaged_bytes":9062,"delivered_sha256":"818428ed31cec0cd8a40c0c822eb9b9fb7eee28afc2b08201dd94ffc7d54cec3","copy":"NEW_CONTENT_VS_TRACKED_PR3_TREE","source_bytes_reauthenticated":false,"job_link":"UNVERIFIED"}
   ],
   "job_observations": [
     {"id":"JOB-16748-16759","job_ids":"16748-16759","status":"COMPLETED","exit_code":"0:0","meaning":"12 successful SLURM jobs; not a count of completed Optuna trials","submit_lines_have_script_or_input_sha":false},
@@ -123,10 +142,25 @@
     {"from":"JOB-15874-15905","to":"PLAN-AE-POLICY","status":"SUPPORTED_NOT_CRYPTO_LINKED","basis":"reported submit/input metadata; policy bytes and read digest absent"},
     {"from":"JOB-15874-15905","to":"PLAN-AE-MANIFEST","status":"SUPPORTED_NOT_CRYPTO_LINKED","basis":"reported submit/input metadata; manifest bytes and read digest absent"},
     {"from":"JOB-15903-15905","to":"PLAN-AF-REPORTS","status":"REPORTED_NOT_RECOMPUTED","basis":"stdout hash/size reported by CEDIA; raw stdout and row-level outputs unavailable"},
-    {"from":"JOB-15903-15905","to":"V45-QUARANTINE","status":"NOT_LINKED","basis":"23 handoff rows and profile aggregates are not a complete eligible ECG denominator or quarantine transition ledger"},
+    {"from":"JOB-15903-15905","to":"V45-QUARANTINE","status":"NOT_LINKED","basis":"REV2/REV6 report the same 23 handoff rows; no complete eligible ECG denominator, policy bytes or quarantine transition ledger is available"},
     {"from":"MAY-CACHE-SPLIT-SUMMARY","to":"V45-SPLITS","status":"NOT_LINKED","basis":"cache-key disjointness does not establish June job-consumed manifests or patient/signal separation"},
     {"from":"PKG-COMPLETE-20261110","to":"V4-MAY-LEGACY-RECOMPUTATION","status":"RECOMPUTED_FROM_HASHED_AGGREGATES","basis":"versioned verifier recomputed counts and metrics from aggregate files whose SHA-256 values are recorded in the receipt"},
-    {"from":"V4-MAY-LEGACY-RECOMPUTATION","to":"V45-QUARANTINE","status":"WRONG_MODEL_VERSION","basis":"legacy V4 May error-subset result is not V4.5 June workflow/quarantine evidence"}
+    {"from":"V4-MAY-LEGACY-RECOMPUTATION","to":"V45-QUARANTINE","status":"WRONG_MODEL_VERSION","basis":"legacy V4 May error-subset result is not V4.5 June workflow/quarantine evidence"},
+    {"from":"PKG-CEDIA-REV6-20261110","to":"SRC-REV6-01","status":"HASH_VERIFIED_IN_PACKAGE","basis":"REV6 member bytes match its in-package export record; identical content already exists as the tracked backbone candidate"},
+    {"from":"PKG-CEDIA-REV6-20261110","to":"SRC-REV6-02","status":"HASH_VERIFIED_IN_PACKAGE","basis":"REV6 member bytes match its in-package export record; source bytes were not rehashed in CEDIA"},
+    {"from":"PKG-CEDIA-REV6-20261110","to":"SRC-REV6-03","status":"HASH_VERIFIED_IN_PACKAGE","basis":"REV6 member bytes match its in-package export record; source bytes were not rehashed in CEDIA"},
+    {"from":"PKG-CEDIA-REV6-20261110","to":"SRC-REV6-04","status":"HASH_VERIFIED_IN_PACKAGE","basis":"REV6 member bytes match its in-package export record; source bytes were not rehashed in CEDIA"},
+    {"from":"PKG-CEDIA-REV6-20261110","to":"SRC-REV6-05","status":"HASH_VERIFIED_IN_PACKAGE","basis":"REV6 member bytes match its in-package export record; source bytes were not rehashed in CEDIA"},
+    {"from":"PKG-CEDIA-REV6-20261110","to":"SRC-REV6-06","status":"HASH_VERIFIED_IN_PACKAGE","basis":"REV6 member bytes match its in-package export record; source bytes were not rehashed in CEDIA"},
+    {"from":"PKG-CEDIA-REV6-20261110","to":"SRC-REV6-07","status":"HASH_VERIFIED_IN_PACKAGE","basis":"REV6 member bytes match its in-package export record; source bytes were not rehashed in CEDIA"},
+    {"from":"PKG-CEDIA-REV6-20261110","to":"SRC-REV6-08","status":"HASH_VERIFIED_IN_PACKAGE","basis":"REV6 member bytes match its in-package export record; source bytes were not rehashed in CEDIA"},
+    {"from":"PKG-CEDIA-REV6-20261110","to":"SRC-REV6-09","status":"HASH_VERIFIED_IN_PACKAGE","basis":"REV6 member bytes match its in-package export record; source bytes were not rehashed in CEDIA"},
+    {"from":"PKG-CEDIA-REV6-20261110","to":"SRC-REV6-10","status":"HASH_VERIFIED_IN_PACKAGE","basis":"REV6 member bytes match its in-package export record; source bytes were not rehashed in CEDIA"},
+    {"from":"CKPT-V3F-RELEASE","to":"JOB-16781","status":"PATH_REFERENCE_ONLY","basis":"The parent_checkpoint string in released metadata matches the input path declared by job 16781; this does not show file-read bytes or that job 16781 produced the released file"},
+    {"from":"CKPT-V3AG-RELEASE","to":"JOB-16781","status":"PATH_REFERENCE_ONLY","basis":"The parent_checkpoint string in released metadata matches the input path declared by job 16781; this does not show file-read bytes or that job 16781 produced the released file"},
+    {"from":"SRC-REV6-05","to":"JOB-13169","status":"UNVERIFIED","basis":"Static objective source copy is not linked to the May job source/config read by the scheduler"},
+    {"from":"SRC-REV6-05","to":"JOB-13172-13181","status":"UNVERIFIED","basis":"Static objective source copy is not linked to either May study generation or effective CLI arguments"},
+    {"from":"JOB-16781","to":"CKPT-V3F-RELEASE","status":"UNVERIFIED","basis":"Path concordance does not provide output bytes/hash or promotion receipt"}
   ],
   "interpretation_guardrails": [
     "Hashes prove byte identity, not historical job consumption or source authenticity by themselves.",
@@ -134,5 +168,27 @@
     "A successful SLURM state is not proof of expected output bytes or complete scientific execution.",
     "A missing artifact in bounded paths is not proof that no institutional backup exists.",
     "No patient IDs, ECG IDs, record-level predictions, raw CEDIA paths, or raw receipts are included."
-  ]
+  ],
+  "rev3_rev6_integration": {
+    "receipt": "docs/reviewer_closure/receipts/CEDIA_REV3_REV6_PACKAGE_AUDIT_2026-11-11.json",
+    "targeted_search_receipt": "docs/reviewer_closure/receipts/CEDIA_TARGETED_RECOVERY_SEARCH_2026-11-11.json",
+    "report": "docs/reviewer_closure/CEDIA_FINAL_RECOVERY_REPORT.md",
+    "pr3_head_at_start": "52ae5743f33419e3d045d4e0c9ab58d93607e90a",
+    "pr4_head_at_start": "3cfedf39a81a22c867fde04faf9b1a1dd2f60448",
+    "adjacent_revision_comparison": {
+      "REV3_to_REV4": {"shared": 30, "same_bytes": 23, "changed": 7, "added": 2},
+      "REV4_to_REV5": {"shared": 32, "same_bytes": 26, "changed": 6, "added": 2},
+      "REV5_to_REV6": {"shared": 34, "same_bytes": 25, "changed": 9, "added": 13}
+    },
+    "rev6_git_tree_comparison": {"payload_members": 47, "tracked_files_pr3": 591, "tracked_files_pr4": 368, "byte_identical_contents_per_tree": 1, "exact_path_and_bytes_per_tree": 0, "new_contents_vs_pr3": 9, "duplicated_content_vs_pr3": 1},
+    "source_code_copies": 10,
+    "source_code_copy_hashes": "Recorded in source_members SRC-REV6-01 through SRC-REV6-10 and CEDIA_SOURCE_CODE_AUTHENTICATION.md",
+    "new_originals_linked_to_v45_jobs_and_checkpoints": 0,
+    "v3c_v3f_parent_path_concordance": "PATH_REFERENCE_ONLY; parent_checkpoint metadata text agrees with job 16781 input path; output identity remains unverified",
+    "optuna_41m": "REV6 objective source is a static copy and remains unlinked to the May jobs; PR4 preserves the distinct log-derived formula",
+    "plan_ae_af": "Repeated reported hashes and 23 handoff rows do not establish policy bytes, denominator or quarantine outcomes",
+    "targeted_cedia_search": "Read-only filename/metadata query in the known authorized V4.5 root, BACKUPS and datos_zip found no matching named target; no files or archive contents were transferred/read. This is a bounded negative result only.",
+    "pr4_head_after_update": "1d556ba5a58255b1eef97221da8107a9c8d120b0",
+    "privacy": "Only aggregate hashes and path-sanitized observations are recorded; raw packages and CEDIA paths are excluded"
+  }
 }

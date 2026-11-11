@@ -1,17 +1,18 @@
 {
   "schema": "TITAN_V45_HISTORICAL_RECOVERY_CANONICAL_INDEX_V1",
-  "as_of_local_date": "2026-11-10",
+  "as_of_local_date": "2026-11-11",
   "repository": "Mateo197802/titan-v45-ecg-multihead",
   "pull_requests": {
     "pr3": {
-      "head": "307ddaf3e3d840a624009d10f53923db307a500c",
+      "head": "52ae5743f33419e3d045d4e0c9ab58d93607e90a",
       "state": "open_draft",
       "merge_performed": false
     },
     "pr4": {
-      "head": "3cfedf39a81a22c867fde04faf9b1a1dd2f60448",
+      "head": "1d556ba5a58255b1eef97221da8107a9c8d120b0",
       "state": "open_draft",
-      "modified": false
+      "modified": true,
+      "ci": {"state":"pass","checks":3,"matrix":["3.10","3.11","3.12"]}
     },
     "pr5": {
       "head": "8dfc29d83910dee7d2caea7a6028b96d481a134a",
@@ -88,7 +89,11 @@
         "removed_in_rev2": 0,
         "interpretation": "Version expansion/update; not by itself a scientific result contradiction."
       }
-    }
+    },
+    {"id":"PKG-CEDIA-REV3-20261110","sha256":"1975a1bbc65a004b444676e7627349e43d9516898215a3b5ecbf242539c9c986","audit":"PASS","files":31,"inventory_rows":147,"checksum_entries":30,"crc_ok":true,"unsafe_members":0,"duplicate_names":0,"source_bytes_reauthenticated":false},
+    {"id":"PKG-CEDIA-REV4-20261110","sha256":"3a87a980c76c1602f450e1aaab720245b566aee4807c21e3f779b73c0469b77a","audit":"PASS","files":33,"inventory_rows":200,"checksum_entries":32,"crc_ok":true,"unsafe_members":0,"duplicate_names":0,"source_bytes_reauthenticated":false},
+    {"id":"PKG-CEDIA-REV5-20261110","sha256":"0e88146b007f68feba2ff643f6d98126d139f19d37fe395931bd640453005773","audit":"PASS","files":35,"inventory_rows":260,"checksum_entries":34,"crc_ok":true,"unsafe_members":0,"duplicate_names":0,"source_bytes_reauthenticated":false},
+    {"id":"PKG-CEDIA-REV6-20261110","sha256":"4bf835059dfdf40f7fd4b0c1879d94b1175efcb091f6cf9065a5e482a3ad2b11","audit":"PASS","files":48,"inventory_rows":273,"checksum_entries":47,"crc_ok":true,"unsafe_members":0,"duplicate_names":0,"source_bytes_reauthenticated":false,"export_rows":45,"exported_payload_hash_matches":45,"identical_copy_labels":29,"sanitized_copy_labels":16}
   ],
   "byte_comparisons": {
     "complete_recovery_against_current_pr3_git_tree": {
@@ -385,5 +390,30 @@
     "pr3_merged": false,
     "pr4_modified": false,
     "pr5_modified": false
+  },
+  "rev3_rev6_integration": {
+    "receipt": "docs/reviewer_closure/receipts/CEDIA_REV3_REV6_PACKAGE_AUDIT_2026-11-11.json",
+    "targeted_search_receipt": "docs/reviewer_closure/receipts/CEDIA_TARGETED_RECOVERY_SEARCH_2026-11-11.json",
+    "report": "docs/reviewer_closure/CEDIA_FINAL_RECOVERY_REPORT.md",
+    "pr3_head_at_start": "52ae5743f33419e3d045d4e0c9ab58d93607e90a",
+    "pr4_head_at_start": "3cfedf39a81a22c867fde04faf9b1a1dd2f60448",
+    "pr4_head_after_update": "1d556ba5a58255b1eef97221da8107a9c8d120b0",
+    "adjacent_revision_comparison": {
+      "REV3_to_REV4": {"shared": 30, "same_bytes": 23, "changed": 7, "added": 2},
+      "REV4_to_REV5": {"shared": 32, "same_bytes": 26, "changed": 6, "added": 2},
+      "REV5_to_REV6": {"shared": 34, "same_bytes": 25, "changed": 9, "added": 13}
+    },
+    "rev6_git_tree_comparison": {"payload_members": 47, "tracked_files_pr3": 591, "tracked_files_pr4": 368, "byte_identical_contents_per_tree": 1, "exact_path_and_bytes_per_tree": 0, "new_contents_vs_pr3": 9, "duplicated_content_vs_pr3": 1},
+    "source_code_copies": "Hashes, sizes, duplicate classification and job-link limits are in HISTORICAL_PROVENANCE_GRAPH.json and CEDIA_SOURCE_CODE_AUTHENTICATION.md.",
+    "new_originals_linked_to_v45_jobs_and_checkpoints": 0,
+    "v3c_v3f_parent_path_concordance": "PATH_REFERENCE_ONLY; metadata text matches job 16781 input path; job output identity remains unverified",
+    "optuna_41m": "Static 60/40 objective implementation copy remains unlinked to May jobs and separate from PR4's 45/35/10/10 log-derived observation.",
+    "plan_ae_af": "Repeated reported hashes and 23 AF handoff rows do not establish source bytes, the complete denominator, or pre/post outcomes.",
+    "targeted_cedia_search": "A direct read-only filename/metadata search over the known V4.5 root and named backup directories found no matching target names. This bounded search does not establish global absence.",
+    "coverage": {"previous_points": 18.5, "new_points": 19.5, "subrequirements": 40, "previous_pct": 46.25, "new_pct": 48.75, "delta_pp": 2.5, "reviewer_satisfaction_changes": 0},
+    "pr4_modified_in_separate_checkout": true,
+    "pr5_modified": false,
+    "manuscript_edited": false,
+    "private_package_published": false
   }
 }

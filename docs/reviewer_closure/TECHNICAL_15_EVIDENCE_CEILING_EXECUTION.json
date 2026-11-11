@@ -1,11 +1,11 @@
 {
   "schema": "TITAN_V45_TECHNICAL_15_EVIDENCE_EXECUTION_V1",
-  "as_of": "2026-11-10",
+  "as_of": "2026-11-11",
   "baseline_commit": "0a32a57a32b50c421fc05323454507dba4265bb0",
   "baseline_matrix_path": "docs/reviewer_closure/REVIEWER_48_DETAILED.json",
   "baseline_matrix_commit": "01beb7a68077a44560b037dbee9b5deace557b8d",
   "baseline_matrix_sha256": "2586de1a1212dd898a9c4201e39e6dda18b59c11e74d7369da02bb1ec2290b52",
-  "current_matrix_sha256": "b5da4a21a5bd968ccf11c005c34888592ee2e41d004e808952c87b62f9d2e9af",
+  "current_matrix_sha256": "06490890cdfe572f54c64eb2113055e5c80fbf605a3032bb8656f688922a804b",
   "matrix_evidence_addendum": {
     "source_commit": "575c5a5fa4dbcf658308c928aa7d08259fd61c9f",
     "updated_ids": ["A-06"],
@@ -21,6 +21,29 @@
     "status_changes": 0,
     "coverage_percentage_point_changes": 0,
     "note": "CEDIA REV2 adds bounded receipt/inventory evidence; item states, satisfaction and coverage remain unchanged."
+  },
+  "rev3_rev6_addendum": {
+    "audit_receipt": "docs/reviewer_closure/receipts/CEDIA_REV3_REV6_PACKAGE_AUDIT_2026-11-11.json",
+    "targeted_search_receipt": "docs/reviewer_closure/receipts/CEDIA_TARGETED_RECOVERY_SEARCH_2026-11-11.json",
+    "integration_report": "docs/reviewer_closure/CEDIA_FINAL_RECOVERY_REPORT.md",
+    "packages": [
+      {"revision": 3, "sha256": "1975a1bbc65a004b444676e7627349e43d9516898215a3b5ecbf242539c9c986", "members": 31, "inventory_rows": 147, "checksum_entries": 30},
+      {"revision": 4, "sha256": "3a87a980c76c1602f450e1aaab720245b566aee4807c21e3f779b73c0469b77a", "members": 33, "inventory_rows": 200, "checksum_entries": 32},
+      {"revision": 5, "sha256": "0e88146b007f68feba2ff643f6d98126d139f19d37fe395931bd640453005773", "members": 35, "inventory_rows": 260, "checksum_entries": 34},
+      {"revision": 6, "sha256": "4bf835059dfdf40f7fd4b0c1879d94b1175efcb091f6cf9065a5e482a3ad2b11", "members": 48, "inventory_rows": 273, "checksum_entries": 47}
+    ],
+    "updated_reviewer_ids": ["R1-1", "R1-2", "R1-4", "R2-3a", "R2-3c", "R2-3d", "R2-3f", "R2-4k"],
+    "updated_internal_audit_ids": ["A-06"],
+    "subrequirement_score_changes": {"R2-3c": {"from": "2/3", "to": "2.5/3"}, "R2-3d": {"from": "2/3", "to": "2.5/3"}},
+    "aggregate_coverage": {"previous_points": 18.5, "new_points": 19.5, "subrequirements": 40, "previous_pct": 46.25, "new_pct": 48.75, "delta_pp": 2.5},
+    "reviewer_satisfaction_changes": 0,
+    "new_v45_originals_linked_to_job_and_checkpoint": 0,
+    "targeted_cedia_search_matches": 0,
+    "targeted_cedia_search_status_or_coverage_change": false,
+    "pr3_head_at_start": "52ae5743f33419e3d045d4e0c9ab58d93607e90a",
+    "pr4_head_at_start": "3cfedf39a81a22c867fde04faf9b1a1dd2f60448",
+    "pr4_head_after_update": "1d556ba5a58255b1eef97221da8107a9c8d120b0",
+    "note": "REV6 establishes static source semantics and a metadata-path concordance, not job execution or checkpoint lineage; the bounded follow-up CEDIA filename search found no target artifact. No original V4.5 execution artifact was newly linked."
   },
   "matrix_counts": {
     "peer_review_total": 36,
@@ -42,7 +65,9 @@
     "gpu_job_launched_in_this_execution": false,
     "new_cedia_search_performed": false,
     "pr3_merged": false,
-    "pr4_or_pr5_modified": false,
+    "pr4_or_pr5_modified_in_pr3_checkout": false,
+    "pr4_modified_in_separate_checkout": true,
+    "pr5_modified": false,
     "private_zip_reingested": false,
     "private_data_or_individual_ids_in_receipts": false,
     "evidence_ceiling_note": "The 2026-11-09 source triage remains bounded to the paths, archives and backup listing it names. No global-absence claim is made."
@@ -119,13 +144,13 @@
       "baseline_reviewer_satisfaction": "PARTIALLY_ADDRESSED",
       "technical_subrequirement_coverage": [
         {"requirement": "Full-source SPH transfer denominator and compatible endpoint coverage", "status": "VERIFIED_BOUNDED", "evidence_refs": ["SPH_AGGREGATE_VALIDATION"], "boundary": "25,770 ECG from 24,666 source patients; three profiles and 14 compatible ECG-statement endpoints."},
-        {"requirement": "Historical training-source, patient and signal independence", "status": "NOT_CERTIFIED", "evidence_refs": ["docs/external_validation/sph_independence_assessment.md", "docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md"], "boundary": "The bounded retained-source signature screen found no candidates, but full V3F/V3AG lineage and historical manifests are missing."},
+        {"requirement": "Historical training-source, patient and signal independence", "status": "NOT_CERTIFIED", "evidence_refs": ["docs/external_validation/sph_independence_assessment.md", "docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md", "docs/reviewer_closure/V3C_TRIAL6_CHECKPOINT_LINEAGE.md", "docs/reviewer_closure/CEDIA_FINAL_RECOVERY_REPORT.md", "docs/reviewer_closure/receipts/CEDIA_TARGETED_RECOVERY_SEARCH_2026-11-11.json"], "boundary": "The bounded retained-source signature screen found no candidates, but full V3F/V3AG lineage and historical manifests are missing. REV6 adds only parent_checkpoint path-text concordance with job 16781, not an input-read or output-hash edge; the direct filename search found no matching targets in its named roots."},
         {"requirement": "V3H status as independent test versus model-selection evidence", "status": "DEVELOPMENT_SELECTION_EXPOSURE_SUPPORTED_WITHOUT_EXACT_17314_MANIFEST_BINDING", "evidence_refs": ["docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md", "docs/reviewer_closure/EVIDENCE_SOURCE_TRIAGE.md"], "boundary": "Jobs 17314/17315 support V3H selection use; the exact 17314 submitted script and manifest binding are absent."}
       ],
       "scientific_evidence_status": "PARTIAL_TRANSFER_EVIDENCE_NO_CERTIFIED_INDEPENDENT_CLINICAL_VALIDATION",
       "historical_provenance_status": "UNVERIFIED_BACKBONE_SOURCE_AND_P6_SWEEP_MANIFEST_EDGES",
       "editorial_status": "SIN_EDITAR",
-      "evidence_recovered_or_verified": ["SPH aggregate and protocol revalidated", "bounded cross-source signature screen and its limits documented", "V3H gate-selection evidence documented"],
+      "evidence_recovered_or_verified": ["SPH aggregate and protocol revalidated", "bounded cross-source signature screen and its limits documented", "V3H gate-selection evidence documented", "REV6 parent_checkpoint path-text concordance with job 16781 recorded only as path evidence"],
       "what_this_does_not_prove": ["complete source independence from all pretraining and fine-tuning", "clinical adjudication", "prospective performance", "deployment safety or utility"],
       "recoverability": "Historical lineage can reopen only with exact job-linked scripts, manifests, checkpoint hashes and patient/signal mappings. Independent generalization requires a separately eligible, untouched cohort if retained as a claim.",
       "remaining_action": "Keep source-transfer and independence terminology distinct; authors decide whether to run a new admissible external study after technical evidence closure.",
@@ -138,8 +163,8 @@
       "baseline_reviewer_satisfaction": "PARTIALLY_ADDRESSED",
       "technical_subrequirement_coverage": [
         {"requirement": "Full eligible denominator for the later SPH transfer", "status": "VERIFIED_BOUNDED", "evidence_refs": ["SPH_AGGREGATE_VALIDATION"], "boundary": "All 25,770 source ECG were technically scored under P6, P8 and P4; endpoint denominators are separately defined."},
-        {"requirement": "June historical parent population and exclusion reasons", "status": "NOT_RECOVERED_IN_INSPECTED_SOURCES", "evidence_refs": ["docs/reviewer_closure/R1_2_EVIDENCE_CEILING.md", "docs/reviewer_closure/RECOVERED_VS_MISSING_HISTORICAL_EVIDENCE.md"], "boundary": "Selected P6/P8/P4 manifests do not recover the preselection population."},
-        {"requirement": "Original quarantine pre/post accuracy and rate", "status": "NOT_ASSESSED", "evidence_refs": ["docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md", "docs/reviewer_closure/QUARANTINE_HISTORICAL_VS_PROSPECTIVE.md"], "boundary": "No linked historical score, policy, ledger or complete denominator; no rate is inferred."}
+        {"requirement": "June historical parent population and exclusion reasons", "status": "NOT_RECOVERED_IN_INSPECTED_SOURCES", "evidence_refs": ["docs/reviewer_closure/R1_2_EVIDENCE_CEILING.md", "docs/reviewer_closure/RECOVERED_VS_MISSING_HISTORICAL_EVIDENCE.md", "docs/reviewer_closure/receipts/CEDIA_TARGETED_RECOVERY_SEARCH_2026-11-11.json"], "boundary": "Selected P6/P8/P4 manifests do not recover the preselection population; the bounded filename search found no matching parent manifests in the named roots."},
+        {"requirement": "Original quarantine pre/post accuracy and rate", "status": "NOT_ASSESSED", "evidence_refs": ["docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md", "docs/reviewer_closure/QUARANTINE_HISTORICAL_VS_PROSPECTIVE.md", "docs/reviewer_closure/receipts/CEDIA_TARGETED_RECOVERY_SEARCH_2026-11-11.json"], "boundary": "No linked historical score, policy, ledger or complete denominator; the bounded filename search found no named policy/ledger and no rate is inferred."}
       ],
       "scientific_evidence_status": "PARTIAL_LATER_COHORT_FLOW_ONLY",
       "historical_provenance_status": "PARENT_POPULATION_EXCLUSIONS_AND_HISTORICAL_ROUTING_UNAVAILABLE_IN_CHECKED_SOURCES",
@@ -176,13 +201,13 @@
       "baseline_reviewer_satisfaction": "PARTIALLY_ADDRESSED",
       "technical_subrequirement_coverage": [
         {"requirement": "Correction of measured checkpoint hashes and sizes", "status": "VERIFIED_IN_SEPARATE_PR_4_EVIDENCE_NOT_REEXECUTED_HERE", "evidence_refs": ["https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/4", "docs/hash-correction-20261028.md", "docs/reviewer_closure/EVIDENCE_COMMITS.md"], "boundary": "Five physical model files were previously measured and documented; this PR3 pass did not modify or independently re-hash PR4 assets."},
-        {"requirement": "Original Optuna SQLite and generic prediction artifact", "status": "NOT_RECOVERED", "evidence_refs": ["docs/reviewer_closure/REVIEWER_48_DETAILED.json", "docs/reviewer_closure/HISTORICAL_RECOVERY_FINAL_EXECUTION.md", "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/4"], "boundary": "No substitute DB or hash is fabricated; PR4 remains separate."}
+        {"requirement": "Original Optuna SQLite and generic prediction artifact", "status": "NOT_RECOVERED", "evidence_refs": ["docs/reviewer_closure/REVIEWER_48_DETAILED.json", "docs/reviewer_closure/HISTORICAL_RECOVERY_FINAL_EXECUTION.md", "docs/reviewer_closure/OPTUNA_HISTORICAL_OBJECTIVE_AND_LINEAGE.md", "docs/reviewer_closure/OPTUNA_PR4_EVIDENCE_HANDOFF.md", "docs/reviewer_closure/receipts/CEDIA_TARGETED_RECOVERY_SEARCH_2026-11-11.json", "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/4"], "boundary": "No substitute DB or hash is fabricated. REV6 adds a static 60/40 source copy but not the May job version, effective arguments, SQLite bytes or a trial-to-checkpoint edge; the direct search found no matching database name in the scoped roots and PR4 remains separate."}
       ],
       "scientific_evidence_status": "ARTIFACT_HASH_CORRECTION_BOUNDED; ORIGINAL_A10_SET_NOT_FULLY_RECOVERED",
       "historical_provenance_status": "FIVE_CHECKPOINT_ARTIFACTS_VERIFIED_IN_PRIOR_RECEIPTS; OPTUNA_AND_GENERIC_PREDICTION_EDGES_MISSING",
       "editorial_status": "SIN_EDITAR",
-      "evidence_recovered_or_verified": ["existing PR4 correction and release verification route retained by reference"],
-      "what_this_does_not_prove": ["recovery of every A10-announced artifact", "Optuna trial-to-checkpoint lineage", "that PR4 is merged or accepted"],
+      "evidence_recovered_or_verified": ["existing PR4 correction and release verification route retained by reference", "REV6 static 60/40 P8/P4 objective source copy recorded separately from the May log-derived formula"],
+      "what_this_does_not_prove": ["recovery of every A10-announced artifact", "which objective source or effective arguments the May jobs used", "Optuna trial-to-checkpoint lineage", "that PR4 is merged or accepted"],
       "recoverability": "A newly authenticated backup catalog could reopen the missing database or generic prediction file. Do not substitute similarly named artifacts.",
       "remaining_action": "Keep A10/Optuna work isolated in PR4; preserve explicit unavailable rows and verify its live CI before any later merge decision.",
       "unverified_claims": ["complete original A10 package", "complete Optuna history", "trial-to-promoted-checkpoint provenance"]
@@ -231,12 +256,12 @@
       "technical_subrequirement_coverage": [
         {"requirement": "Selected evaluation denominators", "status": "VERIFIED_BOUNDED", "evidence_refs": ["RELEASE_METRICS_RECOMPUTE", "outputs/results/external_sph/sph_aggregate_32669.json"], "boundary": "P6 1,643 ECG; P8 2,193 including P6; P4 962 panel rows across 733 ECG/676 linked patients; SPH 25,770 ECG/24,666 source patients."},
         {"requirement": "Selected P4 mapping to official PTB-XL folds", "status": "VERIFIED_FOR_SELECTED_MAPPING_ONLY", "evidence_refs": ["outputs/results/revision_replay_diagnostics_20261107/p4_official_fold_coverage.json", "docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md"], "boundary": "Selected P4 mapping falls in fold 10 with no overlap against official folds 1-9; this is not proof of historical job inputs."},
-        {"requirement": "Actual historical train/validation/calibration/selection manifests linked to checkpoints", "status": "UNVERIFIED_EDGE", "evidence_refs": ["docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md", "docs/reviewer_closure/SPLIT_CALIBRATION_DISPOSITION.md"], "boundary": "Key manifests and complete patient maps are absent; no leakage finding is made, but patient isolation is not certified."}
+        {"requirement": "Actual historical train/validation/calibration/selection manifests linked to checkpoints", "status": "UNVERIFIED_EDGE", "evidence_refs": ["docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md", "docs/reviewer_closure/SPLIT_CALIBRATION_DISPOSITION.md", "docs/reviewer_closure/V3C_TRIAL6_CHECKPOINT_LINEAGE.md", "docs/reviewer_closure/CEDIA_FINAL_RECOVERY_REPORT.md", "docs/reviewer_closure/receipts/CEDIA_TARGETED_RECOVERY_SEARCH_2026-11-11.json"], "boundary": "Key manifests and complete patient maps are absent. REV6 adds only parent_checkpoint path-text concordance with job 16781, not a file-read/hash edge; the bounded search found no named V3M split manifests. No leakage finding is made, but patient isolation is not certified."}
       ],
       "scientific_evidence_status": "SELECTED_COHORT_COUNTS_VERIFIED; HISTORICAL_SPLIT_ISOLATION_NOT_CERTIFIED",
       "historical_provenance_status": "CHECKPOINT_TO_JOB_TO_EXACT_MANIFEST_AND_PATIENT_MAP_CHAIN_INCOMPLETE",
       "editorial_status": "SIN_EDITAR",
-      "evidence_recovered_or_verified": ["release cohort counts and SPH denominator rechecked", "official fold audit remains scoped to selected P4 identifiers"],
+      "evidence_recovered_or_verified": ["release cohort counts and SPH denominator rechecked", "official fold audit remains scoped to selected P4 identifiers", "REV6 parent-path string corroboration recorded without claiming job output identity"],
       "what_this_does_not_prove": ["which exact manifests jobs consumed", "complete per-class counts for each historical split", "patient or signal disjointness across all training stages"],
       "recoverability": "Potentially recoverable only from exact job-linked manifests, patient mappings and checkpoint promotion receipts in an authorized backup. NOC's checked 2026-09-04 listing is a bounded negative result.",
       "remaining_action": "Keep every missing lineage edge explicit; do not claim leakage or no leakage from fold names or selected manifests.",
@@ -250,12 +275,12 @@
       "technical_subrequirement_coverage": [
         {"requirement": "Primary/global rhythm class contract", "status": "VERIFIED_BOUNDED", "evidence_refs": ["outputs/models/heads/global_head_contracts.json", "docs/reviewer_closure/FULL_CLASS_COVERAGE_AND_ROUTING_AUDIT.md"], "boundary": "14 global outputs; P8 has eight, P6 six; six additional rhythm outputs are declared secondary scores."},
         {"requirement": "NSR interpretation and observed SPH decisions", "status": "VERIFIED_BOUNDED", "evidence_refs": ["SPH_AGGREGATE_VALIDATION"], "boundary": "NSR is normal sinus rhythm, not Other or a rare arrhythmia class; SPH P8 had 16,700 NSR top-1 outputs."},
-        {"requirement": "Historical auxiliary class supervision and performance", "status": "NOT_LINKED_TO_CHECKPOINT_RUNS", "evidence_refs": ["docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md"], "boundary": "Per-class positive/negative supports, loss masks and checkpoint-linked metrics are missing."}
+        {"requirement": "Historical auxiliary class supervision and performance", "status": "STATIC_SOURCE_SEMANTICS_VERIFIED_NOT_JOB_LINKED", "evidence_refs": ["docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md", "docs/reviewer_closure/CEDIA_SOURCE_CODE_AUTHENTICATION.md", "docs/reviewer_closure/AUXILIARY_CLASS_TRAINING_EVIDENCE.md"], "boundary": "Static source copies show a generic 14-output rhythm target/loss path and a separate V3F P8/P4 fine-tune path. No job read digest, checkpoint link, exact label supports or secondary-class metrics were recovered."}
       ],
       "scientific_evidence_status": "CONTRACT_AND_OUTPUT_COUNTS_VERIFIED; AUXILIARY_TRAINING_AND_PERFORMANCE_UNPROVEN",
       "historical_provenance_status": "RUN_SPECIFIC_AUXILIARY_LABEL_AND_LOSS_MASK_EDGES_MISSING",
       "editorial_status": "SIN_EDITAR",
-      "evidence_recovered_or_verified": ["global output order", "P6/P8 class distinction", "SPH NSR top-1 count"],
+      "evidence_recovered_or_verified": ["global output order", "P6/P8 class distinction", "SPH NSR top-1 count", "static training-path semantics in REV6 source copies"],
       "what_this_does_not_prove": ["training support for six secondary rhythm labels", "calibration or clinical performance for auxiliary scores"],
       "recoverability": "Historical supervision reopens only with exact manifests, labels/masks, configuration, logs and checkpoint linkage. New performance claims require a new evaluation.",
       "remaining_action": "Separate declared, supervised, emitted and evaluated class statuses in any later explanation.",
@@ -269,12 +294,12 @@
       "technical_subrequirement_coverage": [
         {"requirement": "Declared auxiliary pathology outputs", "status": "VERIFIED_BOUNDED", "evidence_refs": ["outputs/models/heads/global_head_contracts.json"], "boundary": "ALMI, ILMI and LAE are three of seven global pathology outputs."},
         {"requirement": "Reconstructed score emission", "status": "VERIFIED_BOUNDED", "evidence_refs": ["outputs/results/revision_20261107/pathology_waveform.json"], "boundary": "All three scores were emitted for 733 selected P4 ECG with no frozen action policy."},
-        {"requirement": "Historical supervised supports and evaluated performance", "status": "NOT_ESTABLISHED", "evidence_refs": ["docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md"], "boundary": "A candidate manifest is not linked to the released checkpoint's training run; score emission is not evidence of supervision."}
+        {"requirement": "Historical supervised supports and evaluated performance", "status": "STATIC_SOURCE_SEMANTICS_VERIFIED_NOT_JOB_LINKED", "evidence_refs": ["docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md", "docs/reviewer_closure/CEDIA_SOURCE_CODE_AUTHENTICATION.md", "docs/reviewer_closure/AUXILIARY_CLASS_TRAINING_EVIDENCE.md"], "boundary": "REV6 shows a seven-output pathology loss path with a row-level label-presence mask, not a per-class unknown mask; omitted labels enter as zero. This proves source behavior only, not effective supports, historical execution, checkpoint linkage, calibration or performance."}
       ],
       "scientific_evidence_status": "AUXILIARY_OUTPUTS_EMITTED_BUT_HISTORICAL_SUPERVISION_AND_PERFORMANCE_NOT_SATISFIED",
       "historical_provenance_status": "TRAINING_MANIFESTS_MASKS_SUPPORTS_AND_CHECKPOINT_LINKS_MISSING",
       "editorial_status": "SIN_EDITAR",
-      "evidence_recovered_or_verified": ["global contract and reconstructed emission support rechecked"],
+      "evidence_recovered_or_verified": ["global contract and reconstructed emission support rechecked", "static generic pathology-loss semantics inspected in REV6"],
       "what_this_does_not_prove": ["positive/negative examples used in training", "loss participation", "calibration", "held-out performance"],
       "recoverability": "Historical proof requires exact train/validation files, labels/masks, job records and checkpoint hashes; otherwise a new training/evaluation is required for performance claims.",
       "remaining_action": "Do not describe ALMI/ILMI/LAE as trained or validated until checkpoint-linked evidence exists.",
@@ -306,14 +331,14 @@
       "baseline_reviewer_satisfaction": "PARTIALLY_ADDRESSED",
       "technical_subrequirement_coverage": [
         {"requirement": "Candidate morphology feature implementation and hash", "status": "VERIFIED_AS_RECONSTRUCTED_CANDIDATE", "evidence_refs": ["scripts/cedia/recovery_candidates/morphology_features_v4.py", "docs/recovered-feature-contract.md"], "boundary": "Ten deterministic descriptors are identified; exact historical loader is not recovered."},
-        {"requirement": "Exact original loader identity", "status": "NOT_RECOVERED", "evidence_refs": ["docs/reviewer_closure/HISTORICAL_LOADER_IDENTITY_AND_REPLAY.md"], "boundary": "Expected loader 36,271 bytes, SHA-256 fc8d7367f9f2c108376839435021ec3172fe2757faa4a615f0ef5d39cbf1e855; none of 34 examined candidates matched."},
+        {"requirement": "Exact original loader identity", "status": "NOT_RECOVERED", "evidence_refs": ["docs/reviewer_closure/HISTORICAL_LOADER_IDENTITY_AND_REPLAY.md", "docs/reviewer_closure/receipts/CEDIA_TARGETED_RECOVERY_SEARCH_2026-11-11.json"], "boundary": "Expected loader 36,271 bytes, SHA-256 fc8d7367f9f2c108376839435021ec3172fe2757faa4a615f0ef5d39cbf1e855; none of 34 examined candidates or the latest name search matched."},
         {"requirement": "Numerical replay under frozen tolerance", "status": "STRICT_EQUIVALENCE_FAILS", "evidence_refs": ["outputs/results/revision_20261107/pathology_waveform.json", "docs/reviewer_closure/REPLAY_EQUIVALENCE_DISPOSITION.md"], "boundary": "P4 decisions agree 962/962, but max score residual 0.0006194114685058594 exceeds 1e-5; P6 has one top-1 mismatch/1,643 and P8 top-1/binary sets agree 2,193/2,193."},
-        {"requirement": "Specialist hidden-width metadata", "status": "CHECKPOINT_METADATA_MISMATCH_RECORDED", "evidence_refs": ["src/titan_v45/models/frozen_rhythm.py", "tests/evaluation/test_frozen_rhythm_contract.py", "outputs/results/revision_20261107/rhythm_waveform.json"], "boundary": "The saved reconstructed run reports declared width 192 and tensor width 512; inference code uses the stored tensor shape and strict state-dict loading. The training-time architecture is not established by this replay."}
+        {"requirement": "Specialist hidden-width metadata", "status": "STATIC_SOURCE_MISMATCH_MECHANISM_VERIFIED_NOT_JOB_LINKED", "evidence_refs": ["src/titan_v45/models/frozen_rhythm.py", "tests/evaluation/test_frozen_rhythm_contract.py", "outputs/results/revision_20261107/rhythm_waveform.json", "docs/reviewer_closure/CEDIA_SOURCE_CODE_AUTHENTICATION.md", "docs/reviewer_closure/SPECIALIST_192_512_ARCHITECTURE_RESOLUTION.md"], "boundary": "A separate P4 epoch-report source path can build 512-wide heads while writing a 192 field. It is not linked to the released P4 checkpoint and does not explain the P6/P8 runtime width discrepancy; no coverage point is added."}
       ],
       "scientific_evidence_status": "RECONSTRUCTED_FEATURE_CONTRACT_AND_DECISION_REPLAY_ONLY; STRICT_SCORE_EQUIVALENCE_NOT_MET",
       "historical_provenance_status": "EXPECTED_LOADER_HASH_ABSENT; FIGURE_TO_RUNTIME_AND_TRAINING_WIDTH_EDGES_NOT_FULLY_VERIFIED",
       "editorial_status": "SIN_EDITAR",
-      "evidence_recovered_or_verified": ["candidate morphology source hash", "recorded event extractor hash in the waveform report", "P4 tolerance failure preserved", "stale hidden-width metadata surfaced"],
+      "evidence_recovered_or_verified": ["candidate morphology source hash", "recorded event extractor hash in the waveform report", "P4 tolerance failure preserved", "stale hidden-width metadata surfaced", "a distinct unlinked P4 report-writer mismatch mechanism documented"],
       "what_this_does_not_prove": ["the candidate is the original loader", "all figure arrows match historical runtime", "strict probability equivalence", "training used the metadata-declared hidden width"],
       "recoverability": "The exact loader or a job-linked immutable source snapshot could reopen historical identity. Do not adjust tolerance or substitute a similarly named file.",
       "remaining_action": "Keep reconstruction labels and numeric residuals explicit; verify Figure 5/6 arrows against code only during the later author-approved figure phase.",
@@ -362,13 +387,13 @@
       "baseline_technical_status": "EVIDENCE_CEILING_REACHED",
       "baseline_reviewer_satisfaction": "NOT_SATISFIED",
       "technical_subrequirement_coverage": [
-        {"requirement": "Authentic historical quarantine denominator, policy and score", "status": "NOT_RECOVERED", "evidence_refs": ["docs/reviewer_closure/QUARANTINE_HISTORICAL_VS_PROSPECTIVE.md", "docs/reviewer_closure/EVIDENCE_SOURCE_TRIAGE.md"], "boundary": "No checkpoint/job-linked uncertainty score and frozen policy tied to the original inputs."},
+        {"requirement": "Authentic historical quarantine denominator, policy and score", "status": "NOT_RECOVERED", "evidence_refs": ["docs/reviewer_closure/QUARANTINE_HISTORICAL_VS_PROSPECTIVE.md", "docs/reviewer_closure/EVIDENCE_SOURCE_TRIAGE.md", "docs/reviewer_closure/CEDIA_FINAL_RECOVERY_REPORT.md", "docs/reviewer_closure/receipts/CEDIA_TARGETED_RECOVERY_SEARCH_2026-11-11.json"], "boundary": "REV6 reports two AF summaries with 23 handoff rows and repeated AE policy/manifest hashes, but original policy/manifest bytes and job-read digests are absent. The direct name search found no match in its roots. No checkpoint/job-linked uncertainty score, complete denominator, or frozen policy is verified."},
         {"requirement": "SPH quarantine rate", "status": "NOT_ASSESSED_NOT_ZERO", "evidence_refs": ["SPH_AGGREGATE_VALIDATION"], "boundary": "The aggregate records zero assessed quarantine records and a null rate; this is not a measured zero rate."}
       ],
       "scientific_evidence_status": "NOT_SATISFIED_FOR_HISTORICAL_QUARANTINE_EFFECTIVENESS",
       "historical_provenance_status": "POLICY_SCORE_LEDGER_AND_PRE_POST_REFERENCE_LINKS_ABSENT",
       "editorial_status": "SIN_EDITAR",
-      "evidence_recovered_or_verified": ["none for historical rate; all current outputs explicitly leave it unassessed"],
+      "evidence_recovered_or_verified": ["REV6 bounded AF summary corroboration recorded", "none for a historical rate; all current outputs explicitly leave it unassessed"],
       "what_this_does_not_prove": ["pre/post accuracy", "quarantine error rate", "human action", "zero quarantine"],
       "recoverability": "Only an authentic ledger, policy version, score inputs, truth labels and complete denominator can reopen the historical estimate. Otherwise this requires a new study if retained.",
       "remaining_action": "Do not infer rates from empty sets, fallback counts or selected cohort aggregates; preserve null/not-assessed status.",

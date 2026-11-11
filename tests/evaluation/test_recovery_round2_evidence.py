@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import subprocess
 from collections import Counter
 from pathlib import Path
 
@@ -14,7 +15,10 @@ def _load(name: str) -> dict:
 
 def test_round2_source_member_hashes_and_duplicate_are_explicit():
     graph = _load("HISTORICAL_PROVENANCE_GRAPH.json")
-    members = graph["source_members"]
+    members = [
+        member for member in graph["source_members"]
+        if member["id"].startswith("SRC-") and not member["id"].startswith("SRC-REV6-")
+    ]
 
     assert len(members) == 25
     assert len({member["id"] for member in members}) == 25
@@ -37,7 +41,19 @@ def test_round2_source_member_hashes_and_duplicate_are_explicit():
 
 def test_round2_reviewer_coverage_and_statuses_are_internally_consistent():
     update = _load("REVIEWER_15_EVIDENCE_UPDATE.json")
-    source = _load("TECHNICAL_15_EVIDENCE_CEILING_EXECUTION.json")
+    source = json.loads(
+        subprocess.run(
+            [
+                "git",
+                "show",
+                "52ae5743f33419e3d045d4e0c9ab58d93607e90a:docs/reviewer_closure/TECHNICAL_15_EVIDENCE_CEILING_EXECUTION.json",
+            ],
+            check=True,
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+        ).stdout
+    )
     items = update["items"]
     source_items = {item["id"]: item for item in source["reviewer_items"]}
 
