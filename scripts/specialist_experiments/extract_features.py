@@ -65,7 +65,8 @@ def _sha256(path: Path) -> str:
 
 def _git_revision(repo: Path) -> str:
     result = subprocess.run(
-        ["git", "-C", str(repo), "rev-parse", "HEAD"],
+        ["git", "rev-parse", "HEAD"],
+        cwd=repo,
         check=True, capture_output=True, text=True,
     )
     return result.stdout.strip()

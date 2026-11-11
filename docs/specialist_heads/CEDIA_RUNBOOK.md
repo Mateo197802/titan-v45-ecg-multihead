@@ -6,7 +6,7 @@ This runbook executes the already frozen `specialist-heads-20261111-v1` study. I
 
 Use a new clone of the experiment branch and an output directory outside the raw data cache. Keep `private_inventory.json`, feature caches, row-level predictions, candidate checkpoints, and training receipts under the authorized CEDIA account with mode `0700` directories and `0600` files. Only sanitized aggregate metrics may be considered for publication.
 
-The CPU preflight requests `cpu-dev`, 4 CPUs, 24 GB RAM, and up to 12 hours. Feature extraction requests one A100 40 GB, 8 CPUs, 64 GB RAM, and up to 12 hours. Stage A requests one A100 40 GB, 8 CPUs, 48 GB RAM, and up to 24 hours. The jobs use the pinned CEDIA `pytorch/2.2` module and the existing Python 3.11 dependency archive; they do not unpack dependencies into the login environment.
+The CPU preflight requests `cpu-dev`, 4 CPUs, 24 GB RAM, and up to 12 hours. Feature extraction requests one A100 40 GB, 8 CPUs, 64 GB RAM, and up to 12 hours. Stage A requests one A100 40 GB, 8 CPUs, 48 GB RAM, and up to 24 hours. The jobs use CEDIA `pytorch/2.2` and the existing Python 3.11 dependency archive; they do not unpack dependencies into the login environment. Repository-revision receipts use the system Git from inside the checkout for compatibility with the login environment.
 
 ## Submission template
 
