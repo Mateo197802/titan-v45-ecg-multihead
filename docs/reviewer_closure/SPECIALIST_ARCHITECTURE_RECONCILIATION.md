@@ -37,3 +37,7 @@ No hay clase `Other` explícita en el contrato. ALMI, ILMI y LAE existen como sa
 ## Conclusión de procedencia
 
 Quedan **verificados dentro de alcance** los hashes físicos de los cinco assets y las dimensiones descritas. No se verificó la producción histórica de los assets, los datos/etiquetas que actualizaron cada salida ni independencia por paciente. El desacuerdo `192/512` sigue siendo una inconsistencia de metadata de causa histórica desconocida; no se corrigieron los pesos ni el metadata.
+
+## Aclaracion de la segunda recuperacion
+
+El paquete dirigido 2 vuelve a referenciar, con los hashes ya registrados, el trainer `8e8d59889a0458c47a90f9735ff6ba017c7e1a79582d11529a608e1816e671fe` y el runtime `f5161ac848b9012c0d541fba49a1a061c8258cb10e32fde75341934f21c90af3`. No son nuevos bytes recuperados. El informe de la ronda distingue el default/metadata de 192, el constructor classwise explicito de 512 y una linea de reporte por epoca que corresponde a patologia; esto acota la lectura de los extractos, pero no identifica el codigo que escribio `rhythm_hidden_dim=192` en P6/P8. La causa del desacuerdo, el job productor y la supervision efectiva siguen sin probarse. No se cambia la conclusion de procedencia.

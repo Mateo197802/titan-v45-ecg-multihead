@@ -33,3 +33,7 @@ Para V4.5 no se recuperó score de incertidumbre por ECG, política congelada, u
 **Efecto sobre revisores:** este hallazgo completa solo la verificación aritmética del análisis legado dentro de su alcance. R1-2 y R2-4k siguen parcialmente abordados/no satisfechos para la solicitud V4.5. La cuarentena V4.5 de junio no se puede declarar resuelta con este resultado.
 
 El recibo saneado está en [`LEGACY_V4_QUARANTINE_RECOMPUTATION_2026-11-10.json`](receipts/LEGACY_V4_QUARANTINE_RECOMPUTATION_2026-11-10.json). La fuente agregada de confusión tiene SHA-256 `88246c9c82ae9684bae90b22ee96c168085ae11a4a1c79a328995769e41876e9`; el agregado de ruteo tiene SHA-256 `9a7d026c95e084c955321d9f8f613542201ad435c88f32d2b4ff551f0b94cf2f`. No se publica el recibo crudo que contiene rutas y referencias a identificadores.
+
+## Recibo de recuperacion dirigida 2
+
+La nueva copia contiene codigo fuente S4/U de decisiones de viabilidad y metadatos de jobs 15493/15504. La inspeccion estatica confirma que esas funciones fijan `valid_for_gate=0` y dejan la liberacion externa como accion manual; los outputs de decision esperados no estaban en las ubicaciones acotadas consultadas por el recibo. Esto no agrega evidencia de ruteo por ECG, cuarentena ni efecto pre/post. La evidencia V4 de mayo continua separada de la cuarentena V4.5 de junio, que sigue `NOT_ASSESSED`. Detalle en [`NEW_RECOVERY_EVIDENCE_INTEGRATION.md`](NEW_RECOVERY_EVIDENCE_INTEGRATION.md).

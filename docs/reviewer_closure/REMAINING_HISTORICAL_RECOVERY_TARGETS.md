@@ -29,3 +29,9 @@ Este registro distingue archivos no recuperados de archivos no presentes en una 
 ## Límite de búsqueda y solicitud mínima
 
 No se concluye que los archivos jamás existieron ni que se borraron intencionalmente. Para reabrir la recuperación bastaría con que el custodio autorizado entregue **un catálogo** con la ruta/fecha/tamaño y hash de una copia pertinente, o un recibo de job con el digest de entrada/salida. No se solicita transferencia de señales o filas individuales. Si no existe otro snapshot, ese hecho debe confirmarlo el custodio; una nota editorial no sustituye los experimentos o splits ausentes.
+
+## Addendum: recuperacion dirigida 2
+
+La ronda 2 autentica seis paquetes de codigo S4/S5/U y agrega estados SLURM/SubmitLine, pero no recupera la base Optuna, los manifiestos job-consumed, el loader exacto, los checkpoints intermedios ni el ledger de cuarentena V4.5. Jobs 15493/15504 completaron, pero sus outputs esperados faltan en los paths acotados; 16768/16781 completaron, pero no hay digests de entrada/salida ni artefactos intermedios. Por tanto, las aristas siguen `SUPPORTED_NOT_CRYPTO_LINKED` o `UNVERIFIED`, segun el caso; no se confirma la independencia de pacientes.
+
+El recibo reporta ademas que la consulta de metadatos de Windows ShadowCopy fallo. Ese fallo no demuestra que no exista un snapshot. La solicitud al custodio de esta ronda es un borrador no enviado. Ver [`REMAINING_CRITICAL_ARTIFACTS.md`](REMAINING_CRITICAL_ARTIFACTS.md) para el catalogo minimo de artefactos capaces de cambiar el dictamen; no se realizaron nuevas busquedas generales en este turno.

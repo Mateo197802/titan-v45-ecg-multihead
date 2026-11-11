@@ -36,3 +36,7 @@ El asset `backbone-v3f-original.pt` tiene SHA-256 `ca5d4dcb4b9828e6c4339800fe81e
 ## Conclusión
 
 Queda respaldado que el snapshot V3C registró trial 6 como ganador de `ranking_score`, trial 8 con el mayor `peak_composite_score`, que los jobs indicados terminaron con estado exitoso y que V3F/V3AG se publicaron como archivos identificables. **No queda demostrada la cadena completa** `study → trial 6 → JSON consumido → 16768 → checkpoint de 16768 → 16781 → backbone V3F`. No se atribuyen los pesos finales a trial 6 como hecho autenticado.
+
+## Recibo de recuperacion dirigida 2
+
+El recibo CEDIA incluido en la ronda 2 vuelve a registrar `COMPLETED 0:0` para 16748-16759, 16768 y 16781, y conserva SHA-256 de los registros de envio de 16768/16781. Tambien confirma que el envio referencia el JSON de trial 6 y la ruta del checkpoint base. No aporta stdout/stderr, digest de lectura, archivo JSON, checkpoint intermedio ni digest de salida. Los doce jobs 16748-16759 siguen sin equivaler a doce trials completos. Esta es corroboracion de metadatos de envio/estado, no una nueva arista verificada; el grafo actualizado esta en [`HISTORICAL_PROVENANCE_GRAPH.md`](HISTORICAL_PROVENANCE_GRAPH.md).

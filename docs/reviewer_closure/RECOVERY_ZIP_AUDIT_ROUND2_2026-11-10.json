@@ -1,0 +1,56 @@
+{
+  "schema": "TITAN_RECOVERY_ZIP_ROUND2_AUDIT_V1",
+  "as_of": "2026-11-10",
+  "archive": "TITAN_V45_RECUPERACION_DIRIGIDA_2_2026-11-10.zip",
+  "archive_sha256": "d1d77535d2b1995fc8a1ba5e3b47cf9c63703cd29d4ef63334e5402fe731e82f",
+  "expected_sha256_match": true,
+  "zip_crc_ok": true,
+  "archive_file_count": 38,
+  "duplicate_zip_member_name_count": 0,
+  "unsafe_archive_member_count": 0,
+  "inventory_rows": 36,
+  "inventory_rows_match_bytes_and_hashes": true,
+  "checksum_manifest_entries": 37,
+  "checksum_manifest_match": true,
+  "payload_comparison": {
+    "payload_count_excluding_checksum_file": 37,
+    "pr3_head": "e8f3179866d1199cbb98966f328d37774baa646d",
+    "pr3_tracked_file_count": 573,
+    "pr3_byte_identical_count": 0,
+    "pr3_exact_relative_path_and_bytes_count": 0,
+    "pr3_same_basename_different_bytes_count": 0,
+    "pr4_head": "3cfedf39a81a22c867fde04faf9b1a1dd2f60448",
+    "pr4_tracked_file_count": 368,
+    "pr4_byte_identical_count": 0,
+    "pr4_exact_relative_path_and_bytes_count": 0,
+    "pr4_same_basename_different_bytes_count": 0,
+    "prior_complete_recovery_zip": {
+      "payload_count_excluding_checksum_file": 96,
+      "byte_identical_member_pairs": 0,
+      "exact_relative_path_and_bytes_count": 0
+    }
+  },
+  "historical_code_inventory": {
+    "source_plan_archives": 6,
+    "code_launcher_test_members": 25,
+    "delivered_members_byte_identical_to_declared_source_sha": 14,
+    "sanitized_members_with_distinct_source_and_delivered_sha": 11,
+    "unique_member_contents": 24,
+    "duplicate_member_contents": 1,
+    "duplicate_member_identity": "S4 split/cascade decision evaluator occurs in the base and repair plan archives",
+    "executed_recovered_code": false
+  },
+  "privacy_screening": {
+    "text_members_scanned": 38,
+    "common_private_key_or_token_markers": 0,
+    "csv_headers_with_record_or_patient_id_fields": 0,
+    "json_record_identifier_values_detected": 0,
+    "oversize_text_members_not_scanned": 0,
+    "source_receipts_contain_internal_paths": true,
+    "raw_archive_or_receipts_published": false,
+    "scope_limit": "Static bounded scan; not a universal privacy or licensing certification."
+  },
+  "verification_command": "python scripts/evaluation/audit_recovery_bundle.py <archive> --expected-sha256 <sha256> --repo <PR3 checkout> --ref e8f3179866d1199cbb98966f328d37774baa646d --compare-bundle <prior recovery ZIP>",
+  "verifier_change": "Accepts INVENTARIO_ZIP.csv with ruta while retaining INVENTARIO_COMPLETO.csv with ruta_relativa; rejects unsafe inventory paths; compares ZIP payloads by digest without exposing paths.",
+  "related_report": "NEW_RECOVERY_EVIDENCE_INTEGRATION.md"
+}

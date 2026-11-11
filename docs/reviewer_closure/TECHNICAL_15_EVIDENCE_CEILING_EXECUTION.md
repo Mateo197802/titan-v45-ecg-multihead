@@ -8,6 +8,8 @@ This is an execution addendum to the [48-item source matrix](REVIEWER_48_DETAILE
 
 The execution baseline is commit `0a32a57`. The matrix bytes used for the recorded baseline digest are independently verified at matrix commit `01beb7a` (SHA-256 `2586de1a1212dd898a9c4201e39e6dda18b59c11e74d7369da02bb1ec2290b52`); those are distinct commit roles because the matrix changed after the execution baseline. A later evidence-only update adds the CEDIA cleanup-manifest receipt to A-06; the current matrix SHA-256 is recorded separately in the execution JSON. No technical status or reviewer-satisfaction label changed.
 
+**Recovery round 2:** the 2026-11-10 directed package has been validated and reconciled in [`NEW_RECOVERY_EVIDENCE_INTEGRATION.md`](NEW_RECOVERY_EVIDENCE_INTEGRATION.md). It adds authenticated source bytes for S4/S5/U plans and bounded SLURM metadata, but does not complete an original reviewer subrequirement. The 15-item update and its explicit coverage rubric are in [`REVIEWER_15_EVIDENCE_UPDATE.md`](REVIEWER_15_EVIDENCE_UPDATE.md); the source/job/checkpoint graph is in [`HISTORICAL_PROVENANCE_GRAPH.md`](HISTORICAL_PROVENANCE_GRAPH.md). Technical and reviewer-satisfaction states remain unchanged.
+
 ## Result
 
 No targeted reviewer-satisfaction label changed: 12 items remain `PARTIALLY_ADDRESSED`, and R2-general, R2-3d and R2-4k remain `NOT_SATISFIED`. The new checks verify several bounded subrequirements, but do not turn selected development results into independent validation, recover missing historical lineage, or satisfy a missing experiment. No percentages are used as proxies for scientific completion.

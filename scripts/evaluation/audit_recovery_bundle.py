@@ -166,6 +166,53 @@ def summarize_git_comparison(
     }
 
 
+def summarize_bundle_comparison(
+    first_payloads: list[tuple[str, str]], second_payloads: list[tuple[str, str]]
+) -> dict:
+    """Compare two bundle payloads and return counts without exposing member paths."""
+    first_digest_counts = Counter(digest for _, digest in first_payloads)
+    second_digest_counts = Counter(digest for _, digest in second_payloads)
+    first_by_path = {path.replace("\\", "/"): digest for path, digest in first_payloads}
+    second_by_path = {path.replace("\\", "/"): digest for path, digest in second_payloads}
+    shared_pairs = sum((first_digest_counts & second_digest_counts).values())
+    return {
+        "first_payload_count": len(first_payloads),
+        "second_payload_count": len(second_payloads),
+        "byte_identical_member_pairs": shared_pairs,
+        "first_members_matching_second_count": sum(
+            count for digest, count in first_digest_counts.items() if digest in second_digest_counts
+        ),
+        "second_members_matching_first_count": sum(
+            count for digest, count in second_digest_counts.items() if digest in first_digest_counts
+        ),
+        "exact_relative_path_and_bytes_count": sum(
+            digest == second_by_path.get(path) for path, digest in first_by_path.items()
+        ),
+    }
+
+
+def compare_bundle_to_bundle(first_path: Path, second_path: Path) -> dict:
+    """Verify and compare two ZIP payloads, omitting checksum files from the comparison."""
+    first_audit = audit_recovery_bundle(first_path)
+    second_audit = audit_recovery_bundle(second_path)
+    if not first_audit["valid"] or not second_audit["valid"]:
+        raise ValueError("both recovery bundles must pass integrity checks")
+
+    def payloads(archive_path: Path) -> list[tuple[str, str]]:
+        with zipfile.ZipFile(archive_path) as archive:
+            infos = [info for info in archive.infolist() if not info.is_dir()]
+            root = infos[0].filename.split("/", 1)[0]
+            result = []
+            for info in infos:
+                if info.filename.rsplit("/", 1)[-1] == "SHA256SUMS.txt":
+                    continue
+                relative = info.filename[len(root) + 1 :]
+                result.append((relative, _sha256_bytes(archive.read(info))))
+            return result
+
+    return summarize_bundle_comparison(payloads(first_path), payloads(second_path))
+
+
 def _tracked_files(repo: Path, ref: str = "HEAD") -> list[tuple[str, str]]:
     result = subprocess.run(
         ["git", "-C", str(repo), "ls-tree", "-r", "-z", ref], check=True, capture_output=True
@@ -262,7 +309,11 @@ def audit_recovery_bundle(archive_path: Path, expected_sha256: str | None = None
         counters["duplicate_name_count"] = len(names) - len({name.casefold() for name in names})
         crc_ok = archive.testzip() is None
 
-        inventory_matches = [name for name in names if name.endswith("/INVENTARIO_COMPLETO.csv")]
+        inventory_matches = [
+            name
+            for name in names
+            if name.endswith(("/INVENTARIO_COMPLETO.csv", "/INVENTARIO_ZIP.csv"))
+        ]
         sums_matches = [name for name in names if name.endswith("/SHA256SUMS.txt")]
         if len(inventory_matches) == len(sums_matches) == 1 and infos:
             inventory_name = inventory_matches[0]
@@ -283,10 +334,21 @@ def audit_recovery_bundle(archive_path: Path, expected_sha256: str | None = None
             )
             inventory = {}
             for row in inventory_rows_data:
-                relative = (row.get("ruta_relativa") or "").replace("\\", "/").lstrip("./")
-                if not relative or relative in inventory:
+                raw_relative = (row.get("ruta_relativa") or row.get("ruta") or "").replace(
+                    "\\", "/"
+                )
+                relative_path = PurePosixPath(raw_relative)
+                if (
+                    not raw_relative
+                    or relative_path.is_absolute()
+                    or ".." in relative_path.parts
+                    or re.match(r"^[A-Za-z]:", raw_relative)
+                    or raw_relative.startswith("./")
+                    or raw_relative in inventory
+                ):
                     counters["inventory_structure_error_count"] += 1
                     continue
+                relative = relative_path.as_posix()
                 inventory[relative] = row
 
             expected_payload = {
@@ -390,6 +452,7 @@ def main() -> int:
     parser.add_argument("--expected-sha256")
     parser.add_argument("--repo", action="append", type=Path, default=[])
     parser.add_argument("--ref", action="append", default=[])
+    parser.add_argument("--compare-bundle", action="append", type=Path, default=[])
     args = parser.parse_args()
     try:
         report = audit_recovery_bundle(args.archive, args.expected_sha256)
@@ -397,6 +460,11 @@ def main() -> int:
             report["git_comparison"] = compare_bundle_to_git(
                 args.archive, args.repo, args.expected_sha256, args.ref or None
             )
+        if args.compare_bundle:
+            report["bundle_comparisons"] = {
+                path.name: compare_bundle_to_bundle(args.archive, path)
+                for path in args.compare_bundle
+            }
     except (
         OSError,
         zipfile.BadZipFile,

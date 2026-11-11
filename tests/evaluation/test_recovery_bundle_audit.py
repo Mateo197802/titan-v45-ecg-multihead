@@ -11,7 +11,9 @@ import pytest
 
 from scripts.evaluation.audit_recovery_bundle import (
     audit_recovery_bundle,
+    compare_bundle_to_bundle,
     screen_archive_privacy,
+    summarize_bundle_comparison,
     summarize_git_comparison,
 )
 from scripts.evaluation.recompute_legacy_v4_quarantine import recompute_legacy_v4_quarantine
@@ -74,49 +76,59 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 def _write_bundle(
-    path: Path, *, add_unsafe_member: bool = False, corrupt_inventory_hash: bool = False
+    path: Path,
+    *,
+    add_unsafe_member: bool = False,
+    corrupt_inventory_hash: bool = False,
+    alternate_inventory_schema: bool = False,
+    unsafe_inventory_route: bool = False,
 ) -> None:
     root = "synthetic-recovery"
     payload = _matrix_and_reports()
     inventory_buffer = io.StringIO(newline="")
-    fields = [
-        "ruta_relativa",
-        "bytes",
-        "sha256",
-        "origen",
-        "tipo",
-        "nivel_evidencia",
-        "transformacion",
-        "sha256_fuente",
-    ]
+    route_field = "ruta" if alternate_inventory_schema else "ruta_relativa"
+    inventory_name = (
+        "00_LEEME_Y_RESUMEN/INVENTARIO_ZIP.csv"
+        if alternate_inventory_schema
+        else "00_LEEME_Y_RESUMEN/INVENTARIO_COMPLETO.csv"
+    )
+    fields = [route_field, "bytes", "sha256"]
+    if not alternate_inventory_schema:
+        fields.extend(["origen", "tipo", "nivel_evidencia", "transformacion", "sha256_fuente"])
     writer = csv.DictWriter(inventory_buffer, fieldnames=fields, lineterminator="\n")
     writer.writeheader()
     for index, (relative, data) in enumerate(payload.items()):
-        writer.writerow(
-            {
-                "ruta_relativa": relative,
-                "bytes": len(data),
-                "sha256": (
-                    "0" * 64
-                    if corrupt_inventory_hash and index == 0
-                    else hashlib.sha256(data).hexdigest()
-                ),
-                "origen": "synthetic-test",
-                "tipo": "aggregate",
-                "nivel_evidencia": "test-only",
-                "transformacion": "none",
-                "sha256_fuente": "",
-            }
-        )
+        if unsafe_inventory_route and index == 0:
+            relative = "../outside.csv"
+        row = {
+            route_field: relative,
+            "bytes": len(data),
+            "sha256": (
+                "0" * 64
+                if corrupt_inventory_hash and index == 0
+                else hashlib.sha256(data).hexdigest()
+            ),
+        }
+        if not alternate_inventory_schema:
+            row.update(
+                {
+                    "origen": "synthetic-test",
+                    "tipo": "aggregate",
+                    "nivel_evidencia": "test-only",
+                    "transformacion": "none",
+                    "sha256_fuente": "",
+                }
+            )
+        writer.writerow(row)
     inventory = inventory_buffer.getvalue().encode()
-    checksummed = {**payload, "00_LEEME_Y_RESUMEN/INVENTARIO_COMPLETO.csv": inventory}
+    checksummed = {**payload, inventory_name: inventory}
     sums = "".join(
         f"{hashlib.sha256(data).hexdigest()}  {relative}\n"
         for relative, data in checksummed.items()
     ).encode()
     members = {
         **payload,
-        "00_LEEME_Y_RESUMEN/INVENTARIO_COMPLETO.csv": inventory,
+        inventory_name: inventory,
         "00_LEEME_Y_RESUMEN/SHA256SUMS.txt": sums,
     }
     with zipfile.ZipFile(path, "w", compression=zipfile.ZIP_DEFLATED) as archive:
@@ -138,6 +150,27 @@ def test_recovery_bundle_checks_inventory_checksums_and_crc(tmp_path: Path):
     assert report["sha256sum_entries"] == 4
     assert report["unsafe_member_count"] == 0
     assert report["duplicate_name_count"] == 0
+
+
+def test_recovery_bundle_accepts_inventory_zip_route_schema(tmp_path: Path):
+    bundle = tmp_path / "inventory-zip-schema.zip"
+    _write_bundle(bundle, alternate_inventory_schema=True)
+
+    report = audit_recovery_bundle(bundle)
+
+    assert report["valid"] is True
+    assert report["inventory_rows"] == 3
+    assert report["sha256sum_entries"] == 4
+
+
+def test_recovery_bundle_rejects_inventory_path_traversal(tmp_path: Path):
+    bundle = tmp_path / "unsafe-inventory-route.zip"
+    _write_bundle(bundle, unsafe_inventory_route=True)
+
+    report = audit_recovery_bundle(bundle)
+
+    assert report["valid"] is False
+    assert report["error_counts"]["inventory_structure_error_count"] == 1
 
 
 def test_bundle_audit_rejects_path_traversal(tmp_path: Path):
@@ -239,6 +272,39 @@ def test_git_comparison_summary_counts_matches_without_paths():
         "tracked_file_count": 2,
     }
     assert "package/" not in json.dumps(report)
+
+
+def test_bundle_comparison_summary_counts_hash_matches_without_paths():
+    report = summarize_bundle_comparison(
+        [("first/a.csv", "same"), ("first/b.csv", "same"), ("first/c.csv", "new")],
+        [("second/a.csv", "same"), ("second/b.csv", "other")],
+    )
+
+    assert report == {
+        "first_payload_count": 3,
+        "second_payload_count": 2,
+        "byte_identical_member_pairs": 1,
+        "first_members_matching_second_count": 2,
+        "second_members_matching_first_count": 1,
+        "exact_relative_path_and_bytes_count": 0,
+    }
+    assert "first/" not in json.dumps(report)
+    assert "second/" not in json.dumps(report)
+
+
+def test_bundle_comparison_validates_archives_and_omits_member_paths(tmp_path: Path):
+    first = tmp_path / "first.zip"
+    second = tmp_path / "second.zip"
+    _write_bundle(first)
+    _write_bundle(second)
+
+    report = compare_bundle_to_bundle(first, second)
+
+    assert report["first_payload_count"] == 4
+    assert report["second_payload_count"] == 4
+    assert report["byte_identical_member_pairs"] == 4
+    assert report["exact_relative_path_and_bytes_count"] == 4
+    assert "synthetic-recovery/" not in json.dumps(report)
 
 
 def test_reviewer_matrix_counts_and_bounded_updates_are_consistent():
