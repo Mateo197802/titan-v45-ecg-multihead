@@ -186,8 +186,10 @@ def _atomic_json(path: Path, payload: dict[str, Any]) -> None:
     temp_path.replace(path)
 
 
-def run(data_root: Path, preflight_dir: Path, output_dir: Path, repo: Path, device: str):
+def run(data_root: Path, preflight_dir: Path, output_dir: Path, repo: Path, device: str,
+        asset_root: Path | None = None):
     data_root, preflight_dir, repo = data_root.resolve(), preflight_dir.resolve(), repo.resolve()
+    asset_root = (asset_root or repo).resolve()
     output_dir = _safe_output(output_dir, data_root)
     if device == "cuda" and not torch.cuda.is_available():
         raise RuntimeError("CUDA requested but unavailable")
@@ -209,9 +211,9 @@ def run(data_root: Path, preflight_dir: Path, output_dir: Path, repo: Path, devi
         raise ValueError("unexpected private inventory schema")
     contract = json.loads((repo / "outputs/models/heads/global_head_contracts.json").read_text(encoding="utf-8"))
     rhythm_names = {RHYTHM_BACKBONE, *RHYTHM_HEADS.values()}
-    rhythm_assets, rhythm_hashes = verified_assets(repo, repo, rhythm_names)
+    rhythm_assets, rhythm_hashes = verified_assets(repo, asset_root, rhythm_names)
     pathology_names = {P4_BACKBONE, P4_SPECIALIST}
-    pathology_assets, pathology_hashes = verified_assets(repo, repo, pathology_names)
+    pathology_assets, pathology_hashes = verified_assets(repo, asset_root, pathology_names)
     morphology = _safe_morphology(repo)
     event_archive = repo / "docs/provenance/recovered-original-sources-20261029.zip"
     rhythm_scorer = FrozenRhythm(
@@ -411,9 +413,11 @@ def main() -> int:
     parser.add_argument("--preflight-dir", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--repo", type=Path, default=ROOT)
+    parser.add_argument("--asset-root", type=Path,
+                        help="verified release asset cache; defaults to the repository root")
     parser.add_argument("--device", choices=("cuda", "cpu"), default="cuda")
     args = parser.parse_args()
-    run(args.data_root, args.preflight_dir, args.output_dir, args.repo, args.device)
+    run(args.data_root, args.preflight_dir, args.output_dir, args.repo, args.device, args.asset_root)
     return 0
 
 

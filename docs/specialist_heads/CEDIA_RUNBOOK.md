@@ -19,6 +19,7 @@ REPO="$HOME/Mateo Gavilanes/specialist-heads-20261111-v2/repo"
 DATA_ROOT="$HOME/Mateo Gavilanes/titan_v45_data_cache"
 DEPS_TAR="$HOME/Mateo Gavilanes/life-4620846-revision-20261028/python_deps.tar"
 EXPERIMENT_ROOT="$HOME/Mateo Gavilanes/specialist-heads-20261111-v2"
+ASSET_ROOT="$HOME/Mateo Gavilanes/specialist-heads-20261111-v2/release-assets-v0.1.0"
 mkdir -p "$EXPERIMENT_ROOT/logs"
 chmod 700 "$EXPERIMENT_ROOT" "$EXPERIMENT_ROOT/logs"
 umask 077
@@ -31,12 +32,19 @@ Inspect only the aggregate `preflight_receipt.json` and the public-safe job log 
 
 If an implementation defect affects only PTB-XL window QC after a sealed inventory has been produced, preserve the original receipt and use `scripts/cedia/specialist_qc_reuse.sbatch` with a new output directory. This verifies the source receipt, inventory, frozen config, and current PTB-XL waveform hashes, then writes a separate receipt; it does not reuse a failed QC summary or compute model performance.
 
-After preflight review, feature extraction and training use:
+After the corrected preflight receipt passes, materialize only the five public model weights in an external cache. This deliberately omits the release's external-development dataset archives:
+
+```bash
+sbatch --output="$EXPERIMENT_ROOT/logs/assets-%j.out" \
+  "$REPO/scripts/cedia/specialist_fetch_assets.sbatch" "$REPO" "$ASSET_ROOT"
+```
+
+Before using the GPU, compare all five cache files' sizes and SHA-256 values with `release-manifest.json`. Feature extraction and training then use:
 
 ```bash
 sbatch --output="$EXPERIMENT_ROOT/logs/features-%j.out" \
   "$REPO/scripts/cedia/specialist_extract_features.sbatch" \
-  "$REPO" "$DATA_ROOT" "$EXPERIMENT_ROOT/preflight" \
+  "$REPO" "$DATA_ROOT" "$EXPERIMENT_ROOT/preflight" "$ASSET_ROOT" \
   "$EXPERIMENT_ROOT/features" "$DEPS_TAR"
 
 sbatch --output="$EXPERIMENT_ROOT/logs/stage-a-%j.out" \
