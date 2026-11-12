@@ -3,7 +3,11 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
+import subprocess
 from collections import Counter, defaultdict
+from concurrent.futures import ThreadPoolExecutor
+from functools import partial
 from pathlib import Path
 
 import numpy as np
@@ -40,7 +44,7 @@ def read_source(raw, row, endpoints):
     if relative.is_absolute() or ".." in relative.parts:
         raise ValueError("additional source path escaped source root")
     base = source / relative
-    if not base.with_suffix(".hea").resolve(strict=True).is_relative_to(source.resolve()):
+    if not Path(f"{base}.hea").resolve(strict=True).is_relative_to(source.resolve()):
         raise ValueError("source_path_escape")
     header = wfdb.rdheader(str(base))
     if header.fs != 500 or header.sig_len < 5000:
@@ -62,6 +66,16 @@ def read_source(raw, row, endpoints):
     return wave, observed_descriptors(wave), labels
 
 
+def read_candidate(raw, endpoints, row):
+    try:
+        return read_source(raw, row, endpoints), None
+    except (ValueError, OSError) as exc:
+        if str(exc) in {"source_waveform_identity_mismatch", "source_path_escape",
+                        "additional source path escaped source root"}:
+            raise
+        return None, type(exc).__name__
+
+
 def run(raw, preflight, code_bank, out):
     cfg, protocol = (json.loads(path.read_bytes()) for path in (CROSS, PROTOCOL))
     if (cfg["parent_protocol_sha256"] != digest(PROTOCOL)
@@ -73,6 +87,8 @@ def run(raw, preflight, code_bank, out):
     out.mkdir(mode=0o700, exist_ok=False)
     groups, matrix, mapping = defaultdict(list), [], []
     rejected = Counter()
+    worker = partial(read_candidate, raw, list(protocol["endpoints"]))
+    workers = min(4, max(1, int(os.getenv("SLURM_CPUS_PER_TASK", "1"))))
     for source, splits in cfg["sources"].items():
         for split, cap in splits["caps"].items():
             if not cap:
@@ -80,22 +96,21 @@ def run(raw, preflight, code_bank, out):
             pool = [row for row in inventory if row["task"] == "rhythm" and row["source"] == source
                     and row["split"] == split and row["excluded_reason"] is None]
             pool.sort(key=lambda row: stable("titan-da-source-v1", row["identity_hash"]))
-            for row in pool[:cap]:
-                try:
-                    wave, descriptors, labels = read_source(raw, row, list(protocol["endpoints"]))
-                except (ValueError, OSError) as exc:
-                    if str(exc) in {"source_waveform_identity_mismatch", "source_path_escape",
-                                    "additional source path escaped source root"}:
-                        raise
-                    rejected[f"{source}:{type(exc).__name__}"] += 1
-                    continue
-                group = row["group_hash"] if source == "chapman_shaoxing" else None
-                if source == "chapman_shaoxing" and not group:
-                    raise ValueError("missing Chapman subject proxy")
-                normalized = normalize(wave, "per_lead_zscore")
-                matrix.append(signature(normalized))
-                mapping.append((source, split, group, row["identity_hash"], row["signal_sha256"]))
-                groups[source, split].append((len(mapping) - 1, wave, descriptors, labels))
+            with ThreadPoolExecutor(max_workers=workers) as readers:
+                for index, (row, (result, error)) in enumerate(zip(pool[:cap], readers.map(worker, pool[:cap]), strict=True), 1):
+                    if index % 250 == 0:
+                        print(json.dumps({"source": source, "split": split, "checked": index}), flush=True)
+                    if error:
+                        rejected[f"{source}:{error}"] += 1
+                        continue
+                    wave, descriptors, labels = result
+                    group = row["group_hash"] if source == "chapman_shaoxing" else None
+                    if source == "chapman_shaoxing" and not group:
+                        raise ValueError("missing Chapman subject proxy")
+                    normalized = normalize(wave, "per_lead_zscore")
+                    matrix.append(signature(normalized))
+                    mapping.append((source, split, group, row["identity_hash"], row["signal_sha256"]))
+                    groups[source, split].append((len(mapping) - 1, wave, descriptors, labels))
             print(json.dumps({"source": source, "split": split, "selected_records": len(pool[:cap])}), flush=True)
     signature_matrix = np.stack(matrix)
     removed = set()
@@ -133,7 +148,9 @@ def run(raw, preflight, code_bank, out):
     result = {"scope": cfg["scope"], "protocol_sha256": digest(CROSS), "sources": summary,
               "code_waveform_signatures": len(code), "external_code_waveform_matches_excluded": code_matches,
               "total_aligned_exclusions": len(removed), "other_exclusions": dict(rejected),
-              "code_label_files_read": False, "patient_independence_across_sources": "NOT_CERTIFIED"}
+              "code_label_files_read": False, "patient_independence_across_sources": "NOT_CERTIFIED",
+              "reader_workers": workers, "slurm_job": os.getenv("SLURM_JOB_ID"),
+              "code_commit": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()}
     write_json(out / "ADDITIONAL_SOURCE_RECEIPT.json", result)
     print(json.dumps(result, sort_keys=True), flush=True)
 
