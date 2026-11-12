@@ -1,0 +1,65 @@
+{
+  "inputs": 733,
+  "pre_counts": {
+    "pathology_only": 733
+  },
+  "post_counts": {
+    "quarantine_not_assessed": 733
+  },
+  "transitions": {
+    "pathology_only->quarantine_not_assessed": 733
+  },
+  "quarantine_assessed": 0,
+  "quarantine_rate_among_assessed": null,
+  "quarantine_rate_all_inputs": null,
+  "all_four_p4_scores_records": 733,
+  "primary_positive_counts": {
+    "ASMI": 186,
+    "LVH": 225,
+    "IMI": 245,
+    "ISC_": 197
+  },
+  "auxiliary_score_support": {
+    "ALMI": 733,
+    "ILMI": 733,
+    "LAE": 733
+  },
+  "present_lead_counts": {
+    "12": 733
+  },
+  "input_error_counts": {},
+  "reference_labels_used_for_routing": false,
+  "schema": "TITAN_V45_RECONSTRUCTED_P4_WAVEFORM_CASCADE_V1",
+  "scope": "frozen_selected_p4_waveforms_new_inference_not_historical_cascade",
+  "batch_size": 32,
+  "batching": "each_ecg_once_sorted_by_source_and_id",
+  "thresholds": {
+    "ASMI": 0.6699999999999999,
+    "LVH": 0.705,
+    "IMI": 0.635,
+    "ISC_": 0.595
+  },
+  "weights_or_thresholds_modified": false,
+  "release_sha256": {
+    "backbone-v3ag-pathology.pt": "bf71e4cf8acc34031cb3611c7031e0649822e705fd7dcea354a3ea583ce920ee",
+    "specialists-v3ag-primary4-calibrated.pt": "cf5091e962fffb3254b1a71fe57236dd82ea0139093df192511499d931391dbc",
+    "external-dev-pathology-ptbxl-fold10.tar.zst": "fc1c3fc5374af962a8fc5903b6d1dd99a44ebfd7c66e0dfceaa106167afee558"
+  },
+  "manifest_sha256_lf": "26796bdde9f9a736fc7594b65e7e881b4967f15a8665fa5231f5001cbbc105d0",
+  "morphology_candidate_sha256_lf": "2bd1c1822ed72d1531b1f62712d8007c7e2f21009056ad1a3ee905f37051fc3d",
+  "preprocessing": "declared_source_backed_p4_candidate_not_original_loader",
+  "auxiliary_action": "no_frozen_policy",
+  "saved_comparison": {
+    "compared_panel_pairs": 962,
+    "missing_panel_pairs": 0,
+    "decision_disagreements": 0,
+    "max_absolute_probability_difference": 0.0006194114685058594,
+    "mean_absolute_probability_difference": 8.526233725807399e-05,
+    "historical_atol": 1e-05,
+    "meets_historical_tolerance_on_all_panel_pairs": false
+  },
+  "independent_external_evaluation": false,
+  "historical_preprocessing_certified": false,
+  "torch": "2.10.0+cu128",
+  "device": "cuda"
+}

@@ -1,0 +1,99 @@
+{
+  "scope": "paired zero-input sensitivity on selected historical replay; not a retrained ablation",
+  "intervention": "replace the complete normalized morphology vector by zero at preprocessing output",
+  "unchanged": [
+    "waveforms",
+    "published weights",
+    "lead masks",
+    "event features",
+    "thresholds"
+  ],
+  "source_commit": "cfe6d59fa5cc4be10de0d7c6803fa5208fae0072",
+  "job": "33473",
+  "baseline_ledger_sha256": "1eac4fba2f28e4cebcc58d8a21ae64a3ecaf71c1d2e8102a7bea6c46cd44a059",
+  "private_perturbed_ledger_sha256": "9875d0ab1dd7b0b2821a2250fdf862722dcc07a8466e5f4d035b2955a373b7c8",
+  "release_sha256": {
+    "backbone-v3f-original.pt": "ca5d4dcb4b9828e6c4339800fe81ec27f32d9b09a090bb57503bfb56746a8da8",
+    "specialists-v3p-e008-primary6-diagnostic.pt": "9c5a9265a7155e1206c551cc4e6d645b86363ba3dbdeb7baf7b9f173c314be3d",
+    "specialists-v3q-primary8-best-candidate.pt": "b30cb2bbb45f1231c93ff1c196aa966b57b49831cadb296131c0283e7b0ceb02",
+    "external-dev-rhythm-chapman-shaoxing.tar.zst": "ec6ade27ab77b9807d41331016def56e54cbb96fba528fd7aca811e5a468f2fb"
+  },
+  "window_calls": 2404,
+  "profiles": {
+    "P6": {
+      "intended_records": 1643,
+      "ledger_universe_records": 2193,
+      "paired_scored": 1643,
+      "decision_changes": 37,
+      "scoring_status_disagreements": 0,
+      "by_class": {
+        "AFIB": {
+          "mean_absolute_delta": 0.00833606272439722,
+          "max_absolute_delta": 0.17801422151419466
+        },
+        "SB": {
+          "mean_absolute_delta": 0.005899921939738044,
+          "max_absolute_delta": 0.17734645061021193
+        },
+        "STACH": {
+          "mean_absolute_delta": 0.005432886124348795,
+          "max_absolute_delta": 0.18321629994082944
+        },
+        "RBBB": {
+          "mean_absolute_delta": 0.005753288369217487,
+          "max_absolute_delta": 0.19671591853011317
+        },
+        "1AVB": {
+          "mean_absolute_delta": 0.004741709391635069,
+          "max_absolute_delta": 0.04867579970365116
+        },
+        "PVC": {
+          "mean_absolute_delta": 0.0028270823971334497,
+          "max_absolute_delta": 0.0858986148080774
+        }
+      }
+    },
+    "P8": {
+      "intended_records": 2193,
+      "ledger_universe_records": 2193,
+      "paired_scored": 2193,
+      "decision_changes": 120,
+      "scoring_status_disagreements": 0,
+      "by_class": {
+        "AFIB": {
+          "mean_absolute_delta": 0.008583625777060067,
+          "max_absolute_delta": 0.20100614428520203
+        },
+        "SB": {
+          "mean_absolute_delta": 0.007551862348964124,
+          "max_absolute_delta": 0.25200922787189484
+        },
+        "STACH": {
+          "mean_absolute_delta": 0.007981873300512374,
+          "max_absolute_delta": 0.18688589334487915
+        },
+        "NSR": {
+          "mean_absolute_delta": 0.01759439907719335,
+          "max_absolute_delta": 0.18174651265144348
+        },
+        "RBBB": {
+          "mean_absolute_delta": 0.004894877629369526,
+          "max_absolute_delta": 0.2722066342830658
+        },
+        "PAC": {
+          "mean_absolute_delta": 0.00958416520016454,
+          "max_absolute_delta": 0.07879912853240967
+        },
+        "1AVB": {
+          "mean_absolute_delta": 0.005310386369609553,
+          "max_absolute_delta": 0.05837377905845642
+        },
+        "PVC": {
+          "mean_absolute_delta": 0.004175272019942953,
+          "max_absolute_delta": 0.10701161623001099
+        }
+      }
+    }
+  },
+  "identifiers_exported": false
+}

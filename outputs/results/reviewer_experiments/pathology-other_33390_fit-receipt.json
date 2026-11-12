@@ -1,0 +1,32 @@
+{
+  "scope": "new frozen-feature development experiment; not a clinical Other classifier or independent evaluation",
+  "binding": {
+    "protocol_sha256": "031340efaa15e2b5687445dc4fe8179de6e72bfe004e3270241aa0d58b52c80b",
+    "feature_metadata_sha256": "c3a5e7a7d3d08c92fb1e2d7175a8fe1d87ebfb3df51f530ba7929bc66b185321"
+  },
+  "job": "33390",
+  "population": {
+    "metadata_ecgs_folds_1_to_9": 19601,
+    "metadata_patients_folds_1_to_9": 16965,
+    "reserved_fold10_metadata_rows_count_only": 2198,
+    "active_inventory_ecgs": 6205,
+    "scored_ecgs": 6205,
+    "active_by_split": {
+      "train": 4744,
+      "held": 390,
+      "unused": 666,
+      "calibration": 405
+    },
+    "cross_split_exact_signal_or_patient_overlap": 0
+  },
+  "clinical_or_independent_validation": false,
+  "record_identifiers_exported": false,
+  "held_outcomes_evaluated": false,
+  "private_model_sha256": "d3fa39467877354e8b6d438380a965135fe0c5f7aa0d266c27f7417290b7c7ec",
+  "endpoint_status": {
+    "ALMI": "calibrated",
+    "ILMI": "calibrated",
+    "LAO_or_LAE": "calibrated",
+    "Other_pathology_mapped_subset": "calibrated"
+  }
+}

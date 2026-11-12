@@ -1,0 +1,1084 @@
+{
+  "scope": "one decision per ECG on the held SPH development components; not independent validation",
+  "job": "33414",
+  "joint_policy_sha256": "c9183320a4dd923f037a93fc014fc2db6bc64f223ff67b5d297e540eefb43ae6",
+  "private_joint_route_ledger_sha256": "20641afa84b432d365946302404545cfb5dde0323ff51d8965f9034a68a51b5f",
+  "source_stratum_route_counts": {
+    "normal_only": {
+      "accepted": 5696,
+      "abstained": 1227
+    },
+    "no_mapped_statement_not_normal": {
+      "abstained": 606,
+      "accepted": 2231
+    },
+    "mapped_statement_with_other": {
+      "accepted": 1054,
+      "abstained": 306
+    },
+    "mapped_statement_only": {
+      "accepted": 1410,
+      "abstained": 339
+    }
+  },
+  "abstention_drivers": {
+    "P8": 1149,
+    "P4": 1201,
+    "P8+P4": 128
+  },
+  "joint_metrics": {
+    "held_records": 12869,
+    "scored_records": 12869,
+    "accepted": 10391,
+    "abstained": 2478,
+    "technical_unscored": 0,
+    "abstention_all_held": 0.19255575413785064,
+    "abstention_scored": 0.19255575413785064,
+    "coverage_all_held": 0.8074442458621494,
+    "coverage_scored": 0.8074442458621494,
+    "selective_risk": 0.08997102193137224,
+    "aurc": 0.08707092605875698,
+    "risk_coverage_curve": {
+      "requested_coverage_scored": [
+        0.01,
+        0.02,
+        0.03,
+        0.04,
+        0.05,
+        0.06,
+        0.07,
+        0.08,
+        0.09,
+        0.1,
+        0.11,
+        0.12,
+        0.13,
+        0.14,
+        0.15,
+        0.16,
+        0.17,
+        0.18,
+        0.19,
+        0.2,
+        0.21,
+        0.22,
+        0.23,
+        0.24,
+        0.25,
+        0.26,
+        0.27,
+        0.28,
+        0.29,
+        0.3,
+        0.31,
+        0.32,
+        0.33,
+        0.34,
+        0.35,
+        0.36,
+        0.37,
+        0.38,
+        0.39,
+        0.4,
+        0.41,
+        0.42,
+        0.43,
+        0.44,
+        0.45,
+        0.46,
+        0.47,
+        0.48,
+        0.49,
+        0.5,
+        0.51,
+        0.52,
+        0.53,
+        0.54,
+        0.55,
+        0.56,
+        0.57,
+        0.58,
+        0.59,
+        0.6,
+        0.61,
+        0.62,
+        0.63,
+        0.64,
+        0.65,
+        0.66,
+        0.67,
+        0.68,
+        0.69,
+        0.7,
+        0.71,
+        0.72,
+        0.73,
+        0.74,
+        0.75,
+        0.76,
+        0.77,
+        0.78,
+        0.79,
+        0.8,
+        0.81,
+        0.82,
+        0.83,
+        0.84,
+        0.85,
+        0.86,
+        0.87,
+        0.88,
+        0.89,
+        0.9,
+        0.91,
+        0.92,
+        0.93,
+        0.94,
+        0.95,
+        0.96,
+        0.97,
+        0.98,
+        0.99,
+        1.0
+      ],
+      "attainable_coverage_scored": [
+        0.0100240888957961,
+        0.0200481777915922,
+        0.030072266687388296,
+        0.04001864946771311,
+        0.050042738363509205,
+        0.06006682725930531,
+        0.07001321003963012,
+        0.08003729893542622,
+        0.09006138783122232,
+        0.10000777061154713,
+        0.11003185950734323,
+        0.12005594840313932,
+        0.13000233118346413,
+        0.14002642007926025,
+        0.15005050897505634,
+        0.16007459787085243,
+        0.17002098065117724,
+        0.18004506954697336,
+        0.19006915844276945,
+        0.20001554122309426,
+        0.21003963011889035,
+        0.22006371901468647,
+        0.23001010179501127,
+        0.24003419069080736,
+        0.2500582795866035,
+        0.26000466236692826,
+        0.27002875126272435,
+        0.2800528401585205,
+        0.2900769290543166,
+        0.30002331183464137,
+        0.31004740073043746,
+        0.3200714896262336,
+        0.3300178724065584,
+        0.3400419613023545,
+        0.35006605019815057,
+        0.3600124329784754,
+        0.3700365218742715,
+        0.3800606107700676,
+        0.3900069935503924,
+        0.4000310824461885,
+        0.4100551713419846,
+        0.42000155412230944,
+        0.43002564301810553,
+        0.4400497319139016,
+        0.4500738208096977,
+        0.46002020359002255,
+        0.47004429248581864,
+        0.48006838138161473,
+        0.49001476416193956,
+        0.5000388530577357,
+        0.5100629419535317,
+        0.5200093247338565,
+        0.5300334136296526,
+        0.5400575025254487,
+        0.5500038853057736,
+        0.5600279742015697,
+        0.5700520630973658,
+        0.5800761519931619,
+        0.5900225347734867,
+        0.6000466236692827,
+        0.6100707125650788,
+        0.6200170953454037,
+        0.6300411842411998,
+        0.6400652731369959,
+        0.6500116559173207,
+        0.6600357448131168,
+        0.6700598337089129,
+        0.6800062164892378,
+        0.6900303053850338,
+        0.7000543942808299,
+        0.7100007770611547,
+        0.7200248659569508,
+        0.7300489548527469,
+        0.740073043748543,
+        0.7500194265288678,
+        0.760043515424664,
+        0.7700676043204601,
+        0.7800139871007848,
+        0.7900380759965809,
+        0.800062164892377,
+        0.8100085476727018,
+        0.8200326365684979,
+        0.830056725464294,
+        0.8400031082446189,
+        0.850027197140415,
+        0.8600512860362111,
+        0.8700753749320072,
+        0.8800994638278032,
+        0.890045846608128,
+        0.9000699355039241,
+        0.910016318284249,
+        0.9200404071800451,
+        0.9300644960758412,
+        0.940010878856166,
+        0.9500349677519621,
+        0.9600590566477581,
+        0.970005439428083,
+        0.9800295283238791,
+        0.9900536172196752,
+        1.0
+      ],
+      "risk": [
+        0.09560723514211866,
+        0.09173126614987054,
+        0.08929084122882562,
+        0.08910463861920222,
+        0.08919944789510093,
+        0.08739399166307424,
+        0.08768035516093355,
+        0.08608414239482336,
+        0.08676061739047218,
+        0.08624708624708781,
+        0.08537350910232427,
+        0.08529306005034328,
+        0.08527595138473973,
+        0.08459736095696316,
+        0.08452730306692165,
+        0.08408845738943009,
+        0.08389193581149891,
+        0.08416055243849994,
+        0.08394657944944317,
+        0.0838297504964191,
+        0.08398076211616917,
+        0.08372567482737171,
+        0.08329579579579777,
+        0.08327038595734154,
+        0.08352323734548843,
+        0.08348276549113429,
+        0.0838049560351719,
+        0.0836108028116903,
+        0.08366818465934368,
+        0.08385852830297144,
+        0.08368142578668726,
+        0.08397399584580734,
+        0.08392852471025057,
+        0.08379037172455547,
+        0.0836108028116877,
+        0.0838189797827149,
+        0.08374165850015974,
+        0.08396374292918583,
+        0.08425759890194627,
+        0.08464991798324695,
+        0.08466510854230692,
+        0.08483914071332649,
+        0.08490944866079896,
+        0.08479996860713283,
+        0.08482965009207574,
+        0.08479729729729184,
+        0.08486251170991889,
+        0.08496097262687806,
+        0.08489269478802644,
+        0.08486575153241184,
+        0.08482293994176332,
+        0.08499369064221933,
+        0.08486862467216547,
+        0.08500399680255062,
+        0.08506797274810084,
+        0.08517953224487763,
+        0.08539319035501444,
+        0.08537620004464466,
+        0.08559052928866395,
+        0.08581541914874391,
+        0.08593385131404889,
+        0.08586428263078581,
+        0.08622485336840618,
+        0.08629085562434158,
+        0.08643156007171804,
+        0.08679329199695558,
+        0.08692514850463547,
+        0.08717733846289594,
+        0.08737487487486485,
+        0.08762842096174411,
+        0.08790874709665406,
+        0.08812384584021785,
+        0.0884394772633091,
+        0.08854822903540853,
+        0.0888704701385902,
+        0.08911835872268264,
+        0.0892028254288486,
+        0.08930508512097346,
+        0.08948340491567448,
+        0.08974358974357831,
+        0.0900592649441344,
+        0.09014814112889319,
+        0.09030768270609818,
+        0.09048206393256086,
+        0.0907050207717425,
+        0.09095289724128415,
+        0.09133398827065553,
+        0.09154943394744386,
+        0.0916613313155881,
+        0.09162853607296796,
+        0.0917940397916362,
+        0.09206081081079798,
+        0.09220114926521852,
+        0.09252982833208025,
+        0.09309849682823977,
+        0.09361032420521154,
+        0.09395889520858113,
+        0.09451316206785798,
+        0.09496899772386946,
+        0.09533676967042551
+      ]
+    },
+    "endpoints": {
+      "P8:AFIB": {
+        "held_statement_positive": 347,
+        "routes": {
+          "baseline": {
+            "n": 12869,
+            "tn": 12457,
+            "fp": 65,
+            "fn": 19,
+            "tp": 328,
+            "metrics": {
+              "accuracy": 0.9934726863004119,
+              "sensitivity": 0.9452449567723343,
+              "specificity": 0.9948091359207795,
+              "precision": 0.8346055979643766,
+              "npv": 0.9984770759858929,
+              "f1": 0.8864864864864865,
+              "brier_score": 0.008721486070256051,
+              "ece": 0.017285470737449068,
+              "auroc": 0.9985515981785602,
+              "average_precision": 0.9335614962330228
+            }
+          },
+          "accepted": {
+            "n": 10391,
+            "tn": 10062,
+            "fp": 45,
+            "fn": 10,
+            "tp": 274,
+            "metrics": {
+              "accuracy": 0.9947069579443749,
+              "sensitivity": 0.9647887323943662,
+              "specificity": 0.9955476402493322,
+              "precision": 0.8589341692789969,
+              "npv": 0.9990071485305798,
+              "f1": 0.9087893864013267,
+              "brier_score": 0.00711897240092491,
+              "ece": 0.014318346324377482,
+              "auroc": 0.9989264517549544,
+              "average_precision": 0.9539790787834458
+            }
+          },
+          "abstained": {
+            "n": 2478,
+            "tn": 2395,
+            "fp": 20,
+            "fn": 9,
+            "tp": 54,
+            "metrics": {
+              "accuracy": 0.9882970137207425,
+              "sensitivity": 0.8571428571428571,
+              "specificity": 0.9917184265010351,
+              "precision": 0.7297297297297297,
+              "npv": 0.9962562396006656,
+              "f1": 0.7883211678832117,
+              "brier_score": 0.015441308321272964,
+              "ece": 0.029727516651987747,
+              "auroc": 0.9962141378290447,
+              "average_precision": 0.8180655217600957
+            }
+          }
+        }
+      },
+      "P8:SB": {
+        "held_statement_positive": 1375,
+        "routes": {
+          "baseline": {
+            "n": 12869,
+            "tn": 10904,
+            "fp": 590,
+            "fn": 152,
+            "tp": 1223,
+            "metrics": {
+              "accuracy": 0.9423420623203046,
+              "sensitivity": 0.8894545454545455,
+              "specificity": 0.9486688707151557,
+              "precision": 0.6745725317153889,
+              "npv": 0.9862518089725036,
+              "f1": 0.7672521957340025,
+              "brier_score": 0.044896904347373874,
+              "ece": 0.050865157912500764,
+              "auroc": 0.9812155591059367,
+              "average_precision": 0.855930026921532
+            }
+          },
+          "accepted": {
+            "n": 10391,
+            "tn": 8923,
+            "fp": 384,
+            "fn": 103,
+            "tp": 981,
+            "metrics": {
+              "accuracy": 0.9531325185256472,
+              "sensitivity": 0.9049815498154982,
+              "specificity": 0.9587407327817772,
+              "precision": 0.7186813186813187,
+              "npv": 0.9885885220474185,
+              "f1": 0.8011433238056349,
+              "brier_score": 0.03824912957205186,
+              "ece": 0.044153082788496,
+              "auroc": 0.9850544981220737,
+              "average_precision": 0.8746182106932826
+            }
+          },
+          "abstained": {
+            "n": 2478,
+            "tn": 1981,
+            "fp": 206,
+            "fn": 49,
+            "tp": 242,
+            "metrics": {
+              "accuracy": 0.8970944309927361,
+              "sensitivity": 0.8316151202749141,
+              "specificity": 0.9058070416095108,
+              "precision": 0.5401785714285714,
+              "npv": 0.9758620689655172,
+              "f1": 0.6549391069012178,
+              "brier_score": 0.07277302528779818,
+              "ece": 0.07901090957252235,
+              "auroc": 0.9582773558845851,
+              "average_precision": 0.7634035316934809
+            }
+          }
+        }
+      },
+      "P8:STACH": {
+        "held_statement_positive": 366,
+        "routes": {
+          "baseline": {
+            "n": 12869,
+            "tn": 12356,
+            "fp": 147,
+            "fn": 36,
+            "tp": 330,
+            "metrics": {
+              "accuracy": 0.9857797808687544,
+              "sensitivity": 0.9016393442622951,
+              "specificity": 0.9882428217227865,
+              "precision": 0.6918238993710691,
+              "npv": 0.9970948999354422,
+              "f1": 0.7829181494661922,
+              "brier_score": 0.02255735942916709,
+              "ece": 0.04942158861810771,
+              "auroc": 0.9890249290989834,
+              "average_precision": 0.8947773332119521
+            }
+          },
+          "accepted": {
+            "n": 10391,
+            "tn": 10001,
+            "fp": 92,
+            "fn": 20,
+            "tp": 278,
+            "metrics": {
+              "accuracy": 0.9892214416321817,
+              "sensitivity": 0.9328859060402684,
+              "specificity": 0.9908847716238978,
+              "precision": 0.7513513513513513,
+              "npv": 0.9980041911984832,
+              "f1": 0.8323353293413174,
+              "brier_score": 0.018652411189371543,
+              "ece": 0.04378225065999669,
+              "auroc": 0.9894823776462789,
+              "average_precision": 0.9219096298505799
+            }
+          },
+          "abstained": {
+            "n": 2478,
+            "tn": 2355,
+            "fp": 55,
+            "fn": 16,
+            "tp": 52,
+            "metrics": {
+              "accuracy": 0.9713478611783697,
+              "sensitivity": 0.7647058823529411,
+              "specificity": 0.9771784232365145,
+              "precision": 0.48598130841121495,
+              "npv": 0.9932517924926192,
+              "f1": 0.5942857142857143,
+              "brier_score": 0.038931982980303294,
+              "ece": 0.07306903039483559,
+              "auroc": 0.9828716133756407,
+              "average_precision": 0.7188663576209188
+            }
+          }
+        }
+      },
+      "P8:RBBB": {
+        "held_statement_positive": 359,
+        "routes": {
+          "baseline": {
+            "n": 12869,
+            "tn": 12134,
+            "fp": 376,
+            "fn": 17,
+            "tp": 342,
+            "metrics": {
+              "accuracy": 0.969461496619784,
+              "sensitivity": 0.9526462395543176,
+              "specificity": 0.9699440447641886,
+              "precision": 0.4763231197771588,
+              "npv": 0.9986009381943873,
+              "f1": 0.6350974930362117,
+              "brier_score": 0.027329801804240068,
+              "ece": 0.047858645046502696,
+              "auroc": 0.9914138883878969,
+              "average_precision": 0.8752280191786196
+            }
+          },
+          "accepted": {
+            "n": 10391,
+            "tn": 9864,
+            "fp": 243,
+            "fn": 10,
+            "tp": 274,
+            "metrics": {
+              "accuracy": 0.9756520065441248,
+              "sensitivity": 0.9647887323943662,
+              "specificity": 0.9759572573463936,
+              "precision": 0.5299806576402321,
+              "npv": 0.9989872392140976,
+              "f1": 0.6841448189762797,
+              "brier_score": 0.02340171953395525,
+              "ece": 0.04210764590772384,
+              "auroc": 0.9934890335383231,
+              "average_precision": 0.8946479836298198
+            }
+          },
+          "abstained": {
+            "n": 2478,
+            "tn": 2270,
+            "fp": 133,
+            "fn": 7,
+            "tp": 68,
+            "metrics": {
+              "accuracy": 0.943502824858757,
+              "sensitivity": 0.9066666666666666,
+              "specificity": 0.9446525176862256,
+              "precision": 0.3383084577114428,
+              "npv": 0.9969257795344751,
+              "f1": 0.4927536231884058,
+              "brier_score": 0.04380143330969993,
+              "ece": 0.07197431576928366,
+              "auroc": 0.9823387432376196,
+              "average_precision": 0.8067120432410755
+            }
+          }
+        }
+      },
+      "P8:PAC": {
+        "held_statement_positive": 256,
+        "routes": {
+          "baseline": {
+            "n": 12869,
+            "tn": 11780,
+            "fp": 833,
+            "fn": 104,
+            "tp": 152,
+            "metrics": {
+              "accuracy": 0.9271893698034035,
+              "sensitivity": 0.59375,
+              "specificity": 0.9339570284626972,
+              "precision": 0.15431472081218275,
+              "npv": 0.991248737798721,
+              "f1": 0.24496373892022563,
+              "brier_score": 0.0726152034545821,
+              "ece": 0.19982530419128172,
+              "auroc": 0.8450668457147388,
+              "average_precision": 0.27480189327600213
+            }
+          },
+          "accepted": {
+            "n": 10391,
+            "tn": 9721,
+            "fp": 492,
+            "fn": 69,
+            "tp": 109,
+            "metrics": {
+              "accuracy": 0.9460109710326244,
+              "sensitivity": 0.6123595505617978,
+              "specificity": 0.951826103985117,
+              "precision": 0.18136439267886856,
+              "npv": 0.9929519918283963,
+              "f1": 0.2798459563543004,
+              "brier_score": 0.0648068533424516,
+              "ece": 0.192195919857423,
+              "auroc": 0.8470978275099922,
+              "average_precision": 0.30770545964137236
+            }
+          },
+          "abstained": {
+            "n": 2478,
+            "tn": 2059,
+            "fp": 341,
+            "fn": 35,
+            "tp": 43,
+            "metrics": {
+              "accuracy": 0.8482647296206618,
+              "sensitivity": 0.5512820512820513,
+              "specificity": 0.8579166666666667,
+              "precision": 0.11197916666666667,
+              "npv": 0.9832855778414518,
+              "f1": 0.18614718614718614,
+              "brier_score": 0.10535796617255949,
+              "ece": 0.23181760952345518,
+              "auroc": 0.8115705128205128,
+              "average_precision": 0.21537003157340903
+            }
+          }
+        }
+      },
+      "P8:PVC": {
+        "held_statement_positive": 521,
+        "routes": {
+          "baseline": {
+            "n": 12869,
+            "tn": 12058,
+            "fp": 290,
+            "fn": 108,
+            "tp": 413,
+            "metrics": {
+              "accuracy": 0.9690729660424275,
+              "sensitivity": 0.7927063339731286,
+              "specificity": 0.9765144152899254,
+              "precision": 0.5874822190611664,
+              "npv": 0.9911228012493836,
+              "f1": 0.6748366013071896,
+              "brier_score": 0.03876158032025823,
+              "ece": 0.08915586383773015,
+              "auroc": 0.9708251182750771,
+              "average_precision": 0.7117408647420614
+            }
+          },
+          "accepted": {
+            "n": 10391,
+            "tn": 9794,
+            "fp": 199,
+            "fn": 83,
+            "tp": 315,
+            "metrics": {
+              "accuracy": 0.9728611298238861,
+              "sensitivity": 0.7914572864321608,
+              "specificity": 0.9800860602421695,
+              "precision": 0.6128404669260701,
+              "npv": 0.9915966386554622,
+              "f1": 0.6907894736842105,
+              "brier_score": 0.035757498060480626,
+              "ece": 0.08508106914692132,
+              "auroc": 0.968866146000693,
+              "average_precision": 0.7075224347044956
+            }
+          },
+          "abstained": {
+            "n": 2478,
+            "tn": 2264,
+            "fp": 91,
+            "fn": 25,
+            "tp": 98,
+            "metrics": {
+              "accuracy": 0.9531880548829701,
+              "sensitivity": 0.7967479674796748,
+              "specificity": 0.9613588110403397,
+              "precision": 0.5185185185185185,
+              "npv": 0.9890782000873743,
+              "f1": 0.6282051282051282,
+              "brier_score": 0.05135860161216664,
+              "ece": 0.10624270469010881,
+              "auroc": 0.9759480779521171,
+              "average_precision": 0.734991858589897
+            }
+          }
+        }
+      },
+      "P4:ASMI": {
+        "held_statement_positive": 44,
+        "routes": {
+          "baseline": {
+            "n": 12869,
+            "tn": 11694,
+            "fp": 1131,
+            "fn": 18,
+            "tp": 26,
+            "metrics": {
+              "accuracy": 0.9107156733234906,
+              "sensitivity": 0.5909090909090909,
+              "specificity": 0.9118128654970761,
+              "precision": 0.02247191011235955,
+              "npv": 0.9984631147540983,
+              "f1": 0.04329725228975854,
+              "brier_score": 0.1747363557803907,
+              "ece": 0.36163928938615775,
+              "auroc": 0.8764061669324827,
+              "average_precision": 0.04967882681468092
+            }
+          },
+          "accepted": {
+            "n": 10391,
+            "tn": 9548,
+            "fp": 812,
+            "fn": 11,
+            "tp": 20,
+            "metrics": {
+              "accuracy": 0.9207968434221923,
+              "sensitivity": 0.6451612903225806,
+              "specificity": 0.9216216216216216,
+              "precision": 0.02403846153846154,
+              "npv": 0.998849252013809,
+              "f1": 0.046349942062572425,
+              "brier_score": 0.16674101878048914,
+              "ece": 0.35229183653089546,
+              "auroc": 0.8806794121310251,
+              "average_precision": 0.06509927483738541
+            }
+          },
+          "abstained": {
+            "n": 2478,
+            "tn": 2146,
+            "fp": 319,
+            "fn": 7,
+            "tp": 6,
+            "metrics": {
+              "accuracy": 0.8684422921711057,
+              "sensitivity": 0.46153846153846156,
+              "specificity": 0.8705882352941177,
+              "precision": 0.018461538461538463,
+              "npv": 0.9967487227124942,
+              "f1": 0.03550295857988166,
+              "brier_score": 0.20826321081105162,
+              "ece": 0.4008359732517868,
+              "auroc": 0.8351068809486659,
+              "average_precision": 0.020512891491252412
+            }
+          }
+        }
+      },
+      "P4:LVH": {
+        "held_statement_positive": 111,
+        "routes": {
+          "baseline": {
+            "n": 12869,
+            "tn": 8826,
+            "fp": 3932,
+            "fn": 36,
+            "tp": 75,
+            "metrics": {
+              "accuracy": 0.6916621338099308,
+              "sensitivity": 0.6756756756756757,
+              "specificity": 0.6918012227621885,
+              "precision": 0.018717244821562267,
+              "npv": 0.995937711577522,
+              "f1": 0.036425449247207385,
+              "brier_score": 0.346548827445379,
+              "ece": 0.5234649869926411,
+              "auroc": 0.7982647171391488,
+              "average_precision": 0.049847572054230065
+            }
+          },
+          "accepted": {
+            "n": 10391,
+            "tn": 7070,
+            "fp": 3228,
+            "fn": 25,
+            "tp": 68,
+            "metrics": {
+              "accuracy": 0.6869406216918487,
+              "sensitivity": 0.7311827956989247,
+              "specificity": 0.6865410759370751,
+              "precision": 0.02063106796116505,
+              "npv": 0.9964763918252291,
+              "f1": 0.040129831808793155,
+              "brier_score": 0.3461385007309629,
+              "ece": 0.5204366333367303,
+              "auroc": 0.8117433805917007,
+              "average_precision": 0.05341981573845943
+            }
+          },
+          "abstained": {
+            "n": 2478,
+            "tn": 1756,
+            "fp": 704,
+            "fn": 11,
+            "tp": 7,
+            "metrics": {
+              "accuracy": 0.7114608555286521,
+              "sensitivity": 0.3888888888888889,
+              "specificity": 0.7138211382113822,
+              "precision": 0.009845288326300985,
+              "npv": 0.9937747594793436,
+              "f1": 0.019204389574759947,
+              "brier_score": 0.34826945088746836,
+              "ece": 0.5361637855554205,
+              "auroc": 0.7046747967479675,
+              "average_precision": 0.04001070406944325
+            }
+          }
+        }
+      },
+      "P4:IMI": {
+        "held_statement_positive": 55,
+        "routes": {
+          "baseline": {
+            "n": 12869,
+            "tn": 9634,
+            "fp": 3180,
+            "fn": 8,
+            "tp": 47,
+            "metrics": {
+              "accuracy": 0.7522729038775352,
+              "sensitivity": 0.8545454545454545,
+              "specificity": 0.7518339316372717,
+              "precision": 0.01456461109389526,
+              "npv": 0.9991702966189587,
+              "f1": 0.028641072516758074,
+              "brier_score": 0.25081591081495636,
+              "ece": 0.42904823590166985,
+              "auroc": 0.8870908239567519,
+              "average_precision": 0.11448059921482512
+            }
+          },
+          "accepted": {
+            "n": 10391,
+            "tn": 7765,
+            "fp": 2582,
+            "fn": 6,
+            "tp": 38,
+            "metrics": {
+              "accuracy": 0.7509383120007699,
+              "sensitivity": 0.8636363636363636,
+              "specificity": 0.7504590702619117,
+              "precision": 0.01450381679389313,
+              "npv": 0.9992278985973492,
+              "f1": 0.028528528528528527,
+              "brier_score": 0.25125415927353395,
+              "ece": 0.42712874712970833,
+              "auroc": 0.8959843432879095,
+              "average_precision": 0.12936541006630897
+            }
+          },
+          "abstained": {
+            "n": 2478,
+            "tn": 1869,
+            "fp": 598,
+            "fn": 2,
+            "tp": 9,
+            "metrics": {
+              "accuracy": 0.7578692493946732,
+              "sensitivity": 0.8181818181818182,
+              "specificity": 0.7576003242805026,
+              "precision": 0.014827018121911038,
+              "npv": 0.9989310529128808,
+              "f1": 0.02912621359223301,
+              "brier_score": 0.2489782030937787,
+              "ece": 0.4370972301831275,
+              "auroc": 0.8507941187308841,
+              "average_precision": 0.08822697057863982
+            }
+          }
+        }
+      }
+    },
+    "macro_f1": {
+      "baseline": 0.4555464932226702,
+      "accepted": 0.4791173989958848,
+      "endpoints": [
+        "P8:AFIB",
+        "P8:SB",
+        "P8:STACH",
+        "P8:RBBB",
+        "P8:PAC",
+        "P8:PVC",
+        "P4:ASMI",
+        "P4:LVH",
+        "P4:IMI"
+      ]
+    },
+    "macro_binary_accuracy": {
+      "baseline": 0.9046632303295603,
+      "accepted": 0.9100289780686277,
+      "abstained": 0.8821630347054076
+    },
+    "fixed_policy_intervals": {
+      "abstention_all_held": {
+        "bounds": [
+          0.1854533230743322,
+          0.19886772310232914
+        ],
+        "valid": 1000,
+        "invalid": 0
+      },
+      "coverage_scored": {
+        "bounds": [
+          0.8011322768976709,
+          0.8145466769256677
+        ],
+        "valid": 1000,
+        "invalid": 0
+      },
+      "selective_risk": {
+        "bounds": [
+          0.08852205672380005,
+          0.09131683800948835
+        ],
+        "valid": 1000,
+        "invalid": 0
+      },
+      "baseline_macro_f1": {
+        "bounds": [
+          0.44684531698697144,
+          0.46342614327217335
+        ],
+        "valid": 1000,
+        "invalid": 0
+      },
+      "accepted_macro_f1": {
+        "bounds": [
+          0.46959919736443534,
+          0.48796231109126115
+        ],
+        "valid": 1000,
+        "invalid": 0
+      },
+      "delta_macro_f1": {
+        "bounds": [
+          0.01885168977366997,
+          0.02831833473799478
+        ],
+        "valid": 1000,
+        "invalid": 0
+      },
+      "aurc": {
+        "bounds": [
+          0.08558831800043436,
+          0.08852282527117152
+        ],
+        "valid": 1000,
+        "invalid": 0
+      }
+    }
+  },
+  "positive_statement_disposition": {
+    "P8:AFIB": {
+      "held_statement_positives": 347,
+      "accepted_emitted_correct_positive": 274,
+      "accepted_emitted_missed_positive": 10,
+      "abstained_reference_positive_no_prediction": 63,
+      "technically_unscored_reference_positive_no_prediction": 0,
+      "abstained_baseline_counterfactual_fn": 9,
+      "fraction_of_held_statement_positives_correctly_emitted": 0.7896253602305475,
+      "fraction_of_held_statement_positives_abstained": 0.18155619596541786
+    },
+    "P8:SB": {
+      "held_statement_positives": 1375,
+      "accepted_emitted_correct_positive": 981,
+      "accepted_emitted_missed_positive": 103,
+      "abstained_reference_positive_no_prediction": 291,
+      "technically_unscored_reference_positive_no_prediction": 0,
+      "abstained_baseline_counterfactual_fn": 49,
+      "fraction_of_held_statement_positives_correctly_emitted": 0.7134545454545455,
+      "fraction_of_held_statement_positives_abstained": 0.21163636363636365
+    },
+    "P8:STACH": {
+      "held_statement_positives": 366,
+      "accepted_emitted_correct_positive": 278,
+      "accepted_emitted_missed_positive": 20,
+      "abstained_reference_positive_no_prediction": 68,
+      "technically_unscored_reference_positive_no_prediction": 0,
+      "abstained_baseline_counterfactual_fn": 16,
+      "fraction_of_held_statement_positives_correctly_emitted": 0.7595628415300546,
+      "fraction_of_held_statement_positives_abstained": 0.18579234972677597
+    },
+    "P8:RBBB": {
+      "held_statement_positives": 359,
+      "accepted_emitted_correct_positive": 274,
+      "accepted_emitted_missed_positive": 10,
+      "abstained_reference_positive_no_prediction": 75,
+      "technically_unscored_reference_positive_no_prediction": 0,
+      "abstained_baseline_counterfactual_fn": 7,
+      "fraction_of_held_statement_positives_correctly_emitted": 0.7632311977715878,
+      "fraction_of_held_statement_positives_abstained": 0.20891364902506965
+    },
+    "P8:PAC": {
+      "held_statement_positives": 256,
+      "accepted_emitted_correct_positive": 109,
+      "accepted_emitted_missed_positive": 69,
+      "abstained_reference_positive_no_prediction": 78,
+      "technically_unscored_reference_positive_no_prediction": 0,
+      "abstained_baseline_counterfactual_fn": 35,
+      "fraction_of_held_statement_positives_correctly_emitted": 0.42578125,
+      "fraction_of_held_statement_positives_abstained": 0.3046875
+    },
+    "P8:PVC": {
+      "held_statement_positives": 521,
+      "accepted_emitted_correct_positive": 315,
+      "accepted_emitted_missed_positive": 83,
+      "abstained_reference_positive_no_prediction": 123,
+      "technically_unscored_reference_positive_no_prediction": 0,
+      "abstained_baseline_counterfactual_fn": 25,
+      "fraction_of_held_statement_positives_correctly_emitted": 0.6046065259117083,
+      "fraction_of_held_statement_positives_abstained": 0.236084452975048
+    },
+    "P4:ASMI": {
+      "held_statement_positives": 44,
+      "accepted_emitted_correct_positive": 20,
+      "accepted_emitted_missed_positive": 11,
+      "abstained_reference_positive_no_prediction": 13,
+      "technically_unscored_reference_positive_no_prediction": 0,
+      "abstained_baseline_counterfactual_fn": 7,
+      "fraction_of_held_statement_positives_correctly_emitted": 0.45454545454545453,
+      "fraction_of_held_statement_positives_abstained": 0.29545454545454547
+    },
+    "P4:LVH": {
+      "held_statement_positives": 111,
+      "accepted_emitted_correct_positive": 68,
+      "accepted_emitted_missed_positive": 25,
+      "abstained_reference_positive_no_prediction": 18,
+      "technically_unscored_reference_positive_no_prediction": 0,
+      "abstained_baseline_counterfactual_fn": 11,
+      "fraction_of_held_statement_positives_correctly_emitted": 0.6126126126126126,
+      "fraction_of_held_statement_positives_abstained": 0.16216216216216217
+    },
+    "P4:IMI": {
+      "held_statement_positives": 55,
+      "accepted_emitted_correct_positive": 38,
+      "accepted_emitted_missed_positive": 6,
+      "abstained_reference_positive_no_prediction": 11,
+      "technically_unscored_reference_positive_no_prediction": 0,
+      "abstained_baseline_counterfactual_fn": 2,
+      "fraction_of_held_statement_positives_correctly_emitted": 0.6909090909090909,
+      "fraction_of_held_statement_positives_abstained": 0.2
+    }
+  },
+  "cascade": "not implemented; no referral, review, or stage-two prediction inferred",
+  "risk": "mean per-ECG binary statement error across all mapped P8/P4 endpoints",
+  "record_identifiers_exported": false,
+  "independent_validation": false
+}
