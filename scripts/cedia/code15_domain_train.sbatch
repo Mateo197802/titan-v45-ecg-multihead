@@ -26,8 +26,14 @@ cd "$repo"
 test -z "$(git status --porcelain)"
 git rev-parse HEAD
 sha256sum docs/domain_adaptation/MULTISOURCE_TRAINING_PROTOCOL.json
-if [[ ${1:-} == released_baselines ]]; then
-    python -B -u scripts/domain_adaptation/evaluate_released.py "$bank" "$assets" "$out"
-else
-    python -B -u scripts/domain_adaptation/train_duration_aware.py "$bank" "$assets" "$out" "$@"
-fi
+case ${1:-} in
+    released_baselines)
+        python -B -u scripts/domain_adaptation/evaluate_released.py "$bank" "$assets" "$out" ;;
+    masked_mimic_ssl)
+        python -B -u scripts/domain_adaptation/train_masked_mimic.py "$bank" "$assets" "$out" ;;
+    evaluate_frozen)
+        shift
+        python -B -u scripts/domain_adaptation/evaluate_new_holdout.py "$bank" "$assets" "$@" "$out" ;;
+    *)
+        python -B -u scripts/domain_adaptation/train_duration_aware.py "$bank" "$assets" "$out" "$@" ;;
+esac

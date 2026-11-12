@@ -25,6 +25,7 @@ MODES = {
     "partial_transformer_mlp": ("transformer.layers.7.", "transformer.layers.8.", "final_norm."),
     "partial_transformer_resnet_mlp": ("transformer.layers.7.", "transformer.layers.8.", "final_norm.",
                                       "res_layers.5.", "token_projection."),
+    "masked_mimic_partial": ("transformer.layers.7.", "transformer.layers.8.", "final_norm."),
     "full_regularized": ("",),
 }
 
@@ -131,11 +132,13 @@ def configure(backbone, mode, cfg):
     return [{"params": params, "lr": rate} for rate, params in groups.items()], anchors
 
 
-def run(bank, assets, out, mode, seed, normalizer):
+def run(bank, assets, out, mode, seed, normalizer, ssl=None):
     cfg = json.loads(PROTOCOL.read_bytes())
     hp = cfg["training"]
     if seed not in hp["seeds"] or normalizer not in cfg["waveform"]["normalizations"]:
         raise ValueError("unregistered seed or normalization")
+    if (mode == "masked_mimic_partial") != (ssl is not None):
+        raise ValueError("SSL weights are required only for the registered MIMIC warm-start arm")
     if not torch.cuda.is_available():
         raise RuntimeError("a CEDIA CUDA allocation is required")
     torch.manual_seed(seed)
@@ -152,6 +155,21 @@ def run(bank, assets, out, mode, seed, normalizer):
     del state
     model = TemporalSpecialist(backbone).cuda()
     groups, anchors = configure(backbone, mode, hp)
+    warm_start_sha = None
+    if ssl is not None:
+        ssl_checkpoint = ssl / "masked_mimic_backbone.pt"
+        warm_start_sha = digest(ssl_checkpoint)
+        ssl_receipt = json.loads((ssl / "SSL_TRAINING_RECEIPT.json").read_bytes())
+        ssl_protocol = ROOT / "docs/domain_adaptation/MASKED_MIMIC_PROTOCOL.json"
+        if (ssl_receipt["checkpoint_sha256"] != warm_start_sha
+                or ssl_receipt["protocol_sha256"] != digest(ssl_protocol)
+                or ssl_receipt["label_files_opened"] or ssl_receipt["heldout_waveforms_opened"]):
+            raise ValueError("SSL checkpoint seal mismatch")
+        warm = torch.load(ssl_checkpoint, map_location="cpu", weights_only=True)
+        if warm["parent_sha256"] != hashes[BACKBONE] or warm["protocol_sha256"] != digest(ssl_protocol):
+            raise ValueError("SSL parent weights differ from the frozen backbone")
+        backbone.load_state_dict(warm["state_dict"], strict=True)
+        del warm
     optimizer = torch.optim.AdamW([{"params": model.head.parameters(), "lr": hp["head_lr"]}, *groups],
                                   weight_decay=hp["weight_decay"])
     labels = np.concatenate([arrays[2] for arrays in train.values()])
@@ -215,7 +233,8 @@ def run(bank, assets, out, mode, seed, normalizer):
                 break
     result = {"mode": mode, "seed": seed, "normalization": normalizer, "best_epoch": best_epoch,
               "validation_macro_ap": best, "validation_macro_f1_at_half": best_f1, "trainable_parameters": trainable,
-              "source": "CODE-15% development only", "calibration_or_test_opened": False,
+              "source": "CODE-15% supervised development", "calibration_or_test_opened": False,
+              "mimic_ssl_checkpoint_sha256": warm_start_sha,
               "protocol_sha256": digest(PROTOCOL), "baseline_assets": hashes, "checkpoint_sha256": digest(checkpoint),
               "code_commit": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
               "bank_receipt_sha256": digest(bank / "CODE_DEVELOPMENT_RECEIPT.json"),
@@ -233,5 +252,6 @@ if __name__ == "__main__":
     parser.add_argument("mode", choices=MODES)
     parser.add_argument("seed", type=int)
     parser.add_argument("normalizer", choices=("per_lead_zscore", "robust_shared_gain"))
+    parser.add_argument("--ssl", type=Path)
     args = parser.parse_args()
-    run(args.bank, args.assets, args.output, args.mode, args.seed, args.normalizer)
+    run(args.bank, args.assets, args.output, args.mode, args.seed, args.normalizer, args.ssl)

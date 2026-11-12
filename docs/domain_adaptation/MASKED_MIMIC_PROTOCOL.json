@@ -1,0 +1,19 @@
+{
+  "scope": "MIMIC_IV_ECG_TRAIN_WAVEFORMS_ONLY_SELF_SUPERVISION",
+  "frozen_parent_protocol_sha256": "e4fa12f255403b3d59b3188ee138fcf63c44f1a102f011a14db8f3ae099b8ac4",
+  "eligible_manifest_sha256": "418ee17b0554ba5cd9391ab732c5ce5b9edc7fdbbc35dc8f41769968001139ee",
+  "seed": 20261112,
+  "patient_cap": 2048,
+  "max_records_per_patient": 1,
+  "sample_before_outcomes": "hash eligible train patients and select a stable first waveform per patient; no report read",
+  "epochs": 2,
+  "batch": 32,
+  "mask_probability": 0.30,
+  "mask_samples": 16,
+  "learning_rate": 0.00002,
+  "decoder_learning_rate": 0.0005,
+  "max_gpu_hours": 4,
+  "trainable_backbone": ["transformer.layers.7.", "transformer.layers.8.", "final_norm."],
+  "warm_start": "then run the same partial CODE supervised candidate; compare against partial CODE without SSL",
+  "heldout": "no MIMIC validation/calibration/test waveforms or diagnoses are used"
+}
