@@ -37,6 +37,7 @@ real second-stage inference are not implied by abstention.
 | 33390 | New PTB-XL auxiliary and bounded pathology Other heads | afterok:33355:33369 | Complete reference flow, held metrics and patient intervals for supported endpoints |
 | 33396 | New SPH mapped rhythm Other and auxiliary heads vs frozen-score comparator | afterok:33355:33369 | Paired held development metrics and full reference/scoring flow |
 | 33399 | Same-score full-population vs restricted SPH analysis | afterok:33355:33357 | Statement prevalence, disjoint flow strata, and paired differences between denominators |
+| 33403 | Compare both new waveform replays to archived predictions and previous native replays | afterok:33363:33364 | Anchored input hashes, score residuals, margins, decisions and missing-score counts |
 
 The submitted baseline uses experiment commit f989eccf74d38399d0298026e6f4c078a437fd2d.
 The comparison job uses 891dacbca23d7685117f836f98bc3dd1482bb1af.
@@ -44,6 +45,7 @@ The matched retraining job uses 648c5a4b784b2307376d620eeb03fc0bb5d3198a.
 The pathology Other job uses 6baab4228767219c048d8989a35a70e3bb2219fa.
 The rhythm Other job uses 72dd436cd5a9e8ec397fccd1e70b9aa1abed4efe.
 The full-population contrast job uses 63ff66fb9b49198f773973d5f579c404940c648b.
+The replay contrast job uses c4f5e38b31cfad391bdb03ab979ab15d0b2e7543.
 Submission is not completion; the registry does not assert results.
 
 The [population contrast protocol](../../configs/reviewer_experiments/november_population_contrast.json)
@@ -61,6 +63,13 @@ not clinical referral, abstention or a separately executed stage.
 
 The [morphology input contract](MORPHOLOGY_INPUT_CONTRACT.md) gives the formulas
 and separates waveform replay, fixed-weight sensitivity and retraining.
+Job 33403 authenticates the previous native ledgers and receipts from
+32448 and 32461 and the archived prediction tables separately. It
+records exact native byte agreement if observed, but can also quantify
+native drift without redefining an archived residual as equivalence.
+Neither contrast substitutes for the missing original loader. The
+strict same-ledger audit 33365 remains unmodified. The old P4 denominator
+is in panel observations, not distinct ECGs.
 
 The development calibrator groups ECGs by patient components linked by
 exact waveform hashes, uses only the calibration half for cutoffs and
