@@ -1,0 +1,73 @@
+{
+  "schema": "TITAN_V45_MORPHOLOGY_POSTHOC_ROBUSTNESS_V1",
+  "job": "33704",
+  "scope": "Post hoc robustness on previously inspected held predictions, not new confirmation or retraining.",
+  "analysis_contract": "Two-sided within-unit arm-swap reference distribution for paired endpoint macro-F1 difference; Holm across three profiles.",
+  "interpretation_limit": "Exchangeability sensitivity analysis, not a causal randomization of the historical treatment. No model, threshold, unit or endpoint selection.",
+  "config_sha256": "9656714a390d8919faac76cff413bf1dec0953641f57b147468d69a7479c7241",
+  "original_aggregate_sha256": "c057c163e9a526e1aaa92443dfd64a4df03add66b1476ceb43e5f84b83efb8f8",
+  "original_model_sha256": "241f8f673121477c9d27c96239f8b423e5b036bbe33d6a33237d5920200a2337",
+  "binding": {
+    "protocol_sha256": "4a757d5a1860d1c838d77c7eff59783f20ffcdd6f64367a89623ca055f996dc4",
+    "extraction_receipt_sha256": "de65d38ef6c3c00cae2546858924ab87a7656e754fe4a52aaac7a2d7b328f3cb",
+    "inventory_sha256": "798866dc1dc00d3e81c9fda28711dd0ea57fb57a7fc2ac0a415ad20a97f17107"
+  },
+  "profiles": {
+    "P6": {
+      "evaluated_endpoints": 6,
+      "original_bootstrap_rederived": {
+        "with_minus_without": 0.00721644410993801,
+        "bounds": [
+          -0.004046461921011649,
+          0.020590001201723624
+        ],
+        "valid_replicates": 1000,
+        "invalid_replicates": 0
+      },
+      "observed_delta_macro_f1": 0.007216444109937936,
+      "exchangeability_units": 1251,
+      "absolute_null_extremes": 2840,
+      "permutations": 10000,
+      "two_sided_monte_carlo_p": 0.2840715928407159,
+      "holm_adjusted_p": 0.5681431856814319
+    },
+    "P8": {
+      "evaluated_endpoints": 8,
+      "original_bootstrap_rederived": {
+        "with_minus_without": 0.014572830909973862,
+        "bounds": [
+          0.001553101916558849,
+          0.027620746339518068
+        ],
+        "valid_replicates": 1000,
+        "invalid_replicates": 0
+      },
+      "observed_delta_macro_f1": 0.014572830909973966,
+      "exchangeability_units": 1251,
+      "absolute_null_extremes": 451,
+      "permutations": 10000,
+      "two_sided_monte_carlo_p": 0.0451954804519548,
+      "holm_adjusted_p": 0.1355864413558644
+    },
+    "P4": {
+      "evaluated_endpoints": 4,
+      "original_bootstrap_rederived": {
+        "with_minus_without": 0.0006099107324000763,
+        "bounds": [
+          -0.01627915910044925,
+          0.015749943071075547
+        ],
+        "valid_replicates": 1000,
+        "invalid_replicates": 0
+      },
+      "observed_delta_macro_f1": 0.0006099107324000208,
+      "exchangeability_units": 254,
+      "absolute_null_extremes": 9626,
+      "permutations": 10000,
+      "two_sided_monte_carlo_p": 0.9626037396260374,
+      "holm_adjusted_p": 0.9626037396260374
+    }
+  },
+  "fit_or_feature_extraction_performed": false,
+  "no_individual_records_exported": true
+}

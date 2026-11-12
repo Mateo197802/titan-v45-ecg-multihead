@@ -1,4 +1,5 @@
 import importlib
+import json
 from pathlib import Path
 
 import pytest
@@ -63,3 +64,22 @@ def test_verifier_rejects_accepted_only_metric_with_inflated_denominator(verify)
     args[1]["joint_selective"]["risk_accepted"] = .15
     with pytest.raises(ValueError, match="wrong known-reference denominator"):
         verify.check_scientific(*args)
+
+
+def test_verifier_recomputes_familywise_morphology_adjustment(verify):
+    args = inputs(verify)
+    args[2]["profiles"]["P8"] = {**args[2]["profiles"]["P8"], "holm_adjusted_p": .2}
+    with pytest.raises(ValueError, match="morphology robustness"):
+        verify.check_scientific(*args)
+
+
+def test_ptbxl_support_has_all_eleven_dispositions_and_no_proxy_positives(verify):
+    path = (Path(__file__).resolve().parents[2]
+            / "outputs/results/reviewer_closure_experiments/ptbxl_other_support_verified_v2.json")
+    audit = json.loads(path.read_bytes())
+    verify.check_ptbxl_support(audit, verify.digest(path))
+    part = audit["endpoint_support"]["LQTS"]["P4_scoreable"]
+    for counts in part.values():
+        counts["positive"] = counts.pop("non_equivalent_proxy")
+    with pytest.raises(ValueError, match="proxy boundary"):
+        verify.check_ptbxl_support(audit, verify.digest(path))

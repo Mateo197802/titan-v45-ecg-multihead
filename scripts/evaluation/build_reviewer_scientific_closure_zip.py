@@ -14,6 +14,7 @@ from verify_reviewer_scientific_closure import (
     JOBS,
     PUBLIC_NAMES,
     check_ptb,
+    check_ptbxl_rhythm,
     check_ptbxl_support,
     check_scientific,
 )
@@ -62,6 +63,9 @@ ALLOWLIST = frozenset((
     "scripts/evaluation/verify_reviewer_november_delivery.py",
     "scripts/evaluation/score_reviewer_closure_ludb.py",
     "scripts/evaluation/audit_reviewer_ptbxl_other_support.py",
+    "scripts/evaluation/evaluate_reviewer_ptbxl_cached_rhythm.py",
+    "scripts/cedia/reviewer_closure_ptbxl_cached_rhythm.sbatch",
+    "scripts/cedia/reviewer_private_scratch.sh",
     "scripts/evaluation/compare_reviewer_baseline.py",
     "scripts/evaluation/freeze_reviewer_selective_policy.py",
 ))
@@ -121,6 +125,8 @@ def validate_final(blobs):
     check_scientific(content["score"], content["evaluate"], content["morphology"], content["sph"], checks["score"])
     check_ptb(content["ptb_score"], content["ptb_evaluate"], content["ptb_eligibility"], checks["ptb_score"])
     check_ptbxl_support(content["ptbxl_support"], checks["ptbxl_support"])
+    check_ptbxl_rhythm(content["ptbxl_rhythm_score"], content["ptbxl_rhythm_evaluate"],
+                     content["ptbxl_support"], checks["ptbxl_rhythm_score"])
 
 
 def build(root, output):

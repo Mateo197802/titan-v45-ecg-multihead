@@ -11,7 +11,10 @@ from pathlib import Path
 from score_reviewer_closure_ludb import ARCHIVE_SHA256, PROTOCOL_SHA256, write_new
 from verify_reviewer_november_delivery import digest, protected_path, seal_entry, validate_public
 
-JOBS = {"score": "33697", "evaluate": "33720", "morphology": "33704", "ptb_score": "33718", "ptb_evaluate": "33718"}
+JOBS = {
+    "score": "33697", "evaluate": "33720", "morphology": "33704", "ptb_score": "33718", "ptb_evaluate": "33718",
+    "ptbxl_rhythm_score": "33736", "ptbxl_rhythm_evaluate": "33736",
+}
 SUPERSEDED_EVALUATION = "33699"
 PUBLIC_NAMES = {
     "score": "ludb_scoring_receipt.json",
@@ -23,6 +26,8 @@ PUBLIC_NAMES = {
     "ptb_eligibility": "ptb_diagnostic_eligibility_verified_v2.json",
     "ptb_eligibility_superseded": "ptb_diagnostic_eligibility_superseded_v1.json",
     "ptbxl_support": "ptbxl_other_support_verified_v2.json",
+    "ptbxl_rhythm_score": "ptbxl_cached_v3ag_rhythm_scoring_receipt.json",
+    "ptbxl_rhythm_evaluate": "ptbxl_cached_v3ag_rhythm_aggregate.json",
 }
 SPH_SHA256 = "f133cec9ba402ff7fb19ccf5ecaba8daae66c4f492829e3d0f13caa356fbd2d7"
 POLICY_SHA256 = "c9183320a4dd923f037a93fc014fc2db6bc64f223ff67b5d297e540eefb43ae6"
@@ -96,9 +101,12 @@ def check_scientific(score, evaluated, morph, sph, score_hash):
         raise ValueError("SPH calibration isolation or cutoff reproduction is not verified")
     if morph["fit_or_feature_extraction_performed"] is not False or set(morph["profiles"]) != {"P6", "P8", "P4"}:
         raise ValueError("morphology audit must reuse the three original fitted arms")
-    for p in morph["profiles"].values():
+    ordered = sorted(morph["profiles"].values(), key=lambda p: p["two_sided_monte_carlo_p"])
+    holm = 0.0
+    for i, p in enumerate(ordered):
+        holm = min(1.0, max(holm, (len(ordered) - i) * p["two_sided_monte_carlo_p"]))
         if (not number_equal(p["two_sided_monte_carlo_p"], p["absolute_null_extremes"] + 1, p["permutations"] + 1)
-                or p["holm_adjusted_p"] < p["two_sided_monte_carlo_p"]
+                or not math.isclose(p["holm_adjusted_p"], holm, abs_tol=1e-12)
                 or not math.isclose(p["observed_delta_macro_f1"],
                                     p["original_bootstrap_rederived"]["with_minus_without"], abs_tol=1e-12)):
             raise ValueError("morphology robustness calculations do not reconcile")
@@ -150,6 +158,41 @@ def check_ptbxl_support(audit, receipt_hash):
                 raise ValueError("PTB-XL support counts or diagnostic proxy boundary differ")
 
 
+def check_ptbxl_rhythm(score, result, audit, score_hash):
+    if (score["scored"] != 6205 or score["source_reference_values_used"] or score["waveform_inference"]
+            or score["archived_probability_columns_checked"] != 16
+            or not 0 <= score["max_absolute_archived_score_error"] <= 1e-5
+            or result["score_receipt_sha256"] != score_hash or result["reference_support_sha256"] != PTBXL_SUPPORT_SHA256
+            or result["all_metadata_ecgs"] != 19601 or result["cached_scored_ecgs"] != 6205
+            or result["outside_authorized_scoreable_cache"] != 13396
+            or result["historical_independence_certified"] or result["fold10_references_or_waveforms_used"]
+            or result["weights_changed"] or result["calibration_and_held_subject_overlap"] != 0
+            or result["exact_signal_groups_crossing_folds"] != 0):
+        raise ValueError("PTB-XL cached readout changed source, replay tolerance or split boundary")
+    if set(result["endpoints"]) != {"Paced", "2AVB", "3AVB"}:
+        raise ValueError("PTB-XL cached readout endpoint set differs")
+    for endpoint, entry in result["endpoints"].items():
+        c, h = entry["calibration_folds_1_8"], entry["held_fold_9"]
+        pooled = entry["pooled_descriptive_rank"]
+        expected = audit["endpoint_support"][endpoint]["P4_scoreable"]["ECGs"]
+        if (entry["released_operating_point_exists"] or pooled["reference_states"] != expected
+                or sum(s["eligible_cache_ecgs"] for s in (c, h)) != 6205
+                or any(sum(s["reference_states"].values()) != s["eligible_cache_ecgs"] for s in (c, h))
+                or any(sum(s["reference_states"].get(k, 0) for s in (c, h)) != n for k, n in expected.items())
+                or (c["reference_states"].keys() | h["reference_states"].keys()) != expected.keys()):
+            raise ValueError("PTB-XL cached endpoint denominator does not reconcile")
+        threshold = entry["new_operating_point"]
+        enough = min(s[k] for s in (c, h) for k in ("positive_subjects", "control_subjects")) >= 5
+        if (threshold is not None) != enough or ("metrics" in h) != enough:
+            raise ValueError("PTB-XL operating point or held estimate bypasses the support screen")
+        if enough:
+            m = h["metrics"]
+            if (m["tp"] + m["fn"] != h["reference_states"]["positive"]
+                    or m["tn"] + m["fp"] != h["reference_states"]["explicit_normal_control"]
+                    or not number_equal(m["npv"], m["tn"], m["tn"] + m["fn"])):
+                raise ValueError("PTB-XL held confusion counts differ from known references")
+
+
 def native_files(root):
     out = subprocess.check_output([
         "sacct", "-S", "2026-11-12", "-X", "-j", ",".join(sorted(set(JOBS.values()) | {SUPERSEDED_EVALUATION})),
@@ -172,14 +215,17 @@ def native_files(root):
         "morphology": root / f"morphology-audit-{JOBS['morphology']}",
         "ptb_score": root / f"ptb-transport-{JOBS['ptb_score']}",
         "ptb_evaluate": root / f"ptb-transport-{JOBS['ptb_evaluate']}",
+        "ptbxl_rhythm_score": root / f"ptbxl-cached-rhythm-{JOBS['ptbxl_rhythm_score']}",
+        "ptbxl_rhythm_evaluate": root / f"ptbxl-cached-rhythm-{JOBS['ptbxl_rhythm_evaluate']}",
     }
-    paths = {k: protected_path(r, "scoring-receipt.json" if k in ("score", "ptb_score") else "aggregate.json")
+    paths = {k: protected_path(r, "scoring-receipt.json" if k.endswith("score") else "aggregate.json")
              for k, r in roots.items()}
     checks = {k: seal_entry(roots[k], p) for k, p in paths.items()}
     for k, file, field in (
         ("score", "private-scored-and-routed.jsonl", "private_score_route_ledger_sha256"),
         ("evaluate", "private-reference-route-ledger.jsonl", "private_reference_route_ledger_sha256"),
         ("ptb_score", "private-scores.jsonl", "private_scores_sha256"),
+        ("ptbxl_rhythm_score", "private-readout.json", "private_score_sha256"),
     ):
         if seal_entry(roots[k], protected_path(roots[k], file)) != json.loads(paths[k].read_bytes())[field]:
             raise ValueError("native private ledger does not match public summary")
@@ -238,6 +284,8 @@ def main():
     check_scientific(content["score"], content["evaluate"], content["morphology"], content["sph"], checks["score"])
     check_ptb(content["ptb_score"], content["ptb_evaluate"], content["ptb_eligibility"], checks["ptb_score"])
     check_ptbxl_support(content["ptbxl_support"], checks["ptbxl_support"])
+    check_ptbxl_rhythm(content["ptbxl_rhythm_score"], content["ptbxl_rhythm_evaluate"],
+                     content["ptbxl_support"], checks["ptbxl_rhythm_score"])
     if checks["ptb_eligibility_superseded"] != PTB_SUPERSEDED_SHA256:
         raise ValueError("superseded PTB reference audit bytes differ")
     result = {"schema": "TITAN_V45_SCIENTIFIC_CLOSURE_VERIFICATION_V1",

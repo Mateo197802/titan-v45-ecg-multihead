@@ -39,11 +39,18 @@
     },
     "33704": {
       "scope": "Matched-head morphology comparison robustness; reuses sealed 33474 fits and 33596 evaluation",
-      "code": "d89dbc05c67b29d6cf7954ea2763d3b068d16775"
+      "code": "d89dbc05c67b29d6cf7954ea2763d3b068d16775",
+      "aggregate_sha256": "81ebb598aeebd134db952d9b9bbb9a8bee583fdf2211bd64dc8320f93136cc79"
     },
     "33718": {
       "scope": "PTB Diagnostic frozen whole-source scoring, then explicit territory/control comparisons",
       "code": "1ca453f0d4ba1a4438a3c6e8873242444c6bb755"
+    },
+    "33736": {
+      "scope": "Score the unchanged V3AG global rhythm head from cached Stage A embeddings and morphology; separate exploratory operating point",
+      "code": "b25e3d2d8f696038c83809604f1da1b48ca56d5a",
+      "feature_cache_sha256": "9269716a656211fbe81e3ede45b0ea09eaa2437442db8dd2a25fd4006c36592a",
+      "bootstrap_seed": 197841
     }
   },
   "model_and_policy_bindings": {

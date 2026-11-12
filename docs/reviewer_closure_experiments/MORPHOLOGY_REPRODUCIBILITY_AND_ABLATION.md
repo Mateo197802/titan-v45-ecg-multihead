@@ -74,8 +74,20 @@ in macro-F1 (with minus without) were P6 +0.0072 (95% CI -0.0040 to
 +0.0157). The original intervals were profile-specific, not adjusted
 across profiles. P6 and P4 remain inconclusive, not equivalent.
 
-Job 33704 independently rederives the confusion counts and the paired
-intervals from the original sealed features and weights, then reports a
-post hoc grouped arm-swap diagnostic and Holm adjustment across profiles.
-It performs no waveform inference or refit. See the
-[execution register](CLOSURE_EXECUTION_REGISTER.md) for its native status.
+[Job 33704](../../outputs/results/reviewer_closure_experiments/morphology_robustness_aggregate.json)
+independently rederived the original paired point estimates and all 1,000
+valid bootstrap replicates per profile from the sealed fitted arms, without
+waveform inference or refitting. A separately identified post hoc robustness
+test used 10,000 within-group swaps (1,251 P6/P8 and 254 P4 units).
+
+| Profile | Observed delta macro-F1 | Paired 95% interval | Arm-swap p | Holm p, three profiles |
+|---|---:|---:|---:|---:|
+| P6 | +0.00722 | [-0.00405, +0.02059] | 0.2841 | 0.5681 |
+| P8 | +0.01457 | [+0.00155, +0.02762] | 0.0452 | 0.1356 |
+| P4 | +0.00061 | [-0.01628, +0.01575] | 0.9626 | 0.9626 |
+
+P8's original unadjusted interval excludes zero, but this post hoc test
+does not show a robust family-wise result at 0.05. Preserve both findings.
+The two procedures answer different uncertainty questions; neither
+identifies a causal effect in the published backbone or clinical setting.
+P6 and P4 are inconclusive, not demonstrated equivalent.

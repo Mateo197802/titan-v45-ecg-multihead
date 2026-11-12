@@ -17,6 +17,7 @@ The runner checks the archive and the publisher checksums independently.
 | Original SPH split/cutoff read-only audit | [Native aggregate](../../outputs/results/reviewer_closure_experiments/sph_split_and_policy_audit.json) | baceb368a08352b6ea74798f1c77159ef1ec139a | Original 33362 calibration/held split and 33414 policy; no labels or new inference |
 | Matched morphology statistical robustness audit | SLURM 33704 | d89dbc05c67b29d6cf7954ea2763d3b068d16775 | Sealed fit 33474 and evaluation 33596; no fit or waveform extraction |
 | PTB Diagnostic clinical territory vs healthy control transport | SLURM 33718 | 1ca453f0d4ba1a4438a3c6e8873242444c6bb755 | Protocol f37f6ca; score all source ECGs before reference join; original P4 and separately trained 33390 heads, no refit |
+| Cached V3AG global rhythm readout for Paced and AV block | SLURM 33736 | b25e3d2d8f696038c83809604f1da1b48ca56d5a | All 6,205 authorized cached ECGs; archived-column equivalence gate before label join; new operating point on folds 1-8, held fold 9; no waveform rerun, no fold 10 |
 
 The native reference-free SPH audit reconstructed the assignments and
 cutoffs. It found zero cross-split patients, exact waveform fingerprints or
@@ -30,6 +31,10 @@ The morphology robustness check repeats only the computation of the
 original confusion counts and bootstrap from saved fitted arms, then adds
 an explicitly post hoc clustered arm-swap test with Holm adjustment.
 It must not be read as a fresh predeclared confirmatory experiment.
+Job 33704 completed `0:0` in 1:32. The native aggregate SHA-256 is
+`81ebb598aeebd134db952d9b9bbb9a8bee583fdf2211bd64dc8320f93136cc79`.
+P8's rederived delta was +0.01457; arm-swap p = 0.0452 before and 0.1356
+after Holm. See [the effect table](MORPHOLOGY_REPRODUCIBILITY_AND_ABLATION.md).
 
 The LUDB score job completed `0:0` in 6:39 and [sealed 200/200 ECGs
 in every profile](../../outputs/results/reviewer_closure_experiments/ludb_scoring_receipt.json).

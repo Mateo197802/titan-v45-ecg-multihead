@@ -2,7 +2,7 @@
 
 **Working assessment.** The source and model provenance audits are complete
 for the published receipts below. Endpoint-based closure still requires
-native verification of SLURM 33720, 33704 and 33718. Statuses in this draft
+native verification of SLURM 33720, 33718 and 33736. Statuses in this draft
 must not be read as final closure or as changes to the submitted article.
 
 The immutable starting point is November commit
@@ -70,7 +70,9 @@ actually represent.
 
 1. **Experiment:** The candidate formula and load audit is paired with
    instrumented native execution on 200 ECGs and the prior matched
-   head-only comparison.
+   head-only comparison, independently rederived by 33704. P8's
+   exploratory effect is +0.01457 macro-F1; Holm-adjusted p = 0.1356
+   in the separate post hoc arm-swap test.
 2. **Literal request:** The candidate formulas and actual data flow in the
    executed reconstruction can be explained, including global versus
    specialist connections. Historical identity is a separate claim.
