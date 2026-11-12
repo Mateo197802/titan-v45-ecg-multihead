@@ -20,6 +20,15 @@ Paced positives and 1,699/6,549 explicit Normal-only controls. See the
 [coverage audit](OTHER_CLASS_VALIDATION.md#ptb-xl-reference-availability-not-performance).
 Do not use cached operating-point estimates as population predictive values.
 
+The PTB Diagnostic enrollment is 290 actual subject keys in the verified
+RECORDS manifest. The [provider data description](https://physionet.org/content/ptbdb/1.0.0/#data-description)
+also says 290; its news blurb says 294. Use the manifest denominator,
+not the announcement. PTB Diagnostic describes recordings from a Berlin
+cardiology service on a PTB prototype; [PTB-XL](https://physionet.org/content/ptb-xl/1.0.3/#background)
+describes a Schiller archive acquired by PTB. This differentiates the
+sources and recording protocols, but supplies no cross-release patient
+linkage or proof that the historical models were unexposed.
+
 [SPH 33399](../../outputs/results/reviewer_experiments/population-contrast_33399_aggregate.json)
 measures the effect of restriction on the same scores and mapped reference
 endpoints. The restricted sets use compatible positive statements rather than

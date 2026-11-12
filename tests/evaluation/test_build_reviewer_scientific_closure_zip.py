@@ -27,3 +27,13 @@ def test_final_packet_rejects_working_assessment(packet):
     blobs = {f"{packet.DOC_ROOT}/PATIENT_SIGNAL_SPLIT_AUDIT.json": b'{"status": "WORKING"}'}
     with pytest.raises(ValueError, match="working document"):
         packet.validate_final(blobs)
+
+
+def test_november_inputs_are_exact_native_receipt_bytes(packet):
+    root = Path(__file__).resolve().parents[2]
+    names = (*packet.PRIOR_NATIVE, packet.PRIOR_RECEIPT, packet.PRIOR_HEAD_SUPPORT)
+    blobs = {f"{packet.PRIOR_ROOT}/{name}": (root / packet.PRIOR_ROOT / name).read_bytes() for name in names}
+    packet.check_prior_evidence(blobs)
+    blobs[f"{packet.PRIOR_ROOT}/joint-selective_33414_aggregate.json"] += b"\n"
+    with pytest.raises(ValueError, match="evidence differs from the producer seal"):
+        packet.check_prior_evidence(blobs)

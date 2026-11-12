@@ -23,6 +23,7 @@ from verify_reviewer_scientific_closure import (
 
 DOC_ROOT = "docs/reviewer_closure_experiments"
 DATA_ROOT = "outputs/results/reviewer_closure_experiments"
+PRIOR_ROOT = "outputs/results/reviewer_experiments"
 REQUIRED_DOCS = (
     "FOUR_REVIEWER_FINAL_SCIENTIFIC_CLOSURE.md",
     "FOUR_REVIEWER_CLOSURE_MATRIX.csv",
@@ -37,20 +38,34 @@ REQUIRED_DOCS = (
     "PROTOCOL_FREEZE.md",
     "CLOSURE_EXECUTION_REGISTER.md",
 )
-PRIOR = (
-    "november_delivery_verification_33596.json", "population-contrast_33399_aggregate.json",
-    "rhythm-other_33396_aggregate.json", "pathology-other_33390_aggregate.json",
-    "auxiliary_33369_aggregate.json", "ptbxl-bridge_33410_aggregate.json",
-    "joint-selective_33414_aggregate.json", "joint-selective_33414_joint-policy.json",
-    "selective_33362_policy.json", "selective_33362_aggregate.json", "replay-contrast_33472_aggregate.json",
-    "retrained-eval_33596_aggregate.json", "release_backbone_head_support.json",
-)
+PRIOR_NATIVE = {
+    "sph_baseline_scoring_receipt_33355.json": ("33355", "scoring-receipt.json"),
+    "sph_repeat_audit_33356.json": ("33356", "aggregate.json"),
+    "sph-ece-report_33357_aggregate.json": ("33357", "aggregate.json"),
+    "selective_33362_policy.json": ("33362", "policy.json"),
+    "selective_33362_aggregate.json": ("33362", "aggregate.json"),
+    "auxiliary_33369_aggregate.json": ("33369", "aggregate.json"),
+    "pathology-other_33390_aggregate.json": ("33390", "aggregate.json"),
+    "rhythm-other_33396_aggregate.json": ("33396", "aggregate.json"),
+    "population-contrast_33399_aggregate.json": ("33399", "aggregate.json"),
+    "ptbxl-bridge_33410_aggregate.json": ("33410", "aggregate.json"),
+    "joint-selective_33414_aggregate.json": ("33414", "aggregate.json"),
+    "joint-selective_33414_joint-policy.json": ("33414", "joint-policy.json"),
+    "replay-contrast_33472_aggregate.json": ("33472", "aggregate.json"),
+    "morph-sensitivity_33473_p4-aggregate.json": ("33473", "p4-aggregate.json"),
+    "morph-sensitivity_33473_rhythm-aggregate.json": ("33473", "rhythm-aggregate.json"),
+    "retrained-eval_33596_aggregate.json": ("33596", "aggregate.json"),
+}
+PRIOR_RECEIPT = "november_delivery_verification_33596.json"
+PRIOR_RECEIPT_SHA256 = "a4c54f5480145bf1a3bfae5dea9a5aa2b530850146f1dadbe3f33046888ebde8"
+PRIOR_HEAD_SUPPORT = "release_backbone_head_support.json"
+PRIOR_HEAD_SUPPORT_SHA256 = "7afa919842ba850d8b8544c9cc2d4b52046bab87e42e2fff13a8b7d857193513"
 ALLOWLIST = frozenset((
     *(f"{DOC_ROOT}/{name}" for name in REQUIRED_DOCS),
     f"{DOC_ROOT}/{TABLES}",
     *(f"{DATA_ROOT}/{name}" for name in PUBLIC_NAMES.values()),
     f"{DATA_ROOT}/native_closure_verification.json",
-    *(f"outputs/results/reviewer_experiments/{name}" for name in PRIOR),
+    *(f"{PRIOR_ROOT}/{name}" for name in (*PRIOR_NATIVE, PRIOR_RECEIPT, PRIOR_HEAD_SUPPORT)),
     "docs/reviewer_experiments/MORPHOLOGY_INPUT_CONTRACT.md",
     "docs/reviewer_experiments/RELEASE_HEAD_SUPPORT.md",
     "docs/reviewer_experiments/NOVEMBER_FINDINGS.md",
@@ -61,6 +76,9 @@ ALLOWLIST = frozenset((
     "configs/reviewer_experiments/ptb_diagnostic_eligibility_v1.json",
     "configs/reviewer_experiments/ptb_diagnostic_eligibility_v2.json",
     "configs/reviewer_experiments/ptb_diagnostic_transport_v1.json",
+    *(f"configs/reviewer_experiments/november_{name}.json" for name in (
+        "joint_selective", "pathology_other", "phase1", "population_contrast", "ptbxl_reference_bridge", "rhythm_other",
+    )),
     "scripts/evaluation/build_reviewer_scientific_closure_zip.py",
     "scripts/evaluation/render_reviewer_closure_tables.py",
     "scripts/evaluation/verify_reviewer_scientific_closure.py",
@@ -84,6 +102,23 @@ DISPOSITIONS = {
 
 def digest_bytes(data):
     return hashlib.sha256(data).hexdigest()
+
+
+def check_prior_evidence(blobs):
+    receipt_data = blobs[f"{PRIOR_ROOT}/{PRIOR_RECEIPT}"]
+    if digest_bytes(receipt_data) != PRIOR_RECEIPT_SHA256:
+        raise ValueError("historical November verification receipt changed")
+    receipt = json.loads(receipt_data)
+    if receipt["verified_jobs"] != 16 or receipt["required_jobs"] != 16 or receipt["verification_errors"]:
+        raise ValueError("historical November verification is incomplete")
+    for name, (job, artifact) in PRIOR_NATIVE.items():
+        native = receipt["jobs"][job]
+        expected = native["aggregate_candidates"][artifact]
+        if (native["result_status"] != "verified" or not expected["producer_checksum_verified"]
+                or digest_bytes(blobs[f"{PRIOR_ROOT}/{name}"]) != expected["sha256"]):
+            raise ValueError(f"historical November evidence differs from the producer seal: {name}")
+    if digest_bytes(blobs[f"{PRIOR_ROOT}/{PRIOR_HEAD_SUPPORT}"]) != PRIOR_HEAD_SUPPORT_SHA256:
+        raise ValueError("historical released-head support audit changed")
 
 
 def member(z, name, content):
@@ -134,6 +169,7 @@ def validate_final(blobs):
                      content["ptbxl_support"], checks["ptbxl_rhythm_score"])
     if blobs[f"{DOC_ROOT}/{TABLES}"] != render(content):
         raise ValueError("endpoint and route tables differ from verified aggregates")
+    check_prior_evidence(blobs)
 
 
 def build(root, output):
