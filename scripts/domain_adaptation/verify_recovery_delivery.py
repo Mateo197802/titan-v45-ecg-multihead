@@ -103,7 +103,9 @@ def verify(folder):
     if "FINETUNING_EXPERIMENTS.csv" not in names:
         return
     runs = rows(folder / "FINETUNING_EXPERIMENTS.csv")
-    hashes, variance, seen = {}, defaultdict(list), set()
+    hashes, variance, seen, curves = {}, defaultdict(list), set(), defaultdict(list)
+    for curve in rows(folder / "FINETUNING_LEARNING_CURVES.csv"):
+        curves[curve["mode"], curve["seed"]].append(curve)
     for r in runs:
         mode, seed = r["mode"], r["seed"]
         key = mode, seed
@@ -114,9 +116,18 @@ def verify(folder):
                 or r["slurm_job"] not in by_job):
             raise ValueError("fit receipt does not match frozen protocol")
         seen.add(key)
+        epochs = curves.pop(key)
+        best = max(epochs, key=lambda e: (float(e["macro_ap"]), float(e["guard_ap"])))
+        if ([int(e["epoch"]) for e in epochs] != list(range(1, len(epochs) + 1))
+                or len(epochs) > cfg["training"]["epochs"]
+                or best["epoch"] != r["best_epoch"]
+                or float(best["macro_ap"]) != float(r["validation_macro_ap"])
+                or float(best["guard_ap"]) != float(r["validation_guard_ap"])):
+            raise ValueError("best epoch does not match the learning curve")
         hashes[f"{mode}-{seed}/best.pt"] = r["checkpoint_sha256"]
         variance[mode].append(float(r["validation_macro_ap"]))
-    if len(runs) != receipt["checked_fits"] or len(runs) + receipt["failed_fits"] > cfg["training"]["max_supervised_fits"]:
+    if (curves or len(runs) != receipt["checked_fits"]
+            or len(runs) + receipt["failed_fits"] > cfg["training"]["max_supervised_fits"]):
         raise ValueError("fit budget or receipt mismatch")
     sums = [line.split("  ", 1) for line in (folder / "EXPERIMENT_CHECKPOINT_SHA256SUMS.txt").read_text().splitlines()]
     if len(sums) != len(runs) or {name: sha for sha, name in sums} != hashes:
@@ -132,6 +143,18 @@ def verify(folder):
     gates = json.loads((folder / "MODEL_PROMOTION_GATES.json").read_bytes())
     if gates["old_test_opened"] or gates["promotion"] != "NOT_AUTHORIZED":
         raise ValueError("promotion exceeds the study scope")
+    if "C" in gates["code_validation"]:
+        selection_path = folder / "FINAL_SELECTION_RECEIPT.json"
+        final = json.loads(selection_path.read_bytes())
+        candidate = json.loads((folder / "CANDIDATE_SCORING_RECEIPT.json").read_bytes())
+        selected = final["selected"]
+        assert_hash(selection_path, candidate["selection_sha256"])
+        name = f"{candidate['mode']}-{candidate['seed']}/best.pt"
+        if (candidate["old_test_opened"] or not candidate["candidate_calibration_scored_after_selection"]
+                or hashes.get(name) != selected["representative_sha256"]
+                or selected["representative_sha256"] != candidate["checkpoint_sha256"]
+                or {int(r["seed"]) for r in runs if r["mode"] == selected["mode"]} != set(cfg["training"]["seeds"])):
+            raise ValueError("candidate calibration does not follow the sealed three-seed selection")
     domains = rows(folder / "DOMAIN_GENERALIZATION_MATRIX.csv")
     for arm, summary in gates["code_validation"].items():
         selected = [r for r in domains if r["arm"] == arm and r["scope"] == "validation"]
