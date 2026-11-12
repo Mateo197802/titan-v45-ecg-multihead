@@ -13,14 +13,14 @@ from pathlib import Path
 
 import numpy as np
 import torch
-import wfdb
 from acquire_mimic import checksum_index, fetch, select
+from audit_mimic_signals import read_physical
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path[:0] = [str(ROOT / "src"), str(ROOT / "scripts/specialist_experiments")]
 from extract_features import _baseline_thresholds, _pathology_batch, _rhythm_batch, _safe_morphology
 
-from titan_v45.data.external_ecg import physical_mv, prepare_external
+from titan_v45.data.external_ecg import prepare_external
 from titan_v45.models.frozen_pathology import BACKBONE as PATH_BACKBONE
 from titan_v45.models.frozen_pathology import SPECIALIST, FrozenPathology, verified_assets
 from titan_v45.models.frozen_rhythm import (
@@ -64,15 +64,7 @@ def main():
             for suffix in (".hea", ".dat"):
                 path = stem + suffix
                 fetch(source, path, expected[path], 262144)
-            header = wfdb.rdheader(str(source / stem))
-            if set(header.file_name) != {Path(stem).name + ".dat"}:
-                raise ValueError("unsafe_or_unexpected_wfdb_component")
-            if header.fs != 500 or header.sig_len != 5000 or any(
-                not np.isfinite(gain) or gain <= 0 for gain in header.adc_gain
-            ):
-                raise ValueError("invalid_wfdb_header")
-            record = wfdb.rdrecord(str(source / stem), physical=True)
-            signal = physical_mv(record.p_signal, header.sig_name, header.units, 500)
+            signal, _ = read_physical(source / stem)
             samples.append(prepare_external(signal, 500, morphology))
         except (ValueError, OSError, RuntimeError) as error:
             errors[type(error).__name__] += 1

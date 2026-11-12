@@ -12,6 +12,7 @@ from titan_v45.data.external_ecg import (
     unpad_code,
 )
 from titan_v45.data.external_reference import REPORT_COLUMNS, classify_report
+from titan_v45.evaluation.external_metrics import from_confusion
 
 
 def test_select_is_order_independent_and_keeps_patients_together():
@@ -69,3 +70,11 @@ def test_code_padding_does_not_turn_seven_seconds_into_ten():
     assert unpad_code(long).shape == (4000, 12)
     with pytest.raises(ValueError, match="short_or_ambiguous_code_duration"):
         unpad_code(short)
+
+
+def test_aggregate_metrics_do_not_impute_unsupported_f1():
+    assert from_confusion(4, 1, 2, 3)["balanced_accuracy"] == pytest.approx((4 / 7 + 2 / 3) / 2)
+    assert from_confusion(0, 1, 9, 0)["f1"] is None
+    assert from_confusion(0, 0, 0, 0)["accuracy"] is None
+    with pytest.raises(ValueError, match="nonnegative"):
+        from_confusion(-1, 0, 0, 0)
