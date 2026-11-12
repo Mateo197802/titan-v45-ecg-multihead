@@ -10,8 +10,8 @@ tree=$1 source=$2 release=$3 deps=$4 h5=$5 duplicates=$6 root=$7 experiment_comm
 frozen_commit=eb1c67b9229af875a9f868797b0c2f5c546e3dac
 protocol_sha=d788ad8cca94793cebb738496acc131e82b1ca1900976f11020b99a79a5fc366
 [[ "$experiment_commit" =~ ^[0-9a-f]{40}$ ]]
-[[ $(git -C "$tree" rev-parse HEAD) == "$frozen_commit" ]]
-[[ -z $(git -C "$tree" status --porcelain) ]]
+[[ $(cd "$tree" && git rev-parse HEAD) == "$frozen_commit" ]]
+[[ -z $(cd "$tree" && git status --porcelain) ]]
 [[ $(sha256sum "$tree/configs/external_validation/sph_frozen.json" | cut -d' ' -f1) == "$protocol_sha" ]]
 for f in "$source/metadata.csv" "$source/code.csv" "$source/records.tar.gz" "$deps" "$h5" "$duplicates"; do
     test -s "$f"
