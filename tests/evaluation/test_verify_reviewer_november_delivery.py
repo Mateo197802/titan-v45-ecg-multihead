@@ -15,10 +15,10 @@ def delivery(monkeypatch):
 
 def test_wait_never_invents_results_and_native_failures_remain_visible(delivery, tmp_path):
     states = delivery.accounting("33355|PENDING|0:0|00:00:00|\n33373|PENDING|0:0|00:00:00|\n"
-                                 "33365|FAILED|1:0|00:00:01|\n")
+                                 "33456|FAILED|1:0|00:00:01|\n")
     report = delivery.verify({"phase": tmp_path, "history": tmp_path}, states)
     assert report["verified_jobs"] == 0
-    assert report["jobs"]["33365"]["scheduler"]["exit_code"] == "1:0"
+    assert report["jobs"]["33456"]["scheduler"]["exit_code"] == "1:0"
     assert report["superseded_jobs_not_used"]["33373"]["state"] == "PENDING"
 
 
