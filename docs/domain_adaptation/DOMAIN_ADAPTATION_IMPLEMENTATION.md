@@ -11,6 +11,10 @@ or eight-class profile and does not extend P4's reference coverage.
   specialist concatenates seven descriptors computed from observed samples and
   two duration indicators. A LayerNorm, 128-unit SiLU hidden layer, dropout and
   five sigmoid endpoints replace the downstream historical heads in this arm.
+  The instantiated V3F module contains 58,352,219 parameters including its
+  original heads. The adaptation module stores 58,437,362 parameters including
+  those original, unused output heads and the new 85,143-parameter specialist.
+  Stored parameters are not the same as trainable parameters in any arm.
 - The frozen control updates only 85,143 specialist parameters. The partial
   arms additionally allow the last two Transformer blocks and final norm, or
   those plus the last ResNet block and token projection. Backbone modules keep
@@ -75,6 +79,14 @@ The supervised warm start exceeded the corresponding Transformer-only arm by
 0.006605 macro-AP and 0.026203 F1 in this initial seed, but did not beat the
 Transformer plus ResNet arm. These differences are development observations,
 not a paired statistical claim about transfer to another institution.
+
+The frozen per-lead repeat `33713` (seed 20261114) gave AP 0.437878 and
+F1 0.462163 on the same validation set. Its AP stayed close to the first seed
+while F1 at the fixed threshold shifted. Finalists are compared with all three
+registered seeds and only the sealed candidate is calibrated on the separate
+calibration partition. The other frozen repeat's original `33712` attempt
+was cancelled during dependency staging on compute-0-2 before model fitting
+and resubmitted unchanged as `33735` on compute-0-1.
 
 The [run table](evidence/TRAINING_EXPERIMENTS_COMPLETE.csv),
 [learning curves](evidence/FINETUNING_LEARNING_CURVES.csv), and

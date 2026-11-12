@@ -1,20 +1,20 @@
 {
   "files": {
     "CHECKPOINT_SHA256SUMS.txt": {
-      "bytes": 718,
-      "sha256": "b0074cba96227e2d6ad11c566500e592ab57740c7991e86e71e4eb3137ffd7a6"
+      "bytes": 837,
+      "sha256": "486ac113b774824b278007244b44148ccb9f03245721d7e47b915a371bc41e5d"
     },
     "EXTERNAL_DATA_MANIFESTS_SUMMARY.csv": {
       "bytes": 238,
       "sha256": "1048c0efc6758f4725c751f35f27ef4d4fc96e5a78f9f1600caa50586c8af0e9"
     },
     "FINETUNING_LEARNING_CURVES.csv": {
-      "bytes": 9760,
-      "sha256": "116a26643ab9acc7aff1c361c66a78fd65b5b8a06c6cd9f38e3f046f1f0310f0"
+      "bytes": 11674,
+      "sha256": "144aa081d18b40eeb79db48b441800a420d2a3eb6114461b7448bedad7cfd468"
     },
     "MODEL_ARCHITECTURE_ABLATIONS.csv": {
-      "bytes": 637,
-      "sha256": "cd083efd7aa303d951b08396709a004fc1aeb594b862a1fe1fd184757a948bab"
+      "bytes": 677,
+      "sha256": "e1e407f013df4336ce4ab250b4ae33ddcc842db1a6d1f500fa0e89324106524d"
     },
     "PATIENT_AND_SIGNAL_LEAKAGE_AUDIT.json": {
       "bytes": 757,
@@ -29,8 +29,8 @@
       "sha256": "ddfc514561d47eb7cd1563a3dd58cc89b410d5bca9235a46d543525a2844a6f2"
     },
     "TRAINING_EXPERIMENTS_COMPLETE.csv": {
-      "bytes": 1240,
-      "sha256": "403e886981b8993fe0fbfc25b9b0250803dca4251a5c857ffa57372406a8f16f"
+      "bytes": 1452,
+      "sha256": "ddc033ee5cdc8a6390cad85b8550674131bafffd46e65ad5b0b933831e1d4cee"
     },
     "VALIDATION_BASELINES_RECEIPT.json": {
       "bytes": 669,
@@ -43,6 +43,14 @@
     "frozen_backbone_mlp-per_lead_zscore-20261112/TRAINING_RECEIPT.json": {
       "bytes": 1012,
       "sha256": "f42b196dfdfda0019a69344bae7d83a4eaab529ec5facf6666c23ff3bdd332c5"
+    },
+    "frozen_backbone_mlp-per_lead_zscore-20261114/FINETUNING_LEARNING_CURVES.csv": {
+      "bytes": 1769,
+      "sha256": "e40b24d3d25124e0dc7ce12d7c9f31412832285df3f69104c140823d9547b502"
+    },
+    "frozen_backbone_mlp-per_lead_zscore-20261114/TRAINING_RECEIPT.json": {
+      "bytes": 1105,
+      "sha256": "70d0742f2ae3e3b3c07fe044bf873b966b609bf00ec3de079d708bf7ff6115b8"
     },
     "frozen_backbone_mlp-robust_shared_gain-20261112/FINETUNING_LEARNING_CURVES.csv": {
       "bytes": 1668,
