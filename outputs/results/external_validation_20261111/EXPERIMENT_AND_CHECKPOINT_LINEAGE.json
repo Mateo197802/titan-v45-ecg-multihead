@@ -28,9 +28,20 @@
     "first_paired_receipt_sha256": "64e0ba8c3dded8a5ebe1739bf5edfc904520145f53f8ee707fd241dbd4d54d9d",
     "duration_audit_step": "33296.13",
     "duration_audit_commit": "ee2626b143906360bfe979215b5fb1c9e03a98ee",
+    "second_transport_step": "33296.16",
+    "second_transport_receipt_sha256": "99ba5d70db158965699a1ad4efcf868dbaa06c93a6820589f23c98c20b5725c2",
     "remaining_transport_job": 33326,
     "full_evaluation_job": 33360,
+    "full_signal_audit_job": 33376,
     "complete": false,
     "promoted": false
+  },
+  "mimic_label_blind_inference": {
+    "job": 33296,
+    "commit": "7b05c68042aee8dbf9724139f90bb3b1024a1b9f",
+    "receipt_sha256": "953d58572eaf6603db7554062e5395d50cf35e3c5a8f5324f4776e1bd2569cac",
+    "private_cache_sha256_verified_at_cedia": "fbc9f8876227cd881e7548634128e3f85eb016e90e4a0fcf43f471181a9aa277",
+    "reference_read": false,
+    "performance_computed": false
   }
 }

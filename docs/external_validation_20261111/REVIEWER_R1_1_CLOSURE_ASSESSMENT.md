@@ -15,8 +15,10 @@ evidence.
 | R2-general | Five explicitly compatible rhythm endpoints; no Other or P4 score evaluation under CODE. | Additional endpoints require separate explicit positive and negative references. |
 | R2-4e | Five-endpoint binary calls and empty-set counts under unchanged thresholds. | These counts do not measure P8 top-1 fallback, an operational full cascade or clinical quarantine. |
 
-MIMIC has [a waveform QC receipt](../../outputs/results/external_validation_20261111/MIMIC_QC_33295.json)
-and a [development grammar audit](MIMIC_DEVELOPMENT_GRAMMAR_AUDIT.md), not
+MIMIC has [a waveform QC receipt](../../outputs/results/external_validation_20261111/MIMIC_QC_33295.json),
+a [development grammar audit](MIMIC_DEVELOPMENT_GRAMMAR_AUDIT.md), and
+[completed inference without references](../../outputs/results/external_validation_20261111/MIMIC_LABEL_BLIND_INFERENCE_33296.json)
+on 6,675 ECGs from 4,077 patients for all three profiles. This is not
 reference-backed performance. The parser yielded zero explicit negatives;
 its missed variants are not evidence for treating silence as absence.
 The independent cohort and P4 options remain subject to

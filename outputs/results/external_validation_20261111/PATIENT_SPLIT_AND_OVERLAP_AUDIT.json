@@ -27,6 +27,19 @@
       "private_boundary_receipt_sha256": "f5ea1739e3642057cddec84a10381f9ada602ba2bf9c0e51d64cdaff91f6ea34",
       "labels_or_probabilities_loaded": false
     },
+    "signal_limb_amplitude_audit": {
+      "slurm_steps": ["33296.15", "33296.17"],
+      "private_contract_receipt_sha256": "9580fd3eec05403128933e485ca49da8d68c23f7e99066ab58b5fb1b3bc184e1",
+      "n_scored": 1442,
+      "n_scored_consistent_with_all_four_exact_relations": 0,
+      "n_scored_preferred_documented_sign_and_channel_for_all_four": 1442,
+      "n_scored_exact_limb_relation": {"III": 789, "aVR": 1, "aVL": 0, "aVF": 0},
+      "median_normalized_residual_by_limb": {"III": 1.023981949820446e-7, "aVR": 0.026856843420563735, "aVL": 0.023731018723151448, "aVF": 0.020779083867574558},
+      "native_units_max_lead_peak_to_peak_p05_p50_p95": [2.79908766746521, 5.024425029754639, 16.389970779418963],
+      "physical_units_certified": false,
+      "precordial_order_independently_certified": false,
+      "labels_or_probabilities_loaded": false
+    },
     "paired_evaluation_receipt_sha256": "64e0ba8c3dded8a5ebe1739bf5edfc904520145f53f8ee707fd241dbd4d54d9d",
     "limitations": [
       "One archive only; cross-archive near duplicates not yet checked.",
@@ -38,12 +51,16 @@
     "source_patient_split_overlap": 0,
     "waveform_eligible_by_split": {"train": 4328, "validation": 683, "calibration": 671, "test": 993},
     "waveform_eligible_total": 6675,
+    "scored_ecgs": 6675,
+    "scored_patients": 4077,
+    "failed_scoring": 0,
     "stage_a_raw_matches": 0,
     "stage_a_raw_hashes_compared": 19217,
     "historical_physical_or_near_duplicate_comparison": "NOT_RUN",
     "heldout_reference_labels_opened": false,
     "patient_independence_from_historical_weights": "NOT_CERTIFIED",
-    "qc_receipt_sha256": "095b14717a1dc9249cae4876a6b2459483e2c44973aa25f100ce75f8dffddcd0"
+    "qc_receipt_sha256": "095b14717a1dc9249cae4876a6b2459483e2c44973aa25f100ce75f8dffddcd0",
+    "inference_receipt_sha256": "953d58572eaf6603db7554062e5395d50cf35e3c5a8f5324f4776e1bd2569cac"
   },
   "development_ablation": {
     "fit_sources": ["chapman_shaoxing", "cpsc2018"],

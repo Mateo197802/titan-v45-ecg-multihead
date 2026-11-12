@@ -57,6 +57,18 @@ change eligibility after reading outcomes. Any revised duration contract
 requires source clarification and a separately frozen, unexamined evaluation.
 Amplitude units and alignment beyond the documented layout are not certified.
 
+The [publisher's preprocessing source](https://github.com/antonior92/ecg-preprocessing/blob/439bc1bafde571feee9e79e86f475ae9ee37d9e4/ecgprep/preprocess.py#L60-L94)
+allows centered padding and cropping. It does not link a particular
+CODE-15% ECG to an exact duration or prove that every row used those bytes.
+All 1,442 scored ECGs supported the documented limb-lead order and sign
+in a nearest-hypothesis comparison using the four expected limb relations
+and their reversals. None matched all four identities exactly at the
+numeric audit tolerance; for the three augmented leads, median normalized
+residuals were approximately 2.69%, 2.37% and 2.08%, respectively. The
+fitted coefficients remained close to the theoretical ones. This is
+evidence against a simple limb swap or inversion, not certification of
+precordial order, acquisition duration or units. No channel was reordered.
+
 [Per-model results](../../outputs/results/external_validation_20261111/code15-first/EXTERNAL_CODE15_RESULTS.csv) ·
 [Confusion counts](../../outputs/results/external_validation_20261111/code15-first/EXTERNAL_PER_CLASS_CONFUSION.csv) ·
 [Calibration bins](../../outputs/results/external_validation_20261111/code15-first/EXTERNAL_CODE15_CALIBRATION.csv) ·

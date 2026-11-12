@@ -82,10 +82,10 @@ def test_boundary_and_limb_checks_are_distinct_from_clinical_eligibility(monkeyp
     import numpy as np
 
     monkeypatch.syspath_prepend(str(ROOT / "scripts/external_validation"))
-    from audit_code15_padding import border_counts, limb_consistency
+    from audit_code15_padding import border_counts, limb_consistency, limb_order_diagnostic
 
     lead_i = np.arange(2934, dtype=float) + 1
-    lead_ii = 3 * lead_i
+    lead_ii = 3 * lead_i + np.cos(lead_i)
     lead_iii = lead_ii - lead_i
     trace = np.column_stack((lead_i, lead_ii, lead_iii, -(lead_i + lead_ii) / 2,
                              (lead_i - lead_iii) / 2, (lead_ii + lead_iii) / 2,
@@ -93,5 +93,22 @@ def test_boundary_and_limb_checks_are_distinct_from_clinical_eligibility(monkeyp
     trace = np.pad(trace, ((581, 581), (0, 0)))
     assert border_counts(trace) == ("finite_nonzero", 581, 581)
     assert limb_consistency(trace).tolist() == [True, True, True, True]
+    assert limb_order_diagnostic(trace)[2].tolist() == [0, 1, 2, 3]
     trace[:, 3] *= -1
     assert limb_consistency(trace).tolist() == [True, False, True, True]
+    assert limb_order_diagnostic(trace)[2].tolist() == [0, 5, 2, 3]
+
+
+def test_mimic_complete_inference_does_not_claim_performance():
+    receipt_path = RESULTS / "MIMIC_LABEL_BLIND_INFERENCE_33296.json"
+    receipt = load(receipt_path)
+    audit = load(RESULTS / "PATIENT_SPLIT_AND_OVERLAP_AUDIT.json")["mimic"]
+    jobs = load(RESULTS / "PR6_EXECUTION_SLURM_RECEIPT.json")
+    assert audit["inference_receipt_sha256"] == sha256(receipt_path)
+    assert receipt["waveform_qc_receipt_sha256"] == sha256(RESULTS / "MIMIC_QC_33295.json")
+    assert receipt["eligible_ecgs"] == receipt["scored_ecgs"] == sum(audit["waveform_eligible_by_split"].values())
+    assert jobs["jobs"]["33296"]["state"] == "COMPLETED" and jobs["jobs"]["33296"]["errors"] == 0
+    assert receipt["failed_scoring"] == 0 and not receipt["performance_computed"] and not receipt["reference_read"]
+    for route in receipt["threshold_routing"].values():
+        assert route["threshold_set_empty"] + route["threshold_set_nonempty"] == receipt["scored_ecgs"]
+        assert route["clinical_quarantine"] == "NOT_ASSESSED"
