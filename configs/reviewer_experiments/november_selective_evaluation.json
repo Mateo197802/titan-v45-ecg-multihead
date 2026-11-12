@@ -1,0 +1,18 @@
+{
+  "schema": "TITAN_V45_REVIEWER_SPH_SELECTIVE_EVAL_V1",
+  "population": "held half of the phase-1 patient and exact-signal components; retrospective development, not an independent test",
+  "compatible_endpoints": "unchanged SPH V1 frozen endpoint mappings; absent compatible statement is not absence of clinical disease",
+  "risk": "per-ECG mean binary error over that profile's compatible endpoints; risk is not top-1 error",
+  "decisions": "released label set, including the original P8 fallback when it fires; an abstained ECG retains baseline predictions only for audit",
+  "aurc": "right-step integral over attainable scored coverage, taking identical confidence scores as a single threshold group",
+  "quarantine_denominators": ["all held metadata ECGs", "all held scored ECGs"],
+  "technical_failures": "not scored, not abstention, no prediction imputed",
+  "intervals": {
+    "seed": 197819,
+    "replicates": 1000,
+    "level": 0.95,
+    "unit": "patient components linked by exact signal",
+    "scope": "fixed-policy abstention and coverage, risk, baseline and accepted endpoint-macro F1, their paired difference and AURC; not uncertainty of threshold fitting"
+  },
+  "promotion": "no external or clinical promotion from this retrospective experiment"
+}

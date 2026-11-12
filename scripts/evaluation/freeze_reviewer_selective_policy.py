@@ -25,7 +25,7 @@ def components(index):
 
     for row in index:
         key, p, signature = (row[k] for k in (
-            "record_id", "patient_id", "signal_sha256_canonical_f64",
+            "ecg_id", "patient_id", "signal_sha256_canonical_f64",
         ))
         if key in records or not p or not signature:
             raise ValueError("invalid duplicate-index row")
@@ -116,6 +116,7 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     for n in ("phase", "frozen-config", "ledger", "receipt", "duplicate-index", "output"):
         p.add_argument(f"--{n}", type=Path, required=True)
+    p.add_argument("--private-split", type=Path)
     a = p.parse_args()
     phase = json.loads(a.phase.read_bytes())
     receipt = json.loads(a.receipt.read_bytes())
@@ -129,8 +130,15 @@ def main():
     groups = components(jsonl(a.duplicate_index))
     if len(groups) != baseline["expected_metadata_rows"]:
         raise ValueError("incomplete component denominator")
-    report = freeze(jsonl(a.ledger), groups, json.loads(a.frozen_config.read_bytes())["thresholds"],
-                    phase["development_selective_policy"])
+    recipe = phase["development_selective_policy"]
+    report = freeze(jsonl(a.ledger), groups, json.loads(a.frozen_config.read_bytes())["thresholds"], recipe)
+    if a.private_split:
+        with a.private_split.open("x", encoding="utf-8") as stream:
+            for key, group in sorted(groups.items()):
+                calibration = calibration_member(group, recipe["split_seed"], recipe["calibration_fraction"])
+                stream.write(json.dumps({"record_id": key, "component": group,
+                                         "split": "calibration" if calibration else "held"}) + "\n")
+        report["private_split_sha256"] = digest(a.private_split)
     report.update({
         "job": os.environ.get("SLURM_JOB_ID"),
         "phase_sha256": digest(a.phase),

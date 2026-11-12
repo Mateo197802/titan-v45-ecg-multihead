@@ -17,7 +17,7 @@ finally:
 
 
 def test_exact_signal_links_patients_transitively():
-    rows = [dict(record_id=k, patient_id=p, signal_sha256_canonical_f64=h)
+    rows = [dict(ecg_id=k, patient_id=p, signal_sha256_canonical_f64=h)
             for k, p, h in (("1", "p1", "a"), ("2", "p2", "a"),
                             ("3", "p2", "b"), ("4", "p3", "b"))]
     assert len(set(policy.components(rows).values())) == 1
