@@ -131,7 +131,7 @@ def choose_cut(y, p, limits):
 
 
 def bm(y, p, cut):
-    return binary_metrics(y.astype(int), p >= cut, p)
+    return binary_metrics(y.astype(int), p.astype(np.float64) >= cut, p)
 
 
 def methods(cal, probs):
@@ -228,7 +228,10 @@ def run(diagnostics, out, candidate=None):
     for scope, data in cohorts.items():
         reports.extend(audit_rows(data, data["p"], old_thresholds, scope, "A"))
     for arm, folder in candidates.items():
-        probs = {scope: candidate_probs(folder, scope, data) if folder else data["p"] for scope, data in cohorts.items()}
+        training_sources = (json.loads((folder / "MODEL_RECOVERY_FIT_RECEIPT.json").read_bytes())["training_sources"]
+                            if folder else ())
+        probs = {scope: candidate_probs(folder, scope, data) if folder else data["p"]
+                 for scope, data in cohorts.items() if scope != "cpsc" or "cpsc" not in training_sources}
         best, choices, _ = methods(cal, probs["calibration"])
         ablations.extend({"arm": arm, "scope": "grouped_oof_calibration", "chosen": row["method"] == best, **row}
                          for row in choices)
@@ -252,11 +255,9 @@ def run(diagnostics, out, candidate=None):
             private_map = out / f"private_{arm}_calibrator.json"
             write_json(private_map, maps)
         for scope, data in cohorts.items():
+            if scope not in probs:
+                continue
             p = probs[scope]
-            if scope == "cpsc" and folder:
-                fit = json.loads((folder / "MODEL_RECOVERY_FIT_RECEIPT.json").read_bytes())
-                if "cpsc" in fit["training_sources"]:
-                    continue
             for j, endpoint in enumerate(cfg["endpoints"]):
                 keep = data["labels"][:, j] >= 0
                 if not np.any(keep):
@@ -264,7 +265,7 @@ def run(diagnostics, out, candidate=None):
                 y = data["labels"][keep, j]
                 raw = p[keep, j]
                 calibrated = transform(raw, maps[j])
-                r = binary_metrics(y.astype(int), raw >= cuts[j], calibrated)
+                r = binary_metrics(y.astype(int), raw.astype(np.float64) >= cuts[j], calibrated)
                 domains.append({"arm": arm, "scope": scope, "endpoint": endpoint, "source_claim": "development_only",
                                 "raw_auprc": bm(y, raw, cuts[j])["average_precision"],
                                 **{k: r[k] for k in ("rows", "positive_support", "negative_support", "recall", "precision",
@@ -297,6 +298,15 @@ def run(diagnostics, out, candidate=None):
         rows = [r for r in domains if r["arm"] == arm and r["scope"] == "validation"]
         summary[arm] = {f"macro_{key}": float(np.mean([r[key] for r in rows])) for key in (
             "f1", "raw_auprc", "brier_score", "ece")}
+    for arm in candidates:
+        summary[arm].update({
+            "macro_f1_target_met": summary[arm]["macro_f1"] >= cfg["promotion"]["development_macro_f1_target"],
+            "class_guards_pass": all(validation_guards[f"{arm}_{e}"]["feasible"] for e in cfg["endpoints"]),
+            "calibration_guard_pass": all(
+                summary[arm][f"macro_{metric}"] - summary["A"][f"macro_{metric}"]
+                <= cfg["calibration"][f"macro_{limit}_max_increase"]
+                for metric, limit in (("brier_score", "brier"), ("ece", "ece"))),
+        })
     incumbent_feasible = all(policies[f"B_{e}"]["calibration"]["feasible"] for e in cfg["endpoints"])
     write_json(out / "MODEL_PROMOTION_GATES.json", {
         "stage": "development_only", "independent_confirmation": "NOT_EVALUATED", "promotion": "NOT_AUTHORIZED",

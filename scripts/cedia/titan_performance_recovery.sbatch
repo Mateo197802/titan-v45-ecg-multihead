@@ -29,5 +29,7 @@ case "$mode" in
     diagnose) python -B -u scripts/domain_adaptation/recovery_inputs.py "$@" ;;
     calibrate) python -B -u scripts/domain_adaptation/recovery_calibration.py "$@" ;;
     fit) python -B -u scripts/domain_adaptation/recovery_training.py "$@" ;;
+    select) python -B -u scripts/domain_adaptation/recovery_selection.py select "$@" ;;
+    score) python -B -u scripts/domain_adaptation/recovery_selection.py score "$@" ;;
     *) exit 2 ;;
 esac
