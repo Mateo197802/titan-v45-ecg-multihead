@@ -4,7 +4,7 @@
 #SBATCH --gres=gpu:a100-sxm4-40gb:1
 #SBATCH --cpus-per-task=2
 #SBATCH --mem=16G
-#SBATCH --time=00:15:00
+#SBATCH --time=01:00:00
 set -euo pipefail
 umask 077
 if [[ $# != 6 ]]; then
@@ -13,11 +13,12 @@ if [[ $# != 6 ]]; then
 fi
 code=$1 root=$2 release=$3 deps=$4 p4_job=$5 rhythm_job=$6
 (cd "$code" && sha256sum -c CODE_SHA256SUMS)
+source "$code/reviewer_private_scratch.sh"
 [[ "$p4_job" =~ ^[0-9]+$ && "$rhythm_job" =~ ^[0-9]+$ && "$p4_job" != "$rhythm_job" ]]
 output=$root/morph-sensitivity-$SLURM_JOB_ID
 mkdir -m 700 -- "$output"
 module load pytorch/2.2
-scratch=$(mktemp -d "$output/.scratch-XXXXXX")
+scratch=$(reviewer_private_scratch "$output")
 export TMPDIR=$scratch
 tar -xf "$deps" -C "$scratch"
 export OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 PYTHONDONTWRITEBYTECODE=1
