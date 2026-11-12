@@ -61,8 +61,10 @@ def test_locked_evaluator_hdf5_join_and_cached_resume(tmp_path, monkeypatch):
     h5py = pytest.importorskip("h5py")
     root = Path(__file__).resolve().parents[2]
     monkeypatch.syspath_prepend(str(root / "scripts/external_validation"))
+    import audit_code15_padding as padding
     import evaluate_code15 as evaluator
     import preflight_code15 as preflight
+    import seal_full_code15_delivery as delivery
     import verify_code15_evaluation as verifier
 
     code = tmp_path / "code15"
@@ -107,6 +109,10 @@ def test_locked_evaluator_hdf5_join_and_cached_resume(tmp_path, monkeypatch):
     monkeypatch.setattr(verifier, "PROTOCOL", protocol)
     monkeypatch.setattr(preflight, "PROTOCOL", protocol)
     monkeypatch.setattr(preflight, "SHARDS", {archive["key"] for archive in archives})
+    monkeypatch.setattr(padding, "PROTOCOL", protocol)
+    monkeypatch.setattr(delivery, "PROTOCOL", protocol)
+    monkeypatch.setattr(delivery, "SHARDS", preflight.SHARDS)
+    monkeypatch.setattr(delivery, "PINNED_FIRST", output / delivery.EVALUATION_RECEIPT)
     receipt = {"protocol_sha256": evaluator.digest(protocol), "endpoints": endpoints,
                "code_or_mimic_outcomes_used": False, "thresholds_changed": False, "profiles": {}}
     for profile in config["evaluation"]["profiles"]:
@@ -157,3 +163,24 @@ def test_locked_evaluator_hdf5_join_and_cached_resume(tmp_path, monkeypatch):
     assert final["preflight_receipt_sha256"] == evaluator.digest(seal_path)
     assert final["cohort_flow"]["patients_with_no_scored_ecgs"] == 0
     assert len(final["aggregate_views_sha256"]) == 4
+    transport = {"scope": "all", "labels_read": False, "archives": [
+        {"archive": archive["key"], "bytes": archive["size"], "publisher_md5": archive["checksum"][4:],
+         "sha256": evaluator.digest(code / archive["key"])} for archive in archives
+    ]}
+    (code / "range_all_receipt.json").write_text(json.dumps(transport), encoding="utf-8")
+    padding_path = full_output / "padding_audit.json"
+    padding.run(code, full_output, padding_path)
+    destination = tmp_path / "public"
+    delivery.run(code, output, full_output, destination)
+    public = json.loads((destination / "CODE15_FULL_DELIVERY_RECEIPT.json").read_bytes())
+    assert public["first_archive_bit_exact_rows_retained"] == 4
+    assert public["promotion_gates"] == {"P6": "FAIL", "P8": "FAIL"}
+    assert public["duration_distribution"]["exams_part15.zip"]["scored"]["48/48"] == 4
+    assert all(path.suffix in {".json", ".csv"} and not path.name.startswith("private")
+               for path in destination.iterdir())
+    broken = json.loads(padding_path.read_bytes())
+    broken["per_archive_boundary_counts"]["exams_part15.zip"][0]["n_ecg"] += 1
+    padding_path.write_text(json.dumps(broken), encoding="utf-8")
+    with pytest.raises(ValueError, match="preflight and post-inference signal counts differ"):
+        delivery.run(code, output, full_output, tmp_path / "bad-public")
+    assert not (tmp_path / "bad-public").exists()
