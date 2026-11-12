@@ -1,0 +1,9 @@
+arm,scope,chosen,method,macro_brier,macro_ece
+B,grouped_oof_calibration,False,identity,0.015469797209172683,0.014461792109626292
+B,grouped_oof_calibration,False,temperature,0.014979656654459527,0.01577448174944239
+B,grouped_oof_calibration,True,platt,0.01143672569367292,0.003812401702839156
+B,grouped_oof_calibration,False,isotonic,0.011659196938735078,0.004506084069601834
+C,grouped_oof_calibration,False,identity,0.015138245626347163,0.014824366743641449
+C,grouped_oof_calibration,False,temperature,0.01472430159439581,0.016000687570683302
+C,grouped_oof_calibration,True,platt,0.011289549304468415,0.0038214657832084816
+C,grouped_oof_calibration,False,isotonic,0.011778705280319659,0.005426985616360883
