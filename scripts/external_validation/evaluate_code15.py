@@ -292,6 +292,16 @@ def run(args):
         raise ValueError("unexpected shard list")
     if set(archives) != names and archives != ["exams_part10.zip"]:
         raise ValueError("only full coverage or the frozen first checkpoint is permitted")
+    preflight_sha = None
+    preflight = None
+    if set(archives) == names and getattr(args, "require_preflight", False):
+        path = code / "code15_preflight_receipt.json"
+        preflight = json.loads(path.read_bytes())
+        preflight_sha = digest(path)
+        if (preflight["protocol_sha256"] != digest(PROTOCOL) or preflight["labels_used"] is not False
+                or preflight["archives"].keys() != names
+                or not all(item["crc_verified"] for item in preflight["archives"].values())):
+            raise ValueError("full CODE evaluation requires the label-blind 18-archive preflight")
     args.output.mkdir(mode=0o700, exist_ok=False)
     parts = {Path(name).with_suffix(".hdf5").name: {} for name in archives}
     all_keys = set()
@@ -335,6 +345,7 @@ def run(args):
         prior_ledger = args.reuse_partial / "private_selection.json"
         if (prior["protocol_sha256"] != digest(PROTOCOL)
                 or prior["candidate_receipt_sha256"] != digest(receipt_path)
+                or prior["baseline_hashes"] != hashes
                 or prior["private_shard_cache_sha256"] != digest(prior_cache)
                 or prior["private_selection_sha256"] != digest(prior_ledger)
                 or prior.get("publisher_code_test_overlap") != publisher_overlap
@@ -374,8 +385,10 @@ def run(args):
     for name in archives:
         if name in archive_hashes:
             continue
-        h5path = verified_hdf5(code, name, catalog, args.scratch)
         archive_hashes[name] = digest(code / name)
+        if preflight is not None and archive_hashes[name] != preflight["archives"][name]["sha256"]:
+            raise ValueError(f"{name}: evaluated bytes differ from the CRC-verified preflight")
+        h5path = verified_hdf5(code, name, catalog, args.scratch)
         try:
             with h5py.File(h5path, "r") as h5:
                 id_key, trace_key = next(pair for pair in (("exam_id", "tracings"), ("id_exam", "signal"))
@@ -416,6 +429,10 @@ def run(args):
         finally:
             h5path.unlink(missing_ok=True)
     flush()
+    if preflight is not None:
+        if ({name: item["sha256"] for name, item in preflight["archives"].items()} != archive_hashes
+                or any(preflight[key] != stats[key] for key in ("source_ecgs", "selected_ecgs"))):
+            raise ValueError("CODE acquisition and evaluated denominators differ")
     if not index_rows:
         raise ValueError("no CODE records survived common eligibility")
     matrix = np.stack(sigs)
@@ -473,6 +490,24 @@ def run(args):
               "private_selection_sha256": digest(args.output / "private_selection.json"),
               "aggregate_csv_sha256": digest(table), "aggregate_views_sha256": views, "promotion": decisions}
     result["point_estimates_independently_verified"] = verification
+    if preflight is not None:
+        selected_patients = {ref[0] for part in parts.values() for ref in part.values() if ref is not None}
+        scored_patients = set(patients)
+        if (len(selected_patients) != preflight["selected_patients"]
+                or not scored_patients <= selected_patients
+                or stats["selected_ecgs"] != len(keep) + len(excluded) + len(duplicate)):
+            raise ValueError("CODE patient/exam denominator conservation failed")
+        result["preflight_receipt_sha256"] = preflight_sha
+        result["cohort_flow"] = {
+            "source_patients": preflight["source_patients"],
+            "selected_patients": len(selected_patients),
+            "patients_with_no_scored_ecgs": len(selected_patients - scored_patients),
+            "patients_with_scored_ecgs": len(scored_patients),
+            "selected_ecgs": stats["selected_ecgs"],
+            "ecgs_excluded_before_scoring": len(excluded),
+            "ecgs_excluded_as_aligned_duplicates": len(duplicate),
+            "final_paired_ecgs": len(keep),
+        }
     output = json.dumps(result, indent=2, sort_keys=True) + "\n"
     (args.output / "code15_evaluation_receipt.json").write_bytes(output.encode())
     print(output, end="")
@@ -485,4 +520,5 @@ if __name__ == "__main__":
     parser.add_argument("--archives", nargs="+")
     parser.add_argument("--publisher-test", type=Path)
     parser.add_argument("--reuse-partial", type=Path)
+    parser.set_defaults(require_preflight=True)
     run(parser.parse_args())

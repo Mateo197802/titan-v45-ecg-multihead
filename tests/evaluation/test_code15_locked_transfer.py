@@ -62,6 +62,7 @@ def test_locked_evaluator_hdf5_join_and_cached_resume(tmp_path, monkeypatch):
     root = Path(__file__).resolve().parents[2]
     monkeypatch.syspath_prepend(str(root / "scripts/external_validation"))
     import evaluate_code15 as evaluator
+    import preflight_code15 as preflight
     import verify_code15_evaluation as verifier
 
     code = tmp_path / "code15"
@@ -104,6 +105,8 @@ def test_locked_evaluator_hdf5_join_and_cached_resume(tmp_path, monkeypatch):
     protocol.write_text(json.dumps(config), encoding="utf-8")
     monkeypatch.setattr(evaluator, "PROTOCOL", protocol)
     monkeypatch.setattr(verifier, "PROTOCOL", protocol)
+    monkeypatch.setattr(preflight, "PROTOCOL", protocol)
+    monkeypatch.setattr(preflight, "SHARDS", {archive["key"] for archive in archives})
     receipt = {"protocol_sha256": evaluator.digest(protocol), "endpoints": endpoints,
                "code_or_mimic_outcomes_used": False, "thresholds_changed": False, "profiles": {}}
     for profile in config["evaluation"]["profiles"]:
@@ -135,10 +138,22 @@ def test_locked_evaluator_hdf5_join_and_cached_resume(tmp_path, monkeypatch):
     assert first["n_ecg"] == 4 and not first["complete_archive_coverage"]
     assert first["point_estimates_independently_verified"]["status"] == "PASS"
     full_output = tmp_path / "full"
-    args.update(output=full_output, archives=None, reuse_partial=output)
+    args.update(output=full_output, archives=None, reuse_partial=output, require_preflight=True)
+    with pytest.raises(FileNotFoundError, match="code15_preflight_receipt"):
+        evaluator.run(SimpleNamespace(**args))
+    preflight.run(code, args["scratch"], available_only=False)
+    assert preflight.signal_summary(np.pad(np.ones((2934, 12)), ((581, 581), (0, 0)))) == "581/581"
+    seal_path = code / "code15_preflight_receipt.json"
+    seal = json.loads(seal_path.read_bytes())
+    assert seal["selected_patients"] == 8 and not seal["labels_used"]
+    assert seal["archives"]["exams_part10.zip"]["selected_zero_border_pairs"] == {"48/48": 4}
+    preflight.run(code, args["scratch"], available_only=False)
+    assert json.loads(seal_path.read_bytes()) == seal
     evaluator.run(SimpleNamespace(**args))
     final = json.loads((full_output / "code15_evaluation_receipt.json").read_bytes())
     assert scored == [4, 4]
     assert final["n_ecg"] == 8 and final["complete_archive_coverage"]
     assert final["reused_verified_first_archive"] and final["promotion"]["P6"]["decision"] == "FAIL"
+    assert final["preflight_receipt_sha256"] == evaluator.digest(seal_path)
+    assert final["cohort_flow"]["patients_with_no_scored_ecgs"] == 0
     assert len(final["aggregate_views_sha256"]) == 4
