@@ -25,7 +25,7 @@ from titan_v45.evaluation.external_metrics import from_confusion
 from titan_v45.evaluation.revision_report import binary_metrics
 from titan_v45.models.frozen_rhythm import P8_CLASSES
 
-METRICS = ("sensitivity", "specificity", "f1", "auroc", "auprc", "brier")
+METRICS = ("sensitivity", "specificity", "ppv", "npv", "f1", "auroc", "auprc", "brier", "ece")
 
 
 def label(value):
@@ -109,6 +109,7 @@ def estimates(y, pred, score):
     table = from_confusion(*(values[key] for key in ("tp", "fp", "tn", "fn")))
     return {**{key: values[key] for key in ("tp", "tn", "fp", "fn")},
             **{key: table[key] for key in ("sensitivity", "specificity", "f1")},
+            "ppv": table["precision"], "npv": table["npv"], "ece": values["ece"],
             "auroc": values["auroc"], "auprc": values["average_precision"], "brier": values["brier_score"]}
 
 
@@ -135,6 +136,8 @@ def paired_metrics(labels, old, new, patients, threshold, endpoints, config):
 
     observed = paired(np.arange(len(patients)))
     samples = [[{name: [] for name in METRICS} for _ in range(2)] for _ in endpoints]
+    paired_samples = [dict((name, []) for name in METRICS) for _ in endpoints]
+    macro_samples = [[], []]
     deltas = []
     for _ in range(config["bootstrap_replicates"]):
         chosen = rng.integers(0, len(groups), len(groups))
@@ -143,13 +146,21 @@ def paired_metrics(labels, old, new, patients, threshold, endpoints, config):
             for model, values in enumerate(pair):
                 if values is not None:
                     for metric in METRICS:
-                        samples[col][model][metric].append(values[metric])
+                        if values[metric] is not None:
+                            samples[col][model][metric].append(values[metric])
+            if pair[0] is not None:
+                for metric in METRICS:
+                    if all(values[metric] is not None for values in pair):
+                        paired_samples[col][metric].append(pair[1][metric] - pair[0][metric])
         if any(supported) and all(pair[0] is not None for i, pair in enumerate(stats) if supported[i]):
             deltas.append(np.mean([pair[1]["f1"] - pair[0]["f1"] for pair in stats if pair[0] is not None]))
+            for model in range(2):
+                macro_samples[model].append(np.mean([pair[model]["f1"] for pair in stats if pair[0] is not None]))
     output = []
     for col, endpoint in enumerate(endpoints):
         for m, name in enumerate(("published", "anchored_linear_residual_v1")):
             row = {"endpoint": endpoint, "model": name, "n_ecg_with_reference": int((labels[:, col] >= 0).sum()),
+                   "n_patients_with_reference": len(np.unique(patients[labels[:, col] >= 0])),
                    "n_positive_ecg": int((labels[:, col] == 1).sum()), "n_negative_ecg": int((labels[:, col] == 0).sum()),
                    "n_positive_patients": supports[col][1], "n_negative_patients": supports[col][0],
                    "threshold": threshold[col], "estimable": supported[col]}
@@ -157,10 +168,19 @@ def paired_metrics(labels, old, new, patients, threshold, endpoints, config):
             for key, values in samples[col][m].items():
                 low, high = np.quantile(values, [0.025, 0.975]) if values else (None, None)
                 row.update({key + "_ci_low": low, key + "_ci_high": high, key + "_valid_replicates": len(values)})
+                old_value, new_value = (observed[col][k][key] if observed[col][k] is not None else None
+                                        for k in range(2))
+                pair_values = paired_samples[col][key] if m else []
+                dlo, dhi = np.quantile(pair_values, [0.025, 0.975]) if pair_values else (None, None)
+                row.update({key + "_delta": (new_value - old_value if m and old_value is not None
+                                              and new_value is not None else None),
+                            key + "_delta_ci_low": dlo, key + "_delta_ci_high": dhi,
+                            key + "_delta_valid_replicates": len(pair_values)})
             output.append(row)
     estimable = [p for p in observed if p[0] is not None]
     if not estimable:
-        return output, {"decision": "NOT_EVALUABLE"}
+        return output, {"decision": "NOT_EVALUABLE", "macro_f1_classes": [],
+                        "empty_sets": [int((~(scores >= threshold).any(axis=1)).sum()) for scores in (old, new)]}
     delta = float(np.mean([p[1]["f1"] - p[0]["f1"] for p in estimable]))
     sensitivity = float(min(p[1]["sensitivity"] - p[0]["sensitivity"] for p in estimable))
     macro_brier = float(np.mean([p[1]["brier"] - p[0]["brier"] for p in estimable]))
@@ -171,6 +191,11 @@ def paired_metrics(labels, old, new, patients, threshold, endpoints, config):
                  and macro_brier <= config["promotion_max_macro_brier_increase"]
                  and empty_change <= config["promotion_max_empty_set_rate_increase"])
     return output, {"macro_f1_delta": delta, "delta_ci95": ci, "delta_valid_replicates": len(deltas),
+                    "macro_f1_classes": [e for e, valid in zip(endpoints, supported, strict=True) if valid],
+                    "macro_f1": [float(np.mean([p[m]["f1"] for p in estimable])) for m in range(2)],
+                    "macro_f1_ci95": [np.quantile(v, [0.025, 0.975]).tolist() if v else [None, None]
+                                      for v in macro_samples],
+                    "empty_sets": [int((~(scores >= threshold).any(axis=1)).sum()) for scores in (old, new)],
                     "minimum_sensitivity_change": sensitivity, "macro_brier_delta": macro_brier,
                     "five_endpoint_empty_set_delta": empty_change, "observed_metric_gate_pass": pass_gate}
 
@@ -179,7 +204,7 @@ def run(args):
     import h5py
     import torch
     from probe_frozen import load_scorers
-    from verify_code15_evaluation import verify
+    from verify_code15_evaluation import verify, write_aggregate_views
 
     protocol = json.loads(PROTOCOL.read_bytes())
     config = protocol["evaluation"]
@@ -368,7 +393,9 @@ def run(args):
         writer = csv.DictWriter(stream, fieldnames=list(csv_rows[0]), lineterminator="\n")
         writer.writeheader()
         writer.writerows(csv_rows)
-    verification = verify(args.output)
+    verification = verify(args.output, replay=paired_metrics, decisions=decisions)
+    views = write_aggregate_views(args.output, decisions, len(keep), len(set(patients)),
+                                  set(archives) == names, endpoints)
     result = {"protocol_sha256": digest(PROTOCOL), "candidate_receipt_sha256": digest(receipt_path),
               "archive_sha256": archive_hashes, "baseline_hashes": hashes, "counts": stats,
               "historical_aligned_signatures": len(history), "historical_ineligible": unavailable,
@@ -378,7 +405,7 @@ def run(args):
               "private_shard_cache_sha256": digest(cache_path) if cache_path.exists() else None,
               "private_scores_sha256": digest(args.output / "private_scores.npz"),
               "private_selection_sha256": digest(args.output / "private_selection.json"),
-              "aggregate_csv_sha256": digest(table), "promotion": decisions}
+              "aggregate_csv_sha256": digest(table), "aggregate_views_sha256": views, "promotion": decisions}
     result["point_estimates_independently_verified"] = verification
     output = json.dumps(result, indent=2, sort_keys=True) + "\n"
     (args.output / "code15_evaluation_receipt.json").write_bytes(output.encode())

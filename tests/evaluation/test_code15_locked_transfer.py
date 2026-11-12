@@ -54,7 +54,7 @@ def test_independent_verifier_handles_ranking_ties(monkeypatch):
 
     y = np.array([1, 0, 1, 0])
     scores = np.array([.8, .8, .7, .1])
-    assert independent_estimates(y, scores, .75) == estimates(y, scores >= .75, scores)
+    assert independent_estimates(y, scores, .75) == pytest.approx(estimates(y, scores >= .75, scores))
 
 
 def test_locked_evaluator_hdf5_join_and_cached_resume(tmp_path, monkeypatch):
@@ -141,3 +141,4 @@ def test_locked_evaluator_hdf5_join_and_cached_resume(tmp_path, monkeypatch):
     assert scored == [4, 4]
     assert final["n_ecg"] == 8 and final["complete_archive_coverage"]
     assert final["reused_verified_first_archive"] and final["promotion"]["P6"]["decision"] == "FAIL"
+    assert len(final["aggregate_views_sha256"]) == 4
