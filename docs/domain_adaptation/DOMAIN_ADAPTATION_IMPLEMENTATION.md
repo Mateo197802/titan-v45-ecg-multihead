@@ -61,8 +61,9 @@ does not substitute for independent institutional confirmation.
 | 33694 | Partial Transformer, per-lead | 9933463 | 0.467045 | 0.452656 |
 | 33696 | Partial Transformer + ResNet, per-lead | 16992199 | 0.550205 | 0.582790 |
 | 33701 | MIMIC SSL warm start + partial Transformer | 9933463 | 0.473650 | 0.478860 |
+| 33743 | CODE + Chapman + CPSC GroupDRO | 9933463 | 0.378967 | 0.376290 |
 
-All five jobs completed with exit code `0:0`. AP and F1 are macro averages on
+All six jobs completed with exit code `0:0`. AP and F1 are macro averages on
 the same five CODE validation endpoints at each arm's best validation AP epoch.
 The ResNet arm improved validation F1 by 0.164822 over the per-lead frozen
 control, so the insufficient-within-CODE-improvement condition for full fine-
@@ -104,6 +105,15 @@ audit and does not rule out time-shifted matches or matches involving a short
 CODE signal. CPSC SB and STACH are fully masked; CPSC patient support is unknown.
 Where a long raw record is center-cropped, its source statement may not localize
 an episodic finding to the retained 10-second excerpt.
+
+The Chapman-only partial fit (`33742`) completed with macro-AP 0.731218
+and F1 0.679157 at 0.5 on Chapman validation. It is not eligible for CODE
+finalist selection on those metrics. The joint GroupDRO arm (`33743`) used
+all three authorized training sources and reduced CODE validation AP and F1
+relative to both the per-lead frozen control and the best partial variant.
+The result rejects a simple assumption that balancing more sources improves
+the target domain. Differences in positive prevalence and support masks can
+contribute; the experiment does not isolate their individual causal effects.
 
 The [run table](evidence/TRAINING_EXPERIMENTS_COMPLETE.csv),
 [learning curves](evidence/FINETUNING_LEARNING_CURVES.csv), and

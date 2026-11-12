@@ -1,6 +1,8 @@
 mode,normalization,validation_source,seeds,trainable_parameters,macro_ap_mean,macro_ap_population_sd,macro_f1_at_half_mean,macro_f1_at_half_population_sd
+chapman_only_partial,per_lead_zscore,chapman_shaoxing,1,9933463,0.7312179353259743,,0.679156524992451,
 frozen_backbone_mlp,per_lead_zscore,code15,3,85143,0.43962790782527267,0.0019857271210253413,0.4424286970370168,0.018349418995197677
 frozen_backbone_mlp,robust_shared_gain,code15,1,85143,0.273307795862469,,0.29886013876264206,
 masked_mimic_partial,per_lead_zscore,code15,1,9933463,0.4736498905412024,,0.4788595573140479,
+multisource_groupdro,per_lead_zscore,code15,1,9933463,0.3789668752498339,,0.3762898539369127,
 partial_transformer_mlp,per_lead_zscore,code15,1,9933463,0.4670446077645602,,0.4526562769765038,
 partial_transformer_resnet_mlp,per_lead_zscore,code15,1,16992199,0.5502047560208447,,0.5827900159338536,
