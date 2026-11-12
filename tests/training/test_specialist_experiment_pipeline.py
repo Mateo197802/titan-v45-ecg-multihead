@@ -1,3 +1,4 @@
+import csv
 import importlib.util
 from pathlib import Path
 from types import SimpleNamespace
@@ -155,3 +156,20 @@ def test_feature_revision_guard_rejects_extraction_pipeline_changes(monkeypatch,
 
     with pytest.raises(ValueError, match="feature extraction code or inputs changed"):
         pipeline._verify_feature_code_compatibility(tmp_path, "feature-commit")
+
+
+def test_atomic_csv_handles_optional_summary_columns(tmp_path):
+    path = tmp_path / "comparison.csv"
+    rows = [
+        {"model": "baseline", "macro_f1": 0.4},
+        {"model": "candidate", "macro_f1": 0.5, "macro_f1_bootstrap_classes": ["AFIB"]},
+    ]
+
+    pipeline._atomic_csv(path, rows)
+
+    with path.open(encoding="utf-8", newline="") as handle:
+        result = list(csv.DictReader(handle))
+    assert result[0] == {"model": "baseline", "macro_f1": "0.4",
+                        "macro_f1_bootstrap_classes": ""}
+    assert result[1] == {"model": "candidate", "macro_f1": "0.5",
+                        "macro_f1_bootstrap_classes": "['AFIB']"}

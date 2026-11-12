@@ -109,7 +109,7 @@ def _atomic_json(path: Path, payload: dict[str, Any]) -> None:
 
 
 def _atomic_csv(path: Path, rows: list[dict[str, Any]]) -> None:
-    fields = list(rows[0]) if rows else []
+    fields = list(dict.fromkeys(key for row in rows for key in row))
     with NamedTemporaryFile(mode="w", encoding="utf-8", newline="", dir=path.parent,
                             suffix=".csv", delete=False) as temp:
         temp_path = Path(temp.name)
