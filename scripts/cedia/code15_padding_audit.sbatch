@@ -14,8 +14,9 @@ hdf5deps=${5:?HDF5 dependencies archive}
 audit_output=${6:-padding_audit.json}
 [[ $audit_output =~ ^[a-z_]+\.json$ ]]
 module load pytorch/2.2
-scratch=$(mktemp -d "${SLURM_TMPDIR:-/tmp}/titan-code-pad-XXXXXX")
-trap 'rm -rf "$scratch"' EXIT
+source "$repo/scripts/cedia/code15_scratch.sh"
+scratch=$(code15_scratch "$study" padding)
+trap 'rm -rf -- "$scratch"' EXIT
 mkdir "$scratch/deps"
 tar -xf "$deps" -C "$scratch/deps"
 tar -xf "$hdf5deps" -C "$scratch/deps"

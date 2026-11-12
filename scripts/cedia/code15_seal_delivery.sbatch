@@ -13,11 +13,12 @@ evaluation=${4:?full evaluation}
 destination=${5:?aggregate-only destination}
 deps=${6:?dependencies archive}
 module load pytorch/2.2
-scratch=$(mktemp -d "${SLURM_TMPDIR:-/tmp}/titan-code-delivery-XXXXXX")
-trap 'rm -rf "$scratch"' EXIT
+source "$repo/scripts/cedia/code15_scratch.sh"
+scratch=$(code15_scratch "$(dirname -- "$code")" delivery 1048576)
+trap 'rm -rf -- "$scratch"' EXIT
 tar -xf "$deps" -C "$scratch"
 export PYTHONPATH="$scratch${PYTHONPATH:+:$PYTHONPATH}"
-export OPENBLAS_NUM_THREADS=2 OMP_NUM_THREADS=2
+export TMPDIR="$scratch" OPENBLAS_NUM_THREADS=2 OMP_NUM_THREADS=2
 cd "$repo"
 test -z "$(git status --porcelain)"
 git rev-parse HEAD

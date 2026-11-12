@@ -15,13 +15,14 @@ deps=${5:?dependency tar}
 hdf5deps=${6:?HDF5 dependency tar}
 previous=${7:-}
 module load pytorch/2.2
-scratch=$(mktemp -d "${SLURM_TMPDIR:-/tmp}/titan-code-eval-XXXXXX")
-trap 'rm -rf "$scratch"' EXIT
+source "$repo/scripts/cedia/code15_scratch.sh"
+scratch=$(code15_scratch "$study" eval)
+trap 'rm -rf -- "$scratch"' EXIT
 mkdir "$scratch/deps" "$scratch/work"
 tar -xf "$deps" -C "$scratch/deps"
 tar -xf "$hdf5deps" -C "$scratch/deps"
 export PYTHONPATH="$scratch/deps${PYTHONPATH:+:$PYTHONPATH}"
-export OPENBLAS_NUM_THREADS=4 MKL_NUM_THREADS=4 OMP_NUM_THREADS=4
+export TMPDIR="$scratch" OPENBLAS_NUM_THREADS=4 MKL_NUM_THREADS=4 OMP_NUM_THREADS=4
 cd "$repo"
 test -z "$(git status --porcelain)"
 git rev-parse HEAD
