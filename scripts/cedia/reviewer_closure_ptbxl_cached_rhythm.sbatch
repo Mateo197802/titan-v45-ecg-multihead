@@ -23,7 +23,11 @@ export OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 OPENBLAS_NUM_THREADS=4 PYTHONDONTWRIT
 out="$root/ptbxl-cached-rhythm-$SLURM_JOB_ID"
 mkdir -m 700 -- "$out"
 evaluate() {
-    python -u "$code/scripts/evaluation/evaluate_reviewer_ptbxl_cached_rhythm.py" "$@" +      --repo "$repo" --assets "$assets" --features "$features" +      --metadata "$metadata" --support "$support" --output "$out"
+    local -a inputs=(
+        --repo "$repo" --assets "$assets" --features "$features"
+        --metadata "$metadata" --support "$support" --output "$out"
+    )
+    python -u "$code/scripts/evaluation/evaluate_reviewer_ptbxl_cached_rhythm.py" "$@" "${inputs[@]}"
 }
 evaluate score
 (cd "$out" && sha256sum scoring-receipt.json private-readout.json > SCORE_SHA256SUMS)
