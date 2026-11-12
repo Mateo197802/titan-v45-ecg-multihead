@@ -12,6 +12,8 @@ def audit(monkeypatch):
 
 @pytest.mark.parametrize(("endpoint", "codes", "marker", "expected"), [
     ("Paced", {"PACE": 0}, "pacemaker", "concordant_marker_unknown_scp_likelihood"),
+    ("Paced", {"PACE": 0}, "ja, pacemaker", "concordant_marker_unknown_scp_likelihood"),
+    ("Paced", {"PACE": 0}, "ja, nan", "ambiguous_pacing_reference"),
     ("Paced", {"PACE": 100}, "pacemaker", "positive"),
     ("Paced", {"PACE": 100}, "", "ambiguous_pacing_reference"),
     ("Paced", {"NORM": 100}, "pacemaker", "ambiguous_pacing_reference"),

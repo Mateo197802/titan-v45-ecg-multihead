@@ -29,7 +29,8 @@ DIRECT = {
 PROXIES = {"NSR": "SR", "LQTS": "LNGQT", "LAE": "LAO/LAE"}
 TARGETS = (*DIRECT, "Paced", *PROXIES)
 PROFILES = {"P6", "P8", "P4"}
-REFERENCE_SCHEMA = "TITAN_V45_PTBXL_OTHER_SUPPORT_V1"
+EXPLICIT_PACING_MARKERS = {"pacemaker", "ja, pacemaker"}
+REFERENCE_SCHEMA = "TITAN_V45_PTBXL_OTHER_SUPPORT_V2"
 
 
 def digest(path):
@@ -50,7 +51,7 @@ def disposition(endpoint, codes, marker):
     control = codes.get("NORM", 0) > 0 and codes.keys() <= {"NORM", "SR"} and not marker
     if endpoint == "Paced":
         if "PACE" in codes or marker:
-            if marker == "pacemaker" and "PACE" in codes and "NORM" not in codes:
+            if marker in EXPLICIT_PACING_MARKERS and "PACE" in codes and "NORM" not in codes:
                 return "positive" if codes["PACE"] > 0 else "concordant_marker_unknown_scp_likelihood"
             return "ambiguous_pacing_reference"
     elif DIRECT[endpoint] in codes:
@@ -124,7 +125,7 @@ def load_rows(metadata, dictionary, inventory, receipt_path, ledger):
                     or any(not math.isfinite(v) or not 0 <= v <= 100 for v in codes.values())):
                 raise ValueError("unrecognized or invalid source SCP annotation")
             marker = row["pacemaker"].strip().casefold()
-            markers["explicit_marker" if marker == "pacemaker" else "other_nonempty" if marker else "blank"] += 1
+            markers["explicit_marker" if marker in EXPLICIT_PACING_MARKERS else "other_nonempty" if marker else "blank"] += 1
             partitions = ["all_folds_1_9", *(p + "_scoreable" for p in sorted(PROFILES)
                             if statuses[key][p] == "scored")]
             for endpoint in TARGETS:
