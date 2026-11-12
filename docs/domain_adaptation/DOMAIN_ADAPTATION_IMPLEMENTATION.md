@@ -90,6 +90,21 @@ and completed unchanged as `33735` on compute-0-1. Across the three frozen
 per-lead seeds the mean macro-AP was 0.439628 (population SD 0.001986) and
 mean macro-F1 at threshold 0.5 was 0.442429 (population SD 0.018349).
 
+The additional-source bank was completed by `33741` in 24m31s with exit
+code `0:0`, after a four-reader staging attempt was stopped without a receipt.
+The protocol and selection were unchanged when the input reader was scaled to
+12 CPUs. Its [public receipt](evidence/ADDITIONAL_SOURCE_RECEIPT.json)
+reconciles 4294 eligible of 4300 planned ECG: 1998 Chapman training, 700 Chapman
+validation and 1596 CPSC training. Two Chapman and four CPSC candidates failed
+signal-contract validation; the receipt retains exception classes, not finer
+reason counts. No match crossed the frozen cosine criterion against 8280
+comparable 10-second CODE bank windows before final duplicate pruning, and no
+additional-source aligned matches were found. This is not a patient-linkage
+audit and does not rule out time-shifted matches or matches involving a short
+CODE signal. CPSC SB and STACH are fully masked; CPSC patient support is unknown.
+Where a long raw record is center-cropped, its source statement may not localize
+an episodic finding to the retained 10-second excerpt.
+
 The [run table](evidence/TRAINING_EXPERIMENTS_COMPLETE.csv),
 [learning curves](evidence/FINETUNING_LEARNING_CURVES.csv), and
 [artifact manifest](evidence/EXPERIMENT_REPRODUCIBILITY_MANIFEST.json) can be

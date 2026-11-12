@@ -1,5 +1,9 @@
 {
   "files": {
+    "ADDITIONAL_SOURCE_RECEIPT.json": {
+      "bytes": 2786,
+      "sha256": "06c5dd9d6fc5e6116efaece3206f177467261a60bb1959ee7a91d81ce9f69b3f"
+    },
     "CHECKPOINT_SHA256SUMS.txt": {
       "bytes": 956,
       "sha256": "bd651f4459d05168848a3d29105bebbd0316919f465ff59b6d09407f486108bc"

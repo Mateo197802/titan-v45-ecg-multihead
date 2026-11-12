@@ -17,6 +17,7 @@ RUN_FIELDS = ("mode", "normalization", "seed", "slurm_job", "best_epoch", "valid
 HEX = re.compile(r"[0-9a-f]{64}\Z")
 PUBLIC_TYPES = {".csv", ".json", ".txt"}
 PRIVATE_NAMES = {"exam", "patient", "ecg_id", "exam_id", "patient_id", "labels", "waveform", "identity"}
+ROOT = Path(__file__).resolve().parents[2]
 
 
 def sha(path):
@@ -53,6 +54,51 @@ def verify_confusion(row, sensitivity, positive, negative):
         raise ValueError("confusion counts or derived rates disagree")
 
 
+def verify_cross_source(evidence):
+    extra = evidence / "ADDITIONAL_SOURCE_RECEIPT.json"
+    if not extra.is_file():
+        return None
+    receipt = json.loads(extra.read_bytes())
+    protocol = ROOT / "docs/domain_adaptation/CROSS_SOURCE_PROTOCOL.json"
+    assert_hash(protocol, receipt["protocol_sha256"])
+    caps = json.loads(protocol.read_bytes())["sources"]
+    sources = receipt["sources"]
+    if (receipt["code_label_files_read"] or receipt["patient_independence_across_sources"] != "NOT_CERTIFIED"
+            or set(sources) != {"chapman_shaoxing/train", "chapman_shaoxing/validation", "cpsc2018/train"}
+            or sources["cpsc2018/train"]["patients"] is not None):
+        raise ValueError("additional source receipt does not match its frozen scope")
+    accounted = (sum(row["ecgs"] for row in sources.values()) + sum(receipt["other_exclusions"].values())
+                 + receipt["total_aligned_exclusions"])
+    if (accounted != sum(sum(row["caps"].values()) for row in caps.values())
+            or not 0 <= receipt["external_code_waveform_matches_excluded"] <= receipt["total_aligned_exclusions"]):
+        raise ValueError("additional source denominator or exclusions do not reconcile")
+    for scope, row in sources.items():
+        if scope.startswith("chapman_shaoxing/") and row["patients"] != row["ecgs"]:
+            raise ValueError("Chapman source patient proxy does not match ECG units")
+        for values in row["endpoints"].values():
+            if set(values) != {"-1", "0", "1"} or min(values.values()) < 0 or sum(values.values()) != row["ecgs"]:
+                raise ValueError("additional source reference supports do not reconcile")
+    transfer = evidence / "SOURCE_GENERALIZATION_RECEIPT.json"
+    if transfer.is_file():
+        run = json.loads(transfer.read_bytes())
+        table = evidence / "SOURCE_GENERALIZATION_MATRIX.csv"
+        assert_hash(table, run["metrics_sha256"])
+        rows = read_csv(table)
+        if len(rows) != run["rows"] or run["code_evaluation_test_opened"] or run["independent_generalization"] != "NOT_EVALUATED":
+            raise ValueError("invalid source transfer receipt")
+        for row in rows:
+            if row["estimable"] == "True":
+                verify_confusion({**row, "negatives": int(row["ecgs"]) - int(row["positive_ecgs"])},
+                                 "sensitivity", "positive_ecgs", "negatives")
+    probe = evidence / "SOURCE_DESCRIPTOR_PROBE.json"
+    if probe.is_file():
+        data = json.loads(probe.read_bytes())
+        if (data["test_opened"] or data["diagnostic_labels_used"] or data["additional_source_receipt_sha256"] != sha(extra)
+                or data["ecg_duration_seconds"] != 10):
+            raise ValueError("source recognition probe exceeded its scope")
+    return sha(extra)
+
+
 def verify(evidence, rebuild=False):
     qc = json.loads((evidence / "PATIENT_AND_SIGNAL_LEAKAGE_AUDIT.json").read_bytes())
     assert_hash(evidence / "EXTERNAL_DATA_MANIFESTS_SUMMARY.csv", qc["public_cohort_counts_sha256"])
@@ -66,6 +112,7 @@ def verify(evidence, rebuild=False):
     for row in rows:
         verify_confusion(row, "recall", "positive_support", "negative_support")
 
+    extra_hash = verify_cross_source(evidence)
     ssl = evidence / "mimic_ssl/SSL_TRAINING_RECEIPT.json"
     if ssl.is_file():
         ssl_data = json.loads(ssl.read_bytes())
@@ -85,6 +132,7 @@ def verify(evidence, rebuild=False):
         curve_rows = read_csv(curves)
         best = max(curve_rows, key=lambda row: float(row["validation_macro_ap"]))
         if (key in seen or run["calibration_or_test_opened"] or not HEX.fullmatch(run["checkpoint_sha256"])
+                or run.get("additional_source_receipt_sha256") not in {None, extra_hash}
                 or run["bank_receipt_sha256"] != qc["full_qc_receipt_sha256"] or int(best["epoch"]) != run["best_epoch"]
                 or float(best["validation_macro_ap"]) != run["validation_macro_ap"]
                 or float(best["validation_macro_f1_at_half"]) != run["validation_macro_f1_at_half"]):
