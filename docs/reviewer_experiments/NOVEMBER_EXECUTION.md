@@ -34,10 +34,12 @@ real second-stage inference are not implied by abstention.
 | 33369 | Mapped auxiliary ranking and observable Other support | afterok:33355 | Complete-denominator reference states and ranking on explicit compatible controls |
 | 33373 | Paired zero-morphology sensitivity with immutable released weights | afterok:33363:33364 | Score/decision changes, not retraining |
 | 33381 | Fresh paired extraction, matched retraining, calibration seal, held comparison | afterok:33355:33363:33364 | Private models plus aggregate paired intervals and original-baseline comparison |
+| 33390 | New PTB-XL auxiliary and bounded pathology Other heads | afterok:33355:33369 | Complete reference flow, held metrics and patient intervals for supported endpoints |
 
 The submitted baseline uses experiment commit f989eccf74d38399d0298026e6f4c078a437fd2d.
 The comparison job uses 891dacbca23d7685117f836f98bc3dd1482bb1af.
 The matched retraining job uses 648c5a4b784b2307376d620eeb03fc0bb5d3198a.
+The pathology Other job uses 6baab4228767219c048d8989a35a70e3bb2219fa.
 Submission is not completion; the registry does not assert results.
 
 The [morphology input contract](MORPHOLOGY_INPUT_CONTRACT.md) gives the formulas
@@ -57,6 +59,20 @@ Normal ECG-only controls; concurrent Normal and abnormal primary
 statements are ambiguous. The complete source denominator includes
 unknowns. Normal ECG does not authenticate an NSR endpoint. No operating
 threshold or comprehensive Other classifier is inferred.
+
+The [new PTB-XL pathology protocol](../../configs/reviewer_experiments/november_pathology_other.json)
+defines the explicit statement endpoints ALMI, ILMI and LAO/LAE (combined
+overload/enlargement, not isolated LAE), and evaluates their union as a
+bounded pathology Other alternative. It retains the full official-fold
+1-9 metadata denominator, including unscored and unknown reference states.
+New heads use sealed Stage A P4 features, train on folds 1-7 and calibrate on
+one patient-disjoint portion of fold 9. The other portion is evaluated
+after sealing the models and thresholds. Fold 10 outcomes and waveforms
+are not used; fold 8 is not used for fitting or evaluation. P4 has no
+published specialist decision for these endpoints; SPH auxiliary ranks
+from job 33369 are not a head-to-head comparison with this PTB-XL result.
+This design does not evaluate a comprehensive pathology Other or any new
+rhythm Other head and does not establish independent generalization.
 
 ## Links to the 40-criterion register
 
