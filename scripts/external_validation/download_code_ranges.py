@@ -6,6 +6,7 @@ import hashlib
 import json
 import shutil
 import subprocess
+import time
 import zipfile
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
@@ -14,6 +15,23 @@ from code15_io import PROTOCOL, digest
 
 CHUNK = 64 * 1024**2
 WORKERS = 4
+RETRYABLE_CURL_CODES = {5, 6, 7, 18, 28, 35, 52, 55, 56, 92}
+
+
+def fetch_range(command, tmp, expected_header, expected_size):
+    for attempt in range(5):
+        result = subprocess.run(command, capture_output=True, text=True, check=False)
+        headers = {line.strip().lower() for line in result.stdout.splitlines()}
+        if result.returncode == 0:
+            if (expected_header in headers and tmp.is_file()
+                    and tmp.stat().st_size == expected_size):
+                return
+            raise ValueError("server did not return the exact requested range")
+        if result.returncode not in RETRYABLE_CURL_CODES or attempt == 4:
+            raise subprocess.CalledProcessError(result.returncode, command, result.stdout, result.stderr)
+        print(json.dumps({"retry": attempt + 1, "curl_code": result.returncode,
+                          "requested_range": expected_header}), flush=True)
+        time.sleep(2 ** attempt)
 
 
 def range_download(code: Path, filename: str, entry: dict):
@@ -33,17 +51,14 @@ def range_download(code: Path, filename: str, entry: dict):
             if path.is_file() and path.stat().st_size == end + 1 - start:
                 return path
             tmp = path.with_suffix(".part")
-            result = subprocess.run([
+            command = [
                 "curl", "--fail", "--silent", "--show-error", "--location", "--proto", "=https",
                 "--proto-redir", "=https", "--retry", "3", "--connect-timeout", "20", "--max-time", "420",
                 "--header", "Accept-Encoding: identity", "--range", f"{start}-{end}", "--max-filesize",
                 str(end + 1 - start), "--output", str(tmp), "--dump-header", "-",
                 f"https://zenodo.org/records/4916206/files/{filename}?download=1",
-            ], capture_output=True, text=True, check=True)
-            headers = {line.strip().lower() for line in result.stdout.splitlines()}
-            if (f"content-range: bytes {start}-{end}/{total}" not in headers
-                    or tmp.stat().st_size != end + 1 - start):
-                raise ValueError("server did not return the exact requested range")
+            ]
+            fetch_range(command, tmp, f"content-range: bytes {start}-{end}/{total}", end + 1 - start)
             tmp.replace(path)
             print(json.dumps({"archive": filename, "range_verified_bytes": end + 1 - start,
                               "range_start": start}), flush=True)
