@@ -39,6 +39,7 @@ real second-stage inference are not implied by abstention.
 | 33399 | Same-score full-population vs restricted SPH analysis | afterok:33355:33357 | Statement prevalence, disjoint flow strata, and paired differences between denominators |
 | 33403 | Compare both new waveform replays to archived predictions and previous native replays | afterok:33363:33364 | Anchored input hashes, score residuals, margins, decisions and missing-score counts |
 | 33410 | Complementary unfiltered PTB-XL cache scoring with P6/P8/P4 | afterok:33355 | Complete denominator and technical flow; statement metrics for 1AVB/ISC_ and released pathology auxiliary ranking |
+| 33414 | One joint P8/P4 accept-or-abstain decision per held SPH ECG | afterok:33362 | Verified private route ledger, coverage/risk intervals and classwise positive disposition |
 
 The submitted baseline uses experiment commit f989eccf74d38399d0298026e6f4c078a437fd2d.
 The comparison job uses 891dacbca23d7685117f836f98bc3dd1482bb1af.
@@ -48,6 +49,7 @@ The rhythm Other job uses 72dd436cd5a9e8ec397fccd1e70b9aa1abed4efe.
 The full-population contrast job uses 63ff66fb9b49198f773973d5f579c404940c648b.
 The replay contrast job uses c4f5e38b31cfad391bdb03ab979ab15d0b2e7543.
 The complementary PTB-XL job uses 49e520c0d29b81fcc7f584663c4b5b9ad1fe7b64.
+The joint selective job uses 772ec3558d952127fb098cad89d01bb808a8bda9.
 Submission is not completion; the registry does not assert results.
 
 The [population contrast protocol](../../configs/reviewer_experiments/november_population_contrast.json)
@@ -94,6 +96,17 @@ exact waveform hashes, uses only the calibration half for cutoffs and
 exports aggregate counts and the frozen thresholds. A subsequent scoring
 stage must verify that receipt before processing held outcomes. The split
 cannot convert previously inspected SPH into independent validation.
+
+The [joint selective protocol](../../configs/reviewer_experiments/november_joint_selective.json)
+uses those same sealed cutoffs, without refitting. The compound policy
+emits both P8 and P4 released decisions only if both component margins
+pass; otherwise it emits no prediction. P6 remains a diagnostic
+comparison, not a third gate. The joint ledger keeps the original
+predictions for audit, and the aggregate separates emitted misses,
+reference positives with no prediction due to abstention, and technical
+non-scoring. Abstained-baseline FN is a counterfactual, not an emitted
+FN. No real cascade or human adjudication is performed, and these
+predeclared retrospective results do not define a historical rate.
 
 For auxiliary reference support, the versioned SPH dictionary provides
 Flutter (51) and LAE (140). The frozen score interface exposes Flutter as
