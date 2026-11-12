@@ -38,13 +38,13 @@ def code_signatures(bank):
     return np.stack(signatures)
 
 
-def read_source(raw, row, endpoints):
-    source = raw / row["source"]
+def read_source(raw, row, endpoints, source_roots=None):
+    source = source_roots[row["source"]] if source_roots else (raw / row["source"]).resolve()
     relative = Path(row["relative_record"])
     if relative.is_absolute() or ".." in relative.parts:
         raise ValueError("additional source path escaped source root")
     base = source / relative
-    if not Path(f"{base}.hea").resolve(strict=True).is_relative_to(source.resolve()):
+    if not Path(f"{base}.hea").resolve(strict=True).is_relative_to(source):
         raise ValueError("source_path_escape")
     header = wfdb.rdheader(str(base))
     if header.fs != 500 or header.sig_len < 5000:
@@ -54,7 +54,7 @@ def read_source(raw, row, endpoints):
         raise ValueError("unexpected_waveform_components")
     name = next(iter(files))
     signal = base.parent / name
-    if (Path(name).name != name or not signal.resolve(strict=True).is_relative_to(source.resolve())
+    if (Path(name).name != name or not signal.resolve(strict=True).is_relative_to(source)
             or digest(signal) != row["signal_sha256"]):
         raise ValueError("source_waveform_identity_mismatch")
     start = (header.sig_len - 5000) // 2
@@ -66,9 +66,9 @@ def read_source(raw, row, endpoints):
     return wave, observed_descriptors(wave), labels
 
 
-def read_candidate(raw, endpoints, row):
+def read_candidate(raw, endpoints, row, *, source_roots=None):
     try:
-        return read_source(raw, row, endpoints), None
+        return read_source(raw, row, endpoints, source_roots), None
     except (ValueError, OSError) as exc:
         if str(exc) in {"source_waveform_identity_mismatch", "source_path_escape",
                         "additional source path escaped source root"}:
@@ -87,8 +87,11 @@ def run(raw, preflight, code_bank, out):
     out.mkdir(mode=0o700, exist_ok=False)
     groups, matrix, mapping = defaultdict(list), [], []
     rejected = Counter()
-    worker = partial(read_candidate, raw, list(protocol["endpoints"]))
-    workers = min(4, max(1, int(os.getenv("SLURM_CPUS_PER_TASK", "1"))))
+    roots = {name: (raw / name).resolve(strict=True) for name in cfg["sources"]}
+    if any(not root.is_relative_to(raw.resolve(strict=True)) for root in roots.values()):
+        raise ValueError("additional source root escaped the approved input directory")
+    worker = partial(read_candidate, raw, list(protocol["endpoints"]), source_roots=roots)
+    workers = min(16, max(1, int(os.getenv("SLURM_CPUS_PER_TASK", "1"))))
     for source, splits in cfg["sources"].items():
         for split, cap in splits["caps"].items():
             if not cap:
