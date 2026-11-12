@@ -142,12 +142,36 @@ fixed. Decision fields changed for 37/1,643 P6, 120/2,193 P8 and 8/733 P4 ECGs
 on the selected panels. Zero-input perturbation demonstrates dependence of the
 implemented decision function, not incremental value after retraining.
 
+The [matched head comparison 33596](../../outputs/results/reviewer_experiments/retrained-eval_33596_aggregate.json)
+used the heads sealed in job 33474: the same class-masked logistic architecture
+fitted on each extraction arm, with common release backbones, matched splits,
+identical optimizer settings and calibration on a separate partition. For each
+profile the two heads and released baseline were compared on the same known
+held observations.
+
+| Profile | Held ECGs | Supported endpoints | Released comparator F1 | Without morphology | With morphology | Paired difference, 95% CI |
+|---|---:|---:|---:|---:|---:|---:|
+| P6 | 1,251 | 6 | 0.7406 | 0.7715 | 0.7788 | +0.0072 [-0.0040, +0.0206] |
+| P8 | 1,251 | 8 | 0.7281 | 0.7266 | 0.7412 | +0.0146 [+0.0016, +0.0276] |
+| P4 | 390 | 4 | 0.7336 | 0.8400 | 0.8407 | +0.0006 [-0.0163, +0.0157] |
+
+P8 shows a modest improvement on this held Chapman split; P6 and P4 intervals
+span zero, which neither establishes benefit nor proves equivalence. The
+intervals are profile-specific and not adjusted across profiles. Held
+sensitivities, AUROC, average precision, Brier, ECE and paired per-endpoint
+intervals are in the aggregate. P4's 390 held ECGs include unknown references;
+the four known-reference denominators are 186 ASMI, 180 LVH, 192 IMI and
+161 ISC_. PTB-XL uses patient-grouped folds 1-7 and a split of fold 9; Chapman
+uses a record-as-patient proxy, not validated person identifiers. This is not
+an end-to-end backbone retrain or an independent clinical validation. The
+released comparator differs in training and calibration; its performance
+cannot identify a morphology effect.
+
 **Disposition: partial.** Candidate formula, inputs and wiring are supported
 (R2-3f.1); exact original loader identity and strict historical score
 equivalence are not (R2-3f.2-3). The new replay does not authenticate historical
-specialist metadata (R2-3f.4). Job 33474 sealed both fitted arms before the
-released-baseline comparison failed. Evaluation-only recovery 33596 must be
-verified before drawing any conclusion about incremental predictive value.
+specialist metadata (R2-3f.4). The new matched comparison supports a bounded
+P8 effect, not a claim of universal benefit for both branches.
 
 ## R2-4k: Executed abstention, not historical quarantine
 
@@ -187,3 +211,12 @@ aggregate supports a separately dated policy estimate for R2-4k.2. Historical
 R2-4k.1 remains not assessed. Neither 0% nor the Plan AE 9.976% can be reported
 as an original operational quarantine rate. No historical rubric points were
 updated by this report.
+
+## Delivery and proposed changes
+
+The [final CEDIA receipt](../../outputs/results/reviewer_experiments/november_delivery_verification_33596.json)
+verifies 16/16 accepted result jobs. The original fit job 33474 exited with a
+comparison error after sealing both fitted arms. The evaluation-only recovery
+33596 verified and reused those bytes; no refit was performed. The
+[manuscript change map](ORIGINAL_MANUSCRIPT_CHANGE_MAP.md) anchors suggested
+edits to the submitted source without changing it.

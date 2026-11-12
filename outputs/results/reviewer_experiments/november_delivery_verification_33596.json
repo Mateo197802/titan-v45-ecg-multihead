@@ -1,0 +1,347 @@
+{
+  "schema": "TITAN_V45_NOVEMBER_DELIVERY_VERIFICATION_V1",
+  "jobs": {
+    "33355": {
+      "scheduler": {
+        "state": "COMPLETED",
+        "exit_code": "0:0",
+        "elapsed": "00:15:18"
+      },
+      "result_status": "verified",
+      "aggregate_candidates": {
+        "scoring-receipt.json": {
+          "sha256": "6b52867f0a9834a3eb698c76749d7a5d16d35dd1dc3fa0e24e88ed07eefc846b",
+          "producer_checksum_verified": true
+        }
+      }
+    },
+    "33356": {
+      "scheduler": {
+        "state": "COMPLETED",
+        "exit_code": "0:0",
+        "elapsed": "00:00:09"
+      },
+      "result_status": "verified",
+      "aggregate_candidates": {
+        "aggregate.json": {
+          "sha256": "c99ef6197dfcc3ce80009139a47528b6a34f6fb5530109e95853015c0665d5e4",
+          "producer_checksum_verified": true
+        }
+      }
+    },
+    "33357": {
+      "scheduler": {
+        "state": "COMPLETED",
+        "exit_code": "0:0",
+        "elapsed": "00:18:43"
+      },
+      "result_status": "verified",
+      "aggregate_candidates": {
+        "aggregate.json": {
+          "sha256": "0e29fed17b7b4c1b5ba8842761e4bb99b39ed0727d561359a27b4899a583f5cf",
+          "producer_checksum_verified": true
+        },
+        "aggregation-receipt.json": {
+          "sha256": "0ea67efce7937c4e8282c0860a3d3cfe1981152fb4455df267968fd2f2d7f2ba",
+          "producer_checksum_verified": true
+        },
+        "ece-correction-receipt.json": {
+          "sha256": "5a21e966bb60916b1fb779f3d294fcb3d70316580ee00c2070f3a912323d2d01",
+          "producer_checksum_verified": true
+        }
+      }
+    },
+    "33362": {
+      "scheduler": {
+        "state": "COMPLETED",
+        "exit_code": "0:0",
+        "elapsed": "00:00:26"
+      },
+      "result_status": "verified",
+      "aggregate_candidates": {
+        "aggregate.json": {
+          "sha256": "b96dc211fa92687d42b07d757adf921a5f5ee2eecfed195e9e340f99bf62b638",
+          "producer_checksum_verified": true
+        },
+        "policy.json": {
+          "sha256": "61a4cfafb30621991288ab1a314ef932650ab27bbfd8ff0cacb1ff5a5633209b",
+          "producer_checksum_verified": true
+        }
+      }
+    },
+    "33469": {
+      "scheduler": {
+        "state": "COMPLETED",
+        "exit_code": "0:0",
+        "elapsed": "00:01:45"
+      },
+      "result_status": "verified",
+      "aggregate_candidates": {
+        "aggregate.json": {
+          "sha256": "592e2bbab96cd03e23caf5ba4c29b746293a0f6e7584ed4b6fc069160c2d5f46",
+          "producer_checksum_verified": true
+        }
+      }
+    },
+    "33470": {
+      "scheduler": {
+        "state": "COMPLETED",
+        "exit_code": "0:0",
+        "elapsed": "00:01:16"
+      },
+      "result_status": "verified",
+      "aggregate_candidates": {
+        "aggregate.json": {
+          "sha256": "123d21f4512b988eb24bcff90b971c62510c547b7f766e059137f072c2d871b4",
+          "producer_checksum_verified": true
+        }
+      }
+    },
+    "33471": {
+      "scheduler": {
+        "state": "COMPLETED",
+        "exit_code": "0:0",
+        "elapsed": "00:00:10"
+      },
+      "result_status": "verified",
+      "aggregate_candidates": {
+        "aggregate.json": {
+          "sha256": "f5dba0f232bc1a786373747752003cecc37d1df6d120350f39121480b0dc8796",
+          "producer_checksum_verified": false
+        }
+      }
+    },
+    "33369": {
+      "scheduler": {
+        "state": "COMPLETED",
+        "exit_code": "0:0",
+        "elapsed": "00:00:09"
+      },
+      "result_status": "verified",
+      "aggregate_candidates": {
+        "aggregate.json": {
+          "sha256": "7eb6edfae295c3d312fcd743f0b4ec0e5c89c1b263124a8f4eebd4e638fc47eb",
+          "producer_checksum_verified": true
+        }
+      }
+    },
+    "33596": {
+      "scheduler": {
+        "state": "COMPLETED",
+        "exit_code": "0:0",
+        "elapsed": "00:01:13"
+      },
+      "result_status": "verified",
+      "aggregate_candidates": {
+        "aggregate.json": {
+          "sha256": "c057c163e9a526e1aaa92443dfd64a4df03add66b1476ceb43e5f84b83efb8f8",
+          "producer_checksum_verified": true
+        },
+        "fit-receipt.json": {
+          "sha256": "928f90d87f7fc95eeb829792e71e4f2fd267ad35e75ecaf043c2c8065f1f358d",
+          "producer_checksum_verified": true
+        },
+        "features/extraction-receipt.json": {
+          "sha256": "de65d38ef6c3c00cae2546858924ab87a7656e754fe4a52aaac7a2d7b328f3cb",
+          "producer_checksum_verified": true
+        }
+      }
+    },
+    "33390": {
+      "scheduler": {
+        "state": "COMPLETED",
+        "exit_code": "0:0",
+        "elapsed": "00:01:11"
+      },
+      "result_status": "verified",
+      "aggregate_candidates": {
+        "aggregate.json": {
+          "sha256": "da36c3001b144a2e5ed2541e1bb76b405cd66dd994e27d52786f729ecfa900c4",
+          "producer_checksum_verified": true
+        },
+        "fit-receipt.json": {
+          "sha256": "81e3e30c36209b3f098f75e3af83843caa136d42b247cdd7e905438b434566c7",
+          "producer_checksum_verified": true
+        }
+      }
+    },
+    "33396": {
+      "scheduler": {
+        "state": "COMPLETED",
+        "exit_code": "0:0",
+        "elapsed": "00:01:14"
+      },
+      "result_status": "verified",
+      "aggregate_candidates": {
+        "aggregate.json": {
+          "sha256": "fc9af2ff22b30c2f5f7295ff412974a2b20c9da0914942d0923fa6ef46414d7a",
+          "producer_checksum_verified": true
+        },
+        "fit-receipt.json": {
+          "sha256": "67dc87434f2adf0b9035926b75cbaaf2da82425cdb8ea67e28ff5b13c9d5185c",
+          "producer_checksum_verified": true
+        }
+      }
+    },
+    "33399": {
+      "scheduler": {
+        "state": "COMPLETED",
+        "exit_code": "0:0",
+        "elapsed": "00:00:13"
+      },
+      "result_status": "verified",
+      "aggregate_candidates": {
+        "aggregate.json": {
+          "sha256": "9f27b2386a76db1924f10dcfc35a38031e28a8629ba877552653b6b64fee9e48",
+          "producer_checksum_verified": true
+        }
+      }
+    },
+    "33472": {
+      "scheduler": {
+        "state": "COMPLETED",
+        "exit_code": "0:0",
+        "elapsed": "00:00:16"
+      },
+      "result_status": "verified",
+      "aggregate_candidates": {
+        "aggregate.json": {
+          "sha256": "e74bc4cf591885e61d8141299cd548fefd75857c298276b3e2c8c727f152f791",
+          "producer_checksum_verified": true
+        }
+      }
+    },
+    "33410": {
+      "scheduler": {
+        "state": "COMPLETED",
+        "exit_code": "0:0",
+        "elapsed": "01:27:14"
+      },
+      "result_status": "verified",
+      "aggregate_candidates": {
+        "aggregate.json": {
+          "sha256": "87b070fc3bca12726d854b801ac0d5b8144905785299ef7233db82558b4a387b",
+          "producer_checksum_verified": true
+        },
+        "scoring-receipt.json": {
+          "sha256": "16447ad196a1881606db8b027a4fb762783caa82706af7ecbf3fee0b9451574b",
+          "producer_checksum_verified": true
+        }
+      }
+    },
+    "33414": {
+      "scheduler": {
+        "state": "COMPLETED",
+        "exit_code": "0:0",
+        "elapsed": "00:00:34"
+      },
+      "result_status": "verified",
+      "aggregate_candidates": {
+        "aggregate.json": {
+          "sha256": "95f2f6749ed3837c38eddfd2770689edac7adccf73fb3e160cfff07560727172",
+          "producer_checksum_verified": true
+        },
+        "joint-policy.json": {
+          "sha256": "c9183320a4dd923f037a93fc014fc2db6bc64f223ff67b5d297e540eefb43ae6",
+          "producer_checksum_verified": true
+        }
+      }
+    },
+    "33473": {
+      "scheduler": {
+        "state": "COMPLETED",
+        "exit_code": "0:0",
+        "elapsed": "00:01:53"
+      },
+      "result_status": "verified",
+      "aggregate_candidates": {
+        "p4-aggregate.json": {
+          "sha256": "9cba4d549b1ca9ab8e4b0396c43dc71d8b44a6214cc54b0e88bae528d2826b3d",
+          "producer_checksum_verified": true
+        },
+        "rhythm-aggregate.json": {
+          "sha256": "ff663574a53dfa3d8ad75dbaee31b5ba2fb9c80f3673e8368b0244047b736055",
+          "producer_checksum_verified": true
+        }
+      }
+    }
+  },
+  "superseded_jobs_not_used": {
+    "33363": {
+      "state": "FAILED",
+      "exit_code": "1:0",
+      "elapsed": "00:00:04"
+    },
+    "33364": {
+      "state": "PENDING",
+      "exit_code": "0:0",
+      "elapsed": "00:00:00"
+    },
+    "33365": {
+      "state": "CANCELLED",
+      "exit_code": "0:0",
+      "elapsed": "00:00:00"
+    },
+    "33373": {
+      "state": "CANCELLED",
+      "exit_code": "0:0",
+      "elapsed": "00:00:00"
+    },
+    "33381": {
+      "state": "CANCELLED",
+      "exit_code": "0:0",
+      "elapsed": "00:00:00"
+    },
+    "33403": {
+      "state": "PENDING",
+      "exit_code": "0:0",
+      "elapsed": "00:00:00"
+    },
+    "33416": {
+      "state": "PENDING",
+      "exit_code": "0:0",
+      "elapsed": "00:00:00"
+    },
+    "33454": {
+      "state": "TIMEOUT",
+      "exit_code": "0:0",
+      "elapsed": "00:15:12"
+    },
+    "33455": {
+      "state": "PENDING",
+      "exit_code": "0:0",
+      "elapsed": "00:00:00"
+    },
+    "33456": {
+      "state": "CANCELLED",
+      "exit_code": "0:0",
+      "elapsed": "00:00:00"
+    },
+    "33457": {
+      "state": "CANCELLED",
+      "exit_code": "0:0",
+      "elapsed": "00:00:00"
+    },
+    "33458": {
+      "state": "CANCELLED",
+      "exit_code": "0:0",
+      "elapsed": "00:00:00"
+    },
+    "33459": {
+      "state": "CANCELLED",
+      "exit_code": "0:0",
+      "elapsed": "00:00:00"
+    }
+  },
+  "reused_fit_scheduler": {
+    "33474": {
+      "state": "FAILED",
+      "exit_code": "1:0",
+      "elapsed": "04:03:53"
+    }
+  },
+  "verification_errors": {},
+  "verified_jobs": 16,
+  "required_jobs": 16,
+  "public_export_performed": false
+}

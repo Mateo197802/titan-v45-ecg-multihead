@@ -114,6 +114,30 @@ and disclosure boundaries separately before exporting an aggregate.
 The [November findings](NOVEMBER_FINDINGS.md) link the verified results
 and distinguish the November policy from the unsupported historical rates.
 
+The [final verification receipt](../../outputs/results/reviewer_experiments/november_delivery_verification_33596.json)
+records **16/16** accepted results and no verification errors. Job 33596 exited
+`0:0` in 1:13. Its aggregate, the original sealed fit receipt and original
+extraction receipt were exported with byte-identical SHA-256; private feature
+arrays, models, manifests and predictions remain in CEDIA. Job 33474 is recorded
+as a failed scheduler job with a verified reusable fit, not as a successful
+held evaluation. The unsealed legacy-format residual aggregate 33471 is marked
+as such in the receipt; the separate contrast 33472 has a verified producer seal.
+
+## Public split summary
+
+| Analysis | Source inventory | Fit | Calibration | Held | Separation evidence |
+|---|---:|---:|---:|---:|---|
+| SPH frozen baseline and nested comparison | 25,770 | None | None | All scored | 24,666 patient/exact-waveform components; no new fit |
+| SPH selective policy | 25,770 | None | 12,901 | 12,869 | 12,340 calibration and 12,326 held components; zero shared |
+| SPH mapped rhythm Other | 25,770 | 15,501 | 5,149 | 5,120 | Zero shared patient/exact-waveform components |
+| PTB-XL pathology Other and matched P4 ablation | 19,601 metadata; 6,205 scored inventory | 4,744 | 405 | 390 | Official patient folds and exact-waveform split audit; 666 inventory ECGs unused |
+| Matched rhythm ablation | 11,133 scored inventory | 5,884 | 1,220 | 1,251 | Chapman record-as-patient proxy and exact-waveform split audit; 2,778 inventory ECGs unused |
+
+These are privacy-safe summaries, not row manifests. Source, split, inventory,
+feature and model digests are carried in the native linked receipts. Split
+isolation is within each November analysis; it does not prove independence
+from the original weights' training and development exposure.
+
 The [population contrast protocol](../../configs/reviewer_experiments/november_population_contrast.json)
 uses the same frozen predictions for both denominators. Its restricted
 SPH subset requires at least one defensibly mapped statement for the
