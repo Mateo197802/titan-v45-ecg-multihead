@@ -1,10 +1,10 @@
 """Trace the reconstructed runtime and execute a conditional P6 fallback."""
 import argparse
-from collections import Counter
-from hashlib import sha256
 import importlib.util
 import json
 import os
+from collections import Counter
+from hashlib import sha256
 from pathlib import Path
 from time import perf_counter
 from unittest.mock import patch
@@ -12,16 +12,17 @@ from zipfile import ZipFile
 
 import numpy as np
 import scipy
-from scipy.signal import butter, lfilter, resample_poly
 import torch
-
 from compare_reviewer_baseline import digest
-from reviewer_selective_utility import SEALED, read, sealed
 from freeze_reviewer_selective_policy import jsonl
+from reviewer_selective_utility import SEALED, read, sealed
+from scipy.signal import butter, lfilter, resample_poly
 from score_reviewer_closure_ludb import PREFIX, TensorAudit, source_manifest, write_new
+
 from titan_v45.data import reconstructed as prep
 from titan_v45.data.preprocessing import CANONICAL_12_LEADS, extract_named_leads
-from titan_v45.models import frozen_pathology as fp, frozen_rhythm as fr
+from titan_v45.models import frozen_pathology as fp
+from titan_v45.models import frozen_rhythm as fr
 
 
 def imported(path, name):
@@ -95,7 +96,7 @@ def features(path, m, trace):
 
     real = {}
     for name, f in (("rhythm", prep.prepare_rhythm_record), ("pathology", prep.prepare_p4_record)):
-        def extraction(x, fs):
+        def extraction(x, fs, name=name):
             np.testing.assert_allclose(x, standardize(pre_z), rtol=0, atol=2e-5)
             if fs != 125:
                 raise ValueError("morphology rate mismatch")

@@ -1,12 +1,11 @@
 """Compare fixed routing policies without exporting individual records."""
 import argparse
-from hashlib import sha256
 import json
 import os
+from hashlib import sha256
 from pathlib import Path
 
 import numpy as np
-
 from compare_reviewer_baseline import digest
 from evaluate_reviewer_closure_ludb import KNOWN
 from freeze_reviewer_selective_policy import confidence, jsonl
@@ -197,7 +196,8 @@ def evaluate(rows, endpoints, thresholds, recipe):
                        "withheld_risk": ratio(er.sum()-err, unknown),
                        "withheld_positive": float((1-w) @ pos.sum(axis=1)),
                        "ecgs_with_at_least_one_withheld_positive": float((1-w) @ pos.any(axis=1)),
-                       "full_scored_cost": {str(l): ratio(err+l*unknown, kn.sum()) for l in recipe["loss_weights"]},
+                       "full_scored_cost": {str(cost): ratio(err+cost*unknown, kn.sum())
+                                            for cost in recipe["loss_weights"]},
                        "break_even_vs_no_abstention": ratio(er.sum()-err, unknown), "endpoints": endpoint_rows}
     ranking = {}
     for name, r in zip(recipe["rules"][1:4], (margin, distance, uncertainty), strict=True):

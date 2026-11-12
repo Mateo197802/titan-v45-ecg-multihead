@@ -2,16 +2,24 @@
 import argparse
 import json
 import os
-from pathlib import Path
 import time
+from pathlib import Path
 
 import numpy as np
-from scipy.special import expit
 import torch
-
 from compare_reviewer_baseline import digest
-from reviewer_morphology_retrained import ARMS, load_features, paired_macro, polarity, select_profiles, selected, threshold
+from reviewer_morphology_retrained import (
+    ARMS,
+    load_features,
+    paired_macro,
+    polarity,
+    select_profiles,
+    selected,
+    threshold,
+)
+from scipy.special import expit
 from score_reviewer_closure_ludb import write_new
+
 from titan_v45.evaluation.revision_report import binary_metrics
 
 FEATURE_RECEIPT = "de65d38ef6c3c00cae2546858924ab87a7656e754fe4a52aaac7a2d7b328f3cb"
