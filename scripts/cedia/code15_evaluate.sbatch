@@ -29,7 +29,11 @@ scope=(--archives exams_part10.zip)
 if [[ -n "$previous" ]]; then
     scope=(--reuse-partial "$previous")
 fi
+run_id=$SLURM_JOB_ID
+if [[ ${SLURM_STEP_ID:-batch} =~ ^[0-9]+$ ]]; then
+    run_id="$run_id.$SLURM_STEP_ID"
+fi
 python -B -u scripts/external_validation/evaluate_code15.py \
     --study "$study" --assets "$assets" --historical "$historical" \
     --candidates "$study/code15_frozen_candidates" --scratch "$scratch/work" \
-    --output "$study/code15-evaluation-$SLURM_JOB_ID" "${scope[@]}"
+    --output "$study/code15-evaluation-$run_id" "${scope[@]}"
