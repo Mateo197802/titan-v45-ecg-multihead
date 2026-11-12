@@ -2,13 +2,15 @@
 from __future__ import annotations
 
 import argparse
+import csv
 import hashlib
+import io
 import json
 import zipfile
 from pathlib import Path
 
 from verify_reviewer_november_delivery import protected_path, validate_public
-from verify_reviewer_scientific_closure import PUBLIC_NAMES
+from verify_reviewer_scientific_closure import JOBS, PUBLIC_NAMES, check_ptb, check_scientific
 
 DOC_ROOT = "docs/reviewer_closure_experiments"
 DATA_ROOT = "outputs/results/reviewer_closure_experiments"
@@ -57,6 +59,12 @@ ALLOWLIST = frozenset((
     "scripts/evaluation/freeze_reviewer_selective_policy.py",
 ))
 MANIFEST = "SHA256SUMS.json"
+FINAL_STATUS = "FINAL_NATIVE_VERIFIED"
+COMMENTS = {"R1-2", "R2-general", "R2-3f", "R2-4k"}
+DISPOSITIONS = {
+    "SCIENTIFICALLY_SATISFIED", "SCIENTIFICALLY_SATISFIED_WITH_LIMITATIONS",
+    "PARTIAL_EVIDENCE", "NOT_DEMONSTRATED", "BLOCKED_BY_REFERENCE_OR_DATA",
+}
 
 
 def digest_bytes(data):
@@ -71,11 +79,45 @@ def member(z, name, content):
     z.writestr(info, content, compresslevel=9)
 
 
-def build(root, output):
-    blobs = {name: protected_path(root, name).read_bytes() for name in sorted(ALLOWLIST)}
+def validate_final(blobs):
     for name, data in blobs.items():
         if name.startswith(f"{DATA_ROOT}/") or (name.startswith(f"{DOC_ROOT}/") and name.endswith(".json")):
             validate_public(json.loads(data))
+    for name in ("PATIENT_SIGNAL_SPLIT_AUDIT", "EXPERIMENT_PROVENANCE_AND_HASHES",
+                 "SCIENTIFIC_READINESS_FOR_MANUSCRIPT"):
+        if json.loads(blobs[f"{DOC_ROOT}/{name}.json"])["status"] != FINAL_STATUS:
+            raise ValueError(f"working document cannot enter a final packet: {name}")
+    readiness = json.loads(blobs[f"{DOC_ROOT}/SCIENTIFIC_READINESS_FOR_MANUSCRIPT.json"])
+    matrix = list(csv.DictReader(io.StringIO(blobs[f"{DOC_ROOT}/FOUR_REVIEWER_CLOSURE_MATRIX.csv"].decode("utf-8"))))
+    dispositions = {row["comment"]: row["scientific_status"] for row in matrix}
+    if (len(matrix) != len(COMMENTS) or set(dispositions) != COMMENTS
+            or set(dispositions.values()) - DISPOSITIONS
+            or dispositions != {k: v["scientific_status"] for k, v in readiness["comments"].items()}):
+        raise ValueError("final closure matrix and scientific dispositions differ")
+    receipt = json.loads(blobs[f"{DATA_ROOT}/native_closure_verification.json"])
+    scheduler = receipt["scheduler"]
+    checks = receipt["public_sha256"]
+    if (receipt["science_consistency_verified"] is not True
+            or receipt["record_level_export_performed"] is not False
+            or receipt["public_files"] != PUBLIC_NAMES or set(checks) != set(PUBLIC_NAMES)
+            or any((scheduler[j]["state"], scheduler[j]["exit_code"]) != ("COMPLETED", "0:0")
+                   for j in JOBS.values())):
+        raise ValueError("final native receipt is incomplete")
+    content = {}
+    for key, name in PUBLIC_NAMES.items():
+        raw = blobs[f"{DATA_ROOT}/{name}"]
+        if digest_bytes(raw) != checks[key]:
+            raise ValueError(f"artifact does not match native SHA-256: {name}")
+        content[key] = json.loads(raw)
+        if key in JOBS and str(content[key]["job"]) != JOBS[key]:
+            raise ValueError(f"artifact producer does not match native receipt: {name}")
+    check_scientific(content["score"], content["evaluate"], content["morphology"], content["sph"], checks["score"])
+    check_ptb(content["ptb_score"], content["ptb_evaluate"], content["ptb_eligibility"], checks["ptb_score"])
+
+
+def build(root, output):
+    blobs = {name: protected_path(root, name).read_bytes() for name in sorted(ALLOWLIST)}
+    validate_final(blobs)
     manifest = {name: digest_bytes(data) for name, data in blobs.items()}
     with zipfile.ZipFile(output, "x") as z:
         for name, data in blobs.items():
@@ -90,8 +132,10 @@ def verify(path):
         if set(names) != ALLOWLIST | {MANIFEST} or len(names) != len(set(names)):
             raise ValueError("packet includes missing, duplicate or unapproved members")
         manifest = json.loads(z.read(MANIFEST))
-        if manifest.keys() != ALLOWLIST or any(digest_bytes(z.read(k)) != v for k, v in manifest.items()):
+        blobs = {name: z.read(name) for name in ALLOWLIST}
+        if manifest.keys() != ALLOWLIST or any(digest_bytes(blobs[k]) != v for k, v in manifest.items()):
             raise ValueError("packet checksum mismatch")
+        validate_final(blobs)
     return {"files_verified": len(manifest), "zip_sha256": digest_bytes(path.read_bytes())}
 
 
