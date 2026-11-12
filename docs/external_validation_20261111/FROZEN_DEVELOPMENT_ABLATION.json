@@ -1,0 +1,23 @@
+{
+  "scope": "PR6 DEVELOPMENT ONLY, prospectively specified before CODE outcomes; Georgia was inspected in Stage A and is not a new confirmation cohort",
+  "training_sources": ["chapman_shaoxing", "cpsc2018"],
+  "training_split": "train",
+  "selection_source": "chapman_shaoxing",
+  "selection_split": "validation",
+  "descriptive_source": "georgia",
+  "descriptive_split": "source_holdout",
+  "classes": ["AFIB", "SB", "STACH", "RBBB", "1AVB"],
+  "variants": {"mlp_balanced_bce": 0, "mlp_asymmetric_negative_gamma2": 2},
+  "hidden_width": 64,
+  "dropout": 0.15,
+  "residual_cap": 1.5,
+  "seed": 20261112,
+  "batch_size": 256,
+  "max_epochs": 12,
+  "patience": 3,
+  "learning_rate": 0.001,
+  "weight_decay": 0.02,
+  "selection_rule": "minimum unweighted masked ECG-level validation BCE, earliest epoch for exact tie; no Georgia metric used",
+  "threshold_policy": "immutable published thresholds for all compared systems",
+  "interpretation": "One development comparison only. Georgia resamples ECG records because patient linkage is not validated. No independent or clinical validation and no claim of promotion. No use of CODE or any MIMIC data."
+}
