@@ -135,11 +135,29 @@ enabled high float32 matmul precision on capable GPUs, while the source
 scorer uses the default mode. This is a numerical pathway difference, not
 evidence of exact probability replay. Chapman had only 11 positive 1AVB ECG.
 
+The label-free [source descriptor probe](evidence/SOURCE_DESCRIPTOR_PROBE.json)
+(`33745`) distinguished Chapman from CODE using seven descriptors on 10-second
+ECG only: AUROC 0.906840 and balanced accuracy 0.820967 on development validation.
+This establishes separability of the features, not that the diagnostic model
+relies on a source shortcut or that source information caused its errors.
+
 The full fine-tuning gate did not trigger. The best partial fit exceeded the
 registered CODE validation F1 gain, and its Chapman results did not show a
 consistent deterioration that justified deeper unfreezing (AP decreased by
 0.012821 but F1 increased by 0.066816). Both finalist families are instead
 repeated at their registered seeds. No model is selected with reserved scores.
+
+## Finalist selection before the reserved comparison
+
+The frozen family gave mean validation macro-AP 0.439628 (population SD
+0.001986) and F1 0.442429 (SD 0.018349). Transformer + ResNet gave mean
+validation macro-AP 0.545022 (SD 0.009054) and F1 0.558114 (SD 0.019013).
+The latter won by the preregistered mean-AP rule. The median AP seed was
+20261112, epoch 5, fit `33696`, with validation AP 0.550205 and F1 0.582790.
+Selection job `33765` verified the model, learning curves, receipts and bank
+hashes. The [selection receipt](evidence/CANDIDATE_SELECTION_RECEIPT.json) was
+published before scoring the reserved CODE data. Its candidate does not replace
+the published P6/P8 profiles.
 
 The [run table](evidence/TRAINING_EXPERIMENTS_COMPLETE.csv),
 [learning curves](evidence/FINETUNING_LEARNING_CURVES.csv), and
