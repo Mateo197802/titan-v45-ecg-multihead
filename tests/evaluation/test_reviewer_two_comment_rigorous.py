@@ -46,6 +46,8 @@ def test_equal_coverage_finite_utility_and_denominators():
     assert frozen["accepted_risk"] == 0
     assert frozen["withheld_errors"] == 50
     assert frozen["endpoints"]["P8:R"]["positive_technical_unscored"] == 1
+    assert frozen["endpoints"]["P8:R"]["tp"] == 50
+    assert frozen["endpoints"]["P8:R"]["accepted_score_brier"] == pytest.approx(.01)
     assert result["rules"]["random_equal_coverage"]["accepted_risk"] == .5
     assert frozen["full_scored_cost"]["1"] == .5
 

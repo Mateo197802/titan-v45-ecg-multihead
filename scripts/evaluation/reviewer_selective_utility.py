@@ -155,6 +155,7 @@ def evaluate(rows, endpoints, thresholds, recipe):
     known = y != -1
     pos, neg = y == 1, y == 0
     calls = np.array([[c in r[2][p]["labels"] for p, c in endpoints] for r in scored])
+    scores = np.array([[r[2][p]["scores"][c] for p, c in endpoints] for r in scored])
     tp, fp, fn, tn = (calls & pos), (calls & neg), (~calls & pos), (~calls & neg)
     er, kn = (fp | fn).sum(axis=1), known.sum(axis=1)
     margin = np.array([r[3] for r in scored])
@@ -165,19 +166,28 @@ def evaluate(rows, endpoints, thresholds, recipe):
     rules = dict(zip(recipe["rules"], (np.ones(n), frozen, take_k(distance, keys, k),
                                       take_k(uncertainty, keys, k), np.full(n, k/n)), strict=True))
     stats = {}
-    for name, w in rules.items():
+    for name, indicator in rules.items():
+        w = indicator.astype(float, copy=False)
         err, den = float(w @ er), float(w @ kn)
         unknown = kn.sum() - den
         endpoint_rows = {}
         for j, (p, c) in enumerate(endpoints):
             a, b, d, e = (float(w @ z[:, j]) for z in (tp, fp, fn, tn))
             unresolved = float((1-w) @ pos[:, j])
+            observed_weight = w * known[:, j]
+            observed_total = observed_weight.sum()
+            score_bins = np.minimum((scores[:, j]*10).astype(int), 9)
+            calibration_error = np.abs(np.bincount(
+                score_bins, weights=observed_weight*(scores[:, j]-pos[:, j]), minlength=10)).sum()
             endpoint_rows[f"{p}:{c}"] = {
                 "tp": a, "fp": b, "fn_emitted": d, "tn": e, "positive_withheld": unresolved,
                 "positive_total": int(pos[:, j].sum()), "negative_total": int(neg[:, j].sum()),
                 "positive_technical_unscored": sum(int(r[4][j] == 1) for r in rows if r[2] is None),
                 "accepted_sensitivity": ratio(a, a+d), "accepted_specificity": ratio(e, e+b),
                 "full_scored_sensitivity": ratio(a, a+d+unresolved), "ppv": ratio(a, a+b), "npv": ratio(e, e+d),
+                "withheld_positive_rate": ratio(unresolved, pos[:, j].sum()),
+                "accepted_score_brier": ratio(observed_weight @ ((scores[:, j]-pos[:, j])**2), observed_total),
+                "accepted_score_ece_10_equal_width_bins": ratio(calibration_error, observed_total),
             }
         stats[name] = {"accepted": float(w.sum()), "coverage_scored": float(w.mean()),
                        "coverage_full": ratio(w.sum(), len(rows)), "emitted_errors": err,
@@ -186,6 +196,7 @@ def evaluate(rows, endpoints, thresholds, recipe):
                        "withheld_correct": float(unknown - (er.sum()-err)),
                        "withheld_risk": ratio(er.sum()-err, unknown),
                        "withheld_positive": float((1-w) @ pos.sum(axis=1)),
+                       "ecgs_with_at_least_one_withheld_positive": float((1-w) @ pos.any(axis=1)),
                        "full_scored_cost": {str(l): ratio(err+l*unknown, kn.sum()) for l in recipe["loss_weights"]},
                        "break_even_vs_no_abstention": ratio(er.sum()-err, unknown), "endpoints": endpoint_rows}
     ranking = {}
