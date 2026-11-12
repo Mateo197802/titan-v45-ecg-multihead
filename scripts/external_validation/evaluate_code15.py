@@ -58,7 +58,10 @@ def historical_signatures(archive: Path, scratch: Path):
         with tarfile.open(fileobj=decoded, mode="r|") as tar:
             for info in tar:
                 parts = PurePosixPath(info.name).parts
-                if parts[:2] != ("records", "codetest") or Path(info.name).suffix not in (".hea", ".dat"):
+                if parts and parts[0] == "external-dev-rhythm-chapman-shaoxing":
+                    parts = parts[1:]
+                if (parts[:2] != ("records", "codetest") or len(parts) < 3
+                        or Path(info.name).suffix not in (".hea", ".dat", ".mat")):
                     continue
                 name = parts[-1]
                 if (not info.isfile() or info.size > 2 * 1024 ** 2 or name in names
@@ -67,22 +70,33 @@ def historical_signatures(archive: Path, scratch: Path):
                 names.add(name)
                 with tar.extractfile(info) as inp, (directory / name).open("wb") as out:
                     shutil.copyfileobj(inp, out)
-    signatures, unavailable = [], 0
+    signatures, unavailable = [], Counter()
     for header in sorted(directory.glob("*.hea")):
         try:
             base = header.with_suffix("")
             metadata = wfdb.rdheader(str(base))
-            if set(metadata.file_name) != {base.name + ".dat"} or metadata.sig_len < 10 * metadata.fs:
+            expected = [{base.name + extension} for extension in (".dat", ".mat")]
+            if set(metadata.file_name) not in expected or metadata.sig_len < 10 * metadata.fs:
                 raise ValueError("invalid historical header")
-            trace = wfdb.rdrecord(str(base), sampto=int(10 * metadata.fs))
-            signal = physical_mv(trace.p_signal, trace.sig_name, trace.units, int(metadata.fs))
+            if metadata.fs == 400 and metadata.sig_len == 4096:
+                trace = wfdb.rdrecord(str(base))
+                values = unpad_code(trace.p_signal)
+            else:
+                trace = wfdb.rdrecord(str(base), sampto=int(10 * metadata.fs))
+                values = trace.p_signal
+            signal = physical_mv(values, trace.sig_name, trace.units, int(metadata.fs))
             x, _, _ = prepare_external(signal, int(metadata.fs), lambda *_args, **_kwargs: None)
             signatures.append(signature(x))
-        except (ValueError, OSError, RuntimeError):
-            unavailable += 1
+        except (ValueError, OSError, RuntimeError) as error:
+            reason = str(error)
+            if reason not in {"invalid historical header", "unexpected_code_padding", "flat_lead",
+                              "short_or_ambiguous_code_duration", "unknown_physical_unit",
+                              "invalid_canonical_leads", "invalid_rate_or_duration"}:
+                reason = type(error).__name__
+            unavailable[reason] += 1
     if not signatures:
-        raise ValueError("no comparable historical CODE-test signatures")
-    return np.stack(signatures), unavailable
+        raise ValueError(f"no comparable historical CODE-test signatures: {dict(unavailable)}")
+    return np.stack(signatures), dict(unavailable)
 
 
 def verified_hdf5(code, name, catalog, scratch):
