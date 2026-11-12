@@ -36,13 +36,28 @@ real second-stage inference are not implied by abstention.
 | 33381 | Fresh paired extraction, matched retraining, calibration seal, held comparison | afterok:33355:33363:33364 | Private models plus aggregate paired intervals and original-baseline comparison |
 | 33390 | New PTB-XL auxiliary and bounded pathology Other heads | afterok:33355:33369 | Complete reference flow, held metrics and patient intervals for supported endpoints |
 | 33396 | New SPH mapped rhythm Other and auxiliary heads vs frozen-score comparator | afterok:33355:33369 | Paired held development metrics and full reference/scoring flow |
+| 33399 | Same-score full-population vs restricted SPH analysis | afterok:33355:33357 | Statement prevalence, disjoint flow strata, and paired differences between denominators |
 
 The submitted baseline uses experiment commit f989eccf74d38399d0298026e6f4c078a437fd2d.
 The comparison job uses 891dacbca23d7685117f836f98bc3dd1482bb1af.
 The matched retraining job uses 648c5a4b784b2307376d620eeb03fc0bb5d3198a.
 The pathology Other job uses 6baab4228767219c048d8989a35a70e3bb2219fa.
 The rhythm Other job uses 72dd436cd5a9e8ec397fccd1e70b9aa1abed4efe.
+The full-population contrast job uses 63ff66fb9b49198f773973d5f579c404940c648b.
 Submission is not completion; the registry does not assert results.
+
+The [population contrast protocol](../../configs/reviewer_experiments/november_population_contrast.json)
+uses the same frozen predictions for both denominators. Its restricted
+SPH subset requires at least one defensibly mapped statement for the
+profile; it does not reconstruct the original panel selection. Counts
+cover every metadata ECG, including normal-only, ambiguous, proxy,
+out-of-profile, mixed-statement and technical failure strata. Metrics
+are computed only on scored rows with a valid statement reference, never
+imputing scores or clinically negative labels. The same patient/exact-signal
+bootstrap draws compare the nested populations. No difference is
+interpreted as the causal effect of cohort selection or an overall
+clinical accuracy. P8 top-1 fallback remains an internal decision rule,
+not clinical referral, abstention or a separately executed stage.
 
 The [morphology input contract](MORPHOLOGY_INPUT_CONTRACT.md) gives the formulas
 and separates waveform replay, fixed-weight sensitivity and retraining.
