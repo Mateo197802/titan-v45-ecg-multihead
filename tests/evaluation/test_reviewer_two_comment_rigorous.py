@@ -66,3 +66,35 @@ def test_window_membership_and_identical_arm_retraining():
                                   morph.scores(two, x, wi, ids, "P6"))
     with pytest.raises(ValueError, match="missing"):
         morph.window_index(wi, np.array([0, 20]))
+
+
+def test_fallback_executes_only_on_abstentions_and_preserves_unknowns(tmp_path, monkeypatch):
+    calls = []
+    thresholds = {"P6": dict.fromkeys(runtime.fr.P6_CLASSES, .5),
+                  "P8": dict.fromkeys(runtime.fr.P8_CLASSES, .5), "P4": {"X": .5}}
+
+    class Runtime:
+        heads = {"P6": None, "P8": None}
+
+        def __call__(self, samples):
+            calls.append(samples)
+            assert "P8" not in self.heads
+            return {"P6": np.array([[2, -2, -2, -2, -2, -2, -2, -2]])}, None
+
+    monkeypatch.setitem(sys.modules, "wfdb", object())
+    monkeypatch.setattr(runtime.prep, "prepare_rhythm_record", lambda path, *a, **kw: path.name)
+    rows = []
+    for key, status, positive in (("a", "accepted", True), ("b", "abstained", True),
+                                  ("c", "abstained", False), ("d", "technical_unscored", True)):
+        original = {"P8": {"labels": ["AFIB"] if status == "accepted" else []}, "P4": {"labels": []}}
+        refs = {c: "unknown" for c in runtime.fr.P8_CLASSES}
+        refs.update(AFIB="positive" if positive else "negative", X="positive")
+        rows.append({"key": key, "profiles": original, "references": refs,
+                     "route": {"state": status, "emitted": original if status == "accepted" else None}})
+    result = runtime.p6_fallback(rows, Runtime(), tmp_path, None, thresholds, tmp_path)
+    assert calls == ["b", "c"]
+    assert result["totals"]["corrected"] == result["totals"]["introduced"] == 1
+    assert result["totals"]["known_unresolved"] == 2
+    assert result["totals"]["technical_unscored"] == 2
+    assert result["at_least_partial_coverage"] == .75
+    assert result["full_profile_coverage"] == .25

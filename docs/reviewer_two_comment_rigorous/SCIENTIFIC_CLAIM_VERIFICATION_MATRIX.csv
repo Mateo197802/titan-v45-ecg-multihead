@@ -1,0 +1,11 @@
+reviewer,claim,status,evidence,boundary
+R2-3f,Ten formulas and actual specialist tensor paths in reconstructed candidate,IMPLEMENTATION_VERIFIED,runtime,flat-input and clinical proxy limitations
+R2-3f,Exact historical preprocessing and original probabilities,HISTORICAL_PROVENANCE_UNVERIFIED,historical replay,original loader missing; strict P4 tolerance fails
+R2-3f,Macro-F1 benefit above 2 pp in at least one tested development profile,CLAIM_NOT_SUPPORTED,paired ablation,restricted to matched frozen features and new heads; no external confirmation
+R2-3f,Effects inside both sides of the 2 pp interval,CLAIM_SUPPORTED,"P6, P8, P4",only tested development heads; not equivalence of every class or end-to-end system
+R2-3f,Generalizable full-network morphology benefit,STILL_OPEN,paired ablation,no end-to-end paired retraining or unseen same-target cohort
+R2-4k,November joint abstention executed and reproducible,IMPLEMENTATION_VERIFIED,sealed rowwise audit,not June quarantine
+R2-4k,Accepted-risk improvement over all scored and random expectation on at least one tested cohort,CLAIM_SUPPORTED,paired utility,retrospective and conditional on coverage; not clinical benefit
+R2-4k,Actual limited P6 second-stage inference,EXPERIMENT_COMPLETED,runtime/cascade,six membership outputs only; no human review
+R2-4k,Original quarantine rate and complete clinical cascade,HISTORICAL_PROVENANCE_UNVERIFIED,prior original workflow audit,WITHDRAW_HISTORICAL_CLAIM
+R2-4k,Independent clinical utility or safety,STILL_OPEN,selective and fallback studies,prospective/independent references and real resolution costs absent

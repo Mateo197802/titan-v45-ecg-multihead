@@ -41,10 +41,11 @@ def morphology(docs, m, r):
         "", "| Observed consumer | Input width | Morphology |", "| --- | ---: | --- |",
         "| Both V3F/V3AG backbones | 12×1250 + mask + 10 | Distinct auxiliary input |",
         "| Global rhythm, both backbones | 650 | Direct 640–649 (zero-based) |",
-        "| Global pathology, both backbones | 640 | No direct columns; can receive upstream effects |",
+        "| Global pathology, both backbones | 640 | No morphology path; consumes the waveform/mask embedding |",
         "| P6 and P8 specialist | 681 | Direct 640–649 plus separate score/event fields |",
         "| P4 specialist | 670 | Direct 640–649 plus separate score fields |",
-        "", f"Strict weight loading bound all five published artifacts to their SHA-256. Stored widths, not redundant metadata, govern loading (rhythm declared/stored: {r['architecture']['rhythm_width']}; P4 stored hidden width: {r['architecture']['p4_hidden_width']}). Both specialist arrows therefore denote direct feature input; an arrow between blocks is justified only by a tensor or rule actually passed. The global pathology head is not the pathology specialist.",
+        "", f"Strict weight loading bound all five published artifacts to their SHA-256. Stored widths, not redundant metadata, govern loading (rhythm declared/stored: {r['architecture']['rhythm_width']}; P4 stored hidden width: {r['architecture']['p4_hidden_width']}). Both specialist arrows therefore denote direct feature input. The pathology specialist can additionally receive the indirect effect via global rhythm probabilities; the shared waveform/mask embedding and global pathology head do not consume the morphology vector. An arrow between blocks is justified only by a tensor or rule actually passed.",
+        f"The loaded V3F and V3AG model objects each contained {r['architecture']['model_parameters']['V3F']:,} parameters including their global heads, before attaching the separate specialists. This is a direct runtime count for these two released assets, not a count for the different historical 41M experiments.",
         "", "## Ten formulas and numerical checks", "",
         "| Descriptor | Raw computation | Scale | Fixture observed |", "| --- | --- | ---: | ---: |",
     ]
@@ -84,6 +85,13 @@ def morphology(docs, m, r):
     lines += [
         "", "Ranges are training variability, not confidence intervals. Endpoint contrasts are descriptive and rare classes can have large instability; no class-wise significance claims are made. This is not a full-network retraining experiment, an effect on the released weights, or proof of transfer to a new source. Same-target cross-source transport and verified patient independence for Chapman are not established.",
         "", "The PR #9 P8 linear-head estimate was +1.46 pp, exploratory IC95% [+0.16,+2.76] pp, post-hoc Holm p=0.1356. It is a prior study on inspected data, not another independent replication sample. The new comparisons, including adverse effects, are reported without replacing the earlier results.",
+        "", "## Fixed-input perturbations", "",
+        f"Runtime: {r['gpu']}; PyTorch {r['torch']}, CUDA {r['cuda']}, NumPy {r['numpy']}, SciPy {r['scipy']}. Below are maximum absolute differences versus the reconstructed same-batch reference, not differences versus June output.",
+        "", "| Perturbation | P6 logit | P8 logit | P4 probability | P4 > 1e−5 |", "| --- | ---: | ---: | ---: | ---: |",
+    ]
+    for name, effect in r["effects_rhythm_logits_pathology_probabilities"].items():
+        lines.append(f"| {name} | {effect['P6']['max_abs']:.7g} | {effect['P8']['max_abs']:.7g} | {effect['P4']['max_abs']:.7g} | {effect['P4']['p4_outside_unchanged_tolerance']} |")
+    lines += [
         "", "**Historical inference:** [root-cause report](R2_3F_HISTORICAL_REPLAY_ROOT_CAUSE.md). Exact June input and loader identity are not demonstrated. The new instrumented job does not erase the 836/962 out-of-tolerance historical P4 comparisons.",
     ]
     write(docs, "R2_3F_MORPHOLOGY_FINAL_VALIDATION.md", lines)
@@ -107,7 +115,12 @@ def selective(docs, s):
     for cohort, data in s["cohorts"].items():
         delta = data["paired_risk_difference_vs_no_abstention_and_random_expected"]
         a = data["rules"]["frozen_joint"]
-        lines.append(f"- **{cohort}:** difference {pp(delta['difference'])}, simultaneous interval {ci(delta['ci98_75'])}; {a['withheld_errors']:.0f} original errors and {a['withheld_correct']:.0f} original correct known opportunities withheld; {a['ecgs_with_at_least_one_withheld_positive']:.0f} ECGs contained at least one withheld known positive. {data['technical_unscored']} technically unscored ECGs; {data['unknown_scored_opportunities']} scored endpoint references unknown.")
+        b = data["rules"]["no_abstention"]
+        emitted_fn = sum(e["fn_emitted"] for e in a["endpoints"].values())
+        withheld_fn = sum(e["fn_emitted"] for e in b["endpoints"].values())-emitted_fn
+        emitted_fp = sum(e["fp"] for e in a["endpoints"].values())
+        withheld_fp = sum(e["fp"] for e in b["endpoints"].values())-emitted_fp
+        lines.append(f"- **{cohort}:** difference {pp(delta['difference'])}, simultaneous interval {ci(delta['ci98_75'])}; {a['withheld_errors']:.0f} original errors ({withheld_fn:.0f} FN, {withheld_fp:.0f} FP) and {a['withheld_correct']:.0f} original correct known opportunities withheld. Emitted: {emitted_fn:.0f} FN, {emitted_fp:.0f} FP. {a['ecgs_with_at_least_one_withheld_positive']:.0f} ECGs contained at least one withheld known positive. {data['technical_unscored']} technically unscored ECGs; {data['unknown_scored_opportunities']} scored endpoint references unknown.")
     lines += [
         "", "The original joint policy need not dominate simpler uncertainty rankings. The JSON includes tied-score risk–coverage curves, AURC, score Brier/ECE, signed-margin reliability and adverse endpoint effects. None of these alternatives was adopted by choosing the best retrospective result.",
         "", "| Cohort | Joint AURC | Raw distance AURC | Entropy AURC | Break-even λ | Joint cost at λ=.25 | No-abstention cost |",
@@ -121,6 +134,12 @@ def selective(docs, s):
         "", "The full scored denominator charges one unit for each emitted error plus λ for each withheld known opportunity. It never counts a withheld opportunity as correct. The break-even λ is the fraction of withheld known opportunities that would have been wrong. This sensitivity grid is not a clinical cost model, and unknown references or technical failures are not silently scored as successes.",
         "", "Neither SPH nor LUDB was newly unseen when this analysis was specified. Different cohort mappings limit portability. A significant result on either cohort would not establish a clinically useful reduction on a new independent population. See the [partial cascade experiment](R2_4K_CASCADE_EXPERIMENT.md) for a separate actual second stage.",
     ]
+    lines += ["", "## Endpoint effects of the frozen rule", "",
+              "| Source/endpoint | Known positives | FN emitted | Positive withheld | Full sensitivity | PPV accepted | NPV accepted |",
+              "| --- | ---: | ---: | ---: | ---: | ---: | ---: |"]
+    for cohort, data in s["cohorts"].items():
+        for label, e in data["rules"]["frozen_joint"]["endpoints"].items():
+            lines.append(f"| {cohort}/{label} | {e['positive_total']} | {e['fn_emitted']:.0f} | {e['positive_withheld']:.0f} | {pct(e['full_scored_sensitivity'])} | {pct(e['ppv'])} | {pct(e['npv'])} |")
     write(docs, "R2_4K_SELECTIVE_PREDICTION_FINAL_VALIDATION.md", lines)
 
 
@@ -139,19 +158,22 @@ def cascade(docs, r):
         f"| Joint plus P6 fallback | {c['full_ecgs']} | {t['known_emitted']}/{t['known_total']} | {t['final_errors']} | {t['known_unresolved']} |",
         "", f"On the comparable fallback opportunities, it corrected **{t.get('corrected', 0)}** original errors and introduced **{t.get('introduced', 0)}** original errors. Final emitted FN: **{t['final_false_negatives']}**; known positives still unresolved: **{t['positive_unresolved']}**. Overall known emitted risk is {pct(t['final_errors']/t['known_emitted'])}; this is not a full-denominator accuracy. Treating unresolved responses as pending at λ=.25 gives cost {pct((t['final_errors']+.25*t['known_unresolved'])/t['known_total'])} on the original known denominator.",
         "", f"Incremental waveform preparation plus batch-one P6 latency on this allocation: median {c['fallback_seconds_median']:.3f} s, p95 {c['fallback_seconds_p95']:.3f} s, total {c['fallback_seconds_total']:.2f} s. Model startup and the cached original primary runtime are not included. These timings are descriptive, not prospective service latency.",
-        "", "**Scope:** This is a new partial two-stage execution with a restricted ledger and sealed aggregates. It is not the original system, not a complete pathology/rhythm cascade, and not evidence for June quarantine, referral effectiveness or clinical safety.",
+        "", "**Scope:** This is a new partial two-stage execution with a restricted ledger and sealed aggregates. The published P6 cutoffs were not calibrated for the subset rejected by the primary route. This is not the original system, not a complete pathology/rhythm cascade, and not evidence for June quarantine, referral effectiveness or clinical safety.",
     ]
     write(docs, "R2_4K_CASCADE_EXPERIMENT.md", lines)
 
 
 def verdict(docs, m, r, s):
     supported = [p for p, x in m["profiles"].items() if x["contrast"]["classification"] == "benefit_above_margin"]
+    within = [p for p, x in m["profiles"].items() if
+              x["contrast"]["classification"] == "effects_within_prespecified_margin"]
     reduced = [p for p, x in s["cohorts"].items() if
                x["paired_risk_difference_vs_no_abstention_and_random_expected"]["ci98_75"][1] < 0]
     rows = [
         ("R2-3f", "Ten formulas and actual specialist tensor paths in reconstructed candidate", "IMPLEMENTATION_VERIFIED", "runtime", "flat-input and clinical proxy limitations"),
         ("R2-3f", "Exact historical preprocessing and original probabilities", "HISTORICAL_PROVENANCE_UNVERIFIED", "historical replay", "original loader missing; strict P4 tolerance fails"),
         ("R2-3f", "Macro-F1 benefit above 2 pp in at least one tested development profile", "CLAIM_SUPPORTED" if supported else "CLAIM_NOT_SUPPORTED", "paired ablation", "restricted to matched frozen features and new heads; no external confirmation"),
+        ("R2-3f", "Effects inside both sides of the 2 pp interval", "CLAIM_SUPPORTED" if within else "CLAIM_NOT_SUPPORTED", ", ".join(within) or "paired ablation", "only tested development heads; not equivalence of every class or end-to-end system"),
         ("R2-3f", "Generalizable full-network morphology benefit", "STILL_OPEN", "paired ablation", "no end-to-end paired retraining or unseen same-target cohort"),
         ("R2-4k", "November joint abstention executed and reproducible", "IMPLEMENTATION_VERIFIED", "sealed rowwise audit", "not June quarantine"),
         ("R2-4k", "Accepted-risk improvement over all scored and random expectation on at least one tested cohort", "CLAIM_SUPPORTED" if reduced else "CLAIM_NOT_SUPPORTED", "paired utility", "retrospective and conditional on coverage; not clinical benefit"),
@@ -171,7 +193,7 @@ def verdict(docs, m, r, s):
         f"- **R2-4k:** Job {s['job']} reproduced original November score-only route assignments and evaluated full-denominator tradeoffs. Multiplicity-controlled accepted-risk reduction versus all scored and random expectation was supported in {', '.join(reduced) if reduced else 'neither cohort'}. This does not measure benefit on all ECGs or clinical utility. Job {r['job']} executed the distinct partial P6 fallback on the previously withheld LUDB group.",
         "", "## Errors, rejected hypotheses and irreducible limits", "",
         "- The flat-line fixture exposed false morphology peaks. The strict P4 archival probability test still fails; the documented named-lead bug explains earlier decision disagreement but not all residuals. The original loader, full June runtime and exact historical input provenance remain unverified. A new reconstruction cannot authenticate them retroactively.",
-        "- A positive point estimate is not robust evidence of a practically relevant gain. Unseen same-target cross-source robustness and the effect of end-to-end retraining remain open.",
+        f"- A positive point estimate is not robust evidence of a practically relevant gain. Simultaneous intervals were entirely inside the predefined ±2 pp bounds in {', '.join(within) if within else 'no tested profile'}. Unseen same-target cross-source robustness and the effect of end-to-end retraining remain open.",
         "- Retained correct opportunities and positives, reference missingness, and nonzero costs are material. The partial cascade does not restore NSR/PAC or pathology output, let alone establish safety, clinical benefit or historical referral.",
         "", "## What may be used and what must be withdrawn", "",
         "- In a future authorized revision, use the ten proxy definitions, correct direct arrows into both specialists, distinguish the global pathology head, document the reconstructed signal path and report the candidate's limitations.",

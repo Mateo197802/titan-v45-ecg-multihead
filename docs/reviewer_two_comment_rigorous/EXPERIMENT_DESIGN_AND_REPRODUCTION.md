@@ -14,8 +14,10 @@ bytes, not undocumented historical execution.
    and payloads. Scope is retrospective and includes no clinical or human
    referral inference.
 2. The new ablation fits equal nonlinear heads in two arms. The
-   intervention zeroes ten inputs **before both frozen backbone feature
-   generation and direct specialist composition**. The identical
+   intervention zeroes ten inputs **at the frozen backbone interface
+   and before direct specialist composition**. This removes their
+   direct columns and indirect input via global rhythm probabilities,
+   without changing the shared waveform embedding. The identical
    frozen caches, record masks, loss, seed, batch order, architecture
    and calibration rule isolate that intervention for the new fitting
    procedure. Feature standardization and thresholds are separately fit
@@ -49,7 +51,7 @@ reference coverage, access, and historical independence. The
 [CODE-II access record](https://github.com/PetrusAbreu/code-ii)
 and [Harvard-Emory access terms](https://bdsp.io/content/heedb/5.0/)
 are leads for a subsequent preregistered study, not data used here.
-The prior [transport protocol](../reviewer_closure_experiments/PROTOCOL_FREEZE.md)
+The prior [transport protocol](https://github.com/Mateo197802/titan-v45-ecg-multihead/blob/e5aa65ec1ef43cf5477e688c934577f5dcc4d75c/docs/reviewer_closure_experiments/PROTOCOL_FREEZE.md)
 documents limits on treating sparse references or inferred negatives as
 clinical labels. Chapman and PTB-XL fold 10 are not newly opened.
 

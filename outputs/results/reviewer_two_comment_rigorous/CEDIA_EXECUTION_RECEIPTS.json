@@ -1,0 +1,113 @@
+{
+  "schema": "TITAN_V45_TWO_COMMENT_NATIVE_RECEIPTS_V1",
+  "experiments": {
+    "selective": {
+      "job": "33799",
+      "state": "COMPLETED",
+      "elapsed": "00:00:52",
+      "exit": "0:0",
+      "start": "2026-11-12T18:30:54",
+      "end": "2026-11-12T18:31:46",
+      "node": "compute-0-1",
+      "partition": "cpu-dev",
+      "code_commit": "6146750b8f6e48311312268afa9e5d0221020234",
+      "code_archive_sha256": "9d90baa7ccfaeb7165cc116e2dce706550f3e53ffe4997d051c8b92d12dfdd81",
+      "code_manifest_sha256": "a03e8b126e713ccb888192ec74cb99f3253a14e3ab2e648c88dc84551a595b92",
+      "output_manifest_sha256": "27141d9cc088c94ac6b4f3228a13a735ba559c473526a16040ad6fa83a276a45",
+      "aggregate_filename": "R2_4K_COVERAGE_RISK_AND_FALSE_NEGATIVES.json",
+      "aggregate_sha256": "dfe3787ff4f993bd999d56004f7131c0d8f2e4f36526326fd6b37eb9e90f5c9c",
+      "log_sha256": "b5b68180767c082c24314fce1db209e6d03e8420c70fa609b10517c208aed94b"
+    },
+    "morphology": {
+      "job": "33795",
+      "state": "COMPLETED",
+      "elapsed": "00:02:40",
+      "exit": "0:0",
+      "start": "2026-11-12T18:23:21",
+      "end": "2026-11-12T18:26:01",
+      "node": "compute-0-1",
+      "partition": "cpu-dev",
+      "code_commit": "44fcd4edb75c7b1cc6731fd15f0a5e69bb36b7a6",
+      "code_archive_sha256": "4b1959d3bb2d1bba16b7e2d49acae91e37bc0eb66c2d4af012b7aa6595d9b0df",
+      "code_manifest_sha256": "756b124f99a764930e4a3f6e25d96defc4e323183104a3f837cab3862b52aadc",
+      "output_manifest_sha256": "79db5db4b2ef118728abe381ebe1623160031eeea1f810f6cfb7f18b96e4c837",
+      "aggregate_filename": "R2_3F_ABLATION_CONFIRMATORY_RESULTS.json",
+      "aggregate_sha256": "77ba9f46746420b834ab5a24d39cb32bab73e5ad2d481fcfb1d2bd89efe5de4a",
+      "log_sha256": "1e4ab16d87823471b30396deeca139e2716bc2d4543e5c948ddfb5fc6497e72b",
+      "restricted_prediction_ledger_sha256": "03154e0eef76352a5a6898766328e3071edd82dd93632e2ea03e2bf64ab26567"
+    },
+    "runtime": {
+      "job": "33796",
+      "state": "COMPLETED",
+      "elapsed": "00:04:09",
+      "exit": "0:0",
+      "start": "2026-11-12T18:26:24",
+      "end": "2026-11-12T18:30:33",
+      "node": "compute-0-1",
+      "partition": "gpu-dev",
+      "code_commit": "44fcd4edb75c7b1cc6731fd15f0a5e69bb36b7a6",
+      "code_archive_sha256": "4b1959d3bb2d1bba16b7e2d49acae91e37bc0eb66c2d4af012b7aa6595d9b0df",
+      "code_manifest_sha256": "756b124f99a764930e4a3f6e25d96defc4e323183104a3f837cab3862b52aadc",
+      "output_manifest_sha256": "4d8e9b3d9b11d4fbe86baef23661f51b5bc6866b4de7971f71578fa51c53360e",
+      "aggregate_filename": "RUNTIME_AND_CASCADE_AGGREGATE.json",
+      "aggregate_sha256": "4c1490ba3ce5bbc252f72b8a753781c7126ae6c2f358c4842c073d699470fa00",
+      "log_sha256": "b5b68180767c082c24314fce1db209e6d03e8420c70fa609b10517c208aed94b",
+      "restricted_cascade_ledger_sha256": "a1fab69b19e7df70781ad9f902852038b7eaeafb5f2d97e84a74043111577dca"
+    }
+  },
+  "excluded_attempts": [
+    {
+      "scheduler": {
+        "job": "33784",
+        "state": "FAILED",
+        "elapsed": "00:00:28",
+        "exit": "1:0",
+        "start": "2026-11-12T17:58:54",
+        "end": "2026-11-12T17:59:22",
+        "node": "compute-0-1",
+        "partition": "cpu-dev"
+      },
+      "reason": "Original scoring configuration path mismatch before evaluation"
+    },
+    {
+      "scheduler": {
+        "job": "33787",
+        "state": "FAILED",
+        "elapsed": "00:00:28",
+        "exit": "2:0",
+        "start": "2026-11-12T18:00:54",
+        "end": "2026-11-12T18:01:22",
+        "node": "compute-0-1",
+        "partition": "cpu-dev"
+      },
+      "reason": "Launcher argument parser failed before fitting"
+    },
+    {
+      "scheduler": {
+        "job": "33789",
+        "state": "FAILED",
+        "elapsed": "00:00:47",
+        "exit": "2:0",
+        "start": "2026-11-12T18:01:54",
+        "end": "2026-11-12T18:02:41",
+        "node": "compute-0-1",
+        "partition": "gpu-dev"
+      },
+      "reason": "Launcher argument parser failed before waveform inference"
+    },
+    {
+      "scheduler": {
+        "job": "33793",
+        "state": "CANCELLED by 1760",
+        "elapsed": "00:00:00",
+        "exit": "0:0",
+        "start": "None",
+        "end": "2026-11-12T18:07:02",
+        "node": "None assigned",
+        "partition": "cpu-dev"
+      },
+      "reason": "Withdrawn before start to correct boolean endpoint counting"
+    }
+  ],
+  "individual_data_exported": false
+}
