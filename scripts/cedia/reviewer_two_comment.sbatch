@@ -23,10 +23,16 @@ tar -xf "$deps" -C "$scratch"
 export PYTHONPATH="$repo/src:$scratch"
 export OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 OPENBLAS_NUM_THREADS=4 PYTHONDONTWRITEBYTECODE=1
 protocol="$code/configs/reviewer_experiments/two_comment_rigorous_v1.json"
+if [[ "$experiment" == runtime ]]; then
+    protocol="$code/configs/reviewer_experiments/two_comment_gpu_v1.json"
+fi
 out="$root/$experiment-$SLURM_JOB_ID"
 mkdir -m 700 -- "$out"
 common=(--protocol "$protocol" --output "$out/aggregate.json")
 case "$experiment" in
+    runtime)
+        python -u "$code/scripts/evaluation/reviewer_morphology_runtime.py" "${common[@]}" +            --base "$base" --repo "$repo" --assets "$stage_a/attempt-92505-qc-corrected/release-assets-v0.1.0"
+        ;;
     selective)
         python -u "$code/scripts/evaluation/reviewer_selective_utility.py" "${common[@]}" --base "$base"
         ;;
@@ -35,4 +41,8 @@ case "$experiment" in
         ;;
     *) exit 2 ;;
 esac
-(cd "$out" && sha256sum aggregate.json > SHA256SUMS)
+(
+    cd "$out"
+    shopt -s nullglob
+    sha256sum ./*.json ./*.jsonl > SHA256SUMS
+)
