@@ -38,6 +38,7 @@ def run(root: Path, protocol: Path) -> dict:
             if r["split"] != "test"
         }
     counts = defaultdict(lambda: defaultdict(Counter))
+    patients = defaultdict(lambda: defaultdict(lambda: defaultdict(set)))
     cohort_counts = Counter(row["split"] for row in selected.values())
     seen = set()
     with (mimic / "machine_measurements.csv").open("rb") as stream:
@@ -55,7 +56,22 @@ def run(root: Path, protocol: Path) -> dict:
             seen.add(study)
             for endpoint, state in classify_report(row).items():
                 counts[link["split"]][endpoint][state] += 1
+                if state in {"positive", "explicit_negative"}:
+                    patients[link["split"]][endpoint][state].add(link["subject_id"])
     matched = Counter(selected[study]["split"] for study in seen)
+    gate_bytes = (ROOT / "docs/external_validation_20261111/REFERENCE_AUDIT_GATE.json").read_bytes()
+    minima = json.loads(gate_bytes)["per_endpoint_minimum_distinct_patients_per_polarity"]
+    support = {}
+    endpoints = sorted(set().union(*(set(counts[split]) for split in minima)))
+    for endpoint in endpoints:
+        by_split = {}
+        for split in minima:
+            pos = patients[split][endpoint]["positive"]
+            neg = patients[split][endpoint]["explicit_negative"]
+            by_split[split] = {"positive": len(pos - neg), "explicit_negative": len(neg - pos)}
+        support[endpoint] = by_split
+    passed = [endpoint for endpoint, splits in support.items()
+              if all(min(values.values()) >= minima[split] for split, values in splits.items())]
     receipt = {
         "scope": "DEVELOPMENT_MACHINE_STATEMENT_SUPPORT_ONLY",
         "protocol_sha256": hashlib.sha256(protocol_bytes).hexdigest(),
@@ -67,11 +83,15 @@ def run(root: Path, protocol: Path) -> dict:
         "joined_development_ecgs": dict(matched),
         "report_columns": len(REPORT_COLUMNS),
         "states_by_split_and_endpoint": counts,
+        "patient_support_by_split_and_endpoint": support,
+        "reference_audit_gate_sha256": hashlib.sha256(gate_bytes).hexdigest(),
+        "endpoints_passing_development_support": passed,
         "test_labels_extracted": False,
         "performance_computed": False,
     }
     atomic(root / "private_mimic_reference_audit.json", (json.dumps(receipt, indent=2) + "\n").encode())
-    print(json.dumps({k: v for k, v in receipt.items() if k != "states_by_split_and_endpoint"}, indent=2))
+    private_fields = {"states_by_split_and_endpoint", "patient_support_by_split_and_endpoint"}
+    print(json.dumps({k: v for k, v in receipt.items() if k not in private_fields}, indent=2))
     return receipt
 
 

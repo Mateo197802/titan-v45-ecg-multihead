@@ -1,0 +1,10 @@
+{
+  "status": "FROZEN_DEVELOPMENT_SUPPORT_SCREEN_BEFORE_OUTCOME_ACCESS",
+  "reference": "machine statements only, not adjudicated",
+  "per_endpoint_minimum_distinct_patients_per_polarity": {
+    "train": 50,
+    "validation": 20,
+    "calibration": 20
+  },
+  "policy": "Both positive and explicit-negative support must pass in all development splits. This is a necessary screen, not label validation or authority to train. Exclude same-patient mixed-polarity support from this conservative screen without changing any individual label. The retained set is not queried."
+}
