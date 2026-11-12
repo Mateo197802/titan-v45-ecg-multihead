@@ -26,6 +26,8 @@ MODES = {
     "partial_transformer_resnet_mlp": ("transformer.layers.7.", "transformer.layers.8.", "final_norm.",
                                       "res_layers.5.", "token_projection."),
     "masked_mimic_partial": ("transformer.layers.7.", "transformer.layers.8.", "final_norm."),
+    "chapman_only_partial": ("transformer.layers.7.", "transformer.layers.8.", "final_norm."),
+    "multisource_groupdro": ("transformer.layers.7.", "transformer.layers.8.", "final_norm."),
     "full_regularized": ("",),
 }
 
@@ -92,6 +94,48 @@ def batches(data, size, rng=None):
         yield tuple(x[indices] for x in data[length])
 
 
+def read_extra(bank, source, split, normalizer):
+    protocol = ROOT / "docs/domain_adaptation/CROSS_SOURCE_PROTOCOL.json"
+    receipt = json.loads((bank / "ADDITIONAL_SOURCE_RECEIPT.json").read_bytes())
+    if receipt["protocol_sha256"] != digest(protocol):
+        raise ValueError("extra source protocol mismatch")
+    entry = receipt["sources"][f"{source}/{split}"]
+    path = bank / f"{source}-{split}.npz"
+    manifest = bank / f"private_{source}_{split}.json"
+    if digest(path) != entry["bank_sha256"] or digest(manifest) != entry["private_manifest_sha256"]:
+        raise ValueError("extra source bank integrity failure")
+    rows = json.loads(manifest.read_bytes())
+    people = [r["group"] or r["identity"] for r in rows]
+    patient_counts = Counter(people)
+    with np.load(path, allow_pickle=False) as data:
+        wave, descriptors, labels = (data[key] for key in ("wave", "descriptors", "labels"))
+    if wave.shape != (len(rows), 12, 1250) or descriptors.shape != (len(rows), 7) or labels.shape != (len(rows), 5):
+        raise ValueError("extra source shape mismatch")
+    return {1250: (normalize(wave, normalizer), descriptors, labels,
+                   np.asarray([1 / patient_counts[k] for k in people], dtype=np.float32),
+                   np.asarray([r["identity"] for r in rows]), np.asarray(people))}
+
+
+def source_batches(sources, size, rng, balanced):
+    if not balanced:
+        for name, bank in sources.items():
+            for batch in batches(bank, size, rng):
+                yield name, batch
+        return
+    source_names = list(sources)
+    steps = sum(int(np.ceil(len(a[0]) / size)) for a in sources["code15"].values())
+    per_source = int(np.ceil(steps / len(source_names)))
+    iterators = {name: iter(batches(data, size, rng)) for name, data in sources.items()}
+    for _ in range(per_source):
+        for name in rng.permutation(source_names):
+            try:
+                batch = next(iterators[name])
+            except StopIteration:
+                iterators[name] = iter(batches(sources[name], size, rng))
+                batch = next(iterators[name])
+            yield name, batch
+
+
 def device_batch(wave, desc, labels, patient_weight):
     return [torch.as_tensor(a, dtype=torch.float32, device="cuda") for a in (wave, desc, labels, patient_weight)]
 
@@ -132,13 +176,15 @@ def configure(backbone, mode, cfg):
     return [{"params": params, "lr": rate} for rate, params in groups.items()], anchors
 
 
-def run(bank, assets, out, mode, seed, normalizer, ssl=None):
+def run(bank, assets, out, mode, seed, normalizer, ssl=None, extra=None):
     cfg = json.loads(PROTOCOL.read_bytes())
     hp = cfg["training"]
     if seed not in hp["seeds"] or normalizer not in cfg["waveform"]["normalizations"]:
         raise ValueError("unregistered seed or normalization")
     if (mode == "masked_mimic_partial") != (ssl is not None):
         raise ValueError("SSL weights are required only for the registered MIMIC warm-start arm")
+    if (mode in {"chapman_only_partial", "multisource_groupdro"}) != (extra is not None):
+        raise ValueError("additional sources are required only for the registered cross-source arms")
     if not torch.cuda.is_available():
         raise RuntimeError("a CEDIA CUDA allocation is required")
     torch.manual_seed(seed)
@@ -146,7 +192,18 @@ def run(bank, assets, out, mode, seed, normalizer, ssl=None):
     rng = np.random.default_rng(seed)
     if torch.cuda.is_bf16_supported():
         torch.set_float32_matmul_precision("high")
-    train, val = (read_bank(bank, split, normalizer) for split in ("train", "validation"))
+    balanced = mode == "multisource_groupdro"
+    if mode == "chapman_only_partial":
+        train = {"chapman_shaoxing": read_extra(extra, "chapman_shaoxing", "train", normalizer)}
+        val = read_extra(extra, "chapman_shaoxing", "validation", normalizer)
+        validation_source = "chapman_shaoxing"
+    else:
+        train = {"code15": read_bank(bank, "train", normalizer)}
+        val = read_bank(bank, "validation", normalizer)
+        validation_source = "code15"
+        if balanced:
+            for source in ("chapman_shaoxing", "cpsc2018"):
+                train[source] = read_extra(extra, source, "train", normalizer)
     out.mkdir(mode=0o700, exist_ok=False)
     paths, hashes = verified_assets(ROOT, assets, {BACKBONE})
     backbone = build_titan_v45_backbone()
@@ -172,7 +229,7 @@ def run(bank, assets, out, mode, seed, normalizer, ssl=None):
         del warm
     optimizer = torch.optim.AdamW([{"params": model.head.parameters(), "lr": hp["head_lr"]}, *groups],
                                   weight_decay=hp["weight_decay"])
-    labels = np.concatenate([arrays[2] for arrays in train.values()])
+    labels = np.concatenate([arrays[2] for data in train.values() for arrays in data.values()])
     pos = (labels == 1).sum(axis=0)
     neg = (labels == 0).sum(axis=0)
     if np.any(pos == 0) or np.any(neg == 0):
@@ -181,6 +238,10 @@ def run(bank, assets, out, mode, seed, normalizer, ssl=None):
     best, best_epoch = -np.inf, 0
     checkpoint = out / "best.pt"
     trainable = sum(p.numel() for p in model.parameters() if p.requires_grad)
+    domains = {name: i for i, name in enumerate(train)}
+    log_group = np.zeros(len(domains))
+    cross = ROOT / "docs/domain_adaptation/CROSS_SOURCE_PROTOCOL.json"
+    eta = json.loads(cross.read_bytes())["groupdro_eta"] if balanced else 0
     with (out / "FINETUNING_LEARNING_CURVES.csv").open("x", newline="", encoding="utf-8") as stream:
         names = ["epoch", "train_loss", "max_gradient_norm", "validation_macro_ap", "validation_macro_f1_at_half"]
         names += [f"{name}_{metric}" for name in cfg["endpoints"] for metric in ("ap", "f1")]
@@ -190,7 +251,7 @@ def run(bank, assets, out, mode, seed, normalizer, ssl=None):
             model.train()
             model.backbone.eval()
             loss_total, max_grad, n = 0.0, 0.0, 0
-            for wave, desc, y, patient_weight, *_ in batches(train, hp["batch_size"], rng):
+            for source, (wave, desc, y, patient_weight, *_) in source_batches(train, hp["batch_size"], rng, balanced):
                 x, d, target, w = device_batch(wave, desc, y, patient_weight)
                 optimizer.zero_grad(set_to_none=True)
                 with torch.autocast("cuda", dtype=torch.bfloat16, enabled=torch.cuda.is_bf16_supported()):
@@ -199,6 +260,11 @@ def run(bank, assets, out, mode, seed, normalizer, ssl=None):
                         logits.float(), target.clamp_min(0), pos_weight=weights, reduction="none")
                     valid = (target >= 0) * w[:, None]
                     loss = (cell * valid).sum() / valid.sum().clamp_min(1)
+                    if balanced:
+                        index = domains[source]
+                        log_group[index] += eta * float(loss.detach())
+                        group_weight = np.exp(log_group - log_group.max())
+                        loss = loss * (len(domains) * group_weight[index] / group_weight.sum())
                     if anchors:
                         loss = loss + hp["anchor_lambda"] * sum(
                             (p - initial).square().mean() for p, initial in anchors) / len(anchors)
@@ -233,7 +299,9 @@ def run(bank, assets, out, mode, seed, normalizer, ssl=None):
                 break
     result = {"mode": mode, "seed": seed, "normalization": normalizer, "best_epoch": best_epoch,
               "validation_macro_ap": best, "validation_macro_f1_at_half": best_f1, "trainable_parameters": trainable,
-              "source": "CODE-15% supervised development", "calibration_or_test_opened": False,
+              "training_sources": list(train), "validation_source": validation_source,
+              "calibration_or_test_opened": False, "groupdro": balanced,
+              "additional_source_receipt_sha256": digest(extra / "ADDITIONAL_SOURCE_RECEIPT.json") if extra else None,
               "mimic_ssl_checkpoint_sha256": warm_start_sha,
               "protocol_sha256": digest(PROTOCOL), "baseline_assets": hashes, "checkpoint_sha256": digest(checkpoint),
               "code_commit": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
@@ -253,5 +321,6 @@ if __name__ == "__main__":
     parser.add_argument("seed", type=int)
     parser.add_argument("normalizer", choices=("per_lead_zscore", "robust_shared_gain"))
     parser.add_argument("--ssl", type=Path)
+    parser.add_argument("--extra", type=Path)
     args = parser.parse_args()
-    run(args.bank, args.assets, args.output, args.mode, args.seed, args.normalizer, args.ssl)
+    run(args.bank, args.assets, args.output, args.mode, args.seed, args.normalizer, args.ssl, args.extra)
