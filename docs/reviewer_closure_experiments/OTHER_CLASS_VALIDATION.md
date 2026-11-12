@@ -8,16 +8,23 @@ to create a more favorable metric. The full-denominator scoring flow is in
 
 ## Definitions and comparisons
 
-- **Rhythm Other in SPH:** a known positive is a verified mapped non-primary
-  rhythm for the named profile; known negatives in the experimental contrast
-  are explicit Normal-only controls, not all remaining records. P6 includes
-  PAC in its Other union; P8 already has a native PAC output. A missing or
-  incompatible statement remains unknown. These binary logistic heads are
-  post-study components on frozen scores, not deployed routing.
+- **Rhythm Other in SPH:** the [frozen ontology](../../configs/reviewer_experiments/november_rhythm_other.json)
+  maps P6 Other to PAC, Flutter, complete LBBB, second-degree AV block
+  (including explicit Mobitz I, Mobitz II and 2:1 statements), or complete
+  third-degree AV block. P8 Other uses the same union without PAC, which
+  already has a native P8 output. Neither union includes NSR, Paced or
+  LQTS. Positive means at least one mapped code with no Normal ECG code;
+  negatives are explicit Normal-only controls. Mixed Normal labels or
+  discordant exact signals are ambiguous; other records stay unknown.
+  These binary logistic heads use frozen scores, not deployed routing.
 - **Pathology Other in PTB-XL:** the mapped union of ALMI, ILMI and the
   combined LAO/LAE statement is contrasted with explicit source-compatible
   controls. LAO/LAE is an operational composite in that one experiment.
-  It is not a measurement of isolated clinical LAE.
+  It is not a measurement of isolated clinical LAE. The
+  [frozen ontology](../../configs/reviewer_experiments/november_pathology_other.json)
+  requires a positive-likelihood target without NORM; controls are
+  positive-likelihood NORM with no other statement except optional SR.
+  Target with NORM or zero target likelihood is ambiguous, not negative.
 - An original native decision, a released auxiliary score, an auxiliary
   comparator threshold fitted for a comparison, and a newly fitted head
   are separate estimands. See the [asset and loss audit](../reviewer_experiments/RELEASE_HEAD_SUPPORT.md).
@@ -33,6 +40,10 @@ were only three positives (194 known alternative principal rhythms);
 V3F auxiliary AUROC 0.1048 is a sparse descriptive rank, not a calibrated
 decision. Lack of annotation is not counted as a negative for incidental
 conditions or as evidence of an effective Other classifier.
+The grouped LUDB reference has 19 P6 Other and 12 P8 Other positives,
+but no compatible known negatives for either union. Thus it does not
+independently validate the SPH grouped F1 values. The strict LUDB pathology
+union ALMI/ILMI/LAE has no compatible references for any of the 200 ECGs.
 
 | Requested endpoint | Verified prior evidence | Remaining compatibility or deployment limit |
 |---|---|---|
