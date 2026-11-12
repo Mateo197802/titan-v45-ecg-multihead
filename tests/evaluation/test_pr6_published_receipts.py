@@ -8,6 +8,7 @@ import pytest
 ROOT = Path(__file__).resolve().parents[2]
 RESULTS = ROOT / "outputs/results/external_validation_20261111"
 FIRST = RESULTS / "code15-first"
+FULL = RESULTS / "code15-full"
 
 
 def sha256(path):
@@ -56,6 +57,49 @@ def test_first_code_archive_custody_and_aggregate_conservation():
     for decision in receipt["promotion"].values():
         assert decision["decision"] == "INCOMPLETE_NO_PROMOTION"
         assert not decision["observed_metric_gate_pass"]
+
+
+def test_full_code_delivery_matches_cedia_hashes_and_frozen_decisions():
+    evaluation_path = FULL / "code15_evaluation_receipt.json"
+    delivery_path = FULL / "CODE15_FULL_DELIVERY_RECEIPT.json"
+    evaluation, delivery = load(evaluation_path), load(delivery_path)
+    slurm = load(FULL / "CODE15_FULL_SLURM_RECEIPT.json")
+    lineage = load(RESULTS / "EXPERIMENT_AND_CHECKPOINT_LINEAGE.json")["code15_full"]
+    assert sha256(evaluation_path) == slurm["evaluation_receipt_sha256"] == lineage["evaluation_receipt_sha256"]
+    assert sha256(delivery_path) == slurm["delivery_receipt_sha256"] == lineage["delivery_receipt_sha256"]
+    for kind, source_hash in delivery["source_receipt_sha256"].items():
+        receipt_field = "padding_audit_sha256" if kind == "padding" else f"{kind}_receipt_sha256"
+        assert source_hash == slurm[receipt_field]
+    assert {f"exams_part{i}.zip" for i in range(18)} == delivery["archives"].keys()
+    assert {name: item["sha256"] for name, item in delivery["archives"].items()} == evaluation["archive_sha256"]
+    assert delivery["crc_verified_archives"] == 18 and evaluation["complete_archive_coverage"]
+    assert evaluation["reused_verified_first_archive"] and delivery["first_archive_bit_exact_rows_retained"] == 1411
+    assert delivery["independent_metric_verification"]["status"] == "PASS"
+    assert delivery["independent_metric_verification"]["metric_rows_verified"] == 20
+    assert evaluation["point_estimates_independently_verified"]["patient_bootstrap_replayed"]
+    assert delivery["duration_contract_10_seconds"] == "LIMITED"
+    assert delivery["historical_patient_independence"] == "NOT_CERTIFIED"
+    assert delivery["promotion_gates"] == {"P6": "FAIL", "P8": "FAIL"}
+    assert delivery["p4"] == "NOT_EVALUABLE" and not lineage["promoted"]
+    for job in ("33326", "33572", "33573", "33574", "33575"):
+        assert slurm["jobs"][job]["state"] == "COMPLETED" and slurm["jobs"][job]["exit_code"] == "0:0"
+    flow = delivery["cohort_flow"]
+    assert flow == evaluation["cohort_flow"]
+    assert flow["selected_ecgs"] == 43187 == 18001 + 504 + flow["final_paired_ecgs"]
+    assert flow["selected_patients"] == 29081 == 11781 + flow["patients_with_scored_ecgs"]
+    assert sum(sum(row["scored"].values()) for row in delivery["duration_distribution"].values()) == 24682
+    assert sum(row["scored"]["581/581"] for row in delivery["duration_distribution"].values()) == 24578
+    assert sha256(FULL / "CODE15_PER_CLASS.csv") == evaluation["aggregate_csv_sha256"]
+    for filename, expected in evaluation["aggregate_views_sha256"].items():
+        assert sha256(FULL / filename) == expected
+    with (FULL / "EXTERNAL_CODE15_RESULTS.csv").open(newline="", encoding="utf-8") as stream:
+        reader = csv.DictReader(stream)
+        assert {"exam_id", "patient_id", "record_id", "statement"}.isdisjoint(reader.fieldnames)
+        rows = list(reader)
+    assert len(rows) == 20 and len({(row["profile"], row["endpoint"], row["model"]) for row in rows}) == 20
+    for row in rows:
+        assert row["scope"] == "FULL_FROZEN_SAMPLE" and row["estimable"] == "True"
+        assert sum(int(row[key]) for key in ("tp", "tn", "fp", "fn")) == 24682
 
 
 def test_development_replay_receipt_has_no_external_promotion():

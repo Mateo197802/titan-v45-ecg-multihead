@@ -1,4 +1,15 @@
-# Specialist promotion: hold
+# Specialist promotion: P6 and P8 fail the full CODE gate
+
+The [completed 18-archive comparison](CODE15_FULL_EVALUATION.md) is the
+promotion decision for PR #6. P6 changed from 0.428743 to 0.428104 macro-F1
+(paired delta -0.000639, patient 95% CI [-0.006899, +0.004992]); P8 changed
+from 0.449186 to 0.436388 (-0.012798, [-0.019583, -0.005406]). Neither met
+the frozen +0.03 gain or positive lower confidence bound. Neither profile
+is promoted. P4 remains not evaluable against CODE's reference. This is
+a completed operational benchmark, not validation of a 10 s waveform
+contract or historical patient independence.
+
+## Historical first-archive checkpoint
 
 | Profile | Published macro-F1 | Frozen linear macro-F1 | Delta (patient IC95%) | Decision |
 |---|---:|---:|---:|---|

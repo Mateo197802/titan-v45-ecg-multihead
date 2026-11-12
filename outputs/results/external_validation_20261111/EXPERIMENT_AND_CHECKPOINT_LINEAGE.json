@@ -1,7 +1,7 @@
 {
   "repository_scope": "draft PR 6 only",
   "frozen_code15_protocol_sha256": "75f9227ebb506bf0b1aabf215d425ba88cd82119f051bc4400e0c1756410bfd4",
-  "baseline_weight_identity": "baseline_hashes in code15-first/code15_evaluation_receipt.json; release v0.1.0 unchanged",
+  "baseline_weight_identity": "baseline_hashes match in first and full CODE receipts; release v0.1.0 unchanged",
   "linear_fit": {
     "job": 33316,
     "commit": "5a5306d6856fb17d4d08d61be275fa3eeb7c1803",
@@ -21,6 +21,7 @@
     "promoted": false
   },
   "code15": {
+    "scope": "historical first-archive checkpoint and then-pending job chain",
     "first_transport_step": "33296.0",
     "first_transport_receipt_sha256": "0fbb2892bc5f08fd5c70aa6cb59d7aab2d0ae1bb58a6a789b116f0b28b770c47",
     "first_paired_step": "33296.11",
@@ -34,6 +35,22 @@
     "full_evaluation_job": 33360,
     "full_signal_audit_job": 33376,
     "complete": false,
+    "promoted": false
+  },
+  "code15_full": {
+    "scope": "all 18 archives in the locked patient sample",
+    "transport_job": 33326,
+    "preflight_job": 33572,
+    "full_evaluation_job": 33573,
+    "signal_audit_job": 33574,
+    "delivery_verification_job": 33575,
+    "execution_commit": "492caf65656dced80c1ce80d629cbd9649d398b1",
+    "execution_receipt": "code15-full/CODE15_FULL_SLURM_RECEIPT.json",
+    "evaluation_receipt_sha256": "b697185dde787836457c779c0a6fd832dfa3c16d58badf99604ce441a06c39a7",
+    "delivery_receipt_sha256": "228f3a35ab87a45e66c285b6cc1896d509a5f2cec73762690adeccfa7d95248d",
+    "first_archive_bit_exact_rows_retained": 1411,
+    "complete": true,
+    "promotion_gates": {"P6": "FAIL", "P8": "FAIL", "P4": "NOT_EVALUABLE"},
     "promoted": false
   },
   "mimic_label_blind_inference": {

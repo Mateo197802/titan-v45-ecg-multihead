@@ -1,6 +1,7 @@
 {
   "scope": "PR6 external evaluation and development, aggregate only",
   "code15": {
+    "scope": "historical first-archive checkpoint",
     "source_doi": "10.5281/zenodo.4916206",
     "evaluated_archives": 1,
     "publisher_archives": 18,
@@ -46,6 +47,20 @@
       "Alignment and scope do not exclude shifts, crops, unknown training exposures or cross-source patient matches.",
       "The frozen operational filter admitted traces whose acquisition duration cannot be certified."
     ]
+  },
+  "code15_full": {
+    "scope": "full frozen sample across all 18 publisher archives",
+    "paired_scored_ecgs": 24682,
+    "paired_scored_patients": 17300,
+    "within_code_aligned_duplicate_exclusions": 504,
+    "aligned_matches_to_comparable_publisher_code_test_signatures": 0,
+    "publisher_code_test_signatures": 573,
+    "publisher_code_test_uncomparable_waveforms": 254,
+    "converted_historical_release_traces_uncomparable": 167,
+    "publisher_code_test_annotations_opened": false,
+    "patient_independence_from_historical_weights": "NOT_CERTIFIED",
+    "duration_contract": "LIMITED",
+    "delivery_receipt": "code15-full/CODE15_FULL_DELIVERY_RECEIPT.json"
   },
   "mimic": {
     "source_patient_split_overlap": 0,

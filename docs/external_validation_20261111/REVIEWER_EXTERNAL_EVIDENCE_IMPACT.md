@@ -1,16 +1,16 @@
 # External evidence impact: historical rubric and supplemental PR #6 evidence
 
-The [executed first CODE-15% archive](REVIEWER_R1_1_CLOSURE_ASSESSMENT.md)
-now has paired, independently recomputed metrics. It does not satisfy the
-complete-cohort, duration, or historical independence conditions. The table
-below keeps PR #3's previous historical rubric snapshot, not an assertion
-that PR #6 has no executed comparisons.
+The [full frozen CODE-15% sample](CODE15_FULL_EVALUATION.md) now has
+paired, independently recomputed metrics over all 18 archives. It does
+not validate the 10 s waveform contract, historical independence or
+clinically adjudicated generalization. The table below keeps PR #3's
+historical rubric snapshot rather than grading the new PR #6 evidence.
 
 The previous percentages below come from the historical [PR #3 matrix](https://github.com/Mateo197802/titan-v45-ecg-multihead/blob/68274ee05dab1e5aaa48aa588262b5b8289cbbd4/docs/reviewer_closure/REVIEWER_15_COVERAGE_AND_CEILING.json), field `new_pct`. The new study does not edit that matrix or change a percentage based on acquisition, queued jobs, or label-blind inference.
 
 | Reviewer | Previous | Current | What remains for scientific satisfaction |
 |---|---:|---:|---|
-| R1-1 | 50% | 50% | Completed original-model external-source metrics with valid reference; do not equate statements with clinical adjudication or certify unknown historical exposure. |
+| R1-1 | 50% | 50% | Historical rubric only. The completed CODE benchmark adds external agreement; clinically valid reference, duration and independent confirmation remain distinct. |
 | R1-2 | 33.3% | 33.3% | Complete external eligibility/routing denominator, reference coverage, and decisions; does not recover the historical preselection population. |
 | R2-general | 50% | 50% | Compatible source references and separate multilabel evaluation for Other categories, including coexistence and explicit unknown states. |
 | R2-3a | 50% | 50% | Executed and audited splits, class supports and isolation for the new study; authentic training manifests linked to historical weights remain separate. |
