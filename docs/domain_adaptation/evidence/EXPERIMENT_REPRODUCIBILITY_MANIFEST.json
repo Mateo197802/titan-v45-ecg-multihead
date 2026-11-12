@@ -36,6 +36,14 @@
       "bytes": 3116,
       "sha256": "87d02e4604f7ab5d41bbc9fa1b262c157c7c2ba08c107aa62b599d1a5bd87e47"
     },
+    "SOURCE_GENERALIZATION_MATRIX.csv": {
+      "bytes": 19578,
+      "sha256": "d962c8d3d72d25a93779828e7ee1fd0b8821ac6d5c351e7f2db919f87db597cd"
+    },
+    "SOURCE_GENERALIZATION_RECEIPT.json": {
+      "bytes": 1172,
+      "sha256": "5c083b3bc42436d0643df8bbd7973dbded46d098aa7e671de22f931440a474b1"
+    },
     "TRAINING_EXPERIMENTS_COMPLETE.csv": {
       "bytes": 2099,
       "sha256": "67d5f76e339cd29e5b053719453ad6a3c68f6d0af5ae7e12a24f3293ea8498c2"

@@ -123,7 +123,7 @@ def verify(evidence, rebuild=False):
                 or any(int(row["ecgs"]) != ssl_data["ecgs"] for row in read_csv(ssl_curves))):
             raise ValueError("masked waveform training receipt is not train-only and patient-consistent")
 
-    experiments, learning, seen = [], [], set()
+    experiments, learning, seen, receipts = [], [], set(), {}
     for receipt in sorted(evidence.glob("*/TRAINING_RECEIPT.json")):
         run = json.loads(receipt.read_bytes())
         key = tuple(run[k] for k in RUN_FIELDS[:3])
@@ -138,10 +138,24 @@ def verify(evidence, rebuild=False):
                 or float(best["validation_macro_f1_at_half"]) != run["validation_macro_f1_at_half"]):
             raise ValueError("invalid training receipt or best-epoch claim")
         seen.add(key)
+        receipts[run["checkpoint_sha256"]] = sha(receipt)
         run.setdefault("validation_source", "code15")
         experiments.append({field: run[field] for field in RUN_FIELDS})
         learning.extend({"mode": key[0], "normalization": key[1], "seed": key[2], "slurm_job": run["slurm_job"], **row}
                         for row in curve_rows)
+    transfer_path = evidence / "SOURCE_GENERALIZATION_RECEIPT.json"
+    if transfer_path.is_file():
+        linked = json.loads(transfer_path.read_bytes())["checkpoint_to_training_receipt_sha256"]
+        if not linked or any(receipts.get(checkpoint) != receipt for checkpoint, receipt in linked.items()):
+            raise ValueError("source-scoring checkpoint lacks a matching public training receipt")
+
+    selection_path = evidence / "CANDIDATE_SELECTION_RECEIPT.json"
+    if selection_path.is_file():
+        selection = json.loads(selection_path.read_bytes())
+        assert_hash(ROOT / "docs/domain_adaptation/SELECTION_PROTOCOL.json", selection["selection_protocol_sha256"])
+        if (selection["selection_source"] != "validation_only"
+                or receipts.get(selection["selected_checkpoint_sha256"]) != selection["selected_training_receipt_sha256"]):
+            raise ValueError("selected checkpoint and validation receipt are not linked")
     if rebuild:
         write_csv(evidence / "TRAINING_EXPERIMENTS_COMPLETE.csv", RUN_FIELDS, experiments)
         if learning:
@@ -169,7 +183,11 @@ def verify(evidence, rebuild=False):
     final = evidence / "WITHIN_CODE_EVALUATION_RECEIPT.json"
     if final.is_file():
         test = json.loads(final.read_bytes())
-        if test["independent_generalization"] != "NOT_EVALUATED":
+        assert_hash(selection_path, test["selection_sha256"])
+        assert_hash(evidence / "FROZEN_CANDIDATE_THRESHOLDS.json", test["threshold_file_sha256"])
+        assert_hash(evidence / "WITHIN_CODE_SCORE_RECEIPT.json", test["score_receipt_sha256"])
+        if (test["independent_generalization"] != "NOT_EVALUATED"
+                or test["candidate_sha256"] != selection["selected_checkpoint_sha256"]):
             raise ValueError("within-CODE scope cannot certify another institution")
         names = {"EXTERNAL_PER_CLASS_RESULTS.csv", "PATIENT_BOOTSTRAP_CONFIDENCE_INTERVALS.csv",
                  "EXTERNAL_MACRO_F1_COMPARISON.csv", "PRECISION_RECALL_CURVES.csv", "CALIBRATION_CURVES.csv",

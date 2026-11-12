@@ -115,6 +115,32 @@ The result rejects a simple assumption that balancing more sources improves
 the target domain. Differences in positive prevalence and support masks can
 contribute; the experiment does not isolate their individual causal effects.
 
+Job `33744` scored six seed-one arms on matched CODE and Chapman validation
+rows, without opening the reserved test. The [source matrix](evidence/SOURCE_GENERALIZATION_MATRIX.csv)
+keeps each endpoint, support, threshold and exposure flag. A source marked
+absent from the new supervised fit can still have historical backbone exposure.
+
+| Fit | CODE AP / F1 | Chapman AP / F1 |
+|---|---:|---:|
+| Frozen, CODE | 0.438883 / 0.417968 | 0.697190 / 0.486388 |
+| Transformer, CODE | 0.467033 / 0.452656 | 0.641592 / 0.491745 |
+| Transformer + ResNet, CODE | 0.550330 / 0.582790 | 0.684369 / 0.553204 |
+| MIMIC SSL + Transformer, CODE | 0.473593 / 0.478860 | 0.680560 / 0.542993 |
+| Chapman only | 0.328100 / 0.328839 | 0.731245 / 0.679157 |
+| Multisource GroupDRO | 0.378958 / 0.376210 | 0.769860 / 0.674169 |
+
+All F1 values use a 0.5 threshold. The matrix is a separate inference pass;
+small differences from fit receipts are retained, not overwritten. Training
+enabled high float32 matmul precision on capable GPUs, while the source
+scorer uses the default mode. This is a numerical pathway difference, not
+evidence of exact probability replay. Chapman had only 11 positive 1AVB ECG.
+
+The full fine-tuning gate did not trigger. The best partial fit exceeded the
+registered CODE validation F1 gain, and its Chapman results did not show a
+consistent deterioration that justified deeper unfreezing (AP decreased by
+0.012821 but F1 increased by 0.066816). Both finalist families are instead
+repeated at their registered seeds. No model is selected with reserved scores.
+
 The [run table](evidence/TRAINING_EXPERIMENTS_COMPLETE.csv),
 [learning curves](evidence/FINETUNING_LEARNING_CURVES.csv), and
 [artifact manifest](evidence/EXPERIMENT_REPRODUCIBILITY_MANIFEST.json) can be
