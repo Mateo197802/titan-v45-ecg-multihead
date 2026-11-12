@@ -35,11 +35,13 @@ real second-stage inference are not implied by abstention.
 | 33373 | Paired zero-morphology sensitivity with immutable released weights | afterok:33363:33364 | Score/decision changes, not retraining |
 | 33381 | Fresh paired extraction, matched retraining, calibration seal, held comparison | afterok:33355:33363:33364 | Private models plus aggregate paired intervals and original-baseline comparison |
 | 33390 | New PTB-XL auxiliary and bounded pathology Other heads | afterok:33355:33369 | Complete reference flow, held metrics and patient intervals for supported endpoints |
+| 33396 | New SPH mapped rhythm Other and auxiliary heads vs frozen-score comparator | afterok:33355:33369 | Paired held development metrics and full reference/scoring flow |
 
 The submitted baseline uses experiment commit f989eccf74d38399d0298026e6f4c078a437fd2d.
 The comparison job uses 891dacbca23d7685117f836f98bc3dd1482bb1af.
 The matched retraining job uses 648c5a4b784b2307376d620eeb03fc0bb5d3198a.
 The pathology Other job uses 6baab4228767219c048d8989a35a70e3bb2219fa.
+The rhythm Other job uses 72dd436cd5a9e8ec397fccd1e70b9aa1abed4efe.
 Submission is not completion; the registry does not assert results.
 
 The [morphology input contract](MORPHOLOGY_INPUT_CONTRACT.md) gives the formulas
@@ -53,8 +55,11 @@ cannot convert previously inspected SPH into independent validation.
 
 For auxiliary reference support, the versioned SPH dictionary provides
 Flutter (51) and LAE (140). The frozen score interface exposes Flutter as
-the first of the six rhythm auxiliary logits and LAE as a named pathology
-auxiliary sigmoid. Ranking uses only target statements and explicit
+the first of six window-mean auxiliary rhythm softmax probabilities and
+LAE as a named pathology auxiliary sigmoid. The submitted job 33369
+configuration calls the former a logit in its descriptive scale field;
+the sealed scorer exports probabilities and the ranking code does not
+apply an additional transform. Ranking uses only target statements and explicit
 Normal ECG-only controls; concurrent Normal and abnormal primary
 statements are ambiguous. The complete source denominator includes
 unknowns. Normal ECG does not authenticate an NSR endpoint. No operating
@@ -71,8 +76,23 @@ after sealing the models and thresholds. Fold 10 outcomes and waveforms
 are not used; fold 8 is not used for fitting or evaluation. P4 has no
 published specialist decision for these endpoints; SPH auxiliary ranks
 from job 33369 are not a head-to-head comparison with this PTB-XL result.
-This design does not evaluate a comprehensive pathology Other or any new
-rhythm Other head and does not establish independent generalization.
+This design does not evaluate a comprehensive pathology Other or
+establish independent generalization.
+
+The [SPH rhythm Other protocol](../../configs/reviewer_experiments/november_rhythm_other.json)
+defines separate P6 and P8 unions of observable out-of-profile statements:
+Flutter, LBBB, specified 2AVB and 3AVB; only the P6 union also includes PAC.
+It evaluates those four auxiliary endpoints individually where supported.
+Prolonged QT is not an LQTS syndrome label, Paced has no verified SPH
+mapping, and Normal ECG is only an explicit control, not an NSR endpoint.
+The head is a new logistic layer on frozen P6/P8 and auxiliary scores,
+not an alteration to the released models. The released-score comparator
+is a maximum of mapped auxiliary scores, with no P6 PAC score and no
+published Other threshold. Both thresholds are fitted on the same
+calibration patients and sealed before computing held performance.
+Unknown and discordant references remain in full-population flow counts;
+metrics and paired intervals apply only to matched known references.
+This source is retrospective development, not independent validation.
 
 ## Links to the 40-criterion register
 
