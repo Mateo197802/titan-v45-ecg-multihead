@@ -61,3 +61,30 @@ def test_promotion_requires_protected_endpoints_not_only_macro_gain(modules):
     result = evaluate.within_code_decision(points, aggregates, cfg)
     assert result["research_target_met"] and result["external_adaptation"] == "FAIL"
     assert result["independent_generalization"] == "NOT_EVALUATED"
+
+
+def test_reduce_consumes_sealed_scores_without_inference(modules, monkeypatch, tmp_path):
+    select, evaluate = modules
+    cfg = json.loads(select.PROTOCOL.read_bytes())
+    cfg["calibration"]["bootstrap_replicates"] = 16
+    protocol = tmp_path / "protocol.json"
+    evaluate.write_json(protocol, cfg)
+    monkeypatch.setattr(evaluate, "PROTOCOL", protocol)
+    threshold_file = tmp_path / "FROZEN_CANDIDATE_THRESHOLDS.json"
+    evaluate.write_json(threshold_file, {})
+    scores = tmp_path / "private_test_predictions.npz"
+    y = np.tile(np.arange(40)[:, None] % 2, (1, 5))
+    p = y * .8 + .1
+    np.savez(scores, exams=np.arange(40), patients=np.arange(40), durations=np.full(40, 917), labels=y,
+             candidate=p, P6=1 - p, P8=1 - p)
+    evaluate.write_json(tmp_path / "WITHIN_CODE_SCORE_RECEIPT.json", {
+        "test_ecgs": 40, "test_patients": 40, "private_prediction_sha256": evaluate.digest(scores),
+        "protocol_sha256": evaluate.digest(protocol), "threshold_file_sha256": evaluate.digest(threshold_file),
+        "operating_thresholds": {name: [.5] * 5 for name in ("P6", "P8", "candidate")}})
+    result = tmp_path / "delivery"
+    evaluate.reduce(tmp_path, result)
+    assert len(list(result.iterdir())) == 6
+    scores.write_bytes(b"tampered")
+    with pytest.raises(ValueError, match="sealed prediction"):
+        evaluate.reduce(tmp_path, tmp_path / "invalid")
+    assert not (tmp_path / "invalid").exists()

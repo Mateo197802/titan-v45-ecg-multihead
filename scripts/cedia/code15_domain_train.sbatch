@@ -33,7 +33,7 @@ case ${1:-} in
         python -B -u scripts/domain_adaptation/train_masked_mimic.py "$bank" "$assets" "$out" ;;
     evaluate_frozen)
         shift
-        python -B -u scripts/domain_adaptation/evaluate_new_holdout.py "$bank" "$assets" "$@" "$out" ;;
+        python -B -u scripts/domain_adaptation/evaluate_new_holdout.py score "$bank" "$assets" "$@" "$out" ;;
     score_source_transfer)
         shift
         extra=${1:?additional source bank}

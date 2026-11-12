@@ -6,6 +6,7 @@ import csv
 import json
 from collections import defaultdict
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
 import numpy as np
 import torch
@@ -187,7 +188,7 @@ def within_code_decision(points, aggregates, cfg):
     return outcome
 
 
-def run(bank, assets, candidate, selection, out):
+def score(bank, assets, candidate, selection, out):
     cfg = json.loads(PROTOCOL.read_bytes())
     freeze = json.loads(selection.read_bytes())
     selection_policy = json.loads(SELECTION.read_bytes())
@@ -224,7 +225,37 @@ def run(bank, assets, candidate, selection, out):
     outputs = {**released, "candidate": scores}
     operating = {profile: np.asarray([released_thresholds[profile][name] for name in endpoints]) for profile in released}
     operating["candidate"] = threshold
-    np.savez_compressed(out / "private_test_predictions.npz", exams=ids, patients=people, durations=durations, labels=y, **outputs)
+    predictions = out / "private_test_predictions.npz"
+    np.savez_compressed(predictions, exams=ids, patients=people, durations=durations, labels=y, **outputs)
+    report = {"scope": "WITHIN_CODE_NOT_INSTITUTIONAL_CONFIRMATION", "test_ecgs": len(ids), "test_patients": len(set(people)),
+              "selection_sha256": digest(selection), "candidate_sha256": digest(checkpoint), "released_assets": hashes,
+              "protocol_sha256": digest(PROTOCOL), "threshold_file_sha256": digest(out / "FROZEN_CANDIDATE_THRESHOLDS.json"),
+              "operating_thresholds": {name: values.tolist() for name, values in operating.items()},
+              "private_prediction_sha256": digest(predictions), "independent_generalization": "NOT_EVALUATED"}
+    write_json(out / "WITHIN_CODE_SCORE_RECEIPT.json", report)
+    print(json.dumps(report, sort_keys=True))
+
+
+def reduce_tables(score_dir, out):
+    cfg = json.loads(PROTOCOL.read_bytes())
+    endpoints = list(cfg["endpoints"])
+    scored = score_dir / "WITHIN_CODE_SCORE_RECEIPT.json"
+    receipt = json.loads(scored.read_bytes())
+    predictions = score_dir / "private_test_predictions.npz"
+    if (digest(predictions) != receipt["private_prediction_sha256"] or digest(PROTOCOL) != receipt["protocol_sha256"]
+            or digest(score_dir / "FROZEN_CANDIDATE_THRESHOLDS.json") != receipt["threshold_file_sha256"]):
+        raise ValueError("sealed prediction or score protocol mismatch")
+    operating = receipt["operating_thresholds"]
+    if set(operating) != {"P6", "P8", "candidate"} or any(len(t) != len(endpoints) for t in operating.values()):
+        raise ValueError("unregistered model or endpoint threshold roster")
+    with np.load(predictions, allow_pickle=False) as archive:
+        ids, people, durations, y = (archive[key] for key in ("exams", "patients", "durations", "labels"))
+        outputs = {profile: archive[profile] for profile in ("P6", "P8", "candidate")}
+    if (not len(ids) == len(people) == len(durations) == len(y) == receipt["test_ecgs"] == len(set(ids))
+            or len(set(people)) != receipt["test_patients"] or not np.all(np.isin(durations, [917, 1250]))
+            or y.shape != (len(ids), len(endpoints)) or not np.all(np.isin(y, [-1, 0, 1]))
+            or any(p.shape != y.shape or not np.isfinite(p).all() or (p < 0).any() or (p > 1).any() for p in outputs.values())):
+        raise ValueError("invalid sealed predictions")
     tables = [[], [], []]
     for scope, keep in (("all", np.ones(len(ids), bool)), ("short_7p335", durations == 917), ("long_10", durations == 1250)):
         if not np.any(keep):
@@ -252,18 +283,33 @@ def run(bank, assets, candidate, selection, out):
                                    "precision": tp / int(call.sum()) if call.any() else None,
                                    "recall": tp / int(truth.sum()) if truth.any() else None})
     write_csv(out / "PRECISION_RECALL_CURVES.csv", curve_rows)
-    report = {"scope": "WITHIN_CODE_NOT_INSTITUTIONAL_CONFIRMATION", "test_ecgs": len(ids), "test_patients": len(set(people)),
-              "selection_sha256": digest(selection), "candidate_sha256": digest(checkpoint), "released_assets": hashes,
-              "private_prediction_sha256": digest(out / "private_test_predictions.npz"),
-              "aggregates": {name: digest(out / name) for name in (*names, "PRECISION_RECALL_CURVES.csv", decision_file)},
-              "independent_generalization": "NOT_EVALUATED"}
+    report = {**receipt, "score_receipt_sha256": digest(scored),
+              "aggregates": {name: digest(out / name) for name in (*names, "PRECISION_RECALL_CURVES.csv", decision_file)}}
     write_json(out / "WITHIN_CODE_EVALUATION_RECEIPT.json", report)
     print(json.dumps(report, sort_keys=True))
 
 
+def reduce(score_dir, output):
+    if output.exists():
+        raise FileExistsError(output)
+    with TemporaryDirectory(prefix="within-code-reduction-", dir=output.parent) as temp:
+        staging = Path(temp) / "public"
+        staging.mkdir(mode=0o700)
+        reduce_tables(score_dir, staging)
+        staging.rename(output)
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
+    sub = parser.add_subparsers(dest="command", required=True)
+    inference = sub.add_parser("score")
     for key in ("bank", "assets", "candidate", "selection", "output"):
-        parser.add_argument(key, type=Path)
+        inference.add_argument(key, type=Path)
+    reduction = sub.add_parser("reduce")
+    for key in ("score_dir", "output"):
+        reduction.add_argument(key, type=Path)
     args = parser.parse_args()
-    run(args.bank, args.assets, args.candidate, args.selection, args.output)
+    if args.command == "score":
+        score(args.bank, args.assets, args.candidate, args.selection, args.output)
+    else:
+        reduce(args.score_dir, args.output)

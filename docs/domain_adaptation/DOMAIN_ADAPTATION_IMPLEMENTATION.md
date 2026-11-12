@@ -40,6 +40,35 @@ profiles, with the released per-lead normalization and unchanged thresholds.
 The paired uncertainty procedure resamples patient clusters. No model can be
 promoted as institutionally generalizable on this evidence alone.
 
+## Executed ablations before finalist selection
+
+| Job | Variant | Trainable | Validation AP | Validation F1 (0.5) |
+|---:|---|---:|---:|---:|
+| 33692 | Frozen, per-lead | 85143 | 0.438601 | 0.417968 |
+| 33693 | Frozen, robust shared gain | 85143 | 0.273308 | 0.298860 |
+| 33694 | Partial Transformer, per-lead | 9933463 | 0.467045 | 0.452656 |
+| 33696 | Partial Transformer + ResNet, per-lead | 16992199 | 0.550205 | 0.582790 |
+
+All four jobs completed with exit code `0:0`. AP and F1 are macro averages on
+the same five CODE validation endpoints at each arm's best validation AP epoch.
+The ResNet arm improved validation F1 by 0.164822 over the per-lead frozen
+control, so the insufficient-within-CODE-improvement condition for full fine-
+tuning is not triggered. Cross-source forgetting and seed stability are distinct
+checks. These are not held-out performance or evidence of promotion.
+
+The [run table](evidence/TRAINING_EXPERIMENTS_COMPLETE.csv),
+[learning curves](evidence/FINETUNING_LEARNING_CURVES.csv), and
+[artifact manifest](evidence/EXPERIMENT_REPRODUCIBILITY_MANIFEST.json) can be
+verified without access to ECG or model files:
+
+```sh
+python scripts/domain_adaptation/verify_adaptation_delivery.py docs/domain_adaptation/evidence
+```
+
+The GPU evaluator emits one sealed private paired prediction file. A separate
+CPU job reduces it to public aggregates and patient-cluster uncertainty, so
+rechecking statistical output does not trigger another holdout inference.
+
 ## Independent-source eligibility
 
 [HEEDB v5](https://bdsp.io/content/heedb/5.0/) is a candidate, not an executed

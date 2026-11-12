@@ -1,0 +1,65 @@
+{
+  "files": {
+    "CHECKPOINT_SHA256SUMS.txt": {
+      "bytes": 494,
+      "sha256": "6cf16bd5e2125057cf9d27e7d397f25c85b5000a79e2fe230c972c0f4e14b7fc"
+    },
+    "EXTERNAL_DATA_MANIFESTS_SUMMARY.csv": {
+      "bytes": 238,
+      "sha256": "1048c0efc6758f4725c751f35f27ef4d4fc96e5a78f9f1600caa50586c8af0e9"
+    },
+    "FINETUNING_LEARNING_CURVES.csv": {
+      "bytes": 7841,
+      "sha256": "d5328b00b131b05c47990ac336629d50e01f258365ac2a87caa86ffe0541abc0"
+    },
+    "PATIENT_AND_SIGNAL_LEAKAGE_AUDIT.json": {
+      "bytes": 757,
+      "sha256": "3e457d05d87c0b5a3391e9953374fb06a0d2ff8d938baedc90416a885878af03"
+    },
+    "SIGNAL_PROCESSING_ABLATIONS.csv": {
+      "bytes": 17071,
+      "sha256": "ddfc514561d47eb7cd1563a3dd58cc89b410d5bca9235a46d543525a2844a6f2"
+    },
+    "TRAINING_EXPERIMENTS_COMPLETE.csv": {
+      "bytes": 981,
+      "sha256": "c3aed935f696606f7bd2ae8a8a4e8e4aa5b8e885c1066e15a408beb5126abcf8"
+    },
+    "VALIDATION_BASELINES_RECEIPT.json": {
+      "bytes": 669,
+      "sha256": "556c9084e77e0e8ee90f5655df6d796af7eb19e097da924fe2a2e51bec920873"
+    },
+    "frozen_backbone_mlp-per_lead_zscore-20261112/FINETUNING_LEARNING_CURVES.csv": {
+      "bytes": 1768,
+      "sha256": "f93138ce17e8b600629306e4b331eb18b99112b357aede8d9b00e6a273b754fe"
+    },
+    "frozen_backbone_mlp-per_lead_zscore-20261112/TRAINING_RECEIPT.json": {
+      "bytes": 1012,
+      "sha256": "f42b196dfdfda0019a69344bae7d83a4eaab529ec5facf6666c23ff3bdd332c5"
+    },
+    "frozen_backbone_mlp-robust_shared_gain-20261112/FINETUNING_LEARNING_CURVES.csv": {
+      "bytes": 1668,
+      "sha256": "91cf74ec36122101a405b5d08a0faf3c4ba400c95243d17bfc410f4dbff2d788"
+    },
+    "frozen_backbone_mlp-robust_shared_gain-20261112/TRAINING_RECEIPT.json": {
+      "bytes": 1013,
+      "sha256": "c4d05c5ed75e4d59075b318550f056a767e3c244165ff92ec37aba9bef18476d"
+    },
+    "partial_transformer_mlp-per_lead_zscore-20261112/FINETUNING_LEARNING_CURVES.csv": {
+      "bytes": 1760,
+      "sha256": "5ae5a230f3cd32c8f283a7f1ef355163ace3cc13f3555014a97286b58fea0cda"
+    },
+    "partial_transformer_mlp-per_lead_zscore-20261112/TRAINING_RECEIPT.json": {
+      "bytes": 1016,
+      "sha256": "e68f7d4f6fc622de50fded0e45fcf08bfbd2511778421d153702c8ddcdf314ba"
+    },
+    "partial_transformer_resnet_mlp-per_lead_zscore-20261112/FINETUNING_LEARNING_CURVES.csv": {
+      "bytes": 1762,
+      "sha256": "4b348d6c8932e469e6c32ac60ce481bed0a9156e7f9fd78f4437855f5dfd3b05"
+    },
+    "partial_transformer_resnet_mlp-per_lead_zscore-20261112/TRAINING_RECEIPT.json": {
+      "bytes": 1024,
+      "sha256": "a4f69f5954ed6b7ba663527a8b2ff8e82a22779ae99e92749d045989b38d4231"
+    }
+  },
+  "scope": "PUBLIC_AGGREGATES_ONLY"
+}
