@@ -40,6 +40,14 @@ profiles, with the released per-lead normalization and unchanged thresholds.
 The paired uncertainty procedure resamples patient clusters. No model can be
 promoted as institutionally generalizable on this evidence alone.
 
+Stage A required a +0.02 F1 gain and capped sensitivity loss at 0.03. The
+historical PR #6 gate raised the gain target to +0.03 and allowed up to 0.05
+sensitivity loss; this is stricter on gain and more permissive on that
+safeguard, not uniformly stricter. Those historical criteria are preserved.
+This new study separately records the 0.70 research target, paired F1 gain,
+precision and sensitivity safeguards, and Brier change. A within-CODE pass
+does not substitute for independent institutional confirmation.
+
 ## Executed ablations before finalist selection
 
 | Job | Variant | Trainable | Validation AP | Validation F1 (0.5) |

@@ -1,9 +1,13 @@
 import importlib
 import json
+import sys
 from pathlib import Path
+from types import SimpleNamespace
 
 import numpy as np
 import pytest
+
+from titan_v45.data.external_ecg import LEADS
 
 
 @pytest.fixture
@@ -88,3 +92,34 @@ def test_reduce_consumes_sealed_scores_without_inference(modules, monkeypatch, t
     with pytest.raises(ValueError, match="sealed prediction"):
         evaluate.reduce(tmp_path, tmp_path / "invalid")
     assert not (tmp_path / "invalid").exists()
+
+
+def test_multisource_reader_masks_unobserved_targets_and_fails_on_identity_change(modules, monkeypatch, tmp_path):
+    try:
+        importlib.import_module("wfdb")
+    except ModuleNotFoundError:
+        monkeypatch.setitem(sys.modules, "wfdb", SimpleNamespace(rdheader=None, rdrecord=None))
+    extra = importlib.import_module("build_additional_sources")
+    folder = tmp_path / "cpsc2018"
+    folder.mkdir()
+    base = "record.v1"
+    (folder / f"{base}.hea").write_text("synthetic", encoding="ascii")
+    data = folder / f"{base}.dat"
+    data.write_bytes(b"sealed")
+    header = SimpleNamespace(fs=500, sig_len=5200, file_name=[data.name] * 12)
+    monkeypatch.setattr(extra.wfdb, "rdheader", lambda _: header)
+
+    def signal(_, sampfrom, sampto):
+        assert (sampfrom, sampto) == (100, 5100)
+        t = np.arange(sampto - sampfrom) / 500
+        return SimpleNamespace(p_signal=np.sin(t[:, None] * np.arange(1, 13)[None, :]), sig_name=LEADS, units=["mV"] * 12)
+
+    monkeypatch.setattr(extra.wfdb, "rdrecord", signal)
+    endpoints = ["AFIB", "SB", "STACH", "RBBB", "1AVB"]
+    row = {"source": "cpsc2018", "relative_record": base, "signal_sha256": extra.digest(data),
+           "classes": endpoints, "targets": [1, 1, 0, 0, 0], "mask": [1, 0, 0, 1, 1]}
+    result, error = extra.read_candidate(tmp_path, endpoints, row)
+    assert error is None and result[0].shape == (12, 1250) and result[2] == [1, -1, -1, 0, 0]
+    data.write_bytes(b"different")
+    with pytest.raises(ValueError, match="source_waveform_identity_mismatch"):
+        extra.read_candidate(tmp_path, endpoints, row)
