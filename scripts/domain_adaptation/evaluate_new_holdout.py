@@ -10,6 +10,7 @@ from pathlib import Path
 import numpy as np
 import torch
 from evaluate_released import load_released, score_released
+from freeze_candidate import SELECTION
 from train_duration_aware import (
     PROTOCOL,
     TemporalSpecialist,
@@ -27,7 +28,8 @@ METRICS = ("sensitivity", "specificity", "ppv", "npv", "f1", "auroc", "auprc", "
 
 def measure(y, p, threshold):
     x = binary_metrics(y.astype(int), p >= threshold, p)
-    return {**{name: x[name] for name in ("tp", "tn", "fp", "fn", "sensitivity", "specificity", "f1", "auroc", "ece")},
+    return {**{name: x[name] for name in ("tp", "tn", "fp", "fn", "specificity", "f1", "auroc", "ece")},
+            "sensitivity": x["recall"],
             "ppv": x["tp"] / (x["tp"] + x["fp"]) if x["tp"] + x["fp"] else None,
             "npv": x["tn"] / (x["tn"] + x["fn"]) if x["tn"] + x["fn"] else None,
             "auprc": x["average_precision"], "brier": x["brier_score"]}
@@ -155,9 +157,11 @@ def write_csv(path, rows):
 def run(bank, assets, candidate, selection, out):
     cfg = json.loads(PROTOCOL.read_bytes())
     freeze = json.loads(selection.read_bytes())
+    selection_policy = json.loads(SELECTION.read_bytes())
     checkpoint = candidate / "best.pt"
     if (freeze["selected_checkpoint_sha256"] != digest(checkpoint)
             or freeze["protocol_sha256"] != digest(PROTOCOL)
+            or freeze["selection_protocol_sha256"] != digest(SELECTION)
             or freeze["selected_training_receipt_sha256"] != digest(candidate / "TRAINING_RECEIPT.json")
             or freeze["selection_source"] != "validation_only"):
         raise ValueError("candidate or selection seal mismatch")
@@ -178,8 +182,10 @@ def run(bank, assets, candidate, selection, out):
     del calibration
     test = read_bank(bank, "test", state["normalizer"])
     scores, ids, people, y = candidate_scores(model, test, size)
+    del test
     original, released_thresholds, hashes = load_released(assets)
-    released, y2, ids2, people2, durations = score_released(original, test, size, endpoints)
+    baseline = read_bank(bank, "test", selection_policy["released_baseline_normalization"])
+    released, y2, ids2, people2, durations = score_released(original, baseline, size, endpoints)
     if not all(np.array_equal(left, right) for left, right in ((ids, ids2), (people, people2), (y, y2))):
         raise ValueError("paired holdout row membership differs")
     outputs = {**released, "candidate": scores}
