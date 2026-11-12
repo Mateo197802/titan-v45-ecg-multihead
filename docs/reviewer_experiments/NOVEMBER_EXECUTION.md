@@ -31,10 +31,17 @@ real second-stage inference are not implied by abstention.
 | 33363 | Rerun saved P4 waveform panel | P4 source 02019b832fafecd0c263ea556c70f16fa0a50ccf | Private replay ledger |
 | 33364 | Rerun saved rhythm waveform panels | Rhythm source cfe6d59fa5cc4be10de0d7c6803fa5208fae0072 | Private replay ledger |
 | 33365 | Audit historical panel residuals and decisions | afterok:33363:33364 | Aggregate decision and score differences |
+| 33369 | Mapped auxiliary ranking and observable Other support | afterok:33355 | Complete-denominator reference states and ranking on explicit compatible controls |
+| 33373 | Paired zero-morphology sensitivity with immutable released weights | afterok:33363:33364 | Score/decision changes, not retraining |
+| 33381 | Fresh paired extraction, matched retraining, calibration seal, held comparison | afterok:33355:33363:33364 | Private models plus aggregate paired intervals and original-baseline comparison |
 
 The submitted baseline uses experiment commit f989eccf74d38399d0298026e6f4c078a437fd2d.
 The comparison job uses 891dacbca23d7685117f836f98bc3dd1482bb1af.
+The matched retraining job uses 648c5a4b784b2307376d620eeb03fc0bb5d3198a.
 Submission is not completion; the registry does not assert results.
+
+The [morphology input contract](MORPHOLOGY_INPUT_CONTRACT.md) gives the formulas
+and separates waveform replay, fixed-weight sensitivity and retraining.
 
 The development calibrator groups ECGs by patient components linked by
 exact waveform hashes, uses only the calibration half for cutoffs and
