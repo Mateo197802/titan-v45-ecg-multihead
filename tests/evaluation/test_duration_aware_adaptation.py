@@ -43,3 +43,18 @@ def test_temporal_mask_drops_padding_before_model():
     assert out[:, 0].tolist() == [1.5, 5.]
     with pytest.raises(ValueError, match="contiguous"):
         masked_time_forward(Mean(), wave, torch.tensor([[True, False, True], [True, True, True]]))
+
+
+def test_filter_preserves_synthetic_wave_timing_and_st_direction():
+    fs = 400
+    t = np.arange(4000) / fs
+    lead = np.zeros_like(t)
+    for beat in (2., 4., 6., 8.):
+        for center, width, amplitude in ((-.17, .025, .12), (0, .016, 1.0), (.32, .055, .25)):
+            lead += amplitude * np.exp(-.5 * ((t - beat - center) / width) ** 2)
+        lead[(t >= beat + .07) & (t <= beat + .19)] += .14
+    filtered = prepare_observed(np.column_stack([lead * (1 + i / 10) for i in range(12)]), fs)[0]
+    for center in (3.83, 4., 4.32):
+        k = round(center * 125)
+        assert abs((k - 3 + np.argmax(filtered[k - 3:k + 4])) / 125 - center) <= .016
+    assert filtered[round(4.12 * 125)] > filtered[round(3.60 * 125)] + .08
