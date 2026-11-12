@@ -45,6 +45,7 @@ AUX_RHYTHM = {"Flutter": 0, "LBBB": 1, "2AVB": 2, "3AVB": 3, "LQTS": 4, "Paced":
 ROUTES = ("accepted", "abstained", "technical_unscored")
 KNOWN = {"positive": 1, "negative": 0}
 SPH_OTHER_MODEL_SHA256 = "ae8fab7cb5b54a89c38a7e21f99f8b1da10f5cc7d02fa3702283efd73ba129ba"
+PUBLISHER_POSITIVE_COUNTS = {"AFIB": 15, "Flutter": 3, "1AVB": 10, "3AVB": 5, "LBBB": 4, "RBBB": 4, "LVH": 108}
 
 
 def normalized(value):
@@ -52,12 +53,13 @@ def normalized(value):
 
 
 def tokens(value):
-    return tuple(normalized(t.strip(" []'\".")) for t in re.split(r"[;|]", value) if t.strip(" []'\"."))
+    return tuple(normalized(t.strip(" []'\".")) for t in re.split(r"[\r\n;|]+", value) if t.strip(" []'\"."))
 
 
 def reference_states(row, definitions):
     principal = definitions["principal_rhythm"]
-    categories = set(tokens(row["Rhythms"]))
+    # This provider qualifier changes conduction, not the accompanying AF rhythm.
+    categories = set(tokens(row["Rhythms"])) - {"aberrant conduction"}
     declared = {principal[t] for t in categories if t in principal}
     rhythm = next(iter(declared)) if len(declared) == 1 and categories <= principal.keys() else None
     labels = set(principal.values()) - {"other_specified_principal_rhythm"}
@@ -88,6 +90,9 @@ def read_references(archive, protocol, keys):
         result[key], rhythms[key] = reference_states(row, protocol["reference_rules"])
     if result.keys() != set(keys):
         raise ValueError("reference enrollment is not identical to scored enrollment")
+    for label, count in PUBLISHER_POSITIVE_COUNTS.items():
+        if sum(r[label] == "positive" for r in result.values()) != count:
+            raise ValueError(f"LUDB parser does not reconcile publisher support: {label}")
     return result, rhythms, sha256(raw)
 
 
@@ -150,7 +155,9 @@ def endpoint_metrics(rows, refs, groups, label, decision, subsets, design, metri
         if any(c is None for c in calls):
             from audit_reviewer_auxiliary_support import rank_metrics
 
-            stats["ranking"] = rank_metrics(zip(values, truth, strict=True))
+            ranking = rank_metrics(zip(values, truth, strict=True))
+            ranking["compatible_reference_negatives"] = ranking.pop("explicit_normal_control")
+            stats["ranking"] = ranking
             stats["status"] = "rank_only" if enough else "sparse_rank_only"
         else:
             m = metrics(truth, calls, values)

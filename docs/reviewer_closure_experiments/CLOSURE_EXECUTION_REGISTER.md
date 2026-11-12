@@ -15,6 +15,7 @@ The runner checks the archive and the publisher checksums independently.
 | LUDB reference, support, fixed policy and previously fitted SPH head evaluation | SLURM 33699 | baceb368a08352b6ea74798f1c77159ef1ec139a | afterok:33697, native score seal verified before reading LUDB reference CSV |
 | Original SPH split/cutoff read-only audit | [Native aggregate](../../outputs/results/reviewer_closure_experiments/sph_split_and_policy_audit.json) | baceb368a08352b6ea74798f1c77159ef1ec139a | Original 33362 calibration/held split and 33414 policy; no labels or new inference |
 | Matched morphology statistical robustness audit | SLURM 33704 | d89dbc05c67b29d6cf7954ea2763d3b068d16775 | Sealed fit 33474 and evaluation 33596; no fit or waveform extraction |
+| PTB Diagnostic clinical territory vs healthy control transport | SLURM 33718 | 1ca453f0d4ba1a4438a3c6e8873242444c6bb755 | Protocol f37f6ca; score all source ECGs before reference join; original P4 and separately trained 33390 heads, no refit |
 
 The native reference-free SPH audit reconstructed the assignments and
 cutoffs. It found zero cross-split patients, exact waveform fingerprints or
@@ -28,6 +29,37 @@ The morphology robustness check repeats only the computation of the
 original confusion counts and bootstrap from saved fitted arms, then adds
 an explicitly post hoc clustered arm-swap test with Holm adjustment.
 It must not be read as a fresh predeclared confirmatory experiment.
+
+The LUDB score job completed `0:0` in 6:39 and [sealed 200/200 ECGs
+in every profile](../../outputs/results/reviewer_closure_experiments/ludb_scoring_receipt.json).
+The label-blind policy produced 152 acceptances, 48 abstentions and
+zero technical failures. These are route counts, not reference-based
+performance or independent historical validation. The measured tensor
+flow is in [the morphology audit](MORPHOLOGY_REPRODUCIBILITY_AND_ABLATION.md).
+
+The completed LUDB evaluator 33699 used a parser that did not split
+newline-delimited annotations within a CSV cell. It undercounted several
+explicit diagnoses compared with the publisher's data description, so
+its aggregate is superseded (native SHA-256
+`12ad265b5e9bd4a455c20aa2f46362a9beeface1831d1ffd731cb9fbf09bc47a`).
+The correction is limited to source grammar: splitting lines, retaining
+AFIB when explicitly qualified by aberrant conduction, and naming
+compatible rhythm negatives accurately. A wandering atrial pacemaker
+annotation is not electronic pacing and can leave the principal rhythm
+ambiguous. No mapping from LAO to LAE, incomplete to complete block,
+or unknown to negative is introduced. No score, threshold, route,
+enrollment or endpoint support rule changes.
+
+The complete PTB Diagnostic [source audit](../../outputs/results/reviewer_closure_experiments/ptb_diagnostic_eligibility_verified_v2.json)
+verified all 549 publisher-checksummed headers from 290 subjects. The
+[original grammar attempt](../../outputs/results/reviewer_closure_experiments/ptb_diagnostic_eligibility_superseded_v1.json)
+missed the literal token `no` in the acute infarction localization field
+of explicit healthy controls. The versioned correction preceded all model
+scoring, rechecked the same publisher bytes, and did not recode any
+unmentioned disease as negative. The 80 explicit control ECGs came from
+52 subjects; positive patient supports were 27 ASMI, 30 IMI, 16 ALMI,
+22 ILMI. This allowed an enriched territory/control test, not a natural
+prevalence or historically independent claim.
 
 ## Run and verify
 

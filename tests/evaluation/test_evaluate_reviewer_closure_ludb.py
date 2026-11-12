@@ -33,6 +33,25 @@ def test_references_preserve_unknown_and_exclude_non_equivalences(closure):
     assert rhythm is None and states["AFIB"] == states["P6_Other_mapped"] == "unknown"
 
 
+def test_multiline_provider_statements_and_pacing_qualifiers(closure):
+    rules = json.loads((ROOT / "configs/reviewer_experiments/scientific_closure_v1.json").read_bytes())["reference_rules"]
+    row = {
+        "Rhythms": "Atrial fibrillation\nAberrant conduction",
+        "Conduction abnormalities": "Left anterior hemiblock\nComplete left bundle branch block",
+        "Extrasystolies": "Ventricular extrasystole\nAtrial extrasystole: left atrial",
+        "Cardiac pacing": "Pacemaker presence, undefined\nUnipolar ventricular pacing",
+        "Hypertrophies": "Left atrial hypertrophy\nLeft ventricular hypertrophy",
+    }
+    states, rhythm = closure.reference_states(row, rules)
+    assert rhythm == "AFIB"
+    assert all(states[k] == "positive" for k in ("LVH", "Paced", "PVC", "PAC", "LBBB"))
+    assert states["LAE"] == "unknown"
+    row["Rhythms"] = "Sinus rhythm\nWandering atrial pacemaker"
+    row["Cardiac pacing"] = "Pacemaker presence, undefined"
+    states, rhythm = closure.reference_states(row, rules)
+    assert rhythm is None and states["Paced"] == states["NSR"] == "unknown"
+
+
 def test_risk_coverage_groups_ties_and_preserves_unknown_opportunities(closure):
     c, r, a = closure.risk_curve(np.array([.2, .1, .2]), np.array([1, 1, 0]),
                                  np.array([2, 2, 0]), np.ones(3, dtype=int))
