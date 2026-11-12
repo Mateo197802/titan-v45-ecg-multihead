@@ -14,7 +14,6 @@ import numpy as np
 import scipy
 from scipy.signal import butter, lfilter, resample_poly
 import torch
-import wfdb
 
 from compare_reviewer_baseline import digest
 from reviewer_selective_utility import SEALED, read, sealed
@@ -74,6 +73,8 @@ def check_fixtures(m):
 
 
 def features(path, m, trace):
+    import wfdb
+
     rec = wfdb.rdrecord(str(path))
     if rec.fs != 500 or rec.sig_len != 5000 or tuple(n.lower() for n in rec.sig_name) != tuple(
             n.lower() for n in CANONICAL_12_LEADS):
@@ -137,6 +138,8 @@ def features(path, m, trace):
 
 
 def p6_fallback(rows, runtime, raw, morphology, thresholds, out):
+    import wfdb
+
     targets = fr.P6_CLASSES
     endpoints = [(p, c) for p in ("P8", "P4") for c in thresholds[p]]
     by_endpoint = {f"{p}:{c}": Counter() for p, c in endpoints}

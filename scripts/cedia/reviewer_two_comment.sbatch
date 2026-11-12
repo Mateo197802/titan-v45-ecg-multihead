@@ -31,14 +31,20 @@ mkdir -m 700 -- "$out"
 common=(--protocol "$protocol" --output "$out/aggregate.json")
 case "$experiment" in
     runtime)
-        python -u "$code/scripts/evaluation/reviewer_morphology_runtime.py" "${common[@]}" +            --base "$base" --repo "$repo" --assets "$stage_a/attempt-92505-qc-corrected/release-assets-v0.1.0"
+        args=(--base "$base" --repo "$repo" --assets "$stage_a/attempt-92505-qc-corrected/release-assets-v0.1.0")
+        python -u "$code/scripts/evaluation/reviewer_morphology_runtime.py" "${common[@]}" "${args[@]}"
         ;;
     selective)
         sph="$base/life-4620846-revision-20261028/sph-v1-private.1XgPeH/source/configs/external_validation/sph_frozen.json"
         python -u "$code/scripts/evaluation/reviewer_selective_utility.py" "${common[@]}" --base "$base" --sph-config "$sph"
         ;;
     morphology)
-        python -u "$code/scripts/evaluation/reviewer_morphology_multiseed.py" "${common[@]}" +            --original "$code/configs/reviewer_experiments/november_morphology_retrained.json" +            --features "$history/retrained-33474/features" +            --inventory "$stage_a/attempt-92505-qc-corrected/preflight/private_inventory.json"
+        args=(
+            --original "$code/configs/reviewer_experiments/november_morphology_retrained.json"
+            --features "$history/retrained-33474/features"
+            --inventory "$stage_a/attempt-92505-qc-corrected/preflight/private_inventory.json"
+        )
+        python -u "$code/scripts/evaluation/reviewer_morphology_multiseed.py" "${common[@]}" "${args[@]}"
         ;;
     *) exit 2 ;;
 esac
