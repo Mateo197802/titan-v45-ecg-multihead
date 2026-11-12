@@ -58,3 +58,21 @@ def test_selective_arithmetic_checks_both_denominators_and_confusion(delivery):
     stats["coverage_all_held"] = 0.75
     with pytest.raises(ValueError, match="denominator"):
         delivery.check_selective(stats)
+
+
+def test_morphology_check_requires_common_held_counts_and_paired_delta(delivery):
+    arms = ("with_morphology", "without_morphology", "released_baseline")
+    metric = {"tp": 2, "tn": 3, "fp": 0, "fn": 0, "f1": 1.0}
+    result_profile = {
+        "split_counts": {"held": 5},
+        "endpoints": {"A": {"status": "evaluated", "held_known_n": 5, "metrics": dict.fromkeys(arms, metric)}},
+        "macro_f1_on_common_supported_endpoints": dict.fromkeys(arms, 1.0),
+        "paired_endpoint_macro_f1": {"with_minus_without": 0.0, "valid_replicates": 10, "invalid_replicates": 0},
+    }
+    profiles = ("P6", "P8", "P4")
+    fit = {"profiles": dict.fromkeys(profiles, {"split_counts": {"held": 5}, "endpoint_status": {"A": "calibrated"}})}
+    result = {"profiles": dict.fromkeys(profiles, result_profile), "bootstrap": {"replicates": 10}}
+    delivery.check_retrained(result, fit)
+    result_profile["paired_endpoint_macro_f1"]["with_minus_without"] = 0.01
+    with pytest.raises(ValueError, match="paired morphology"):
+        delivery.check_retrained(result, fit)

@@ -10,6 +10,8 @@ import subprocess
 from pathlib import Path
 
 SPH = 25770
+RETRAINED_FIT_JOB = "33474"
+RETRAINED_EVAL_JOB = "33596"
 JOBS = {
     "33355": ("phase", "sph-frozen", ("scoring-receipt.json",), True),
     "33356": ("phase", "repeat-audit", ("aggregate.json",), True),
@@ -19,7 +21,8 @@ JOBS = {
     "33470": ("history", "rhythm-cascade", ("aggregate.json",), True),
     "33471": ("history", "replay-diagnostics", ("aggregate.json",), False),
     "33369": ("phase", "auxiliary", ("aggregate.json",), True),
-    "33474": ("history", "retrained", ("aggregate.json", "fit-receipt.json", "features/extraction-receipt.json"), True),
+    RETRAINED_EVAL_JOB: ("history", "retrained-eval",
+                         ("aggregate.json", "fit-receipt.json", "features/extraction-receipt.json"), True),
     "33390": ("phase", "pathology-other", ("aggregate.json", "fit-receipt.json"), True),
     "33396": ("phase", "rhythm-other", ("aggregate.json", "fit-receipt.json"), True),
     "33399": ("phase", "population-contrast", ("aggregate.json",), True),
@@ -69,7 +72,7 @@ def accounting(text):
         if not line.strip():
             continue
         job, state, code, elapsed = line.rstrip("|").split("|")
-        if job not in JOBS and job not in SUPERSEDED:
+        if job not in JOBS and job not in (*SUPERSEDED, RETRAINED_FIT_JOB):
             continue
         if job in result:
             raise ValueError("duplicate native accounting row")
@@ -84,8 +87,8 @@ def protected_path(directory, name):
     return target
 
 
-def seal_entry(directory, target):
-    manifest = protected_path(directory, "SHA256SUMS")
+def seal_entry(directory, target, manifest_name="SHA256SUMS"):
+    manifest = protected_path(directory, manifest_name)
     matches = []
     for line in manifest.read_text(encoding="utf-8").splitlines():
         check, path = line.split(maxsplit=1)
@@ -123,6 +126,36 @@ def check_selective(stats):
                 raise ValueError("selective confusion table has the wrong denominator")
         if any(b[k] != a[k]+q[k] for k in ("tn", "fp", "fn", "tp")):
             raise ValueError("selective confusion tables disagree")
+
+
+def check_retrained(result, fit):
+    if set(result["profiles"]) != set(fit["profiles"]) or set(result["profiles"]) != {"P6", "P8", "P4"}:
+        raise ValueError("morphology profiles differ from the sealed fit")
+    arms = ("with_morphology", "without_morphology", "released_baseline")
+    for name, profile in result["profiles"].items():
+        parent = fit["profiles"][name]
+        if (profile["split_counts"] != parent["split_counts"]
+                or set(profile["endpoints"]) != set(parent["endpoint_status"])):
+            raise ValueError("held morphology split or class contract changed")
+        endpoints = [e for e in profile["endpoints"].values() if e["status"] == "evaluated"]
+        for arm in arms:
+            values = []
+            for e in endpoints:
+                m = e["metrics"][arm]
+                if total(m[k] for k in ("tp", "tn", "fp", "fn")) != e["held_known_n"]:
+                    raise ValueError("morphology confusion does not match held references")
+                values.append(m["f1"])
+            expected = sum(values)/len(values) if values else None
+            observed = profile["macro_f1_on_common_supported_endpoints"][arm]
+            if ((expected is None) != (observed is None)
+                    or (expected is not None and not math.isclose(expected, observed, abs_tol=1e-12))):
+                raise ValueError("morphology macro-F1 does not match common endpoints")
+        if endpoints:
+            macro = profile["macro_f1_on_common_supported_endpoints"]
+            delta = profile["paired_endpoint_macro_f1"]
+            if (not math.isclose(macro[arms[0]]-macro[arms[1]], delta["with_minus_without"], abs_tol=1e-12)
+                    or delta["valid_replicates"]+delta["invalid_replicates"] != result["bootstrap"]["replicates"]):
+                raise ValueError("paired morphology comparison does not reconcile")
 
 
 def scientific_checks(job, value, earlier, baseline_digest):
@@ -223,21 +256,29 @@ def bundle_checks(job, directory, items, files):
                                ("private-routes.jsonl", result["private_route_ledger_sha256"])):
             if digest(protected_path(directory, file)) != expected:
                 raise ValueError("private selective output differs from producer hash")
-    elif job in {"33474", "33390", "33396"}:
+    elif job in {RETRAINED_EVAL_JOB, "33390", "33396"}:
         fit, evaluated = (items[n] for n in ("fit-receipt.json", "aggregate.json"))
-        field = "model_sha256" if job == "33474" else "private_model_sha256"
+        resumed = job == RETRAINED_EVAL_JOB
+        field = "model_sha256" if resumed else "private_model_sha256"
+        model_root = directory.parent / f"retrained-{RETRAINED_FIT_JOB}" if resumed else directory
+        model = protected_path(model_root, "private-models.json")
+        model_hash = seal_entry(model_root, model, "FIT_SHA256SUMS") if resumed else digest(model)
         if (fit["held_outcomes_evaluated"] is not False or fit[field] != evaluated[field]
                 or fit["binding"] != evaluated["binding"]
-                or digest(protected_path(directory, "private-models.json")) != fit[field]):
+                or model_hash != fit[field]):
             raise ValueError("held evaluation is not bound to the pre-evaluation checkpoint")
-        if job == "33474":
+        if resumed:
             key = "features/extraction-receipt.json"
             extraction = items[key]
-            if (fit["binding"]["extraction_receipt_sha256"] != files[key]["sha256"]
+            if (seal_entry(model_root, protected_path(model_root, "fit-receipt.json"), "FIT_SHA256SUMS")
+                    != files["fit-receipt.json"]["sha256"]
+                    or digest(protected_path(model_root, key)) != files[key]["sha256"]
+                    or fit["binding"]["extraction_receipt_sha256"] != files[key]["sha256"]
                     or extraction["zeroed_morphology_calls"] <= 0
                     or extraction["arms"]["with_morphology"]["asset_hashes"]
                     != extraction["arms"]["without_morphology"]["asset_hashes"]):
                 raise ValueError("matched extraction did not preserve the common release assets")
+            check_retrained(evaluated, fit)
     elif job == "33410":
         receipt, result = (items[n] for n in ("scoring-receipt.json", "aggregate.json"))
         if (files["scoring-receipt.json"]["sha256"] != result["scoring_receipt_sha256"]
@@ -262,6 +303,11 @@ def verify(roots, states):
         directory = roots[root].resolve() / f"{folder}-{job}"
         verified, items = {}, {}
         try:
+            if job == RETRAINED_EVAL_JOB and (
+                states.get(RETRAINED_FIT_JOB, {}).get("state"),
+                states.get(RETRAINED_FIT_JOB, {}).get("exit_code"),
+            ) != ("FAILED", "1:0"):
+                raise ValueError("unexpected original morphology job state")
             for idx, name in enumerate(names):
                 path = protected_path(directory, name)
                 file_hash = seal_entry(directory, path) if sealed else digest(path)
@@ -270,7 +316,8 @@ def verify(roots, states):
                     raise ValueError("public result is not a JSON object")
                 validate_public(result)
                 reported_job = result.get("job", result.get("audit_job", result.get("job_id")))
-                if reported_job is not None and str(reported_job) != job:
+                expected_job = RETRAINED_FIT_JOB if job == RETRAINED_EVAL_JOB and name == "fit-receipt.json" else job
+                if reported_job is not None and str(reported_job) != expected_job:
                     raise ValueError("producer job in public candidate does not match")
                 if idx == 0 or job == "33473":
                     scientific_checks(job, result, earliest, earliest.get("33355"))
@@ -285,6 +332,7 @@ def verify(roots, states):
                           "aggregate_candidates": verified if job not in failures else {}}
     return {"schema": "TITAN_V45_NOVEMBER_DELIVERY_VERIFICATION_V1", "jobs": inventory,
             "superseded_jobs_not_used": {j: states.get(j) for j in SUPERSEDED},
+            "reused_fit_scheduler": {RETRAINED_FIT_JOB: states.get(RETRAINED_FIT_JOB)},
             "verification_errors": failures, "verified_jobs": len(earliest), "required_jobs": len(JOBS),
             "public_export_performed": False}
 
@@ -296,7 +344,7 @@ def main():
     p.add_argument("--output", type=Path)
     a = p.parse_args()
     fields = subprocess.check_output([
-        "sacct", "-S", "2026-11-11", "-X", "-j", ",".join((*JOBS, *SUPERSEDED)), "-n", "-P",
+        "sacct", "-S", "2026-11-11", "-X", "-j", ",".join((*JOBS, *SUPERSEDED, RETRAINED_FIT_JOB)), "-n", "-P",
         "-o", "JobIDRaw,State,ExitCode,Elapsed",
     ], text=True)
     result = verify({"phase": a.phase_root, "history": a.history_root}, accounting(fields))
