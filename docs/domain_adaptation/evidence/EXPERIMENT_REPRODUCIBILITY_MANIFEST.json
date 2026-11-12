@@ -4,6 +4,10 @@
       "bytes": 2786,
       "sha256": "06c5dd9d6fc5e6116efaece3206f177467261a60bb1959ee7a91d81ce9f69b3f"
     },
+    "CALIBRATION_CURVES.csv": {
+      "bytes": 9492,
+      "sha256": "1ab420aaa988b70c31c09e3de90239a82e7956655e3424cae056f6792ab64f76"
+    },
     "CANDIDATE_SELECTION_RECEIPT.json": {
       "bytes": 4218,
       "sha256": "cebc409aeda67b479679e893335e8bceff301e57b6dfdb79cb46639327bf97d5"
@@ -15,6 +19,14 @@
     "EXTERNAL_DATA_MANIFESTS_SUMMARY.csv": {
       "bytes": 238,
       "sha256": "1048c0efc6758f4725c751f35f27ef4d4fc96e5a78f9f1600caa50586c8af0e9"
+    },
+    "EXTERNAL_MACRO_F1_COMPARISON.csv": {
+      "bytes": 1864,
+      "sha256": "1734897fb6173f290de1d271ef2d394013db93ebe1dfc49056ddb049f3933262"
+    },
+    "EXTERNAL_PER_CLASS_RESULTS.csv": {
+      "bytes": 13436,
+      "sha256": "0a9f7ea81ac7f68c218733c86db69d53e09432ca02255a009727828e14b90cee"
     },
     "FINETUNING_LEARNING_CURVES.csv": {
       "bytes": 20994,
@@ -32,6 +44,14 @@
       "bytes": 757,
       "sha256": "3e457d05d87c0b5a3391e9953374fb06a0d2ff8d938baedc90416a885878af03"
     },
+    "PATIENT_BOOTSTRAP_CONFIDENCE_INTERVALS.csv": {
+      "bytes": 101405,
+      "sha256": "2e2d9e2eed489970a0c7cb22444c9b5697542e264dab7dde9c5935d1d7c49806"
+    },
+    "PRECISION_RECALL_CURVES.csv": {
+      "bytes": 75217,
+      "sha256": "46784121f0fe107c4b135814ff45364770b8721e68bf051028b114c96c487d28"
+    },
     "PREPROCESSING_REPRODUCIBILITY.json": {
       "bytes": 908,
       "sha256": "9f3bd3663c91d9245bb4fa9e1664085348eb454b9200680f1d75e356ce56b428"
@@ -41,8 +61,8 @@
       "sha256": "ddfc514561d47eb7cd1563a3dd58cc89b410d5bca9235a46d543525a2844a6f2"
     },
     "SLURM_EXECUTION_LEDGER.csv": {
-      "bytes": 3634,
-      "sha256": "069a0ca8f51da39d82775707d845379cf636d4aab86d1d8d771a595f07354dbf"
+      "bytes": 4035,
+      "sha256": "bdbbab39345ba501b900b80bb860aee355756a6607f3c6bdce6ef8a65da1b83e"
     },
     "SOURCE_DESCRIPTOR_PROBE.json": {
       "bytes": 1351,
@@ -63,6 +83,22 @@
     "VALIDATION_BASELINES_RECEIPT.json": {
       "bytes": 669,
       "sha256": "556c9084e77e0e8ee90f5655df6d796af7eb19e097da924fe2a2e51bec920873"
+    },
+    "WITHIN_CODE_EVALUATION_RECEIPT.json": {
+      "bytes": 2044,
+      "sha256": "cb09a7e987bbf2bc5513f40323e48f813dfd7af8eec87ec12ae40d4aa601a60f"
+    },
+    "WITHIN_CODE_INDEPENDENT_READBACK.json": {
+      "bytes": 541,
+      "sha256": "e0edbee6ab477ce59383434e2c6687a7107110fcb787261c23588adb1b57bd02"
+    },
+    "WITHIN_CODE_PROMOTION_DECISION.json": {
+      "bytes": 2076,
+      "sha256": "b187f9fcb18dd7b0f916e2862b9ecbceaaeb00f3e352a43e787e98721c706e34"
+    },
+    "WITHIN_CODE_SCORE_RECEIPT.json": {
+      "bytes": 1284,
+      "sha256": "b8dc9544f4072dc33f6656fdbbc0f0dfd1d49b8c8ab96edabe8decb7d7ccb222"
     },
     "chapman_only_partial-per_lead_zscore-20261112/FINETUNING_LEARNING_CURVES.csv": {
       "bytes": 1753,

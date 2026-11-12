@@ -189,6 +189,14 @@ def verify(evidence, rebuild=False):
         if (test["independent_generalization"] != "NOT_EVALUATED"
                 or test["candidate_sha256"] != selection["selected_checkpoint_sha256"]):
             raise ValueError("within-CODE scope cannot certify another institution")
+        readback = json.loads((evidence / "WITHIN_CODE_INDEPENDENT_READBACK.json").read_bytes())
+        if (readback["status"] != "PASS" or readback["aggregate_receipt_sha256"] != sha(final)
+                or readback["score_sha256"] != test["private_prediction_sha256"]
+                or readback["ecgs"] != test["test_ecgs"] or readback["patients"] != test["test_patients"]
+                or readback["point_comparisons"] <= 0 or readback["macro_ci_endpoint_comparisons"] <= 0
+                or not 0 <= readback["max_abs_point_difference"] <= 1e-12
+                or not 0 <= readback["max_abs_macro_ci_difference"] <= 1e-12):
+            raise ValueError("private-score readback not verified for this evidence package")
         names = {"EXTERNAL_PER_CLASS_RESULTS.csv", "PATIENT_BOOTSTRAP_CONFIDENCE_INTERVALS.csv",
                  "EXTERNAL_MACRO_F1_COMPARISON.csv", "PRECISION_RECALL_CURVES.csv", "CALIBRATION_CURVES.csv",
                  "WITHIN_CODE_PROMOTION_DECISION.json"}
