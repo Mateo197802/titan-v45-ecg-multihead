@@ -47,6 +47,10 @@ design the protocol; no TITAN performance from LUDB was used.
   is a clinically enriched potential complementary source, not an
   all-comers cohort. Separate it from PTB-XL and audit provider, exposure
   and endpoint-specific references before authorizing any inference.
+  Its [separate header-only eligibility protocol](../../configs/reviewer_experiments/ptb_diagnostic_eligibility_v1.json)
+  prespecifies exact territory fields, explicit controls and a support
+  screen. Only source schema documentation was inspected; no new TITAN
+  performance is used to select this candidate or its categories.
 
 ## Execution and reporting boundary
 
