@@ -10,7 +10,7 @@ import zipfile
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
-from fit_code_transfer import PROTOCOL, digest
+from code15_io import PROTOCOL, digest
 
 CHUNK = 64 * 1024**2
 WORKERS = 4

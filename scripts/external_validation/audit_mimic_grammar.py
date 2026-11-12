@@ -9,7 +9,7 @@ import sys
 from collections import Counter
 from pathlib import Path
 
-from fit_code_transfer import digest
+from code15_io import digest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
 from titan_v45.data.external_reference import REPORT_COLUMNS, _normalized, classify_report

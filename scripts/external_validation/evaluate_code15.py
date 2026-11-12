@@ -13,7 +13,8 @@ from collections import Counter
 from pathlib import Path, PurePosixPath
 
 import numpy as np
-from fit_code_transfer import PROTOCOL, ROOT, digest, residual_logits
+from code15_io import PROTOCOL, ROOT, digest
+from fit_code_transfer import residual_logits
 from scipy.special import expit
 
 sys.path.insert(0, str(ROOT / "scripts/specialist_experiments"))

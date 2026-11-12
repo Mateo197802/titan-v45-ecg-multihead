@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import os
 import sys
@@ -10,22 +9,12 @@ from collections import Counter
 from pathlib import Path
 
 import numpy as np
+from code15_io import PROTOCOL, ROOT, digest
 from scipy.optimize import minimize
 from scipy.special import expit
 
-ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 from titan_v45.models.frozen_rhythm import P8_CLASSES
-
-PROTOCOL = ROOT / "docs/external_validation_20261111/FROZEN_CODE15_PROTOCOL.json"
-
-
-def digest(path):
-    sha = hashlib.sha256()
-    with path.open("rb") as stream:
-        for block in iter(lambda: stream.read(1024 * 1024), b""):
-            sha.update(block)
-    return sha.hexdigest()
 
 
 def residual_logits(features, baseline, mean, scale, coefficients, cap):
