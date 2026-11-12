@@ -1,0 +1,37 @@
+{
+  "candidate_sha256": "7408fd07d19ca62e88d13d6842f81403e354140b39e135de876afa23436a8340",
+  "policy": {
+    "1AVB": {
+      "calibration_f1": 0.5203252032520326,
+      "calibration_sensitivity": 0.7111111111111111,
+      "floor_met": true,
+      "threshold": 0.51
+    },
+    "AFIB": {
+      "calibration_f1": 0.5691056910569106,
+      "calibration_sensitivity": 0.625,
+      "floor_met": true,
+      "threshold": 0.66
+    },
+    "RBBB": {
+      "calibration_f1": 0.7011494252873564,
+      "calibration_sensitivity": 0.7530864197530864,
+      "floor_met": true,
+      "threshold": 0.44
+    },
+    "SB": {
+      "calibration_f1": 0.6610169491525424,
+      "calibration_sensitivity": 0.6610169491525424,
+      "floor_met": true,
+      "threshold": 0.87
+    },
+    "STACH": {
+      "calibration_f1": 0.7171717171717171,
+      "calibration_sensitivity": 0.8765432098765432,
+      "floor_met": true,
+      "threshold": 0.48
+    }
+  },
+  "selection_sha256": "cebc409aeda67b479679e893335e8bceff301e57b6dfdb79cb46639327bf97d5",
+  "source": "calibration_only"
+}

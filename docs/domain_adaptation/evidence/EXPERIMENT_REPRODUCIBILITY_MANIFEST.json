@@ -20,6 +20,10 @@
       "bytes": 20994,
       "sha256": "4d2174f5c136a5b4f6d3f4a3bf9a903e6d8a2fd71d8706d241ea6b61d8503a09"
     },
+    "FROZEN_CANDIDATE_THRESHOLDS.json": {
+      "bytes": 1054,
+      "sha256": "258fc17c2c8ae37bf9a3e57c6802fe621556a9ba33d942aa01478a396ab23fdf"
+    },
     "MODEL_ARCHITECTURE_ABLATIONS.csv": {
       "bytes": 914,
       "sha256": "2ccc1e5857e01ed6f3c219f56fd5e7295edfe3b322697f0b2756c2e7d7c85426"
