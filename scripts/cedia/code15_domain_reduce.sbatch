@@ -28,5 +28,6 @@ case $mode in
     reduce) python -B -u scripts/domain_adaptation/evaluate_new_holdout.py reduce "$scores" "$out" ;;
     source_probe) python -B -u scripts/domain_adaptation/probe_source_descriptors.py "$scores" "${1:?additional source bank}" "$out" ;;
     select) python -B -u scripts/domain_adaptation/freeze_candidate.py "$scores" "$out" "$@" ;;
+    readback) python -B -u scripts/domain_adaptation/audit_private_holdout.py "$scores" "${1:?aggregate evidence}" "$out" ;;
     *) exit 2 ;;
 esac

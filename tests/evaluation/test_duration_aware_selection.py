@@ -88,6 +88,12 @@ def test_reduce_consumes_sealed_scores_without_inference(modules, monkeypatch, t
     result = tmp_path / "delivery"
     evaluate.reduce(tmp_path, result)
     assert len(list(result.iterdir())) == 7
+    audit = importlib.import_module("audit_private_holdout")
+    monkeypatch.setattr(audit, "PROTOCOL", protocol)
+    report = tmp_path / "readback.json"
+    audit.run(tmp_path, result, report)
+    verified = json.loads(report.read_bytes())
+    assert verified["status"] == "PASS" and verified["macro_ci_endpoint_comparisons"] == 20
     scores.write_bytes(b"tampered")
     with pytest.raises(ValueError, match="sealed prediction"):
         evaluate.reduce(tmp_path, tmp_path / "invalid")
