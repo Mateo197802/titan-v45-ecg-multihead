@@ -1,6 +1,8 @@
 {
   "schema": "TITAN_V45_CLOSURE_EXPERIMENT_PROVENANCE_V1",
-  "status": "WORKING_AWAITING_FINAL_NATIVE_RECEIPT",
+  "status": "FINAL_NATIVE_VERIFIED",
+  "native_verifier_commit": "f23cffb5a467ba4022c064c3952a0fbde0903dc6",
+  "native_verification_receipt_sha256": "418f961fd0e60a25dfc6e2fddc3efb545544e2fc451598451d6d04839fae3270",
   "starting_branch": "codex/titan-v45-four-reviewer-experiments",
   "starting_commit": "bf081e9c2fd62704821f56d614399d7d0eb6e656",
   "experiment_branch": "codex/titan-v45-scientific-closure",
@@ -69,6 +71,8 @@
       "code": "cce4773ead27da850f4793b09da7e241a31a841a",
       "protocol_changed": false,
       "feature_cache_sha256": "9269716a656211fbe81e3ede45b0ea09eaa2437442db8dd2a25fd4006c36592a",
+      "aggregate_sha256": "27477b63a035d2a1f545669536b664128f5c0f961363150ccb56335288d10041",
+      "score_receipt_sha256": "b4f2e451fabc9b23d73fc787ad1757cee75129480816ae3ac982ae19bc494ccd",
       "bootstrap_seed": 197841
     }
   },

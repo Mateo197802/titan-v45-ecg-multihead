@@ -1,6 +1,6 @@
 {
   "schema": "TITAN_V45_CLOSURE_PARTITION_ASSESSMENT_V1",
-  "status": "WORKING_AWAITING_TRANSPORT_NATIVE_RESULTS",
+  "status": "FINAL_NATIVE_VERIFIED",
   "SPH_policy_isolation": {
     "receipt": "outputs/results/reviewer_closure_experiments/sph_split_and_policy_audit.json",
     "receipt_sha256": "f133cec9ba402ff7fb19ccf5ecaba8daae66c4f492829e3d0f13caa356fbd2d7",
@@ -34,8 +34,13 @@
     "cached_exact_signals_crossing_folds": 0,
     "metadata_patients_crossing_folds": 0,
     "partition_reference_receipt_sha256": "1e758fcb0cc17e7cc15ff8be2fcb7911a6f102d4dd5d673cec440d409a187bcd",
-    "planned_calibration": "folds 1-8",
-    "planned_held": "fold 9",
+    "native_readout_job": 33747,
+    "native_readout_sha256": "27477b63a035d2a1f545669536b664128f5c0f961363150ccb56335288d10041",
+    "calibration_folds_1_8_ECGs": 5410,
+    "held_fold_9_ECGs": 795,
+    "calibration_held_subject_overlap": 0,
+    "calibration_held_exact_signal_group_overlap": 0,
+    "fold_10_references_or_waveforms_used": false,
     "not_a_new_untouched_test": true
   },
   "PTB_Diagnostic_transport": {

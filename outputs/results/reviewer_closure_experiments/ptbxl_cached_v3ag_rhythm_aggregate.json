@@ -1,0 +1,280 @@
+{
+  "schema": "TITAN_V45_PTBXL_CACHED_V3AG_RHYTHM_V1",
+  "job": "33747",
+  "score_receipt_sha256": "b4f2e451fabc9b23d73fc787ad1757cee75129480816ae3ac982ae19bc494ccd",
+  "reference_support_sha256": "1e758fcb0cc17e7cc15ff8be2fcb7911a6f102d4dd5d673cec440d409a187bcd",
+  "all_metadata_ecgs": 19601,
+  "cached_scored_ecgs": 6205,
+  "outside_authorized_scoreable_cache": 13396,
+  "fold10_references_or_waveforms_used": false,
+  "historical_independence_certified": false,
+  "no_individual_records_exported": true,
+  "calibration_and_held_subject_overlap": 0,
+  "exact_signal_groups_crossing_folds": 0,
+  "weights_changed": false,
+  "endpoints": {
+    "Paced": {
+      "calibration_folds_1_8": {
+        "eligible_cache_ecgs": 5410,
+        "reference_states": {
+          "unknown": 3661,
+          "explicit_normal_control": 1509,
+          "positive": 226,
+          "ambiguous_pacing_reference": 11,
+          "concordant_marker_unknown_scp_likelihood": 3
+        },
+        "positive_subjects": 178,
+        "control_subjects": 1470
+      },
+      "held_fold_9": {
+        "eligible_cache_ecgs": 795,
+        "reference_states": {
+          "unknown": 577,
+          "explicit_normal_control": 190,
+          "positive": 26,
+          "concordant_marker_unknown_scp_likelihood": 1,
+          "ambiguous_pacing_reference": 1
+        },
+        "positive_subjects": 23,
+        "control_subjects": 188,
+        "metrics": {
+          "rows": 216,
+          "positive_support": 26,
+          "negative_support": 190,
+          "predicted_positive_support": 57,
+          "tp": 22,
+          "tn": 155,
+          "fp": 35,
+          "fn": 4,
+          "accuracy": 0.8194444444444444,
+          "precision": 0.38596491228070173,
+          "recall": 0.8461538461538461,
+          "specificity": 0.8157894736842105,
+          "f1": 0.5301204819277109,
+          "probability_rows": 216,
+          "missing_probability_rows": 0,
+          "probability_positive_support": 26,
+          "probability_negative_support": 190,
+          "auroc": 0.9135627530364373,
+          "average_precision": 0.6436396130946747,
+          "brier_score": 0.096436563485047,
+          "ece": 0.09347466680389076,
+          "undefined": {},
+          "npv": 0.9748427672955975
+        },
+        "cluster_intervals": {
+          "unit": "patient_or_record_group",
+          "groups": 211,
+          "seed": 197841,
+          "n_bootstrap": 2000,
+          "confidence": 0.95,
+          "intervals": {
+            "accuracy": {
+              "low": 0.7671232876712328,
+              "high": 0.8697674418604651,
+              "valid_replicates": 2000,
+              "invalid_replicates": 0
+            },
+            "precision": {
+              "low": 0.25489304812834224,
+              "high": 0.5082036676854682,
+              "valid_replicates": 2000,
+              "invalid_replicates": 0
+            },
+            "recall": {
+              "low": 0.6571428571428571,
+              "high": 1.0,
+              "valid_replicates": 2000,
+              "invalid_replicates": 0
+            },
+            "specificity": {
+              "low": 0.7582330827067669,
+              "high": 0.8691158672945881,
+              "valid_replicates": 2000,
+              "invalid_replicates": 0
+            },
+            "negative_predictive_value": {
+              "low": 0.937888198757764,
+              "high": 1.0,
+              "valid_replicates": 2000,
+              "invalid_replicates": 0
+            },
+            "f1": {
+              "low": 0.38199571963616913,
+              "high": 0.6436973180076627,
+              "valid_replicates": 2000,
+              "invalid_replicates": 0
+            },
+            "auroc": {
+              "low": 0.8468301863765011,
+              "high": 0.9746581860820244,
+              "valid_replicates": 2000,
+              "invalid_replicates": 0
+            },
+            "average_precision": {
+              "low": 0.4526172567496062,
+              "high": 0.8329044731353692,
+              "valid_replicates": 2000,
+              "invalid_replicates": 0
+            },
+            "brier_score": {
+              "low": 0.0580301346249568,
+              "high": 0.13892589960155705,
+              "valid_replicates": 2000,
+              "invalid_replicates": 0
+            },
+            "ece": {
+              "low": 0.05091956008167245,
+              "high": 0.140374746588554,
+              "valid_replicates": 2000,
+              "invalid_replicates": 0
+            }
+          }
+        }
+      },
+      "pooled_descriptive_rank": {
+        "eligible_cache_ecgs": 6205,
+        "reference_states": {
+          "unknown": 4238,
+          "explicit_normal_control": 1699,
+          "positive": 252,
+          "ambiguous_pacing_reference": 12,
+          "concordant_marker_unknown_scp_likelihood": 4
+        },
+        "positive_subjects": 201,
+        "control_subjects": 1658,
+        "rank_metrics": {
+          "auroc": 0.8636079112830144,
+          "average_precision": 0.4714669911494369
+        },
+        "cluster_intervals": {
+          "auroc": {
+            "low": 0.8369380955718195,
+            "high": 0.8882464089260023,
+            "valid_replicates": 2000,
+            "invalid_replicates": 0
+          },
+          "average_precision": {
+            "low": 0.4025591666438418,
+            "high": 0.5425987421878158,
+            "valid_replicates": 2000,
+            "invalid_replicates": 0
+          }
+        }
+      },
+      "new_operating_point": 0.018182838335633278,
+      "released_operating_point_exists": false
+    },
+    "2AVB": {
+      "calibration_folds_1_8": {
+        "eligible_cache_ecgs": 5410,
+        "reference_states": {
+          "unknown": 3889,
+          "explicit_normal_control": 1509,
+          "positive": 11,
+          "ambiguous": 1
+        },
+        "positive_subjects": 8,
+        "control_subjects": 1470
+      },
+      "held_fold_9": {
+        "eligible_cache_ecgs": 795,
+        "reference_states": {
+          "unknown": 604,
+          "explicit_normal_control": 190,
+          "positive": 1
+        },
+        "positive_subjects": 1,
+        "control_subjects": 188
+      },
+      "pooled_descriptive_rank": {
+        "eligible_cache_ecgs": 6205,
+        "reference_states": {
+          "unknown": 4493,
+          "explicit_normal_control": 1699,
+          "positive": 12,
+          "ambiguous": 1
+        },
+        "positive_subjects": 9,
+        "control_subjects": 1658,
+        "rank_metrics": {
+          "auroc": 0.8027761428291151,
+          "average_precision": 0.022240131520731777
+        },
+        "cluster_intervals": {
+          "auroc": {
+            "low": 0.6700858313131628,
+            "high": 0.8925586408729816,
+            "valid_replicates": 2000,
+            "invalid_replicates": 0
+          },
+          "average_precision": {
+            "low": 0.009211058385597232,
+            "high": 0.04872010262063268,
+            "valid_replicates": 2000,
+            "invalid_replicates": 0
+          }
+        }
+      },
+      "new_operating_point": null,
+      "released_operating_point_exists": false
+    },
+    "3AVB": {
+      "calibration_folds_1_8": {
+        "eligible_cache_ecgs": 5410,
+        "reference_states": {
+          "unknown": 3889,
+          "explicit_normal_control": 1509,
+          "positive": 12
+        },
+        "positive_subjects": 11,
+        "control_subjects": 1470
+      },
+      "held_fold_9": {
+        "eligible_cache_ecgs": 795,
+        "reference_states": {
+          "unknown": 603,
+          "explicit_normal_control": 190,
+          "positive": 2
+        },
+        "positive_subjects": 2,
+        "control_subjects": 188
+      },
+      "pooled_descriptive_rank": {
+        "eligible_cache_ecgs": 6205,
+        "reference_states": {
+          "unknown": 4492,
+          "explicit_normal_control": 1699,
+          "positive": 14
+        },
+        "positive_subjects": 13,
+        "control_subjects": 1658,
+        "rank_metrics": {
+          "auroc": 0.8727823089212142,
+          "average_precision": 0.10313672693860877
+        },
+        "cluster_intervals": {
+          "auroc": {
+            "low": 0.7827992825784346,
+            "high": 0.9553698110290344,
+            "valid_replicates": 2000,
+            "invalid_replicates": 0
+          },
+          "average_precision": {
+            "low": 0.030539590599123912,
+            "high": 0.2999374580869342,
+            "valid_replicates": 2000,
+            "invalid_replicates": 0
+          }
+        }
+      },
+      "new_operating_point": null,
+      "released_operating_point_exists": false
+    }
+  },
+  "statistical_design": {
+    "seed": 197841,
+    "n_bootstrap": 2000,
+    "confidence": 0.95
+  }
+}

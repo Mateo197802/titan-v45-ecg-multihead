@@ -45,19 +45,19 @@ but no compatible known negatives for either union. Thus it does not
 independently validate the SPH grouped F1 values. The strict LUDB pathology
 union ALMI/ILMI/LAE has no compatible references for any of the 200 ECGs.
 
-| Requested endpoint | Verified prior evidence | Remaining compatibility or deployment limit |
+| Requested endpoint | Scientific disposition and evidence | Remaining compatibility or deployment limit |
 |---|---|---|
-| NSR | Published P8 decision; no verified SPH NSR reference | LUDB principal rhythm is distinct from Normal-only controls; do not call NSR an arrhythmia |
-| PAC | Published P8 decision, also included in the experimental P6 Other union; SPH statement evaluation | Statement agreement is not beat-by-beat PAC detection |
+| NSR | Native P8 evaluated on LUDB: 142 positive, 55 alternative principal rhythms, three unknown | Principal sinus rhythm is not a disease-free ECG. Do not call NSR an arrhythmia |
+| PAC | Native P8 evaluated against SPH statements; LUDB positive-only corroborates seven references; included in experimental P6 Other | Statement agreement is not beat-by-beat PAC detection |
 | Flutter | SPH held new head F1 0.857, 19 positives; auxiliary comparator F1 0.013 | Small source-stratified positive support; new head not deployed |
-| Paced | No compatible SPH label; original auxiliary scores are not published P6/P8 Paced decisions | Keep explicit electronic pacing distinct from wandering atrial pacemaker. PTB-XL PACE is a functioning-pacemaker statement, not a historical independence certificate |
+| Paced | Evaluated in held PTB-XL fold 9 using the unchanged V3AG global output and a new development threshold; sensitivity 22/26 | No native P6/P8 Paced decision. Electronic pacing evidence is not wandering atrial pacemaker or historical independence |
 | LBBB | SPH held new head F1 0.400, 18 positives; comparator F1 0.013 | Complete and incomplete block are distinct; no native P6/P8 action |
-| 2AVB | SPH held new head F1 0.778, 10 positives; comparator F1 0.006 | Small development test; no published specialist decision |
-| 3AVB | Prior support failed the training/calibration screen; LUDB publisher reports five positives | No unsupported fitted decision or negative controls inferred |
-| LQTS | No authorized compatible source establishing the endpoint for these models | Prolonged QT does not establish congenital LQTS; a published genotype cohort does not grant data access |
-| ALMI | PTB-XL held new head F1 0.900; original auxiliary rank AUROC 0.818 | Neither is a native P4 decision; PTB Diagnostic territory/control is a separate endpoint |
-| ILMI | PTB-XL held new head F1 0.571; original auxiliary rank AUROC 0.869 | Keep inferior and inferolateral localization distinct |
-| LAE | SPH original auxiliary AUROC 0.3037 on 19 explicit LAE statements and 13,905 Normal-only controls | Poor rank performance on that contrast, not calibration or clinical adjudication; no substitution of LAO |
+| 2AVB | SPH held experimental head F1 0.778, 10 positives; comparator F1 0.006. V3AG pooled PTB-XL rank also evaluated | No held V3AG binary estimate: one positive subject in fold 9; no published specialist decision |
+| 3AVB | V3AG pooled PTB-XL rank evaluated on 14 positives and 1,699 explicit controls; LUDB has five positives only | No held V3AG binary estimate: two positive subjects in fold 9; SPH fit support failed |
+| LQTS | Not evaluable: no authorized compatible direct syndrome reference for these models | Prolonged QT does not establish congenital LQTS; a published genotype cohort does not grant data access |
+| ALMI | Frozen experimental head evaluated on PTB Diagnostic: F1 0.646; original auxiliary rank AUROC 0.6064 on the same references | Neither is a native P4 ALMI decision; clinical sensitivity remains limited |
+| ILMI | Frozen experimental head evaluated on PTB Diagnostic: F1 0.579; original auxiliary rank AUROC 0.7309 on the same references | Keep inferior and inferolateral localization distinct |
+| LAE | Rank-only: SPH original auxiliary AUROC 0.3037 on 19 explicit LAE statements and 13,905 Normal-only controls | Isolated clinical LAE or a calibrated LAE decision not evaluable; no substitution of LAO |
 
 The [SPH held experiment](../../outputs/results/reviewer_experiments/rhythm-other_33396_aggregate.json)
 gave Rhythm Other P6 F1 **0.647** (141 positives among 2,895 known ECGs)
@@ -88,7 +88,9 @@ Normal-only controls are a restricted negative contrast, not confirmed
 absence among all other patients. PTB-XL contributed no compatible direct
 reference for congenital LQTS, isolated LAE or strict NSR in this audit.
 The original 33410 ledger does not contain V3AG global rhythm scores;
-counts alone cannot assign performance to Paced or 3AVB.
+counts alone cannot assign performance to Paced or 3AVB. The separate
+cache readout below uses the unchanged V3AG global head, not a recovered
+binary specialist decision.
 
 Cache inclusion was not uniform. The cache covers 6,205/19,601 eligible
 ECGs (31.66%), but includes 252/252 Paced positives, 14/14 3AVB positives,
@@ -99,6 +101,38 @@ Paced/Normal contrast, the positive fraction is 252/1,951 in the cache
 versus 252/6,801 in the eligible metadata. Cached PPV, NPV and precision-
 recall estimates therefore cannot be interpreted at the original
 PTB-XL reference prevalence or in a clinical all-comers population.
+
+### Cached V3AG Paced and AV block evaluation
+
+[Job 33747](../../outputs/results/reviewer_closure_experiments/ptbxl_cached_v3ag_rhythm_aggregate.json)
+replayed the unchanged V3AG rhythm head on all 6,205 cached ECGs.
+Sixteen archived probability columns agreed within a maximum absolute
+error of 4.77e-7, below the frozen 1e-5 tolerance, before label joining.
+The evidence proves the cached readout, not historical waveform replay.
+No weights changed and no waveforms or fold-10 references were opened.
+
+Folds 1-8 (5,410 ECGs) set the new threshold and fold 9 (795 ECGs)
+assessed it. No patient or exact-signal group crossed those folds.
+The held Paced contrast had 26 positive ECGs from 23 subjects and
+190 controls from 188 subjects. The remaining 579 ECGs had unknown or
+ambiguous reference states. At the frozen exploratory threshold
+0.01818284, TP/FN/FP/TN were 22/4/35/155. Sensitivity was 0.8462
+(cluster 95% interval 0.6571-1.0000), specificity 0.8158, PPV 0.3860,
+NPV 0.9748, F1 0.5301 (0.3820-0.6437), AUROC 0.9136
+(0.8468-0.9747), and AP 0.6436. The sensitivity and rank performance
+do not imply high precision or calibration at population prevalence.
+
+| Endpoint | Pooled descriptive AUROC (cluster 95% interval) | Pooled AP | Held positive subjects | Binary disposition |
+|---|---:|---:|---:|---|
+| Paced | 0.8636 (0.8369-0.8882) | 0.4715 | 23 | Exploratory held estimate above |
+| 2AVB | 0.8028 (0.6701-0.8926) | 0.0222 | 1 | Below five-subject support rule; no threshold or held binary estimate |
+| 3AVB | 0.8728 (0.7828-0.9554) | 0.1031 | 2 | Below five-subject support rule; no threshold or held binary estimate |
+
+Pooled rank is descriptive, not an independent validation. Particularly
+low AP for 2AVB and 3AVB must not be hidden by their AUROCs. This does not
+change the released model or define a clinical route. See the
+[generated tables](VERIFIED_ENDPOINT_AND_ROUTE_TABLES.md) and aggregate
+for denominators and additional intervals.
 
 ### ALMI and ILMI transport with unchanged cutoffs
 

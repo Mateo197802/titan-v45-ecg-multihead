@@ -1,9 +1,13 @@
 # TITAN V4.5: scientific closure of four reviewer comments
 
-**Working assessment.** The source and model provenance audits are complete
-for the published receipts below. Endpoint-based closure still requires
-native verification of SLURM 33747. Statuses in this draft
-must not be read as final closure or as changes to the submitted article.
+**Final evidence assessment:** zero unqualified satisfactions, three
+scientifically satisfied with limitations (R2-general, R2-3f and R2-4k),
+and one partial (R1-2). This closes the bounded evidence assessment, not
+the untested end-to-end clinical claim or the editorial process. The
+[native CEDIA receipt](../../outputs/results/reviewer_closure_experiments/native_closure_verification.json)
+verifies 11 aggregate/receipt artifacts and five authoritative successful
+jobs. It also preserves two pre-result failures and one superseded
+evaluator. No changes are applied to the submitted article.
 
 The immutable starting point is November commit
 `bf081e9c2fd62704821f56d614399d7d0eb6e656`. This work adds evidence
@@ -47,18 +51,22 @@ ALMI, ILMI and LAE. NSR remains a normal rhythm endpoint.
 
 1. **Experiment:** Asset supervision traced; bounded new Other and
    individual heads already fit and evaluated on held development subsets.
-   Frozen transport and source reference audits supplement that evidence.
-2. **Literal request:** Exclusions can be explained and all eleven classes
-   have explicit evidence dispositions. A comprehensive Other classifier
-   or deployed cascade has not been demonstrated.
+   Frozen transport, source reference audits and the 33747 cached readout
+   supplement those experiments. Paced passed the held-support rule;
+   V3AG 2AVB and 3AVB did not and remain pooled rank-only in that test.
+2. **Literal request:** The class roles, explicit group membership and all
+   eleven scientific dispositions are answerable. A comprehensive, unbiased
+   Other classifier or deployed cascade has not been demonstrated.
 3. **Preserve:** Native specialist scope and separately dated experimental
    mapped-reference results.
 4. **Restrict:** Do not attribute post-study heads to V3F/V3AG, combine LAO
    and LAE into isolated LAE, substitute prolonged QT for LQTS or equate
    score presence with calibrated classification.
-5. **Essential evidence:** Compatible positive and negative references with
-   sufficient support and frozen operating points for any broader clinical
-   claims; unsupported classes may instead be explicitly excluded.
+5. **Essential evidence:** None to report the stated class dispositions,
+   including explicit exclusion of congenital LQTS and no clinical LAE
+   estimate. A broader diagnostic claim still needs direct adjudication
+   for those diagnoses, sufficient held support for AV block operating
+   points, and representative all-class evaluation of any composed system.
 6. **Future manuscript:** Class-by-class dispositions and bounded mapped
    results are usable. They are not a clinical full-scope Other result.
 
@@ -119,7 +127,23 @@ See [selective prediction validation](SELECTIVE_PREDICTION_VALIDATION.md).
 
 [Literal-request protocol](PROTOCOL_FREEZE.md) |
 [execution and verification register](CLOSURE_EXECUTION_REGISTER.md) |
+[endpoint and route tables](VERIFIED_ENDPOINT_AND_ROUTE_TABLES.md) |
 [15-comment / 40-subrequirement crosswalk](REVIEWER_EVIDENCE_GAP_RESOLUTION.md).
 All individual waveforms, patient or signal linkage, scored ledgers and
 experimental fits remain in CEDIA. The manuscript, figures, abstract,
 conclusions, letter, existing PRs and historical weights remain unchanged.
+
+## Reproduce the documentary delivery
+
+From the scientific branch, verify the CEDIA export and documentary ZIP
+without acquiring any clinical records:
+
+```sh
+python scripts/evaluation/verify_reviewer_scientific_closure.py --public-dir outputs/results/reviewer_closure_experiments --native-receipt outputs/results/reviewer_closure_experiments/native_closure_verification.json
+python scripts/evaluation/build_reviewer_scientific_closure_zip.py verify outputs/results/reviewer_closure_experiments/TITAN_V45_FOUR_REVIEWER_SCIENTIFIC_CLOSURE.zip
+```
+
+The ZIP uses an explicit member allowlist, hashes native aggregates and
+reused November evidence, and verifies the generated tables against
+their sources. The full implementation and historical register are linked
+from this branch. Native record-level replay is restricted to CEDIA.

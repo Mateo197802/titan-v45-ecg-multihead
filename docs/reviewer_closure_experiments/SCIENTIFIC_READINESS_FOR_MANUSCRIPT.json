@@ -1,6 +1,6 @@
 {
   "schema": "TITAN_V45_SCIENTIFIC_READINESS_V1",
-  "status": "WORKING_NOT_FINAL_VERIFIED",
+  "status": "FINAL_NATIVE_VERIFIED",
   "original_manuscript_edited": false,
   "historical_rubric_rescored": false,
   "comments": {
@@ -12,11 +12,11 @@
       "essential_for_broader_claim": "Reference-complete representative population and executed route-specific follow-up."
     },
     "R2-general": {
-      "scientific_status": "PARTIAL_EVIDENCE",
+      "scientific_status": "SCIENTIFICALLY_SATISFIED_WITH_LIMITATIONS",
       "may_retain": "Actual checkpoint-specific direct loss and published specialist scope.",
-      "may_add_after_author_review": "Bounded mapped Other results, individual class dispositions and explicit unknowns.",
+      "may_add_after_author_review": "Bounded mapped Other results, all eleven class dispositions, held Paced evaluation, descriptive AV-block ranks and frozen ALMI/ILMI transport with low sensitivity.",
       "must_not_claim": "One validated all-class Other model, clinical LAE/LQTS validation, or original-head provenance for new fits.",
-      "essential_for_broader_claim": "Compatible reference controls, adequate positive support and validated frozen outputs for excluded classes."
+      "essential_for_broader_claim": "Direct adjudicated references for isolated clinical LAE and LQTS, adequately supported held AV-block operating points, and a representative evaluation of any all-class Other system."
     },
     "R2-3f": {
       "scientific_status": "SCIENTIFICALLY_SATISFIED_WITH_LIMITATIONS",

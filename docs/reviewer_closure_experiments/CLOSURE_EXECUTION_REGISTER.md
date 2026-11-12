@@ -97,6 +97,16 @@ The authoritative grammar in `e0feb79` accepts the explicit marker,
 does not treat unclear tokens or zero SCP likelihood as positive, and
 reconciles all partitions. Neither correction used model performance.
 
+The repaired cached rhythm job 33747 completed `0:0` in 1:24. The
+6,205 ECG readouts matched 16 archived probability columns within
+4.77e-7 maximum absolute error before labels were joined. Folds 1-8
+calibrated the exploratory Paced decision and fold 9 evaluated it;
+both AV block classes fell below the predeclared held support rule.
+[Aggregate](../../outputs/results/reviewer_closure_experiments/ptbxl_cached_v3ag_rhythm_aggregate.json)
+SHA-256 `27477b63a035d2a1f545669536b664128f5c0f961363150ccb56335288d10041`;
+[scoring receipt](../../outputs/results/reviewer_closure_experiments/ptbxl_cached_v3ag_rhythm_scoring_receipt.json)
+SHA-256 `b4f2e451fabc9b23d73fc787ad1757cee75129480816ae3ac982ae19bc494ccd`.
+
 ## Run and verify
 
 Run launchers under SLURM on CEDIA with approved private release assets
