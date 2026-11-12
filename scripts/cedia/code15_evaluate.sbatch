@@ -35,5 +35,6 @@ if [[ ${SLURM_STEP_ID:-batch} =~ ^[0-9]+$ ]]; then
 fi
 python -B -u scripts/external_validation/evaluate_code15.py \
     --study "$study" --assets "$assets" --historical "$historical" \
+    --publisher-test "$study/code15/code-test-3765780" \
     --candidates "$study/code15_frozen_candidates" --scratch "$scratch/work" \
     --output "$study/code15-evaluation-$run_id" "${scope[@]}"

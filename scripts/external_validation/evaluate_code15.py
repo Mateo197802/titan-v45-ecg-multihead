@@ -89,14 +89,56 @@ def historical_signatures(archive: Path, scratch: Path):
             signatures.append(signature(x))
         except (ValueError, OSError, RuntimeError) as error:
             reason = str(error)
-            if reason not in {"invalid historical header", "unexpected_code_padding", "flat_lead",
+            if reason not in {"invalid historical header", "unexpected_code_padding", "flat_lead", "invalid_code_array",
                               "short_or_ambiguous_code_duration", "unknown_physical_unit",
                               "invalid_canonical_leads", "invalid_rate_or_duration"}:
                 reason = type(error).__name__
             unavailable[reason] += 1
-    if not signatures:
-        raise ValueError(f"no comparable historical CODE-test signatures: {dict(unavailable)}")
-    return np.stack(signatures), dict(unavailable)
+    return np.asarray(signatures, dtype=np.float32).reshape(-1, 3000), dict(unavailable)
+
+
+def publisher_test_signatures(source: Path, scratch: Path):
+    """Compare with original CODE-test signals, never its annotations."""
+    import h5py
+
+    archive = source / "data.zip"
+    if archive.stat().st_size != 218189452:
+        raise ValueError("publisher CODE-test archive size mismatch")
+    md5 = hashlib.md5(usedforsecurity=False)
+    with archive.open("rb") as stream:
+        for block in iter(lambda: stream.read(1024 * 1024), b""):
+            md5.update(block)
+    if md5.hexdigest() != "cef8fe457abf4b8f66a34dc1269b4ced":
+        raise ValueError("publisher CODE-test archive checksum mismatch")
+    checksum = digest(archive)
+    target = scratch / "publisher-code-test.hdf5"
+    with zipfile.ZipFile(archive) as package:
+        members = [item for item in package.infolist()
+                   if PurePosixPath(item.filename).name == "ecg_tracings.hdf5"]
+        if len(members) != 1 or members[0].file_size > 400 * 1024 ** 2:
+            raise ValueError("invalid publisher CODE-test signal member")
+        with package.open(members[0]) as inp, target.open("xb") as out:
+            shutil.copyfileobj(inp, out, length=1024 * 1024)
+    signatures, failures = [], Counter()
+    with h5py.File(target, "r") as h5:
+        traces = h5["tracings"]
+        if traces.shape != (827, 4096, 12):
+            raise ValueError("invalid publisher CODE-test signal shape")
+        for trace in traces:
+            try:
+                signal = unpad_code(trace).T.astype(np.float32)
+                if np.any(np.ptp(signal, axis=1) <= 1e-6):
+                    raise ValueError("flat_lead")
+                x, _, _ = prepare_external(signal, 400, lambda *_args, **_kwargs: None)
+                signatures.append(signature(x))
+            except ValueError as error:
+                failures[str(error)] += 1
+    target.unlink()
+    if not signatures or len(signatures) + sum(failures.values()) != 827:
+        raise ValueError("publisher CODE-test comparison reference incomplete")
+    return np.stack(signatures), {"doi": "10.5281/zenodo.3765780", "archive_sha256": checksum,
+                                  "aligned_signatures": len(signatures), "excluded": dict(failures),
+                                  "annotations_opened": False}
 
 
 def verified_hdf5(code, name, catalog, scratch):
@@ -269,6 +311,13 @@ def run(args):
                 if selected(patient) else None
             )
     history, unavailable = historical_signatures(args.historical, args.scratch)
+    archive_signature_count = len(history)
+    publisher_overlap = None
+    if getattr(args, "publisher_test", None) is not None:
+        publisher, publisher_overlap = publisher_test_signatures(args.publisher_test, args.scratch)
+        history = np.concatenate((history, publisher))
+    if not len(history):
+        raise ValueError(f"no comparable historical CODE-test signatures: {unavailable}")
     source_protocol = json.loads((ROOT / "docs/external_validation_20261111/FROZEN_EXTERNAL_EVALUATION_PROTOCOL.json").read_bytes())
     rhythm, _, hashes, thresholds = load_scorers(args.assets, source_protocol)
     morphology = _safe_morphology(ROOT)
@@ -288,6 +337,7 @@ def run(args):
                 or prior["candidate_receipt_sha256"] != digest(receipt_path)
                 or prior["private_shard_cache_sha256"] != digest(prior_cache)
                 or prior["private_selection_sha256"] != digest(prior_ledger)
+                or prior.get("publisher_code_test_overlap") != publisher_overlap
                 or prior["archive_sha256"] != {"exams_part10.zip": digest(code / "exams_part10.zip")}):
             raise ValueError("partial cache provenance mismatch")
         archive_hashes.update(prior["archive_sha256"])
@@ -413,6 +463,8 @@ def run(args):
     result = {"protocol_sha256": digest(PROTOCOL), "candidate_receipt_sha256": digest(receipt_path),
               "archive_sha256": archive_hashes, "baseline_hashes": hashes, "counts": stats,
               "historical_aligned_signatures": len(history), "historical_ineligible": unavailable,
+              "historical_release_archive_aligned_signatures": archive_signature_count,
+              "publisher_code_test_overlap": publisher_overlap,
               "historical_patient_independence": "NOT_CERTIFIED", "within_code_duplicate_ecgs_excluded": len(duplicate),
               "n_ecg": len(keep), "n_patients": len(set(patients)), "complete_archive_coverage": set(archives) == names,
               "reused_verified_first_archive": args.reuse_partial is not None,
@@ -431,5 +483,6 @@ if __name__ == "__main__":
     for arg in ("study", "candidates", "assets", "historical", "scratch", "output"):
         parser.add_argument("--" + arg, type=Path, required=True)
     parser.add_argument("--archives", nargs="+")
+    parser.add_argument("--publisher-test", type=Path)
     parser.add_argument("--reuse-partial", type=Path)
     run(parser.parse_args())
