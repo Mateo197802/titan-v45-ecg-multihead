@@ -13,4 +13,6 @@ The previous percentages below come from the historical [PR #3 matrix](https://g
 | R2-4a | 75% | 75% | Locked external-source and patient-holdout results distinguished from development evidence; historical selection claims require historical links. |
 | R2-4e | 50% | 50% | Full population routing against a compatible reference and explicit uncovered endpoints; no clinical abstention or quarantine inferred from thresholds. |
 
+The [execution receipt](../../outputs/results/external_validation_20261111/EXTERNAL_VALIDATION_REPRODUCIBILITY.json) adds verified metadata, a patient-level selection, real label-blind inference on three MIMIC ECGs, and a negative reference-support audit on 5,770 development ECGs. These improve implementation traceability and identify a concrete barrier, but do not satisfy a new scoring subrequirement of the existing rubric.
+
 None of the above percentages is a probability of acceptance. A frozen baseline and an adapted patient holdout answer different questions. The former cannot establish independence from undocumented historical pretraining; the latter does not establish transport to another hospital. Cross-source confirmation remains separate.

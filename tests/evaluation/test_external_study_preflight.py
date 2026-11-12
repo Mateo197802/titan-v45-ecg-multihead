@@ -1,4 +1,6 @@
+import hashlib
 import importlib.util
+import json
 from pathlib import Path
 
 import numpy as np
@@ -78,3 +80,22 @@ def test_aggregate_metrics_do_not_impute_unsupported_f1():
     assert from_confusion(0, 0, 0, 0)["accuracy"] is None
     with pytest.raises(ValueError, match="nonnegative"):
         from_confusion(-1, 0, 0, 0)
+
+
+def test_public_preflight_receipt_separates_selected_and_evaluable():
+    root = Path(__file__).resolve().parents[2]
+    result = root / "outputs/results/external_validation_20261111/EXTERNAL_VALIDATION_REPRODUCIBILITY.json"
+    receipt = json.loads(result.read_text(encoding="utf-8"))
+    docs = root / "docs/external_validation_20261111"
+    for name, expected in (
+        ("FROZEN_EXTERNAL_EVALUATION_PROTOCOL.json", receipt["protocol_sha256"]),
+        ("REFERENCE_AUDIT_GATE.json", receipt["development_reference_support"]["gate_sha256"]),
+    ):
+        assert hashlib.sha256((docs / name).read_bytes()).hexdigest() == expected
+    selected = receipt["frozen_mimic_selection"]
+    assert sum(selected["ecgs_by_split"].values()) == selected["ecgs"] == 6784
+    assert sum(selected["patients_by_split"].values()) == selected["patients"] == 4096
+    assert selected["counts_are_selected_not_waveform_qc_eligible"]
+    assert receipt["development_reference_support"]["endpoints_passed"] == 0
+    assert not receipt["development_reference_support"]["retained_labels_extracted"]
+    assert not receipt["frozen_model_probe"]["performance_computed"]

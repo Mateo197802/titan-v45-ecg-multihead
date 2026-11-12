@@ -10,3 +10,7 @@ MIMIC v1.0 supplies 18 machine statement fields (`report_0` to `report_17`), not
 | CODE-15% | `AF`, `SB`, `ST`, `RBBB`, `1dAVb` are candidate shared columns | No PVC, PAC, or P4 truth. Do not map generic `normal_ecg` to NSR or LBBB to Other. |
 
 No automatic output is interpreted as a clinically adjudicated diagnosis. No parser has been approved for performance evaluation: held-out labels must not be extracted before the grammar, ambiguity audit, minimum positive/negative support, exact endpoint definitions, and performance protocol are frozen. Other requires a dedicated multilabel reference, not a residual category for missing diagnoses.
+
+## Executed development support audit
+
+SLURM job 33293 joined all 5,770 selected development ECGs and applied the frozen [support screen](REFERENCE_AUDIT_GATE.json). Across all endpoints, the maximum explicit-negative patient support was zero in train, validation, and calibration. No endpoint passed the necessary two-sided gate. This is a result about the implemented strict reference contract, not proof that all possible references are absent from MIMIC. The 1,014 retained ECG labels were not extracted. No heads were trained and no performance result was computed. A revised machine-reference study would require an independently reviewed new contract, not relabeling missing statements or weakening the same gate after seeing these results.
