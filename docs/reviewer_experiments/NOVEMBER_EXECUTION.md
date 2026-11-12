@@ -34,7 +34,8 @@ real second-stage inference are not implied by abstention.
 | 33369 | Mapped auxiliary ranking and observable Other support | afterok:33355 | Complete-denominator reference states and ranking on explicit compatible controls |
 | 33373 | Initial zero-morphology sensitivity submission | Held before execution: pinned P4 runner has no extractor-loader hook | Preserved preflight rejection; do not release |
 | 33473 | Corrected paired zero-morphology sensitivity with immutable released weights | afterok:33469:33470 | Score/decision changes, not retraining |
-| 33474 | Fresh paired extraction, matched retraining, calibration seal, held comparison | afterok:33355:33469:33470 | Private models plus aggregate paired intervals and original-baseline comparison |
+| 33474 | Fresh paired extraction, matched retraining and calibration seal | afterok:33355:33469:33470 | Both arms and fitted heads sealed; original held evaluator failed, no aggregate used |
+| 33596 | CPU-only recovery of the held morphology evaluation | Native 33474 failure and pinned original fit, extraction, inventory and protocol hashes | Sealed paired intervals and native released-baseline comparison; no fit or extraction |
 | 33390 | New PTB-XL auxiliary and bounded pathology Other heads | afterok:33355:33369 | Complete reference flow, held metrics and patient intervals for supported endpoints |
 | 33396 | New SPH mapped rhythm Other and auxiliary heads vs frozen-score comparator | afterok:33355:33369 | Paired held development metrics and full reference/scoring flow |
 | 33399 | Same-score full-population vs restricted SPH analysis | afterok:33355:33357 | Statement prevalence, disjoint flow strata, and paired differences between denominators |
@@ -46,6 +47,7 @@ The submitted baseline uses experiment commit f989eccf74d38399d0298026e6f4c078a4
 The comparison job uses 891dacbca23d7685117f836f98bc3dd1482bb1af.
 The current replay and sensitivity launchers use 07e9430a0926afa5ee8c1767e00467303f28c6e3.
 The matched retraining job uses 648c5a4b784b2307376d620eeb03fc0bb5d3198a.
+Its evaluation-only recovery uses 36a8ad8e086910eabb2615bb656162b41c5b6101.
 The pathology Other job uses 6baab4228767219c048d8989a35a70e3bb2219fa.
 The rhythm Other job uses 72dd436cd5a9e8ec397fccd1e70b9aa1abed4efe.
 The full-population contrast job uses 63ff66fb9b49198f773973d5f579c404940c648b.
@@ -85,6 +87,16 @@ prefer a writable node-local location, allow a longer time for the
 shared fallback, run the same pinned historical source commits and seal
 native output bytes. No asset, threshold or inference contract changed.
 
+Job 33474 exited `1:0` after 4:03:53, after sealing the fit and before
+writing a held aggregate. The released P6 cache contains eight logits
+in P8 order, but the initial comparator passed six thresholds to the
+unprojected array. Job 33596 delegates rhythm aggregation and call rules
+to the frozen native scorer, including the P6 projection and P8 fallback.
+It performs only the evaluation, reusing the original sealed model
+SHA-256 `241f8f673121477c9d27c96239f8b423e5b036bbe33d6a33237d5920200a2337`.
+No fitted coefficients, calibration, waveforms, split assignments, release
+weights or endpoints changed. The original failure remains visible in SLURM.
+
 ## Result verification
 
 Run `scripts/evaluation/verify_reviewer_november_delivery.py` inside the
@@ -99,6 +111,8 @@ invalid result is. Legacy replay writers without an output checksum are
 marked explicitly, and the contrast checks their runner aggregate hashes.
 The verifier does not copy or publish any output. Review the interpretation
 and disclosure boundaries separately before exporting an aggregate.
+The [November findings](NOVEMBER_FINDINGS.md) link the verified results
+and distinguish the November policy from the unsupported historical rates.
 
 The [population contrast protocol](../../configs/reviewer_experiments/november_population_contrast.json)
 uses the same frozen predictions for both denominators. Its restricted

@@ -145,8 +145,9 @@ implemented decision function, not incremental value after retraining.
 **Disposition: partial.** Candidate formula, inputs and wiring are supported
 (R2-3f.1); exact original loader identity and strict historical score
 equivalence are not (R2-3f.2-3). The new replay does not authenticate historical
-specialist metadata (R2-3f.4). The separately matched retraining job 33474 must
-be verified before drawing any conclusion about incremental predictive value.
+specialist metadata (R2-3f.4). Job 33474 sealed both fitted arms before the
+released-baseline comparison failed. Evaluation-only recovery 33596 must be
+verified before drawing any conclusion about incremental predictive value.
 
 ## R2-4k: Executed abstention, not historical quarantine
 
