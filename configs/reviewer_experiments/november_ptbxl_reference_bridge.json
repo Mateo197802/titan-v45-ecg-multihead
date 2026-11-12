@@ -1,0 +1,26 @@
+{
+  "schema": "TITAN_V45_REVIEWER_PTBXL_REFERENCE_BRIDGE_V1",
+  "scope": "retrospective frozen P6/P8/P4 inference on every available authorized PTB-XL v1.0.3 fold 1-9 waveform, not independent validation",
+  "upstream": "f4d6be30b0befea739cf2e35df1033230a1f5d10",
+  "source_doi": "10.13026/kfzx-aw45",
+  "metadata_rows_total": 21799,
+  "eligible_metadata_rows": 19601,
+  "metadata_sha256": "7600de9c1b27d181d850b3c6038a35d7c3ddb6bb33b702e3a20252a6859d216b",
+  "dictionary_sha256": "ad05b0b1fcae83bb1230755ad9cfc7c96f303feddc08a4a9ad5bdc9ca63bac8f",
+  "inventory_sha256": "798866dc1dc00d3e81c9fda28711dd0ea57fb57a7fc2ac0a415ad20a97f17107",
+  "reference": {
+    "positive": "exact SCP code with likelihood greater than zero and no NORM code",
+    "control": "positive-likelihood NORM with no other statement except optional SR",
+    "ambiguous": "target code with zero likelihood or with NORM",
+    "unknown": "remaining records, not negatives",
+    "NSR": "not evaluated: SR indicates sinus rhythm, not necessarily normal sinus rhythm; all SR likelihood values are unknown in folds 1-9",
+    "ISC_": "non-specific ischemic ECG statement, not an independently adjudicated diagnosis"
+  },
+  "p6_p8_reference_bridge": {"1AVB": "1AVB"},
+  "p4_statement_endpoints": {"ASMI": "ASMI", "LVH": "LVH", "IMI": "IMI", "ISC_": "ISC_"},
+  "p4_auxiliary_rank_only": {"ALMI": "ALMI", "ILMI": "ILMI", "LAE": "LAO/LAE"},
+  "excluded_official_folds": [10],
+  "score_policy": "unchanged released thresholds and P8 fallback, no fitted thresholds, no abstention or referral",
+  "waveform_batch_ecgs": 16,
+  "statistics": {"seed": 197833, "replicates": 1000, "confidence": 0.95}
+}
