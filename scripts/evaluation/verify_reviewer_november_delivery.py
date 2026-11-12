@@ -15,22 +15,23 @@ JOBS = {
     "33356": ("phase", "repeat-audit", ("aggregate.json",), True),
     "33357": ("phase", "sph-ece-report", ("aggregate.json", "aggregation-receipt.json", "ece-correction-receipt.json"), True),
     "33362": ("phase", "selective", ("aggregate.json", "policy.json"), True),
-    "33454": ("history", "p4-cascade", ("aggregate.json",), True),
-    "33455": ("history", "rhythm-cascade", ("aggregate.json",), True),
-    "33456": ("history", "replay-diagnostics", ("aggregate.json",), False),
+    "33469": ("history", "p4-cascade", ("aggregate.json",), True),
+    "33470": ("history", "rhythm-cascade", ("aggregate.json",), True),
+    "33471": ("history", "replay-diagnostics", ("aggregate.json",), False),
     "33369": ("phase", "auxiliary", ("aggregate.json",), True),
-    "33459": ("history", "retrained", ("aggregate.json", "fit-receipt.json", "features/extraction-receipt.json"), True),
+    "33474": ("history", "retrained", ("aggregate.json", "fit-receipt.json", "features/extraction-receipt.json"), True),
     "33390": ("phase", "pathology-other", ("aggregate.json", "fit-receipt.json"), True),
     "33396": ("phase", "rhythm-other", ("aggregate.json", "fit-receipt.json"), True),
     "33399": ("phase", "population-contrast", ("aggregate.json",), True),
-    "33457": ("history", "replay-contrast", ("aggregate.json",), True),
+    "33472": ("history", "replay-contrast", ("aggregate.json",), True),
     "33410": ("phase", "ptbxl-bridge", ("aggregate.json", "scoring-receipt.json"), True),
     "33414": ("phase", "joint-selective", ("aggregate.json", "joint-policy.json"), True),
-    "33458": ("history", "morph-sensitivity", ("p4-aggregate.json", "rhythm-aggregate.json"), True),
+    "33473": ("history", "morph-sensitivity", ("p4-aggregate.json", "rhythm-aggregate.json"), True),
 }
-SUPERSEDED = ("33363", "33364", "33365", "33373", "33381", "33403", "33416")
-REPLAY_COMMITS = {"33454": "02019b832fafecd0c263ea556c70f16fa0a50ccf",
-                  "33455": "cfe6d59fa5cc4be10de0d7c6803fa5208fae0072"}
+SUPERSEDED = ("33363", "33364", "33365", "33373", "33381", "33403", "33416",
+              "33454", "33455", "33456", "33457", "33458", "33459")
+REPLAY_COMMITS = {"33469": "02019b832fafecd0c263ea556c70f16fa0a50ccf",
+                  "33470": "cfe6d59fa5cc4be10de0d7c6803fa5208fae0072"}
 PRIVATE_FIELDS = {
     "ecg_id", "patient_id", "record_id", "window_key", "record_path", "header_path", "record_base",
     "relative_record", "signal_sha256", "signal_sha256_canonical_f64", "state_dict", "record_ids",
@@ -178,13 +179,13 @@ def scientific_checks(job, value, earlier, baseline_digest):
         for p in value["profiles"].values():
             if total(v["metadata_ecgs"] for v in p["reference_strata"].values()) != SPH:
                 raise ValueError("population strata do not exhaust SPH")
-    elif job == "33457":
+    elif job == "33472":
         p4 = value["archived_predictions_versus_current_native"]["P4"]
         if (total(p["archived_rows"] for p in p4.values()) != 962
                 or total(p["matched_rows"] for p in p4.values()) != value["matched_p4_panel_observations"]
                 or any(p["matched_rows"]+p["missing_scores"] != p["archived_rows"] for p in p4.values())):
             raise ValueError("P4 archived panel observations do not reconcile")
-        for branch, parent in (("P4", "33454"), ("rhythm", "33455")):
+        for branch, parent in (("P4", "33469"), ("rhythm", "33470")):
             if value["provenance"][branch]["current"]["runner_aggregate_sha256"] != earlier[parent]:
                 raise ValueError("current replay report not bound to native parent")
     elif job == "33410":
@@ -192,7 +193,7 @@ def scientific_checks(job, value, earlier, baseline_digest):
             raise ValueError("PTB-XL metadata denominator does not reconcile")
         if set(value["flow_by_official_fold"]) != {str(i) for i in range(1, 10)}:
             raise ValueError("unexpected PTB-XL fold in analyzed data")
-    elif job == "33458":
+    elif job == "33473":
         for p, r in value["profiles"].items():
             if r["intended_records"] != {"P4": 733, "P6": 1643, "P8": 2193}[p] or not (
                 0 <= r["decision_changes"] <= r["paired_scored"] <= r["intended_records"]
@@ -222,14 +223,14 @@ def bundle_checks(job, directory, items, files):
                                ("private-routes.jsonl", result["private_route_ledger_sha256"])):
             if digest(protected_path(directory, file)) != expected:
                 raise ValueError("private selective output differs from producer hash")
-    elif job in {"33459", "33390", "33396"}:
+    elif job in {"33474", "33390", "33396"}:
         fit, evaluated = (items[n] for n in ("fit-receipt.json", "aggregate.json"))
-        field = "model_sha256" if job == "33459" else "private_model_sha256"
+        field = "model_sha256" if job == "33474" else "private_model_sha256"
         if (fit["held_outcomes_evaluated"] is not False or fit[field] != evaluated[field]
                 or fit["binding"] != evaluated["binding"]
                 or digest(protected_path(directory, "private-models.json")) != fit[field]):
             raise ValueError("held evaluation is not bound to the pre-evaluation checkpoint")
-        if job == "33459":
+        if job == "33474":
             key = "features/extraction-receipt.json"
             extraction = items[key]
             if (fit["binding"]["extraction_receipt_sha256"] != files[key]["sha256"]
@@ -271,7 +272,7 @@ def verify(roots, states):
                 reported_job = result.get("job", result.get("audit_job", result.get("job_id")))
                 if reported_job is not None and str(reported_job) != job:
                     raise ValueError("producer job in public candidate does not match")
-                if idx == 0 or job == "33458":
+                if idx == 0 or job == "33473":
                     scientific_checks(job, result, earliest, earliest.get("33355"))
                 verified[name] = {"sha256": file_hash, "producer_checksum_verified": sealed}
                 items[name] = result

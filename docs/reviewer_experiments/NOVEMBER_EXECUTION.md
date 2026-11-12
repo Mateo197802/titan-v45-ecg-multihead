@@ -28,23 +28,23 @@ real second-stage inference are not implied by abstention.
 | 33356 | Pair new scores with job 32668 | afterok:33355 | Aggregate residuals, decisions and denominator reconciliation |
 | 33357 | Aggregate new baseline metrics | afterok:33355 | Compatible-endpoint confusion/metrics and cluster intervals |
 | 33362 | Freeze policy on calibration components, then evaluate held SPH development components | afterok:33355:33357 | Private split/route ledgers, cutoff seal, and aggregate selective metrics |
-| 33454 | Rerun saved P4 waveform panel | P4 source 02019b832fafecd0c263ea556c70f16fa0a50ccf | Private replay ledger and seal |
-| 33455 | Rerun saved rhythm waveform panels | Rhythm source cfe6d59fa5cc4be10de0d7c6803fa5208fae0072 | Private replay ledger and seal |
-| 33456 | Strict audit of historical panel residuals and decisions | afterok:33454:33455 | Aggregate decision and score differences |
+| 33469 | Rerun saved P4 waveform panel | P4 source 02019b832fafecd0c263ea556c70f16fa0a50ccf | Private replay ledger and seal |
+| 33470 | Rerun saved rhythm waveform panels | Rhythm source cfe6d59fa5cc4be10de0d7c6803fa5208fae0072 | Private replay ledger and seal |
+| 33471 | Strict audit of historical panel residuals and decisions | afterok:33469:33470 | Aggregate decision and score differences |
 | 33369 | Mapped auxiliary ranking and observable Other support | afterok:33355 | Complete-denominator reference states and ranking on explicit compatible controls |
 | 33373 | Initial zero-morphology sensitivity submission | Held before execution: pinned P4 runner has no extractor-loader hook | Preserved preflight rejection; do not release |
-| 33458 | Corrected paired zero-morphology sensitivity with immutable released weights | afterok:33454:33455 | Score/decision changes, not retraining |
-| 33459 | Fresh paired extraction, matched retraining, calibration seal, held comparison | afterok:33355:33454:33455 | Private models plus aggregate paired intervals and original-baseline comparison |
+| 33473 | Corrected paired zero-morphology sensitivity with immutable released weights | afterok:33469:33470 | Score/decision changes, not retraining |
+| 33474 | Fresh paired extraction, matched retraining, calibration seal, held comparison | afterok:33355:33469:33470 | Private models plus aggregate paired intervals and original-baseline comparison |
 | 33390 | New PTB-XL auxiliary and bounded pathology Other heads | afterok:33355:33369 | Complete reference flow, held metrics and patient intervals for supported endpoints |
 | 33396 | New SPH mapped rhythm Other and auxiliary heads vs frozen-score comparator | afterok:33355:33369 | Paired held development metrics and full reference/scoring flow |
 | 33399 | Same-score full-population vs restricted SPH analysis | afterok:33355:33357 | Statement prevalence, disjoint flow strata, and paired differences between denominators |
-| 33457 | Compare both new waveform replays to archived predictions and previous native replays | afterok:33454:33455 | Anchored input hashes, score residuals, margins, decisions and missing-score counts |
+| 33472 | Compare both new waveform replays to archived predictions and previous native replays | afterok:33469:33470 | Anchored input hashes, score residuals, margins, decisions and missing-score counts |
 | 33410 | Complementary unfiltered PTB-XL cache scoring with P6/P8/P4 | afterok:33355 | Complete denominator and technical flow; statement metrics for 1AVB/ISC_ and released pathology auxiliary ranking |
 | 33414 | One joint P8/P4 accept-or-abstain decision per held SPH ECG | afterok:33362 | Verified private route ledger, coverage/risk intervals and classwise positive disposition |
 
 The submitted baseline uses experiment commit f989eccf74d38399d0298026e6f4c078a437fd2d.
 The comparison job uses 891dacbca23d7685117f836f98bc3dd1482bb1af.
-The private-scratch replay and corrected sensitivity launchers use 44339337f9da509c86d46a32928cc65f966be6ec.
+The current replay and sensitivity launchers use 07e9430a0926afa5ee8c1767e00467303f28c6e3.
 The matched retraining job uses 648c5a4b784b2307376d620eeb03fc0bb5d3198a.
 The pathology Other job uses 6baab4228767219c048d8989a35a70e3bb2219fa.
 The rhythm Other job uses 72dd436cd5a9e8ec397fccd1e70b9aa1abed4efe.
@@ -64,14 +64,26 @@ or abstention was recorded in this baseline. SHA-256 of the receipt:
 The private predictions stay in CEDIA. Scoring completion is not a
 diagnostic performance result; 33357 supplies statement-level metrics.
 
+**Verified SPH repeat.** Job 33356 found identical native ledger
+SHA-256 for jobs 32668 and 33355, zero score differences and no
+decision or scoring-state disagreements across all 25,770 ECGs.
+The [repeat audit](../../outputs/results/reviewer_experiments/sph_repeat_audit_33356.json)
+reports the paired class score and decision counts. This is repeatability
+of the November SPH scoring protocol, not reproduction of the original
+June study, the historical panel replay, or independent validation.
+
 Native replay 33363 failed before inference with permission denied
 creating its default temporary directory. The same pending launcher
 33364 was held before inference. Original dependent jobs 33365 and
 33381 were cancelled by SLURM; 33403 and 33416 have unsatisfiable
-dependencies. They remain preserved as superseded attempts. The new
-launchers use per-job private scratch in the authorized run root,
-verify and execute the same historical source commits and seal native
-output bytes. No asset, threshold or inference contract changed.
+dependencies. The first repair, 33454, passed the permission point but
+timed out during extraction of the dependency archive in shared scratch
+without writing an inference ledger. Its pending rhythm counterpart
+33455 was held and SLURM cancelled 33456-33459. All superseded attempts
+remain preserved. The current launchers use private per-job scratch,
+prefer a writable node-local location, allow a longer time for the
+shared fallback, run the same pinned historical source commits and seal
+native output bytes. No asset, threshold or inference contract changed.
 
 ## Result verification
 
@@ -125,12 +137,12 @@ candidate extractor unchanged, including their integrity checks. The
 verified P6 manifest defines its 1,643 intended ECGs independently
 of the 2,193 ECG shared rhythm ledger. An unscored eligible P6 record
 remains in its denominator; a P8-only ECG is not a missing P6 score.
-Job 33457 authenticates the previous native ledgers and receipts from
+Job 33472 authenticates the previous native ledgers and receipts from
 32448 and 32461 and the archived prediction tables separately. It
 records exact native byte agreement if observed, but can also quantify
 native drift without redefining an archived residual as equivalence.
 Neither contrast substitutes for the missing original loader. The
-strict same-ledger audit logic in 33456 remains unmodified. The old P4 denominator
+strict same-ledger audit logic in 33471 remains unmodified. The old P4 denominator
 is in panel observations, not distinct ECGs.
 
 The development calibrator groups ECGs by patient components linked by
