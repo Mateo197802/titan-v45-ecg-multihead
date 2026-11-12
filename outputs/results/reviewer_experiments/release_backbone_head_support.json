@@ -1,0 +1,375 @@
+{
+  "schema": "TITAN_V45_RELEASE_BACKBONE_HEAD_SUPPORT_V1",
+  "scope": "read-only checkpoint byte and embedded internal report audit; no inference or training",
+  "release_manifest_sha256": "44ff950d0c64d78b3a8af11f8bc7e558707088d1e9dea127ecf9558012facedf",
+  "global_head_contract_sha256": "ac73de5baf2e1b5416b37611c173f7d4979627639477fae2c68197e50c37d5fc",
+  "checkpoint_assets": {
+    "V3F": {
+      "name": "backbone-v3f-original.pt",
+      "sha256": "ca5d4dcb4b9828e6c4339800fe81ec27f32d9b09a090bb57503bfb56746a8da8",
+      "bytes": 233565900
+    },
+    "V3AG": {
+      "name": "backbone-v3ag-pathology.pt",
+      "sha256": "bf71e4cf8acc34031cb3611c7031e0649822e705fd7dcea354a3ea583ce920ee",
+      "bytes": 233566092
+    }
+  },
+  "declared_parent_path_strings_equal": true,
+  "parent_bytes_verified": false,
+  "embedded_report_epoch_count": {
+    "V3F": 8,
+    "V3AG": 10
+  },
+  "V3AG_historical_log_binding": {
+    "scheduler_job": 17285,
+    "parent_job_status": "FAILED",
+    "parent_job_exit_code": "1:0",
+    "matching_embedded_epoch_rows": 10,
+    "source_archive_sha256": "2935deb7eaaa9ba6b040610cf810ddc6e1c82a212b260170ec9b6b02e3727d07",
+    "source_member": "PRIMARY_EXCERPTS/job17285_epochs_and_scheduler.txt",
+    "source_member_sha256": "b71e48e5483f753af26e1fa4ebb416e579384e90290c2a956b682dd2bf17e88b"
+  },
+  "heads": {
+    "rhythm": {
+      "release_output_order": [
+        "AFIB",
+        "SB",
+        "STACH",
+        "NSR",
+        "RBBB",
+        "PAC",
+        "1AVB",
+        "PVC",
+        "Flutter",
+        "LBBB",
+        "2AVB",
+        "3AVB",
+        "LQTS",
+        "Paced"
+      ],
+      "coverage_by_asset": {
+        "V3F": {
+          "declared_finetune_classes": [
+            "AFIB",
+            "SB",
+            "STACH",
+            "NSR",
+            "RBBB",
+            "PAC",
+            "1AVB",
+            "PVC"
+          ],
+          "embedded_validation_panels": {
+            "AFIB": {
+              "validation_positive": 27,
+              "validation_negative": 117,
+              "validation_observations": 144
+            },
+            "SB": {
+              "validation_positive": 12,
+              "validation_negative": 132,
+              "validation_observations": 144
+            },
+            "STACH": {
+              "validation_positive": 12,
+              "validation_negative": 132,
+              "validation_observations": 144
+            },
+            "NSR": {
+              "validation_positive": 19,
+              "validation_negative": 125,
+              "validation_observations": 144
+            },
+            "RBBB": {
+              "validation_positive": 18,
+              "validation_negative": 126,
+              "validation_observations": 144
+            },
+            "PAC": {
+              "validation_positive": 24,
+              "validation_negative": 120,
+              "validation_observations": 144
+            },
+            "1AVB": {
+              "validation_positive": 16,
+              "validation_negative": 128,
+              "validation_observations": 144
+            },
+            "PVC": {
+              "validation_positive": 16,
+              "validation_negative": 128,
+              "validation_observations": 144
+            }
+          },
+          "no_embedded_validation_panel": [
+            "Flutter",
+            "LBBB",
+            "2AVB",
+            "3AVB",
+            "LQTS",
+            "Paced"
+          ]
+        },
+        "V3AG": {
+          "declared_finetune_classes": [
+            "NSR",
+            "SB",
+            "STACH",
+            "RBBB",
+            "PVC",
+            "1AVB",
+            "Flutter",
+            "Paced"
+          ],
+          "embedded_validation_panels": {
+            "NSR": {
+              "validation_positive": 58,
+              "validation_negative": 449,
+              "validation_observations": 507
+            },
+            "SB": {
+              "validation_positive": 140,
+              "validation_negative": 367,
+              "validation_observations": 507
+            },
+            "STACH": {
+              "validation_positive": 84,
+              "validation_negative": 423,
+              "validation_observations": 507
+            },
+            "RBBB": {
+              "validation_positive": 82,
+              "validation_negative": 425,
+              "validation_observations": 507
+            },
+            "PVC": {
+              "validation_positive": 64,
+              "validation_negative": 443,
+              "validation_observations": 507
+            },
+            "1AVB": {
+              "validation_positive": 69,
+              "validation_negative": 438,
+              "validation_observations": 507
+            },
+            "Flutter": {
+              "validation_positive": 152,
+              "validation_negative": 355,
+              "validation_observations": 507
+            },
+            "Paced": {
+              "validation_positive": 34,
+              "validation_negative": 473,
+              "validation_observations": 507
+            }
+          },
+          "no_embedded_validation_panel": [
+            "AFIB",
+            "PAC",
+            "LBBB",
+            "2AVB",
+            "3AVB",
+            "LQTS"
+          ]
+        }
+      },
+      "V3F_vs_V3AG": {
+        "final_weight_elements_per_class": 512,
+        "final_row_numeric_differences": {
+          "AFIB": {
+            "weight_elements_different": 512,
+            "bias_different": true
+          },
+          "SB": {
+            "weight_elements_different": 512,
+            "bias_different": true
+          },
+          "STACH": {
+            "weight_elements_different": 512,
+            "bias_different": true
+          },
+          "NSR": {
+            "weight_elements_different": 512,
+            "bias_different": true
+          },
+          "RBBB": {
+            "weight_elements_different": 512,
+            "bias_different": true
+          },
+          "PAC": {
+            "weight_elements_different": 512,
+            "bias_different": true
+          },
+          "1AVB": {
+            "weight_elements_different": 512,
+            "bias_different": true
+          },
+          "PVC": {
+            "weight_elements_different": 512,
+            "bias_different": true
+          },
+          "Flutter": {
+            "weight_elements_different": 512,
+            "bias_different": true
+          },
+          "LBBB": {
+            "weight_elements_different": 0,
+            "bias_different": false
+          },
+          "2AVB": {
+            "weight_elements_different": 0,
+            "bias_different": false
+          },
+          "3AVB": {
+            "weight_elements_different": 0,
+            "bias_different": false
+          },
+          "LQTS": {
+            "weight_elements_different": 0,
+            "bias_different": false
+          },
+          "Paced": {
+            "weight_elements_different": 512,
+            "bias_different": true
+          }
+        },
+        "shared_head_tensor_equal": {
+          "head_rhythm.0.bias": false,
+          "head_rhythm.0.weight": false,
+          "head_rhythm.1.bias": false,
+          "head_rhythm.1.weight": false
+        }
+      }
+    },
+    "pathology": {
+      "release_output_order": [
+        "ASMI",
+        "LVH",
+        "IMI",
+        "ISC_",
+        "ALMI",
+        "ILMI",
+        "LAE"
+      ],
+      "coverage_by_asset": {
+        "V3F": {
+          "declared_finetune_classes": [
+            "ASMI",
+            "LVH",
+            "IMI",
+            "ISC_"
+          ],
+          "embedded_validation_panels": {
+            "ASMI": {
+              "validation_positive": 73,
+              "validation_negative": 703,
+              "validation_observations": 776
+            },
+            "LVH": {
+              "validation_positive": 94,
+              "validation_negative": 682,
+              "validation_observations": 776
+            },
+            "IMI": {
+              "validation_positive": 61,
+              "validation_negative": 715,
+              "validation_observations": 776
+            },
+            "ISC_": {
+              "validation_positive": 78,
+              "validation_negative": 698,
+              "validation_observations": 776
+            }
+          },
+          "no_embedded_validation_panel": [
+            "ALMI",
+            "ILMI",
+            "LAE"
+          ]
+        },
+        "V3AG": {
+          "declared_finetune_classes": [
+            "ASMI",
+            "LVH",
+            "IMI",
+            "ISC_"
+          ],
+          "embedded_validation_panels": {
+            "ASMI": {
+              "validation_positive": 216,
+              "validation_negative": 584,
+              "validation_observations": 800
+            },
+            "LVH": {
+              "validation_positive": 187,
+              "validation_negative": 613,
+              "validation_observations": 800
+            },
+            "IMI": {
+              "validation_positive": 246,
+              "validation_negative": 554,
+              "validation_observations": 800
+            },
+            "ISC_": {
+              "validation_positive": 97,
+              "validation_negative": 703,
+              "validation_observations": 800
+            }
+          },
+          "no_embedded_validation_panel": [
+            "ALMI",
+            "ILMI",
+            "LAE"
+          ]
+        }
+      },
+      "V3F_vs_V3AG": {
+        "final_weight_elements_per_class": 512,
+        "final_row_numeric_differences": {
+          "ASMI": {
+            "weight_elements_different": 512,
+            "bias_different": true
+          },
+          "LVH": {
+            "weight_elements_different": 512,
+            "bias_different": true
+          },
+          "IMI": {
+            "weight_elements_different": 512,
+            "bias_different": true
+          },
+          "ISC_": {
+            "weight_elements_different": 512,
+            "bias_different": true
+          },
+          "ALMI": {
+            "weight_elements_different": 0,
+            "bias_different": false
+          },
+          "ILMI": {
+            "weight_elements_different": 0,
+            "bias_different": false
+          },
+          "LAE": {
+            "weight_elements_different": 0,
+            "bias_different": false
+          }
+        },
+        "shared_head_tensor_equal": {
+          "head_pathology.0.bias": false,
+          "head_pathology.0.weight": false,
+          "head_pathology.1.bias": false,
+          "head_pathology.1.weight": false
+        }
+      }
+    }
+  },
+  "limitations": [
+    "Embedded confusion counts describe internal development observations, not distinct patients or new test outcomes.",
+    "Tensor row differences do not authenticate direct supervision, gradient history or the consumed training manifest.",
+    "Identical final rows do not imply identical outputs: the shared feature path can differ.",
+    "A matching parent path is not a matching parent digest."
+  ],
+  "contains_checkpoint_tensors_or_record_identifiers": false
+}

@@ -89,6 +89,12 @@ statements are ambiguous. The complete source denominator includes
 unknowns. Normal ECG does not authenticate an NSR endpoint. No operating
 threshold or comprehensive Other classifier is inferred.
 
+The [released backbone audit](RELEASE_HEAD_SUPPORT.md) verifies both
+published checkpoint payloads separately. V3AG and V3F have different
+fine-tuning rhythm subsets despite sharing a global output contract;
+the embedded V3AG Flutter/Paced panels must not be attributed to V3F
+or to the released P4 specialist. This audit adds no inference results.
+
 The [new PTB-XL pathology protocol](../../configs/reviewer_experiments/november_pathology_other.json)
 defines the explicit statement endpoints ALMI, ILMI and LAO/LAE (combined
 overload/enlargement, not isolated LAE), and evaluates their union as a
