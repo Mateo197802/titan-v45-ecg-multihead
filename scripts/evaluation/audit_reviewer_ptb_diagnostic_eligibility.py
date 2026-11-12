@@ -42,7 +42,7 @@ def source_references(header, config):
     condition, territory = fields[config["condition_field"]], fields[config["territory_field"]]
     if len(condition) > 1 or len(territory) > 1:
         return {key: "discordant_header" for key in config["territories"]}
-    no_territory = not territory or territory <= {"n/a", "na", "none", "-", ""}
+    no_territory = territory <= set(config.get("explicit_no_territory", ["n/a", "na", "none", "-", ""]))
     return {key: (
         "positive" if condition == {config["required_condition"]} and territory == {name}
         else "explicit_control" if condition == {config["explicit_control"]} and no_territory
@@ -76,13 +76,15 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
+    parser.add_argument("--verified-source-dir", type=Path)
     args = parser.parse_args()
     config = json.loads(args.config.read_bytes())
     base = config["source_url"]
     if base != "https://physionet.org/files/ptbdb/1.0.0/":
         raise ValueError("unexpected source/version")
-    names = fetch(base, "RECORDS")
-    checks = fetch(base, config["source_manifest"])
+    source = args.verified_source_dir
+    names = (source / "RECORDS").read_bytes() if source else fetch(base, "RECORDS")
+    checks = (source / "publisher-SHA256SUMS.txt").read_bytes() if source else fetch(base, config["source_manifest"])
     index = source_manifest(checks.decode("ascii"))
     entries = names.decode("ascii").splitlines()
     if (len(entries) != config["records"] or len(set(entries)) != len(entries)
@@ -94,18 +96,20 @@ def main():
     out.mkdir(mode=0o700)
     (out / "RECORDS").write_bytes(names)
     (out / "publisher-SHA256SUMS.txt").write_bytes(checks)
-    headers = out / "private-headers"
-    headers.mkdir(mode=0o700)
+    headers = (source or out) / "private-headers"
+    if not source:
+        headers.mkdir(mode=0o700)
 
     def header(entry):
         name = entry + ".hea"
-        raw = fetch(base, name)
+        raw = (headers / name).read_bytes() if source else fetch(base, name)
         checksum = sha256(raw)
         if checksum != index[name]:
             raise ValueError("provider header checksum differs")
-        target = headers / name
-        target.parent.mkdir(mode=0o700, exist_ok=True)
-        target.write_bytes(raw)
+        if not source:
+            target = headers / name
+            target.parent.mkdir(mode=0o700, exist_ok=True)
+            target.write_bytes(raw)
         return {"record": entry, "source_subject": entry.split("/")[0], "header_sha256": checksum,
                 "references": source_references(raw, config)}
 
@@ -122,6 +126,7 @@ def main():
         "publisher_checksum_manifest_sha256": sha256(checks), "verified_headers": len(refs),
         "reference_manifest_sha256": digest(private), "endpoints": summarize(refs, config["territories"]),
         "model_performance_computed": False, "historical_independence_certified": False,
+        "reused_verified_headers": bool(source),
         "waveforms_downloaded": False, "no_individual_records_exported": True,
     })
 

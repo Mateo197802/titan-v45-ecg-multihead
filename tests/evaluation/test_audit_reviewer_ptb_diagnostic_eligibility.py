@@ -35,3 +35,12 @@ def test_eligibility_uses_subjects_instead_of_repeated_ecgs(audit):
     e = audit.summarize(refs, ["ASMI"])["ASMI"]
     assert e["record_states"]["positive"] == 6 and e["subject_states"]["positive"] == 1
     assert not e["eligible_for_territory_control_comparison"]
+
+
+def test_amendment_accepts_explicit_control_no_but_not_other_disease(audit):
+    v2 = json.loads((ROOT / "configs/reviewer_experiments/ptb_diagnostic_eligibility_v2.json").read_bytes())
+    no = b"\n# Acute infarction (localization): no"
+    assert set(audit.source_references(b"# Reason for admission: Healthy control" + no, v2).values()) == {
+        "explicit_control",
+    }
+    assert set(audit.source_references(b"# Reason for admission: Dysrhythmia" + no, v2).values()) == {"unknown"}
