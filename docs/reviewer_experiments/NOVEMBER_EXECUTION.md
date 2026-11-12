@@ -54,6 +54,21 @@ The complementary PTB-XL job uses 49e520c0d29b81fcc7f584663c4b5b9ad1fe7b64.
 The joint selective job uses 772ec3558d952127fb098cad89d01bb808a8bda9.
 Submission is not completion; the registry does not assert results.
 
+## Result verification
+
+Run `scripts/evaluation/verify_reviewer_november_delivery.py` inside the
+CEDIA access environment with `--phase-root` and `--history-root` pointing
+to the two experimental run roots. This is read-only except for an optional
+new `--output` receipt and does not submit a SLURM job. It uses native
+`sacct`, validates producer checksums where present, reconciles scientific
+denominators and checks hashes of private ledgers/models in place. The
+receipt lists only aggregate candidates, hashes and job states. A pending
+job is not a failed verification; a successful job with a missing or
+invalid result is. Legacy replay writers without an output checksum are
+marked explicitly, and the contrast checks their runner aggregate hashes.
+The verifier does not copy or publish any output. Review the interpretation
+and disclosure boundaries separately before exporting an aggregate.
+
 The [population contrast protocol](../../configs/reviewer_experiments/november_population_contrast.json)
 uses the same frozen predictions for both denominators. Its restricted
 SPH subset requires at least one defensibly mapped statement for the
