@@ -179,6 +179,7 @@ def run(args):
     import h5py
     import torch
     from probe_frozen import load_scorers
+    from verify_code15_evaluation import verify
 
     protocol = json.loads(PROTOCOL.read_bytes())
     config = protocol["evaluation"]
@@ -367,6 +368,7 @@ def run(args):
         writer = csv.DictWriter(stream, fieldnames=list(csv_rows[0]), lineterminator="\n")
         writer.writeheader()
         writer.writerows(csv_rows)
+    verification = verify(args.output)
     result = {"protocol_sha256": digest(PROTOCOL), "candidate_receipt_sha256": digest(receipt_path),
               "archive_sha256": archive_hashes, "baseline_hashes": hashes, "counts": stats,
               "historical_aligned_signatures": len(history), "historical_ineligible": unavailable,
@@ -377,6 +379,7 @@ def run(args):
               "private_scores_sha256": digest(args.output / "private_scores.npz"),
               "private_selection_sha256": digest(args.output / "private_selection.json"),
               "aggregate_csv_sha256": digest(table), "promotion": decisions}
+    result["point_estimates_independently_verified"] = verification
     output = json.dumps(result, indent=2, sort_keys=True) + "\n"
     (args.output / "code15_evaluation_receipt.json").write_bytes(output.encode())
     print(output, end="")

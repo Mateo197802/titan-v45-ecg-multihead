@@ -1,7 +1,6 @@
 from pathlib import Path
 
 import numpy as np
-import pytest
 
 
 def test_paired_metrics_mask_unknown_and_protect_support(monkeypatch):
@@ -38,4 +37,14 @@ def test_bounded_adapter_is_not_unanchored(monkeypatch):
     adjusted = residual_logits(x, initial, np.zeros(1), np.ones(1), theta, 1.5)
     assert iterations > 0
     assert adjusted[0] < 0 < adjusted[-1]
-    assert np.max(np.abs(adjusted)) <= pytest.approx(1.5).expected
+    assert np.max(np.abs(adjusted)) <= 1.5
+
+
+def test_independent_verifier_handles_ranking_ties(monkeypatch):
+    monkeypatch.syspath_prepend(str(Path(__file__).resolve().parents[2] / "scripts/external_validation"))
+    from evaluate_code15 import estimates
+    from verify_code15_evaluation import independent_estimates
+
+    y = np.array([1, 0, 1, 0])
+    scores = np.array([.8, .8, .7, .1])
+    assert independent_estimates(y, scores, .75) == estimates(y, scores >= .75, scores)
