@@ -1,0 +1,38 @@
+{
+  "schema": "TITAN_V45_SCIENTIFIC_READINESS_V1",
+  "status": "WORKING_NOT_FINAL_VERIFIED",
+  "original_manuscript_edited": false,
+  "historical_rubric_rescored": false,
+  "comments": {
+    "R1-2": {
+      "scientific_status": "PARTIAL_EVIDENCE",
+      "may_retain": "Original selected-panel results under their own denominators.",
+      "may_add_after_author_review": "Full source scoring, matched denominator contrast, known-reference and executed route estimates.",
+      "must_not_claim": "End-to-end diagnostic performance, population predictive values, or a historical downstream cascade.",
+      "essential_for_broader_claim": "Reference-complete representative population and executed route-specific follow-up."
+    },
+    "R2-general": {
+      "scientific_status": "PARTIAL_EVIDENCE",
+      "may_retain": "Actual checkpoint-specific direct loss and published specialist scope.",
+      "may_add_after_author_review": "Bounded mapped Other results, individual class dispositions and explicit unknowns.",
+      "must_not_claim": "One validated all-class Other model, clinical LAE/LQTS validation, or original-head provenance for new fits.",
+      "essential_for_broader_claim": "Compatible reference controls, adequate positive support and validated frozen outputs for excluded classes."
+    },
+    "R2-3f": {
+      "scientific_status": "SCIENTIFICALLY_SATISFIED_WITH_LIMITATIONS",
+      "may_retain": "Ten candidate proxies and runtime concatenation verified on the pinned reconstructed scorer.",
+      "may_add_after_author_review": "Executable input contract, observed widths, matched head ablation and remaining replay differences.",
+      "must_not_claim": "Byte-identical historic replay, verified original loader, universally beneficial or clinically validated features.",
+      "essential_for_broader_claim": "Original loader and numerical provenance for historical equivalence; complete backbone study only for a backbone-wide causal claim."
+    },
+    "R2-4k": {
+      "scientific_status": "SCIENTIFICALLY_SATISFIED_WITH_LIMITATIONS",
+      "historical_disposition": "WITHDRAW_HISTORICAL_CLAIM",
+      "may_retain": "Native threshold sets and fallback are ordinary model outputs, not clinical quarantine.",
+      "may_add_after_author_review": "Separate post-study abstention study, with eligible and conditional denominators distinguished.",
+      "must_not_claim": "Historic operational quarantine rate, clinical effectiveness, a second stage or human review.",
+      "essential_for_broader_claim": "Historical ledger for historical attribution; independently verified clinical pathway and outcomes for clinical utility."
+    }
+  },
+  "protected_scope": ["manuscript", "abstract", "conclusions", "figures", "reviewer_letter", "released_weights", "existing_PRs_3_4_5_7_8"]
+}

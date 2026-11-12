@@ -1,0 +1,56 @@
+{
+  "schema": "TITAN_V45_CLOSURE_EXPERIMENT_PROVENANCE_V1",
+  "status": "WORKING_AWAITING_FINAL_NATIVE_RECEIPT",
+  "starting_branch": "codex/titan-v45-four-reviewer-experiments",
+  "starting_commit": "bf081e9c2fd62704821f56d614399d7d0eb6e656",
+  "experiment_branch": "codex/titan-v45-scientific-closure",
+  "draft_pr": "Mateo197802/titan-v45-ecg-multihead#9",
+  "original_review_sha256": "fa20747434b7ecabf1ed9fa4189f94a9884418e2c0a2a2d439d02ca14eb3f427",
+  "historical_rubric_sha256": "275c28fa96d2429b4cbfca366196fd0fef195041a991a7a623d36f0fa7a8efa5",
+  "protocols": {
+    "LUDB": {
+      "frozen_commit": "208f7b4abfb409d77c4a370cdb7aa768a8364b82",
+      "config_sha256": "d4f8157e762ba411781c5a04f0b0a7a51a2ff7cd764ffe0bc2bfae1681d6ef6f",
+      "archive_sha256": "d03192c7361ab5deeaba3f0d46e274b9ecb0b74c9caf8964151e20f1b5a7df06",
+      "bootstrap_seed": 197837
+    },
+    "PTB_Diagnostic": {
+      "frozen_commit": "f37f6ca7f6836d550798e973141d70062686e68f",
+      "config_sha256": "3975bb5a8f2bcade7f559146d1c3f30a5553728b8ac94d84f40c4cec3c4d9db2",
+      "archive_sha256": "61e00fc9f38a391fc2a0d757dfa6a02a3f915ad7f0095f747e9c44df395371d3",
+      "bootstrap_seed": 197839
+    }
+  },
+  "executions": {
+    "33697": {
+      "scope": "LUDB all-release scoring and joint routing before reference access",
+      "code": "cb17ac132dd3242192d9996f51129a48e06b5d32",
+      "receipt_sha256": "73e5a4a9944a03c2c4a549f80e8ae9fa280d328f31fc925b910385ed8aac41c4"
+    },
+    "33699": {
+      "scope": "Original LUDB evaluator",
+      "code": "baceb368a08352b6ea74798f1c77159ef1ec139a",
+      "aggregate_sha256": "12ad265b5e9bd4a455c20aa2f46362a9beeface1831d1ffd731cb9fbf09bc47a",
+      "status": "SUPERSEDED_MULTILINE_REFERENCE_GRAMMAR"
+    },
+    "33720": {
+      "scope": "Versioned reference grammar correction on the immutable 33697 scores and routes",
+      "code": "10140a0b7c45e792106d3e9c08c8e93ddf3e5c1b"
+    },
+    "33704": {
+      "scope": "Matched-head morphology comparison robustness; reuses sealed 33474 fits and 33596 evaluation",
+      "code": "d89dbc05c67b29d6cf7954ea2763d3b068d16775"
+    },
+    "33718": {
+      "scope": "PTB Diagnostic frozen whole-source scoring, then explicit territory/control comparisons",
+      "code": "1ca453f0d4ba1a4438a3c6e8873242444c6bb755"
+    }
+  },
+  "model_and_policy_bindings": {
+    "original_model_hashes": "outputs/results/reviewer_closure_experiments/ludb_scoring_receipt.json#model_hashes",
+    "SPH_joint_policy_sha256": "c9183320a4dd923f037a93fc014fc2db6bc64f223ff67b5d297e540eefb43ae6",
+    "SPH_rhythm_Other_fit_sha256": "ae8fab7cb5b54a89c38a7e21f99f8b1da10f5cc7d02fa3702283efd73ba129ba",
+    "PTBXL_pathology_Other_fit_sha256": "d3fa39467877354e8b6d438380a965135fe0c5f7aa0d266c27f7417290b7c7ec"
+  },
+  "no_individual_records_exported": true
+}

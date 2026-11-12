@@ -1,0 +1,40 @@
+{
+  "schema": "TITAN_V45_CLOSURE_PARTITION_ASSESSMENT_V1",
+  "status": "WORKING_AWAITING_TRANSPORT_NATIVE_RESULTS",
+  "SPH_policy_isolation": {
+    "receipt": "outputs/results/reviewer_closure_experiments/sph_split_and_policy_audit.json",
+    "receipt_sha256": "f133cec9ba402ff7fb19ccf5ecaba8daae66c4f492829e3d0f13caa356fbd2d7",
+    "jobs": [33362, 33414],
+    "ECGs": {"calibration": 12901, "held": 12869},
+    "unique_source_subjects": {"calibration": 12340, "held": 12326},
+    "unique_exact_signal_digests": {"calibration": 12807, "held": 12795},
+    "cross_split_overlap": {"subject": 0, "exact_signal": 0, "connected_component": 0},
+    "exact_cutoffs_rederived": true,
+    "scope": "Isolation between the two partitions of the November SPH policy study, not independence from historical development."
+  },
+  "LUDB_transport": {
+    "full_release_scored": 200,
+    "source_subjects_per_provider": 200,
+    "target_training_or_calibration_ecgs": 0,
+    "native_scoring_job": 33697,
+    "native_reference_audit_job": 33720,
+    "source_key_scope": "Provider's one-record-per-subject documentation; not a cross-provider subject identifier.",
+    "same_encoding_only": "Native audit compares exact raw signal bytes against retained Stage A inventory, not near-duplicate or cross-encoding waveform equivalence."
+  },
+  "PTB_Diagnostic_transport": {
+    "source_eligible_ecgs": 549,
+    "source_subjects": 290,
+    "target_training_or_calibration_ecgs": 0,
+    "native_evaluation_job": 33718,
+    "reference_source": "PTB Diagnostic v1.0.0 original header fields",
+    "fit_source": "Original P4 versus separately fitted PTB-XL Other heads are distinct; no target fitting and no PTB-XL fold 10.",
+    "uncertainty_unit": "Source subject and exact file-signal components"
+  },
+  "historical_isolation": {
+    "certified": false,
+    "missing": "Complete historical patient and signal inventory, cross-provider patient link and ancestry of all model inputs.",
+    "positive_overlap_evidence": "CODE-test is named in previously released specialist manifests, so it is not a new untouched historical test.",
+    "not_proven_by": ["different archive SHA-256", "distinct source name", "zero same-encoding raw signal overlap", "a source-specific subject identifier"]
+  },
+  "no_individual_records_exported": true
+}
