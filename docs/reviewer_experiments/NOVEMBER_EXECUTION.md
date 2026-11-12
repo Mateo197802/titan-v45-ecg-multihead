@@ -32,7 +32,8 @@ real second-stage inference are not implied by abstention.
 | 33364 | Rerun saved rhythm waveform panels | Rhythm source cfe6d59fa5cc4be10de0d7c6803fa5208fae0072 | Private replay ledger |
 | 33365 | Audit historical panel residuals and decisions | afterok:33363:33364 | Aggregate decision and score differences |
 | 33369 | Mapped auxiliary ranking and observable Other support | afterok:33355 | Complete-denominator reference states and ranking on explicit compatible controls |
-| 33373 | Paired zero-morphology sensitivity with immutable released weights | afterok:33363:33364 | Score/decision changes, not retraining |
+| 33373 | Initial zero-morphology sensitivity submission | Held before execution: pinned P4 runner has no extractor-loader hook | Preserved preflight rejection; do not release |
+| 33416 | Corrected paired zero-morphology sensitivity with immutable released weights | afterok:33363:33364 | Score/decision changes, not retraining |
 | 33381 | Fresh paired extraction, matched retraining, calibration seal, held comparison | afterok:33355:33363:33364 | Private models plus aggregate paired intervals and original-baseline comparison |
 | 33390 | New PTB-XL auxiliary and bounded pathology Other heads | afterok:33355:33369 | Complete reference flow, held metrics and patient intervals for supported endpoints |
 | 33396 | New SPH mapped rhythm Other and auxiliary heads vs frozen-score comparator | afterok:33355:33369 | Paired held development metrics and full reference/scoring flow |
@@ -43,6 +44,7 @@ real second-stage inference are not implied by abstention.
 
 The submitted baseline uses experiment commit f989eccf74d38399d0298026e6f4c078a437fd2d.
 The comparison job uses 891dacbca23d7685117f836f98bc3dd1482bb1af.
+The corrected sensitivity job uses d2589a5e0a8d3174710d24e29b14d8b1fd385eea.
 The matched retraining job uses 648c5a4b784b2307376d620eeb03fc0bb5d3198a.
 The pathology Other job uses 6baab4228767219c048d8989a35a70e3bb2219fa.
 The rhythm Other job uses 72dd436cd5a9e8ec397fccd1e70b9aa1abed4efe.
@@ -83,6 +85,12 @@ validation cohort and is not a replacement for the SPH denominator.
 
 The [morphology input contract](MORPHOLOGY_INPUT_CONTRACT.md) gives the formulas
 and separates waveform replay, fixed-weight sensitivity and retraining.
+The corrected sensitivity job intercepts the extractor argument at the
+pinned waveform preparation boundary. It leaves the loader source and
+candidate extractor unchanged, including their integrity checks. The
+verified P6 manifest defines its 1,643 intended ECGs independently
+of the 2,193 ECG shared rhythm ledger. An unscored eligible P6 record
+remains in its denominator; a P8-only ECG is not a missing P6 score.
 Job 33403 authenticates the previous native ledgers and receipts from
 32448 and 32461 and the archived prediction tables separately. It
 records exact native byte agreement if observed, but can also quantify
