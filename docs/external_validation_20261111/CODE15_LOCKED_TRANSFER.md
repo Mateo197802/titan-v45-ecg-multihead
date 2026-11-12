@@ -1,0 +1,17 @@
+# CODE-15% locked transfer in PR #6
+
+The [publisher release](https://zenodo.org/records/4916206) defines the 400 Hz waveform and published lead order, centered zero-padding for 7 s and 10 s records, and structured binary annotations. The [frozen contract](FROZEN_CODE15_PROTOCOL.json) uses AF, SB, ST, RBBB and 1dAVb as benchmark labels, not independent adjudication. Unspecified flags are missing, not negative. Only a 10 s record that survives signal checks can enter the shared baseline/candidate population.
+
+The first archive (`exams_part10.zip`) was chosen by the existing label-blind transport rule. The fixed patient-hash rule is the same across all 18 archives; no labels, quality scores or performance select the sample. The first-archive result, if executed, cannot promote a model or be represented as population-wide. Keep both models and both score policies frozen after opening CODE results. No model revision, recalibration, or endpoint selection based on CODE is allowed. A full-population continuation should reuse any already scored identical shard rows rather than rerunning that checkpoint.
+
+## Training and promotion
+
+One bounded residual adapter per P6/P8 adjusts only the five shared logits. It uses the previously verified Stage A training cache with observed, masked supervision from Chapman and CPSC, inverse window multiplicity, equal observed source weight, and training-only capped positive weighting. Chapman validation is descriptive, not a candidate search. Published thresholds stay unchanged. The primary comparison evaluates independent per-class binary calls; P8's top-1 fallback is not injected into those calls.
+
+Stage A's development objective was +0.02 macro-F1 and no sensitivity drop greater than 0.03. PR #6 specifies a separate external-transfer criterion: +0.03 or more, paired patient-bootstrap lower 95% bound above zero, and no class sensitivity drop greater than 0.05; macro Brier deterioration and the increase in five-endpoint empty-call fraction must each be no larger than 0.01. A complete sample and sufficient reference in all five endpoints are required. The sensitivity margins are different and are not retroactively substituted. Failure or insufficient support remains visible.
+
+## Overlap and P4
+
+The executable overlap screen compares aligned, normalized 12-lead signatures with comparable CODE-test waveforms from the SHA-verified historical rhythm archive and screens near duplicates within the acquired CODE sample. This cannot rule out shifts, crops, differing acquisition pipelines or unknown pretraining exposure. Patient keys are meaningful only within the publisher's source. Do not label the historical backbone as certified independent.
+
+CODE-15% does not provide the P4 label contract. The [PTB Diagnostic ECG Database](https://physionet.org/content/ptbdb/1.0.0/) is an additional candidate for an infarct localization reference audit, with patient identifiers, documented acquisition and healthy controls. Patient-level infarction history or location is not automatically a positive ECG manifestation, hypertrophy is not automatically LVH, and nonspecific ischemia is not ISC_. PTBDB also appears in [Challenge 2020](https://physionet.org/content/challenge-2020/1.0.2/); historical exposure must be checked before any external-independence claim. No new P4 training or evaluation is released without a defensible endpoint-level contract. Previously inspected PTB-XL/SPH outcomes are not a new independent test.

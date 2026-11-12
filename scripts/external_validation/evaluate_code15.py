@@ -237,6 +237,28 @@ def run(args):
     old = {profile: [] for profile in config["profiles"]}
     new = {profile: [] for profile in config["profiles"]}
     pending = []
+    if args.reuse_partial is not None:
+        if set(archives) != names:
+            raise ValueError("partial scores may only resume the full evaluation")
+        prior = json.loads((args.reuse_partial / "code15_evaluation_receipt.json").read_bytes())
+        prior_cache = args.reuse_partial / "private_shard_cache.npz"
+        prior_ledger = args.reuse_partial / "private_selection.json"
+        if (prior["protocol_sha256"] != digest(PROTOCOL)
+                or prior["candidate_receipt_sha256"] != digest(receipt_path)
+                or prior["private_shard_cache_sha256"] != digest(prior_cache)
+                or prior["private_selection_sha256"] != digest(prior_ledger)
+                or prior["archive_sha256"] != {"exams_part10.zip": digest(code / "exams_part10.zip")}):
+            raise ValueError("partial cache provenance mismatch")
+        archive_hashes.update(prior["archive_sha256"])
+        stats.update(prior["counts"])
+        excluded.extend(json.loads(prior_ledger.read_bytes())["excluded_before_scoring"])
+        with np.load(prior_cache, allow_pickle=False) as cache:
+            index_rows.extend((int(exam), patient, y.tolist(), "exams_part10.zip")
+                              for exam, patient, y in zip(cache["exams"], cache["patients"], cache["labels"], strict=True))
+            sigs.extend(cache["signatures"])
+            for profile in old:
+                old[profile].append(cache["baseline_" + profile])
+                new[profile].append(cache["candidate_" + profile])
 
     def flush():
         if not pending:
@@ -259,6 +281,8 @@ def run(args):
         pending.clear()
 
     for name in archives:
+        if name in archive_hashes:
+            continue
         h5path = verified_hdf5(code, name, catalog, args.scratch)
         archive_hashes[name] = digest(code / name)
         try:
@@ -304,6 +328,14 @@ def run(args):
     if not index_rows:
         raise ValueError("no CODE records survived common eligibility")
     matrix = np.stack(sigs)
+    raw = {f"{kind}_{profile}": np.concatenate(values[profile])
+           for kind, values in (("baseline", old), ("candidate", new)) for profile in old}
+    cache_path = args.output / "private_shard_cache.npz"
+    if set(archives) != names:
+        np.savez_compressed(cache_path, signatures=matrix,
+                            exams=np.asarray([row[0] for row in index_rows]),
+                            patients=np.asarray([row[1] for row in index_rows]),
+                            labels=np.asarray([row[2] for row in index_rows]), **raw)
     duplicate = set()
     for start in range(0, len(matrix), 128):
         for i, j in zip(*np.nonzero(matrix[start:start + 128] @ matrix.T >= 0.995), strict=True):
@@ -316,8 +348,7 @@ def run(args):
     patients = np.asarray([index_rows[i][1] for i in keep])
     np.savez_compressed(args.output / "private_scores.npz", labels=labels, patients=patients,
                         exams=np.asarray([index_rows[i][0] for i in keep]),
-                        **{f"{kind}_{profile}": np.concatenate(values[profile])[keep]
-                           for kind, values in (("baseline", old), ("candidate", new)) for profile in old})
+                        **{key: value[keep] for key, value in raw.items()})
     ledger = {"excluded_before_scoring": excluded, "aligned_duplicate_exams": [index_rows[i][0] for i in sorted(duplicate)],
               "eligible_exams": [index_rows[i][0] for i in keep]}
     (args.output / "private_selection.json").write_text(json.dumps(ledger, sort_keys=True))
@@ -340,6 +371,8 @@ def run(args):
               "historical_aligned_signatures": len(history), "historical_ineligible": unavailable,
               "historical_patient_independence": "NOT_CERTIFIED", "within_code_duplicate_ecgs_excluded": len(duplicate),
               "n_ecg": len(keep), "n_patients": len(set(patients)), "complete_archive_coverage": set(archives) == names,
+              "reused_verified_first_archive": args.reuse_partial is not None,
+              "private_shard_cache_sha256": digest(cache_path) if cache_path.exists() else None,
               "private_scores_sha256": digest(args.output / "private_scores.npz"),
               "private_selection_sha256": digest(args.output / "private_selection.json"),
               "aggregate_csv_sha256": digest(table), "promotion": decisions}
@@ -353,4 +386,5 @@ if __name__ == "__main__":
     for arg in ("study", "candidates", "assets", "historical", "scratch", "output"):
         parser.add_argument("--" + arg, type=Path, required=True)
     parser.add_argument("--archives", nargs="+")
+    parser.add_argument("--reuse-partial", type=Path)
     run(parser.parse_args())

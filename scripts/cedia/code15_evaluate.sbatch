@@ -13,6 +13,7 @@ assets=${3:?released assets}
 historical=${4:?released historical rhythm archive}
 deps=${5:?dependency tar}
 hdf5deps=${6:?HDF5 dependency tar}
+previous=${7:-}
 module load pytorch/2.2
 scratch=$(mktemp -d "${SLURM_TMPDIR:-/tmp}/titan-code-eval-XXXXXX")
 trap 'rm -rf "$scratch"' EXIT
@@ -24,7 +25,11 @@ export OPENBLAS_NUM_THREADS=4 MKL_NUM_THREADS=4 OMP_NUM_THREADS=4
 cd "$repo"
 test -z "$(git status --porcelain)"
 git rev-parse HEAD
+scope=(--archives exams_part10.zip)
+if [[ -n "$previous" ]]; then
+    scope=(--reuse-partial "$previous")
+fi
 python -B -u scripts/external_validation/evaluate_code15.py \
     --study "$study" --assets "$assets" --historical "$historical" \
     --candidates "$study/code15_frozen_candidates" --scratch "$scratch/work" \
-    --output "$study/code15-evaluation-$SLURM_JOB_ID" --archives exams_part10.zip
+    --output "$study/code15-evaluation-$SLURM_JOB_ID" "${scope[@]}"
