@@ -56,8 +56,9 @@ does not substitute for independent institutional confirmation.
 | 33693 | Frozen, robust shared gain | 85143 | 0.273308 | 0.298860 |
 | 33694 | Partial Transformer, per-lead | 9933463 | 0.467045 | 0.452656 |
 | 33696 | Partial Transformer + ResNet, per-lead | 16992199 | 0.550205 | 0.582790 |
+| 33701 | MIMIC SSL warm start + partial Transformer | 9933463 | 0.473650 | 0.478860 |
 
-All four jobs completed with exit code `0:0`. AP and F1 are macro averages on
+All five jobs completed with exit code `0:0`. AP and F1 are macro averages on
 the same five CODE validation endpoints at each arm's best validation AP epoch.
 The ResNet arm improved validation F1 by 0.164822 over the per-lead frozen
 control, so the insufficient-within-CODE-improvement condition for full fine-
@@ -70,6 +71,10 @@ Its masked reconstruction loss decreased from 0.311588 to 0.295683. This
 checks the self-supervised objective, not diagnostic transfer. The receipt
 and its [two-epoch trace](evidence/mimic_ssl/SSL_LEARNING_CURVES.csv) are
 sealed separately from the downstream CODE supervised comparison.
+The supervised warm start exceeded the corresponding Transformer-only arm by
+0.006605 macro-AP and 0.026203 F1 in this initial seed, but did not beat the
+Transformer plus ResNet arm. These differences are development observations,
+not a paired statistical claim about transfer to another institution.
 
 The [run table](evidence/TRAINING_EXPERIMENTS_COMPLETE.csv),
 [learning curves](evidence/FINETUNING_LEARNING_CURVES.csv), and
@@ -98,3 +103,5 @@ is a useful technical audit candidate but cannot support all five endpoints at
 the registered minimum of 20 positive and negative patients per class. For P4,
 the exact ECG-level phenotype, timing and anatomical labels must be compatible;
 history of infarction and nonspecific ischemia codes are not substitutes.
+The authors reported that HEEDB access and CEDIA processing permission are not
+confirmed. No download or evaluation was attempted for this source.
