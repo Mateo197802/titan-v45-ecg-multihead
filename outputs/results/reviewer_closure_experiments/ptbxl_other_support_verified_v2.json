@@ -1,0 +1,621 @@
+{
+  "schema": "TITAN_V45_PTBXL_OTHER_SUPPORT_V2",
+  "source_doi": "10.13026/kfzx-aw45",
+  "source_scoring_job": 33410,
+  "source_input_sha256": {
+    "metadata": "7600de9c1b27d181d850b3c6038a35d7c3ddb6bb33b702e3a20252a6859d216b",
+    "dictionary": "ad05b0b1fcae83bb1230755ad9cfc7c96f303feddc08a4a9ad5bdc9ca63bac8f",
+    "inventory": "798866dc1dc00d3e81c9fda28711dd0ea57fb57a7fc2ac0a415ad20a97f17107"
+  },
+  "source_score_receipt_sha256": "16447ad196a1881606db8b027a4fb762783caa82706af7ecbf3fee0b9451574b",
+  "source_private_score_ledger_sha256": "9148bc59bb725ae4d34e665293fb6dc3a55783cdb70ca9d3448f6ef9c3c1a08a",
+  "fold10_reference_parsed": false,
+  "fold10_waveforms_accessed": false,
+  "historical_independence_certified": false,
+  "inference_or_performance_estimation": false,
+  "metadata_ecgs": 19601,
+  "source_subjects": 16965,
+  "cached_records": 6205,
+  "eligible_ecgs_by_fold": {
+    "3": 2192,
+    "2": 2181,
+    "5": 2174,
+    "4": 2174,
+    "7": 2176,
+    "9": 2183,
+    "8": 2173,
+    "6": 2173,
+    "1": 2175
+  },
+  "fold10_metadata_count_only": 2198,
+  "cached_exact_signal_groups_crossing_folds_1_9": 0,
+  "distinct_cached_exact_signal_groups": 6205,
+  "profile_scoring_flow": {
+    "P8": {
+      "scored": 6205,
+      "not_in_authorized_preflight": 13396
+    },
+    "P4": {
+      "scored": 6205,
+      "not_in_authorized_preflight": 13396
+    },
+    "P6": {
+      "scored": 6205,
+      "not_in_authorized_preflight": 13396
+    }
+  },
+  "source_pacing_marker_flow": {
+    "blank": 19339,
+    "explicit_marker": 257,
+    "other_nonempty": 5
+  },
+  "no_individual_records_exported": true,
+  "endpoint_support": {
+    "PAC": {
+      "all_folds_1_9": {
+        "ECGs": {
+          "unknown": 12694,
+          "explicit_normal_control": 6549,
+          "ambiguous": 329,
+          "positive": 29
+        },
+        "source_subjects": {
+          "unknown": 10799,
+          "explicit_normal_control": 6190,
+          "ambiguous": 316,
+          "positive": 29
+        }
+      },
+      "P4_scoreable": {
+        "ECGs": {
+          "unknown": 4341,
+          "explicit_normal_control": 1699,
+          "ambiguous": 155,
+          "positive": 10
+        },
+        "source_subjects": {
+          "unknown": 3836,
+          "explicit_normal_control": 1658,
+          "ambiguous": 149,
+          "positive": 10
+        }
+      },
+      "P6_scoreable": {
+        "ECGs": {
+          "unknown": 4341,
+          "explicit_normal_control": 1699,
+          "ambiguous": 155,
+          "positive": 10
+        },
+        "source_subjects": {
+          "unknown": 3836,
+          "explicit_normal_control": 1658,
+          "ambiguous": 149,
+          "positive": 10
+        }
+      },
+      "P8_scoreable": {
+        "ECGs": {
+          "unknown": 4341,
+          "explicit_normal_control": 1699,
+          "ambiguous": 155,
+          "positive": 10
+        },
+        "source_subjects": {
+          "unknown": 3836,
+          "explicit_normal_control": 1658,
+          "ambiguous": 149,
+          "positive": 10
+        }
+      }
+    },
+    "Flutter": {
+      "all_folds_1_9": {
+        "ECGs": {
+          "unknown": 12986,
+          "explicit_normal_control": 6549,
+          "positive": 52,
+          "ambiguous": 14
+        },
+        "source_subjects": {
+          "unknown": 11077,
+          "explicit_normal_control": 6190,
+          "positive": 36,
+          "ambiguous": 14
+        }
+      },
+      "P4_scoreable": {
+        "ECGs": {
+          "unknown": 4486,
+          "explicit_normal_control": 1699,
+          "positive": 13,
+          "ambiguous": 7
+        },
+        "source_subjects": {
+          "unknown": 3969,
+          "explicit_normal_control": 1658,
+          "positive": 9,
+          "ambiguous": 7
+        }
+      },
+      "P6_scoreable": {
+        "ECGs": {
+          "unknown": 4486,
+          "explicit_normal_control": 1699,
+          "positive": 13,
+          "ambiguous": 7
+        },
+        "source_subjects": {
+          "unknown": 3969,
+          "explicit_normal_control": 1658,
+          "positive": 9,
+          "ambiguous": 7
+        }
+      },
+      "P8_scoreable": {
+        "ECGs": {
+          "unknown": 4486,
+          "explicit_normal_control": 1699,
+          "positive": 13,
+          "ambiguous": 7
+        },
+        "source_subjects": {
+          "unknown": 3969,
+          "explicit_normal_control": 1658,
+          "positive": 9,
+          "ambiguous": 7
+        }
+      }
+    },
+    "LBBB": {
+      "all_folds_1_9": {
+        "ECGs": {
+          "unknown": 12570,
+          "explicit_normal_control": 6549,
+          "positive": 482
+        },
+        "source_subjects": {
+          "unknown": 10747,
+          "explicit_normal_control": 6190,
+          "positive": 388
+        }
+      },
+      "P4_scoreable": {
+        "ECGs": {
+          "unknown": 4080,
+          "explicit_normal_control": 1699,
+          "positive": 426
+        },
+        "source_subjects": {
+          "unknown": 3642,
+          "explicit_normal_control": 1658,
+          "positive": 347
+        }
+      },
+      "P6_scoreable": {
+        "ECGs": {
+          "unknown": 4080,
+          "explicit_normal_control": 1699,
+          "positive": 426
+        },
+        "source_subjects": {
+          "unknown": 3642,
+          "explicit_normal_control": 1658,
+          "positive": 347
+        }
+      },
+      "P8_scoreable": {
+        "ECGs": {
+          "unknown": 4080,
+          "explicit_normal_control": 1699,
+          "positive": 426
+        },
+        "source_subjects": {
+          "unknown": 3642,
+          "explicit_normal_control": 1658,
+          "positive": 347
+        }
+      }
+    },
+    "2AVB": {
+      "all_folds_1_9": {
+        "ECGs": {
+          "unknown": 13039,
+          "explicit_normal_control": 6549,
+          "positive": 12,
+          "ambiguous": 1
+        },
+        "source_subjects": {
+          "unknown": 11099,
+          "explicit_normal_control": 6190,
+          "positive": 9,
+          "ambiguous": 1
+        }
+      },
+      "P4_scoreable": {
+        "ECGs": {
+          "unknown": 4493,
+          "explicit_normal_control": 1699,
+          "positive": 12,
+          "ambiguous": 1
+        },
+        "source_subjects": {
+          "unknown": 3969,
+          "explicit_normal_control": 1658,
+          "positive": 9,
+          "ambiguous": 1
+        }
+      },
+      "P6_scoreable": {
+        "ECGs": {
+          "unknown": 4493,
+          "explicit_normal_control": 1699,
+          "positive": 12,
+          "ambiguous": 1
+        },
+        "source_subjects": {
+          "unknown": 3969,
+          "explicit_normal_control": 1658,
+          "positive": 9,
+          "ambiguous": 1
+        }
+      },
+      "P8_scoreable": {
+        "ECGs": {
+          "unknown": 4493,
+          "explicit_normal_control": 1699,
+          "positive": 12,
+          "ambiguous": 1
+        },
+        "source_subjects": {
+          "unknown": 3969,
+          "explicit_normal_control": 1658,
+          "positive": 9,
+          "ambiguous": 1
+        }
+      }
+    },
+    "3AVB": {
+      "all_folds_1_9": {
+        "ECGs": {
+          "unknown": 13038,
+          "explicit_normal_control": 6549,
+          "positive": 14
+        },
+        "source_subjects": {
+          "unknown": 11100,
+          "explicit_normal_control": 6190,
+          "positive": 13
+        }
+      },
+      "P4_scoreable": {
+        "ECGs": {
+          "unknown": 4492,
+          "explicit_normal_control": 1699,
+          "positive": 14
+        },
+        "source_subjects": {
+          "unknown": 3969,
+          "explicit_normal_control": 1658,
+          "positive": 13
+        }
+      },
+      "P6_scoreable": {
+        "ECGs": {
+          "unknown": 4492,
+          "explicit_normal_control": 1699,
+          "positive": 14
+        },
+        "source_subjects": {
+          "unknown": 3969,
+          "explicit_normal_control": 1658,
+          "positive": 13
+        }
+      },
+      "P8_scoreable": {
+        "ECGs": {
+          "unknown": 4492,
+          "explicit_normal_control": 1699,
+          "positive": 14
+        },
+        "source_subjects": {
+          "unknown": 3969,
+          "explicit_normal_control": 1658,
+          "positive": 13
+        }
+      }
+    },
+    "ALMI": {
+      "all_folds_1_9": {
+        "ECGs": {
+          "unknown": 12791,
+          "explicit_normal_control": 6549,
+          "positive": 261
+        },
+        "source_subjects": {
+          "unknown": 10930,
+          "explicit_normal_control": 6190,
+          "positive": 222
+        }
+      },
+      "P4_scoreable": {
+        "ECGs": {
+          "unknown": 4245,
+          "explicit_normal_control": 1699,
+          "positive": 261
+        },
+        "source_subjects": {
+          "unknown": 3774,
+          "explicit_normal_control": 1658,
+          "positive": 222
+        }
+      },
+      "P6_scoreable": {
+        "ECGs": {
+          "unknown": 4245,
+          "explicit_normal_control": 1699,
+          "positive": 261
+        },
+        "source_subjects": {
+          "unknown": 3774,
+          "explicit_normal_control": 1658,
+          "positive": 222
+        }
+      },
+      "P8_scoreable": {
+        "ECGs": {
+          "unknown": 4245,
+          "explicit_normal_control": 1699,
+          "positive": 261
+        },
+        "source_subjects": {
+          "unknown": 3774,
+          "explicit_normal_control": 1658,
+          "positive": 222
+        }
+      }
+    },
+    "ILMI": {
+      "all_folds_1_9": {
+        "ECGs": {
+          "unknown": 12622,
+          "explicit_normal_control": 6549,
+          "positive": 430
+        },
+        "source_subjects": {
+          "unknown": 10830,
+          "explicit_normal_control": 6190,
+          "positive": 373
+        }
+      },
+      "P4_scoreable": {
+        "ECGs": {
+          "unknown": 4228,
+          "explicit_normal_control": 1699,
+          "positive": 278
+        },
+        "source_subjects": {
+          "unknown": 3755,
+          "explicit_normal_control": 1658,
+          "positive": 253
+        }
+      },
+      "P6_scoreable": {
+        "ECGs": {
+          "unknown": 4228,
+          "explicit_normal_control": 1699,
+          "positive": 278
+        },
+        "source_subjects": {
+          "unknown": 3755,
+          "explicit_normal_control": 1658,
+          "positive": 253
+        }
+      },
+      "P8_scoreable": {
+        "ECGs": {
+          "unknown": 4228,
+          "explicit_normal_control": 1699,
+          "positive": 278
+        },
+        "source_subjects": {
+          "unknown": 3755,
+          "explicit_normal_control": 1658,
+          "positive": 253
+        }
+      }
+    },
+    "Paced": {
+      "all_folds_1_9": {
+        "ECGs": {
+          "unknown": 12781,
+          "explicit_normal_control": 6549,
+          "positive": 252,
+          "ambiguous_pacing_reference": 14,
+          "concordant_marker_unknown_scp_likelihood": 5
+        },
+        "source_subjects": {
+          "unknown": 10912,
+          "explicit_normal_control": 6190,
+          "positive": 201,
+          "ambiguous_pacing_reference": 13,
+          "concordant_marker_unknown_scp_likelihood": 5
+        }
+      },
+      "P4_scoreable": {
+        "ECGs": {
+          "unknown": 4238,
+          "explicit_normal_control": 1699,
+          "positive": 252,
+          "ambiguous_pacing_reference": 12,
+          "concordant_marker_unknown_scp_likelihood": 4
+        },
+        "source_subjects": {
+          "unknown": 3771,
+          "explicit_normal_control": 1658,
+          "positive": 201,
+          "ambiguous_pacing_reference": 11,
+          "concordant_marker_unknown_scp_likelihood": 4
+        }
+      },
+      "P6_scoreable": {
+        "ECGs": {
+          "unknown": 4238,
+          "explicit_normal_control": 1699,
+          "positive": 252,
+          "ambiguous_pacing_reference": 12,
+          "concordant_marker_unknown_scp_likelihood": 4
+        },
+        "source_subjects": {
+          "unknown": 3771,
+          "explicit_normal_control": 1658,
+          "positive": 201,
+          "ambiguous_pacing_reference": 11,
+          "concordant_marker_unknown_scp_likelihood": 4
+        }
+      },
+      "P8_scoreable": {
+        "ECGs": {
+          "unknown": 4238,
+          "explicit_normal_control": 1699,
+          "positive": 252,
+          "ambiguous_pacing_reference": 12,
+          "concordant_marker_unknown_scp_likelihood": 4
+        },
+        "source_subjects": {
+          "unknown": 3771,
+          "explicit_normal_control": 1658,
+          "positive": 201,
+          "ambiguous_pacing_reference": 11,
+          "concordant_marker_unknown_scp_likelihood": 4
+        }
+      }
+    },
+    "NSR": {
+      "all_folds_1_9": {
+        "ECGs": {
+          "non_equivalent_proxy": 15074,
+          "unknown": 4527
+        },
+        "source_subjects": {
+          "non_equivalent_proxy": 13529,
+          "unknown": 3968
+        }
+      },
+      "P4_scoreable": {
+        "ECGs": {
+          "non_equivalent_proxy": 4575,
+          "unknown": 1630
+        },
+        "source_subjects": {
+          "non_equivalent_proxy": 4257,
+          "unknown": 1452
+        }
+      },
+      "P6_scoreable": {
+        "ECGs": {
+          "non_equivalent_proxy": 4575,
+          "unknown": 1630
+        },
+        "source_subjects": {
+          "non_equivalent_proxy": 4257,
+          "unknown": 1452
+        }
+      },
+      "P8_scoreable": {
+        "ECGs": {
+          "non_equivalent_proxy": 4575,
+          "unknown": 1630
+        },
+        "source_subjects": {
+          "non_equivalent_proxy": 4257,
+          "unknown": 1452
+        }
+      }
+    },
+    "LQTS": {
+      "all_folds_1_9": {
+        "ECGs": {
+          "unknown": 19495,
+          "non_equivalent_proxy": 106
+        },
+        "source_subjects": {
+          "unknown": 16893,
+          "non_equivalent_proxy": 98
+        }
+      },
+      "P4_scoreable": {
+        "ECGs": {
+          "unknown": 6190,
+          "non_equivalent_proxy": 15
+        },
+        "source_subjects": {
+          "unknown": 5573,
+          "non_equivalent_proxy": 14
+        }
+      },
+      "P6_scoreable": {
+        "ECGs": {
+          "unknown": 6190,
+          "non_equivalent_proxy": 15
+        },
+        "source_subjects": {
+          "unknown": 5573,
+          "non_equivalent_proxy": 14
+        }
+      },
+      "P8_scoreable": {
+        "ECGs": {
+          "unknown": 6190,
+          "non_equivalent_proxy": 15
+        },
+        "source_subjects": {
+          "unknown": 5573,
+          "non_equivalent_proxy": 14
+        }
+      }
+    },
+    "LAE": {
+      "all_folds_1_9": {
+        "ECGs": {
+          "unknown": 19217,
+          "non_equivalent_proxy": 384
+        },
+        "source_subjects": {
+          "unknown": 16669,
+          "non_equivalent_proxy": 365
+        }
+      },
+      "P4_scoreable": {
+        "ECGs": {
+          "unknown": 5901,
+          "non_equivalent_proxy": 304
+        },
+        "source_subjects": {
+          "unknown": 5323,
+          "non_equivalent_proxy": 290
+        }
+      },
+      "P6_scoreable": {
+        "ECGs": {
+          "unknown": 5901,
+          "non_equivalent_proxy": 304
+        },
+        "source_subjects": {
+          "unknown": 5323,
+          "non_equivalent_proxy": 290
+        }
+      },
+      "P8_scoreable": {
+        "ECGs": {
+          "unknown": 5901,
+          "non_equivalent_proxy": 304
+        },
+        "source_subjects": {
+          "unknown": 5323,
+          "non_equivalent_proxy": 290
+        }
+      }
+    }
+  }
+}

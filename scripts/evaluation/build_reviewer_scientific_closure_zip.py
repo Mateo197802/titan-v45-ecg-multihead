@@ -10,7 +10,13 @@ import zipfile
 from pathlib import Path
 
 from verify_reviewer_november_delivery import protected_path, validate_public
-from verify_reviewer_scientific_closure import JOBS, PUBLIC_NAMES, check_ptb, check_scientific
+from verify_reviewer_scientific_closure import (
+    JOBS,
+    PUBLIC_NAMES,
+    check_ptb,
+    check_ptbxl_support,
+    check_scientific,
+)
 
 DOC_ROOT = "docs/reviewer_closure_experiments"
 DATA_ROOT = "outputs/results/reviewer_closure_experiments"
@@ -55,6 +61,7 @@ ALLOWLIST = frozenset((
     "scripts/evaluation/verify_reviewer_scientific_closure.py",
     "scripts/evaluation/verify_reviewer_november_delivery.py",
     "scripts/evaluation/score_reviewer_closure_ludb.py",
+    "scripts/evaluation/audit_reviewer_ptbxl_other_support.py",
     "scripts/evaluation/compare_reviewer_baseline.py",
     "scripts/evaluation/freeze_reviewer_selective_policy.py",
 ))
@@ -113,6 +120,7 @@ def validate_final(blobs):
             raise ValueError(f"artifact producer does not match native receipt: {name}")
     check_scientific(content["score"], content["evaluate"], content["morphology"], content["sph"], checks["score"])
     check_ptb(content["ptb_score"], content["ptb_evaluate"], content["ptb_eligibility"], checks["ptb_score"])
+    check_ptbxl_support(content["ptbxl_support"], checks["ptbxl_support"])
 
 
 def build(root, output):

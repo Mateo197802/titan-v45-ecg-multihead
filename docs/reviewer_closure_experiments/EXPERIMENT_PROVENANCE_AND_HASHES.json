@@ -52,5 +52,13 @@
     "SPH_rhythm_Other_fit_sha256": "ae8fab7cb5b54a89c38a7e21f99f8b1da10f5cc7d02fa3702283efd73ba129ba",
     "PTBXL_pathology_Other_fit_sha256": "d3fa39467877354e8b6d438380a965135fe0c5f7aa0d266c27f7417290b7c7ec"
   },
+  "metadata_audits": {
+    "PTBXL_eleven_class_support": {
+      "sealed_prior_scoring_job": 33410,
+      "code": "e0feb79e372eafc98f4074b79df822c1e131f6fa",
+      "receipt_sha256": "1e758fcb0cc17e7cc15ff8be2fcb7911a6f102d4dd5d673cec440d409a187bcd",
+      "performed_inference": false
+    }
+  },
   "no_individual_records_exported": true
 }

@@ -47,6 +47,29 @@ gave Pathology Other F1 **0.939** on 153 known of 390 held ECGs
 These counts cannot be interpreted as the full set of errors. The aggregates
 retain endpoint support, intervals and calibration where estimable.
 
+### PTB-XL reference availability, not performance
+
+A [read-only CEDIA audit](../../outputs/results/reviewer_closure_experiments/ptbxl_other_support_verified_v2.json)
+reconciled the same 19,601 fold 1-9 records (16,965 source subjects) and
+6,205 scoreable cached ECGs with the sealed 33410 ledger. No fold 10
+references or waveforms were used. For every requested class it records
+positive, normal-control, unknown and ambiguous or proxy ECGs and unique
+source subjects, both in all eligible records and in each scoreable profile.
+Exact cached signal hashes did not cross official folds. These are metadata
+counts, not clinical prevalence or performance.
+
+| Reference in scoreable cache | Positive ECGs / subjects | Explicit normal controls (ECGs / subjects) | Scope |
+|---|---:|---:|---|
+| Paced | 252 / 201 | 1,699 / 1,658 | Positive-likelihood PACE and explicit active pacing marker; 4 additional concordant ECGs with unknown SCP likelihood and 12 ambiguous ECGs were not positives |
+| 2AVB | 12 / 9 | 1,699 / 1,658 | Exact second-degree statement, not inferred from 1AVB |
+| 3AVB | 14 / 13 | 1,699 / 1,658 | Exact third-degree statement; small positive sample |
+
+Normal-only controls are a restricted negative contrast, not confirmed
+absence among all other patients. PTB-XL contributed no compatible direct
+reference for congenital LQTS, isolated LAE or strict NSR in this audit.
+The original 33410 ledger does not contain V3AG global rhythm scores;
+counts alone cannot assign performance to Paced or 3AVB.
+
 ### Reference sources considered
 
 [LUDB](https://physionet.org/content/ludb/1.0.1/) permits a bounded transport

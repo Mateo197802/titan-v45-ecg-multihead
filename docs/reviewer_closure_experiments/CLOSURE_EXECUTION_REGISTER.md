@@ -62,6 +62,18 @@ unmentioned disease as negative. The 80 explicit control ECGs came from
 22 ILMI. This allowed an enriched territory/control test, not a natural
 prevalence or historically independent claim.
 
+The separate [PTB-XL eleven-class support audit](../../outputs/results/reviewer_closure_experiments/ptbxl_other_support_verified_v2.json)
+reused only sealed metadata, inventory and score-availability states of
+job 33410. It did not inspect score values, fit or infer any models, or
+read fold-10 references or waveforms. Code `55d5e08` stopped at the
+dictionary gate before reading cohort rows: the release contains distinct
+2AVB and 3AVB codes. Code `402f0f5` authenticated that dictionary but did
+not recognize the provider's explicit composite pacing marker (superseded
+aggregate SHA-256 `518af21e99e09307fde652fdd6d9a8f08a63fbce625626cd1386ec6fa7d74f39`).
+The authoritative grammar in `e0feb79` accepts the explicit marker,
+does not treat unclear tokens or zero SCP likelihood as positive, and
+reconciles all partitions. Neither correction used model performance.
+
 ## Run and verify
 
 Run launchers under SLURM on CEDIA with approved private release assets

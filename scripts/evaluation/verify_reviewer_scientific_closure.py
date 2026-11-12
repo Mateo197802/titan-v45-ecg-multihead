@@ -22,12 +22,15 @@ PUBLIC_NAMES = {
     "ptb_evaluate": "ptb_diagnostic_transport_aggregate.json",
     "ptb_eligibility": "ptb_diagnostic_eligibility_verified_v2.json",
     "ptb_eligibility_superseded": "ptb_diagnostic_eligibility_superseded_v1.json",
+    "ptbxl_support": "ptbxl_other_support_verified_v2.json",
 }
 SPH_SHA256 = "f133cec9ba402ff7fb19ccf5ecaba8daae66c4f492829e3d0f13caa356fbd2d7"
 POLICY_SHA256 = "c9183320a4dd923f037a93fc014fc2db6bc64f223ff67b5d297e540eefb43ae6"
 PTB_ELIGIBILITY_SHA256 = "fc179fe166b340c37b1372201243c4d48268d0270d691562a3187b706fa94eaf"
 PTB_SUPERSEDED_SHA256 = "4e97e47839971f35f81333f46458ba6ab8ea01c1f3bf81c7b15fa58fc84547f9"
 PTB_PROTOCOL_SHA256 = "3975bb5a8f2bcade7f559146d1c3f30a5553728b8ac94d84f40c4cec3c4d9db2"
+PTBXL_SUPPORT_COMMIT = "e0feb79e372eafc98f4074b79df822c1e131f6fa"
+PTBXL_SUPPORT_SHA256 = "1e758fcb0cc17e7cc15ff8be2fcb7911a6f102d4dd5d673cec440d409a187bcd"
 SCORE_STATES = {"scored", "technical_unscored"}
 ROUTES = {"accepted", "abstained", "technical_unscored"}
 
@@ -126,6 +129,27 @@ def check_ptb(score, result, eligibility, score_hash):
                 raise ValueError("PTB endpoint reference flow does not reconcile")
 
 
+def check_ptbxl_support(audit, receipt_hash):
+    if (receipt_hash != PTBXL_SUPPORT_SHA256 or audit["metadata_ecgs"] != 19601
+            or audit["source_subjects"] != 16965 or audit["cached_records"] != 6205
+            or audit["cached_exact_signal_groups_crossing_folds_1_9"] != 0
+            or audit["fold10_reference_parsed"] or audit["fold10_waveforms_accessed"]
+            or audit["historical_independence_certified"] or audit["inference_or_performance_estimation"]):
+        raise ValueError("PTB-XL support receipt does not preserve scope or source seal")
+    targets = {"NSR", "PAC", "Flutter", "Paced", "LBBB", "2AVB", "3AVB", "LQTS", "ALMI", "ILMI", "LAE"}
+    support = audit["endpoint_support"]
+    denominators = {"all_folds_1_9": 19601, **{f"{p}_scoreable": 6205 for p in ("P6", "P8", "P4")}}
+    if set(support) != targets or any(set(parts) != set(denominators) for parts in support.values()):
+        raise ValueError("PTB-XL audit does not account for all requested classes and profiles")
+    for endpoint, parts in support.items():
+        for split, part in parts.items():
+            counts, subjects = part["ECGs"], part["source_subjects"]
+            if (sum(counts.values()) != denominators[split] or set(counts) != set(subjects)
+                    or any(not 0 < subjects[k] <= n for k, n in counts.items())
+                    or (endpoint in {"NSR", "LQTS", "LAE"} and set(counts) - {"unknown", "non_equivalent_proxy"})):
+                raise ValueError("PTB-XL support counts or diagnostic proxy boundary differ")
+
+
 def native_files(root):
     out = subprocess.check_output([
         "sacct", "-S", "2026-11-12", "-X", "-j", ",".join(sorted(set(JOBS.values()) | {SUPERSEDED_EVALUATION})),
@@ -176,6 +200,9 @@ def native_files(root):
         ref = protected_path(directory, "private-reference-manifest.jsonl")
         if seal_entry(directory, ref) != aggregate["reference_manifest_sha256"]:
             raise ValueError("PTB private reference bytes differ")
+    directory = root / f"ptbxl-other-support-{PTBXL_SUPPORT_COMMIT}"
+    paths["ptbxl_support"] = protected_path(directory, "aggregate.json")
+    checks["ptbxl_support"] = seal_entry(directory, paths["ptbxl_support"])
     return paths, checks, states
 
 
@@ -210,6 +237,7 @@ def main():
             raise ValueError("producer job does not match native accounting")
     check_scientific(content["score"], content["evaluate"], content["morphology"], content["sph"], checks["score"])
     check_ptb(content["ptb_score"], content["ptb_evaluate"], content["ptb_eligibility"], checks["ptb_score"])
+    check_ptbxl_support(content["ptbxl_support"], checks["ptbxl_support"])
     if checks["ptb_eligibility_superseded"] != PTB_SUPERSEDED_SHA256:
         raise ValueError("superseded PTB reference audit bytes differ")
     result = {"schema": "TITAN_V45_SCIENTIFIC_CLOSURE_VERIFICATION_V1",
