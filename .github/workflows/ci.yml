@@ -30,6 +30,11 @@ jobs:
         run: python scripts/evaluation/verify_release_hashes.py
       - name: Verify public adaptation receipts
         run: python scripts/domain_adaptation/verify_adaptation_delivery.py docs/domain_adaptation/evidence
+      - name: Verify public performance recovery evidence when present
+        run: |
+          if [ -d docs/performance_recovery/evidence ]; then
+            python scripts/domain_adaptation/verify_recovery_delivery.py docs/performance_recovery/evidence
+          fi
       - name: Tests
         run: python -m pytest -q
       - name: Build package
