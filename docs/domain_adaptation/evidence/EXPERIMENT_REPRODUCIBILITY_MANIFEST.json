@@ -1,8 +1,8 @@
 {
   "files": {
     "CHECKPOINT_SHA256SUMS.txt": {
-      "bytes": 494,
-      "sha256": "6cf16bd5e2125057cf9d27e7d397f25c85b5000a79e2fe230c972c0f4e14b7fc"
+      "bytes": 598,
+      "sha256": "170b29a8ebc0823679984e1600d3e94dcd89f6ee13a8d4d1b8ee21a2892b8a83"
     },
     "EXTERNAL_DATA_MANIFESTS_SUMMARY.csv": {
       "bytes": 238,
@@ -51,6 +51,14 @@
     "frozen_backbone_mlp-robust_shared_gain-20261112/TRAINING_RECEIPT.json": {
       "bytes": 1013,
       "sha256": "c4d05c5ed75e4d59075b318550f056a767e3c244165ff92ec37aba9bef18476d"
+    },
+    "mimic_ssl/SSL_LEARNING_CURVES.csv": {
+      "bytes": 80,
+      "sha256": "d4a983a76513a2e5811d565311bad5ee4b2aeaa40d40831954e42a5c9b50309d"
+    },
+    "mimic_ssl/SSL_TRAINING_RECEIPT.json": {
+      "bytes": 661,
+      "sha256": "f41d36c4b0109b87c304f334e16e9f4e35b38eb715ba1376544a64e8755677c4"
     },
     "partial_transformer_mlp-per_lead_zscore-20261112/FINETUNING_LEARNING_CURVES.csv": {
       "bytes": 1760,

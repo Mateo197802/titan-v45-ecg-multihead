@@ -12,6 +12,7 @@ out=${3:?aggregate output}
 deps=${4:?dependencies archive}
 hdf5deps=${5:?HDF5 dependencies archive}
 mode=${6:-reduce}
+if (( $# >= 6 )); then shift 6; else shift 5; fi
 module load pytorch/2.2
 source "$repo/scripts/cedia/code15_scratch.sh"
 scratch=$(code15_scratch "$(dirname -- "$out")" reduction 1048576)
@@ -25,6 +26,7 @@ test -z "$(git status --porcelain)"
 git rev-parse HEAD
 case $mode in
     reduce) python -B -u scripts/domain_adaptation/evaluate_new_holdout.py reduce "$scores" "$out" ;;
-    source_probe) python -B -u scripts/domain_adaptation/probe_source_descriptors.py "$scores" "${7:?additional source bank}" "$out" ;;
+    source_probe) python -B -u scripts/domain_adaptation/probe_source_descriptors.py "$scores" "${1:?additional source bank}" "$out" ;;
+    select) python -B -u scripts/domain_adaptation/freeze_candidate.py "$scores" "$out" "$@" ;;
     *) exit 2 ;;
 esac

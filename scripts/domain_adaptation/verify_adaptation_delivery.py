@@ -66,6 +66,16 @@ def verify(evidence, rebuild=False):
     for row in rows:
         verify_confusion(row, "recall", "positive_support", "negative_support")
 
+    ssl = evidence / "mimic_ssl/SSL_TRAINING_RECEIPT.json"
+    if ssl.is_file():
+        ssl_data = json.loads(ssl.read_bytes())
+        ssl_curves = ssl.with_name("SSL_LEARNING_CURVES.csv")
+        assert_hash(ssl_curves, ssl_data["curves_sha256"])
+        if (ssl_data["label_files_opened"] or ssl_data["heldout_waveforms_opened"]
+                or ssl_data["ecgs"] != ssl_data["patients"] or not HEX.fullmatch(ssl_data["checkpoint_sha256"])
+                or any(int(row["ecgs"]) != ssl_data["ecgs"] for row in read_csv(ssl_curves))):
+            raise ValueError("masked waveform training receipt is not train-only and patient-consistent")
+
     experiments, learning, seen = [], [], set()
     for receipt in sorted(evidence.glob("*/TRAINING_RECEIPT.json")):
         run = json.loads(receipt.read_bytes())
@@ -105,6 +115,8 @@ def verify(evidence, rebuild=False):
         with (evidence / "CHECKPOINT_SHA256SUMS.txt").open("w", encoding="utf-8", newline="\n") as stream:
             for run in experiments:
                 stream.write(f"{run['checkpoint_sha256']}  {run['mode']}-{run['normalization']}-{run['seed']}/best.pt\n")
+            if ssl.is_file():
+                stream.write(f"{ssl_data['checkpoint_sha256']}  mimic-masked/masked_mimic_backbone.pt\n")
 
     final = evidence / "WITHIN_CODE_EVALUATION_RECEIPT.json"
     if final.is_file():

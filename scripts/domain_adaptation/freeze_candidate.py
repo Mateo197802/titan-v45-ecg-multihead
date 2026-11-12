@@ -7,7 +7,7 @@ import math
 from pathlib import Path
 from statistics import mean, pstdev
 
-from build_code_development import PROTOCOL, ROOT, digest, write_json
+from build_code_development import PROTOCOL, ROOT, digest
 
 SELECTION = ROOT / "docs/domain_adaptation/SELECTION_PROTOCOL.json"
 
@@ -80,7 +80,9 @@ def run(bank, output, run_dirs, shortlist):
                       selected_training_receipt_sha256=selected["receipt_sha256"],
                       selected_seed=selected["seed"], selected_mode=selected["mode"],
                       selected_normalization=selected["normalization"], finalists=finalists)
-    write_json(output, result)
+    with output.open("x", encoding="utf-8", newline="\n") as stream:
+        json.dump(result, stream, sort_keys=True, indent=2)
+        stream.write("\n")
     print(json.dumps(result, sort_keys=True))
 
 

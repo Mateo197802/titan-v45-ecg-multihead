@@ -64,6 +64,13 @@ control, so the insufficient-within-CODE-improvement condition for full fine-
 tuning is not triggered. Cross-source forgetting and seed stability are distinct
 checks. These are not held-out performance or evidence of promotion.
 
+Job `33700` also completed masked waveform training on one ECG per patient
+for 2048 MIMIC training patients, with no report or held-out waveform access.
+Its masked reconstruction loss decreased from 0.311588 to 0.295683. This
+checks the self-supervised objective, not diagnostic transfer. The receipt
+and its [two-epoch trace](evidence/mimic_ssl/SSL_LEARNING_CURVES.csv) are
+sealed separately from the downstream CODE supervised comparison.
+
 The [run table](evidence/TRAINING_EXPERIMENTS_COMPLETE.csv),
 [learning curves](evidence/FINETUNING_LEARNING_CURVES.csv), and
 [artifact manifest](evidence/EXPERIMENT_REPRODUCIBILITY_MANIFEST.json) can be

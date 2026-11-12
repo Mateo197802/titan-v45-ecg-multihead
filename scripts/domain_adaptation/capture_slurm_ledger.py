@@ -24,7 +24,7 @@ def capture(entries, start):
         raise ValueError("scheduler did not return exactly the requested job set")
     utc = datetime.now(timezone.utc).isoformat()
     return [{"job_id": r["JobID"], "role": jobs[r["JobID"]][1], "resource": jobs[r["JobID"]][0],
-             "state": r["State"], "exit_code": r["ExitCode"], "elapsed": r["Elapsed"],
+             "state": r["State"].split()[0].removesuffix("+"), "exit_code": r["ExitCode"], "elapsed": r["Elapsed"],
              "start_scheduler_local": r["Start"], "end_scheduler_local": r["End"],
              "captured_at_utc": utc} for r in returned]
 
