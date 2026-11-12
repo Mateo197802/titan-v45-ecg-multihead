@@ -60,3 +60,40 @@ distinct transport result can characterize a frozen rule without proving
 that the published weights never saw any overlapping historical patient or
 that the rule is safe clinically. Risk comparisons across SPH and LUDB also
 use different annotation contracts; they are not a pooled estimate.
+
+### LUDB transport: measured effects and withheld positives
+
+[The reference evaluation](../../outputs/results/reviewer_closure_experiments/ludb_fixed_policy_and_reference_aggregate.json)
+produced 2,000 valid subject/exact-signal component bootstrap draws per
+joint estimate. Coverage was 76.00% (95% interval 70.00-82.00%), and
+abstention 24.00% (18.00-30.00%). The error unit below is a known
+ECG-by-endpoint opportunity, not a whole-ECG diagnostic failure.
+
+| Estimand | Error / opportunity count | Risk | Cluster 95% interval |
+|---|---:|---:|---:|
+| Baseline before withholding | 192 / 924 | 20.78% | 18.24-23.42% |
+| Accepted ECGs only | 139 / 697 | 19.94% | 16.86-23.11% |
+| Abstained ECGs, baseline counterfactual | 53 / 227 | 23.35% | 17.98-28.51% |
+
+AURC was 0.1631 (0.1284-0.1980). For the common two-sided P8 AFIB, SB and
+NSR endpoints, macro-F1 changed from 0.7075 to 0.7270, and mean binary
+accuracy from 0.8257 to 0.8322, on the accepted subset. No P4 endpoint had
+two reference polarities for this contrast. The modest point differences
+and marginal intervals do not establish superiority on the entire release
+or a clinical safety benefit.
+
+| Endpoint | Positive refs | Emitted TP | Emitted FN | Withheld positive | Withheld baseline FN |
+|---|---:|---:|---:|---:|---:|
+| P8 AFIB | 15 | 11 | 1 | 3 | 1 |
+| P8 NSR | 142 | 71 | 33 | 38 | 18 |
+| P8 PAC | 7 | 0 | 4 | 3 | 1 |
+| P8 STACH | 4 | 0 | 4 | 0 | 0 |
+| P4 LVH | 108 | 33 | 49 | 26 | 20 |
+
+Among accepted AFIB references, sensitivity was 11/12, specificity 134/137,
+PPV 11/14 and NPV 134/135. On all eligible ECGs, only 11/15 AFIB positives
+received a true-positive output. The 38/142 withheld NSR positives
+contrast with 10/55 withheld records of other known principal rhythms
+(and 0/3 among unknown principal rhythm). This is descriptive and does
+not establish a population-level subgroup difference. The loss of output
+on reference-positive ECGs is a cost, even when accepted-only metrics rise.

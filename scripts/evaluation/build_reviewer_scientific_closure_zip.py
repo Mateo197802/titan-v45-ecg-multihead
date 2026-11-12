@@ -14,6 +14,7 @@ from verify_reviewer_november_delivery import protected_path, validate_public
 from verify_reviewer_scientific_closure import (
     JOBS,
     PUBLIC_NAMES,
+    check_ludb_detail,
     check_ptb,
     check_ptbxl_rhythm,
     check_ptbxl_support,
@@ -126,6 +127,7 @@ def validate_final(blobs):
         if key in JOBS and str(content[key]["job"]) != JOBS[key]:
             raise ValueError(f"artifact producer does not match native receipt: {name}")
     check_scientific(content["score"], content["evaluate"], content["morphology"], content["sph"], checks["score"])
+    check_ludb_detail(content["score"], content["evaluate"])
     check_ptb(content["ptb_score"], content["ptb_evaluate"], content["ptb_eligibility"], checks["ptb_score"])
     check_ptbxl_support(content["ptbxl_support"], checks["ptbxl_support"])
     check_ptbxl_rhythm(content["ptbxl_rhythm_score"], content["ptbxl_rhythm_evaluate"],

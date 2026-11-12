@@ -35,7 +35,8 @@
     },
     "33720": {
       "scope": "Versioned reference grammar correction on the immutable 33697 scores and routes",
-      "code": "10140a0b7c45e792106d3e9c08c8e93ddf3e5c1b"
+      "code": "10140a0b7c45e792106d3e9c08c8e93ddf3e5c1b",
+      "aggregate_sha256": "af72ae7bf04c807a88ea33db3076970aac780c3f7669b145b34b34c64cf87c29"
     },
     "33704": {
       "scope": "Matched-head morphology comparison robustness; reuses sealed 33474 fits and 33596 evaluation",
@@ -43,8 +44,15 @@
       "aggregate_sha256": "81ebb598aeebd134db952d9b9bbb9a8bee583fdf2211bd64dc8320f93136cc79"
     },
     "33718": {
-      "scope": "PTB Diagnostic frozen whole-source scoring, then explicit territory/control comparisons",
-      "code": "1ca453f0d4ba1a4438a3c6e8873242444c6bb755"
+      "scope": "Failed PTB Diagnostic score adapter; no sealed scores or evaluation",
+      "code": "1ca453f0d4ba1a4438a3c6e8873242444c6bb755",
+      "status": "FAILED_THRESHOLD_SCHEMA",
+      "score_rows_written": 0
+    },
+    "33737": {
+      "scope": "PTB Diagnostic frozen whole-source scoring, then explicit territory/control comparisons; read original thresholds in their sealed model structure",
+      "code": "ed14a1db1c31284b2cdb2488dbc29e447d2d179b",
+      "protocol_changed": false
     },
     "33736": {
       "scope": "Score the unchanged V3AG global rhythm head from cached Stage A embeddings and morphology; separate exploratory operating point",

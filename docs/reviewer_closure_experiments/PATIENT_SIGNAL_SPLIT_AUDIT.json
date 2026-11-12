@@ -18,14 +18,31 @@
     "target_training_or_calibration_ecgs": 0,
     "native_scoring_job": 33697,
     "native_reference_audit_job": 33720,
+    "native_reference_audit_sha256": "af72ae7bf04c807a88ea33db3076970aac780c3f7669b145b34b34c64cf87c29",
+    "physical_signals_verified": 200,
+    "distinct_physical_signals": 200,
+    "within_LUDB_exact_duplicate_groups": 0,
+    "prior_Stage_A_distinct_raw_signal_digests_compared": 19217,
+    "same_encoding_raw_matches": 0,
     "source_key_scope": "Provider's one-record-per-subject documentation; not a cross-provider subject identifier.",
     "same_encoding_only": "Native audit compares exact raw signal bytes against retained Stage A inventory, not near-duplicate or cross-encoding waveform equivalence."
+  },
+  "PTBXL_auxiliary_development": {
+    "official_folds": "1-9 only",
+    "eligible_metadata_ECGs": 19601,
+    "scoreable_cached_ECGs": 6205,
+    "cached_exact_signals_crossing_folds": 0,
+    "metadata_patients_crossing_folds": 0,
+    "partition_reference_receipt_sha256": "1e758fcb0cc17e7cc15ff8be2fcb7911a6f102d4dd5d673cec440d409a187bcd",
+    "planned_calibration": "folds 1-8",
+    "planned_held": "fold 9",
+    "not_a_new_untouched_test": true
   },
   "PTB_Diagnostic_transport": {
     "source_eligible_ecgs": 549,
     "source_subjects": 290,
     "target_training_or_calibration_ecgs": 0,
-    "native_evaluation_job": 33718,
+    "native_evaluation_job": 33737,
     "reference_source": "PTB Diagnostic v1.0.0 original header fields",
     "fit_source": "Original P4 versus separately fitted PTB-XL Other heads are distinct; no target fitting and no PTB-XL fold 10.",
     "uncertainty_unit": "Source subject and exact file-signal components"

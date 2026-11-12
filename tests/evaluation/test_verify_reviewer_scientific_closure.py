@@ -83,3 +83,13 @@ def test_ptbxl_support_has_all_eleven_dispositions_and_no_proxy_positives(verify
         counts["positive"] = counts.pop("non_equivalent_proxy")
     with pytest.raises(ValueError, match="proxy boundary"):
         verify.check_ptbxl_support(audit, verify.digest(path))
+
+
+def test_native_ludb_group_routes_and_matched_contrasts_reconcile(verify):
+    path = Path(__file__).resolve().parents[2] / "outputs/results/reviewer_closure_experiments"
+    score = json.loads((path / "ludb_scoring_receipt.json").read_bytes())
+    result = json.loads((path / "ludb_fixed_policy_and_reference_aggregate.json").read_bytes())
+    verify.check_ludb_detail(score, result)
+    result["matched_restricted_contrast"]["P4"]["means"]["all_eligible"]["f1"] = 0.0
+    with pytest.raises(ValueError, match="contrast arithmetic"):
+        verify.check_ludb_detail(score, result)

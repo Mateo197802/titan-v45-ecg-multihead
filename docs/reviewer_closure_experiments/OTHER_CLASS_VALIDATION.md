@@ -25,6 +25,15 @@ to create a more favorable metric. The full-denominator scoring flow is in
   targets. V3AG uses a different rhythm contract. Neither a vector index
   nor unrelated 41M auxiliary results authenticate a published head.
 
+The [LUDB native result](../../outputs/results/reviewer_closure_experiments/ludb_fixed_policy_and_reference_aggregate.json)
+adds a compatible normal-rhythm reference for P8 NSR. It also identifies
+seven PAC, nine Paced, four LBBB and five 3AVB positives, but no
+endpoint-compatible negatives for those four classes. For Flutter there
+were only three positives (194 known alternative principal rhythms);
+V3F auxiliary AUROC 0.1048 is a sparse descriptive rank, not a calibrated
+decision. Lack of annotation is not counted as a negative for incidental
+conditions or as evidence of an effective Other classifier.
+
 | Requested endpoint | Verified prior evidence | Remaining compatibility or deployment limit |
 |---|---|---|
 | NSR | Published P8 decision; no verified SPH NSR reference | LUDB principal rhythm is distinct from Normal-only controls; do not call NSR an arrhythmia |

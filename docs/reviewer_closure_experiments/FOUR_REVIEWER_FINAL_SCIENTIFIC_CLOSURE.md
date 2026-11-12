@@ -2,7 +2,7 @@
 
 **Working assessment.** The source and model provenance audits are complete
 for the published receipts below. Endpoint-based closure still requires
-native verification of SLURM 33720, 33718 and 33736. Statuses in this draft
+native verification of SLURM 33737 and 33736. Statuses in this draft
 must not be read as final closure or as changes to the submitted article.
 
 The immutable starting point is November commit

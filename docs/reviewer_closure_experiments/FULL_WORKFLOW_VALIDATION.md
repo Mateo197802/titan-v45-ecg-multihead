@@ -33,6 +33,29 @@ another source. The 13,905 SPH Normal-only controls are not an NSR annotation.
 In LUDB, mutually exclusive principal rhythms provide explicit endpoint
 contrasts; incidental or missing annotations do not establish negatives.
 
+### LUDB whole release versus nested restricted subset
+
+[Job 33720](../../outputs/results/reviewer_closure_experiments/ludb_fixed_policy_and_reference_aggregate.json)
+joined references after the scoring and routing seal. All 200 ECGs remain
+in each full-release denominator. The restricted subset includes any ECG
+with at least one positive compatible reference for that profile; it is
+not a reproduction of the original specialist panel.
+
+| Profile | Restricted ECGs | Endpoints supported in both denominators | Full macro-F1 | Restricted macro-F1 |
+|---|---:|---|---:|---:|
+| P6 | 59 | AFIB, SB | 0.6949 | 0.8778 |
+| P8 | 188 | AFIB, SB, NSR | 0.7075 | 0.7407 |
+| P4 | 108 | None with both reference polarities | Not estimable | Not estimable |
+
+LUDB provided 142 principal sinus-rhythm references, 55 other recognized
+principal rhythms and 3 unknowns for the P8 NSR contrast. This is not a
+Normal ECG or disease-free label. P4 LVH had 108 positive and 92 unknown
+references; named infarct territories and ISC_ were not evaluable there.
+P8 PAC had 7 positive and 193 unknown references. These are not negative
+controls and cannot contribute to specificity, PPV or NPV for those
+endpoints. The aggregate reports route-specific confusion and intervals
+where support permits. No endpoint is promoted from one polarity alone.
+
 ## What actually ran
 
 The published classifiers produced their native threshold sets and top-1

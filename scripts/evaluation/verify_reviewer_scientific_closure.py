@@ -6,16 +6,18 @@ import json
 import math
 import re
 import subprocess
+from collections import Counter
 from pathlib import Path
 
 from score_reviewer_closure_ludb import ARCHIVE_SHA256, PROTOCOL_SHA256, write_new
 from verify_reviewer_november_delivery import digest, protected_path, seal_entry, validate_public
 
 JOBS = {
-    "score": "33697", "evaluate": "33720", "morphology": "33704", "ptb_score": "33718", "ptb_evaluate": "33718",
+    "score": "33697", "evaluate": "33720", "morphology": "33704", "ptb_score": "33737", "ptb_evaluate": "33737",
     "ptbxl_rhythm_score": "33736", "ptbxl_rhythm_evaluate": "33736",
 }
 SUPERSEDED_EVALUATION = "33699"
+FAILED_PTB_ADAPTER = "33718"
 PUBLIC_NAMES = {
     "score": "ludb_scoring_receipt.json",
     "evaluate": "ludb_fixed_policy_and_reference_aggregate.json",
@@ -137,6 +139,46 @@ def check_ptb(score, result, eligibility, score_hash):
                 raise ValueError("PTB endpoint reference flow does not reconcile")
 
 
+def check_ludb_detail(score, result):
+    audit = result["partition_audit"]
+    if (audit["eligible_records"] != score["eligible_ecgs"]
+            or audit["source_unique_subjects_per_publisher"] != 200 or audit["distinct_physical_waveforms"] != 200
+            or audit["exact_duplicate_groups"] != 0 or audit["prior_stage_a_distinct_raw_signal_digests"] != 19217
+            or audit["lu_db_raw_signal_matches_to_stage_a"] != 0 or audit["historical_independence_certified"]
+            or audit["lu_db_train_or_calibration_records"] != 0):
+        raise ValueError("LUDB source population, exact signal check or exposure scope differs")
+    by_rhythm = result["routing_by_principal_rhythm"]
+    routes = Counter()
+    for counts in by_rhythm.values():
+        routes.update(counts)
+    if (routes != score["routes"]
+            or {k: sum(v.values()) for k, v in by_rhythm.items()} != result["reference_principal_rhythm_counts"]):
+        raise ValueError("LUDB routes by reference group do not reconcile")
+    endpoints = result["endpoints"]
+    primary = {p: [f"{p}:{c}" for c in classes] for p, classes in score["thresholds"].items()}
+    if set(endpoints) != {k for keys in primary.values() for k in keys}:
+        raise ValueError("LUDB output endpoint coverage differs from released profiles")
+    tests = [(keys, result["matched_restricted_contrast"][p], "all_eligible", "restricted_known_positive_profile")
+             for p, keys in primary.items()]
+    tests.append((primary["P8"] + primary["P4"], result["matched_selective_contrast"],
+                  "jointly_scored_baseline", "accepted"))
+    for keys, contrast, a, b in tests:
+        matched = [k for k in keys if all(endpoints[k]["estimates"][s]["status"] == "evaluated" for s in (a, b))]
+        if contrast["matched_endpoints"] != matched or set(contrast["means"]) != {a, b}:
+            raise ValueError("LUDB matched contrast includes incompatible endpoint estimates")
+        for subset, metrics in contrast["means"].items():
+            if any(not number_equal(value, sum(endpoints[k]["estimates"][subset]["metrics"][m] for k in matched),
+                                    len(matched)) for m, value in metrics.items()):
+                raise ValueError("LUDB matched contrast arithmetic differs")
+    for e in endpoints.values():
+        d = e.get("joint_positive_disposition", {})
+        if d.get("abstained_baseline_counterfactual_fn", 0) > d.get("abstained_positive_no_output", 0):
+            raise ValueError("LUDB counterfactual misses exceed withheld positives")
+    for endpoint, positive in {"P8:AFIB": 15, "P8:1AVB": 10, "P8:RBBB": 4, "P4:LVH": 108}.items():
+        if endpoints[endpoint]["estimates"]["all_eligible"]["reference_states"].get("positive", 0) != positive:
+            raise ValueError("LUDB compatible references do not match published support")
+
+
 def check_ptbxl_support(audit, receipt_hash):
     if (receipt_hash != PTBXL_SUPPORT_SHA256 or audit["metadata_ecgs"] != 19601
             or audit["source_subjects"] != 16965 or audit["cached_records"] != 6205
@@ -195,7 +237,8 @@ def check_ptbxl_rhythm(score, result, audit, score_hash):
 
 def native_files(root):
     out = subprocess.check_output([
-        "sacct", "-S", "2026-11-12", "-X", "-j", ",".join(sorted(set(JOBS.values()) | {SUPERSEDED_EVALUATION})),
+        "sacct", "-S", "2026-11-12", "-X", "-j",
+        ",".join(sorted(set(JOBS.values()) | {SUPERSEDED_EVALUATION, FAILED_PTB_ADAPTER})),
         "-P", "-n",
         "-o", "JobIDRaw,State,ExitCode,Elapsed",
     ], text=True)
@@ -209,6 +252,8 @@ def native_files(root):
         state = states.get(job)
         if not state or (state["state"], state["exit_code"]) != ("COMPLETED", "0:0"):
             raise ValueError(f"authoritative job {job} is not a successful result")
+    if states.get(FAILED_PTB_ADAPTER, {}).get("state") != "FAILED":
+        raise ValueError("PTB adapter failure not preserved in native accounting")
     roots = {
         "score": root / f"ludb-score-{JOBS['score']}",
         "evaluate": root / f"ludb-eval-{JOBS['evaluate']}",
@@ -282,6 +327,7 @@ def main():
         if k in JOBS and str(content[k]["job"]) != JOBS[k]:
             raise ValueError("producer job does not match native accounting")
     check_scientific(content["score"], content["evaluate"], content["morphology"], content["sph"], checks["score"])
+    check_ludb_detail(content["score"], content["evaluate"])
     check_ptb(content["ptb_score"], content["ptb_evaluate"], content["ptb_eligibility"], checks["ptb_score"])
     check_ptbxl_support(content["ptbxl_support"], checks["ptbxl_support"])
     check_ptbxl_rhythm(content["ptbxl_rhythm_score"], content["ptbxl_rhythm_evaluate"],
@@ -290,7 +336,10 @@ def main():
         raise ValueError("superseded PTB reference audit bytes differ")
     result = {"schema": "TITAN_V45_SCIENTIFIC_CLOSURE_VERIFICATION_V1",
               "scheduler": states, "public_sha256": checks, "public_files": PUBLIC_NAMES,
-              "superseded_evaluations_not_used": {SUPERSEDED_EVALUATION: "multiline source grammar corrected"},
+              "superseded_evaluations_not_used": {
+                  SUPERSEDED_EVALUATION: "multiline source grammar corrected",
+                  FAILED_PTB_ADAPTER: "wrong sealed model threshold key; no rows or receipt produced",
+              },
               "science_consistency_verified": True, "record_level_export_performed": False}
     if args.output:
         write_new(args.output, result)

@@ -16,7 +16,8 @@ The runner checks the archive and the publisher checksums independently.
 | LUDB reference grammar correction; authoritative evaluation only | SLURM 33720 | 10140a0b7c45e792106d3e9c08c8e93ddf3e5c1b | Requires original 33697 complete and sealed; no new inference, calibration, or route construction |
 | Original SPH split/cutoff read-only audit | [Native aggregate](../../outputs/results/reviewer_closure_experiments/sph_split_and_policy_audit.json) | baceb368a08352b6ea74798f1c77159ef1ec139a | Original 33362 calibration/held split and 33414 policy; no labels or new inference |
 | Matched morphology statistical robustness audit | SLURM 33704 | d89dbc05c67b29d6cf7954ea2763d3b068d16775 | Sealed fit 33474 and evaluation 33596; no fit or waveform extraction |
-| PTB Diagnostic clinical territory vs healthy control transport | SLURM 33718 | 1ca453f0d4ba1a4438a3c6e8873242444c6bb755 | Protocol f37f6ca; score all source ECGs before reference join; original P4 and separately trained 33390 heads, no refit |
+| PTB Diagnostic initial transport adapter | SLURM 33718 (failed) | 1ca453f0d4ba1a4438a3c6e8873242444c6bb755 | Failed before any score row was written; read threshold at the wrong level of the sealed 33390 artifact |
+| PTB Diagnostic clinical territory vs healthy control transport | SLURM 33737 | ed14a1db1c31284b2cdb2488dbc29e447d2d179b | Same frozen protocol and model bytes; read ALMI/ILMI thresholds from the nested model; score all source ECGs before reference join; no refit |
 | Cached V3AG global rhythm readout for Paced and AV block | SLURM 33736 | b25e3d2d8f696038c83809604f1da1b48ca56d5a | All 6,205 authorized cached ECGs; archived-column equivalence gate before label join; new operating point on folds 1-8, held fold 9; no waveform rerun, no fold 10 |
 
 The native reference-free SPH audit reconstructed the assignments and
@@ -55,6 +56,12 @@ annotation is not electronic pacing and can leave the principal rhythm
 ambiguous. No mapping from LAO to LAE, incomplete to complete block,
 or unknown to negative is introduced. No score, threshold, route,
 enrollment or endpoint support rule changes.
+Authoritative job 33720 completed `0:0` in 1:28. Its aggregate SHA-256
+is `af72ae7bf04c807a88ea33db3076970aac780c3f7669b145b34b34c64cf87c29`.
+The original score seal and native private reference-route ledger matched.
+The [full workflow](FULL_WORKFLOW_VALIDATION.md) and
+[selective policy](SELECTIVE_PREDICTION_VALIDATION.md) documents report
+the paired-denominator scope and withheld positive references.
 
 The complete PTB Diagnostic [source audit](../../outputs/results/reviewer_closure_experiments/ptb_diagnostic_eligibility_verified_v2.json)
 verified all 549 publisher-checksummed headers from 290 subjects. The
@@ -66,6 +73,10 @@ unmentioned disease as negative. The 80 explicit control ECGs came from
 52 subjects; positive patient supports were 27 ASMI, 30 IMI, 16 ALMI,
 22 ILMI. This allowed an enriched territory/control test, not a natural
 prevalence or historically independent claim.
+Initial scorer 33718 exited `1:0` in 1:56 with a zero-byte score ledger.
+No evaluation or sealed scores were produced. The repair preserves that
+job and reuses the same authenticated cohort, model coefficients,
+decision thresholds and analysis protocol.
 
 The separate [PTB-XL eleven-class support audit](../../outputs/results/reviewer_closure_experiments/ptbxl_other_support_verified_v2.json)
 reused only sealed metadata, inventory and score-availability states of
