@@ -12,9 +12,9 @@ if [[ $# != 8 ]]; then
 fi
 code=$1 tree=$2 metrics=$3 source=$4 deps=$5 duplicates=$6 score=$7 root=$8
 (cd "$code" && sha256sum -c CODE_SHA256SUMS)
-[[ $(git -C "$tree" rev-parse HEAD) == eb1c67b9229af875a9f868797b0c2f5c546e3dac ]]
-[[ $(git -C "$metrics" rev-parse HEAD) == f4d6be30b0befea739cf2e35df1033230a1f5d10 ]]
-[[ -z $(git -C "$tree" status --porcelain) && -z $(git -C "$metrics" status --porcelain) ]]
+[[ $(cd "$tree" && git rev-parse HEAD) == eb1c67b9229af875a9f868797b0c2f5c546e3dac ]]
+[[ $(cd "$metrics" && git rev-parse HEAD) == f4d6be30b0befea739cf2e35df1033230a1f5d10 ]]
+[[ -z $(cd "$tree" && git status --porcelain) && -z $(cd "$metrics" && git status --porcelain) ]]
 output=$root/rhythm-other-$SLURM_JOB_ID
 mkdir -m 700 -- "$output"
 module load pytorch/2.2
