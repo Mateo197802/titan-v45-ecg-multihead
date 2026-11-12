@@ -12,7 +12,7 @@ parts of this request in different cohorts. These cohorts are not pooled.
 | SPH v1; one ECG, published P6/P8/P4 | 25,770 / 25,770 per profile | Entire SPH source inventory. 24,666 source patient IDs and 25,602 exact signal signatures. Compatible statement prediction, not adjudicated disease. |
 | LUDB v1.0.1; one ECG, published P6/P8/P4 | 200 / 200 per profile | Entire publisher release, without reference-based selection for scoring. Deliberately assembled source; not a natural-prevalence clinic population. |
 | PTB-XL bridge; one ECG | 19,601 metadata eligible / 6,205 available and scored | Limited development bridge using folds 1-9; no fold 10 and no claim of complete cohort inference. |
-| PTB Diagnostic v1.0.0; one ECG | 549 verified source records / 290 source subjects | Eligibility for separate infarct-territory versus healthy-control comparisons, not complete clinical workflow validation. |
+| PTB Diagnostic v1.0.0; one ECG | 549 / 549 scored; 290 source subjects | Separate infarct-territory versus healthy-control comparisons, not complete clinical workflow validation. |
 
 The PTB-XL cached subset is measurably enriched, not a random draw from
 its metadata denominator. For example, it contains 252/252 compatible
@@ -70,6 +70,32 @@ P8 PAC had 7 positive and 193 unknown references. These are not negative
 controls and cannot contribute to specificity, PPV or NPV for those
 endpoints. The aggregate reports route-specific confusion and intervals
 where support permits. No endpoint is promoted from one polarity alone.
+
+### PTB Diagnostic: separate pathology-reference cohort
+
+[Job 33737](../../outputs/results/reviewer_closure_experiments/ptb_diagnostic_transport_aggregate.json)
+scored every eligible ECG before joining reference values, with no technical
+non-scoring. The 549 ECGs represent 290 source subjects and 290
+subject/exact-signal components. Native P4 ASMI and IMI decisions used
+unchanged published cutoffs. A separate ALMI/ILMI comparison applies
+previously trained PTB-XL heads without tuning on PTB Diagnostic. It does
+not create a second routing stage.
+
+| Endpoint and score | Positive ECGs / subjects | Explicit control ECGs / subjects | Unknown ECGs | TP/FN/FP/TN | F1 (cluster 95% interval) |
+|---|---:|---:|---:|---|---|
+| ASMI, original P4 | 77 / 27 | 80 / 52 | 392 | 63/14/20/60 | 0.788 (0.672-0.870) |
+| IMI, original P4 | 89 / 30 | 80 / 52 | 380 | 66/23/21/59 | 0.750 (0.632-0.833) |
+| ALMI, experimental PTB-XL head | 43 / 16 | 80 / 52 | 426 | 21/22/1/79 | 0.646 (0.523-0.771) |
+| ILMI, experimental PTB-XL head | 53 / 22 | 80 / 52 | 416 | 22/31/1/79 | 0.579 (0.345-0.764) |
+
+The provider's clinical header territories and explicit controls are
+stronger references for these specific contrasts than a missing ECG
+statement, but not a blinded independent re-adjudication. The controls
+are repeated across endpoints; do not sum the rows as unique subjects.
+Other diagnoses and compound/unresolved territories remain unknown,
+so PPV and NPV are conditional on an enriched two-polarity subset.
+This experiment supplies neither representative clinical prevalence nor
+references for the remaining rhythm and pathology routes.
 
 ## What actually ran
 

@@ -18,7 +18,8 @@ The runner checks the archive and the publisher checksums independently.
 | Matched morphology statistical robustness audit | SLURM 33704 | d89dbc05c67b29d6cf7954ea2763d3b068d16775 | Sealed fit 33474 and evaluation 33596; no fit or waveform extraction |
 | PTB Diagnostic initial transport adapter | SLURM 33718 (failed) | 1ca453f0d4ba1a4438a3c6e8873242444c6bb755 | Failed before any score row was written; read threshold at the wrong level of the sealed 33390 artifact |
 | PTB Diagnostic clinical territory vs healthy control transport | SLURM 33737 | ed14a1db1c31284b2cdb2488dbc29e447d2d179b | Same frozen protocol and model bytes; read ALMI/ILMI thresholds from the nested model; score all source ECGs before reference join; no refit |
-| Cached V3AG global rhythm readout for Paced and AV block | SLURM 33736 | b25e3d2d8f696038c83809604f1da1b48ca56d5a | All 6,205 authorized cached ECGs; archived-column equivalence gate before label join; new operating point on folds 1-8, held fold 9; no waveform rerun, no fold 10 |
+| Cached V3AG rhythm original launcher | SLURM 33736 (failed) | b25e3d2d8f696038c83809604f1da1b48ca56d5a | Unexpected extra CLI arguments; exited 2:0 before loading the model or writing any result |
+| Cached V3AG global rhythm readout for Paced and AV block | SLURM 33747 | cce4773ead27da850f4793b09da7e241a31a841a | Both command argument vectors checked on CEDIA. Same sealed features and protocol as 33736; no waveform rerun, no fold 10 |
 
 The native reference-free SPH audit reconstructed the assignments and
 cutoffs. It found zero cross-split patients, exact waveform fingerprints or
@@ -77,6 +78,12 @@ Initial scorer 33718 exited `1:0` in 1:56 with a zero-byte score ledger.
 No evaluation or sealed scores were produced. The repair preserves that
 job and reuses the same authenticated cohort, model coefficients,
 decision thresholds and analysis protocol.
+The repaired scorer/evaluator 33737 completed `0:0` in 2:24. It scored
+all 549 ECGs without reading reference values for scoring. Both sealed
+outputs were verified in CEDIA. Aggregate SHA-256
+`8c3046fcc2d48ce241fcacc566e0fb17a89b0664e43e098adcf7bf8a44f8dcb4`;
+scoring receipt SHA-256
+`7d0894f5436ffe991326c6358f55c60fa33b0506b583ad33ab8f2e6409731916`.
 
 The separate [PTB-XL eleven-class support audit](../../outputs/results/reviewer_closure_experiments/ptbxl_other_support_verified_v2.json)
 reused only sealed metadata, inventory and score-availability states of

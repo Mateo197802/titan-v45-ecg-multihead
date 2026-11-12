@@ -93,3 +93,15 @@ def test_native_ludb_group_routes_and_matched_contrasts_reconcile(verify):
     result["matched_restricted_contrast"]["P4"]["means"]["all_eligible"]["f1"] = 0.0
     with pytest.raises(ValueError, match="contrast arithmetic"):
         verify.check_ludb_detail(score, result)
+
+
+def test_native_ptb_diagnostic_only_counts_known_references_and_frozen_calls(verify):
+    path = Path(__file__).resolve().parents[2] / "outputs/results/reviewer_closure_experiments"
+    score_path = path / "ptb_diagnostic_scoring_receipt.json"
+    score = json.loads(score_path.read_bytes())
+    result = json.loads((path / "ptb_diagnostic_transport_aggregate.json").read_bytes())
+    eligibility = json.loads((path / "ptb_diagnostic_eligibility_verified_v2.json").read_bytes())
+    verify.check_ptb(score, result, eligibility, verify.digest(score_path))
+    result["endpoints"]["ALMI"]["separately_trained_PTBXL_head"]["metrics"]["recall"] = 21 / 549
+    with pytest.raises(ValueError, match="binary metrics or confusion counts"):
+        verify.check_ptb(score, result, eligibility, verify.digest(score_path))

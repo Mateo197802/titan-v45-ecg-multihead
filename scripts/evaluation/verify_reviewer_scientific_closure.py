@@ -14,10 +14,11 @@ from verify_reviewer_november_delivery import digest, protected_path, seal_entry
 
 JOBS = {
     "score": "33697", "evaluate": "33720", "morphology": "33704", "ptb_score": "33737", "ptb_evaluate": "33737",
-    "ptbxl_rhythm_score": "33736", "ptbxl_rhythm_evaluate": "33736",
+    "ptbxl_rhythm_score": "33747", "ptbxl_rhythm_evaluate": "33747",
 }
 SUPERSEDED_EVALUATION = "33699"
 FAILED_PTB_ADAPTER = "33718"
+FAILED_RHYTHM_LAUNCHER = "33736"
 PUBLIC_NAMES = {
     "score": "ludb_scoring_receipt.json",
     "evaluate": "ludb_fixed_policy_and_reference_aggregate.json",
@@ -121,8 +122,8 @@ def check_ptb(score, result, eligibility, score_hash):
             or result["reference_eligibility_sha256"] != PTB_ELIGIBILITY_SHA256
             or result["private_reference_manifest_sha256"] != eligibility["reference_manifest_sha256"]
             or not (score["all_source_records"] == result["all_source_ecgs"] == eligibility["verified_headers"] == 549)
-            or result["source_subjects"] != 290 or result["scored_flow"] != score["flow"]
-            or sum(result["scored_flow"].values()) != 549):
+            or result["source_subjects"] != 290 or result["patient_exact_signal_components"] != 290
+            or result["scored_flow"] != score["flow"] or result["scored_flow"] != {"scored": 549}):
         raise ValueError("PTB clinical comparison lineage, scope or denominator differs")
     if set(result["endpoints"]) != {"ASMI", "IMI", "ALMI", "ILMI"}:
         raise ValueError("PTB clinical territory contract differs")
@@ -130,13 +131,31 @@ def check_ptb(score, result, eligibility, score_hash):
         prior = eligibility["endpoints"][label]
         if not prior["eligible_for_territory_control_comparison"]:
             raise ValueError("PTB endpoint did not pass the source-reference support gate")
-        for e in endpoints.values():
-            known = e["reference_states"].get("positive", 0) + e["reference_states"].get("negative", 0)
-            if (e["eligible_ecgs"] != 549 or sum(e["reference_states"].values()) != 549
-                    or e["known_scored_ecgs"] > known
-                    or e["reference_states"].get("negative", 0) > prior["record_states"]["explicit_control"]
-                    or e["reference_states"].get("positive", 0) > prior["record_states"]["positive"]):
+        methods = {"released_P4_threshold"} if label in {"ASMI", "IMI"} else {
+            "released_V3AG_rank_only", "separately_trained_PTBXL_head",
+        }
+        if set(endpoints) != methods:
+            raise ValueError("PTB score provenance or operating-point method differs")
+        for method, e in endpoints.items():
+            pos, neg = prior["record_states"]["positive"], prior["record_states"]["explicit_control"]
+            if (e["eligible_ecgs"] != 549 or e["reference_states"] != {"positive": pos, "negative": neg,
+                                                                      "unknown": 549 - pos - neg}
+                    or e["known_scored_ecgs"] != pos + neg
+                    or e["positive_components_scored"] != prior["subject_states"]["positive"]
+                    or e["negative_components_scored"] != prior["subject_states"]["explicit_control"]):
                 raise ValueError("PTB endpoint reference flow does not reconcile")
+            if method == "released_V3AG_rank_only":
+                if e["status"] != "rank_only" or "metrics" in e or "descriptive_confusion" in e:
+                    raise ValueError("PTB uncalibrated auxiliary score must not have binary decisions")
+                continue
+            m = e["metrics"]
+            tp, fn, fp, tn = (m[k] for k in ("tp", "fn", "fp", "tn"))
+            ratios = {"recall": (tp, pos), "specificity": (tn, neg), "precision": (tp, tp + fp),
+                      "npv": (tn, tn + fn), "f1": (2 * tp, 2 * tp + fp + fn), "accuracy": (tp + tn, pos + neg)}
+            if (e["status"] != "evaluated" or tp + fn != pos or tn + fp != neg
+                    or e["descriptive_confusion"] != {k: m[k] for k in ("tp", "fn", "fp", "tn")}
+                    or any(not number_equal(m[k], n, d) for k, (n, d) in ratios.items())):
+                raise ValueError("PTB binary metrics or confusion counts do not reconcile")
 
 
 def check_ludb_detail(score, result):
@@ -238,7 +257,7 @@ def check_ptbxl_rhythm(score, result, audit, score_hash):
 def native_files(root):
     out = subprocess.check_output([
         "sacct", "-S", "2026-11-12", "-X", "-j",
-        ",".join(sorted(set(JOBS.values()) | {SUPERSEDED_EVALUATION, FAILED_PTB_ADAPTER})),
+        ",".join(sorted(set(JOBS.values()) | {SUPERSEDED_EVALUATION, FAILED_PTB_ADAPTER, FAILED_RHYTHM_LAUNCHER})),
         "-P", "-n",
         "-o", "JobIDRaw,State,ExitCode,Elapsed",
     ], text=True)
@@ -252,8 +271,10 @@ def native_files(root):
         state = states.get(job)
         if not state or (state["state"], state["exit_code"]) != ("COMPLETED", "0:0"):
             raise ValueError(f"authoritative job {job} is not a successful result")
-    if states.get(FAILED_PTB_ADAPTER, {}).get("state") != "FAILED":
-        raise ValueError("PTB adapter failure not preserved in native accounting")
+    for job, exit_code in ((FAILED_PTB_ADAPTER, "1:0"), (FAILED_RHYTHM_LAUNCHER, "2:0")):
+        failed = states.get(job, {})
+        if (failed.get("state"), failed.get("exit_code")) != ("FAILED", exit_code):
+            raise ValueError(f"pre-result failure {job} not preserved in native accounting")
     roots = {
         "score": root / f"ludb-score-{JOBS['score']}",
         "evaluate": root / f"ludb-eval-{JOBS['evaluate']}",
@@ -339,6 +360,7 @@ def main():
               "superseded_evaluations_not_used": {
                   SUPERSEDED_EVALUATION: "multiline source grammar corrected",
                   FAILED_PTB_ADAPTER: "wrong sealed model threshold key; no rows or receipt produced",
+                  FAILED_RHYTHM_LAUNCHER: "unexpected shell arguments rejected before scoring",
               },
               "science_consistency_verified": True, "record_level_export_performed": False}
     if args.output:

@@ -43,6 +43,9 @@
     "source_subjects": 290,
     "target_training_or_calibration_ecgs": 0,
     "native_evaluation_job": 33737,
+    "scored_ECGs": 549,
+    "source_subject_exact_file_signal_components": 290,
+    "native_evaluation_sha256": "8c3046fcc2d48ce241fcacc566e0fb17a89b0664e43e098adcf7bf8a44f8dcb4",
     "reference_source": "PTB Diagnostic v1.0.0 original header fields",
     "fit_source": "Original P4 versus separately fitted PTB-XL Other heads are distinct; no target fitting and no PTB-XL fold 10.",
     "uncertainty_unit": "Source subject and exact file-signal components"

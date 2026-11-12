@@ -164,6 +164,10 @@ def validate_final(blobs):
     check_scientific(content["score"], content["evaluate"], content["morphology"], content["sph"], checks["score"])
     check_ludb_detail(content["score"], content["evaluate"])
     check_ptb(content["ptb_score"], content["ptb_evaluate"], content["ptb_eligibility"], checks["ptb_score"])
+    fit = json.loads(blobs[f"{PRIOR_ROOT}/pathology-other_33390_aggregate.json"])["endpoints"]
+    if (content["ptb_score"]["published_thresholds"] != content["score"]["thresholds"]["P4"]
+            or content["ptb_score"]["transported_thresholds"] != {c: fit[c]["threshold"] for c in ("ALMI", "ILMI")}):
+        raise ValueError("PTB Diagnostic used different published or development cutoffs")
     check_ptbxl_support(content["ptbxl_support"], checks["ptbxl_support"])
     check_ptbxl_rhythm(content["ptbxl_rhythm_score"], content["ptbxl_rhythm_evaluate"],
                      content["ptbxl_support"], checks["ptbxl_rhythm_score"])

@@ -2,7 +2,7 @@
 
 **Working assessment.** The source and model provenance audits are complete
 for the published receipts below. Endpoint-based closure still requires
-native verification of SLURM 33737 and 33736. Statuses in this draft
+native verification of SLURM 33747. Statuses in this draft
 must not be read as final closure or as changes to the submitted article.
 
 The immutable starting point is November commit
@@ -20,8 +20,10 @@ prevalences. They explicitly warned against interpreting the selected
 95.19% accuracy and 80.09% macro-F1 as end-to-end estimates.
 
 1. **Experiment:** Original P6/P8/P4 were scored on all 25,770 SPH ECGs
-   and all 200 LUDB ECGs. New executed joint abstention decisions are
-   available; no actual downstream clinical cascade was run.
+   and all 200 LUDB ECGs. Original P4 also scored all 549 PTB Diagnostic
+   ECGs, with supported infarct-territory/healthy-control comparisons.
+   New executed joint abstention decisions are available; no actual
+   downstream clinical cascade was run.
 2. **Literal request:** Partly addressed. Full-source inference, narrower
    reference-based contrasts, and route dispositions are not a full
    reference-supported clinical workflow.

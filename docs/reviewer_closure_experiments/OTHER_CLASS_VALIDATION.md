@@ -89,6 +89,27 @@ versus 252/6,801 in the eligible metadata. Cached PPV, NPV and precision-
 recall estimates therefore cannot be interpreted at the original
 PTB-XL reference prevalence or in a clinical all-comers population.
 
+### ALMI and ILMI transport with unchanged cutoffs
+
+The [PTB Diagnostic transport](../../outputs/results/reviewer_closure_experiments/ptb_diagnostic_transport_aggregate.json)
+compared original V3AG rank-only scores and separate PTB-XL-trained heads
+on the same source-compatible subsets: 43 ALMI and 53 ILMI positives,
+each against 80 explicit healthy-control ECGs. All 549 ECGs were scored;
+426 ALMI and 416 ILMI references remained unknown. No target fitting
+or threshold adjustment was performed.
+
+| Endpoint | Original auxiliary AUROC (rank only) | Experimental head AUROC (cluster 95% interval) | Experimental fixed-threshold sensitivity | Specificity |
+|---|---:|---:|---:|---:|
+| ALMI | 0.6064 | 0.8997 (0.8408-0.9566) | 21/43 = 0.4884 | 79/80 = 0.9875 |
+| ILMI | 0.7309 | 0.8807 (0.8085-0.9473) | 22/53 = 0.4151 | 79/80 = 0.9875 |
+
+High rank discrimination did not translate into high sensitivity at the
+transported cutoffs. Neither result establishes validated clinical
+operating points. The original auxiliary outputs have no published binary
+decision, and the fitted heads cannot be attributed to the original P4
+specialist. The AUROC differences are descriptive, not paired confidence
+intervals or significance tests for superiority.
+
 ### Reference sources considered
 
 [LUDB](https://physionet.org/content/ludb/1.0.1/) permits a bounded transport
