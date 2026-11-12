@@ -1,6 +1,7 @@
 import runpy
 import sys
 from pathlib import Path
+from types import SimpleNamespace
 
 import numpy as np
 import pytest
@@ -33,3 +34,29 @@ def test_comparison_preserves_unscored_rows_in_denominator():
     assert output["by_class"]["x"]["max_absolute_delta"] == pytest.approx(.3)
     with pytest.raises(ValueError, match="universe"):
         module["compare"](old, {}, "pathology_primary4")
+
+
+def test_inline_loader_still_exercises_perturbation_and_restores_hook():
+    def prepare(record, morph):
+        return record, morph(record, fs=125)
+
+    owner = SimpleNamespace(prepare_p4_record=prepare)
+    calls = [0]
+    with module["perturb_preparation"](owner, "prepare_p4_record", calls):
+        _, vector = owner.prepare_p4_record("record", lambda *a, **kw: np.ones(10))
+        assert np.count_nonzero(vector) == 0
+    assert owner.prepare_p4_record is prepare
+    assert calls == [1]
+
+
+def test_p6_intended_rows_do_not_include_p8_only_records():
+    a, b, c = ("source", "A"), ("source", "B"), ("source", "C")
+    scored = {"scores": {"AFIB": 0.5}, "labels": [], "top1": "AFIB", "used_fallback": False}
+    rows = {a: {"P6": scored, "P8": scored}, b: {}, c: {"P8": scored}}
+    report = module["compare"](rows, rows, "rhythm", {a, b})
+    assert report["P6"]["intended_records"] == 2
+    assert report["P6"]["ledger_universe_records"] == 3
+    assert report["P6"]["paired_scored"] == 1
+    assert report["P8"]["intended_records"] == 3
+    with pytest.raises(ValueError, match="outside P6"):
+        module["compare"](rows, rows, "rhythm", {b, c})
