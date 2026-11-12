@@ -1,0 +1,81 @@
+{
+  "schema": "TITAN_V45_SCIENTIFIC_CLOSURE_V1",
+  "prior_results_commit": "bf081e9c2fd62704821f56d614399d7d0eb6e656",
+  "original_review_text_sha256": "fa20747434b7ecabf1ed9fa4189f94a9884418e2c0a2a2d439d02ca14eb3f427",
+  "historical_40_item_register_sha256": "275c28fa96d2429b4cbfca366196fd0fef195041a991a7a623d36f0fa7a8efa5",
+  "native_scorer_commit": "f4d6be30b0befea739cf2e35df1033230a1f5d10",
+  "source": {
+    "name": "LUDB",
+    "version": "1.0.1",
+    "doi": "10.13026/eegm-h675",
+    "url": "https://physionet.org/content/ludb/1.0.1/",
+    "archive_url": "https://physionet-open.s3.amazonaws.com/ludb/ludb-1.0.1.zip",
+    "license": "Open Data Commons Attribution License v1.0",
+    "records": 200,
+    "source_subjects": 200,
+    "sample_rate_hz": 500,
+    "samples": 5000,
+    "leads": ["i", "ii", "iii", "avr", "avl", "avf", "v1", "v2", "v3", "v4", "v5", "v6"],
+    "enrollment": "Every publisher RECORDS row; retain missing or invalid signals as technical failures, never omit based on labels, scores or routes.",
+    "reference_authority": "Publisher ECG diagnoses and explicitly enumerated principal rhythm, not adjudication of underlying disease. The released set is a selected mix of volunteers and patients.",
+    "subject_key": "One source record per subject per publisher README, no cross-dataset person linkage.",
+    "overlap": "Compare same-format exact waveform fingerprints and document actual prior inventory coverage. Do not promote to historically independent if prior manifests or reliable subject links are incomplete."
+  },
+  "route": {
+    "policy_producer_job": 33414,
+    "policy_sha256": "c9183320a4dd923f037a93fc014fc2db6bc64f223ff67b5d297e540eefb43ae6",
+    "calibration_policy_sha256": "61a4cfafb30621991288ab1a314ef932650ab27bbfd8ff0cacb1ff5a5633209b",
+    "cutoffs": {"P8": 0.037162774801254295, "P4": 0.014417142868041966},
+    "margin": "min across P8/P4 of min absolute class score minus original class threshold distance, then subtract that profile cutoff",
+    "accept": "Both profiles scored and both signed margins >= 0. Emit original P8/P4 sets, including original P8 fallback.",
+    "abstain": "Both profiles scored and any signed margin < 0. Emit neither set; retain baseline calls only for counterfactual audit.",
+    "technical_unscored": "Either routed profile could not score. Do not count as abstention or clinical referral.",
+    "refer": "Not implemented for published system. No second-stage or human outcomes. Any new composite is a separately named study.",
+    "fit_on_ludb": false
+  },
+  "reference_rules": {
+    "principal_rhythm": {
+      "sinus rhythm": "NSR",
+      "sinus bradycardia": "SB",
+      "sinus tachycardia": "STACH",
+      "atrial fibrillation": "AFIB",
+      "atrial flutter, typical": "Flutter",
+      "sinus arrhythmia": "other_specified_principal_rhythm",
+      "irregular sinus rhythm": "other_specified_principal_rhythm"
+    },
+    "principal_negative": "Only another recognized, mutually exclusive principal rhythm; unknown or conflicting categories stay unknown. NSR denotes source-recorded sinus rhythm, not a normal ECG or a disease-free subject.",
+    "positive_only": {
+      "RBBB": "explicit complete RBBB; incomplete not equivalent",
+      "LBBB": "explicit complete LBBB; incomplete not equivalent",
+      "1AVB": "explicit first-degree AV block",
+      "2AVB": "explicit second-degree AV block, not duration or conduction proxies",
+      "3AVB": "explicit third-degree or complete AV block",
+      "PAC": "explicit atrial extrasystole or PAC; do not infer from irregular sinus rhythm",
+      "PVC": "explicit ventricular extrasystole or PVC, at ECG level",
+      "Paced": "explicit ECG pacing; device status alone does not prove paced rhythm",
+      "LVH": "explicit left ventricular hypertrophy; overload alone does not qualify"
+    },
+    "positive_only_negative": "Only an explicitly documented endpoint-compatible negative; generic silence, another finding and sinus rhythm do not count.",
+    "unmapped": ["ASMI", "IMI", "ISC_", "ALMI", "ILMI", "LAE", "LQTS"],
+    "prohibited_equivalences": ["prolonged QT = LQTS", "LAO or atrial hypertrophy = LAE", "unspecified ischemia/scar = a named infarct territory", "not mentioned = clinical negative"],
+    "unknowns": "Remain in all ECG/route denominators; excluded from endpoint binary comparisons and never imputed."
+  },
+  "analysis": {
+    "primary_estimand": "Per original profile membership predictions on every eligible ECG for endpoints with explicitly known references; top-1 retained as a distinct secondary quantity.",
+    "matched_contrast": "Nested restricted subset: at least one known positive mapped primary label for the profile; same scores and endpoint definitions; common estimable endpoints shown separately.",
+    "selective": "One joint decision per ECG, unconditional flow plus positive disposition. Risk is error over known ECG-endpoint opportunities; report opportunity counts and per-class counts, with missingness caveat. AURC is computed from the frozen signed margin ordering with ties grouped and references never used for route construction.",
+    "metrics": ["sensitivity", "specificity", "PPV", "NPV", "F1", "AUROC", "average_precision", "Brier", "ECE", "coverage", "abstention", "selective_risk", "AURC"],
+    "uncertainty": {"seed": 197837, "replicates": 2000, "confidence": 0.95, "cluster": "connected components of source subject and exact waveform", "two_sided_minimum_clusters_per_polarity": 5},
+    "underpowered": "Retain all descriptive confusion and support; mark <5 independent clusters in either polarity sparse, and suppress unsupported two-sided estimates when a polarity is absent. Do not change endpoints after observing performance.",
+    "reporting": "Distinguish emitted false negatives, abstained positives with no output, and baseline false negatives counterfactually found among abstentions. No performance acceptance threshold."
+  },
+  "invariants": {
+    "no_published_weight_or_threshold_changes": true,
+    "no_ludb_training_selection_or_calibration": true,
+    "score_and_route_before_reference_join": true,
+    "no_individual_records_exported": true,
+    "no_historical_or_clinical_claim_from_november": true,
+    "historical_quarantine": "WITHDRAW_HISTORICAL_CLAIM",
+    "protected_manuscript_figures_letters_and_prs": true
+  }
+}
