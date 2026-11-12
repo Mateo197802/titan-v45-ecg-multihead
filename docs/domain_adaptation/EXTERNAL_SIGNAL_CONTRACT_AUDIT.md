@@ -30,6 +30,8 @@ shared patient identifiers between partitions. The 992 PR #6-selected patients
 retained by this design are all in training, not in validation/calibration/test.
 Waveform matching is exact float32 equality on the observed CODE window; it is
 not exhaustive equivalence detection or proof of cross-institution isolation.
+See the [cohort CSV](evidence/EXTERNAL_DATA_MANIFESTS_SUMMARY.csv) and
+[sanitized audit receipt](evidence/PATIENT_AND_SIGNAL_LEAKAGE_AUDIT.json).
 
 | Split | ECG | Patients | 7.335 s ECG | 10 s ECG |
 |---|---:|---:|---:|---:|

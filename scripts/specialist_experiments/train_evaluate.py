@@ -10,7 +10,7 @@ import platform
 import subprocess
 import sys
 from collections import Counter
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from tempfile import NamedTemporaryFile
 from typing import Any
@@ -845,7 +845,7 @@ def run(feature_dir: Path, output_dir: Path, device: str):
     public_manifest = {
         "schema": "TITAN_SPECIALIST_REPRODUCIBILITY_MANIFEST_V1",
         "study_id": receipt["study_id"],
-        "created_utc": datetime.now(UTC).isoformat(),
+        "created_utc": datetime.now(timezone.utc).isoformat(),
         "git_commit": _git_revision(ROOT),
         "feature_extraction_commit": feature_extraction_commit,
         "config_sha256": receipt["config_sha256"],

@@ -1,4 +1,5 @@
 import importlib
+import json
 from pathlib import Path
 
 import numpy as np
@@ -44,3 +45,19 @@ def test_calibration_and_paired_bootstrap_use_valid_reference_and_patients(modul
     assert points[-1]["tp"] == 2 and points[-1]["fp"] == 0
     assert macro[0]["candidate_minus_baseline"] == 1
     assert paired[1]["value"] == 1
+
+
+def test_promotion_requires_protected_endpoints_not_only_macro_gain(modules):
+    select, evaluate = modules
+    cfg = json.loads(select.PROTOCOL.read_bytes())
+    endpoints = "|".join(cfg["endpoints"])
+    aggregates = [{"model": model, "duration": "all", "endpoints": endpoints, "macro_f1": score,
+                   "candidate_minus_baseline": .20, "paired_ci_low": .10}
+                  for model, score in (("P6", .55), ("P8", .55), ("candidate", .75))]
+    points = [{"model": model, "duration": "all", "endpoint": endpoint, "sensitivity": .80, "ppv": .80, "brier": .03}
+              for model in ("P6", "P8", "candidate") for endpoint in cfg["endpoints"]]
+    assert evaluate.within_code_decision(points, aggregates, cfg)["external_adaptation"] == "PASS"
+    next(x for x in points if x["model"] == "candidate" and x["endpoint"] == "AFIB")["sensitivity"] = .70
+    result = evaluate.within_code_decision(points, aggregates, cfg)
+    assert result["research_target_met"] and result["external_adaptation"] == "FAIL"
+    assert result["independent_generalization"] == "NOT_EVALUATED"

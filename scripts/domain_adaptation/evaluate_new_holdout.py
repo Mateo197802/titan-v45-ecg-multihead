@@ -154,6 +154,39 @@ def write_csv(path, rows):
         writer.writerows(rows)
 
 
+def within_code_decision(points, aggregates, cfg):
+    endpoints = tuple(cfg["endpoints"])
+    gate = cfg["promotion"]
+    macro = {row["model"]: row for row in aggregates if row["duration"] == "all"}
+    scores = {(row["model"], row["endpoint"]): row for row in points if row["duration"] == "all"}
+    usable = macro["candidate"]["endpoints"].split("|") == list(endpoints)
+    outcome = {"scope": "WITHIN_CODE_NOT_INSTITUTIONAL_CONFIRMATION", "all_five_endpoints_estimable": usable,
+               "research_target_met": usable and macro["candidate"]["macro_f1"] >= gate["development_goal_macro_f1"],
+               "independent_generalization": "NOT_EVALUATED", "P6_P8_promotion": "NOT_AUTHORIZED_BY_THIS_EVALUATION",
+               "P4": "NOT_EVALUABLE", "compared_with": {}}
+    for base in ("P6", "P8"):
+        if not usable:
+            outcome["compared_with"][base] = {"gain_and_safeguards_pass": False, "reason": "unsupported_endpoint"}
+            continue
+        safeguards = {}
+        for endpoint in ("AFIB", "RBBB", "1AVB"):
+            for metric, bound in (("sensitivity", "max_sensitivity_drop_afib_rbbb_1avb"),
+                                  ("ppv", "max_precision_drop_afib_rbbb_1avb")):
+                a, b = (scores[profile, endpoint][metric] for profile in ("candidate", base))
+                delta = a - b if a is not None and b is not None else None
+                safeguards[f"{endpoint}_{metric}"] = {"delta": delta, "pass": delta is not None and delta >= -gate[bound]}
+        brier_delta = float(np.mean([scores["candidate", endpoint]["brier"] - scores[base, endpoint]["brier"]
+                                     for endpoint in endpoints]))
+        safeguards["macro_brier"] = {"delta": brier_delta, "pass": brier_delta <= gate["max_macro_brier_increase"]}
+        delta, low = (macro[base][k] for k in ("candidate_minus_baseline", "paired_ci_low"))
+        outcome["compared_with"][base] = {"macro_f1_delta": delta, "paired_ci_low": low, "safeguards": safeguards,
+            "gain_and_safeguards_pass": delta >= gate["confirmatory_macro_f1_gain_min"] and low is not None and low > 0
+            and all(x["pass"] for x in safeguards.values())}
+    outcome["external_adaptation"] = "PASS" if outcome["research_target_met"] and all(
+        x["gain_and_safeguards_pass"] for x in outcome["compared_with"].values()) else "FAIL"
+    return outcome
+
+
 def run(bank, assets, candidate, selection, out):
     cfg = json.loads(PROTOCOL.read_bytes())
     freeze = json.loads(selection.read_bytes())
@@ -205,6 +238,8 @@ def run(bank, assets, candidate, selection, out):
              "EXTERNAL_MACRO_F1_COMPARISON.csv")
     for name, rows in zip(names, tables, strict=True):
         write_csv(out / name, rows)
+    decision_file = "WITHIN_CODE_PROMOTION_DECISION.json"
+    write_json(out / decision_file, within_code_decision(tables[0], tables[2], cfg))
     curve_rows = []
     for i, endpoint in enumerate(endpoints):
         keep = y[:, i] >= 0
@@ -220,7 +255,7 @@ def run(bank, assets, candidate, selection, out):
     report = {"scope": "WITHIN_CODE_NOT_INSTITUTIONAL_CONFIRMATION", "test_ecgs": len(ids), "test_patients": len(set(people)),
               "selection_sha256": digest(selection), "candidate_sha256": digest(checkpoint), "released_assets": hashes,
               "private_prediction_sha256": digest(out / "private_test_predictions.npz"),
-              "aggregates": {name: digest(out / name) for name in (*names, "PRECISION_RECALL_CURVES.csv")},
+              "aggregates": {name: digest(out / name) for name in (*names, "PRECISION_RECALL_CURVES.csv", decision_file)},
               "independent_generalization": "NOT_EVALUATED"}
     write_json(out / "WITHIN_CODE_EVALUATION_RECEIPT.json", report)
     print(json.dumps(report, sort_keys=True))
