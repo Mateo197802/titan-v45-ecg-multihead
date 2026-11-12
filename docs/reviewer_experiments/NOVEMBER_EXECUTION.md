@@ -54,6 +54,16 @@ The complementary PTB-XL job uses 49e520c0d29b81fcc7f584663c4b5b9ad1fe7b64.
 The joint selective job uses 772ec3558d952127fb098cad89d01bb808a8bda9.
 Submission is not completion; the registry does not assert results.
 
+**Verified baseline inference.** Native job 33355 completed with exit
+`0:0` in 15 minutes 18 seconds. Its
+[scoring receipt](../../outputs/results/reviewer_experiments/sph_baseline_scoring_receipt_33355.json)
+reconciles 25,770 SPH metadata ECGs, 25,770 archive ECGs and 25,770 scored
+ECGs. No technical exclusion, failed inference, label-conditioned routing
+or abstention was recorded in this baseline. SHA-256 of the receipt:
+`6b52867f0a9834a3eb698c76749d7a5d16d35dd1dc3fa0e24e88ed07eefc846b`.
+The private predictions stay in CEDIA. Scoring completion is not a
+diagnostic performance result; 33357 supplies statement-level metrics.
+
 Native replay 33363 failed before inference with permission denied
 creating its default temporary directory. The same pending launcher
 33364 was held before inference. Original dependent jobs 33365 and
