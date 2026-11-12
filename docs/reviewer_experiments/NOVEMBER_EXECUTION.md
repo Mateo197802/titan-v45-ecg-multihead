@@ -38,6 +38,7 @@ real second-stage inference are not implied by abstention.
 | 33396 | New SPH mapped rhythm Other and auxiliary heads vs frozen-score comparator | afterok:33355:33369 | Paired held development metrics and full reference/scoring flow |
 | 33399 | Same-score full-population vs restricted SPH analysis | afterok:33355:33357 | Statement prevalence, disjoint flow strata, and paired differences between denominators |
 | 33403 | Compare both new waveform replays to archived predictions and previous native replays | afterok:33363:33364 | Anchored input hashes, score residuals, margins, decisions and missing-score counts |
+| 33410 | Complementary unfiltered PTB-XL cache scoring with P6/P8/P4 | afterok:33355 | Complete denominator and technical flow; statement metrics for 1AVB/ISC_ and released pathology auxiliary ranking |
 
 The submitted baseline uses experiment commit f989eccf74d38399d0298026e6f4c078a437fd2d.
 The comparison job uses 891dacbca23d7685117f836f98bc3dd1482bb1af.
@@ -46,6 +47,7 @@ The pathology Other job uses 6baab4228767219c048d8989a35a70e3bb2219fa.
 The rhythm Other job uses 72dd436cd5a9e8ec397fccd1e70b9aa1abed4efe.
 The full-population contrast job uses 63ff66fb9b49198f773973d5f579c404940c648b.
 The replay contrast job uses c4f5e38b31cfad391bdb03ab979ab15d0b2e7543.
+The complementary PTB-XL job uses 49e520c0d29b81fcc7f584663c4b5b9ad1fe7b64.
 Submission is not completion; the registry does not assert results.
 
 The [population contrast protocol](../../configs/reviewer_experiments/november_population_contrast.json)
@@ -60,6 +62,22 @@ bootstrap draws compare the nested populations. No difference is
 interpreted as the causal effect of cohort selection or an overall
 clinical accuracy. P8 top-1 fallback remains an internal decision rule,
 not clinical referral, abstention or a separately executed stage.
+
+The [complementary PTB-XL protocol](../../configs/reviewer_experiments/november_ptbxl_reference_bridge.json)
+records every one of the 19,601 fold 1-9 metadata rows, with 6,205
+waveforms present in the authorized preflight cache. It reads neither
+fold-10 waveforms nor their reference labels. The direct `1AVB` and
+`ISC_` SCP statements complement SPH's insufficient references, but
+the latter means non-specific ischemic ECG statement, not clinical
+ischemia. Zero likelihood is unknown under the
+[versioned PhysioNet data description](https://physionet.org/content/ptb-xl/1.0.3/#data-description).
+`SR` is a sinus-rhythm statement, not an NSR control/positive, and its
+likelihood is unknown in these folds. Patient-component intervals are
+computed on matched references; case-control PPV and NPV are not
+population estimates. The protocol also produces matched-reference
+threshold-free ALMI/ILMI/LAO-or-LAE scores from the released V3AG
+backbone. The previously inspected partial cache is not an independent
+validation cohort and is not a replacement for the SPH denominator.
 
 The [morphology input contract](MORPHOLOGY_INPUT_CONTRACT.md) gives the formulas
 and separates waveform replay, fixed-weight sensitivity and retraining.
