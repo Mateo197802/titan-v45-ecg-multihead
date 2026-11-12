@@ -238,21 +238,30 @@ def paired_macro(trials, groups, design):
             "valid_replicates": len(samples), "invalid_replicates": design["replicates"]-len(samples)}
 
 
-def released_scores(profile, arrays, wi, ids):
+def released_decisions(profile, arrays, wi, ids, labels, thresholds):
     selected = np.isin(wi, ids)
     ix = np.searchsorted(ids, wi[selected])
-    key = "p4_baseline_scores" if profile == "P4" else profile.lower()+"_baseline_logits"
-    logits = arrays[key][selected]
-    if profile == "P4" and len(logits) != len(ids):
-        raise ValueError("released P4 must score one window per ECG")
-    values = expit(logits) if profile == "P8" else logits
-    totals = np.zeros((len(ids), values.shape[1]))
-    np.add.at(totals, ix, values)
     counts = np.bincount(ix, minlength=len(ids))
     if np.any(counts == 0):
         raise ValueError("released baseline missing held score")
-    aggregated = totals / counts[:, None]
-    return expit(aggregated) if profile == "P6" else aggregated
+    ordered_thresholds = {label: thresholds[label] for label in labels}
+    order = np.argsort(ix, kind="stable")
+    if profile == "P4":
+        scores = arrays["p4_baseline_scores"][selected][order]
+        if not np.all(counts == 1) or scores.shape != (len(ids), len(labels)):
+            raise ValueError("released P4 score contract differs from the held ECGs")
+        return scores, scores >= list(ordered_thresholds.values())
+
+    from titan_v45.models.frozen_rhythm import aggregate_rhythm
+
+    # Both released rhythm heads emit eight logits, including the P6 checkpoint.
+    logits = arrays[profile.lower()+"_baseline_logits"][selected][order]
+    scores, calls = [], []
+    for group in np.split(logits, np.cumsum(counts)[:-1]):
+        result = aggregate_rhythm(group, ordered_thresholds, profile=profile)
+        scores.append([result["scores"][label] for label in labels])
+        calls.append([label in result["labels"] for label in labels])
+    return np.asarray(scores), np.asarray(calls)
 
 
 def evaluate(protocol, profiles, models, arrays, released_thresholds, metric, paired_intervals):
@@ -277,11 +286,7 @@ def evaluate(protocol, profiles, models, arrays, released_thresholds, metric, pa
                 s = record_scores(model, xs[arm], wi, ids, p)
                 scores[arm], decisions[arm] = s, (s >= model["threshold"]).astype(np.int8)
                 metrics[arm] = metric(y, decisions[arm], s)
-            baseline = released_scores(p, arrays, wi, ids)
-            calls = baseline >= [released_thresholds[p][c] for c in labels]
-            if p == "P8":
-                empty = np.flatnonzero(~calls.any(axis=1))
-                calls[empty, np.argmax(baseline[empty], axis=1)] = True
+            baseline, calls = released_decisions(p, arrays, wi, ids, labels, released_thresholds[p])
             metrics["released_baseline"] = metric(y, calls[:, position], baseline[:, position])
             a, b = ARMS
             trials.append((ids, y, decisions[a], decisions[b]))

@@ -39,3 +39,30 @@ def test_paired_bootstrap_uses_only_evaluable_held_groups():
         rows, ["another-train-patient", "a", "b", "calibration-only"], design,
     )
     assert m["paired_macro"](rows, ["unused", "a", "b"], design)["with_minus_without"] == 1
+
+
+def test_released_comparison_projects_p6_and_retains_p8_fallback():
+    from titan_v45.models.frozen_rhythm import P6_CLASSES, P8_CLASSES, aggregate_rhythm
+
+    logits = np.array([[1, 0, 0, 4, -1, 3, -2, -3],
+                       [2, 0, 0, 5, -1, 3, -2, -3],
+                       [0, 1, 0, 4, -2, 3, -2, -3]], dtype=np.float32)
+    wi = np.array([1, 0, 1])
+    ids = np.array([0, 1])
+    for profile, labels in (("P6", P6_CLASSES), ("P8", P8_CLASSES)):
+        thresholds = dict.fromkeys(labels, 0.9999)
+        arrays = {profile.lower()+"_baseline_logits": logits}
+        scores, calls = m["released_decisions"](profile, arrays, wi, ids, labels, thresholds)
+        assert scores.shape == calls.shape == (2, len(labels))
+        for i, record in enumerate(ids):
+            expected = aggregate_rhythm(logits[wi == record], thresholds, profile=profile)
+            assert scores[i].tolist() == list(expected["scores"].values())
+            assert [c for c, flag in zip(labels, calls[i], strict=True) if flag] == expected["labels"]
+        assert calls.sum() == (0 if profile == "P6" else 2)
+
+
+def test_released_p4_rejects_more_than_one_window_per_ecg():
+    labels = ("ASMI", "LVH", "IMI", "ISC_")
+    with pytest.raises(ValueError, match="P4 score contract"):
+        m["released_decisions"]("P4", {"p4_baseline_scores": np.zeros((2, 4))},
+                                np.array([0, 0]), np.array([0]), labels, dict.fromkeys(labels, 0.5))
