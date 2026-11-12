@@ -31,7 +31,7 @@ def read(path):
     return json.loads(path.read_bytes())
 
 
-def load(base):
+def load(base, sph_config_path):
     phase = base / "titan-four-reviewers-november-phase1"
     closure = base / "titan-v45-scientific-closure"
     joint = phase / "joint-selective-33414"
@@ -53,10 +53,7 @@ def load(base):
     held = {r["record_id"]: r["component"] for r in splits if r["split"] == "held"}
     sph_receipt_path = phase / "sph-frozen-33355" / "scoring-receipt.json"
     sph_receipt = read(sealed(sph_receipt_path, calibration["scoring_receipt_sha256"]))
-    # The scoring configuration belongs to the immutable runtime checkout.
-    repo = base / "specialist-heads-20261111-v2" / "repo"
-    sph_config = read(sealed(repo / "configs/external_validation/sph_frozen.json",
-                             sph_receipt["protocol_sha256"]))
+    sph_config = read(sealed(sph_config_path, sph_receipt["protocol_sha256"]))
     sph_rows = list(jsonl(sealed(joint / "private-joint-routes.jsonl",
                                  aggregate["private_joint_route_ledger_sha256"])))
     if len(sph_rows) != len(held) or {r["record_id"] for r in sph_rows} != set(held):
@@ -212,11 +209,11 @@ def evaluate(rows, endpoints, thresholds, recipe):
 
 def main():
     p = argparse.ArgumentParser()
-    for key in ("base", "protocol", "output"):
+    for key in ("base", "protocol", "output", "sph-config"):
         p.add_argument(f"--{key}", type=Path, required=True)
     a = p.parse_args()
     protocol = read(a.protocol)
-    data, policy = load(a.base)
+    data, policy = load(a.base, a.sph_config)
     result = {name: evaluate(*data[name], protocol["selective"]) for name in protocol["selective"]["cohorts"]}
     write_new(a.output, {"job": os.environ.get("SLURM_JOB_ID"), "protocol_sha256": digest(a.protocol),
                          "design": protocol["design"], "sealed_receipts": SEALED, "cutoffs": policy["cutoffs"],
