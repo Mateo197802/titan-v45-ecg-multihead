@@ -1,0 +1,14 @@
+{
+  "code_development_job": "33689",
+  "code_development_commit": "0b55b1de1b104c97353e3eee1444f2a1d83891c0",
+  "archive_receipt_sha256": "a6b2c0fee44c380721aaeb585497553bf327eabbd84b1171b4179bb9458e2315",
+  "protocol_sha256": "e4fa12f255403b3d59b3188ee138fcf63c44f1a102f011a14db8f3ae099b8ac4",
+  "waveform_bank_qc_sha256": "45e19b5f044c55c0a1a797886b9a1e9e7b65ffada917a73c0e09145fe4c6fa75",
+  "source_hashes": {
+    "scripts/domain_adaptation/build_code_development.py": "04dc36968f0f0f29a19e6236a794f49d1bc2f57cce8b16c46bd9b87e3b5de73f",
+    "src/titan_v45/data/duration_aware_preprocessing.py": "54655983446420475e139ca4a42e4fcdc3ff8d74f2dd05cde76697f06b999201"
+  },
+  "preprocessed_signal_scope": "observed CODE waveform only; physical native gain not inferred",
+  "published_controls_job": "33691",
+  "published_controls_csv_sha256": "ddfc514561d47eb7cd1563a3dd58cc89b410d5bca9235a46d543525a2844a6f2"
+}

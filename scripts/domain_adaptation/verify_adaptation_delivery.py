@@ -9,9 +9,11 @@ import math
 import re
 from collections import defaultdict
 from pathlib import Path
+from statistics import mean, pstdev
 
 RUN_FIELDS = ("mode", "normalization", "seed", "slurm_job", "best_epoch", "validation_macro_ap",
-              "validation_macro_f1_at_half", "trainable_parameters", "code_commit", "checkpoint_sha256")
+              "validation_macro_f1_at_half", "trainable_parameters", "code_commit", "checkpoint_sha256",
+              "validation_source")
 HEX = re.compile(r"[0-9a-f]{64}\Z")
 PUBLIC_TYPES = {".csv", ".json", ".txt"}
 PRIVATE_NAMES = {"exam", "patient", "ecg_id", "exam_id", "patient_id", "labels", "waveform", "identity"}
@@ -78,6 +80,7 @@ def verify(evidence, rebuild=False):
                 or float(best["validation_macro_f1_at_half"]) != run["validation_macro_f1_at_half"]):
             raise ValueError("invalid training receipt or best-epoch claim")
         seen.add(key)
+        run.setdefault("validation_source", "code15")
         experiments.append({field: run[field] for field in RUN_FIELDS})
         learning.extend({"mode": key[0], "normalization": key[1], "seed": key[2], "slurm_job": run["slurm_job"], **row}
                         for row in curve_rows)
@@ -85,6 +88,20 @@ def verify(evidence, rebuild=False):
         write_csv(evidence / "TRAINING_EXPERIMENTS_COMPLETE.csv", RUN_FIELDS, experiments)
         if learning:
             write_csv(evidence / "FINETUNING_LEARNING_CURVES.csv", tuple(learning[0]), learning)
+        groups = defaultdict(list)
+        for run in experiments:
+            groups[run["mode"], run["normalization"], run["validation_source"]].append(run)
+        ablations = []
+        for (mode, norm, source), group in sorted(groups.items()):
+            ap = [r["validation_macro_ap"] for r in group]
+            f1 = [r["validation_macro_f1_at_half"] for r in group]
+            ablations.append({"mode": mode, "normalization": norm, "validation_source": source, "seeds": len(group),
+                              "trainable_parameters": group[0]["trainable_parameters"], "macro_ap_mean": mean(ap),
+                              "macro_ap_population_sd": pstdev(ap) if len(ap) > 1 else None,
+                              "macro_f1_at_half_mean": mean(f1),
+                              "macro_f1_at_half_population_sd": pstdev(f1) if len(f1) > 1 else None})
+        if ablations:
+            write_csv(evidence / "MODEL_ARCHITECTURE_ABLATIONS.csv", tuple(ablations[0]), ablations)
         with (evidence / "CHECKPOINT_SHA256SUMS.txt").open("w", encoding="utf-8", newline="\n") as stream:
             for run in experiments:
                 stream.write(f"{run['checkpoint_sha256']}  {run['mode']}-{run['normalization']}-{run['seed']}/best.pt\n")

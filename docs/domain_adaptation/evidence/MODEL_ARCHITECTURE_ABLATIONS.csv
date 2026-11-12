@@ -1,0 +1,5 @@
+mode,normalization,validation_source,seeds,trainable_parameters,macro_ap_mean,macro_ap_population_sd,macro_f1_at_half_mean,macro_f1_at_half_population_sd
+frozen_backbone_mlp,per_lead_zscore,code15,1,85143,0.43860074430755364,,0.41796782054238746,
+frozen_backbone_mlp,robust_shared_gain,code15,1,85143,0.273307795862469,,0.29886013876264206,
+partial_transformer_mlp,per_lead_zscore,code15,1,9933463,0.4670446077645602,,0.4526562769765038,
+partial_transformer_resnet_mlp,per_lead_zscore,code15,1,16992199,0.5502047560208447,,0.5827900159338536,

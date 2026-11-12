@@ -73,8 +73,10 @@ rechecking statistical output does not trigger another holdout inference.
 
 [HEEDB v5](https://bdsp.io/content/heedb/5.0/) is a candidate, not an executed
 cohort. Before acquiring data, the team must verify permission and storage in
-CEDIA under the applicable data-use agreement. Emory `codes_physician` contains
-provider-described overread and automated coding; human reference status and
+CEDIA under the applicable data-use agreement. Emory's `diagnoses_acquisition.csv`
+distinguishes `codes_software` from `codes_physician`; `diagnoses_v24.csv` is
+the separate automated reprocessing export. `codes_physician` can include
+original software codes as well as overreads; human reference status and
 negative semantics must be established for the exact eligible ECG, not inferred
 from the column name. The public [LUDB](https://physionet.org/content/ludb/1.0.1/)
 is a useful technical audit candidate but cannot support all five endpoints at

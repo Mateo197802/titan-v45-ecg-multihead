@@ -12,17 +12,25 @@
       "bytes": 7841,
       "sha256": "d5328b00b131b05c47990ac336629d50e01f258365ac2a87caa86ffe0541abc0"
     },
+    "MODEL_ARCHITECTURE_ABLATIONS.csv": {
+      "bytes": 543,
+      "sha256": "6181645e07b66aaf7bd21ba7926031530fb3ec62a517d760b7b595ab70fe218a"
+    },
     "PATIENT_AND_SIGNAL_LEAKAGE_AUDIT.json": {
       "bytes": 757,
       "sha256": "3e457d05d87c0b5a3391e9953374fb06a0d2ff8d938baedc90416a885878af03"
+    },
+    "PREPROCESSING_REPRODUCIBILITY.json": {
+      "bytes": 908,
+      "sha256": "9f3bd3663c91d9245bb4fa9e1664085348eb454b9200680f1d75e356ce56b428"
     },
     "SIGNAL_PROCESSING_ABLATIONS.csv": {
       "bytes": 17071,
       "sha256": "ddfc514561d47eb7cd1563a3dd58cc89b410d5bca9235a46d543525a2844a6f2"
     },
     "TRAINING_EXPERIMENTS_COMPLETE.csv": {
-      "bytes": 981,
-      "sha256": "c3aed935f696606f7bd2ae8a8a4e8e4aa5b8e885c1066e15a408beb5126abcf8"
+      "bytes": 1027,
+      "sha256": "d6a78506d0ed8c4d29db02254734f89c1e54da3c3dff965ede875c3795041c66"
     },
     "VALIDATION_BASELINES_RECEIPT.json": {
       "bytes": 669,
