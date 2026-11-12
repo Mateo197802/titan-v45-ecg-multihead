@@ -1,0 +1,34 @@
+{
+  "counts_by_split": {
+    "calibration": {
+      "physical_or_integrity_failed": 13,
+      "waveform_eligible": 671
+    },
+    "test": {
+      "physical_or_integrity_failed": 21,
+      "waveform_eligible": 993
+    },
+    "train": {
+      "acquisition_failed": 1,
+      "exact_duplicate": 2,
+      "physical_or_integrity_failed": 65,
+      "waveform_eligible": 4328
+    },
+    "validation": {
+      "physical_or_integrity_failed": 7,
+      "waveform_eligible": 683
+    }
+  },
+  "eligibility_manifest_sha256": "418ee17b0554ba5cd9391ab732c5ce5b9edc7fdbbc35dc8f41769968001139ee",
+  "historical_physical_or_near_duplicate_comparison": "NOT_RUN",
+  "input_acquisition_sha256": "476d4f63acd4445846ae231adbd20618c707ba84868cc429b067a659f97aa238",
+  "patient_independence_from_historical_backbones": "NOT_CERTIFIED",
+  "performance_computed": false,
+  "scope": "WAVEFORM_QC_NO_REFERENCE_OR_PERFORMANCE",
+  "source_patient_split_overlap": 0,
+  "stage_a_raw_hashes_compared": 19217,
+  "stage_a_raw_matches": 0,
+  "within_source_aligned_cross_split_pairs": 0,
+  "within_source_aligned_near_pairs": 1,
+  "within_source_exact_duplicate_records": 2
+}
