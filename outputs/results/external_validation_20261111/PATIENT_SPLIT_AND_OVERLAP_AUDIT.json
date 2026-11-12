@@ -1,0 +1,59 @@
+{
+  "scope": "PR6 external evaluation and development, aggregate only",
+  "code15": {
+    "source_doi": "10.5281/zenodo.4916206",
+    "evaluated_archives": 1,
+    "publisher_archives": 18,
+    "source_ecgs_in_archive": 20000,
+    "selected_ecgs": 2461,
+    "selected_rule": "frozen source patient SHA-256 rule; repeat ECGs retained",
+    "paired_scored_ecgs": 1442,
+    "paired_scored_patients": 1403,
+    "within_archive_aligned_duplicate_exclusions": 0,
+    "aligned_matches_to_comparable_publisher_code_test_signatures": 0,
+    "publisher_code_test_signatures": 573,
+    "publisher_code_test_uncomparable_waveforms": 254,
+    "converted_historical_release_traces_uncomparable": 167,
+    "publisher_code_test_annotations_opened": false,
+    "patient_independence_from_historical_weights": "NOT_CERTIFIED",
+    "duration_contract": "NOT_CERTIFIED",
+    "signal_boundary_audit": {
+      "slurm_step": "33296.13",
+      "scored_nominal_48_48": 0,
+      "scored_symmetric_581_581": 1437,
+      "scored_other_left_with_right_581": 5,
+      "selected_symmetric_581_581": 1438,
+      "excluded_no_zero_border_either_side": 923,
+      "private_boundary_receipt_sha256": "f5ea1739e3642057cddec84a10381f9ada602ba2bf9c0e51d64cdaff91f6ea34",
+      "labels_or_probabilities_loaded": false
+    },
+    "paired_evaluation_receipt_sha256": "64e0ba8c3dded8a5ebe1739bf5edfc904520145f53f8ee707fd241dbd4d54d9d",
+    "limitations": [
+      "One archive only; cross-archive near duplicates not yet checked.",
+      "Alignment and scope do not exclude shifts, crops, unknown training exposures or cross-source patient matches.",
+      "The frozen operational filter admitted traces whose acquisition duration cannot be certified."
+    ]
+  },
+  "mimic": {
+    "source_patient_split_overlap": 0,
+    "waveform_eligible_by_split": {"train": 4328, "validation": 683, "calibration": 671, "test": 993},
+    "waveform_eligible_total": 6675,
+    "stage_a_raw_matches": 0,
+    "stage_a_raw_hashes_compared": 19217,
+    "historical_physical_or_near_duplicate_comparison": "NOT_RUN",
+    "heldout_reference_labels_opened": false,
+    "patient_independence_from_historical_weights": "NOT_CERTIFIED",
+    "qc_receipt_sha256": "095b14717a1dc9249cae4876a6b2459483e2c44973aa25f100ce75f8dffddcd0"
+  },
+  "development_ablation": {
+    "fit_sources": ["chapman_shaoxing", "cpsc2018"],
+    "epoch_selection_source": "chapman_shaoxing",
+    "descriptive_source": "georgia",
+    "n_fit_ecg": 8415,
+    "n_epoch_selection_ecg": 812,
+    "n_descriptive_ecg": 1097,
+    "bootstrap_unit": "ecg_record_not_patient",
+    "code_and_mimic_used": false,
+    "independent_confirmation": "NOT_RUN"
+  }
+}

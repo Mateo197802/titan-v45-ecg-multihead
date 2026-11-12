@@ -1,0 +1,36 @@
+{
+  "repository_scope": "draft PR 6 only",
+  "frozen_code15_protocol_sha256": "75f9227ebb506bf0b1aabf215d425ba88cd82119f051bc4400e0c1756410bfd4",
+  "baseline_weight_identity": "baseline_hashes in code15-first/code15_evaluation_receipt.json; release v0.1.0 unchanged",
+  "linear_fit": {
+    "job": 33316,
+    "commit": "5a5306d6856fb17d4d08d61be275fa3eeb7c1803",
+    "receipt_sha256": "2f1461d63ec213660d3278c9956b1fbf759b5bbada1962d9a2af798ea28a0385",
+    "P6_sha256": "7e5d4a4793b7d0a3cd3fa3f21ad0ba7ba3a4f827e5097cb3bfc4692789a6f07f",
+    "P8_sha256": "7a3cbeb6c55fabc838317a7921fe0c278e34d23c1d2167bac07e8d3688de9879"
+  },
+  "development_mlp": {
+    "fit_step": "33296.1",
+    "fit_commit": "a9dabd2ac31af5ff1946f196d9016e77684a264c",
+    "fit_receipt_sha256": "744a00b7e1a764c5f67aef640658eed72c34b020331a25a2ac8e947220e9e0af",
+    "replay_step": "33296.6",
+    "replay_commit": "d443aa45fca476557718f4f29174bdf81c25a3e5",
+    "replay_receipt_sha256": "123d3c3516730933ce4d241914b317036e82e6c8c1e82d4f40444d6987de79a1",
+    "checkpoint_hashes": "runs by profile and loss in DEVELOPMENT_ABLATION_33296_1.json",
+    "used_for_code15": false,
+    "promoted": false
+  },
+  "code15": {
+    "first_transport_step": "33296.0",
+    "first_transport_receipt_sha256": "0fbb2892bc5f08fd5c70aa6cb59d7aab2d0ae1bb58a6a789b116f0b28b770c47",
+    "first_paired_step": "33296.11",
+    "first_paired_commit": "34c349539004167aeb91a25dab4048efcf2045e5",
+    "first_paired_receipt_sha256": "64e0ba8c3dded8a5ebe1739bf5edfc904520145f53f8ee707fd241dbd4d54d9d",
+    "duration_audit_step": "33296.13",
+    "duration_audit_commit": "ee2626b143906360bfe979215b5fb1c9e03a98ee",
+    "remaining_transport_job": 33326,
+    "full_evaluation_job": 33360,
+    "complete": false,
+    "promoted": false
+  }
+}

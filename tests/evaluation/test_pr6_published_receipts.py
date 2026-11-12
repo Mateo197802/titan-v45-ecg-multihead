@@ -1,0 +1,97 @@
+import csv
+import hashlib
+import json
+from pathlib import Path
+
+import pytest
+
+ROOT = Path(__file__).resolve().parents[2]
+RESULTS = ROOT / "outputs/results/external_validation_20261111"
+FIRST = RESULTS / "code15-first"
+
+
+def sha256(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def load(path):
+    return json.loads(path.read_bytes())
+
+
+def test_first_code_archive_custody_and_aggregate_conservation():
+    receipt_path = FIRST / "code15_evaluation_receipt.json"
+    receipt = load(receipt_path)
+    audit = load(RESULTS / "PATIENT_SPLIT_AND_OVERLAP_AUDIT.json")["code15"]
+    lineage = load(RESULTS / "EXPERIMENT_AND_CHECKPOINT_LINEAGE.json")
+    assert audit["paired_evaluation_receipt_sha256"] == sha256(receipt_path)
+    assert lineage["code15"]["first_paired_receipt_sha256"] == sha256(receipt_path)
+    assert receipt["protocol_sha256"] == sha256(ROOT / "docs/external_validation_20261111/FROZEN_CODE15_PROTOCOL.json")
+    assert receipt["aggregate_csv_sha256"] == sha256(FIRST / "CODE15_PER_CLASS.csv")
+    for filename, expected in receipt["aggregate_views_sha256"].items():
+        assert sha256(FIRST / filename) == expected
+    assert not receipt["complete_archive_coverage"]
+    assert receipt["historical_patient_independence"] == "NOT_CERTIFIED"
+    assert receipt["point_estimates_independently_verified"]["metric_rows_verified"] == 20
+    assert receipt["point_estimates_independently_verified"]["patient_bootstrap_replayed"]
+    assert audit["duration_contract"] == "NOT_CERTIFIED"
+    boundary = audit["signal_boundary_audit"]
+    assert boundary["scored_nominal_48_48"] == 0
+    assert boundary["scored_symmetric_581_581"] + boundary["scored_other_left_with_right_581"] == receipt["n_ecg"]
+    counts = receipt["counts"]
+    assert sum(counts[key] for key in ("unexpected_code_padding", "flat_lead",
+                                       "short_or_ambiguous_code_duration")) + receipt["n_ecg"] == counts["selected_ecgs"]
+    with (FIRST / "EXTERNAL_CODE15_RESULTS.csv").open(newline="", encoding="utf-8") as stream:
+        reader = csv.DictReader(stream)
+        assert {"exam_id", "patient_id", "record_id", "statement"}.isdisjoint(reader.fieldnames)
+        rows = list(reader)
+    assert len(rows) == 20
+    assert len({(r["profile"], r["endpoint"], r["model"]) for r in rows}) == 20
+    for row in rows:
+        assert row["scope"] == "FIRST_ARCHIVE_ONLY_NO_PROMOTION"
+        tp, tn, fp, fn = (int(row[key]) for key in ("tp", "tn", "fp", "fn"))
+        assert tp + tn + fp + fn == int(row["n_ecg_with_reference"]) == receipt["n_ecg"]
+        assert tp + fn == int(row["n_positive_ecg"])
+        assert tn + fp == int(row["n_negative_ecg"])
+        assert float(row["f1"]) == pytest.approx(2 * tp / (2 * tp + fp + fn))
+    for decision in receipt["promotion"].values():
+        assert decision["decision"] == "INCOMPLETE_NO_PROMOTION"
+        assert not decision["observed_metric_gate_pass"]
+
+
+def test_development_replay_receipt_has_no_external_promotion():
+    fit_path = RESULTS / "DEVELOPMENT_ABLATION_33296_1.json"
+    replay_path = RESULTS / "DEVELOPMENT_ABLATION_REPLAY_33296_6.json"
+    lineage = load(RESULTS / "EXPERIMENT_AND_CHECKPOINT_LINEAGE.json")["development_mlp"]
+    assert lineage["fit_receipt_sha256"] == sha256(fit_path)
+    assert lineage["replay_receipt_sha256"] == sha256(replay_path)
+    fit, replay = load(fit_path), load(replay_path)
+    assert not fit["code15_inputs_opened"] and not fit["mimic_inputs_opened"]
+    assert replay["input_aggregate_sha256"] == fit["aggregate_csv_sha256"] == sha256(
+        RESULTS / "SPECIALIST_IMPROVEMENT_EXPERIMENTS.csv"
+    )
+    assert replay["verified_original_rows"] == 60
+    assert replay["bootstrap_unit"] == "ecg_record_not_patient"
+    for contrasts in replay["contrasts_mlp_minus_linear"].values():
+        for contrast in contrasts.values():
+            assert contrast["delta_ci95"][0] <= 0
+            assert not contrast["observed_metric_gate_pass"]
+
+
+def test_boundary_and_limb_checks_are_distinct_from_clinical_eligibility(monkeypatch):
+    pytest.importorskip("h5py")
+    import numpy as np
+
+    monkeypatch.syspath_prepend(str(ROOT / "scripts/external_validation"))
+    from audit_code15_padding import border_counts, limb_consistency
+
+    lead_i = np.arange(2934, dtype=float) + 1
+    lead_ii = 3 * lead_i
+    lead_iii = lead_ii - lead_i
+    trace = np.column_stack((lead_i, lead_ii, lead_iii, -(lead_i + lead_ii) / 2,
+                             (lead_i - lead_iii) / 2, (lead_ii + lead_iii) / 2,
+                             *([lead_ii] * 6)))
+    trace = np.pad(trace, ((581, 581), (0, 0)))
+    assert border_counts(trace) == ("finite_nonzero", 581, 581)
+    assert limb_consistency(trace).tolist() == [True, True, True, True]
+    trace[:, 3] *= -1
+    assert limb_consistency(trace).tolist() == [True, False, True, True]

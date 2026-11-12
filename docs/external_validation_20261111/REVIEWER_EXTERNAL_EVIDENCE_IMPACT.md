@@ -1,4 +1,10 @@
-# External evidence impact: preflight only
+# External evidence impact: historical rubric and supplemental PR #6 evidence
+
+The [executed first CODE-15% archive](REVIEWER_R1_1_CLOSURE_ASSESSMENT.md)
+now has paired, independently recomputed metrics. It does not satisfy the
+complete-cohort, duration, or historical independence conditions. The table
+below keeps PR #3's previous historical rubric snapshot, not an assertion
+that PR #6 has no executed comparisons.
 
 The previous percentages below come from the historical [PR #3 matrix](https://github.com/Mateo197802/titan-v45-ecg-multihead/blob/68274ee05dab1e5aaa48aa588262b5b8289cbbd4/docs/reviewer_closure/REVIEWER_15_COVERAGE_AND_CEILING.json), field `new_pct`. The new study does not edit that matrix or change a percentage based on acquisition, queued jobs, or label-blind inference.
 

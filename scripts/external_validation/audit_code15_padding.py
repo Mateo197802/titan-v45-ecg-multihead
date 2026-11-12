@@ -24,6 +24,15 @@ def border_counts(trace):
     return "finite_nonzero", left, right
 
 
+def limb_consistency(trace):
+    lead_i, lead_ii, lead_iii, avr, avl, avf = trace[:, :6].astype(np.float64).T
+    derived = np.stack((lead_ii - lead_i, -(lead_i + lead_ii) / 2,
+                        (lead_i - lead_iii) / 2, (lead_ii + lead_iii) / 2), axis=1)
+    residual = np.max(np.abs(trace[:, 2:6] - derived), axis=0)
+    scale = np.max(np.abs(trace[:, :6]))
+    return residual <= (1e-9 + 1e-6 * scale)
+
+
 def run(code, evaluation, output):
     protocol = json.loads(PROTOCOL.read_bytes())
     if (digest(code / "record.json") != protocol["catalog_sha256"]
@@ -37,7 +46,7 @@ def run(code, evaluation, output):
     with np.load(scores, allow_pickle=False) as membership:
         scored = set(map(int, membership["exams"]))
     catalog = json.loads((code / "record.json").read_bytes())
-    summaries, total_scored = {}, 0
+    summaries, amplitude, total_scored = {}, {}, 0
     for name, expected in results["archive_sha256"].items():
         if digest(code / name) != expected:
             raise ValueError("scored archive checksum mismatch")
@@ -45,7 +54,7 @@ def run(code, evaluation, output):
         with (code / "exams.csv").open(encoding="utf-8-sig", newline="") as stream:
             keys = {int(row["exam_id"]) for row in csv.DictReader(stream)
                     if row["trace_file"] == trace_name and selected(row["patient_id"].strip())}
-        summary = Counter()
+        summary, limb_rows, amplitudes = Counter(), Counter(), {False: [], True: []}
         with tempfile.TemporaryDirectory() as temp:
             h5path = verified_hdf5(code, name, catalog, Path(temp))
             with h5py.File(h5path, "r") as h5:
@@ -56,18 +65,35 @@ def run(code, evaluation, output):
                         continue
                     in_scores = int(exam) in scored
                     total_scored += in_scores
-                    summary[(in_scores, *border_counts(h5[trace_key][index]))] += 1
+                    trace = h5[trace_key][index]
+                    state, left, right = border_counts(trace)
+                    summary[(in_scores, state, left, right)] += 1
+                    if state == "finite_nonzero":
+                        consistent = limb_consistency(trace)
+                        limb_rows[(in_scores, "finite_nonzero")] += 1
+                        limb_rows[(in_scores, "all_four_relations")] += bool(consistent.all())
+                        for lead, passed in zip(("III", "aVR", "aVL", "aVF"), consistent, strict=True):
+                            limb_rows[(in_scores, lead)] += bool(passed)
+                        amplitudes[in_scores].append(float(np.max(np.ptp(trace, axis=0))))
         if sum(summary.values()) != len(keys):
             raise ValueError("padding-audit cohort membership mismatch")
         summaries[name] = [
             {"scored": included, "status": status, "zero_left": left, "zero_right": right, "n_ecg": count}
             for (included, status, left, right), count in sorted(summary.items(), key=lambda item: (-item[1], item[0]))
         ]
+        amplitude[name] = [
+            {"scored": included, "n_finite_nonzero": len(values),
+             "n_limb_relation_consistent": {lead: limb_rows[(included, lead)]
+                                            for lead in ("III", "aVR", "aVL", "aVF", "all_four_relations")},
+             "max_lead_peak_to_peak_p05_p50_p95_native_units": np.quantile(values, [.05, .5, .95]).tolist()}
+            for included, values in amplitudes.items() if values
+        ]
     if total_scored != results["n_ecg"] or len(scored) != results["n_ecg"]:
         raise ValueError("padding-audit scored membership mismatch")
     report = {"scope": "SIGNAL_BOUNDARY_AUDIT_NO_OUTCOMES", "labels_or_probabilities_loaded": False,
               "evaluation_receipt_sha256": digest(receipt), "n_scored_verified": total_scored,
-              "per_archive_boundary_counts": summaries}
+              "per_archive_boundary_counts": summaries, "per_archive_limb_and_amplitude": amplitude,
+              "physical_units_certified": False}
     with output.open("x", encoding="utf-8", newline="\n") as stream:
         stream.write(json.dumps(report, indent=2, sort_keys=True) + "\n")
 
