@@ -27,6 +27,10 @@ real second-stage inference are not implied by abstention.
 | 33355 | New frozen P6/P8/P4 inference | Immutable SPH inputs, release weights and frozen scorer | Private scoring ledger and scoring receipt |
 | 33356 | Pair new scores with job 32668 | afterok:33355 | Aggregate residuals, decisions and denominator reconciliation |
 | 33357 | Aggregate new baseline metrics | afterok:33355 | Compatible-endpoint confusion/metrics and cluster intervals |
+| 33362 | Freeze policy on calibration components, then evaluate held SPH development components | afterok:33355:33357 | Private split/route ledgers, cutoff seal, and aggregate selective metrics |
+| 33363 | Rerun saved P4 waveform panel | P4 source 02019b832fafecd0c263ea556c70f16fa0a50ccf | Private replay ledger |
+| 33364 | Rerun saved rhythm waveform panels | Rhythm source cfe6d59fa5cc4be10de0d7c6803fa5208fae0072 | Private replay ledger |
+| 33365 | Audit historical panel residuals and decisions | afterok:33363:33364 | Aggregate decision and score differences |
 
 The submitted baseline uses experiment commit f989eccf74d38399d0298026e6f4c078a437fd2d.
 The comparison job uses 891dacbca23d7685117f836f98bc3dd1482bb1af.
@@ -37,3 +41,23 @@ exact waveform hashes, uses only the calibration half for cutoffs and
 exports aggregate counts and the frozen thresholds. A subsequent scoring
 stage must verify that receipt before processing held outcomes. The split
 cannot convert previously inspected SPH into independent validation.
+
+For auxiliary reference support, the versioned SPH dictionary provides
+Flutter (51) and LAE (140). The frozen score interface exposes Flutter as
+the first of the six rhythm auxiliary logits and LAE as a named pathology
+auxiliary sigmoid. Ranking uses only target statements and explicit
+Normal ECG-only controls; concurrent Normal and abnormal primary
+statements are ambiguous. The complete source denominator includes
+unknowns. Normal ECG does not authenticate an NSR endpoint. No operating
+threshold or comprehensive Other classifier is inferred.
+
+## Links to the 40-criterion register
+
+R1-2.1 receives new reproducibility evidence only after successful scoring
+and aggregation; R1-2.2–3 remain historical questions. R2-general.1
+distinguishes declared outputs from evaluable references, and
+R2-general.2 does not close on a mapped subset. R2-3f.3 requires score and
+decision verification on the historical panels, not the SPH repeat;
+R2-3f.1–2 and R2-3f.4 retain their source and checkpoint caveats.
+R2-4k.1 remains historical; a selective SPH development result belongs to
+R2-4k.2 and never updates the June rate. No automatic scoring changes.
