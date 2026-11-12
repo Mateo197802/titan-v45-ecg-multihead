@@ -1,6 +1,6 @@
 # External reference contract under audit
 
-MIMIC v1.0 supplies 18 machine statement fields (`report_0` to `report_17`), not the cardiologist free text. The candidate parser reads every field for development records; it treats only whole approved lexical templates as positive or explicitly negated. It separately records historical, uncertain, ambiguous, conflicting, unmentioned, and unmapped states. Compound templates that are not implemented are masked, not treated as negative. A missing phrase and a generic normal statement do not imply the absence of every pathology.
+MIMIC v1.0 supplies 18 machine statement fields (`report_0` to `report_17`), not the cardiologist free text. The candidate parser reads every field for development records; it treats only whole allowlisted lexical templates as positive or explicitly negated. It separately records historical, uncertain, ambiguous, conflicting, unmentioned, and unmapped states. Compound templates that are not implemented are masked, not treated as negative. A missing phrase and a generic normal statement do not imply the absence of every pathology.
 
 | Profile | Candidates for machine concordance | Not established |
 |---|---|---|

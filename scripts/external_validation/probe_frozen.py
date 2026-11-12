@@ -31,19 +31,28 @@ from titan_v45.models.frozen_rhythm import (
 )
 
 
+def load_scorers(asset_root: Path, protocol: dict):
+    if not torch.cuda.is_available():
+        raise RuntimeError("frozen external scoring requires CUDA")
+    assets, hashes = verified_assets(ROOT, asset_root, {BACKBONE, *HEADS.values(), PATH_BACKBONE, SPECIALIST})
+    if hashes != protocol["baseline"]:
+        raise ValueError("baseline assets differ from pinned protocol")
+    contract = json.loads((ROOT / "outputs/models/heads/global_head_contracts.json").read_text())
+    rhythm = FrozenRhythm(
+        assets, contract,
+        load_recorded_event_extractor(ROOT / "docs/provenance/recovered-original-sources-20261029.zip"),
+        "cuda",
+    )
+    pathology = FrozenPathology(assets, contract, "cuda")
+    return rhythm, pathology, hashes, _baseline_thresholds(ROOT, pathology)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("study", type=Path)
     parser.add_argument("assets", type=Path)
     args = parser.parse_args()
-    device = "cuda"
-    if not torch.cuda.is_available():
-        raise RuntimeError("GPU probe requires CUDA")
     protocol = json.loads((ROOT / "docs/external_validation_20261111/FROZEN_EXTERNAL_EVALUATION_PROTOCOL.json").read_text())
-    assets, hashes = verified_assets(ROOT, args.assets, {BACKBONE, *HEADS.values(), PATH_BACKBONE, SPECIALIST})
-    if hashes != protocol["baseline"]:
-        raise ValueError("baseline assets differ from pinned protocol")
-    contract = json.loads((ROOT / "outputs/models/heads/global_head_contracts.json").read_text())
     morphology = _safe_morphology(ROOT)
     source = args.study / "probe"
     index = (args.study / "mimic/record_list.csv").read_bytes()
@@ -70,13 +79,7 @@ def main():
             errors[type(error).__name__] += 1
     if not samples:
         raise RuntimeError("no physically valid probe inputs")
-    rhythm = FrozenRhythm(
-        assets, contract,
-        load_recorded_event_extractor(ROOT / "docs/provenance/recovered-original-sources-20261029.zip"),
-        device,
-    )
-    pathology = FrozenPathology(assets, contract, device)
-    _baseline_thresholds(ROOT, pathology)
+    rhythm, pathology, hashes, _ = load_scorers(args.assets, protocol)
     scores = {key: values[1] for key, values in _rhythm_batch(rhythm, samples).items()}
     scores["P4"] = _pathology_batch(pathology, samples)[1]
     if set(scores) != {"P4", "P6", "P8"} or any(not np.isfinite(value).all() for value in scores.values()):

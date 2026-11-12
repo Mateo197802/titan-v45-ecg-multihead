@@ -11,6 +11,12 @@ repo=${1:?repository required}
 study=${2:?study directory required}
 assets=${3:?asset cache required}
 deps=${4:?dependency tar required}
+mode=${5:-probe}
+case "$mode" in
+    probe) script=probe_frozen.py ;;
+    cohort) script=score_mimic.py ;;
+    *) exit 2 ;;
+esac
 module load pytorch/2.2
 scratch=$(mktemp -d "${SLURM_TMPDIR:-/tmp}/titan-external-probe-XXXXXX")
 trap 'rm -rf "$scratch"' EXIT
@@ -20,4 +26,4 @@ export PYTHONPYCACHEPREFIX="$scratch/pycache"
 cd "$repo"
 test -z "$(git status --porcelain)"
 git rev-parse HEAD
-python -u scripts/external_validation/probe_frozen.py "$study" "$assets"
+python -u "scripts/external_validation/$script" "$study" "$assets"
