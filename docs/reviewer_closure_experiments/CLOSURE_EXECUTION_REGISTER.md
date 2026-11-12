@@ -13,6 +13,7 @@ The runner checks the archive and the publisher checksums independently.
 |---|---|---|---|
 | LUDB frozen P6/P8/P4 scoring, joint routes and morphology hooks | SLURM 33697 | cb17ac132dd3242192d9996f51129a48e06b5d32 | No reference join; immutable release assets and sealed SPH policy |
 | LUDB reference, support, fixed policy and previously fitted SPH head evaluation | SLURM 33699 | baceb368a08352b6ea74798f1c77159ef1ec139a | afterok:33697, native score seal verified before reading LUDB reference CSV |
+| LUDB reference grammar correction; authoritative evaluation only | SLURM 33720 | 10140a0b7c45e792106d3e9c08c8e93ddf3e5c1b | Requires original 33697 complete and sealed; no new inference, calibration, or route construction |
 | Original SPH split/cutoff read-only audit | [Native aggregate](../../outputs/results/reviewer_closure_experiments/sph_split_and_policy_audit.json) | baceb368a08352b6ea74798f1c77159ef1ec139a | Original 33362 calibration/held split and 33414 policy; no labels or new inference |
 | Matched morphology statistical robustness audit | SLURM 33704 | d89dbc05c67b29d6cf7954ea2763d3b068d16775 | Sealed fit 33474 and evaluation 33596; no fit or waveform extraction |
 | PTB Diagnostic clinical territory vs healthy control transport | SLURM 33718 | 1ca453f0d4ba1a4438a3c6e8873242444c6bb755 | Protocol f37f6ca; score all source ECGs before reference join; original P4 and separately trained 33390 heads, no refit |
@@ -78,3 +79,6 @@ receipt bytes; terminal scheduler state alone is insufficient.
 The [draft PR](https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/9)
 targets the previous November experimental branch, not a manuscript branch.
 Existing PRs are untouched. No closure decisions follow from submission alone.
+The [verifier](../../scripts/evaluation/verify_reviewer_scientific_closure.py)
+checks native CEDIA producer state and bytes, verifies private hashes in
+place, and rechecks the public packet against the sanitized native receipt.

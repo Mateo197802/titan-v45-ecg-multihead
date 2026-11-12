@@ -11,15 +11,23 @@ from pathlib import Path
 from score_reviewer_closure_ludb import ARCHIVE_SHA256, PROTOCOL_SHA256, write_new
 from verify_reviewer_november_delivery import digest, protected_path, seal_entry, validate_public
 
-JOBS = {"score": "33697", "evaluate": "33699", "morphology": "33704"}
+JOBS = {"score": "33697", "evaluate": "33720", "morphology": "33704", "ptb_score": "33718", "ptb_evaluate": "33718"}
+SUPERSEDED_EVALUATION = "33699"
 PUBLIC_NAMES = {
     "score": "ludb_scoring_receipt.json",
     "evaluate": "ludb_fixed_policy_and_reference_aggregate.json",
     "morphology": "morphology_robustness_aggregate.json",
     "sph": "sph_split_and_policy_audit.json",
+    "ptb_score": "ptb_diagnostic_scoring_receipt.json",
+    "ptb_evaluate": "ptb_diagnostic_transport_aggregate.json",
+    "ptb_eligibility": "ptb_diagnostic_eligibility_verified_v2.json",
+    "ptb_eligibility_superseded": "ptb_diagnostic_eligibility_superseded_v1.json",
 }
 SPH_SHA256 = "f133cec9ba402ff7fb19ccf5ecaba8daae66c4f492829e3d0f13caa356fbd2d7"
 POLICY_SHA256 = "c9183320a4dd923f037a93fc014fc2db6bc64f223ff67b5d297e540eefb43ae6"
+PTB_ELIGIBILITY_SHA256 = "fc179fe166b340c37b1372201243c4d48268d0270d691562a3187b706fa94eaf"
+PTB_SUPERSEDED_SHA256 = "4e97e47839971f35f81333f46458ba6ab8ea01c1f3bf81c7b15fa58fc84547f9"
+PTB_PROTOCOL_SHA256 = "3975bb5a8f2bcade7f559146d1c3f30a5553728b8ac94d84f40c4cec3c4d9db2"
 SCORE_STATES = {"scored", "technical_unscored"}
 ROUTES = {"accepted", "abstained", "technical_unscored"}
 
@@ -93,9 +101,35 @@ def check_scientific(score, evaluated, morph, sph, score_hash):
             raise ValueError("morphology robustness calculations do not reconcile")
 
 
+def check_ptb(score, result, eligibility, score_hash):
+    if (score["protocol_sha256"] != PTB_PROTOCOL_SHA256 or score["reference_labels_used_for_scoring"] is not False
+            or result["fit_or_calibration_performed"] is not False or result["historical_independence_certified"]
+            or result["score_receipt_sha256"] != score_hash
+            or result["reference_eligibility_sha256"] != PTB_ELIGIBILITY_SHA256
+            or result["private_reference_manifest_sha256"] != eligibility["reference_manifest_sha256"]
+            or not (score["all_source_records"] == result["all_source_ecgs"] == eligibility["verified_headers"] == 549)
+            or result["source_subjects"] != 290 or result["scored_flow"] != score["flow"]
+            or sum(result["scored_flow"].values()) != 549):
+        raise ValueError("PTB clinical comparison lineage, scope or denominator differs")
+    if set(result["endpoints"]) != {"ASMI", "IMI", "ALMI", "ILMI"}:
+        raise ValueError("PTB clinical territory contract differs")
+    for label, endpoints in result["endpoints"].items():
+        prior = eligibility["endpoints"][label]
+        if not prior["eligible_for_territory_control_comparison"]:
+            raise ValueError("PTB endpoint did not pass the source-reference support gate")
+        for e in endpoints.values():
+            known = e["reference_states"].get("positive", 0) + e["reference_states"].get("negative", 0)
+            if (e["eligible_ecgs"] != 549 or sum(e["reference_states"].values()) != 549
+                    or e["known_scored_ecgs"] > known
+                    or e["reference_states"].get("negative", 0) > prior["record_states"]["explicit_control"]
+                    or e["reference_states"].get("positive", 0) > prior["record_states"]["positive"]):
+                raise ValueError("PTB endpoint reference flow does not reconcile")
+
+
 def native_files(root):
     out = subprocess.check_output([
-        "sacct", "-S", "2026-11-12", "-X", "-j", ",".join(JOBS.values()), "-P", "-n",
+        "sacct", "-S", "2026-11-12", "-X", "-j", ",".join(sorted(set(JOBS.values()) | {SUPERSEDED_EVALUATION})),
+        "-P", "-n",
         "-o", "JobIDRaw,State,ExitCode,Elapsed",
     ], text=True)
     states = {}
@@ -112,13 +146,16 @@ def native_files(root):
         "score": root / f"ludb-score-{JOBS['score']}",
         "evaluate": root / f"ludb-eval-{JOBS['evaluate']}",
         "morphology": root / f"morphology-audit-{JOBS['morphology']}",
+        "ptb_score": root / f"ptb-transport-{JOBS['ptb_score']}",
+        "ptb_evaluate": root / f"ptb-transport-{JOBS['ptb_evaluate']}",
     }
-    paths = {k: protected_path(r, "scoring-receipt.json" if k == "score" else "aggregate.json")
+    paths = {k: protected_path(r, "scoring-receipt.json" if k in ("score", "ptb_score") else "aggregate.json")
              for k, r in roots.items()}
     checks = {k: seal_entry(roots[k], p) for k, p in paths.items()}
     for k, file, field in (
         ("score", "private-scored-and-routed.jsonl", "private_score_route_ledger_sha256"),
         ("evaluate", "private-reference-route-ledger.jsonl", "private_reference_route_ledger_sha256"),
+        ("ptb_score", "private-scores.jsonl", "private_scores_sha256"),
     ):
         if seal_entry(roots[k], protected_path(roots[k], file)) != json.loads(paths[k].read_bytes())[field]:
             raise ValueError("native private ledger does not match public summary")
@@ -126,6 +163,19 @@ def native_files(root):
     checks["sph"] = digest(paths["sph"])
     if checks["sph"] != SPH_SHA256:
         raise ValueError("native SPH audit bytes differ")
+    for k, tag, expected in (
+        ("ptb_eligibility", "fc0f1d7bd9fca80cb159277fab17961dbb028cb9", PTB_ELIGIBILITY_SHA256),
+        ("ptb_eligibility_superseded", "f6781067bc18860f1224060e61a3141151cbe293", PTB_SUPERSEDED_SHA256),
+    ):
+        directory = root / f"ptb-diagnostic-source-audit-{tag}"
+        paths[k] = protected_path(directory, "aggregate.json")
+        checks[k] = seal_entry(directory, paths[k])
+        if checks[k] != expected:
+            raise ValueError("native PTB source audit bytes differ")
+        aggregate = json.loads(paths[k].read_bytes())
+        ref = protected_path(directory, "private-reference-manifest.jsonl")
+        if seal_entry(directory, ref) != aggregate["reference_manifest_sha256"]:
+            raise ValueError("PTB private reference bytes differ")
     return paths, checks, states
 
 
@@ -159,8 +209,12 @@ def main():
         if k in JOBS and str(content[k]["job"]) != JOBS[k]:
             raise ValueError("producer job does not match native accounting")
     check_scientific(content["score"], content["evaluate"], content["morphology"], content["sph"], checks["score"])
+    check_ptb(content["ptb_score"], content["ptb_evaluate"], content["ptb_eligibility"], checks["ptb_score"])
+    if checks["ptb_eligibility_superseded"] != PTB_SUPERSEDED_SHA256:
+        raise ValueError("superseded PTB reference audit bytes differ")
     result = {"schema": "TITAN_V45_SCIENTIFIC_CLOSURE_VERIFICATION_V1",
               "scheduler": states, "public_sha256": checks, "public_files": PUBLIC_NAMES,
+              "superseded_evaluations_not_used": {SUPERSEDED_EVALUATION: "multiline source grammar corrected"},
               "science_consistency_verified": True, "record_level_export_performed": False}
     if args.output:
         write_new(args.output, result)
