@@ -11,6 +11,7 @@ scores=${2:?sealed private scores}
 out=${3:?aggregate output}
 deps=${4:?dependencies archive}
 hdf5deps=${5:?HDF5 dependencies archive}
+mode=${6:-reduce}
 module load pytorch/2.2
 source "$repo/scripts/cedia/code15_scratch.sh"
 scratch=$(code15_scratch "$(dirname -- "$out")" reduction 1048576)
@@ -22,4 +23,8 @@ export TMPDIR="$scratch" OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1
 cd "$repo"
 test -z "$(git status --porcelain)"
 git rev-parse HEAD
-python -B -u scripts/domain_adaptation/evaluate_new_holdout.py reduce "$scores" "$out"
+case $mode in
+    reduce) python -B -u scripts/domain_adaptation/evaluate_new_holdout.py reduce "$scores" "$out" ;;
+    source_probe) python -B -u scripts/domain_adaptation/probe_source_descriptors.py "$scores" "${7:?additional source bank}" "$out" ;;
+    *) exit 2 ;;
+esac
