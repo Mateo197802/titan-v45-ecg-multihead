@@ -22,9 +22,12 @@ SOURCE_SHA = {
     "dictionary": "ad05b0b1fcae83bb1230755ad9cfc7c96f303feddc08a4a9ad5bdc9ca63bac8f",
     "inventory": "798866dc1dc00d3e81c9fda28711dd0ea57fb57a7fc2ac0a415ad20a97f17107",
 }
-DIRECT = {"PAC": "PAC", "Flutter": "AFLT", "LBBB": "CLBBB", "ALMI": "ALMI", "ILMI": "ILMI"}
+DIRECT = {
+    "PAC": "PAC", "Flutter": "AFLT", "LBBB": "CLBBB", "2AVB": "2AVB",
+    "3AVB": "3AVB", "ALMI": "ALMI", "ILMI": "ILMI",
+}
 PROXIES = {"NSR": "SR", "LQTS": "LNGQT", "LAE": "LAO/LAE"}
-TARGETS = (*DIRECT, "Paced", "2AVB", "3AVB", *PROXIES)
+TARGETS = (*DIRECT, "Paced", *PROXIES)
 PROFILES = {"P6", "P8", "P4"}
 REFERENCE_SCHEMA = "TITAN_V45_PTBXL_OTHER_SUPPORT_V1"
 
@@ -44,8 +47,6 @@ def identity(path):
 def disposition(endpoint, codes, marker):
     if endpoint in PROXIES:
         return "non_equivalent_proxy" if PROXIES[endpoint] in codes else "unknown"
-    if endpoint in {"2AVB", "3AVB"}:
-        return "unknown"
     control = codes.get("NORM", 0) > 0 and codes.keys() <= {"NORM", "SR"} and not marker
     if endpoint == "Paced":
         if "PACE" in codes or marker:
@@ -69,7 +70,8 @@ def load_rows(metadata, dictionary, inventory, receipt_path, ledger):
         records = {row[0]: row[1] for row in csv.reader(stream)}
     if (not set(DIRECT.values()).union(PROXIES.values()) <= records.keys()
             or records["PACE"].casefold() != "normal functioning artificial pacemaker"
-            or {"2AVB", "3AVB"} & records.keys()):
+            or records["2AVB"].casefold() != "second degree av block"
+            or records["3AVB"].casefold() != "third degree av block"):
         raise ValueError("official statement contract changed")
 
     flow = {p: Counter() for p in PROFILES}
