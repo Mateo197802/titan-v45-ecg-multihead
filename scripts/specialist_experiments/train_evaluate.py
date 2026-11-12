@@ -40,6 +40,20 @@ from titan_v45.training.specialist_heads import (  # noqa: E402
 CONFIG = ROOT / "configs/specialist_heads/study_20261111_v2.json"
 BOOTSTRAP_REPLICATES = 2000
 BOOTSTRAP_SEED = 20261111
+FEATURE_PIPELINE_PATHS = (
+    "scripts/specialist_experiments/audit_inputs.py",
+    "scripts/specialist_experiments/extract_features.py",
+    "scripts/cedia/recovery_candidates/morphology_features_v4.py",
+    "src/titan_v45",
+    "configs/specialist_heads/study_20261111_v2.json",
+    "data/manifests/external_dev/rhythm_primary8_records.csv",
+    "data/manifests/external_dev/rhythm_primary6_diagnostic_records.csv",
+    "outputs/models/heads/global_head_contracts.json",
+    "outputs/results/revision_20261029/p6_calibration_lineage_summary.json",
+    "outputs/results/external_dev/rhythm_primary8_metrics.json",
+    "docs/provenance/recovered-original-sources-20261029.zip",
+    "release-manifest.json",
+)
 
 
 def _sha256(path: Path) -> str:
@@ -57,6 +71,29 @@ def _git_revision(repo: Path) -> str:
         check=True, capture_output=True, text=True,
     )
     return result.stdout.strip()
+
+
+def _verify_feature_code_compatibility(repo: Path, feature_revision: str) -> str:
+    training_revision = _git_revision(repo)
+    if feature_revision == training_revision:
+        return training_revision
+    ancestry = subprocess.run(
+        ["git", "merge-base", "--is-ancestor", feature_revision, training_revision],
+        cwd=repo, check=False, capture_output=True, text=True,
+    )
+    if ancestry.returncode != 0:
+        raise ValueError("feature extraction commit is not an ancestor of training code")
+    changed = subprocess.run(
+        ["git", "diff", "--quiet", feature_revision, training_revision, "--",
+         *FEATURE_PIPELINE_PATHS],
+        cwd=repo, check=False, capture_output=True, text=True,
+    )
+    if changed.returncode == 1:
+        raise ValueError("feature extraction code or inputs changed after cache creation")
+    if changed.returncode != 0:
+        raise subprocess.CalledProcessError(changed.returncode, changed.args, changed.stdout,
+                                            changed.stderr)
+    return training_revision
 
 
 def _atomic_json(path: Path, payload: dict[str, Any]) -> None:
@@ -210,13 +247,14 @@ def _baseline_rhythm_scores(
     profile: str, thresholds: dict[str, float],
 ) -> np.ndarray:
     classes = RHYTHM_CLASSES_P6 if profile == "P6" else RHYTHM_CLASSES_P8
+    ordered_thresholds = {name: thresholds[name] for name in classes}
     scores = np.full((len(records), len(classes)), np.nan, dtype=np.float64)
     for index, row in enumerate(records):
         if not row["scored"]:
             continue
         values = logits[window_records == index]
         if len(values):
-            result = aggregate_rhythm(values, thresholds, profile=profile)
+            result = aggregate_rhythm(values, ordered_thresholds, profile=profile)
             scores[index] = [result["scores"][name] for name in classes]
     return scores
 
@@ -541,8 +579,8 @@ def run(feature_dir: Path, output_dir: Path, device: str):
         raise ValueError("feature cache hash mismatch")
     if metadata.get("config_sha256") != _sha256(CONFIG):
         raise ValueError("frozen study configuration changed after feature extraction")
-    if metadata.get("git_commit") != _git_revision(ROOT):
-        raise ValueError("feature cache was extracted from a different code commit")
+    feature_extraction_commit = metadata.get("git_commit")
+    training_code_commit = _verify_feature_code_compatibility(ROOT, feature_extraction_commit)
     with np.load(feature_path, allow_pickle=False) as loaded:
         arrays = {name: loaded[name] for name in loaded.files}
     rhythm_records = metadata["rhythm_records"]
@@ -780,6 +818,9 @@ def run(feature_dir: Path, output_dir: Path, device: str):
     receipt = {
         "schema": "TITAN_SPECIALIST_TRAINING_EVALUATION_RECEIPT_V1",
         "study_id": config["study_id"],
+        "feature_extraction_commit": feature_extraction_commit,
+        "training_code_commit": training_code_commit,
+        "feature_pipeline_unchanged_since_extraction": True,
         "config_sha256": _sha256(CONFIG),
         "feature_cache_sha256": metadata["feature_cache_sha256"],
         "private_feature_metadata_sha256": _sha256(metadata_path),
@@ -806,6 +847,7 @@ def run(feature_dir: Path, output_dir: Path, device: str):
         "study_id": receipt["study_id"],
         "created_utc": datetime.now(UTC).isoformat(),
         "git_commit": _git_revision(ROOT),
+        "feature_extraction_commit": feature_extraction_commit,
         "config_sha256": receipt["config_sha256"],
         "code_sha256": {
             "audit_inputs.py": _sha256(ROOT / "scripts/specialist_experiments/audit_inputs.py"),

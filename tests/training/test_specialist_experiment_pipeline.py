@@ -1,7 +1,9 @@
 import importlib.util
 from pathlib import Path
+from types import SimpleNamespace
 
 import numpy as np
+import pytest
 import torch
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -120,3 +122,36 @@ def test_summary_macro_compares_only_identical_evaluable_endpoints():
     assert candidate["baseline_macro_f1"] == 0.5
     assert np.isclose(candidate["delta_macro_f1_vs_baseline"], 0.1)
     assert len({tuple(item.keys()) for item in summaries}) == 1
+
+
+def test_p6_baseline_thresholds_ignore_json_key_sorting():
+    classes = pipeline.RHYTHM_CLASSES_P6
+    thresholds = dict(sorted({name: 0.5 for name in classes}.items()))
+    logits = np.zeros((1, 8), dtype=np.float32)
+
+    scores = pipeline._baseline_rhythm_scores(
+        logits, np.asarray([0], dtype=np.int32), [{"scored": True}], "P6", thresholds
+    )
+
+    assert scores.shape == (1, 6)
+    assert np.array_equal(scores, np.full((1, 6), 0.5))
+
+
+def test_feature_revision_guard_allows_training_only_changes(monkeypatch, tmp_path):
+    monkeypatch.setattr(pipeline, "_git_revision", lambda repo: "training-commit")
+    monkeypatch.setattr(
+        pipeline.subprocess, "run", lambda *args, **kwargs: SimpleNamespace(returncode=0)
+    )
+
+    result = pipeline._verify_feature_code_compatibility(tmp_path, "feature-commit")
+
+    assert result == "training-commit"
+
+
+def test_feature_revision_guard_rejects_extraction_pipeline_changes(monkeypatch, tmp_path):
+    monkeypatch.setattr(pipeline, "_git_revision", lambda repo: "training-commit")
+    results = iter((SimpleNamespace(returncode=0), SimpleNamespace(returncode=1)))
+    monkeypatch.setattr(pipeline.subprocess, "run", lambda *args, **kwargs: next(results))
+
+    with pytest.raises(ValueError, match="feature extraction code or inputs changed"):
+        pipeline._verify_feature_code_compatibility(tmp_path, "feature-commit")
