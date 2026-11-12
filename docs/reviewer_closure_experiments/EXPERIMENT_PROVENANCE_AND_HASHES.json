@@ -7,6 +7,8 @@
   "draft_pr": "Mateo197802/titan-v45-ecg-multihead#9",
   "original_review_sha256": "fa20747434b7ecabf1ed9fa4189f94a9884418e2c0a2a2d439d02ca14eb3f427",
   "historical_rubric_sha256": "275c28fa96d2429b4cbfca366196fd0fef195041a991a7a623d36f0fa7a8efa5",
+  "historical_register_commit": "4abb2de2bda3b3a2fa61b9418594690b5a3fc629",
+  "historical_fifteen_comment_register_sha256": "01849f3cf60520cd8e2396308a3e7165821b860b20497baf3511102797a34028",
   "protocols": {
     "LUDB": {
       "frozen_commit": "208f7b4abfb409d77c4a370cdb7aa768a8364b82",

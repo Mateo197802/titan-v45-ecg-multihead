@@ -14,6 +14,12 @@ parts of this request in different cohorts. These cohorts are not pooled.
 | PTB-XL bridge; one ECG | 19,601 metadata eligible / 6,205 available and scored | Limited development bridge using folds 1-9; no fold 10 and no claim of complete cohort inference. |
 | PTB Diagnostic v1.0.0; one ECG | 549 verified source records / 290 source subjects | Eligibility for separate infarct-territory versus healthy-control comparisons, not complete clinical workflow validation. |
 
+The PTB-XL cached subset is measurably enriched, not a random draw from
+its metadata denominator. For example, it contains 252/252 compatible
+Paced positives and 1,699/6,549 explicit Normal-only controls. See the
+[coverage audit](OTHER_CLASS_VALIDATION.md#ptb-xl-reference-availability-not-performance).
+Do not use cached operating-point estimates as population predictive values.
+
 [SPH 33399](../../outputs/results/reviewer_experiments/population-contrast_33399_aggregate.json)
 measures the effect of restriction on the same scores and mapped reference
 endpoints. The restricted sets use compatible positive statements rather than

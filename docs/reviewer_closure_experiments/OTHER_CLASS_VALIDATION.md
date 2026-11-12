@@ -79,6 +79,16 @@ reference for congenital LQTS, isolated LAE or strict NSR in this audit.
 The original 33410 ledger does not contain V3AG global rhythm scores;
 counts alone cannot assign performance to Paced or 3AVB.
 
+Cache inclusion was not uniform. The cache covers 6,205/19,601 eligible
+ECGs (31.66%), but includes 252/252 Paced positives, 14/14 3AVB positives,
+261/261 ALMI positives, and 426/482 complete LBBB positives. It contains
+1,699/6,549 explicit Normal-only controls (25.94%), 10/29 PAC positives,
+and 13/52 Flutter positives. Even within the known-reference
+Paced/Normal contrast, the positive fraction is 252/1,951 in the cache
+versus 252/6,801 in the eligible metadata. Cached PPV, NPV and precision-
+recall estimates therefore cannot be interpreted at the original
+PTB-XL reference prevalence or in a clinical all-comers population.
+
 ### Reference sources considered
 
 [LUDB](https://physionet.org/content/ludb/1.0.1/) permits a bounded transport
