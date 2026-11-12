@@ -1,0 +1,44 @@
+{
+  "schema": "TITAN_V45_CLOSURE_SPH_SPLIT_AUDIT_V1",
+  "original_calibration_job": "33362",
+  "original_joint_job": 33414,
+  "eligible_ecgs": 25770,
+  "ecg_by_split": {
+    "calibration": 12901,
+    "held": 12869
+  },
+  "distinct_by_split": {
+    "patient": {
+      "calibration": 12340,
+      "held": 12326
+    },
+    "signal": {
+      "calibration": 12807,
+      "held": 12795
+    },
+    "component": {
+      "calibration": 12340,
+      "held": 12326
+    }
+  },
+  "overlap_calibration_held": {
+    "patient": 0,
+    "signal": 0,
+    "component": 0
+  },
+  "calibration_policy_sha256": "61a4cfafb30621991288ab1a314ef932650ab27bbfd8ff0cacb1ff5a5633209b",
+  "joint_policy_sha256": "c9183320a4dd923f037a93fc014fc2db6bc64f223ff67b5d297e540eefb43ae6",
+  "private_split_sha256": "080288760b11bf6138bba5e3e5ebcfaa5f6c1da40af81c7090254f58458f46e4",
+  "private_index_sha256": "24eae465775c82c6ffa8fa9739a66d59f294f9de9190b903ea2b417b978f68ea",
+  "scoring_receipt_sha256": "6b52867f0a9834a3eb698c76749d7a5d16d35dd1dc3fa0e24e88ed07eefc846b",
+  "scoring_ledger_sha256": "4a3a1e61b1784e06190d5caaa089fca04ef84792acb3a5f9fc1af3f9c1173462",
+  "exact_calibration_recipe_rederived": true,
+  "cutoffs": {
+    "P8": 0.037162774801254295,
+    "P4": 0.014417142868041966
+  },
+  "references_read": false,
+  "inference_run": false,
+  "historical_independence_certified": false,
+  "no_individual_records_exported": true
+}
