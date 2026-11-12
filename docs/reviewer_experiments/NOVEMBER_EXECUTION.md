@@ -19,3 +19,21 @@ as a quarantine rate. Do not inspect a new test's outcome labels to choose
 thresholds or ontology. Do not publish patient keys, waveform signatures
 at record level, signals, predictions or checkpoints. Clinical review and
 real second-stage inference are not implied by abstention.
+
+## CEDIA execution registry
+
+| Job | Phase | Gate | Expected evidence |
+|---:|---|---|---|
+| 33355 | New frozen P6/P8/P4 inference | Immutable SPH inputs, release weights and frozen scorer | Private scoring ledger and scoring receipt |
+| 33356 | Pair new scores with job 32668 | afterok:33355 | Aggregate residuals, decisions and denominator reconciliation |
+| 33357 | Aggregate new baseline metrics | afterok:33355 | Compatible-endpoint confusion/metrics and cluster intervals |
+
+The submitted baseline uses experiment commit f989eccf74d38399d0298026e6f4c078a437fd2d.
+The comparison job uses 891dacbca23d7685117f836f98bc3dd1482bb1af.
+Submission is not completion; the registry does not assert results.
+
+The development calibrator groups ECGs by patient components linked by
+exact waveform hashes, uses only the calibration half for cutoffs and
+exports aggregate counts and the frozen thresholds. A subsequent scoring
+stage must verify that receipt before processing held outcomes. The split
+cannot convert previously inspected SPH into independent validation.
