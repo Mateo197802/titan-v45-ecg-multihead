@@ -271,20 +271,32 @@ def reduce_tables(score_dir, out):
         write_csv(out / name, rows)
     decision_file = "WITHIN_CODE_PROMOTION_DECISION.json"
     write_json(out / decision_file, within_code_decision(tables[0], tables[2], cfg))
-    curve_rows = []
+    curve_rows, calibration_rows = [], []
     for i, endpoint in enumerate(endpoints):
         keep = y[:, i] >= 0
         for model_name, values in outputs.items():
+            score = values[keep, i]
+            truth = y[keep, i] == 1
+            for bin_index in range(10):
+                lo, hi = bin_index / 10, (bin_index + 1) / 10
+                inside = (score >= lo) & ((score < hi) if bin_index < 9 else (score <= hi))
+                count = int(inside.sum())
+                calibration_rows.append({"model": model_name, "endpoint": endpoint, "low": lo, "high": hi,
+                                         "ecgs": count, "small_bin_suppressed": count < 10,
+                                         "mean_score": float(score[inside].mean()) if count >= 10 else None,
+                                         "observed_fraction": float(truth[inside].mean()) if count >= 10 else None})
             for k in range(101):
-                truth, score, t = y[keep, i] == 1, values[keep, i], k / 100
+                t = k / 100
                 call = score >= t
                 tp = int((call & truth).sum())
                 curve_rows.append({"model": model_name, "endpoint": endpoint, "threshold": t,
                                    "precision": tp / int(call.sum()) if call.any() else None,
                                    "recall": tp / int(truth.sum()) if truth.any() else None})
     write_csv(out / "PRECISION_RECALL_CURVES.csv", curve_rows)
+    write_csv(out / "CALIBRATION_CURVES.csv", calibration_rows)
     report = {**receipt, "score_receipt_sha256": digest(scored),
-              "aggregates": {name: digest(out / name) for name in (*names, "PRECISION_RECALL_CURVES.csv", decision_file)}}
+              "aggregates": {name: digest(out / name) for name in (
+                  *names, "PRECISION_RECALL_CURVES.csv", "CALIBRATION_CURVES.csv", decision_file)}}
     write_json(out / "WITHIN_CODE_EVALUATION_RECEIPT.json", report)
     print(json.dumps(report, sort_keys=True))
 

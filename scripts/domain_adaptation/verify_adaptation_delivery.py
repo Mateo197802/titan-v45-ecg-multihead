@@ -112,7 +112,8 @@ def verify(evidence, rebuild=False):
         if test["independent_generalization"] != "NOT_EVALUATED":
             raise ValueError("within-CODE scope cannot certify another institution")
         names = {"EXTERNAL_PER_CLASS_RESULTS.csv", "PATIENT_BOOTSTRAP_CONFIDENCE_INTERVALS.csv",
-                 "EXTERNAL_MACRO_F1_COMPARISON.csv", "PRECISION_RECALL_CURVES.csv", "WITHIN_CODE_PROMOTION_DECISION.json"}
+                 "EXTERNAL_MACRO_F1_COMPARISON.csv", "PRECISION_RECALL_CURVES.csv", "CALIBRATION_CURVES.csv",
+                 "WITHIN_CODE_PROMOTION_DECISION.json"}
         if set(test["aggregates"]) != names:
             raise ValueError("unexpected public aggregate roster")
         for name, digest in test["aggregates"].items():

@@ -83,7 +83,7 @@ def test_reduce_consumes_sealed_scores_without_inference(modules, monkeypatch, t
         "operating_thresholds": {name: [.5] * 5 for name in ("P6", "P8", "candidate")}})
     result = tmp_path / "delivery"
     evaluate.reduce(tmp_path, result)
-    assert len(list(result.iterdir())) == 6
+    assert len(list(result.iterdir())) == 7
     scores.write_bytes(b"tampered")
     with pytest.raises(ValueError, match="sealed prediction"):
         evaluate.reduce(tmp_path, tmp_path / "invalid")
