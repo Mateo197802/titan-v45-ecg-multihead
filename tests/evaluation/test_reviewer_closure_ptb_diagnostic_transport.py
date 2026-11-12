@@ -27,3 +27,13 @@ def test_verified_provider_record_extracts_only_checked_header_and_signals(trans
         checks[record + ".dat"] = "0" * 64
         with pytest.raises(ValueError, match="signal digest"):
             transport.verified_record(zipped, "data/", record, checks, tmp_path)
+
+
+def test_transport_reads_threshold_from_sealed_model_not_the_endpoint_wrapper(transport):
+    almi, ilmi = {"threshold": .26}, {"threshold": .72}
+    fit = {"endpoints": {"ALMI": {"status": "calibrated", "model": almi},
+                         "ILMI": {"status": "calibrated", "model": ilmi}}}
+    assert transport.transported_heads(fit) == {"ALMI": (almi, .26), "ILMI": (ilmi, .72)}
+    ilmi["threshold"] = float("nan")
+    with pytest.raises(ValueError, match="invalid sealed"):
+        transport.transported_heads(fit)

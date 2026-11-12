@@ -9,6 +9,7 @@ import json
 import zipfile
 from pathlib import Path
 
+from render_reviewer_closure_tables import TABLES, render
 from verify_reviewer_november_delivery import protected_path, validate_public
 from verify_reviewer_scientific_closure import (
     JOBS,
@@ -45,6 +46,7 @@ PRIOR = (
 )
 ALLOWLIST = frozenset((
     *(f"{DOC_ROOT}/{name}" for name in REQUIRED_DOCS),
+    f"{DOC_ROOT}/{TABLES}",
     *(f"{DATA_ROOT}/{name}" for name in PUBLIC_NAMES.values()),
     f"{DATA_ROOT}/native_closure_verification.json",
     *(f"outputs/results/reviewer_experiments/{name}" for name in PRIOR),
@@ -59,6 +61,7 @@ ALLOWLIST = frozenset((
     "configs/reviewer_experiments/ptb_diagnostic_eligibility_v2.json",
     "configs/reviewer_experiments/ptb_diagnostic_transport_v1.json",
     "scripts/evaluation/build_reviewer_scientific_closure_zip.py",
+    "scripts/evaluation/render_reviewer_closure_tables.py",
     "scripts/evaluation/verify_reviewer_scientific_closure.py",
     "scripts/evaluation/verify_reviewer_november_delivery.py",
     "scripts/evaluation/score_reviewer_closure_ludb.py",
@@ -127,6 +130,8 @@ def validate_final(blobs):
     check_ptbxl_support(content["ptbxl_support"], checks["ptbxl_support"])
     check_ptbxl_rhythm(content["ptbxl_rhythm_score"], content["ptbxl_rhythm_evaluate"],
                      content["ptbxl_support"], checks["ptbxl_rhythm_score"])
+    if blobs[f"{DOC_ROOT}/{TABLES}"] != render(content):
+        raise ValueError("endpoint and route tables differ from verified aggregates")
 
 
 def build(root, output):

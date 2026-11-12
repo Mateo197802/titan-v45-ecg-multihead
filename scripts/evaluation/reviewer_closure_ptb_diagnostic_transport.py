@@ -22,6 +22,20 @@ ARCHIVE_SHA256 = "61e00fc9f38a391fc2a0d757dfa6a02a3f915ad7f0095f747e9c44df395371
 ENDPOINTS = ("ASMI", "IMI", "ALMI", "ILMI")
 
 
+def transported_heads(artifact):
+    heads = {}
+    for label in ("ALMI", "ILMI"):
+        spec = artifact["endpoints"][label]
+        if spec["status"] != "calibrated":
+            raise ValueError("no sealed calibrated PTB-XL head")
+        model = spec["model"]
+        threshold = float(model["threshold"])
+        if not 0 <= threshold <= 1:
+            raise ValueError("invalid sealed PTB-XL threshold")
+        heads[label] = (model, threshold)
+    return heads
+
+
 def verify_inputs(args):
     if digest(args.config) != TRANSPORT_SHA256:
         raise ValueError("unsealed PTB Diagnostic transport config")
@@ -44,7 +58,7 @@ def verify_inputs(args):
             or len(set(entries)) != len(entries)
             or any(not re.fullmatch(r"patient[0-9]{3}/[A-Za-z0-9_-]+", k) for k in entries)):
         raise ValueError("invalid publisher cohort index")
-    return config, model, entries, checks, names, manifest
+    return config, transported_heads(model), entries, checks, names, manifest
 
 
 def verified_record(z, prefix, key, checks, work):
@@ -134,13 +148,10 @@ def score(args, config, other, entries, checks, names, manifest):
                 row.update(status="scored", published_scores=published, auxiliary_scores=auxiliary,
                            published_labels=[k for k, v in published.items() if v >= model.thresholds[k]],
                            transported_head_scores={}, transported_head_labels=[])
-                for label in ("ALMI", "ILMI"):
-                    spec = other["endpoints"][label]
-                    if spec["status"] != "calibrated":
-                        raise ValueError("no sealed calibrated PTB-XL head")
-                    p = float(probabilities(spec["model"], feature))
+                for label, (head, threshold) in other.items():
+                    p = float(probabilities(head, feature))
                     row["transported_head_scores"][label] = p
-                    if p >= spec["threshold"]:
+                    if p >= threshold:
                         row["transported_head_labels"].append(label)
             status[row["status"]] += 1
             stream.write(json.dumps(row, separators=(",", ":"), allow_nan=False) + "\n")
@@ -178,7 +189,7 @@ def score(args, config, other, entries, checks, names, manifest):
         "all_source_records": len(entries), "flow": status, "technical_failure_types": failures,
         "native_model_assets_sha256": asset_hashes, "published_thresholds": model.thresholds,
         "transported_model_sha256": config["pathology_other_model_sha256"],
-        "transported_thresholds": {c: other["endpoints"][c]["threshold"] for c in ("ALMI", "ILMI")},
+        "transported_thresholds": {c: threshold for c, (_, threshold) in other.items()},
         "private_scores_sha256": digest(scores), "reference_labels_used_for_scoring": False,
         "no_individual_records_exported": True,
     })
