@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [main]
+    branches: [main, codex/titan-external-validation-20261111]
 
 permissions:
   contents: read

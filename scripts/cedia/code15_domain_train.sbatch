@@ -34,6 +34,11 @@ case ${1:-} in
     evaluate_frozen)
         shift
         python -B -u scripts/domain_adaptation/evaluate_new_holdout.py "$bank" "$assets" "$@" "$out" ;;
+    score_source_transfer)
+        shift
+        extra=${1:?additional source bank}
+        shift
+        python -B -u scripts/domain_adaptation/score_source_transfer.py "$bank" "$extra" "$out" "$@" ;;
     *)
         python -B -u scripts/domain_adaptation/train_duration_aware.py "$bank" "$assets" "$out" "$@" ;;
 esac
