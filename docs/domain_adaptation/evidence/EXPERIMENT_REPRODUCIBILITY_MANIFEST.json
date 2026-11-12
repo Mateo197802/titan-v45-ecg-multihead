@@ -1,20 +1,20 @@
 {
   "files": {
     "CHECKPOINT_SHA256SUMS.txt": {
-      "bytes": 837,
-      "sha256": "486ac113b774824b278007244b44148ccb9f03245721d7e47b915a371bc41e5d"
+      "bytes": 956,
+      "sha256": "bd651f4459d05168848a3d29105bebbd0316919f465ff59b6d09407f486108bc"
     },
     "EXTERNAL_DATA_MANIFESTS_SUMMARY.csv": {
       "bytes": 238,
       "sha256": "1048c0efc6758f4725c751f35f27ef4d4fc96e5a78f9f1600caa50586c8af0e9"
     },
     "FINETUNING_LEARNING_CURVES.csv": {
-      "bytes": 11674,
-      "sha256": "144aa081d18b40eeb79db48b441800a420d2a3eb6114461b7448bedad7cfd468"
+      "bytes": 13589,
+      "sha256": "3a3154003858f96c2380aa1a132c773934dcfa82235d8f3ad9af14d7300b405d"
     },
     "MODEL_ARCHITECTURE_ABLATIONS.csv": {
       "bytes": 677,
-      "sha256": "e1e407f013df4336ce4ab250b4ae33ddcc842db1a6d1f500fa0e89324106524d"
+      "sha256": "1899336bb232721eb7033ba024b3e212e14751e1b049cb1b4d18255c52bec35e"
     },
     "PATIENT_AND_SIGNAL_LEAKAGE_AUDIT.json": {
       "bytes": 757,
@@ -28,9 +28,13 @@
       "bytes": 17071,
       "sha256": "ddfc514561d47eb7cd1563a3dd58cc89b410d5bca9235a46d543525a2844a6f2"
     },
+    "SLURM_EXECUTION_LEDGER.csv": {
+      "bytes": 3116,
+      "sha256": "87d02e4604f7ab5d41bbc9fa1b262c157c7c2ba08c107aa62b599d1a5bd87e47"
+    },
     "TRAINING_EXPERIMENTS_COMPLETE.csv": {
-      "bytes": 1452,
-      "sha256": "ddc033ee5cdc8a6390cad85b8550674131bafffd46e65ad5b0b933831e1d4cee"
+      "bytes": 1664,
+      "sha256": "fcf9a337cbe1a58f1e3fb042d7a7ccd5ee47efcd606afa7dc1268c6ee7c4c722"
     },
     "VALIDATION_BASELINES_RECEIPT.json": {
       "bytes": 669,
@@ -43,6 +47,14 @@
     "frozen_backbone_mlp-per_lead_zscore-20261112/TRAINING_RECEIPT.json": {
       "bytes": 1012,
       "sha256": "f42b196dfdfda0019a69344bae7d83a4eaab529ec5facf6666c23ff3bdd332c5"
+    },
+    "frozen_backbone_mlp-per_lead_zscore-20261113/FINETUNING_LEARNING_CURVES.csv": {
+      "bytes": 1770,
+      "sha256": "1e1ea31145e2456ddeb8d1134c0dd97e83b76f04c748af8e6e20fcf8f05858d8"
+    },
+    "frozen_backbone_mlp-per_lead_zscore-20261113/TRAINING_RECEIPT.json": {
+      "bytes": 1105,
+      "sha256": "7c95ecadf832e2159e72ba1b441703a554967f076097bf5778846b868029d555"
     },
     "frozen_backbone_mlp-per_lead_zscore-20261114/FINETUNING_LEARNING_CURVES.csv": {
       "bytes": 1769,

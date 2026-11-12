@@ -86,7 +86,9 @@ while F1 at the fixed threshold shifted. Finalists are compared with all three
 registered seeds and only the sealed candidate is calibrated on the separate
 calibration partition. The other frozen repeat's original `33712` attempt
 was cancelled during dependency staging on compute-0-2 before model fitting
-and resubmitted unchanged as `33735` on compute-0-1.
+and completed unchanged as `33735` on compute-0-1. Across the three frozen
+per-lead seeds the mean macro-AP was 0.439628 (population SD 0.001986) and
+mean macro-F1 at threshold 0.5 was 0.442429 (population SD 0.018349).
 
 The [run table](evidence/TRAINING_EXPERIMENTS_COMPLETE.csv),
 [learning curves](evidence/FINETUNING_LEARNING_CURVES.csv), and
