@@ -1,0 +1,39 @@
+{
+  "scope": "SPH retrospective development; mapped ECG statements, not independent or clinical validation",
+  "binding": {
+    "protocol_sha256": "6c41da3153b9b45b82ba2af4820f4044e873759b0abd907d70ee197b6281dac6",
+    "scoring_receipt_sha256": "6b52867f0a9834a3eb698c76749d7a5d16d35dd1dc3fa0e24e88ed07eefc846b",
+    "private_duplicate_index_sha256": "24eae465775c82c6ffa8fa9739a66d59f294f9de9190b903ea2b417b978f68ea"
+  },
+  "job": "33396",
+  "split_ecgs": {
+    "calibration": 5149,
+    "train": 15501,
+    "held": 5120
+  },
+  "split_components": {
+    "train": 14864,
+    "held": 4875,
+    "calibration": 4927
+  },
+  "cross_split_patient_or_exact_signal_components": 0,
+  "unique_ecgs": 25770,
+  "unique_patients": 24666,
+  "record_identifiers_exported": false,
+  "non_evaluable": {
+    "NSR": "SPH Normal ECG is not an explicit NSR statement and is never part of Other",
+    "LQTS": "prolonged QT statement 148 is not LQTS syndrome",
+    "Paced": "no usable SPH Paced statement",
+    "unmapped_abnormal_rhythm": "not a known Other reference or known negative"
+  },
+  "endpoint_status": {
+    "P6_Other_mapped": "calibrated",
+    "P8_Other_mapped": "calibrated",
+    "Flutter": "calibrated",
+    "LBBB": "calibrated",
+    "2AVB": "calibrated",
+    "3AVB": "insufficient_training_or_calibration_support"
+  },
+  "held_outcomes_evaluated": false,
+  "private_model_sha256": "ae8fab7cb5b54a89c38a7e21f99f8b1da10f5cc7d02fa3702283efd73ba129ba"
+}

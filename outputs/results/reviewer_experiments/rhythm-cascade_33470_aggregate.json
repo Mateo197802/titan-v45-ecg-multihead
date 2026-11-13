@@ -1,0 +1,115 @@
+{
+  "schema": "TITAN_V45_RECONSTRUCTED_RHYTHM_WAVEFORM_CASCADE_V1",
+  "scope": "frozen_selected_rhythm_waveforms_new_inference_not_historical_cascade",
+  "profiles": {
+    "P6": {
+      "inputs": 1643,
+      "scored_records": 1643,
+      "windows": 1679,
+      "top1_counts": {
+        "1AVB": 48,
+        "AFIB": 375,
+        "PVC": 48,
+        "RBBB": 101,
+        "SB": 746,
+        "STACH": 325
+      },
+      "fallback_count": 0,
+      "window_count_disagreements": 0,
+      "top1_disagreements": 1,
+      "binary_set_disagreements": 0,
+      "archived_comparison_pairs": 1643,
+      "max_absolute_score_difference": 0.0019060099985065693,
+      "quarantine_assessed": 0,
+      "quarantine_rate": null
+    },
+    "P8": {
+      "inputs": 2193,
+      "scored_records": 2193,
+      "windows": 2404,
+      "top1_counts": {
+        "1AVB": 64,
+        "AFIB": 363,
+        "NSR": 476,
+        "PAC": 34,
+        "PVC": 71,
+        "RBBB": 116,
+        "SB": 728,
+        "STACH": 341
+      },
+      "fallback_count": 58,
+      "window_count_disagreements": 0,
+      "top1_disagreements": 0,
+      "binary_set_disagreements": 0,
+      "archived_comparison_pairs": 2193,
+      "max_absolute_score_difference": 0.0017378628253936768,
+      "quarantine_assessed": 0,
+      "quarantine_rate": null
+    }
+  },
+  "input_error_counts": {},
+  "batch_size": 32,
+  "transitions": {
+    "rhythm_only->quarantine_not_assessed": 2193
+  },
+  "codetest_archive_alias_records": 167,
+  "auxiliary_score_support": {
+    "Flutter": 2193,
+    "LBBB": 2193,
+    "2AVB": 2193,
+    "3AVB": 2193,
+    "LQTS": 2193,
+    "Paced": 2193
+  },
+  "thresholds": {
+    "P6": {
+      "AFIB": 0.82,
+      "SB": 0.835,
+      "STACH": 0.7749999999999999,
+      "RBBB": 0.5149999999999999,
+      "1AVB": 0.57,
+      "PVC": 0.42999999999999994
+    },
+    "P8": {
+      "AFIB": 0.8,
+      "SB": 0.55,
+      "STACH": 0.8,
+      "NSR": 0.525,
+      "RBBB": 0.725,
+      "PAC": 0.45,
+      "1AVB": 0.775,
+      "PVC": 0.725
+    }
+  },
+  "weights_or_thresholds_modified": false,
+  "checkpoint_hidden_widths": {
+    "P6": {
+      "declared": 192,
+      "stored": 512,
+      "metadata_matches": false
+    },
+    "P8": {
+      "declared": 192,
+      "stored": 512,
+      "metadata_matches": false
+    }
+  },
+  "release_sha256": {
+    "backbone-v3f-original.pt": "ca5d4dcb4b9828e6c4339800fe81ec27f32d9b09a090bb57503bfb56746a8da8",
+    "specialists-v3p-e008-primary6-diagnostic.pt": "9c5a9265a7155e1206c551cc4e6d645b86363ba3dbdeb7baf7b9f173c314be3d",
+    "specialists-v3q-primary8-best-candidate.pt": "b30cb2bbb45f1231c93ff1c196aa966b57b49831cadb296131c0283e7b0ceb02",
+    "external-dev-rhythm-chapman-shaoxing.tar.zst": "ec6ade27ab77b9807d41331016def56e54cbb96fba528fd7aca811e5a468f2fb"
+  },
+  "manifest_sha256_lf": {
+    "rhythm_primary6_diagnostic_records.csv": "db6de6b83c353d7a671482667e91ac1d78de76bb169d5cd751874cb7b0d600ca",
+    "rhythm_primary8_records.csv": "b7e044ca1696eced6ac25f93cc1574d7c596c1cadfd4a98f86ca9d42699a11d0"
+  },
+  "morphology_candidate_sha256_lf": "2bd1c1822ed72d1531b1f62712d8007c7e2f21009056ad1a3ee905f37051fc3d",
+  "event_trainer_sha256": "8e8d59889a0458c47a90f9735ff6ba017c7e1a79582d11529a608e1816e671fe",
+  "auxiliary_action": "no_frozen_policy",
+  "reference_labels_used_for_routing": false,
+  "independent_external_evaluation": false,
+  "historical_preprocessing_certified": false,
+  "torch": "2.10.0+cu128",
+  "device": "cuda"
+}

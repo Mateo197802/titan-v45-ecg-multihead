@@ -1,0 +1,1906 @@
+{
+  "schema": "TITAN_V45_REVIEWER_SPH_POPULATION_CONTRAST_V1",
+  "scope": "same-score denominator sensitivity in unselected SPH V1; retrospective ECG-statement transfer",
+  "job": "33399",
+  "baseline_receipt_sha256": "6b52867f0a9834a3eb698c76749d7a5d16d35dd1dc3fa0e24e88ed07eefc846b",
+  "analysis_protocol_sha256": "4f5ef8ac9c39666843452f844d34d8c6a38b801e6b64f882f5e50add725ad2b1",
+  "source_population": {
+    "source": "SPH ECG dataset V1",
+    "metadata_ecgs": 25770,
+    "unique_source_patients": 24666,
+    "distinct_exact_signal_signatures_in_sealed_index": 25602,
+    "patient_exact_signal_components": 24666,
+    "status": {
+      "metadata_records": 25770,
+      "archive_records": 25770,
+      "status_counts": {
+        "scored": 25770
+      },
+      "scored_records": 25770
+    }
+  },
+  "statement_prevalence_before_exclusions": {
+    "1": {
+      "statement": "Normal ECG",
+      "ecgs": 13905,
+      "fraction": 0.5395809080325961
+    },
+    "21": {
+      "statement": "Sinus tachycardia",
+      "ecgs": 725,
+      "fraction": 0.02813348855258052
+    },
+    "22": {
+      "statement": "Sinus bradycardia",
+      "ecgs": 2711,
+      "fraction": 0.10519984478075281
+    },
+    "23": {
+      "statement": "Sinus arrhythmia",
+      "ecgs": 1553,
+      "fraction": 0.060263872720217306
+    },
+    "30": {
+      "statement": "Atrial premature complex(es)",
+      "ecgs": 539,
+      "fraction": 0.02091579355840124
+    },
+    "31": {
+      "statement": "Atrial premature complexes, nonconducted",
+      "ecgs": 4,
+      "fraction": 0.00015521924718665114
+    },
+    "36": {
+      "statement": "Junctional premature complex(es)",
+      "ecgs": 64,
+      "fraction": 0.0024835079549864183
+    },
+    "37": {
+      "statement": "Junctional escape complex(es)",
+      "ecgs": 20,
+      "fraction": 0.0007760962359332557
+    },
+    "50": {
+      "statement": "Atrial fibrillation",
+      "ecgs": 675,
+      "fraction": 0.02619324796274738
+    },
+    "51": {
+      "statement": "Atrial flutter",
+      "ecgs": 99,
+      "fraction": 0.003841676367869616
+    },
+    "54": {
+      "statement": "Junctional tachycardia",
+      "ecgs": 13,
+      "fraction": 0.0005044625533566162
+    },
+    "60": {
+      "statement": "Ventricular premature complex(es)",
+      "ecgs": 1067,
+      "fraction": 0.041404734187039195
+    },
+    "80": {
+      "statement": "Short PR interval",
+      "ecgs": 11,
+      "fraction": 0.00042685292976329063
+    },
+    "81": {
+      "statement": "AV conduction ratio N:D",
+      "ecgs": 3,
+      "fraction": 0.00011641443538998836
+    },
+    "82": {
+      "statement": "Prolonged PR interval",
+      "ecgs": 238,
+      "fraction": 0.009235545207605743
+    },
+    "83": {
+      "statement": "Second-degree AV block, Mobitz type I (Wenckebach)",
+      "ecgs": 9,
+      "fraction": 0.0003492433061699651
+    },
+    "84": {
+      "statement": "Second-degree AV block, Mobitz type II",
+      "ecgs": 3,
+      "fraction": 0.00011641443538998836
+    },
+    "85": {
+      "statement": "2:1 AV block",
+      "ecgs": 35,
+      "fraction": 0.0013581684128831976
+    },
+    "86": {
+      "statement": "AV block, varying conduction",
+      "ecgs": 47,
+      "fraction": 0.001823826154443151
+    },
+    "87": {
+      "statement": "AV block, advanced (high-grade)",
+      "ecgs": 3,
+      "fraction": 0.00011641443538998836
+    },
+    "88": {
+      "statement": "AV block, complete (third-degree)",
+      "ecgs": 22,
+      "fraction": 0.0008537058595265813
+    },
+    "101": {
+      "statement": "Left anterior fascicular block",
+      "ecgs": 154,
+      "fraction": 0.005975941016686069
+    },
+    "102": {
+      "statement": "Left posterior fascicular block",
+      "ecgs": 6,
+      "fraction": 0.00023282887077997672
+    },
+    "104": {
+      "statement": "Left bundle-branch block",
+      "ecgs": 84,
+      "fraction": 0.003259604190919674
+    },
+    "105": {
+      "statement": "Incomplete right bundle-branch block",
+      "ecgs": 1259,
+      "fraction": 0.048855258051998446
+    },
+    "106": {
+      "statement": "Right bundle-branch block",
+      "ecgs": 710,
+      "fraction": 0.027551416375630577
+    },
+    "108": {
+      "statement": "Ventricular preexcitation",
+      "ecgs": 27,
+      "fraction": 0.0010477299185098952
+    },
+    "120": {
+      "statement": "Right-axis deviation",
+      "ecgs": 161,
+      "fraction": 0.006247574699262708
+    },
+    "121": {
+      "statement": "Left-axis deviation",
+      "ecgs": 138,
+      "fraction": 0.005355064027939465
+    },
+    "125": {
+      "statement": "Low voltage",
+      "ecgs": 322,
+      "fraction": 0.012495149398525416
+    },
+    "140": {
+      "statement": "Left atrial enlargement",
+      "ecgs": 19,
+      "fraction": 0.000737291424136593
+    },
+    "142": {
+      "statement": "Left ventricular hypertrophy",
+      "ecgs": 209,
+      "fraction": 0.008110205665502522
+    },
+    "143": {
+      "statement": "Right ventricular hypertrophy",
+      "ecgs": 6,
+      "fraction": 0.00023282887077997672
+    },
+    "145": {
+      "statement": "ST deviation",
+      "ecgs": 1829,
+      "fraction": 0.07097400077609624
+    },
+    "146": {
+      "statement": "ST deviation with T-wave change",
+      "ecgs": 1063,
+      "fraction": 0.041249514939852544
+    },
+    "147": {
+      "statement": "T-wave abnormality",
+      "ecgs": 2218,
+      "fraction": 0.08606907256499806
+    },
+    "148": {
+      "statement": "Prolonged QT interval",
+      "ecgs": 24,
+      "fraction": 0.0009313154831199069
+    },
+    "152": {
+      "statement": "TU fusion",
+      "ecgs": 9,
+      "fraction": 0.0003492433061699651
+    },
+    "153": {
+      "statement": "ST-T change due to ventricular hypertrophy",
+      "ecgs": 88,
+      "fraction": 0.003414823438106325
+    },
+    "155": {
+      "statement": "Early repolarization",
+      "ecgs": 32,
+      "fraction": 0.0012417539774932092
+    },
+    "160": {
+      "statement": "Anterior MI",
+      "ecgs": 52,
+      "fraction": 0.0020178502134264647
+    },
+    "161": {
+      "statement": "Inferior MI",
+      "ecgs": 120,
+      "fraction": 0.004656577415599534
+    },
+    "165": {
+      "statement": "Anteroseptal MI",
+      "ecgs": 91,
+      "fraction": 0.0035312378734963135
+    },
+    "166": {
+      "statement": "Extensive anterior MI",
+      "ecgs": 7,
+      "fraction": 0.0002716336825766395
+    }
+  },
+  "denominator_definition": "all source metadata rows for flow and prevalence; all successfully scored nonconflicting source rows for statement metrics",
+  "restricted_definition": "retain scored rows with at least one of this profile's defensibly mapped statements; this is a new SPH restriction, not a replay of historical panel selection",
+  "routing": "no abstention, cascade or clinical referral executed; P8 can apply its original top-1 fallback",
+  "reference_semantics": "for a defensibly mapped statement, absence means not documented in SPH and is never absence of disease; Normal ECG with any other primary statement is ambiguous and excluded from metrics only",
+  "record_identifiers_exported": false,
+  "independent_validation": false,
+  "profiles": {
+    "P6": {
+      "reference_strata": {
+        "mapped_plus_other_statement": {
+          "metadata_ecgs": 2467,
+          "unique_source_patients": 2401,
+          "scoring_state": {
+            "scored": 2467
+          },
+          "empty_label_set": 203,
+          "top1_fallback": 0,
+          "released_calls": {
+            "SB": 1029,
+            "RBBB": 288,
+            "PVC": 417,
+            "STACH": 247,
+            "AFIB": 376,
+            "1AVB": 125
+          },
+          "released_top1": {
+            "SB": 1205,
+            "RBBB": 219,
+            "PVC": 327,
+            "STACH": 259,
+            "AFIB": 394,
+            "1AVB": 63
+          }
+        },
+        "normal_only": {
+          "metadata_ecgs": 13905,
+          "unique_source_patients": 13498,
+          "scoring_state": {
+            "scored": 13905
+          },
+          "empty_label_set": 11737,
+          "top1_fallback": 0,
+          "released_calls": {
+            "SB": 654,
+            "PVC": 833,
+            "RBBB": 405,
+            "1AVB": 213,
+            "AFIB": 14,
+            "STACH": 95
+          },
+          "released_top1": {
+            "SB": 7118,
+            "PVC": 3594,
+            "STACH": 614,
+            "RBBB": 2130,
+            "1AVB": 400,
+            "AFIB": 49
+          }
+        },
+        "other_unmapped_no_profile_statement": {
+          "metadata_ecgs": 5688,
+          "unique_source_patients": 5543,
+          "scoring_state": {
+            "scored": 5688
+          },
+          "empty_label_set": 4353,
+          "top1_fallback": 0,
+          "released_calls": {
+            "RBBB": 510,
+            "PVC": 361,
+            "SB": 327,
+            "STACH": 63,
+            "1AVB": 99,
+            "AFIB": 8
+          },
+          "released_top1": {
+            "SB": 2803,
+            "PVC": 1275,
+            "RBBB": 1095,
+            "STACH": 294,
+            "1AVB": 184,
+            "AFIB": 37
+          }
+        },
+        "mapped_only": {
+          "metadata_ecgs": 3056,
+          "unique_source_patients": 2954,
+          "scoring_state": {
+            "scored": 3056
+          },
+          "empty_label_set": 131,
+          "top1_fallback": 0,
+          "released_calls": {
+            "RBBB": 526,
+            "PVC": 600,
+            "SB": 1216,
+            "STACH": 381,
+            "AFIB": 275,
+            "1AVB": 64
+          },
+          "released_top1": {
+            "RBBB": 500,
+            "PVC": 542,
+            "SB": 1319,
+            "STACH": 394,
+            "AFIB": 273,
+            "1AVB": 28
+          }
+        },
+        "out_of_profile_observable_no_mapped_statement": {
+          "metadata_ecgs": 555,
+          "unique_source_patients": 533,
+          "scoring_state": {
+            "scored": 555
+          },
+          "empty_label_set": 348,
+          "top1_fallback": 0,
+          "released_calls": {
+            "PVC": 67,
+            "SB": 29,
+            "STACH": 15,
+            "1AVB": 38,
+            "AFIB": 60,
+            "RBBB": 15
+          },
+          "released_top1": {
+            "STACH": 69,
+            "SB": 248,
+            "RBBB": 14,
+            "PVC": 95,
+            "AFIB": 87,
+            "1AVB": 42
+          }
+        },
+        "proxy_present_no_mapped_statement": {
+          "metadata_ecgs": 99,
+          "unique_source_patients": 98,
+          "scoring_state": {
+            "scored": 99
+          },
+          "empty_label_set": 13,
+          "top1_fallback": 0,
+          "released_calls": {
+            "1AVB": 75,
+            "RBBB": 9,
+            "PVC": 2,
+            "SB": 2,
+            "AFIB": 7,
+            "STACH": 1
+          },
+          "released_top1": {
+            "1AVB": 74,
+            "RBBB": 4,
+            "PVC": 2,
+            "AFIB": 10,
+            "SB": 8,
+            "STACH": 1
+          }
+        }
+      },
+      "outputs_without_validated_reference": {
+        "1AVB": "prolonged PR is only a proxy"
+      },
+      "metrics": {
+        "all_scored_reference_compatible": {
+          "n": 25770,
+          "macro_f1_on_mapped_endpoints": 0.7083077206669349,
+          "endpoint_macro_binary_accuracy": 0.9643771827706635,
+          "endpoints": {
+            "AFIB": {
+              "n": 25770,
+              "statement_positive": 675,
+              "metrics": {
+                "rows": 25770,
+                "positive_support": 675,
+                "negative_support": 25095,
+                "predicted_positive_support": 740,
+                "tp": 628,
+                "tn": 24983,
+                "fp": 112,
+                "fn": 47,
+                "accuracy": 0.9938300349243306,
+                "precision": 0.8486486486486486,
+                "recall": 0.9303703703703704,
+                "specificity": 0.9955369595536959,
+                "f1": 0.8876325088339223,
+                "probability_rows": 25770,
+                "missing_probability_rows": 0,
+                "probability_positive_support": 675,
+                "probability_negative_support": 25095,
+                "auroc": 0.9986533838081955,
+                "average_precision": 0.943291968139309,
+                "brier_score": 0.009152189071437134,
+                "ece": 0.01568979576714067,
+                "undefined": {},
+                "npv": 0.9981222532960448
+              }
+            },
+            "SB": {
+              "n": 25770,
+              "statement_positive": 2711,
+              "metrics": {
+                "rows": 25770,
+                "positive_support": 2711,
+                "negative_support": 23059,
+                "predicted_positive_support": 3257,
+                "tp": 2228,
+                "tn": 22030,
+                "fp": 1029,
+                "fn": 483,
+                "accuracy": 0.9413271245634459,
+                "precision": 0.684065090574148,
+                "recall": 0.8218369605311693,
+                "specificity": 0.9553753415152435,
+                "f1": 0.7466487935656837,
+                "probability_rows": 25770,
+                "missing_probability_rows": 0,
+                "probability_positive_support": 2711,
+                "probability_negative_support": 23059,
+                "auroc": 0.968746971127534,
+                "average_precision": 0.8116744110636066,
+                "brier_score": 0.11106360994899489,
+                "ece": 0.17950783213433877,
+                "undefined": {},
+                "npv": 0.978545729134278
+              }
+            },
+            "STACH": {
+              "n": 25770,
+              "statement_positive": 725,
+              "metrics": {
+                "rows": 25770,
+                "positive_support": 725,
+                "negative_support": 25045,
+                "predicted_positive_support": 802,
+                "tp": 618,
+                "tn": 24861,
+                "fp": 184,
+                "fn": 107,
+                "accuracy": 0.9887077997671712,
+                "precision": 0.770573566084788,
+                "recall": 0.8524137931034482,
+                "specificity": 0.9926532241964464,
+                "f1": 0.8094302554027505,
+                "probability_rows": 25770,
+                "missing_probability_rows": 0,
+                "probability_positive_support": 725,
+                "probability_negative_support": 25045,
+                "auroc": 0.9918740474043275,
+                "average_precision": 0.8786994644242297,
+                "brier_score": 0.0175335161968631,
+                "ece": 0.03858541388389454,
+                "undefined": {},
+                "npv": 0.9957145145786607
+              }
+            },
+            "RBBB": {
+              "n": 25770,
+              "statement_positive": 710,
+              "metrics": {
+                "rows": 25770,
+                "positive_support": 710,
+                "negative_support": 25060,
+                "predicted_positive_support": 1753,
+                "tp": 686,
+                "tn": 23993,
+                "fp": 1067,
+                "fn": 24,
+                "accuracy": 0.9576639503298409,
+                "precision": 0.39132915002852253,
+                "recall": 0.9661971830985916,
+                "specificity": 0.9574221867517957,
+                "f1": 0.5570442549736094,
+                "probability_rows": 25770,
+                "missing_probability_rows": 0,
+                "probability_positive_support": 710,
+                "probability_negative_support": 25060,
+                "auroc": 0.9874986792261953,
+                "average_precision": 0.8063639945843524,
+                "brier_score": 0.03567997356820812,
+                "ece": 0.07106286177243665,
+                "undefined": {},
+                "npv": 0.9990007078319524
+              }
+            },
+            "PVC": {
+              "n": 25770,
+              "statement_positive": 1067,
+              "metrics": {
+                "rows": 25770,
+                "positive_support": 1067,
+                "negative_support": 24703,
+                "predicted_positive_support": 2280,
+                "tp": 905,
+                "tn": 23328,
+                "fp": 1375,
+                "fn": 162,
+                "accuracy": 0.9403570042685293,
+                "precision": 0.3969298245614035,
+                "recall": 0.8481724461105904,
+                "specificity": 0.944338744282071,
+                "f1": 0.5407827905587093,
+                "probability_rows": 25770,
+                "missing_probability_rows": 0,
+                "probability_positive_support": 1067,
+                "probability_negative_support": 24703,
+                "auroc": 0.9562223014472855,
+                "average_precision": 0.6538842270135854,
+                "brier_score": 0.041028732473808865,
+                "ece": 0.07911615548788611,
+                "undefined": {},
+                "npv": 0.993103448275862
+              }
+            }
+          }
+        },
+        "restricted_has_any_profile_statement": {
+          "n": 5523,
+          "macro_f1_on_mapped_endpoints": 0.9057263758718801,
+          "endpoint_macro_binary_accuracy": 0.9596958174904943,
+          "endpoints": {
+            "AFIB": {
+              "n": 5523,
+              "statement_positive": 675,
+              "metrics": {
+                "rows": 5523,
+                "positive_support": 675,
+                "negative_support": 4848,
+                "predicted_positive_support": 651,
+                "tp": 628,
+                "tn": 4825,
+                "fp": 23,
+                "fn": 47,
+                "accuracy": 0.9873257287705957,
+                "precision": 0.9646697388632872,
+                "recall": 0.9303703703703704,
+                "specificity": 0.9952557755775577,
+                "f1": 0.947209653092006,
+                "probability_rows": 5523,
+                "missing_probability_rows": 0,
+                "probability_positive_support": 675,
+                "probability_negative_support": 4848,
+                "auroc": 0.9982584647353624,
+                "average_precision": 0.9891109810348149,
+                "brier_score": 0.018415603348314963,
+                "ece": 0.03404406217862671,
+                "undefined": {},
+                "npv": 0.9903530377668309
+              }
+            },
+            "SB": {
+              "n": 5523,
+              "statement_positive": 2711,
+              "metrics": {
+                "rows": 5523,
+                "positive_support": 2711,
+                "negative_support": 2812,
+                "predicted_positive_support": 2245,
+                "tp": 2228,
+                "tn": 2795,
+                "fp": 17,
+                "fn": 483,
+                "accuracy": 0.9094694912185406,
+                "precision": 0.9924276169265034,
+                "recall": 0.8218369605311693,
+                "specificity": 0.9939544807965861,
+                "f1": 0.8991121872477804,
+                "probability_rows": 5523,
+                "missing_probability_rows": 0,
+                "probability_positive_support": 2711,
+                "probability_negative_support": 2812,
+                "auroc": 0.9916671607638234,
+                "average_precision": 0.9904544794050967,
+                "brier_score": 0.03620996962437868,
+                "ece": 0.039918907956770736,
+                "undefined": {},
+                "npv": 0.8526540573520439
+              }
+            },
+            "STACH": {
+              "n": 5523,
+              "statement_positive": 725,
+              "metrics": {
+                "rows": 5523,
+                "positive_support": 725,
+                "negative_support": 4798,
+                "predicted_positive_support": 628,
+                "tp": 618,
+                "tn": 4788,
+                "fp": 10,
+                "fn": 107,
+                "accuracy": 0.9788158609451385,
+                "precision": 0.9840764331210191,
+                "recall": 0.8524137931034482,
+                "specificity": 0.9979157982492706,
+                "f1": 0.9135254988913526,
+                "probability_rows": 5523,
+                "missing_probability_rows": 0,
+                "probability_positive_support": 725,
+                "probability_negative_support": 4798,
+                "auroc": 0.9922344080148339,
+                "average_precision": 0.9746529224484654,
+                "brier_score": 0.0204808203520839,
+                "ece": 0.0373812780769251,
+                "undefined": {},
+                "npv": 0.9781409601634321
+              }
+            },
+            "RBBB": {
+              "n": 5523,
+              "statement_positive": 710,
+              "metrics": {
+                "rows": 5523,
+                "positive_support": 710,
+                "negative_support": 4813,
+                "predicted_positive_support": 814,
+                "tp": 686,
+                "tn": 4685,
+                "fp": 128,
+                "fn": 24,
+                "accuracy": 0.9724787253304363,
+                "precision": 0.8427518427518428,
+                "recall": 0.9661971830985916,
+                "specificity": 0.9734053604820279,
+                "f1": 0.9002624671916011,
+                "probability_rows": 5523,
+                "missing_probability_rows": 0,
+                "probability_positive_support": 710,
+                "probability_negative_support": 4813,
+                "auroc": 0.9914427767519307,
+                "average_precision": 0.9640946327204607,
+                "brier_score": 0.023777794845008245,
+                "ece": 0.03597893799649729,
+                "undefined": {},
+                "npv": 0.99490337651306
+              }
+            },
+            "PVC": {
+              "n": 5523,
+              "statement_positive": 1067,
+              "metrics": {
+                "rows": 5523,
+                "positive_support": 1067,
+                "negative_support": 4456,
+                "predicted_positive_support": 1017,
+                "tp": 905,
+                "tn": 4344,
+                "fp": 112,
+                "fn": 162,
+                "accuracy": 0.9503892811877602,
+                "precision": 0.8898721730580138,
+                "recall": 0.8481724461105904,
+                "specificity": 0.9748653500897666,
+                "f1": 0.8685220729366603,
+                "probability_rows": 5523,
+                "missing_probability_rows": 0,
+                "probability_positive_support": 1067,
+                "probability_negative_support": 4456,
+                "auroc": 0.9749072047166589,
+                "average_precision": 0.929397970196397,
+                "brier_score": 0.040070302428049875,
+                "ece": 0.017314359737785213,
+                "undefined": {},
+                "npv": 0.9640479360852197
+              }
+            }
+          }
+        }
+      },
+      "paired_denominator_differences": {
+        "macro_f1": {
+          "restricted_minus_all": 0.19741865520494517,
+          "interval": [
+            0.18996040575043507,
+            0.20498336119273206
+          ],
+          "valid_replicates": 1000,
+          "invalid_replicates": 0
+        },
+        "endpoint_macro_binary_accuracy": {
+          "restricted_minus_all": -0.0046813652801692696,
+          "interval": [
+            -0.006851555199276357,
+            -0.002641780566788885
+          ],
+          "valid_replicates": 1000,
+          "invalid_replicates": 0
+        },
+        "sensitivity": {
+          "AFIB": {
+            "restricted_minus_all": 0.0,
+            "interval": [
+              0.0,
+              0.0
+            ],
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "SB": {
+            "restricted_minus_all": 0.0,
+            "interval": [
+              0.0,
+              0.0
+            ],
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "STACH": {
+            "restricted_minus_all": 0.0,
+            "interval": [
+              0.0,
+              0.0
+            ],
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "RBBB": {
+            "restricted_minus_all": 0.0,
+            "interval": [
+              0.0,
+              0.0
+            ],
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "PVC": {
+            "restricted_minus_all": 0.0,
+            "interval": [
+              0.0,
+              0.0
+            ],
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          }
+        },
+        "specificity": {
+          "AFIB": {
+            "restricted_minus_all": -0.00028118397613818846,
+            "interval": [
+              -0.0020304873006048605,
+              0.0013812188508906835
+            ],
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "SB": {
+            "restricted_minus_all": 0.0385791392813426,
+            "interval": [
+              0.03494162603419646,
+              0.04213169203432715
+            ],
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "STACH": {
+            "restricted_minus_all": 0.005262574052824154,
+            "interval": [
+              0.0036665095800347135,
+              0.006590122193176973
+            ],
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "RBBB": {
+            "restricted_minus_all": 0.01598317373023217,
+            "interval": [
+              0.011219835341107428,
+              0.02024982277285175
+            ],
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "PVC": {
+            "restricted_minus_all": 0.030526605807695617,
+            "interval": [
+              0.02602749146541828,
+              0.034990364277040005
+            ],
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          }
+        }
+      }
+    },
+    "P8": {
+      "reference_strata": {
+        "mapped_plus_other_statement": {
+          "metadata_ecgs": 2562,
+          "unique_source_patients": 2492,
+          "scoring_state": {
+            "scored": 2562
+          },
+          "empty_label_set": 0,
+          "top1_fallback": 81,
+          "released_calls": {
+            "SB": 1154,
+            "RBBB": 222,
+            "NSR": 229,
+            "PAC": 264,
+            "PVC": 322,
+            "STACH": 264,
+            "AFIB": 393,
+            "1AVB": 89
+          },
+          "released_top1": {
+            "SB": 1068,
+            "RBBB": 201,
+            "PAC": 118,
+            "NSR": 121,
+            "PVC": 328,
+            "STACH": 254,
+            "AFIB": 389,
+            "1AVB": 83
+          }
+        },
+        "normal_only": {
+          "metadata_ecgs": 13905,
+          "unique_source_patients": 13498,
+          "scoring_state": {
+            "scored": 13905
+          },
+          "empty_label_set": 0,
+          "top1_fallback": 381,
+          "released_calls": {
+            "NSR": 12482,
+            "PVC": 384,
+            "SB": 703,
+            "RBBB": 231,
+            "PAC": 921,
+            "1AVB": 145,
+            "STACH": 121,
+            "AFIB": 18
+          },
+          "released_top1": {
+            "NSR": 12022,
+            "PVC": 440,
+            "SB": 567,
+            "RBBB": 266,
+            "1AVB": 180,
+            "STACH": 154,
+            "PAC": 252,
+            "AFIB": 24
+          }
+        },
+        "other_unmapped_no_profile_statement": {
+          "metadata_ecgs": 5688,
+          "unique_source_patients": 5543,
+          "scoring_state": {
+            "scored": 5688
+          },
+          "empty_label_set": 0,
+          "top1_fallback": 243,
+          "released_calls": {
+            "NSR": 4625,
+            "RBBB": 414,
+            "PAC": 474,
+            "SB": 425,
+            "STACH": 80,
+            "PVC": 149,
+            "1AVB": 85,
+            "AFIB": 17
+          },
+          "released_top1": {
+            "NSR": 4349,
+            "RBBB": 437,
+            "PVC": 171,
+            "SB": 347,
+            "STACH": 100,
+            "1AVB": 92,
+            "PAC": 173,
+            "AFIB": 19
+          }
+        },
+        "mapped_only": {
+          "metadata_ecgs": 3363,
+          "unique_source_patients": 3253,
+          "scoring_state": {
+            "scored": 3363
+          },
+          "empty_label_set": 0,
+          "top1_fallback": 69,
+          "released_calls": {
+            "RBBB": 517,
+            "PAC": 300,
+            "PVC": 560,
+            "NSR": 260,
+            "SB": 1316,
+            "STACH": 427,
+            "AFIB": 279,
+            "1AVB": 37
+          },
+          "released_top1": {
+            "RBBB": 510,
+            "STACH": 396,
+            "PVC": 563,
+            "PAC": 160,
+            "NSR": 163,
+            "SB": 1259,
+            "AFIB": 272,
+            "1AVB": 40
+          }
+        },
+        "proxy_present_no_mapped_statement": {
+          "metadata_ecgs": 99,
+          "unique_source_patients": 98,
+          "scoring_state": {
+            "scored": 99
+          },
+          "empty_label_set": 0,
+          "top1_fallback": 4,
+          "released_calls": {
+            "1AVB": 71,
+            "RBBB": 5,
+            "AFIB": 9,
+            "NSR": 12,
+            "SB": 8,
+            "PAC": 1,
+            "STACH": 1
+          },
+          "released_top1": {
+            "1AVB": 71,
+            "RBBB": 5,
+            "AFIB": 9,
+            "PVC": 2,
+            "NSR": 8,
+            "SB": 3,
+            "STACH": 1
+          }
+        },
+        "out_of_profile_observable_no_mapped_statement": {
+          "metadata_ecgs": 153,
+          "unique_source_patients": 142,
+          "scoring_state": {
+            "scored": 153
+          },
+          "empty_label_set": 0,
+          "top1_fallback": 23,
+          "released_calls": {
+            "SB": 22,
+            "NSR": 43,
+            "1AVB": 17,
+            "STACH": 20,
+            "AFIB": 52,
+            "PAC": 7,
+            "RBBB": 2,
+            "PVC": 3
+          },
+          "released_top1": {
+            "SB": 17,
+            "NSR": 37,
+            "1AVB": 17,
+            "STACH": 21,
+            "AFIB": 54,
+            "PVC": 3,
+            "PAC": 3,
+            "RBBB": 1
+          }
+        }
+      },
+      "outputs_without_validated_reference": {
+        "1AVB": "prolonged PR is only a proxy",
+        "NSR": "Normal ECG is not an explicit NSR statement"
+      },
+      "metrics": {
+        "all_scored_reference_compatible": {
+          "n": 25770,
+          "macro_f1_on_mapped_endpoints": 0.6621764924323207,
+          "endpoint_macro_binary_accuracy": 0.9641960936489458,
+          "endpoints": {
+            "AFIB": {
+              "n": 25770,
+              "statement_positive": 675,
+              "metrics": {
+                "rows": 25770,
+                "positive_support": 675,
+                "negative_support": 25095,
+                "predicted_positive_support": 768,
+                "tp": 632,
+                "tn": 24959,
+                "fp": 136,
+                "fn": 43,
+                "accuracy": 0.9930539386883973,
+                "precision": 0.8229166666666666,
+                "recall": 0.9362962962962963,
+                "specificity": 0.9945805937437736,
+                "f1": 0.875952875952876,
+                "probability_rows": 25770,
+                "missing_probability_rows": 0,
+                "probability_positive_support": 675,
+                "probability_negative_support": 25095,
+                "auroc": 0.9986638329901929,
+                "average_precision": 0.9426251044915842,
+                "brier_score": 0.008830412879517338,
+                "ece": 0.01744242678387639,
+                "undefined": {},
+                "npv": 0.9982801375889929
+              }
+            },
+            "SB": {
+              "n": 25770,
+              "statement_positive": 2711,
+              "metrics": {
+                "rows": 25770,
+                "positive_support": 2711,
+                "negative_support": 23059,
+                "predicted_positive_support": 3628,
+                "tp": 2396,
+                "tn": 21827,
+                "fp": 1232,
+                "fn": 315,
+                "accuracy": 0.9399689561505626,
+                "precision": 0.6604189636163176,
+                "recall": 0.883806713389893,
+                "specificity": 0.9465718374604276,
+                "f1": 0.7559551979807541,
+                "probability_rows": 25770,
+                "missing_probability_rows": 0,
+                "probability_positive_support": 2711,
+                "probability_negative_support": 23059,
+                "auroc": 0.9795441661214863,
+                "average_precision": 0.8470358869713722,
+                "brier_score": 0.046400891906019065,
+                "ece": 0.05140830529877018,
+                "undefined": {},
+                "npv": 0.985773642850691
+              }
+            },
+            "STACH": {
+              "n": 25770,
+              "statement_positive": 725,
+              "metrics": {
+                "rows": 25770,
+                "positive_support": 725,
+                "negative_support": 25045,
+                "predicted_positive_support": 913,
+                "tp": 637,
+                "tn": 24769,
+                "fp": 276,
+                "fn": 88,
+                "accuracy": 0.9858750485060147,
+                "precision": 0.6976998904709748,
+                "recall": 0.8786206896551724,
+                "specificity": 0.9889798362946696,
+                "f1": 0.7777777777777778,
+                "probability_rows": 25770,
+                "missing_probability_rows": 0,
+                "probability_positive_support": 725,
+                "probability_negative_support": 25045,
+                "auroc": 0.9901603320918898,
+                "average_precision": 0.8701572043635253,
+                "brier_score": 0.02300723950037806,
+                "ece": 0.049902588285366666,
+                "undefined": {},
+                "npv": 0.9964597497686768
+              }
+            },
+            "RBBB": {
+              "n": 25770,
+              "statement_positive": 710,
+              "metrics": {
+                "rows": 25770,
+                "positive_support": 710,
+                "negative_support": 25060,
+                "predicted_positive_support": 1391,
+                "tp": 669,
+                "tn": 24338,
+                "fp": 722,
+                "fn": 41,
+                "accuracy": 0.9703919285991462,
+                "precision": 0.4809489575844716,
+                "recall": 0.9422535211267605,
+                "specificity": 0.9711891460494813,
+                "f1": 0.6368396001903855,
+                "probability_rows": 25770,
+                "missing_probability_rows": 0,
+                "probability_positive_support": 710,
+                "probability_negative_support": 25060,
+                "auroc": 0.9896215280509876,
+                "average_precision": 0.8808854827313725,
+                "brier_score": 0.026856471064288397,
+                "ece": 0.047121255689318645,
+                "undefined": {},
+                "npv": 0.9983182247015875
+              }
+            },
+            "PAC": {
+              "n": 25770,
+              "statement_positive": 539,
+              "metrics": {
+                "rows": 25770,
+                "positive_support": 539,
+                "negative_support": 25231,
+                "predicted_positive_support": 1967,
+                "tp": 332,
+                "tn": 23596,
+                "fp": 1635,
+                "fn": 207,
+                "accuracy": 0.9285215366705472,
+                "precision": 0.16878495170310118,
+                "recall": 0.6159554730983302,
+                "specificity": 0.9351987634259443,
+                "f1": 0.2649640861931365,
+                "probability_rows": 25770,
+                "missing_probability_rows": 0,
+                "probability_positive_support": 539,
+                "probability_negative_support": 25231,
+                "auroc": 0.849623725385968,
+                "average_precision": 0.2895270930867443,
+                "brier_score": 0.07232526211107661,
+                "ece": 0.19922427804080217,
+                "undefined": {},
+                "npv": 0.9913036171911104
+              }
+            },
+            "PVC": {
+              "n": 25770,
+              "statement_positive": 1067,
+              "metrics": {
+                "rows": 25770,
+                "positive_support": 1067,
+                "negative_support": 24703,
+                "predicted_positive_support": 1418,
+                "tp": 822,
+                "tn": 24107,
+                "fp": 596,
+                "fn": 245,
+                "accuracy": 0.9673651532790066,
+                "precision": 0.5796897038081805,
+                "recall": 0.7703842549203374,
+                "specificity": 0.9758733757033559,
+                "f1": 0.6615694164989939,
+                "probability_rows": 25770,
+                "missing_probability_rows": 0,
+                "probability_positive_support": 1067,
+                "probability_negative_support": 24703,
+                "auroc": 0.9728171995395267,
+                "average_precision": 0.7038857923801832,
+                "brier_score": 0.03974058988061353,
+                "ece": 0.08973053480079524,
+                "undefined": {},
+                "npv": 0.9899392247043364
+              }
+            }
+          }
+        },
+        "restricted_has_any_profile_statement": {
+          "n": 5925,
+          "macro_f1_on_mapped_endpoints": 0.8553194283026354,
+          "endpoint_macro_binary_accuracy": 0.9586779184247539,
+          "endpoints": {
+            "AFIB": {
+              "n": 5925,
+              "statement_positive": 675,
+              "metrics": {
+                "rows": 5925,
+                "positive_support": 675,
+                "negative_support": 5250,
+                "predicted_positive_support": 672,
+                "tp": 632,
+                "tn": 5210,
+                "fp": 40,
+                "fn": 43,
+                "accuracy": 0.9859915611814346,
+                "precision": 0.9404761904761905,
+                "recall": 0.9362962962962963,
+                "specificity": 0.9923809523809524,
+                "f1": 0.9383815887156645,
+                "probability_rows": 5925,
+                "missing_probability_rows": 0,
+                "probability_positive_support": 675,
+                "probability_negative_support": 5250,
+                "auroc": 0.9982030335097002,
+                "average_precision": 0.9860456399942658,
+                "brier_score": 0.017452770161359297,
+                "ece": 0.03462912687976823,
+                "undefined": {},
+                "npv": 0.9918142014087188
+              }
+            },
+            "SB": {
+              "n": 5925,
+              "statement_positive": 2711,
+              "metrics": {
+                "rows": 5925,
+                "positive_support": 2711,
+                "negative_support": 3214,
+                "predicted_positive_support": 2470,
+                "tp": 2396,
+                "tn": 3140,
+                "fp": 74,
+                "fn": 315,
+                "accuracy": 0.9343459915611815,
+                "precision": 0.9700404858299595,
+                "recall": 0.883806713389893,
+                "specificity": 0.9769757311761046,
+                "f1": 0.9249179695039568,
+                "probability_rows": 5925,
+                "missing_probability_rows": 0,
+                "probability_positive_support": 2711,
+                "probability_negative_support": 3214,
+                "auroc": 0.9868013350848615,
+                "average_precision": 0.9842676154106152,
+                "brier_score": 0.045942735676625844,
+                "ece": 0.030487276843106422,
+                "undefined": {},
+                "npv": 0.9088277858176556
+              }
+            },
+            "STACH": {
+              "n": 5925,
+              "statement_positive": 725,
+              "metrics": {
+                "rows": 5925,
+                "positive_support": 725,
+                "negative_support": 5200,
+                "predicted_positive_support": 691,
+                "tp": 637,
+                "tn": 5146,
+                "fp": 54,
+                "fn": 88,
+                "accuracy": 0.9760337552742616,
+                "precision": 0.9218523878437048,
+                "recall": 0.8786206896551724,
+                "specificity": 0.9896153846153846,
+                "f1": 0.8997175141242938,
+                "probability_rows": 5925,
+                "missing_probability_rows": 0,
+                "probability_positive_support": 725,
+                "probability_negative_support": 5200,
+                "auroc": 0.9867954907161803,
+                "average_precision": 0.9553705700657462,
+                "brier_score": 0.03662116638656141,
+                "ece": 0.06775577516506663,
+                "undefined": {},
+                "npv": 0.9831868551776843
+              }
+            },
+            "RBBB": {
+              "n": 5925,
+              "statement_positive": 710,
+              "metrics": {
+                "rows": 5925,
+                "positive_support": 710,
+                "negative_support": 5215,
+                "predicted_positive_support": 739,
+                "tp": 669,
+                "tn": 5145,
+                "fp": 70,
+                "fn": 41,
+                "accuracy": 0.9812658227848101,
+                "precision": 0.9052774018944519,
+                "recall": 0.9422535211267605,
+                "specificity": 0.9865771812080537,
+                "f1": 0.9233954451345756,
+                "probability_rows": 5925,
+                "missing_probability_rows": 0,
+                "probability_positive_support": 710,
+                "probability_negative_support": 5215,
+                "auroc": 0.9915968292979352,
+                "average_precision": 0.9700193579497769,
+                "brier_score": 0.018955240658288117,
+                "ece": 0.023905373750512358,
+                "undefined": {},
+                "npv": 0.9920940994986502
+              }
+            },
+            "PAC": {
+              "n": 5925,
+              "statement_positive": 539,
+              "metrics": {
+                "rows": 5925,
+                "positive_support": 539,
+                "negative_support": 5386,
+                "predicted_positive_support": 564,
+                "tp": 332,
+                "tn": 5154,
+                "fp": 232,
+                "fn": 207,
+                "accuracy": 0.9259071729957806,
+                "precision": 0.5886524822695035,
+                "recall": 0.6159554730983302,
+                "specificity": 0.9569253620497586,
+                "f1": 0.6019945602901179,
+                "probability_rows": 5925,
+                "missing_probability_rows": 0,
+                "probability_positive_support": 539,
+                "probability_negative_support": 5386,
+                "auroc": 0.8891160825806202,
+                "average_precision": 0.6248239178208301,
+                "brier_score": 0.06737366877035184,
+                "ece": 0.1022549356980915,
+                "undefined": {},
+                "npv": 0.9613878007834359
+              }
+            },
+            "PVC": {
+              "n": 5925,
+              "statement_positive": 1067,
+              "metrics": {
+                "rows": 5925,
+                "positive_support": 1067,
+                "negative_support": 4858,
+                "predicted_positive_support": 882,
+                "tp": 822,
+                "tn": 4798,
+                "fp": 60,
+                "fn": 245,
+                "accuracy": 0.9485232067510548,
+                "precision": 0.9319727891156463,
+                "recall": 0.7703842549203374,
+                "specificity": 0.9876492383696994,
+                "f1": 0.8435094920472037,
+                "probability_rows": 5925,
+                "missing_probability_rows": 0,
+                "probability_positive_support": 1067,
+                "probability_negative_support": 4858,
+                "auroc": 0.9777755741985219,
+                "average_precision": 0.9291118651362559,
+                "brier_score": 0.042667498348654215,
+                "ece": 0.04420708393069073,
+                "undefined": {},
+                "npv": 0.9514178068609954
+              }
+            }
+          }
+        }
+      },
+      "paired_denominator_differences": {
+        "macro_f1": {
+          "restricted_minus_all": 0.19314293587031472,
+          "interval": [
+            0.18577423857102607,
+            0.20070665126416315
+          ],
+          "valid_replicates": 1000,
+          "invalid_replicates": 0
+        },
+        "endpoint_macro_binary_accuracy": {
+          "restricted_minus_all": -0.005518175224191846,
+          "interval": [
+            -0.007407820762324082,
+            -0.0035788157468364117
+          ],
+          "valid_replicates": 1000,
+          "invalid_replicates": 0
+        },
+        "sensitivity": {
+          "AFIB": {
+            "restricted_minus_all": 0.0,
+            "interval": [
+              0.0,
+              0.0
+            ],
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "SB": {
+            "restricted_minus_all": 0.0,
+            "interval": [
+              0.0,
+              0.0
+            ],
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "STACH": {
+            "restricted_minus_all": 0.0,
+            "interval": [
+              0.0,
+              0.0
+            ],
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "RBBB": {
+            "restricted_minus_all": 0.0,
+            "interval": [
+              0.0,
+              0.0
+            ],
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "PAC": {
+            "restricted_minus_all": 0.0,
+            "interval": [
+              0.0,
+              0.0
+            ],
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "PVC": {
+            "restricted_minus_all": 0.0,
+            "interval": [
+              0.0,
+              0.0
+            ],
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          }
+        },
+        "specificity": {
+          "AFIB": {
+            "restricted_minus_all": -0.0021996413628212474,
+            "interval": [
+              -0.004205040227610301,
+              -0.00021739958318224852
+            ],
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "SB": {
+            "restricted_minus_all": 0.030403893715676977,
+            "interval": [
+              0.02547772732117719,
+              0.03607063312683838
+            ],
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "STACH": {
+            "restricted_minus_all": 0.0006355483207149959,
+            "interval": [
+              -0.0019308790003056517,
+              0.0030366129703291245
+            ],
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "RBBB": {
+            "restricted_minus_all": 0.015388035158572455,
+            "interval": [
+              0.011888845889957136,
+              0.01840563261325772
+            ],
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "PAC": {
+            "restricted_minus_all": 0.02172659862381432,
+            "interval": [
+              0.01664847054040236,
+              0.026881546253454507
+            ],
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "PVC": {
+            "restricted_minus_all": 0.011775862666343562,
+            "interval": [
+              0.008680316053645085,
+              0.01463613894412083
+            ],
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          }
+        }
+      }
+    },
+    "P4": {
+      "reference_strata": {
+        "other_unmapped_no_profile_statement": {
+          "metadata_ecgs": 8658,
+          "unique_source_patients": 8359,
+          "scoring_state": {
+            "scored": 8658
+          },
+          "empty_label_set": 2504,
+          "top1_fallback": 0,
+          "released_calls": {
+            "IMI": 2609,
+            "ISC_": 1932,
+            "LVH": 2294,
+            "ASMI": 1030
+          },
+          "released_top1": {
+            "IMI": 3087,
+            "LVH": 3099,
+            "ISC_": 1143,
+            "ASMI": 1329
+          }
+        },
+        "normal_only": {
+          "metadata_ecgs": 13905,
+          "unique_source_patients": 13498,
+          "scoring_state": {
+            "scored": 13905
+          },
+          "empty_label_set": 5326,
+          "top1_fallback": 0,
+          "released_calls": {
+            "LVH": 4315,
+            "ISC_": 1479,
+            "IMI": 3135,
+            "ASMI": 935
+          },
+          "released_top1": {
+            "LVH": 7120,
+            "IMI": 4430,
+            "ASMI": 1727,
+            "ISC_": 628
+          }
+        },
+        "proxy_present_no_mapped_statement": {
+          "metadata_ecgs": 2723,
+          "unique_source_patients": 2643,
+          "scoring_state": {
+            "scored": 2723
+          },
+          "empty_label_set": 490,
+          "top1_fallback": 0,
+          "released_calls": {
+            "LVH": 1223,
+            "ISC_": 1557,
+            "IMI": 556,
+            "ASMI": 170
+          },
+          "released_top1": {
+            "LVH": 910,
+            "ISC_": 1043,
+            "IMI": 596,
+            "ASMI": 174
+          }
+        },
+        "mapped_only": {
+          "metadata_ecgs": 75,
+          "unique_source_patients": 75,
+          "scoring_state": {
+            "scored": 75
+          },
+          "empty_label_set": 11,
+          "top1_fallback": 0,
+          "released_calls": {
+            "LVH": 16,
+            "IMI": 37,
+            "ASMI": 13,
+            "ISC_": 9
+          },
+          "released_top1": {
+            "LVH": 23,
+            "IMI": 38,
+            "ASMI": 13,
+            "ISC_": 1
+          }
+        },
+        "out_of_profile_observable_no_mapped_statement": {
+          "metadata_ecgs": 69,
+          "unique_source_patients": 65,
+          "scoring_state": {
+            "scored": 69
+          },
+          "empty_label_set": 1,
+          "top1_fallback": 0,
+          "released_calls": {
+            "IMI": 18,
+            "ISC_": 20,
+            "ASMI": 53,
+            "LVH": 8
+          },
+          "released_top1": {
+            "IMI": 9,
+            "ASMI": 50,
+            "ISC_": 7,
+            "LVH": 3
+          }
+        },
+        "mapped_plus_other_statement": {
+          "metadata_ecgs": 340,
+          "unique_source_patients": 323,
+          "scoring_state": {
+            "scored": 340
+          },
+          "empty_label_set": 11,
+          "top1_fallback": 0,
+          "released_calls": {
+            "LVH": 163,
+            "ISC_": 210,
+            "IMI": 117,
+            "ASMI": 74
+          },
+          "released_top1": {
+            "LVH": 65,
+            "IMI": 91,
+            "ISC_": 133,
+            "ASMI": 51
+          }
+        }
+      },
+      "outputs_without_validated_reference": {
+        "ISC_": "ST and ST-T statements do not establish the ischemia endpoint"
+      },
+      "metrics": {
+        "all_scored_reference_compatible": {
+          "n": 25770,
+          "macro_f1_on_mapped_endpoints": 0.038753911892463085,
+          "endpoint_macro_binary_accuracy": 0.7857974388824215,
+          "endpoints": {
+            "ASMI": {
+              "n": 25770,
+              "statement_positive": 91,
+              "metrics": {
+                "rows": 25770,
+                "positive_support": 91,
+                "negative_support": 25679,
+                "predicted_positive_support": 2275,
+                "tp": 56,
+                "tn": 23460,
+                "fp": 2219,
+                "fn": 35,
+                "accuracy": 0.9125339542103221,
+                "precision": 0.024615384615384615,
+                "recall": 0.6153846153846154,
+                "specificity": 0.913586977686047,
+                "f1": 0.047337278106508875,
+                "probability_rows": 25770,
+                "missing_probability_rows": 0,
+                "probability_positive_support": 91,
+                "probability_negative_support": 25679,
+                "auroc": 0.8762130427693728,
+                "average_precision": 0.05263240175093426,
+                "brier_score": 0.17447557902920383,
+                "ece": 0.36148920272320495,
+                "undefined": {},
+                "npv": 0.998510321344967
+              }
+            },
+            "LVH": {
+              "n": 25770,
+              "statement_positive": 209,
+              "metrics": {
+                "rows": 25770,
+                "positive_support": 209,
+                "negative_support": 25561,
+                "predicted_positive_support": 8019,
+                "tp": 150,
+                "tn": 17692,
+                "fp": 7869,
+                "fn": 59,
+                "accuracy": 0.6923554520760574,
+                "precision": 0.01870557426112982,
+                "recall": 0.7177033492822966,
+                "specificity": 0.6921481945150816,
+                "f1": 0.036460865337870685,
+                "probability_rows": 25770,
+                "missing_probability_rows": 0,
+                "probability_positive_support": 209,
+                "probability_negative_support": 25561,
+                "auroc": 0.7942901950096298,
+                "average_precision": 0.05033218257393411,
+                "brier_score": 0.34664834308512704,
+                "ece": 0.5235005663097372,
+                "undefined": {},
+                "npv": 0.9966762435919103
+              }
+            },
+            "IMI": {
+              "n": 25770,
+              "statement_positive": 120,
+              "metrics": {
+                "rows": 25770,
+                "positive_support": 120,
+                "negative_support": 25650,
+                "predicted_positive_support": 6472,
+                "tp": 107,
+                "tn": 19285,
+                "fp": 6365,
+                "fn": 13,
+                "accuracy": 0.7525029103608848,
+                "precision": 0.016532756489493202,
+                "recall": 0.8916666666666667,
+                "specificity": 0.7518518518518519,
+                "f1": 0.03246359223300971,
+                "probability_rows": 25770,
+                "missing_probability_rows": 0,
+                "probability_positive_support": 120,
+                "probability_negative_support": 25650,
+                "auroc": 0.9087703053931123,
+                "average_precision": 0.14346090627227187,
+                "brier_score": 0.25099118278558136,
+                "ece": 0.42951117283789325,
+                "undefined": {},
+                "npv": 0.9993263550627008
+              }
+            }
+          }
+        },
+        "restricted_has_any_profile_statement": {
+          "n": 415,
+          "macro_f1_on_mapped_endpoints": 0.7278104190816488,
+          "endpoint_macro_binary_accuracy": 0.8281124497991968,
+          "endpoints": {
+            "ASMI": {
+              "n": 415,
+              "statement_positive": 91,
+              "metrics": {
+                "rows": 415,
+                "positive_support": 91,
+                "negative_support": 324,
+                "predicted_positive_support": 87,
+                "tp": 56,
+                "tn": 293,
+                "fp": 31,
+                "fn": 35,
+                "accuracy": 0.8409638554216867,
+                "precision": 0.6436781609195402,
+                "recall": 0.6153846153846154,
+                "specificity": 0.904320987654321,
+                "f1": 0.6292134831460674,
+                "probability_rows": 415,
+                "missing_probability_rows": 0,
+                "probability_positive_support": 91,
+                "probability_negative_support": 324,
+                "auroc": 0.863960113960114,
+                "average_precision": 0.6592345154456218,
+                "brier_score": 0.17235766887938847,
+                "ece": 0.22897657064204835,
+                "undefined": {},
+                "npv": 0.8932926829268293
+              }
+            },
+            "LVH": {
+              "n": 415,
+              "statement_positive": 209,
+              "metrics": {
+                "rows": 415,
+                "positive_support": 209,
+                "negative_support": 206,
+                "predicted_positive_support": 179,
+                "tp": 150,
+                "tn": 177,
+                "fp": 29,
+                "fn": 59,
+                "accuracy": 0.7879518072289157,
+                "precision": 0.8379888268156425,
+                "recall": 0.7177033492822966,
+                "specificity": 0.8592233009708737,
+                "f1": 0.7731958762886598,
+                "probability_rows": 415,
+                "missing_probability_rows": 0,
+                "probability_positive_support": 209,
+                "probability_negative_support": 206,
+                "auroc": 0.8919031913411065,
+                "average_precision": 0.8899425701245995,
+                "brier_score": 0.14253288489675803,
+                "ece": 0.07513729104469251,
+                "undefined": {},
+                "npv": 0.75
+              }
+            },
+            "IMI": {
+              "n": 415,
+              "statement_positive": 120,
+              "metrics": {
+                "rows": 415,
+                "positive_support": 120,
+                "negative_support": 295,
+                "predicted_positive_support": 154,
+                "tp": 107,
+                "tn": 248,
+                "fp": 47,
+                "fn": 13,
+                "accuracy": 0.8554216867469879,
+                "precision": 0.6948051948051948,
+                "recall": 0.8916666666666667,
+                "specificity": 0.8406779661016949,
+                "f1": 0.781021897810219,
+                "probability_rows": 415,
+                "missing_probability_rows": 0,
+                "probability_positive_support": 120,
+                "probability_negative_support": 295,
+                "auroc": 0.9378531073446328,
+                "average_precision": 0.862815573095217,
+                "brier_score": 0.15128167393079536,
+                "ece": 0.22265322705259527,
+                "undefined": {},
+                "npv": 0.9501915708812261
+              }
+            }
+          }
+        }
+      },
+      "paired_denominator_differences": {
+        "macro_f1": {
+          "restricted_minus_all": 0.6890565071891857,
+          "interval": [
+            0.6511295154750429,
+            0.7246181461715504
+          ],
+          "valid_replicates": 1000,
+          "invalid_replicates": 0
+        },
+        "endpoint_macro_binary_accuracy": {
+          "restricted_minus_all": 0.042315010916775364,
+          "interval": [
+            0.016513719363657333,
+            0.06609000698713971
+          ],
+          "valid_replicates": 1000,
+          "invalid_replicates": 0
+        },
+        "sensitivity": {
+          "ASMI": {
+            "restricted_minus_all": 0.0,
+            "interval": [
+              0.0,
+              0.0
+            ],
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "LVH": {
+            "restricted_minus_all": 0.0,
+            "interval": [
+              0.0,
+              0.0
+            ],
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "IMI": {
+            "restricted_minus_all": 0.0,
+            "interval": [
+              0.0,
+              0.0
+            ],
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          }
+        },
+        "specificity": {
+          "ASMI": {
+            "restricted_minus_all": -0.009265990031726012,
+            "interval": [
+              -0.04320714601455516,
+              0.02016184624172397
+            ],
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "LVH": {
+            "restricted_minus_all": 0.16707510645579216,
+            "interval": [
+              0.1184659063471869,
+              0.21234845124668822
+            ],
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "IMI": {
+            "restricted_minus_all": 0.08882611424984299,
+            "interval": [
+              0.04089435540826609,
+              0.13575637697473383
+            ],
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          }
+        }
+      }
+    }
+  }
+}

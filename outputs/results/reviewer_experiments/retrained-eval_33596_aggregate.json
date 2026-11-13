@@ -1,0 +1,2746 @@
+{
+  "binding": {
+    "protocol_sha256": "4a757d5a1860d1c838d77c7eff59783f20ffcdd6f64367a89623ca055f996dc4",
+    "extraction_receipt_sha256": "de65d38ef6c3c00cae2546858924ab87a7656e754fe4a52aaac7a2d7b328f3cb",
+    "inventory_sha256": "798866dc1dc00d3e81c9fda28711dd0ea57fb57a7fc2ac0a415ad20a97f17107"
+  },
+  "model_sha256": "241f8f673121477c9d27c96239f8b423e5b036bbe33d6a33237d5920200a2337",
+  "scope": "new matched frozen-backbone head retraining, retrospective development; not historical replay or independent validation",
+  "bootstrap": {
+    "replicates": 1000,
+    "seed": 197823,
+    "level": 0.95,
+    "unit": "PTB-XL patient or Chapman record-as-patient proxy",
+    "primary_contrast": "paired with minus without endpoint macro-F1",
+    "secondary": [
+      "sensitivity",
+      "AUROC",
+      "average_precision",
+      "Brier",
+      "ECE"
+    ],
+    "unsupported": "null when there is no common valid support; no favorable endpoint substitution"
+  },
+  "profiles": {
+    "P6": {
+      "split_counts": {
+        "held": 1251,
+        "train": 5884,
+        "calibration": 1220,
+        "unused": 2778
+      },
+      "endpoints": {
+        "AFIB": {
+          "status": "evaluated",
+          "held_known_n": 1251,
+          "metrics": {
+            "with_morphology": {
+              "rows": 1251,
+              "positive_support": 201,
+              "negative_support": 1050,
+              "predicted_positive_support": 221,
+              "tp": 180,
+              "tn": 1009,
+              "fp": 41,
+              "fn": 21,
+              "accuracy": 0.950439648281375,
+              "precision": 0.8144796380090498,
+              "recall": 0.8955223880597015,
+              "specificity": 0.960952380952381,
+              "f1": 0.8530805687203792,
+              "probability_rows": 1251,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 201,
+              "probability_negative_support": 1050,
+              "auroc": 0.9800663349917083,
+              "average_precision": 0.8894029587430993,
+              "brier_score": 0.03813625251115259,
+              "ece": 0.013800391336327404,
+              "undefined": {}
+            },
+            "without_morphology": {
+              "rows": 1251,
+              "positive_support": 201,
+              "negative_support": 1050,
+              "predicted_positive_support": 219,
+              "tp": 179,
+              "tn": 1010,
+              "fp": 40,
+              "fn": 22,
+              "accuracy": 0.950439648281375,
+              "precision": 0.817351598173516,
+              "recall": 0.8905472636815921,
+              "specificity": 0.9619047619047619,
+              "f1": 0.8523809523809524,
+              "probability_rows": 1251,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 201,
+              "probability_negative_support": 1050,
+              "auroc": 0.980194266761431,
+              "average_precision": 0.8905491471355323,
+              "brier_score": 0.03834893256003098,
+              "ece": 0.01458369952737864,
+              "undefined": {}
+            },
+            "released_baseline": {
+              "rows": 1251,
+              "positive_support": 201,
+              "negative_support": 1050,
+              "predicted_positive_support": 279,
+              "tp": 183,
+              "tn": 954,
+              "fp": 96,
+              "fn": 18,
+              "accuracy": 0.9088729016786571,
+              "precision": 0.6559139784946236,
+              "recall": 0.9104477611940298,
+              "specificity": 0.9085714285714286,
+              "f1": 0.7625,
+              "probability_rows": 1251,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 201,
+              "probability_negative_support": 1050,
+              "auroc": 0.9689362710258234,
+              "average_precision": 0.803373969480285,
+              "brier_score": 0.09759986156690537,
+              "ece": 0.11271304286716449,
+              "undefined": {}
+            }
+          },
+          "paired_intervals_with_minus_without": {
+            "unit": "paired_patient_or_record_group",
+            "groups": 1251,
+            "seed": 197823,
+            "n_bootstrap": 1000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": -0.003996802557953649,
+                "high": 0.003996802557953649,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": -0.016817080250227222,
+                "high": 0.009232227618596123,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": -0.010527708159287028,
+                "high": 0.021279440209352518,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": -0.004730480956681265,
+                "high": 0.0019175455417066445,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": -0.001956964521936394,
+                "high": 0.003857532978482725,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "f1": {
+                "low": -0.01108712901209679,
+                "high": 0.011777552613955791,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": -0.0009756413489007017,
+                "high": 0.000767861760763866,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": -0.006221491454041524,
+                "high": 0.0040940972551053445,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": -0.0010153425115694498,
+                "high": 0.0006517186564044715,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": -0.008244365034503029,
+                "high": 0.0057893583650548905,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        },
+        "SB": {
+          "status": "evaluated",
+          "held_known_n": 1251,
+          "metrics": {
+            "with_morphology": {
+              "rows": 1251,
+              "positive_support": 452,
+              "negative_support": 799,
+              "predicted_positive_support": 476,
+              "tp": 446,
+              "tn": 769,
+              "fp": 30,
+              "fn": 6,
+              "accuracy": 0.9712230215827338,
+              "precision": 0.9369747899159664,
+              "recall": 0.9867256637168141,
+              "specificity": 0.9624530663329162,
+              "f1": 0.9612068965517241,
+              "probability_rows": 1251,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 452,
+              "probability_negative_support": 799,
+              "auroc": 0.9949217495320478,
+              "average_precision": 0.9892285597907089,
+              "brier_score": 0.02275485892615519,
+              "ece": 0.01771541616285636,
+              "undefined": {}
+            },
+            "without_morphology": {
+              "rows": 1251,
+              "positive_support": 452,
+              "negative_support": 799,
+              "predicted_positive_support": 473,
+              "tp": 444,
+              "tn": 770,
+              "fp": 29,
+              "fn": 8,
+              "accuracy": 0.9704236610711431,
+              "precision": 0.9386892177589852,
+              "recall": 0.9823008849557522,
+              "specificity": 0.9637046307884856,
+              "f1": 0.96,
+              "probability_rows": 1251,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 452,
+              "probability_negative_support": 799,
+              "auroc": 0.9946586994805454,
+              "average_precision": 0.9888637784991015,
+              "brier_score": 0.02344957597787361,
+              "ece": 0.01260161987658676,
+              "undefined": {}
+            },
+            "released_baseline": {
+              "rows": 1251,
+              "positive_support": 452,
+              "negative_support": 799,
+              "predicted_positive_support": 421,
+              "tp": 405,
+              "tn": 783,
+              "fp": 16,
+              "fn": 47,
+              "accuracy": 0.9496402877697842,
+              "precision": 0.9619952494061758,
+              "recall": 0.8960176991150443,
+              "specificity": 0.9799749687108886,
+              "f1": 0.9278350515463918,
+              "probability_rows": 1251,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 452,
+              "probability_negative_support": 799,
+              "auroc": 0.9934514381915447,
+              "average_precision": 0.9870596692062339,
+              "brier_score": 0.03835644785413014,
+              "ece": 0.04602161464291184,
+              "undefined": {}
+            }
+          },
+          "paired_intervals_with_minus_without": {
+            "unit": "paired_patient_or_record_group",
+            "groups": 1251,
+            "seed": 197823,
+            "n_bootstrap": 1000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": -0.001598721023181482,
+                "high": 0.003996802557953541,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": -0.0059233261580936055,
+                "high": 0.0005421295185707914,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": 0.0,
+                "high": 0.010989616110761553,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": -0.0038219000902945553,
+                "high": 0.0,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": -1.9153235184896068e-05,
+                "high": 0.006441370291990109,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "f1": {
+                "low": -0.0020887255015047176,
+                "high": 0.005249539706826531,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": -4.15047529341711e-05,
+                "high": 0.0005777027095101667,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": -0.0004846794992829108,
+                "high": 0.0011243213653365529,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": -0.0011928258943619842,
+                "high": -0.00015994340151208094,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": -0.003129471183763205,
+                "high": 0.00943824397500603,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        },
+        "STACH": {
+          "status": "evaluated",
+          "held_known_n": 1251,
+          "metrics": {
+            "with_morphology": {
+              "rows": 1251,
+              "positive_support": 193,
+              "negative_support": 1058,
+              "predicted_positive_support": 196,
+              "tp": 177,
+              "tn": 1039,
+              "fp": 19,
+              "fn": 16,
+              "accuracy": 0.9720223820943246,
+              "precision": 0.9030612244897959,
+              "recall": 0.917098445595855,
+              "specificity": 0.9820415879017014,
+              "f1": 0.910025706940874,
+              "probability_rows": 1251,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 193,
+              "probability_negative_support": 1058,
+              "auroc": 0.992987061324035,
+              "average_precision": 0.9643479708108362,
+              "brier_score": 0.0197429132100409,
+              "ece": 0.014465197532310096,
+              "undefined": {}
+            },
+            "without_morphology": {
+              "rows": 1251,
+              "positive_support": 193,
+              "negative_support": 1058,
+              "predicted_positive_support": 201,
+              "tp": 178,
+              "tn": 1035,
+              "fp": 23,
+              "fn": 15,
+              "accuracy": 0.9696243005595524,
+              "precision": 0.8855721393034826,
+              "recall": 0.9222797927461139,
+              "specificity": 0.9782608695652174,
+              "f1": 0.9035532994923858,
+              "probability_rows": 1251,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 193,
+              "probability_negative_support": 1058,
+              "auroc": 0.992350411863228,
+              "average_precision": 0.9671501848167366,
+              "brier_score": 0.021461053962981164,
+              "ece": 0.016390883227477816,
+              "undefined": {}
+            },
+            "released_baseline": {
+              "rows": 1251,
+              "positive_support": 193,
+              "negative_support": 1058,
+              "predicted_positive_support": 212,
+              "tp": 177,
+              "tn": 1023,
+              "fp": 35,
+              "fn": 16,
+              "accuracy": 0.9592326139088729,
+              "precision": 0.8349056603773585,
+              "recall": 0.917098445595855,
+              "specificity": 0.9669187145557656,
+              "f1": 0.8740740740740741,
+              "probability_rows": 1251,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 193,
+              "probability_negative_support": 1058,
+              "auroc": 0.9906363556225941,
+              "average_precision": 0.9445017999148481,
+              "brier_score": 0.04558309750993257,
+              "ece": 0.06363223410595215,
+              "undefined": {}
+            }
+          },
+          "paired_intervals_with_minus_without": {
+            "unit": "paired_patient_or_record_group",
+            "groups": 1251,
+            "seed": 197823,
+            "n_bootstrap": 1000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": -0.003996802557953649,
+                "high": 0.008013589128697048,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": -0.0062514898636221936,
+                "high": 0.0435944203449601,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": -0.03243557510999372,
+                "high": 0.021393249381864262,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": -0.0009652742804917236,
+                "high": 0.00938989198347985,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": -0.005763442735294189,
+                "high": 0.0038331860536586133,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "f1": {
+                "low": -0.013634947920235736,
+                "high": 0.026289264404531214,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": -0.0005070288561431009,
+                "high": 0.0016420555890284793,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": -0.020288276700972396,
+                "high": 0.007116999448967772,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": -0.0035595937928077147,
+                "high": 0.00031433744443604557,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": -0.009024427670559295,
+                "high": 0.004968781106096898,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        },
+        "RBBB": {
+          "status": "evaluated",
+          "held_known_n": 1251,
+          "metrics": {
+            "with_morphology": {
+              "rows": 1251,
+              "positive_support": 50,
+              "negative_support": 1201,
+              "predicted_positive_support": 48,
+              "tp": 39,
+              "tn": 1192,
+              "fp": 9,
+              "fn": 11,
+              "accuracy": 0.9840127897681854,
+              "precision": 0.8125,
+              "recall": 0.78,
+              "specificity": 0.9925062447960034,
+              "f1": 0.7959183673469388,
+              "probability_rows": 1251,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 50,
+              "probability_negative_support": 1201,
+              "auroc": 0.9875603663613656,
+              "average_precision": 0.8360268717023778,
+              "brier_score": 0.01367964004337793,
+              "ece": 0.009852782723667072,
+              "undefined": {}
+            },
+            "without_morphology": {
+              "rows": 1251,
+              "positive_support": 50,
+              "negative_support": 1201,
+              "predicted_positive_support": 51,
+              "tp": 40,
+              "tn": 1190,
+              "fp": 11,
+              "fn": 10,
+              "accuracy": 0.9832134292565947,
+              "precision": 0.7843137254901961,
+              "recall": 0.8,
+              "specificity": 0.9908409658617818,
+              "f1": 0.7920792079207921,
+              "probability_rows": 1251,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 50,
+              "probability_negative_support": 1201,
+              "auroc": 0.9875104079933389,
+              "average_precision": 0.834112892562057,
+              "brier_score": 0.014061377555469767,
+              "ece": 0.006047337715785498,
+              "undefined": {}
+            },
+            "released_baseline": {
+              "rows": 1251,
+              "positive_support": 50,
+              "negative_support": 1201,
+              "predicted_positive_support": 97,
+              "tp": 48,
+              "tn": 1152,
+              "fp": 49,
+              "fn": 2,
+              "accuracy": 0.9592326139088729,
+              "precision": 0.4948453608247423,
+              "recall": 0.96,
+              "specificity": 0.9592006661115737,
+              "f1": 0.6530612244897959,
+              "probability_rows": 1251,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 50,
+              "probability_negative_support": 1201,
+              "auroc": 0.9916402997502082,
+              "average_precision": 0.834776523691527,
+              "brier_score": 0.031699299379690765,
+              "ece": 0.06347184207160345,
+              "undefined": {}
+            }
+          },
+          "paired_intervals_with_minus_without": {
+            "unit": "paired_patient_or_record_group",
+            "groups": 1251,
+            "seed": 197823,
+            "n_bootstrap": 1000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": -0.001598721023181482,
+                "high": 0.003996802557953649,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": -0.007205557661661097,
+                "high": 0.08093219015027525,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": -0.06666666666666665,
+                "high": 0.0,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": 0.0,
+                "high": 0.004208754208754217,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": -0.0024833641688170537,
+                "high": 3.097331103971978e-05,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "f1": {
+                "low": -0.031711170942878286,
+                "high": 0.03736790984634802,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": -0.0006697266530294758,
+                "high": 0.0008211766368004745,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": -0.014997006298707894,
+                "high": 0.01908673166097351,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": -0.0007573174154719471,
+                "high": -2.361324729841767e-05,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": -0.0013698739811205867,
+                "high": 0.005434315262247647,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        },
+        "1AVB": {
+          "status": "evaluated",
+          "held_known_n": 1251,
+          "metrics": {
+            "with_morphology": {
+              "rows": 1251,
+              "positive_support": 33,
+              "negative_support": 1218,
+              "predicted_positive_support": 36,
+              "tp": 16,
+              "tn": 1198,
+              "fp": 20,
+              "fn": 17,
+              "accuracy": 0.9704236610711431,
+              "precision": 0.4444444444444444,
+              "recall": 0.48484848484848486,
+              "specificity": 0.9835796387520526,
+              "f1": 0.463768115942029,
+              "probability_rows": 1251,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 33,
+              "probability_negative_support": 1218,
+              "auroc": 0.9672836741802259,
+              "average_precision": 0.5078190803774134,
+              "brier_score": 0.018026907431796076,
+              "ece": 0.00876748859835326,
+              "undefined": {}
+            },
+            "without_morphology": {
+              "rows": 1251,
+              "positive_support": 33,
+              "negative_support": 1218,
+              "predicted_positive_support": 33,
+              "tp": 15,
+              "tn": 1200,
+              "fp": 18,
+              "fn": 18,
+              "accuracy": 0.9712230215827338,
+              "precision": 0.45454545454545453,
+              "recall": 0.45454545454545453,
+              "specificity": 0.9852216748768473,
+              "f1": 0.45454545454545453,
+              "probability_rows": 1251,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 33,
+              "probability_negative_support": 1218,
+              "auroc": 0.9666368114643977,
+              "average_precision": 0.44531768752682716,
+              "brier_score": 0.018835602254698772,
+              "ece": 0.008742380799878331,
+              "undefined": {}
+            },
+            "released_baseline": {
+              "rows": 1251,
+              "positive_support": 33,
+              "negative_support": 1218,
+              "predicted_positive_support": 61,
+              "tp": 28,
+              "tn": 1185,
+              "fp": 33,
+              "fn": 5,
+              "accuracy": 0.9696243005595524,
+              "precision": 0.45901639344262296,
+              "recall": 0.8484848484848485,
+              "specificity": 0.9729064039408867,
+              "f1": 0.5957446808510638,
+              "probability_rows": 1251,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 33,
+              "probability_negative_support": 1218,
+              "auroc": 0.9826591033487585,
+              "average_precision": 0.5355711542209844,
+              "brier_score": 0.036842765986805665,
+              "ece": 0.08344539199727123,
+              "undefined": {}
+            }
+          },
+          "paired_intervals_with_minus_without": {
+            "unit": "paired_patient_or_record_group",
+            "groups": 1251,
+            "seed": 197823,
+            "n_bootstrap": 1000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": -0.003996802557953649,
+                "high": 0.001598721023181482,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": -0.06227863907628436,
+                "high": 0.03877636075685588,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": 0.0,
+                "high": 0.10258620689655172,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": -0.004132231404958664,
+                "high": 0.0,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": -5.452811950842904e-05,
+                "high": 0.0024332327647114374,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "f1": {
+                "low": -0.03027248608519606,
+                "high": 0.0665391581852682,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": -0.002355094341901231,
+                "high": 0.0032347933339948866,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": 0.0025688852624565677,
+                "high": 0.10191770137799197,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": -0.0014596177573182256,
+                "high": -0.00025085514385160567,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": -0.004045416059790206,
+                "high": 0.004811263695262926,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        },
+        "PVC": {
+          "status": "evaluated",
+          "held_known_n": 1251,
+          "metrics": {
+            "with_morphology": {
+              "rows": 1251,
+              "positive_support": 39,
+              "negative_support": 1212,
+              "predicted_positive_support": 22,
+              "tp": 21,
+              "tn": 1211,
+              "fp": 1,
+              "fn": 18,
+              "accuracy": 0.9848121502797762,
+              "precision": 0.9545454545454546,
+              "recall": 0.5384615384615384,
+              "specificity": 0.9991749174917491,
+              "f1": 0.6885245901639344,
+              "probability_rows": 1251,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 39,
+              "probability_negative_support": 1212,
+              "auroc": 0.9552762968604552,
+              "average_precision": 0.7586829065719999,
+              "brier_score": 0.013897976928412364,
+              "ece": 0.006997498148132233,
+              "undefined": {}
+            },
+            "without_morphology": {
+              "rows": 1251,
+              "positive_support": 39,
+              "negative_support": 1212,
+              "predicted_positive_support": 21,
+              "tp": 20,
+              "tn": 1211,
+              "fp": 1,
+              "fn": 19,
+              "accuracy": 0.9840127897681854,
+              "precision": 0.9523809523809523,
+              "recall": 0.5128205128205128,
+              "specificity": 0.9991749174917491,
+              "f1": 0.6666666666666666,
+              "probability_rows": 1251,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 39,
+              "probability_negative_support": 1212,
+              "auroc": 0.9524625539477025,
+              "average_precision": 0.7330854201499901,
+              "brier_score": 0.01463801254531144,
+              "ece": 0.009567288056318275,
+              "undefined": {}
+            },
+            "released_baseline": {
+              "rows": 1251,
+              "positive_support": 39,
+              "negative_support": 1212,
+              "predicted_positive_support": 53,
+              "tp": 29,
+              "tn": 1188,
+              "fp": 24,
+              "fn": 10,
+              "accuracy": 0.9728217426059153,
+              "precision": 0.5471698113207547,
+              "recall": 0.7435897435897436,
+              "specificity": 0.9801980198019802,
+              "f1": 0.6304347826086957,
+              "probability_rows": 1251,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 39,
+              "probability_negative_support": 1212,
+              "auroc": 0.9553186087839554,
+              "average_precision": 0.7413987033631738,
+              "brier_score": 0.02252305295603462,
+              "ece": 0.053062273473639496,
+              "undefined": {}
+            }
+          },
+          "paired_intervals_with_minus_without": {
+            "unit": "paired_patient_or_record_group",
+            "groups": 1251,
+            "seed": 197823,
+            "n_bootstrap": 1000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": 0.0,
+                "high": 0.0023980815347722784,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": 0.0,
+                "high": 0.01250801282051277,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": 0.0,
+                "high": 0.08830213903743311,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": 0.0,
+                "high": 0.0,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": 0.0,
+                "high": 0.0024172390590990384,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "f1": {
+                "low": 0.0,
+                "high": 0.0748069825414443,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": -0.00036686930417806026,
+                "high": 0.007042122743614558,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": 0.0019870006745932593,
+                "high": 0.05510113184219048,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": -0.0013143624033400002,
+                "high": -0.00020092920375310667,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": -0.005949726931780775,
+                "high": 0.0024593252674984453,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        }
+      },
+      "macro_f1_on_common_supported_endpoints": {
+        "with_morphology": 0.7787540409443131,
+        "without_morphology": 0.7715375968343752,
+        "released_baseline": 0.7406083022616702
+      },
+      "paired_endpoint_macro_f1": {
+        "with_minus_without": 0.00721644410993801,
+        "bounds": [
+          -0.004046461921011649,
+          0.020590001201723624
+        ],
+        "valid_replicates": 1000,
+        "invalid_replicates": 0
+      }
+    },
+    "P8": {
+      "split_counts": {
+        "held": 1251,
+        "train": 5884,
+        "calibration": 1220,
+        "unused": 2778
+      },
+      "endpoints": {
+        "AFIB": {
+          "status": "evaluated",
+          "held_known_n": 1251,
+          "metrics": {
+            "with_morphology": {
+              "rows": 1251,
+              "positive_support": 201,
+              "negative_support": 1050,
+              "predicted_positive_support": 221,
+              "tp": 180,
+              "tn": 1009,
+              "fp": 41,
+              "fn": 21,
+              "accuracy": 0.950439648281375,
+              "precision": 0.8144796380090498,
+              "recall": 0.8955223880597015,
+              "specificity": 0.960952380952381,
+              "f1": 0.8530805687203792,
+              "probability_rows": 1251,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 201,
+              "probability_negative_support": 1050,
+              "auroc": 0.9800663349917083,
+              "average_precision": 0.8894029587430993,
+              "brier_score": 0.03813625251115259,
+              "ece": 0.013800391336327404,
+              "undefined": {}
+            },
+            "without_morphology": {
+              "rows": 1251,
+              "positive_support": 201,
+              "negative_support": 1050,
+              "predicted_positive_support": 219,
+              "tp": 179,
+              "tn": 1010,
+              "fp": 40,
+              "fn": 22,
+              "accuracy": 0.950439648281375,
+              "precision": 0.817351598173516,
+              "recall": 0.8905472636815921,
+              "specificity": 0.9619047619047619,
+              "f1": 0.8523809523809524,
+              "probability_rows": 1251,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 201,
+              "probability_negative_support": 1050,
+              "auroc": 0.980194266761431,
+              "average_precision": 0.8905491471355323,
+              "brier_score": 0.03834893256003098,
+              "ece": 0.01458369952737864,
+              "undefined": {}
+            },
+            "released_baseline": {
+              "rows": 1251,
+              "positive_support": 201,
+              "negative_support": 1050,
+              "predicted_positive_support": 294,
+              "tp": 185,
+              "tn": 941,
+              "fp": 109,
+              "fn": 16,
+              "accuracy": 0.9000799360511591,
+              "precision": 0.6292517006802721,
+              "recall": 0.9203980099502488,
+              "specificity": 0.8961904761904762,
+              "f1": 0.7474747474747475,
+              "probability_rows": 1251,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 201,
+              "probability_negative_support": 1050,
+              "auroc": 0.9671452262497038,
+              "average_precision": 0.7923851475269034,
+              "brier_score": 0.09309107470711918,
+              "ece": 0.10935665575236911,
+              "undefined": {}
+            }
+          },
+          "paired_intervals_with_minus_without": {
+            "unit": "paired_patient_or_record_group",
+            "groups": 1251,
+            "seed": 197823,
+            "n_bootstrap": 1000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": -0.003996802557953649,
+                "high": 0.003996802557953649,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": -0.016817080250227222,
+                "high": 0.009232227618596123,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": -0.010527708159287028,
+                "high": 0.021279440209352518,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": -0.004730480956681265,
+                "high": 0.0019175455417066445,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": -0.001956964521936394,
+                "high": 0.003857532978482725,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "f1": {
+                "low": -0.01108712901209679,
+                "high": 0.011777552613955791,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": -0.0009756413489007017,
+                "high": 0.000767861760763866,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": -0.006221491454041524,
+                "high": 0.0040940972551053445,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": -0.0010153425115694498,
+                "high": 0.0006517186564044715,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": -0.008244365034503029,
+                "high": 0.0057893583650548905,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        },
+        "SB": {
+          "status": "evaluated",
+          "held_known_n": 1251,
+          "metrics": {
+            "with_morphology": {
+              "rows": 1251,
+              "positive_support": 452,
+              "negative_support": 799,
+              "predicted_positive_support": 476,
+              "tp": 446,
+              "tn": 769,
+              "fp": 30,
+              "fn": 6,
+              "accuracy": 0.9712230215827338,
+              "precision": 0.9369747899159664,
+              "recall": 0.9867256637168141,
+              "specificity": 0.9624530663329162,
+              "f1": 0.9612068965517241,
+              "probability_rows": 1251,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 452,
+              "probability_negative_support": 799,
+              "auroc": 0.9949217495320478,
+              "average_precision": 0.9892285597907089,
+              "brier_score": 0.02275485892615519,
+              "ece": 0.01771541616285636,
+              "undefined": {}
+            },
+            "without_morphology": {
+              "rows": 1251,
+              "positive_support": 452,
+              "negative_support": 799,
+              "predicted_positive_support": 473,
+              "tp": 444,
+              "tn": 770,
+              "fp": 29,
+              "fn": 8,
+              "accuracy": 0.9704236610711431,
+              "precision": 0.9386892177589852,
+              "recall": 0.9823008849557522,
+              "specificity": 0.9637046307884856,
+              "f1": 0.96,
+              "probability_rows": 1251,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 452,
+              "probability_negative_support": 799,
+              "auroc": 0.9946586994805454,
+              "average_precision": 0.9888637784991015,
+              "brier_score": 0.02344957597787361,
+              "ece": 0.01260161987658676,
+              "undefined": {}
+            },
+            "released_baseline": {
+              "rows": 1251,
+              "positive_support": 452,
+              "negative_support": 799,
+              "predicted_positive_support": 459,
+              "tp": 432,
+              "tn": 772,
+              "fp": 27,
+              "fn": 20,
+              "accuracy": 0.9624300559552358,
+              "precision": 0.9411764705882353,
+              "recall": 0.9557522123893806,
+              "specificity": 0.9662077596996246,
+              "f1": 0.9484083424807903,
+              "probability_rows": 1251,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 452,
+              "probability_negative_support": 799,
+              "auroc": 0.9939055456488752,
+              "average_precision": 0.9882382633791349,
+              "brier_score": 0.02675560216381929,
+              "ece": 0.013103762638100348,
+              "undefined": {}
+            }
+          },
+          "paired_intervals_with_minus_without": {
+            "unit": "paired_patient_or_record_group",
+            "groups": 1251,
+            "seed": 197823,
+            "n_bootstrap": 1000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": -0.001598721023181482,
+                "high": 0.003996802557953541,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": -0.0059233261580936055,
+                "high": 0.0005421295185707914,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": 0.0,
+                "high": 0.010989616110761553,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": -0.0038219000902945553,
+                "high": 0.0,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": -1.9153235184896068e-05,
+                "high": 0.006441370291990109,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "f1": {
+                "low": -0.0020887255015047176,
+                "high": 0.005249539706826531,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": -4.15047529341711e-05,
+                "high": 0.0005777027095101667,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": -0.0004846794992829108,
+                "high": 0.0011243213653365529,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": -0.0011928258943619842,
+                "high": -0.00015994340151208094,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": -0.003129471183763205,
+                "high": 0.00943824397500603,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        },
+        "STACH": {
+          "status": "evaluated",
+          "held_known_n": 1251,
+          "metrics": {
+            "with_morphology": {
+              "rows": 1251,
+              "positive_support": 193,
+              "negative_support": 1058,
+              "predicted_positive_support": 196,
+              "tp": 177,
+              "tn": 1039,
+              "fp": 19,
+              "fn": 16,
+              "accuracy": 0.9720223820943246,
+              "precision": 0.9030612244897959,
+              "recall": 0.917098445595855,
+              "specificity": 0.9820415879017014,
+              "f1": 0.910025706940874,
+              "probability_rows": 1251,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 193,
+              "probability_negative_support": 1058,
+              "auroc": 0.992987061324035,
+              "average_precision": 0.9643479708108362,
+              "brier_score": 0.0197429132100409,
+              "ece": 0.014465197532310096,
+              "undefined": {}
+            },
+            "without_morphology": {
+              "rows": 1251,
+              "positive_support": 193,
+              "negative_support": 1058,
+              "predicted_positive_support": 201,
+              "tp": 178,
+              "tn": 1035,
+              "fp": 23,
+              "fn": 15,
+              "accuracy": 0.9696243005595524,
+              "precision": 0.8855721393034826,
+              "recall": 0.9222797927461139,
+              "specificity": 0.9782608695652174,
+              "f1": 0.9035532994923858,
+              "probability_rows": 1251,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 193,
+              "probability_negative_support": 1058,
+              "auroc": 0.992350411863228,
+              "average_precision": 0.9671501848167366,
+              "brier_score": 0.021461053962981164,
+              "ece": 0.016390883227477816,
+              "undefined": {}
+            },
+            "released_baseline": {
+              "rows": 1251,
+              "positive_support": 193,
+              "negative_support": 1058,
+              "predicted_positive_support": 232,
+              "tp": 185,
+              "tn": 1011,
+              "fp": 47,
+              "fn": 8,
+              "accuracy": 0.95603517186251,
+              "precision": 0.7974137931034483,
+              "recall": 0.9585492227979274,
+              "specificity": 0.9555765595463138,
+              "f1": 0.8705882352941177,
+              "probability_rows": 1251,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 193,
+              "probability_negative_support": 1058,
+              "auroc": 0.9885256177948422,
+              "average_precision": 0.927166045866437,
+              "brier_score": 0.057755249438599575,
+              "ece": 0.09433852789047595,
+              "undefined": {}
+            }
+          },
+          "paired_intervals_with_minus_without": {
+            "unit": "paired_patient_or_record_group",
+            "groups": 1251,
+            "seed": 197823,
+            "n_bootstrap": 1000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": -0.003996802557953649,
+                "high": 0.008013589128697048,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": -0.0062514898636221936,
+                "high": 0.0435944203449601,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": -0.03243557510999372,
+                "high": 0.021393249381864262,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": -0.0009652742804917236,
+                "high": 0.00938989198347985,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": -0.005763442735294189,
+                "high": 0.0038331860536586133,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "f1": {
+                "low": -0.013634947920235736,
+                "high": 0.026289264404531214,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": -0.0005070288561431009,
+                "high": 0.0016420555890284793,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": -0.020288276700972396,
+                "high": 0.007116999448967772,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": -0.0035595937928077147,
+                "high": 0.00031433744443604557,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": -0.009024427670559295,
+                "high": 0.004968781106096898,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        },
+        "NSR": {
+          "status": "evaluated",
+          "held_known_n": 1251,
+          "metrics": {
+            "with_morphology": {
+              "rows": 1251,
+              "positive_support": 216,
+              "negative_support": 1035,
+              "predicted_positive_support": 193,
+              "tp": 184,
+              "tn": 1026,
+              "fp": 9,
+              "fn": 32,
+              "accuracy": 0.9672262190247801,
+              "precision": 0.9533678756476683,
+              "recall": 0.8518518518518519,
+              "specificity": 0.991304347826087,
+              "f1": 0.8997555012224939,
+              "probability_rows": 1251,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 216,
+              "probability_negative_support": 1035,
+              "auroc": 0.9897835033100734,
+              "average_precision": 0.9620813314544177,
+              "brier_score": 0.02376869281425459,
+              "ece": 0.01919449554918863,
+              "undefined": {}
+            },
+            "without_morphology": {
+              "rows": 1251,
+              "positive_support": 216,
+              "negative_support": 1035,
+              "predicted_positive_support": 196,
+              "tp": 186,
+              "tn": 1025,
+              "fp": 10,
+              "fn": 30,
+              "accuracy": 0.9680255795363709,
+              "precision": 0.9489795918367347,
+              "recall": 0.8611111111111112,
+              "specificity": 0.9903381642512077,
+              "f1": 0.9029126213592233,
+              "probability_rows": 1251,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 216,
+              "probability_negative_support": 1035,
+              "auroc": 0.9893988191089641,
+              "average_precision": 0.9634354967079385,
+              "brier_score": 0.023983866602748663,
+              "ece": 0.019037886636127214,
+              "undefined": {}
+            },
+            "released_baseline": {
+              "rows": 1251,
+              "positive_support": 216,
+              "negative_support": 1035,
+              "predicted_positive_support": 217,
+              "tp": 190,
+              "tn": 1008,
+              "fp": 27,
+              "fn": 26,
+              "accuracy": 0.9576338928856915,
+              "precision": 0.8755760368663594,
+              "recall": 0.8796296296296297,
+              "specificity": 0.9739130434782609,
+              "f1": 0.8775981524249422,
+              "probability_rows": 1251,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 216,
+              "probability_negative_support": 1035,
+              "auroc": 0.9825326534263732,
+              "average_precision": 0.9397688944706742,
+              "brier_score": 0.04803499572756911,
+              "ece": 0.10074928276407068,
+              "undefined": {}
+            }
+          },
+          "paired_intervals_with_minus_without": {
+            "unit": "paired_patient_or_record_group",
+            "groups": 1251,
+            "seed": 197823,
+            "n_bootstrap": 1000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": -0.004016786570743398,
+                "high": 0.0023980815347721673,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": -0.011695958257927696,
+                "high": 0.021091987431059257,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": -0.02347694658517141,
+                "high": 0.0,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": -0.0019764806449588945,
+                "high": 0.003986639340590392,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": -0.004633783694466912,
+                "high": 6.35134737575371e-05,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "f1": {
+                "low": -0.013817188294293369,
+                "high": 0.006842968925993133,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": -0.00021919120229846044,
+                "high": 0.0010525890708197065,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": -0.007361330075023896,
+                "high": 0.0025796063006097263,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": -0.0011026366449901153,
+                "high": 0.0007811697421578067,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": -0.00604082840160999,
+                "high": 0.005705793774244304,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        },
+        "RBBB": {
+          "status": "evaluated",
+          "held_known_n": 1251,
+          "metrics": {
+            "with_morphology": {
+              "rows": 1251,
+              "positive_support": 50,
+              "negative_support": 1201,
+              "predicted_positive_support": 48,
+              "tp": 39,
+              "tn": 1192,
+              "fp": 9,
+              "fn": 11,
+              "accuracy": 0.9840127897681854,
+              "precision": 0.8125,
+              "recall": 0.78,
+              "specificity": 0.9925062447960034,
+              "f1": 0.7959183673469388,
+              "probability_rows": 1251,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 50,
+              "probability_negative_support": 1201,
+              "auroc": 0.9875603663613656,
+              "average_precision": 0.8360268717023778,
+              "brier_score": 0.01367964004337793,
+              "ece": 0.009852782723667072,
+              "undefined": {}
+            },
+            "without_morphology": {
+              "rows": 1251,
+              "positive_support": 50,
+              "negative_support": 1201,
+              "predicted_positive_support": 51,
+              "tp": 40,
+              "tn": 1190,
+              "fp": 11,
+              "fn": 10,
+              "accuracy": 0.9832134292565947,
+              "precision": 0.7843137254901961,
+              "recall": 0.8,
+              "specificity": 0.9908409658617818,
+              "f1": 0.7920792079207921,
+              "probability_rows": 1251,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 50,
+              "probability_negative_support": 1201,
+              "auroc": 0.9875104079933389,
+              "average_precision": 0.834112892562057,
+              "brier_score": 0.014061377555469767,
+              "ece": 0.006047337715785498,
+              "undefined": {}
+            },
+            "released_baseline": {
+              "rows": 1251,
+              "positive_support": 50,
+              "negative_support": 1201,
+              "predicted_positive_support": 63,
+              "tp": 45,
+              "tn": 1183,
+              "fp": 18,
+              "fn": 5,
+              "accuracy": 0.9816147082334132,
+              "precision": 0.7142857142857143,
+              "recall": 0.9,
+              "specificity": 0.9850124895920067,
+              "f1": 0.7964601769911505,
+              "probability_rows": 1251,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 50,
+              "probability_negative_support": 1201,
+              "auroc": 0.9937552039966695,
+              "average_precision": 0.900788737727754,
+              "brier_score": 0.023693967175366152,
+              "ece": 0.041472326156855636,
+              "undefined": {}
+            }
+          },
+          "paired_intervals_with_minus_without": {
+            "unit": "paired_patient_or_record_group",
+            "groups": 1251,
+            "seed": 197823,
+            "n_bootstrap": 1000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": -0.001598721023181482,
+                "high": 0.003996802557953649,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": -0.007205557661661097,
+                "high": 0.08093219015027525,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": -0.06666666666666665,
+                "high": 0.0,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": 0.0,
+                "high": 0.004208754208754217,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": -0.0024833641688170537,
+                "high": 3.097331103971978e-05,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "f1": {
+                "low": -0.031711170942878286,
+                "high": 0.03736790984634802,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": -0.0006697266530294758,
+                "high": 0.0008211766368004745,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": -0.014997006298707894,
+                "high": 0.01908673166097351,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": -0.0007573174154719471,
+                "high": -2.361324729841767e-05,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": -0.0013698739811205867,
+                "high": 0.005434315262247647,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        },
+        "PAC": {
+          "status": "evaluated",
+          "held_known_n": 1251,
+          "metrics": {
+            "with_morphology": {
+              "rows": 1251,
+              "positive_support": 22,
+              "negative_support": 1229,
+              "predicted_positive_support": 34,
+              "tp": 10,
+              "tn": 1205,
+              "fp": 24,
+              "fn": 12,
+              "accuracy": 0.9712230215827338,
+              "precision": 0.29411764705882354,
+              "recall": 0.45454545454545453,
+              "specificity": 0.9804719283970708,
+              "f1": 0.35714285714285715,
+              "probability_rows": 1251,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 22,
+              "probability_negative_support": 1229,
+              "auroc": 0.9217027886678009,
+              "average_precision": 0.3606126597645423,
+              "brier_score": 0.014118011440309748,
+              "ece": 0.008423763394846647,
+              "undefined": {}
+            },
+            "without_morphology": {
+              "rows": 1251,
+              "positive_support": 22,
+              "negative_support": 1229,
+              "predicted_positive_support": 35,
+              "tp": 8,
+              "tn": 1202,
+              "fp": 27,
+              "fn": 14,
+              "accuracy": 0.9672262190247801,
+              "precision": 0.22857142857142856,
+              "recall": 0.36363636363636365,
+              "specificity": 0.9780309194467046,
+              "f1": 0.2807017543859649,
+              "probability_rows": 1251,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 22,
+              "probability_negative_support": 1229,
+              "auroc": 0.9058732154745173,
+              "average_precision": 0.31875820738588717,
+              "brier_score": 0.014563474434976572,
+              "ece": 0.00713695938577722,
+              "undefined": {}
+            },
+            "released_baseline": {
+              "rows": 1251,
+              "positive_support": 22,
+              "negative_support": 1229,
+              "predicted_positive_support": 54,
+              "tp": 15,
+              "tn": 1190,
+              "fp": 39,
+              "fn": 7,
+              "accuracy": 0.9632294164668266,
+              "precision": 0.2777777777777778,
+              "recall": 0.6818181818181818,
+              "specificity": 0.96826688364524,
+              "f1": 0.39473684210526316,
+              "probability_rows": 1251,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 22,
+              "probability_negative_support": 1229,
+              "auroc": 0.9411568903025371,
+              "average_precision": 0.31604587872112033,
+              "brier_score": 0.043162890405014365,
+              "ece": 0.12741695537076453,
+              "undefined": {}
+            }
+          },
+          "paired_intervals_with_minus_without": {
+            "unit": "paired_patient_or_record_group",
+            "groups": 1251,
+            "seed": 197823,
+            "n_bootstrap": 1000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": 0.0,
+                "high": 0.008792965627497984,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": 0.0,
+                "high": 0.14464359900851834,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": 0.0,
+                "high": 0.23088235294117632,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": -0.0016117992868491247,
+                "high": 0.006514657980456029,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": 0.0,
+                "high": 0.0041206774847864,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "f1": {
+                "low": 0.0,
+                "high": 0.1701204679098141,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": 0.0037543802793015956,
+                "high": 0.03306912742303347,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": -0.002543135505702705,
+                "high": 0.08535868736941529,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": -0.0009470444989467813,
+                "high": 4.622006049493923e-05,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": -0.0032463304019295152,
+                "high": 0.004007898655378428,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        },
+        "1AVB": {
+          "status": "evaluated",
+          "held_known_n": 1251,
+          "metrics": {
+            "with_morphology": {
+              "rows": 1251,
+              "positive_support": 33,
+              "negative_support": 1218,
+              "predicted_positive_support": 36,
+              "tp": 16,
+              "tn": 1198,
+              "fp": 20,
+              "fn": 17,
+              "accuracy": 0.9704236610711431,
+              "precision": 0.4444444444444444,
+              "recall": 0.48484848484848486,
+              "specificity": 0.9835796387520526,
+              "f1": 0.463768115942029,
+              "probability_rows": 1251,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 33,
+              "probability_negative_support": 1218,
+              "auroc": 0.9672836741802259,
+              "average_precision": 0.5078190803774134,
+              "brier_score": 0.018026907431796076,
+              "ece": 0.00876748859835326,
+              "undefined": {}
+            },
+            "without_morphology": {
+              "rows": 1251,
+              "positive_support": 33,
+              "negative_support": 1218,
+              "predicted_positive_support": 33,
+              "tp": 15,
+              "tn": 1200,
+              "fp": 18,
+              "fn": 18,
+              "accuracy": 0.9712230215827338,
+              "precision": 0.45454545454545453,
+              "recall": 0.45454545454545453,
+              "specificity": 0.9852216748768473,
+              "f1": 0.45454545454545453,
+              "probability_rows": 1251,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 33,
+              "probability_negative_support": 1218,
+              "auroc": 0.9666368114643977,
+              "average_precision": 0.44531768752682716,
+              "brier_score": 0.018835602254698772,
+              "ece": 0.008742380799878331,
+              "undefined": {}
+            },
+            "released_baseline": {
+              "rows": 1251,
+              "positive_support": 33,
+              "negative_support": 1218,
+              "predicted_positive_support": 33,
+              "tp": 15,
+              "tn": 1200,
+              "fp": 18,
+              "fn": 18,
+              "accuracy": 0.9712230215827338,
+              "precision": 0.45454545454545453,
+              "recall": 0.45454545454545453,
+              "specificity": 0.9852216748768473,
+              "f1": 0.45454545454545453,
+              "probability_rows": 1251,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 33,
+              "probability_negative_support": 1218,
+              "auroc": 0.9766631835597352,
+              "average_precision": 0.5436499233006298,
+              "brier_score": 0.04532399201965105,
+              "ece": 0.0955023621018564,
+              "undefined": {}
+            }
+          },
+          "paired_intervals_with_minus_without": {
+            "unit": "paired_patient_or_record_group",
+            "groups": 1251,
+            "seed": 197823,
+            "n_bootstrap": 1000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": -0.003996802557953649,
+                "high": 0.001598721023181482,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": -0.06227863907628436,
+                "high": 0.03877636075685588,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": 0.0,
+                "high": 0.10258620689655172,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": -0.004132231404958664,
+                "high": 0.0,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": -5.452811950842904e-05,
+                "high": 0.0024332327647114374,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "f1": {
+                "low": -0.03027248608519606,
+                "high": 0.0665391581852682,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": -0.002355094341901231,
+                "high": 0.0032347933339948866,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": 0.0025688852624565677,
+                "high": 0.10191770137799197,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": -0.0014596177573182256,
+                "high": -0.00025085514385160567,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": -0.004045416059790206,
+                "high": 0.004811263695262926,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        },
+        "PVC": {
+          "status": "evaluated",
+          "held_known_n": 1251,
+          "metrics": {
+            "with_morphology": {
+              "rows": 1251,
+              "positive_support": 39,
+              "negative_support": 1212,
+              "predicted_positive_support": 22,
+              "tp": 21,
+              "tn": 1211,
+              "fp": 1,
+              "fn": 18,
+              "accuracy": 0.9848121502797762,
+              "precision": 0.9545454545454546,
+              "recall": 0.5384615384615384,
+              "specificity": 0.9991749174917491,
+              "f1": 0.6885245901639344,
+              "probability_rows": 1251,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 39,
+              "probability_negative_support": 1212,
+              "auroc": 0.9552762968604552,
+              "average_precision": 0.7586829065719999,
+              "brier_score": 0.013897976928412364,
+              "ece": 0.006997498148132233,
+              "undefined": {}
+            },
+            "without_morphology": {
+              "rows": 1251,
+              "positive_support": 39,
+              "negative_support": 1212,
+              "predicted_positive_support": 21,
+              "tp": 20,
+              "tn": 1211,
+              "fp": 1,
+              "fn": 19,
+              "accuracy": 0.9840127897681854,
+              "precision": 0.9523809523809523,
+              "recall": 0.5128205128205128,
+              "specificity": 0.9991749174917491,
+              "f1": 0.6666666666666666,
+              "probability_rows": 1251,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 39,
+              "probability_negative_support": 1212,
+              "auroc": 0.9524625539477025,
+              "average_precision": 0.7330854201499901,
+              "brier_score": 0.01463801254531144,
+              "ece": 0.009567288056318275,
+              "undefined": {}
+            },
+            "released_baseline": {
+              "rows": 1251,
+              "positive_support": 39,
+              "negative_support": 1212,
+              "predicted_positive_support": 29,
+              "tp": 25,
+              "tn": 1208,
+              "fp": 4,
+              "fn": 14,
+              "accuracy": 0.9856115107913669,
+              "precision": 0.8620689655172413,
+              "recall": 0.6410256410256411,
+              "specificity": 0.9966996699669967,
+              "f1": 0.7352941176470589,
+              "probability_rows": 1251,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 39,
+              "probability_negative_support": 1212,
+              "auroc": 0.9748032495557248,
+              "average_precision": 0.826890093434225,
+              "brier_score": 0.025031715564552776,
+              "ece": 0.07539213941305022,
+              "undefined": {}
+            }
+          },
+          "paired_intervals_with_minus_without": {
+            "unit": "paired_patient_or_record_group",
+            "groups": 1251,
+            "seed": 197823,
+            "n_bootstrap": 1000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": 0.0,
+                "high": 0.0023980815347722784,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": 0.0,
+                "high": 0.01250801282051277,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": 0.0,
+                "high": 0.08830213903743311,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": 0.0,
+                "high": 0.0,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": 0.0,
+                "high": 0.0024172390590990384,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "f1": {
+                "low": 0.0,
+                "high": 0.0748069825414443,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": -0.00036686930417806026,
+                "high": 0.007042122743614558,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": 0.0019870006745932593,
+                "high": 0.05510113184219048,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": -0.0013143624033400002,
+                "high": -0.00020092920375310667,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": -0.005949726931780775,
+                "high": 0.0024593252674984453,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        }
+      },
+      "macro_f1_on_common_supported_endpoints": {
+        "with_morphology": 0.7411778255039039,
+        "without_morphology": 0.7266049945939299,
+        "released_baseline": 0.7281382586204406
+      },
+      "paired_endpoint_macro_f1": {
+        "with_minus_without": 0.014572830909973862,
+        "bounds": [
+          0.001553101916558849,
+          0.027620746339518068
+        ],
+        "valid_replicates": 1000,
+        "invalid_replicates": 0
+      }
+    },
+    "P4": {
+      "split_counts": {
+        "train": 4744,
+        "held": 390,
+        "unused": 666,
+        "calibration": 405
+      },
+      "endpoints": {
+        "ASMI": {
+          "status": "evaluated",
+          "held_known_n": 186,
+          "metrics": {
+            "with_morphology": {
+              "rows": 186,
+              "positive_support": 51,
+              "negative_support": 135,
+              "predicted_positive_support": 42,
+              "tp": 42,
+              "tn": 135,
+              "fp": 0,
+              "fn": 9,
+              "accuracy": 0.9516129032258065,
+              "precision": 1.0,
+              "recall": 0.8235294117647058,
+              "specificity": 1.0,
+              "f1": 0.9032258064516129,
+              "probability_rows": 186,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 51,
+              "probability_negative_support": 135,
+              "auroc": 0.976325344952796,
+              "average_precision": 0.9601701010590069,
+              "brier_score": 0.037953853339003404,
+              "ece": 0.03424136195653059,
+              "undefined": {}
+            },
+            "without_morphology": {
+              "rows": 186,
+              "positive_support": 51,
+              "negative_support": 135,
+              "predicted_positive_support": 45,
+              "tp": 44,
+              "tn": 134,
+              "fp": 1,
+              "fn": 7,
+              "accuracy": 0.956989247311828,
+              "precision": 0.9777777777777777,
+              "recall": 0.8627450980392157,
+              "specificity": 0.9925925925925926,
+              "f1": 0.9166666666666666,
+              "probability_rows": 186,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 51,
+              "probability_negative_support": 135,
+              "auroc": 0.977196804647785,
+              "average_precision": 0.9619433006614015,
+              "brier_score": 0.03622453872543674,
+              "ece": 0.03623751571193963,
+              "undefined": {}
+            },
+            "released_baseline": {
+              "rows": 186,
+              "positive_support": 51,
+              "negative_support": 135,
+              "predicted_positive_support": 48,
+              "tp": 39,
+              "tn": 126,
+              "fp": 9,
+              "fn": 12,
+              "accuracy": 0.8870967741935484,
+              "precision": 0.8125,
+              "recall": 0.7647058823529411,
+              "specificity": 0.9333333333333333,
+              "f1": 0.7878787878787878,
+              "probability_rows": 186,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 51,
+              "probability_negative_support": 135,
+              "auroc": 0.9363834422657951,
+              "average_precision": 0.882147579737695,
+              "brier_score": 0.1648534280381976,
+              "ece": 0.2543034577461821,
+              "undefined": {}
+            }
+          },
+          "paired_intervals_with_minus_without": {
+            "unit": "paired_patient_or_record_group",
+            "groups": 179,
+            "seed": 197823,
+            "n_bootstrap": 1000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": -0.02604851973684217,
+                "high": 0.01098901098901095,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": 0.0,
+                "high": 0.0714285714285714,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": -0.10419407894736847,
+                "high": 0.0,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": 0.0,
+                "high": 0.023622047244094446,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": -0.03443529935133277,
+                "high": 0.0005257884592997941,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "f1": {
+                "low": -0.05484133995559523,
+                "high": 0.02166374166374169,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": -0.007672118492787094,
+                "high": 0.006368272897160973,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": -0.012927264300449569,
+                "high": 0.008487787094696705,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": -0.0011712028746581114,
+                "high": 0.006151857929874285,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": -0.010574753582597698,
+                "high": 0.007456472221240213,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        },
+        "LVH": {
+          "status": "evaluated",
+          "held_known_n": 180,
+          "metrics": {
+            "with_morphology": {
+              "rows": 180,
+              "positive_support": 45,
+              "negative_support": 135,
+              "predicted_positive_support": 35,
+              "tp": 31,
+              "tn": 131,
+              "fp": 4,
+              "fn": 14,
+              "accuracy": 0.9,
+              "precision": 0.8857142857142857,
+              "recall": 0.6888888888888889,
+              "specificity": 0.9703703703703703,
+              "f1": 0.775,
+              "probability_rows": 180,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 45,
+              "probability_negative_support": 135,
+              "auroc": 0.9262551440329219,
+              "average_precision": 0.8809935918179103,
+              "brier_score": 0.0740925513708414,
+              "ece": 0.042223356407167116,
+              "undefined": {}
+            },
+            "without_morphology": {
+              "rows": 180,
+              "positive_support": 45,
+              "negative_support": 135,
+              "predicted_positive_support": 35,
+              "tp": 32,
+              "tn": 132,
+              "fp": 3,
+              "fn": 13,
+              "accuracy": 0.9111111111111111,
+              "precision": 0.9142857142857143,
+              "recall": 0.7111111111111111,
+              "specificity": 0.9777777777777777,
+              "f1": 0.8,
+              "probability_rows": 180,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 45,
+              "probability_negative_support": 135,
+              "auroc": 0.9311934156378601,
+              "average_precision": 0.8852375560345802,
+              "brier_score": 0.07379173458981288,
+              "ece": 0.06160565193007008,
+              "undefined": {}
+            },
+            "released_baseline": {
+              "rows": 180,
+              "positive_support": 45,
+              "negative_support": 135,
+              "predicted_positive_support": 76,
+              "tp": 36,
+              "tn": 95,
+              "fp": 40,
+              "fn": 9,
+              "accuracy": 0.7277777777777777,
+              "precision": 0.47368421052631576,
+              "recall": 0.8,
+              "specificity": 0.7037037037037037,
+              "f1": 0.5950413223140496,
+              "probability_rows": 180,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 45,
+              "probability_negative_support": 135,
+              "auroc": 0.8451028806584362,
+              "average_precision": 0.7541335327242961,
+              "brier_score": 0.2854119808913306,
+              "ece": 0.3717984633623726,
+              "undefined": {}
+            }
+          },
+          "paired_intervals_with_minus_without": {
+            "unit": "paired_patient_or_record_group",
+            "groups": 175,
+            "seed": 197823,
+            "n_bootstrap": 1000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": -0.027932960893854664,
+                "high": 0.0,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": -0.09170794930875573,
+                "high": 0.0,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": -0.07317073170731703,
+                "high": 0.0,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": -0.023809523809523836,
+                "high": 0.0,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": -0.020192703003805126,
+                "high": 0.0,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "f1": {
+                "low": -0.06367369181571501,
+                "high": 0.0,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": -0.0175485938259329,
+                "high": 0.006260272256248092,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": -0.01995998851763158,
+                "high": 0.010152175242738216,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": -0.0030550190453660893,
+                "high": 0.004047957912349305,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": -0.03454562762745857,
+                "high": 0.007382344739459426,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        },
+        "IMI": {
+          "status": "evaluated",
+          "held_known_n": 192,
+          "metrics": {
+            "with_morphology": {
+              "rows": 192,
+              "positive_support": 57,
+              "negative_support": 135,
+              "predicted_positive_support": 51,
+              "tp": 45,
+              "tn": 129,
+              "fp": 6,
+              "fn": 12,
+              "accuracy": 0.90625,
+              "precision": 0.8823529411764706,
+              "recall": 0.7894736842105263,
+              "specificity": 0.9555555555555556,
+              "f1": 0.8333333333333334,
+              "probability_rows": 192,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 57,
+              "probability_negative_support": 135,
+              "auroc": 0.9601039636127355,
+              "average_precision": 0.9202034656504448,
+              "brier_score": 0.08272399069046392,
+              "ece": 0.06340719549781992,
+              "undefined": {}
+            },
+            "without_morphology": {
+              "rows": 192,
+              "positive_support": 57,
+              "negative_support": 135,
+              "predicted_positive_support": 49,
+              "tp": 42,
+              "tn": 128,
+              "fp": 7,
+              "fn": 15,
+              "accuracy": 0.8854166666666666,
+              "precision": 0.8571428571428571,
+              "recall": 0.7368421052631579,
+              "specificity": 0.9481481481481482,
+              "f1": 0.7924528301886793,
+              "probability_rows": 192,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 57,
+              "probability_negative_support": 135,
+              "auroc": 0.952046783625731,
+              "average_precision": 0.9081388788949836,
+              "brier_score": 0.08797178664503862,
+              "ece": 0.07040510704031498,
+              "undefined": {}
+            },
+            "released_baseline": {
+              "rows": 192,
+              "positive_support": 57,
+              "negative_support": 135,
+              "predicted_positive_support": 85,
+              "tp": 51,
+              "tn": 101,
+              "fp": 34,
+              "fn": 6,
+              "accuracy": 0.7916666666666666,
+              "precision": 0.6,
+              "recall": 0.8947368421052632,
+              "specificity": 0.7481481481481481,
+              "f1": 0.7183098591549296,
+              "probability_rows": 192,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 57,
+              "probability_negative_support": 135,
+              "auroc": 0.8970760233918129,
+              "average_precision": 0.8012133008475648,
+              "brier_score": 0.20121046705186352,
+              "ece": 0.2640964892246605,
+              "undefined": {}
+            }
+          },
+          "paired_intervals_with_minus_without": {
+            "unit": "paired_patient_or_record_group",
+            "groups": 185,
+            "seed": 197823,
+            "n_bootstrap": 1000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": 0.005102040816326592,
+                "high": 0.04166666666666663,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": 0.0013859827516164035,
+                "high": 0.06461493090663976,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": 0.0,
+                "high": 0.1132182675814752,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": 0.0,
+                "high": 0.023255813953488413,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": 0.0005369127516778871,
+                "high": 0.042572656099600696,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "f1": {
+                "low": 0.008157396331738438,
+                "high": 0.0852830725462304,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": 0.0010424042104901807,
+                "high": 0.0177296777296777,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": 0.001726102351123886,
+                "high": 0.025788418485963874,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": -0.010307246338032273,
+                "high": -0.00043253071467197555,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": -0.019762121400470893,
+                "high": 0.010968029556142893,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        },
+        "ISC_": {
+          "status": "evaluated",
+          "held_known_n": 161,
+          "metrics": {
+            "with_morphology": {
+              "rows": 161,
+              "positive_support": 26,
+              "negative_support": 135,
+              "predicted_positive_support": 21,
+              "tp": 20,
+              "tn": 134,
+              "fp": 1,
+              "fn": 6,
+              "accuracy": 0.9565217391304348,
+              "precision": 0.9523809523809523,
+              "recall": 0.7692307692307693,
+              "specificity": 0.9925925925925926,
+              "f1": 0.851063829787234,
+              "probability_rows": 161,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 26,
+              "probability_negative_support": 135,
+              "auroc": 0.9962962962962963,
+              "average_precision": 0.9819299680748392,
+              "brier_score": 0.017448741367885556,
+              "ece": 0.02311646305607232,
+              "undefined": {}
+            },
+            "without_morphology": {
+              "rows": 161,
+              "positive_support": 26,
+              "negative_support": 135,
+              "predicted_positive_support": 21,
+              "tp": 20,
+              "tn": 134,
+              "fp": 1,
+              "fn": 6,
+              "accuracy": 0.9565217391304348,
+              "precision": 0.9523809523809523,
+              "recall": 0.7692307692307693,
+              "specificity": 0.9925925925925926,
+              "f1": 0.851063829787234,
+              "probability_rows": 161,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 26,
+              "probability_negative_support": 135,
+              "auroc": 0.9965811965811966,
+              "average_precision": 0.9831141287417586,
+              "brier_score": 0.019375619984548016,
+              "ece": 0.026165113151416012,
+              "undefined": {}
+            },
+            "released_baseline": {
+              "rows": 161,
+              "positive_support": 26,
+              "negative_support": 135,
+              "predicted_positive_support": 34,
+              "tp": 25,
+              "tn": 126,
+              "fp": 9,
+              "fn": 1,
+              "accuracy": 0.937888198757764,
+              "precision": 0.7352941176470589,
+              "recall": 0.9615384615384616,
+              "specificity": 0.9333333333333333,
+              "f1": 0.8333333333333334,
+              "probability_rows": 161,
+              "missing_probability_rows": 0,
+              "probability_positive_support": 26,
+              "probability_negative_support": 135,
+              "auroc": 0.9820512820512821,
+              "average_precision": 0.9201794571848237,
+              "brier_score": 0.08168259764524284,
+              "ece": 0.161255627731729,
+              "undefined": {}
+            }
+          },
+          "paired_intervals_with_minus_without": {
+            "unit": "paired_patient_or_record_group",
+            "groups": 158,
+            "seed": 197823,
+            "n_bootstrap": 1000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": 0.0,
+                "high": 0.0,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": 0.0,
+                "high": 0.0,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": 0.0,
+                "high": 0.0,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": 0.0,
+                "high": 0.0,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": 0.0,
+                "high": 0.0,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "f1": {
+                "low": 0.0,
+                "high": 0.0,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": -0.0016242172285046257,
+                "high": 1.1102230246251565e-16,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": -0.006734170220511829,
+                "high": 5.191511387275791e-06,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": -0.00418905721956437,
+                "high": -2.550590936671552e-05,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": -0.012217905529215953,
+                "high": 0.006231123943032514,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        }
+      },
+      "macro_f1_on_common_supported_endpoints": {
+        "with_morphology": 0.8406557423930451,
+        "without_morphology": 0.8400458316606451,
+        "released_baseline": 0.7336408256702751
+      },
+      "paired_endpoint_macro_f1": {
+        "with_minus_without": 0.0006099107324000763,
+        "bounds": [
+          -0.01627915910044925,
+          0.015749943071075547
+        ],
+        "valid_replicates": 1000,
+        "invalid_replicates": 0
+      }
+    }
+  },
+  "job": "33596",
+  "identifiers_exported": false
+}

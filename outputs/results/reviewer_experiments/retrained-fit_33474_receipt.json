@@ -1,0 +1,61 @@
+{
+  "binding": {
+    "protocol_sha256": "4a757d5a1860d1c838d77c7eff59783f20ffcdd6f64367a89623ca055f996dc4",
+    "extraction_receipt_sha256": "de65d38ef6c3c00cae2546858924ab87a7656e754fe4a52aaac7a2d7b328f3cb",
+    "inventory_sha256": "798866dc1dc00d3e81c9fda28711dd0ea57fb57a7fc2ac0a415ad20a97f17107"
+  },
+  "model_sha256": "241f8f673121477c9d27c96239f8b423e5b036bbe33d6a33237d5920200a2337",
+  "held_outcomes_evaluated": false,
+  "profiles": {
+    "P6": {
+      "split_counts": {
+        "held": 1251,
+        "train": 5884,
+        "calibration": 1220,
+        "unused": 2778
+      },
+      "endpoint_status": {
+        "AFIB": "calibrated",
+        "SB": "calibrated",
+        "STACH": "calibrated",
+        "RBBB": "calibrated",
+        "1AVB": "calibrated",
+        "PVC": "calibrated"
+      }
+    },
+    "P8": {
+      "split_counts": {
+        "held": 1251,
+        "train": 5884,
+        "calibration": 1220,
+        "unused": 2778
+      },
+      "endpoint_status": {
+        "AFIB": "calibrated",
+        "SB": "calibrated",
+        "STACH": "calibrated",
+        "NSR": "calibrated",
+        "RBBB": "calibrated",
+        "PAC": "calibrated",
+        "1AVB": "calibrated",
+        "PVC": "calibrated"
+      }
+    },
+    "P4": {
+      "split_counts": {
+        "train": 4744,
+        "held": 390,
+        "unused": 666,
+        "calibration": 405
+      },
+      "endpoint_status": {
+        "ASMI": "calibrated",
+        "LVH": "calibrated",
+        "IMI": "calibrated",
+        "ISC_": "calibrated"
+      }
+    }
+  },
+  "job": "33474",
+  "identifiers_exported": false
+}

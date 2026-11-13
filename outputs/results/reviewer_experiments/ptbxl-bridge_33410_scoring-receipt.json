@@ -1,0 +1,66 @@
+{
+  "job": "33410",
+  "scope": "retrospective frozen P6/P8/P4 inference on every available authorized PTB-XL v1.0.3 fold 1-9 waveform, not independent validation",
+  "input_hashes": {
+    "protocol_sha256": "c30366f1c18e74a3b1cc7feb40bfce402e3bfeccf7950a654de27f4e3c487b61",
+    "metadata_sha256": "7600de9c1b27d181d850b3c6038a35d7c3ddb6bb33b702e3a20252a6859d216b",
+    "dictionary_sha256": "ad05b0b1fcae83bb1230755ad9cfc7c96f303feddc08a4a9ad5bdc9ca63bac8f",
+    "inventory_sha256": "798866dc1dc00d3e81c9fda28711dd0ea57fb57a7fc2ac0a415ad20a97f17107"
+  },
+  "immutable_model_assets_sha256": {
+    "backbone-v3f-original.pt": "ca5d4dcb4b9828e6c4339800fe81ec27f32d9b09a090bb57503bfb56746a8da8",
+    "specialists-v3p-e008-primary6-diagnostic.pt": "9c5a9265a7155e1206c551cc4e6d645b86363ba3dbdeb7baf7b9f173c314be3d",
+    "specialists-v3q-primary8-best-candidate.pt": "b30cb2bbb45f1231c93ff1c196aa966b57b49831cadb296131c0283e7b0ceb02",
+    "backbone-v3ag-pathology.pt": "bf71e4cf8acc34031cb3611c7031e0649822e705fd7dcea354a3ea583ce920ee",
+    "specialists-v3ag-primary4-calibrated.pt": "cf5091e962fffb3254b1a71fe57236dd82ea0139093df192511499d931391dbc"
+  },
+  "ledger_sha256": "9148bc59bb725ae4d34e665293fb6dc3a55783cdb70ca9d3448f6ef9c3c1a08a",
+  "metadata_ecgs": 19601,
+  "flow": {
+    "P6": {
+      "scored": 6205,
+      "not_in_authorized_preflight": 13396
+    },
+    "P8": {
+      "scored": 6205,
+      "not_in_authorized_preflight": 13396
+    },
+    "P4": {
+      "scored": 6205,
+      "not_in_authorized_preflight": 13396
+    }
+  },
+  "thresholds": {
+    "P6": {
+      "AFIB": 0.82,
+      "SB": 0.835,
+      "STACH": 0.7749999999999999,
+      "RBBB": 0.5149999999999999,
+      "1AVB": 0.57,
+      "PVC": 0.42999999999999994
+    },
+    "P8": {
+      "AFIB": 0.8,
+      "SB": 0.55,
+      "STACH": 0.8,
+      "NSR": 0.525,
+      "RBBB": 0.725,
+      "PAC": 0.45,
+      "1AVB": 0.775,
+      "PVC": 0.725
+    },
+    "P4": {
+      "ASMI": 0.6699999999999999,
+      "LVH": 0.705,
+      "IMI": 0.635,
+      "ISC_": 0.595
+    }
+  },
+  "references_accessed_for_scoring": false,
+  "fold10_scored": false,
+  "preprocessor_sha256": "cdef92f694b8a950076131c07e65177984cdac2db3b1a11b1eacb3e569f42275",
+  "runtime": {
+    "torch": "2.10.0+cu128",
+    "gpu": "NVIDIA A100-SXM4-40GB"
+  }
+}

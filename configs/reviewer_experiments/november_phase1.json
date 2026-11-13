@@ -1,0 +1,40 @@
+{
+  "schema": "TITAN_V45_REVIEWER_EXPERIMENTS_PHASE1_V1",
+  "reviewer_ids": ["R1-2", "R2-general", "R2-3f", "R2-4k"],
+  "frozen_baseline": {
+    "purpose": "new waveform inference on the complete, previously inspected SPH V1 source; independent validation is not claimed",
+    "implementation_commit": "eb1c67b9229af875a9f868797b0c2f5c546e3dac",
+    "protocol_sha256": "d788ad8cca94793cebb738496acc131e82b1ca1900976f11020b99a79a5fc366",
+    "profiles": ["P6", "P8", "P4"],
+    "expected_metadata_rows": 25770,
+    "scoring_batch_size": 16,
+    "reference_access_during_scoring": false,
+    "threshold_changes": false,
+    "routing": "none"
+  },
+  "replay": {
+    "historical_scope": "saved predictions and retained waveforms, not a new test cohort",
+    "absolute_score_tolerance": 0.00001,
+    "success_requires": ["all intended records reconciled", "decisions agree", "all comparable score differences within tolerance"],
+    "missing_waveforms_are_not_equivalent": true
+  },
+  "development_selective_policy": {
+    "dataset": "SPH V1; retrospective development only",
+    "split_unit": "connected components of patients linked by exact waveform hashes",
+    "split_seed": "titan-v45-reviewer-november-v1",
+    "calibration_fraction": 0.5,
+    "target_scored_coverage": 0.9,
+    "confidence": "minimum absolute distance of any profile score to its released class threshold",
+    "threshold_selection": "choose the floor order statistic among calibration confidence values; accept ties, report realized coverage",
+    "route_inputs": ["profile_scores", "released_class_thresholds", "frozen_calibration_cutoff"],
+    "cascade": "not implemented; no routing to a second stage and no clinical review claimed",
+    "held_partition": "blocked for this policy until threshold freeze; historically inspected SPH is not independent"
+  },
+  "release_gates": {
+    "independent_test": "separate approval and sealed patient/signal split, source exposure audit, rights and endpoint compatibility",
+    "other_and_auxiliary": "evaluate only mapped positive and explicit compatible negative references; missing/unmappable labels remain unknown; NSR separate",
+    "morphology_perturbation": "frozen paired waveform sensitivity only; never label as a retrained ablation",
+    "morphology_retrained_ablation": "paired identical patient partitions, initial checkpoint, training schedule, seeds and calibration; freeze before locked test",
+    "reports": "aggregates and sanitized receipts only; restricted inputs and per-ECG outputs stay in CEDIA"
+  }
+}

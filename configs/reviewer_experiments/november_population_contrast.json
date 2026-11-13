@@ -1,0 +1,17 @@
+{
+  "schema": "TITAN_V45_REVIEWER_SPH_POPULATION_CONTRAST_V1",
+  "scope": "same-score denominator sensitivity in unselected SPH V1; retrospective ECG-statement transfer",
+  "denominator": "all source metadata rows for flow and prevalence; all successfully scored nonconflicting source rows for statement metrics",
+  "restriction": "retain scored rows with at least one of this profile's defensibly mapped statements; this is a new SPH restriction, not a replay of historical panel selection",
+  "reference": "for a defensibly mapped statement, absence means not documented in SPH and is never absence of disease; Normal ECG with any other primary statement is ambiguous and excluded from metrics only",
+  "normal_code": 1,
+  "proxy_codes": {"P6": [82], "P8": [82], "P4": [145, 146]},
+  "other_observable_codes": {"P6": [30, 51, 83, 84, 85, 88, 104], "P8": [51, 83, 84, 85, 88, 104], "P4": [140, 143, 160, 166]},
+  "reference_missing_outputs": {
+    "P6": {"1AVB": "prolonged PR is only a proxy"},
+    "P8": {"1AVB": "prolonged PR is only a proxy", "NSR": "Normal ECG is not an explicit NSR statement"},
+    "P4": {"ISC_": "ST and ST-T statements do not establish the ischemia endpoint"}
+  },
+  "bootstrap": {"seed": 197831, "replicates": 1000, "level": 0.95, "unit": "patients linked by exact signal"},
+  "routing": "no abstention, cascade or clinical referral executed; P8 can apply its original top-1 fallback"
+}

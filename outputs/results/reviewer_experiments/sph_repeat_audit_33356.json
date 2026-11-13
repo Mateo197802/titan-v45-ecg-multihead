@@ -1,0 +1,59 @@
+{
+  "total_records": 25770,
+  "new_flow": {
+    "scored": 25770
+  },
+  "shared_scored_records": 25770,
+  "flow_disagreements": 0,
+  "profiles": {
+    "P6": {
+      "decision_disagreements": 0,
+      "scores": {
+        "n": 154620,
+        "above_tolerance": 0,
+        "maximum_absolute_difference": 0.0
+      },
+      "auxiliary_scores": {
+        "n": 154620,
+        "above_tolerance": 0,
+        "maximum_absolute_difference": 0.0
+      }
+    },
+    "P8": {
+      "decision_disagreements": 0,
+      "scores": {
+        "n": 206160,
+        "above_tolerance": 0,
+        "maximum_absolute_difference": 0.0
+      },
+      "auxiliary_scores": {
+        "n": 154620,
+        "above_tolerance": 0,
+        "maximum_absolute_difference": 0.0
+      }
+    },
+    "P4": {
+      "decision_disagreements": 0,
+      "scores": {
+        "n": 103080,
+        "above_tolerance": 0,
+        "maximum_absolute_difference": 0.0
+      },
+      "auxiliary_scores": {
+        "n": 77310,
+        "above_tolerance": 0,
+        "maximum_absolute_difference": 0.0
+      }
+    }
+  },
+  "tolerance": 1e-05,
+  "strict_equivalence": true,
+  "scope": "SPH repeat inference only; not historical panel replay or independent validation",
+  "audit_job": "33356",
+  "experiment_protocol_sha256": "401b75de6bbed680355bc2cd38e247c9718e0f0b89776c9991389f6c463f154f",
+  "original_receipt_sha256": "8abdc5f6561fc3fea77eeb68e8aa34bc2d02396cad9c2e9fbeea70b4188dac92",
+  "new_receipt_sha256": "6b52867f0a9834a3eb698c76749d7a5d16d35dd1dc3fa0e24e88ed07eefc846b",
+  "original_ledger_sha256": "4a3a1e61b1784e06190d5caaa089fca04ef84792acb3a5f9fc1af3f9c1173462",
+  "new_ledger_sha256": "4a3a1e61b1784e06190d5caaa089fca04ef84792acb3a5f9fc1af3f9c1173462",
+  "record_identifiers_exported": false
+}

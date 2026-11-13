@@ -1,0 +1,40 @@
+{
+  "schema": "TITAN_V45_REVIEWER_SPH_RHYTHM_OTHER_V1",
+  "scope": "SPH retrospective development; mapped ECG statements, not independent or clinical validation",
+  "dictionary": {
+    "1": "Normal ECG",
+    "30": "Atrial premature complex(es)",
+    "51": "Atrial flutter",
+    "83": "Second-degree AV block, Mobitz type I (Wenckebach)",
+    "84": "Second-degree AV block, Mobitz type II",
+    "85": "2:1 AV block",
+    "88": "AV block, complete (third-degree)",
+    "104": "Left bundle-branch block",
+    "148": "Prolonged QT interval"
+  },
+  "endpoints": {
+    "P6_Other_mapped": {"codes": [30, 51, 83, 84, 85, 88, 104], "profile": "P6", "auxiliary": [0, 1, 2, 3]},
+    "P8_Other_mapped": {"codes": [51, 83, 84, 85, 88, 104], "profile": "P8", "auxiliary": [0, 1, 2, 3]},
+    "Flutter": {"codes": [51], "profile": "P8", "auxiliary": [0]},
+    "LBBB": {"codes": [104], "profile": "P8", "auxiliary": [1]},
+    "2AVB": {"codes": [83, 84, 85], "profile": "P8", "auxiliary": [2]},
+    "3AVB": {"codes": [88], "profile": "P8", "auxiliary": [3]}
+  },
+  "non_evaluable": {
+    "NSR": "SPH Normal ECG is not an explicit NSR statement and is never part of Other",
+    "LQTS": "prolonged QT statement 148 is not LQTS syndrome",
+    "Paced": "no usable SPH Paced statement",
+    "unmapped_abnormal_rhythm": "not a known Other reference or known negative"
+  },
+  "reference": {
+    "positive": "at least one mapped target code and no Normal ECG statement",
+    "control": "only Normal ECG primary statement",
+    "ambiguous": "Normal ECG co-recorded with any other primary statement or exact waveform with incompatible endpoint reference states",
+    "unknown": "all other references; never treated as negative"
+  },
+  "split": {"seed": "titan-reviewer-sph-rhythm-other-v1", "train_fraction": 0.6, "train_or_calibration_fraction": 0.8},
+  "comparator": "maximum mapped V3F auxiliary window-mean softmax probability; threshold fitted on calibration, not a published decision rule; P6 has no PAC decision score so PAC is unrepresented in its comparator",
+  "candidate": "deterministic L2 logistic head on released P6 and P8 class scores and six V3F auxiliary scores; no backbone changes",
+  "training": {"l2": 0.01, "max_iterations": 250, "minimum_training_per_polarity": 20, "minimum_calibration_per_polarity": 5, "minimum_held_per_polarity": 5},
+  "statistics": {"seed": 197826, "replicates": 1000, "confidence": 0.95}
+}
