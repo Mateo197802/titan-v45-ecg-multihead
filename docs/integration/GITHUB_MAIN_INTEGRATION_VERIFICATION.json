@@ -1,0 +1,211 @@
+{
+  "schema": "TITAN_MAIN_INTEGRATION_V1",
+  "initial_main": "2677a3333069c16915cb71acd55d0f0176570bcf",
+  "initial_tree": "21df2536b37b632e52ac18bbf1d1a6cb377b0ce5",
+  "restoration_tag": "integration/titan-v45-main-pre-20261112",
+  "scientific_main": "85c1d8e6f3603560af9aea47e33806a530428cfb",
+  "scientific_tree": "30849a3dfcc34ea0d2f9b118f3e4cb154f5b8b60",
+  "publication_note": "Documentation-only receipt is published after scientific_main; its own commit SHA is not self-embedded.",
+  "integration_candidate": "3e11ecf3fd4554fee7dda981977ec9295f6f0030",
+  "integration_tree_verified_identical": true,
+  "pr_count_initial": 12,
+  "already_merged_initial": 2,
+  "original_prs_integrated": 10,
+  "consolidation_pr": 13,
+  "prs": [
+    {
+      "number": 1,
+      "title": "Audit revision evidence and disclose failed CEDIA replay equivalence",
+      "github_state": "MERGED",
+      "base": "main",
+      "head": "5ddda529c78428cf20538f76cbf4d19757edc1a9",
+      "head_in_scientific_main": true,
+      "github_merge_sha": "79af292762eef20b23161d17541b496ea98218e9",
+      "github_merge_sha_in_scientific_main": true,
+      "url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/1"
+    },
+    {
+      "number": 2,
+      "title": "Quantify frozen replay residuals and official PTB-XL coverage",
+      "github_state": "MERGED",
+      "base": "main",
+      "head": "a10f1b1eab62de241c8913a7b9f3c559e37d9b7e",
+      "head_in_scientific_main": true,
+      "github_merge_sha": "2677a3333069c16915cb71acd55d0f0176570bcf",
+      "github_merge_sha_in_scientific_main": true,
+      "url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/2"
+    },
+    {
+      "number": 3,
+      "title": "Execute frozen SPH transfer evaluation and document V4.5 evidence",
+      "github_state": "MERGED",
+      "base": "main",
+      "head": "68274ee05dab1e5aaa48aa588262b5b8289cbbd4",
+      "head_in_scientific_main": true,
+      "github_merge_sha": "84f989e8074004ee29e8607a3a996c86b1b64c41",
+      "github_merge_sha_in_scientific_main": true,
+      "url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/3"
+    },
+    {
+      "number": 4,
+      "title": "Document verified A10 artifacts and Optuna evidence limits",
+      "github_state": "MERGED",
+      "base": "main",
+      "head": "81a75ec69f086dae7c295d65f1c2720416d9db81",
+      "head_in_scientific_main": true,
+      "github_merge_sha": "e0d6ce6daa2c9a954b56779e77c7974105a6fa81",
+      "github_merge_sha_in_scientific_main": true,
+      "url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/4"
+    },
+    {
+      "number": 5,
+      "title": "TITAN V4.6 BenchmarkMax experimental program",
+      "github_state": "MERGED",
+      "base": "main",
+      "head": "8dfc29d83910dee7d2caea7a6028b96d481a134a",
+      "head_in_scientific_main": true,
+      "github_merge_sha": "6f9d7f360677c492bcbf868f95a9123747417f8a",
+      "github_merge_sha_in_scientific_main": true,
+      "url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/5"
+    },
+    {
+      "number": 6,
+      "title": "TITAN V4.5 external study: executed preflight and reference-support gate",
+      "github_state": "MERGED",
+      "base": "codex/titan-specialist-heads-20261111",
+      "head": "85d673ac04986fe1c50a8cf39d8279344a708647",
+      "head_in_scientific_main": true,
+      "github_merge_sha": "05b5f2c7970243061b907ef61d555653f4bb5c30",
+      "github_merge_sha_in_scientific_main": false,
+      "url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/6"
+    },
+    {
+      "number": 7,
+      "title": "docs: clarify 12 reviewer evidence statuses and clinical scope",
+      "github_state": "MERGED",
+      "base": "main",
+      "head": "1ee102e94484c46f01cca14346ef2c041c456b25",
+      "head_in_scientific_main": true,
+      "github_merge_sha": "39c031f92b6e62d9d044e9fc740682b2b1ee445c",
+      "github_merge_sha_in_scientific_main": true,
+      "url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/7"
+    },
+    {
+      "number": 8,
+      "title": "TITAN V4.5: reconcile reviewer evidence and scientific claims",
+      "github_state": "MERGED",
+      "base": "main",
+      "head": "4abb2de2bda3b3a2fa61b9418594690b5a3fc629",
+      "head_in_scientific_main": true,
+      "github_merge_sha": "69ecb60b410697b045a72be9e66b3674ff0e1d2b",
+      "github_merge_sha_in_scientific_main": true,
+      "url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/8"
+    },
+    {
+      "number": 9,
+      "title": "TITAN V4.5: scientific closure experiments for four reviewer comments",
+      "github_state": "MERGED",
+      "base": "codex/titan-v45-four-reviewer-experiments",
+      "head": "e5aa65ec1ef43cf5477e688c934577f5dcc4d75c",
+      "head_in_scientific_main": true,
+      "github_merge_sha": "ad0e8a929bed88895d40f2de572169be80d62fb9",
+      "github_merge_sha_in_scientific_main": false,
+      "url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/9"
+    },
+    {
+      "number": 10,
+      "title": "TITAN V4.5 duration-aware domain adaptation",
+      "github_state": "MERGED",
+      "base": "codex/titan-external-validation-20261111",
+      "head": "63c74b3fde2c51f7f8cde4ad396d77a1bd16cb29",
+      "head_in_scientific_main": true,
+      "github_merge_sha": "a44984d31bf075059684a399834aba52f6308017",
+      "github_merge_sha_in_scientific_main": false,
+      "url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/10"
+    },
+    {
+      "number": 11,
+      "title": "TITAN V4.5: development-only specialist performance recovery",
+      "github_state": "MERGED",
+      "base": "codex/titan-duration-aware-adaptation",
+      "head": "2d1f8432177835e189cfa769e7880d4f0165cdcb",
+      "head_in_scientific_main": true,
+      "github_merge_sha": "0b87b9354796807b3bab26f3ded158f38afcc489",
+      "github_merge_sha_in_scientific_main": false,
+      "url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/11"
+    },
+    {
+      "number": 12,
+      "title": "Verify TITAN V4.5 morphology and selective prediction in CEDIA",
+      "github_state": "MERGED",
+      "base": "codex/titan-v45-scientific-closure",
+      "head": "608b8c1be17e4dd15a3e73a75be69bc49ac4b003",
+      "head_in_scientific_main": true,
+      "github_merge_sha": "511709561cfece3acf4edafd564640dcc99a169b",
+      "github_merge_sha_in_scientific_main": false,
+      "url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/12"
+    },
+    {
+      "number": 13,
+      "title": "Consolidate TITAN V4.5 scientific evidence and separate V4.6 experiments",
+      "github_state": "MERGED",
+      "base": "main",
+      "head": "3e11ecf3fd4554fee7dda981977ec9295f6f0030",
+      "head_in_scientific_main": true,
+      "github_merge_sha": "85c1d8e6f3603560af9aea47e33806a530428cfb",
+      "github_merge_sha_in_scientific_main": true,
+      "url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/13"
+    }
+  ],
+  "first_parent_merges": [
+    "85c1d8e6f3603560af9aea47e33806a530428cfb Consolidate audited TITAN scientific evidence via PR #13"
+  ],
+  "pr_11_concurrent_update": {
+    "prior": "880945fef6fe0bb12dd272078f09aa73e58721db",
+    "head": "2d1f8432177835e189cfa769e7880d4f0165cdcb",
+    "commits": [
+      "81b963cf932a19b9e7011c41fdfdaa01d00a8b6b Seal corrective candidate and compute paired source-aware uncertainty",
+      "0f35c1d9d092d44904a230d7a42a2bf765255273 Verify corrective receipts and endpoint bootstrap scope",
+      "ebe86ee90a10137a38c0b1651576739757b55564 Add fixed development representation and released-weight checks",
+      "2d1f8432177835e189cfa769e7880d4f0165cdcb Independently recompute corrective metrics from sealed private scores"
+    ],
+    "files": [
+      "M\t.github/workflows/ci.yml",
+      "M\tscripts/cedia/titan_performance_recovery.sbatch",
+      "A\tscripts/domain_adaptation/corrective_evaluate.py",
+      "A\tscripts/domain_adaptation/corrective_probe.py",
+      "A\tscripts/domain_adaptation/corrective_readback.py",
+      "A\tscripts/domain_adaptation/verify_corrective_delivery.py",
+      "A\ttests/test_corrective_recovery.py"
+    ]
+  },
+  "combined_ci_run": 43338162743,
+  "scientific_main_ci_run": 43338782307,
+  "local": {
+    "pytest_passed": 777,
+    "ruff": "PASS",
+    "protected_modified_paths": [],
+    "tracked_files_exact": 1148,
+    "relative_links_checked": 178,
+    "shell_files_checked": 69,
+    "json_configs_checked": 28
+  },
+  "release_declared_asset_digests_and_sizes_matched": 7,
+  "cedia_code15": {
+    "original_jobs": [
+      "33573",
+      "33574",
+      "33575"
+    ],
+    "original_exit": "0:0",
+    "delivery_receipt_sha256": "228f3a35ab87a45e66c285b6cc1896d509a5f2cec73762690adeccfa7d95248d",
+    "private_readback_repeat_job": "33831",
+    "private_readback_repeat_last_observed_state": "PENDING (QOSMaxJobsPerUserLimit)",
+    "record_level_exported": false
+  },
+  "historical_rubric": {
+    "comments": 15,
+    "points": 20.5,
+    "possible": 40
+  }
+}

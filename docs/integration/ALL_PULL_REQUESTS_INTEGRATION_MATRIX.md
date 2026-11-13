@@ -27,3 +27,7 @@ No archive-looking binary beyond the two evidence ZIPs was found among
 the incoming history in the preflight blob listing. Verify the two ZIPs
 with their respective project verifiers. Aggregate Slurm receipts must
 not contain raw command lines, cluster account paths or record identifiers.
+
+The initial snapshot used #11 at `880945f`. Four additional commits touching
+seven paths arrived during integration. Their exact IDs and file changes are
+in `GITHUB_MAIN_INTEGRATION_VERIFICATION.json`; all four are included in main.

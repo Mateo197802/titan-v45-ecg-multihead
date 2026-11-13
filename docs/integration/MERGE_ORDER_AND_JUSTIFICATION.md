@@ -17,3 +17,13 @@ the actual PR state confirms it.
 
 Before integration, record the original tree and retain annotated tag
 `integration/titan-v45-main-pre-20261112`. Never rewrite any published ref.
+
+## Actual integration
+
+The above order was executed. During verification, #11 advanced by four
+commits from `880945f` to `2d1f843`, adding a corrective evaluator, receipt
+validator, independent private readback, fixed development probe, and
+tests. That delta was audited separately, merged cleanly at `3e11ecf`,
+and included in the fresh combined CI run before #13 was merged.
+The subsequent stacked-base bookkeeping merges are recorded in
+[the final status](FINAL_INTEGRATION_STATUS.md).
