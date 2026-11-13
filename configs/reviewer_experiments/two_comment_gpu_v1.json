@@ -1,0 +1,16 @@
+{
+  "schema": "TITAN_V45_TWO_COMMENT_GPU_V1",
+  "source": "sealed LUDB 1.0.1 and original label-free P8/P4 routing, previously inspected; retrospective",
+  "morphology": {
+    "selection": "first 16 scored keys in ascending SHA-256 order with prefix titan-morph-trace-v1; selected without references",
+    "perturbations": ["zero ten normalized features", "no bandpass", "no standardization", "drop lead II", "CPU versus CUDA", "singleton versus batch"],
+    "precision": "fixed float32 reconstructed route; identical execution repeated; historical P4 tolerance unchanged at 0.00001; perturbations are not fitted to historical scores"
+  },
+  "fallback": {
+    "eligibility": "all original joint abstentions, excluding technical failures; no reference-driven gating",
+    "model": "actual V3F plus released P6 head on withheld ECGs only; remove the P8 head before fallback",
+    "decision": "published P6 thresholds for AFIB SB STACH RBBB 1AVB PVC; no further top-1 fallback; P8 NSR/PAC and all P4 outcomes remain unresolved",
+    "evaluation": "known-reference opportunity denominator and full ECG denominator kept; count errors corrected and introduced versus withheld counterfactual P8 predictions; compare with baseline and joint withholding",
+    "limits": "partial experimental cascade; timing on one allocation is not a clinical or production estimate; no model training or release"
+  }
+}
