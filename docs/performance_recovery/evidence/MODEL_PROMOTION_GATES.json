@@ -1,0 +1,382 @@
+{
+  "code_validation": {
+    "A": {
+      "macro_brier_score": 0.017123151848645324,
+      "macro_ece": 0.015396874131493807,
+      "macro_f1": 0.5801237271883082,
+      "macro_raw_auprc": 0.5503295221919241
+    },
+    "B": {
+      "calibration_guard_pass": true,
+      "class_guards_pass": false,
+      "macro_brier_score": 0.012454317005345604,
+      "macro_ece": 0.004671347081776669,
+      "macro_f1": 0.5838400012945032,
+      "macro_f1_target_met": false,
+      "macro_raw_auprc": 0.5503295221919241
+    },
+    "C": {
+      "calibration_guard_pass": true,
+      "class_guards_pass": false,
+      "macro_brier_score": 0.012421764589038162,
+      "macro_ece": 0.005463177285907796,
+      "macro_f1": 0.565870992701077,
+      "macro_f1_target_met": false,
+      "macro_raw_auprc": 0.5617419185285332
+    }
+  },
+  "frozen_promotion_rules": {
+    "aspirational_range": [
+      0.75,
+      0.8
+    ],
+    "development_macro_f1_target": 0.7,
+    "independent_bootstrap": {
+      "replicates": 1000,
+      "seed": 20261112,
+      "unit": "patient"
+    },
+    "independent_min_absolute_paired_f1_gain": 0.03,
+    "independent_min_positive_and_negative_patients_per_endpoint": 20,
+    "independent_paired_ci_lower_must_exceed": 0.0,
+    "requires": [
+      "all operating safeguards",
+      "three-seed stability",
+      "reviewed reference semantics",
+      "verified patient and signal overlap controls",
+      "untouched authorized institution"
+    ],
+    "test_reuse_for_promotion": false
+  },
+  "incumbent_calibration_all_guards_feasible": true,
+  "independent_confirmation": "NOT_EVALUATED",
+  "old_test_opened": false,
+  "policies": {
+    "B_1AVB": {
+      "calibration": {
+        "f1": 0.5203252032520326,
+        "feasible": true,
+        "fn": 13,
+        "fp": 46,
+        "guard_deficit": 0.0,
+        "ppv": 0.41025641025641024,
+        "sensitivity": 0.7111111111111111,
+        "specificity": 0.984843492586491,
+        "threshold": 0.5049382299184799,
+        "tn": 2989,
+        "tp": 32
+      },
+      "limits": {
+        "ppv_min": 0.32142857142857145,
+        "sensitivity_min": 0.6611111111111111
+      },
+      "mapping": {
+        "intercept": -1.583192391870472,
+        "kind": "platt",
+        "slope": 0.6098873380871498
+      }
+    },
+    "B_AFIB": {
+      "calibration": {
+        "f1": 0.5691056910569106,
+        "feasible": true,
+        "fn": 21,
+        "fp": 32,
+        "guard_deficit": 0.0,
+        "ppv": 0.5223880597014925,
+        "sensitivity": 0.625,
+        "specificity": 0.9894179894179894,
+        "threshold": 0.655012458562851,
+        "tn": 2992,
+        "tp": 35
+      },
+      "limits": {
+        "sensitivity_min": 0.575
+      },
+      "mapping": {
+        "intercept": -1.2927372459866384,
+        "kind": "platt",
+        "slope": 0.5480243742374845
+      }
+    },
+    "B_RBBB": {
+      "calibration": {
+        "f1": 0.7011494252873564,
+        "feasible": true,
+        "fn": 20,
+        "fp": 32,
+        "guard_deficit": 0.0,
+        "ppv": 0.6559139784946236,
+        "sensitivity": 0.7530864197530864,
+        "specificity": 0.9893297765921975,
+        "threshold": 0.44070953130722046,
+        "tn": 2967,
+        "tp": 61
+      },
+      "limits": {
+        "ppv_min": 0.6059139784946236,
+        "sensitivity_min": 0.7030864197530864
+      },
+      "mapping": {
+        "intercept": -0.9809607284267542,
+        "kind": "platt",
+        "slope": 0.6674526903921117
+      }
+    },
+    "B_SB": {
+      "calibration": {
+        "f1": 0.6614173228346457,
+        "feasible": true,
+        "fn": 17,
+        "fp": 26,
+        "guard_deficit": 0.0,
+        "ppv": 0.6176470588235294,
+        "sensitivity": 0.711864406779661,
+        "specificity": 0.991393578285336,
+        "threshold": 0.7947364747524261,
+        "tn": 2995,
+        "tp": 42
+      },
+      "limits": {
+        "fp_max": 40.0,
+        "ppv_min": 0.3,
+        "sensitivity_min": 0.6610169491525424
+      },
+      "mapping": {
+        "intercept": -1.6792672431247317,
+        "kind": "platt",
+        "slope": 0.7099769265367138
+      }
+    },
+    "B_STACH": {
+      "calibration": {
+        "f1": 0.7171717171717171,
+        "feasible": true,
+        "fn": 10,
+        "fp": 46,
+        "guard_deficit": 0.0,
+        "ppv": 0.6068376068376068,
+        "sensitivity": 0.8765432098765432,
+        "specificity": 0.9846615538512837,
+        "threshold": 0.4662320762872696,
+        "tn": 2953,
+        "tp": 71
+      },
+      "limits": {
+        "ppv_min": 0.5568376068376067,
+        "sensitivity_min": 0.8265432098765432
+      },
+      "mapping": {
+        "intercept": -1.2009372855080114,
+        "kind": "platt",
+        "slope": 0.571474719484547
+      }
+    },
+    "C_1AVB": {
+      "calibration": {
+        "f1": 0.5535714285714286,
+        "feasible": true,
+        "fn": 14,
+        "fp": 36,
+        "guard_deficit": 0.0,
+        "ppv": 0.4626865671641791,
+        "sensitivity": 0.6888888888888889,
+        "specificity": 0.9881383855024711,
+        "threshold": 0.5933057367801666,
+        "tn": 2999,
+        "tp": 31
+      },
+      "limits": {
+        "ppv_min": 0.32142857142857145,
+        "sensitivity_min": 0.6611111111111111
+      },
+      "mapping": {
+        "intercept": -1.431949070974068,
+        "kind": "platt",
+        "slope": 0.6149781405942065
+      }
+    },
+    "C_AFIB": {
+      "calibration": {
+        "f1": 0.6055045871559633,
+        "feasible": true,
+        "fn": 23,
+        "fp": 20,
+        "guard_deficit": 0.0,
+        "ppv": 0.6226415094339622,
+        "sensitivity": 0.5892857142857143,
+        "specificity": 0.9933862433862434,
+        "threshold": 0.8722109496593475,
+        "tn": 3004,
+        "tp": 33
+      },
+      "limits": {
+        "sensitivity_min": 0.575
+      },
+      "mapping": {
+        "intercept": -1.4360215436788144,
+        "kind": "platt",
+        "slope": 0.559578259256663
+      }
+    },
+    "C_RBBB": {
+      "calibration": {
+        "f1": 0.7017543859649122,
+        "feasible": true,
+        "fn": 21,
+        "fp": 30,
+        "guard_deficit": 0.0,
+        "ppv": 0.6666666666666666,
+        "sensitivity": 0.7407407407407407,
+        "specificity": 0.9899966655551851,
+        "threshold": 0.5830923914909363,
+        "tn": 2969,
+        "tp": 60
+      },
+      "limits": {
+        "ppv_min": 0.6059139784946236,
+        "sensitivity_min": 0.7030864197530864
+      },
+      "mapping": {
+        "intercept": -1.3113874490999209,
+        "kind": "platt",
+        "slope": 0.6310111686477822
+      }
+    },
+    "C_SB": {
+      "calibration": {
+        "f1": 0.6614173228346457,
+        "feasible": true,
+        "fn": 17,
+        "fp": 26,
+        "guard_deficit": 0.0,
+        "ppv": 0.6176470588235294,
+        "sensitivity": 0.711864406779661,
+        "specificity": 0.991393578285336,
+        "threshold": 0.7237630188465118,
+        "tn": 2995,
+        "tp": 42
+      },
+      "limits": {
+        "fp_max": 40.0,
+        "ppv_min": 0.3,
+        "sensitivity_min": 0.6610169491525424
+      },
+      "mapping": {
+        "intercept": -1.810788301753432,
+        "kind": "platt",
+        "slope": 0.9354480135138734
+      }
+    },
+    "C_STACH": {
+      "calibration": {
+        "f1": 0.7142857142857143,
+        "feasible": true,
+        "fn": 6,
+        "fp": 54,
+        "guard_deficit": 0.0,
+        "ppv": 0.5813953488372093,
+        "sensitivity": 0.9259259259259259,
+        "specificity": 0.9819939979993331,
+        "threshold": 0.17278189957141876,
+        "tn": 2945,
+        "tp": 75
+      },
+      "limits": {
+        "ppv_min": 0.5568376068376067,
+        "sensitivity_min": 0.8265432098765432
+      },
+      "mapping": {
+        "intercept": -1.0918289806642378,
+        "kind": "platt",
+        "slope": 0.6333779131075913
+      }
+    }
+  },
+  "promotion": "NOT_AUTHORIZED",
+  "protocol_sha256": "4d17cf25bf380454277b8e0f7584377370379bcef3b65431a728ea2ca0d0fa9f",
+  "slurm_job": "33806",
+  "stage": "development_only",
+  "validation_guards": {
+    "B_1AVB": {
+      "feasible": true,
+      "guard_deficit": 0.0,
+      "limits": {
+        "ppv_min": 0.2948275862068966,
+        "sensitivity_min": 0.5681818181818181
+      }
+    },
+    "B_AFIB": {
+      "feasible": true,
+      "guard_deficit": 0.0,
+      "limits": {
+        "sensitivity_min": 0.5432203389830508
+      }
+    },
+    "B_RBBB": {
+      "feasible": true,
+      "guard_deficit": 0.0,
+      "limits": {
+        "ppv_min": 0.6085365853658536,
+        "sensitivity_min": 0.76
+      }
+    },
+    "B_SB": {
+      "feasible": false,
+      "guard_deficit": 0.015094339622641506,
+      "limits": {
+        "fp_max": 70.0,
+        "ppv_min": 0.3,
+        "sensitivity_min": 0.6
+      }
+    },
+    "B_STACH": {
+      "feasible": true,
+      "guard_deficit": 0.0,
+      "limits": {
+        "ppv_min": 0.49639175257731954,
+        "sensitivity_min": 0.7294117647058823
+      }
+    },
+    "C_1AVB": {
+      "feasible": false,
+      "guard_deficit": 0.022727272727272707,
+      "limits": {
+        "ppv_min": 0.2948275862068966,
+        "sensitivity_min": 0.5681818181818181
+      }
+    },
+    "C_AFIB": {
+      "feasible": false,
+      "guard_deficit": 0.0008474576271185752,
+      "limits": {
+        "sensitivity_min": 0.5432203389830508
+      }
+    },
+    "C_RBBB": {
+      "feasible": true,
+      "guard_deficit": 0.0,
+      "limits": {
+        "ppv_min": 0.6085365853658536,
+        "sensitivity_min": 0.76
+      }
+    },
+    "C_SB": {
+      "feasible": false,
+      "guard_deficit": 0.015094339622641506,
+      "limits": {
+        "fp_max": 70.0,
+        "ppv_min": 0.3,
+        "sensitivity_min": 0.6
+      }
+    },
+    "C_STACH": {
+      "feasible": false,
+      "guard_deficit": 0.013633131887664351,
+      "limits": {
+        "ppv_min": 0.49639175257731954,
+        "sensitivity_min": 0.7294117647058823
+      }
+    }
+  }
+}

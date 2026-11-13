@@ -1,0 +1,68 @@
+{
+  "code_commit": "f73f29b517c607feb909de7b4de28c94e9697bd9",
+  "private_artifact_sha256": {
+    "private_calibration.npz": "d67f60db8a391565e8deb585c5901ea0518fcbeb4fbb22d23c793701f663b5f1",
+    "private_chapman.npz": "588a0d02ebe4156bfae85c5aa0e2f2f3d7a48e17b9fa14c2cf64f9b66cfcc76c",
+    "private_cpsc.npz": "e400ee1f3002bc8a778f71aff8667d813a5cb1926e04793a9a552a2b5a018ae1",
+    "private_training_aux.npz": "4c87095ecf20bd703141595cb62ab9060d5d031b819c85e8525ccadd963d389c",
+    "private_validation.npz": "00ef88bab318d715886502cc1153916aee91ca227c5e0d45a8a34e6a7cd4f700"
+  },
+  "protocol_sha256": "4d17cf25bf380454277b8e0f7584377370379bcef3b65431a728ea2ca0d0fa9f",
+  "published_thresholds": {
+    "P4": {},
+    "P6": {
+      "1AVB": 0.57,
+      "AFIB": 0.82,
+      "PVC": 0.42999999999999994,
+      "RBBB": 0.5149999999999999,
+      "SB": 0.835,
+      "STACH": 0.7749999999999999
+    },
+    "P8": {
+      "1AVB": 0.775,
+      "AFIB": 0.8,
+      "NSR": 0.525,
+      "PAC": 0.45,
+      "PVC": 0.725,
+      "RBBB": 0.725,
+      "SB": 0.55,
+      "STACH": 0.8
+    }
+  },
+  "slurm_job": "33782",
+  "split_audit": {
+    "cross_split_patient_exam_and_exact_waveform_overlap": 0,
+    "historical_test_opened": false,
+    "pr6_eligibility_is_not_verified_pr6_test_membership": true,
+    "splits": {
+      "calibration": {
+        "ecgs": 3080,
+        "manifest_sha256": "d20d1ea7b187671a60aa1346aa713b9a6530005565b0e02e70a76e11ea7c9562",
+        "patients": 2435,
+        "pr6_eligible_patients": 0
+      },
+      "train": {
+        "ecgs": 9869,
+        "manifest_sha256": "997f2f0688c1579eedb57423b5a2a9c226f0e1c300cf34a1a892d5305fbeb3c4",
+        "patients": 7808,
+        "pr6_eligible_patients": 992
+      },
+      "validation": {
+        "ecgs": 3088,
+        "manifest_sha256": "14a7bdc5cab503e363f19c459dc9f1dba4665eac497ccb78100fe62a680ad829",
+        "patients": 2426,
+        "pr6_eligible_patients": 0
+      }
+    }
+  },
+  "verified_parent_checkpoints": {
+    "20261112": "7408fd07d19ca62e88d13d6842f81403e354140b39e135de876afa23436a8340",
+    "20261113": "67eca104dc67864eef898f45fca44a50e59f46d00f7447d5b52a61d437921eb4",
+    "20261114": "a725e91400734a68a540e802bf83fd0af20ffb3176600aaf7c0093b0d61e045f"
+  },
+  "verified_released_assets": {
+    "backbone-v3f-original.pt": "ca5d4dcb4b9828e6c4339800fe81ec27f32d9b09a090bb57503bfb56746a8da8",
+    "specialists-v3p-e008-primary6-diagnostic.pt": "9c5a9265a7155e1206c551cc4e6d645b86363ba3dbdeb7baf7b9f173c314be3d",
+    "specialists-v3q-primary8-best-candidate.pt": "b30cb2bbb45f1231c93ff1c196aa966b57b49831cadb296131c0283e7b0ceb02"
+  }
+}
