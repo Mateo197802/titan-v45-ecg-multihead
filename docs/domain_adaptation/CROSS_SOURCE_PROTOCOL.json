@@ -1,0 +1,19 @@
+{
+  "scope": "HISTORICALLY_EXPOSED_DEVELOPMENT_SOURCES_ONLY",
+  "parent_protocol_sha256": "e4fa12f255403b3d59b3188ee138fcf63c44f1a102f011a14db8f3ae099b8ac4",
+  "private_inventory_sha256": "798866dc1dc00d3e81c9fda28711dd0ea57fb57a7fc2ac0a415ad20a97f17107",
+  "inventory_receipt_sha256": "a8244565d9e57d1326c6a13bdb119350cfd4a68c8969f24f971732b80865832f",
+  "sources": {
+    "chapman_shaoxing": {"caps": {"train": 2000, "validation": 700}, "source_doi": "10.1038/s41597-020-0386-x"},
+    "cpsc2018": {"caps": {"train": 1600, "validation": 0}, "source_url": "https://physionet.org/content/challenge-2020/1.0.2/"}
+  },
+  "labels": "inherit only observed source-supported endpoint flags from verified inventory; other cells masked",
+  "chapman_group_policy": "preserve prior patient proxy partitions; primary source reports one recording per patient; exact source-local and signal screening required",
+  "cpsc_group_policy": "entire source training only; no certified patient keys, no within-source validation and no patient-level support inference",
+  "overlap": "screen same-duration resampled aligned lead signatures and exclude both members across additional sources and all extra-source matches to CODE; no ID linkage across providers",
+  "minimum_aligned_cosine": 0.995,
+  "variants": ["chapman_only_partial", "multisource_groupdro"],
+  "balanced_steps": "sample equal count of single-source batches per epoch; inverse records per verified source patient",
+  "groupdro_eta": 0.02,
+  "evaluation": "same CODE validation rows for all architectures; separate Chapman development matrix for CODE-only zero-shot and other modes; no external confirmation"
+}

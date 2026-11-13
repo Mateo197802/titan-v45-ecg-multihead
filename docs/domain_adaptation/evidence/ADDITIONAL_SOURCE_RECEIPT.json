@@ -1,0 +1,117 @@
+{
+  "code_commit": "41e9be7fce1522979f93457d916d858a0fcd9dde",
+  "code_label_files_read": false,
+  "code_waveform_signatures": 8280,
+  "external_code_waveform_matches_excluded": 0,
+  "other_exclusions": {
+    "chapman_shaoxing:ValueError": 2,
+    "cpsc2018:ValueError": 4
+  },
+  "patient_independence_across_sources": "NOT_CERTIFIED",
+  "protocol_sha256": "10e58e1781db0b5ea214658926348874a41e6c00bd74e4de25fbbea7f43e4f47",
+  "reader_workers": 12,
+  "scope": "HISTORICALLY_EXPOSED_DEVELOPMENT_SOURCES_ONLY",
+  "slurm_job": "33741",
+  "sources": {
+    "chapman_shaoxing/train": {
+      "bank_sha256": "403c5c286abee33f9c01e95c6b1cc35a6a0249f5322f9cf052a9e702725e8dd2",
+      "ecgs": 1998,
+      "endpoints": {
+        "1AVB": {
+          "-1": 0,
+          "0": 1959,
+          "1": 39
+        },
+        "AFIB": {
+          "-1": 0,
+          "0": 1676,
+          "1": 322
+        },
+        "RBBB": {
+          "-1": 0,
+          "0": 1932,
+          "1": 66
+        },
+        "SB": {
+          "-1": 0,
+          "0": 1250,
+          "1": 748
+        },
+        "STACH": {
+          "-1": 0,
+          "0": 1704,
+          "1": 294
+        }
+      },
+      "patients": 1998,
+      "private_manifest_sha256": "92105ce616eaed2a42225a8f91e46e800f59c4aaf556bde955fb62385803eecc"
+    },
+    "chapman_shaoxing/validation": {
+      "bank_sha256": "0d83a633dd799f083cdfbef90832abfa9fa0da304c6f73f4ab20991430e6fdbd",
+      "ecgs": 700,
+      "endpoints": {
+        "1AVB": {
+          "-1": 0,
+          "0": 689,
+          "1": 11
+        },
+        "AFIB": {
+          "-1": 0,
+          "0": 572,
+          "1": 128
+        },
+        "RBBB": {
+          "-1": 0,
+          "0": 669,
+          "1": 31
+        },
+        "SB": {
+          "-1": 0,
+          "0": 435,
+          "1": 265
+        },
+        "STACH": {
+          "-1": 0,
+          "0": 602,
+          "1": 98
+        }
+      },
+      "patients": 700,
+      "private_manifest_sha256": "907bc2213c2c8912c82998b56093161faedb9c75c7f8dbe64d819a907d392102"
+    },
+    "cpsc2018/train": {
+      "bank_sha256": "3a29241fd5bb184e2931bb1b8066fa2856ebec736dbd66c55fed5daf7aeae73e",
+      "ecgs": 1596,
+      "endpoints": {
+        "1AVB": {
+          "-1": 0,
+          "0": 1431,
+          "1": 165
+        },
+        "AFIB": {
+          "-1": 0,
+          "0": 1304,
+          "1": 292
+        },
+        "RBBB": {
+          "-1": 0,
+          "0": 1166,
+          "1": 430
+        },
+        "SB": {
+          "-1": 1596,
+          "0": 0,
+          "1": 0
+        },
+        "STACH": {
+          "-1": 1596,
+          "0": 0,
+          "1": 0
+        }
+      },
+      "patients": null,
+      "private_manifest_sha256": "e960a3059e8899d6040fdeba00409077870e14efda65c9e77bbed419ab22b140"
+    }
+  },
+  "total_aligned_exclusions": 0
+}

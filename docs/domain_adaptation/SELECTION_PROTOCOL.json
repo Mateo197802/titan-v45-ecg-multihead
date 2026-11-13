@@ -1,0 +1,14 @@
+{
+  "parent_protocol_sha256": "e4fa12f255403b3d59b3188ee138fcf63c44f1a102f011a14db8f3ae099b8ac4",
+  "selection_split": "CODE_validation_only",
+  "eligible_nonfrozen": ["partial_transformer_mlp", "partial_transformer_resnet_mlp", "masked_mimic_partial", "multisource_groupdro", "full_regularized"],
+  "seed_one_rule": "repeat highest validation macro-AP frozen and highest validation macro-AP eligible nonfrozen on the two remaining seeds; ties by mode and normalizer",
+  "architecture_rule": "choose the finalist with highest mean validation macro-AP across all three registered seeds; ties prefer frozen then lexical",
+  "checkpoint_rule": "select the middle seed by validation macro-AP, ties by seed number; no test or calibration metrics",
+  "released_baseline_normalization": "per_lead_zscore",
+  "released_baseline_thresholds": "unchanged published thresholds",
+  "candidate_thresholds": "fit on CODE calibration per parent protocol",
+  "deep_gate": "execute if best same-normalization partial validation macro-F1 at 0.5 falls short of frozen by +0.03; otherwise only on documented cross-source forgetting",
+  "within_code_decision": "Report the 0.70 research target separately from the paired +0.03 gain, positive paired lower confidence bound, and protected sensitivity, precision and Brier safeguards against each baseline. No within-CODE result qualifies for independent promotion.",
+  "scope": "new within-CODE comparison on matched ECG, not independent confirmation or a replacement for PR #6"
+}

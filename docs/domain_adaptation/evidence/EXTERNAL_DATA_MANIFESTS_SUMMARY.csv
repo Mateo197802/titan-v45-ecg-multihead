@@ -1,0 +1,5 @@
+source,split,ecgs,patients,short_7p335_ecgs,long_10_ecgs,pr6_exposed_patients
+CODE-15%,train,9869,7808,5924,3945,992
+CODE-15%,validation,3088,2426,1881,1207,0
+CODE-15%,calibration,3080,2435,1876,1204,0
+CODE-15%,test,4921,3891,3061,1860,0
