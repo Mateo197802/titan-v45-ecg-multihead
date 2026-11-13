@@ -1,0 +1,477 @@
+[
+  {
+    "baseRefName": "codex/titan-v45-scientific-closure",
+    "baseRefOid": "e5aa65ec1ef43cf5477e688c934577f5dcc4d75c",
+    "headRefName": "codex/titan-v45-r2-3f-r2-4k-rigorous",
+    "headRefOid": "608b8c1be17e4dd15a3e73a75be69bc49ac4b003",
+    "isDraft": true,
+    "mergeCommit": null,
+    "mergeStateStatus": "CLEAN",
+    "mergedAt": null,
+    "number": 12,
+    "reviewDecision": "",
+    "state": "OPEN",
+    "statusCheckRollup": [],
+    "title": "Verify TITAN V4.5 morphology and selective prediction in CEDIA",
+    "url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/12"
+  },
+  {
+    "baseRefName": "codex/titan-duration-aware-adaptation",
+    "baseRefOid": "63c74b3fde2c51f7f8cde4ad396d77a1bd16cb29",
+    "headRefName": "codex/titan-performance-recovery",
+    "headRefOid": "81b963cf932a19b9e7011c41fdfdaa01d00a8b6b",
+    "isDraft": true,
+    "mergeCommit": null,
+    "mergeStateStatus": "UNSTABLE",
+    "mergedAt": null,
+    "number": 11,
+    "reviewDecision": "",
+    "state": "OPEN",
+    "statusCheckRollup": [
+      {
+        "__typename": "CheckRun",
+        "completedAt": "0001-01-01T00:00:00Z",
+        "conclusion": "",
+        "detailsUrl": "https://github.com/Mateo197802/titan-v45-ecg-multihead/actions/runs/43337189985/job/131596229595",
+        "name": "test (3.10)",
+        "startedAt": "2026-11-13T00:27:20Z",
+        "status": "IN_PROGRESS",
+        "workflowName": "CI"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "0001-01-01T00:00:00Z",
+        "conclusion": "",
+        "detailsUrl": "https://github.com/Mateo197802/titan-v45-ecg-multihead/actions/runs/43337189985/job/131596230104",
+        "name": "test (3.11)",
+        "startedAt": "2026-11-13T00:27:19Z",
+        "status": "IN_PROGRESS",
+        "workflowName": "CI"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "0001-01-01T00:00:00Z",
+        "conclusion": "",
+        "detailsUrl": "https://github.com/Mateo197802/titan-v45-ecg-multihead/actions/runs/43337189985/job/131596229889",
+        "name": "test (3.12)",
+        "startedAt": "2026-11-13T00:27:20Z",
+        "status": "IN_PROGRESS",
+        "workflowName": "CI"
+      }
+    ],
+    "title": "TITAN V4.5: development-only specialist performance recovery",
+    "url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/11"
+  },
+  {
+    "baseRefName": "codex/titan-external-validation-20261111",
+    "baseRefOid": "85d673ac04986fe1c50a8cf39d8279344a708647",
+    "headRefName": "codex/titan-duration-aware-adaptation",
+    "headRefOid": "63c74b3fde2c51f7f8cde4ad396d77a1bd16cb29",
+    "isDraft": true,
+    "mergeCommit": null,
+    "mergeStateStatus": "CLEAN",
+    "mergedAt": null,
+    "number": 10,
+    "reviewDecision": "",
+    "state": "OPEN",
+    "statusCheckRollup": [
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-11-12T22:34:42Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/Mateo197802/titan-v45-ecg-multihead/actions/runs/43320777865/job/131540538606",
+        "name": "test (3.10)",
+        "startedAt": "2026-11-12T22:32:07Z",
+        "status": "COMPLETED",
+        "workflowName": "CI"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-11-12T22:34:19Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/Mateo197802/titan-v45-ecg-multihead/actions/runs/43320777865/job/131540538137",
+        "name": "test (3.11)",
+        "startedAt": "2026-11-12T22:32:07Z",
+        "status": "COMPLETED",
+        "workflowName": "CI"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-11-12T22:34:16Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/Mateo197802/titan-v45-ecg-multihead/actions/runs/43320777865/job/131540538780",
+        "name": "test (3.12)",
+        "startedAt": "2026-11-12T22:32:07Z",
+        "status": "COMPLETED",
+        "workflowName": "CI"
+      }
+    ],
+    "title": "TITAN V4.5 duration-aware domain adaptation",
+    "url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/10"
+  },
+  {
+    "baseRefName": "codex/titan-v45-four-reviewer-experiments",
+    "baseRefOid": "bf081e9c2fd62704821f56d614399d7d0eb6e656",
+    "headRefName": "codex/titan-v45-scientific-closure",
+    "headRefOid": "e5aa65ec1ef43cf5477e688c934577f5dcc4d75c",
+    "isDraft": true,
+    "mergeCommit": null,
+    "mergeStateStatus": "CLEAN",
+    "mergedAt": null,
+    "number": 9,
+    "reviewDecision": "",
+    "state": "OPEN",
+    "statusCheckRollup": [],
+    "title": "TITAN V4.5: scientific closure experiments for four reviewer comments",
+    "url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/9"
+  },
+  {
+    "baseRefName": "main",
+    "baseRefOid": "2677a3333069c16915cb71acd55d0f0176570bcf",
+    "headRefName": "codex/titan-v45-evidence-reconciliation",
+    "headRefOid": "4abb2de2bda3b3a2fa61b9418594690b5a3fc629",
+    "isDraft": true,
+    "mergeCommit": null,
+    "mergeStateStatus": "CLEAN",
+    "mergedAt": null,
+    "number": 8,
+    "reviewDecision": "",
+    "state": "OPEN",
+    "statusCheckRollup": [
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-11-12T06:21:43Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/Mateo197802/titan-v45-ecg-multihead/actions/runs/43167292145/job/131012021342",
+        "name": "test (3.10)",
+        "startedAt": "2026-11-12T06:19:09Z",
+        "status": "COMPLETED",
+        "workflowName": "CI"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-11-12T06:21:31Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/Mateo197802/titan-v45-ecg-multihead/actions/runs/43167292145/job/131012021717",
+        "name": "test (3.11)",
+        "startedAt": "2026-11-12T06:19:09Z",
+        "status": "COMPLETED",
+        "workflowName": "CI"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-11-12T06:21:45Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/Mateo197802/titan-v45-ecg-multihead/actions/runs/43167292145/job/131012021658",
+        "name": "test (3.12)",
+        "startedAt": "2026-11-12T06:19:09Z",
+        "status": "COMPLETED",
+        "workflowName": "CI"
+      }
+    ],
+    "title": "TITAN V4.5: reconcile reviewer evidence and scientific claims",
+    "url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/8"
+  },
+  {
+    "baseRefName": "main",
+    "baseRefOid": "2677a3333069c16915cb71acd55d0f0176570bcf",
+    "headRefName": "codex/titan-v45-reviewer-12-clarifications-20261112",
+    "headRefOid": "1ee102e94484c46f01cca14346ef2c041c456b25",
+    "isDraft": true,
+    "mergeCommit": null,
+    "mergeStateStatus": "CLEAN",
+    "mergedAt": null,
+    "number": 7,
+    "reviewDecision": "",
+    "state": "OPEN",
+    "statusCheckRollup": [
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-11-12T06:14:48Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/Mateo197802/titan-v45-ecg-multihead/actions/runs/43166487904/job/131009454509",
+        "name": "test (3.10)",
+        "startedAt": "2026-11-12T06:12:22Z",
+        "status": "COMPLETED",
+        "workflowName": "CI"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-11-12T06:14:53Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/Mateo197802/titan-v45-ecg-multihead/actions/runs/43166487904/job/131009454449",
+        "name": "test (3.11)",
+        "startedAt": "2026-11-12T06:12:22Z",
+        "status": "COMPLETED",
+        "workflowName": "CI"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-11-12T06:15:09Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/Mateo197802/titan-v45-ecg-multihead/actions/runs/43166487904/job/131009454220",
+        "name": "test (3.12)",
+        "startedAt": "2026-11-12T06:12:22Z",
+        "status": "COMPLETED",
+        "workflowName": "CI"
+      }
+    ],
+    "title": "docs: clarify 12 reviewer evidence statuses and clinical scope",
+    "url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/7"
+  },
+  {
+    "baseRefName": "codex/titan-specialist-heads-20261111",
+    "baseRefOid": "f4d6be30b0befea739cf2e35df1033230a1f5d10",
+    "headRefName": "codex/titan-external-validation-20261111",
+    "headRefOid": "85d673ac04986fe1c50a8cf39d8279344a708647",
+    "isDraft": true,
+    "mergeCommit": null,
+    "mergeStateStatus": "CLEAN",
+    "mergedAt": null,
+    "number": 6,
+    "reviewDecision": "",
+    "state": "OPEN",
+    "statusCheckRollup": [],
+    "title": "TITAN V4.5 external study: executed preflight and reference-support gate",
+    "url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/6"
+  },
+  {
+    "baseRefName": "main",
+    "baseRefOid": "2677a3333069c16915cb71acd55d0f0176570bcf",
+    "headRefName": "research/titan-benchmarkmax-v46",
+    "headRefOid": "8dfc29d83910dee7d2caea7a6028b96d481a134a",
+    "isDraft": true,
+    "mergeCommit": null,
+    "mergeStateStatus": "CLEAN",
+    "mergedAt": null,
+    "number": 5,
+    "reviewDecision": "",
+    "state": "OPEN",
+    "statusCheckRollup": [
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-11-09T23:35:18Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/Mateo197802/titan-v45-ecg-multihead/actions/runs/42721320800/job/129515712386",
+        "name": "test (3.10)",
+        "startedAt": "2026-11-09T23:32:52Z",
+        "status": "COMPLETED",
+        "workflowName": "CI"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-11-09T23:35:20Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/Mateo197802/titan-v45-ecg-multihead/actions/runs/42721320800/job/129515712763",
+        "name": "test (3.11)",
+        "startedAt": "2026-11-09T23:32:53Z",
+        "status": "COMPLETED",
+        "workflowName": "CI"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-11-09T23:35:04Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/Mateo197802/titan-v45-ecg-multihead/actions/runs/42721320800/job/129515712816",
+        "name": "test (3.12)",
+        "startedAt": "2026-11-09T23:32:52Z",
+        "status": "COMPLETED",
+        "workflowName": "CI"
+      }
+    ],
+    "title": "TITAN V4.6 BenchmarkMax experimental program",
+    "url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/5"
+  },
+  {
+    "baseRefName": "main",
+    "baseRefOid": "2677a3333069c16915cb71acd55d0f0176570bcf",
+    "headRefName": "codex/titan-a10-optuna-evidence",
+    "headRefOid": "81a75ec69f086dae7c295d65f1c2720416d9db81",
+    "isDraft": true,
+    "mergeCommit": null,
+    "mergeStateStatus": "CLEAN",
+    "mergedAt": null,
+    "number": 4,
+    "reviewDecision": "",
+    "state": "OPEN",
+    "statusCheckRollup": [
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-11-11T17:26:17Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/Mateo197802/titan-v45-ecg-multihead/actions/runs/43067718110/job/130687016346",
+        "name": "test (3.10)",
+        "startedAt": "2026-11-11T17:23:38Z",
+        "status": "COMPLETED",
+        "workflowName": "CI"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-11-11T17:25:46Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/Mateo197802/titan-v45-ecg-multihead/actions/runs/43067718110/job/130687016021",
+        "name": "test (3.11)",
+        "startedAt": "2026-11-11T17:23:38Z",
+        "status": "COMPLETED",
+        "workflowName": "CI"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-11-11T17:25:54Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/Mateo197802/titan-v45-ecg-multihead/actions/runs/43067718110/job/130687016399",
+        "name": "test (3.12)",
+        "startedAt": "2026-11-11T17:23:38Z",
+        "status": "COMPLETED",
+        "workflowName": "CI"
+      }
+    ],
+    "title": "Document verified A10 artifacts and Optuna evidence limits",
+    "url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/4"
+  },
+  {
+    "baseRefName": "main",
+    "baseRefOid": "2677a3333069c16915cb71acd55d0f0176570bcf",
+    "headRefName": "codex/titan-v45-external-review",
+    "headRefOid": "68274ee05dab1e5aaa48aa588262b5b8289cbbd4",
+    "isDraft": true,
+    "mergeCommit": null,
+    "mergeStateStatus": "CLEAN",
+    "mergedAt": null,
+    "number": 3,
+    "reviewDecision": "",
+    "state": "OPEN",
+    "statusCheckRollup": [
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-11-11T17:25:43Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/Mateo197802/titan-v45-ecg-multihead/actions/runs/43067713327/job/130686997854",
+        "name": "test (3.10)",
+        "startedAt": "2026-11-11T17:23:36Z",
+        "status": "COMPLETED",
+        "workflowName": "CI"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-11-11T17:26:09Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/Mateo197802/titan-v45-ecg-multihead/actions/runs/43067713327/job/130686998407",
+        "name": "test (3.11)",
+        "startedAt": "2026-11-11T17:23:36Z",
+        "status": "COMPLETED",
+        "workflowName": "CI"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-11-11T17:26:16Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/Mateo197802/titan-v45-ecg-multihead/actions/runs/43067713327/job/130686998458",
+        "name": "test (3.12)",
+        "startedAt": "2026-11-11T17:23:36Z",
+        "status": "COMPLETED",
+        "workflowName": "CI"
+      }
+    ],
+    "title": "Execute frozen SPH transfer evaluation and document V4.5 evidence",
+    "url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/3"
+  },
+  {
+    "baseRefName": "main",
+    "baseRefOid": "79af292762eef20b23161d17541b496ea98218e9",
+    "headRefName": "codex/reviewer-replay-diagnostics",
+    "headRefOid": "a10f1b1eab62de241c8913a7b9f3c559e37d9b7e",
+    "isDraft": false,
+    "mergeCommit": {
+      "oid": "2677a3333069c16915cb71acd55d0f0176570bcf"
+    },
+    "mergeStateStatus": "UNKNOWN",
+    "mergedAt": "2026-11-07T22:58:10Z",
+    "number": 2,
+    "reviewDecision": "",
+    "state": "MERGED",
+    "statusCheckRollup": [
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-11-07T22:29:42Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/Mateo197802/titan-v45-ecg-multihead/actions/runs/42420691420/job/128548268127",
+        "name": "test (3.10)",
+        "startedAt": "2026-11-07T22:27:29Z",
+        "status": "COMPLETED",
+        "workflowName": "CI"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-11-07T22:29:47Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/Mateo197802/titan-v45-ecg-multihead/actions/runs/42420691420/job/128548268282",
+        "name": "test (3.11)",
+        "startedAt": "2026-11-07T22:27:29Z",
+        "status": "COMPLETED",
+        "workflowName": "CI"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-11-07T22:29:59Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/Mateo197802/titan-v45-ecg-multihead/actions/runs/42420691420/job/128548268401",
+        "name": "test (3.12)",
+        "startedAt": "2026-11-07T22:27:29Z",
+        "status": "COMPLETED",
+        "workflowName": "CI"
+      }
+    ],
+    "title": "Quantify frozen replay residuals and official PTB-XL coverage",
+    "url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/2"
+  },
+  {
+    "baseRefName": "main",
+    "baseRefOid": "ff5814bd2c6d8743e663f50e88eddd66e6d65704",
+    "headRefName": "revision/life-4620846",
+    "headRefOid": "5ddda529c78428cf20538f76cbf4d19757edc1a9",
+    "isDraft": false,
+    "mergeCommit": {
+      "oid": "79af292762eef20b23161d17541b496ea98218e9"
+    },
+    "mergeStateStatus": "UNKNOWN",
+    "mergedAt": "2026-11-07T05:32:02Z",
+    "number": 1,
+    "reviewDecision": "",
+    "state": "MERGED",
+    "statusCheckRollup": [
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-11-07T05:17:29Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/Mateo197802/titan-v45-ecg-multihead/actions/runs/42341915729/job/128311243848",
+        "name": "test (3.10)",
+        "startedAt": "2026-11-07T05:15:05Z",
+        "status": "COMPLETED",
+        "workflowName": "CI"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-11-07T05:17:53Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/Mateo197802/titan-v45-ecg-multihead/actions/runs/42341915729/job/128311243736",
+        "name": "test (3.11)",
+        "startedAt": "2026-11-07T05:15:05Z",
+        "status": "COMPLETED",
+        "workflowName": "CI"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-11-07T05:17:45Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/Mateo197802/titan-v45-ecg-multihead/actions/runs/42341915729/job/128311243501",
+        "name": "test (3.12)",
+        "startedAt": "2026-11-07T05:15:05Z",
+        "status": "COMPLETED",
+        "workflowName": "CI"
+      }
+    ],
+    "title": "Audit revision evidence and disclose failed CEDIA replay equivalence",
+    "url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/1"
+  }
+]
