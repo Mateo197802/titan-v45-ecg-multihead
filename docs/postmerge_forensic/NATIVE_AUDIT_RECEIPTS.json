@@ -1,0 +1,53 @@
+{
+  "scope": "sanitized forensic evidence; no individual predictions or paths",
+  "jobs": {
+    "33831": {
+      "artifact_id": "sha256:228f3a35ab87a45e66c285b6cc1896d509a5f2cec73762690adeccfa7d95248d",
+      "experiment_id": "CODE-FULL",
+      "state": "COMPLETED",
+      "exit": "0:0",
+      "verification": "native repeated delivery checksum equals original"
+    },
+    "33832": {
+      "artifact_id": "sha256:00dcd0e1babf2714b0cbce1d7143d5aa36b503214ff142b7bfe1d84bdfbee05d",
+      "experiment_id": "CORRECTIVE-PR15",
+      "state": "COMPLETED",
+      "exit": "0:0",
+      "point_rows_verified": 26,
+      "max_absolute_error": 3.3306690738754696e-16,
+      "verification": "prior native readback receipt bytes match PR15; evaluator was not rerun in this audit"
+    },
+    "33844": {
+      "state": "FAILED",
+      "exit": "127:0",
+      "verification": "shell module function unavailable; no receipt"
+    },
+    "33846": {
+      "artifact_id": "sha256:b8504048783aa787a77da366fa6c922f45320a6f88d8918ae677e6b0eb0c4b38",
+      "state": "COMPLETED",
+      "exit": "0:0",
+      "elapsed": "00:06:51",
+      "selected_locations_read": 1321,
+      "read_failures": 0
+    },
+    "33847": {
+      "artifact_id": "sha256:a7b1542e4f1d60c15553fb1107a885f4522b110d83da492585510eafa87d2833",
+      "experiment_id": "RELEASE-ASSETS",
+      "state": "COMPLETED",
+      "exit": "0:0",
+      "elapsed": "00:00:21",
+      "weights_only_deserialized": 5,
+      "model_inference_performed": false
+    },
+    "33859": {
+      "state": "PENDING",
+      "reason": "QOSMaxJobsPerUserLimit",
+      "verification": "new CPU fixture; not claimed as executed"
+    },
+    "33862": {
+      "state": "PENDING",
+      "reason": "QOSMaxJobsPerUserLimit",
+      "verification": "additional adaptation tree; receipt-only until physical hashes return"
+    }
+  }
+}
