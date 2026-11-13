@@ -277,6 +277,7 @@ def main():
     p.add_argument("--github", type=Path, help="Sanitized GitHub PR and release metadata snapshot")
     p.add_argument("--local-v3f", type=Path, help="Optional authorized copy of the public V3F release weight")
     p.add_argument("--native-release-smoke", type=Path)
+    p.add_argument("--adaptation-hash-readback", type=Path)
     a = p.parse_args()
     a.out.mkdir(parents=True, exist_ok=True)
     main, pr15, pr16 = snapshot(MAIN), snapshot(PR15), snapshot(PR16)
@@ -325,6 +326,22 @@ def main():
         for key in ("artifacts","scheduler","read_failures"):
             native[key].extend(obj[key])
     native["scheduler"] = list({r["job"]:r for r in native["scheduler"]}.values())
+    if a.adaptation_hash_readback:
+        raw = a.adaptation_hash_readback.read_bytes()
+        sealed = json.loads(main["docs/domain_adaptation/evidence/EXPERIMENT_REPRODUCIBILITY_MANIFEST.json"])
+        path = "docs/domain_adaptation/evidence/CHECKPOINT_SHA256SUMS.txt"
+        if digest(main[path]) != sealed["files"]["CHECKPOINT_SHA256SUMS.txt"]["sha256"]:
+            raise ValueError("adaptation hash declarations differ from manifest")
+        expected = {line.split()[0] for line in main[path].decode().splitlines() if "best.pt" in line}
+        seen = list(csv.DictReader(io.StringIO(raw.decode())))
+        if len(seen) != len(expected) or {r["sha256"] for r in seen} != expected:
+            raise ValueError("adaptation byte hashes do not reproduce all declared best checkpoints")
+        for item in seen:
+            native["artifacts"].append({"source":"domain-adaptation-v1","locator_sha256":item["sha256"],
+                                        "sha256":item["sha256"],"bytes":int(item["bytes"]),"format":".pt",
+                                        "checkpoint":True,"release_name":""})
+        add(ledger,digest(raw),len(raw),"CEDIA_HASH_READBACK","adaptation-checkpoint-hash-readback",
+            "csv","RECEIPT_VERIFIED",experiment="ADAPTATION")
     release = json.loads(main["release-manifest.json"])["assets"]
     matches = defaultdict(set)
     for item in native["artifacts"]:
@@ -400,6 +417,7 @@ def main():
         "archives":archives,"native":{k:v for k,v in native.items() if k!="artifacts"},
         "native_checkpoint_locations":sum(x["checkpoint"] for x in native["artifacts"]),
         "native_checkpoint_unique":len({x["sha256"] for x in native["artifacts"] if x["checkpoint"]}),
+        "native_adaptation_best_checkpoint_readback":11 if a.adaptation_hash_readback else 0,
         "metric_states":dict(Counter(r["status"] for r in rows)),
         "experiment_index":index,
         "local_link_candidates":links,

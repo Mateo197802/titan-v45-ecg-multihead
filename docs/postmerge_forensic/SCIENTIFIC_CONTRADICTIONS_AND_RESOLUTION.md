@@ -11,6 +11,7 @@
 | Exact repeat and historic replay failure coexist. | Current fixed execution can repeat exactly. Historical P4 still has 836/962 scores outside 1e-5; P6 has one archived top-1 difference. Historical loader is not authenticated. |
 | SPH accepted risk decreased; LUDB benefit is inconclusive. | Cohort, known-reference opportunities and coverage differ. At cost 0.25 the frozen policy lost on both. P6 real fallback recovers only six outputs and introduces errors; not a clinical cascade. |
 | Adaptation shows a within-CODE gain yet failed promotion. | Paired mean and guard decisions differ. AFIB/1AVB safeguards failed; later corrective development also did not promote. Preserve both favorable and unfavorable results. |
+| Submitted A10 hashes versus measured release hashes. | The empty-content digest and example-pattern strings in the submitted A10 are placeholders, not verified weights. The five named release identities were read directly and do not retroactively identify old generic filenames. |
 
 Figure origin is not authorship or permission, AF is ECG classification
 not incident disease prediction, and PVC is ECG membership not beat

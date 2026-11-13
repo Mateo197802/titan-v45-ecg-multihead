@@ -37,6 +37,14 @@ tensor elements include buffers and are not trainable parameter counts.
 A local V3F copy independently matched the same declared byte count and
 SHA-256. The two dataset archives were checked against GitHub release
 metadata; this audit did not reopen their protected waveform payloads.
+The [prior native receipt](../reproducibility/A10_ARTIFACT_DISPOSITION.md)
+from job 32733 verifies all seven physical assets in its original scope;
+it is not a second fresh byte read by this audit.
+
+The 11 adaptation `best.pt` files were read by SHA-256 and all match
+the sealed adaptation checksum manifest. This targeted check did not
+load their tensors or prove their consumed manifests. The additional
+tree-wide inventory job remains separate.
 
 Native checkpoint SHA identities without a producer/parent binding are
 retained as such. For historical weights, the exact output digest from

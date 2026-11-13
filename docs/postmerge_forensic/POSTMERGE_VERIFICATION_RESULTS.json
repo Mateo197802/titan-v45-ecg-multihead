@@ -92,7 +92,7 @@
       "status": "CRC_OK"
     }
   ],
-  "content_identities": 2955,
+  "content_identities": 2967,
   "duplicate_location_count": 2005,
   "empty_locations": 476,
   "experiment_index": {
@@ -424,7 +424,7 @@
   ],
   "history_only_blobs": 909,
   "local_link_candidates": [],
-  "locations": 4960,
+  "locations": 4972,
   "main": "6f50a6337fc3e8b518655b05916ced7447598b47",
   "main_files": 1151,
   "metric_states": {
@@ -891,8 +891,9 @@
       }
     ]
   },
-  "native_checkpoint_locations": 87,
-  "native_checkpoint_unique": 58,
+  "native_adaptation_best_checkpoint_readback": 11,
+  "native_checkpoint_locations": 98,
+  "native_checkpoint_unique": 69,
   "pr15": "732ecb1c8e697997cdedf85f67db70d38bd765ed",
   "pr15_payload_delta": [
     "A\tdocs/performance_recovery/CORRECTIVE_TECHNICAL_ASSESSMENT.md",

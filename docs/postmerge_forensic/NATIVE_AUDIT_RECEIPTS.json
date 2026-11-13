@@ -47,7 +47,7 @@
     "33862": {
       "state": "PENDING",
       "reason": "QOSMaxJobsPerUserLimit",
-      "verification": "additional adaptation tree; receipt-only until physical hashes return"
+      "verification": "additional adaptation tree inventory; 11 best.pt files already independently hashed by targeted direct read"
     }
   }
 }

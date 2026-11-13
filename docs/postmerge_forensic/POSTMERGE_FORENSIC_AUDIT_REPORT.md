@@ -72,6 +72,9 @@ every checkpoint/claim or a clinical validation report.
 
 The clean pinned checkout passed **777 tests**, Ruff, release and
 evidence checks, and the public adaptation and recovery readbacks.
+The SHA ledger indexes 4,972 occurrences of 2,967 distinct contents.
+It includes 98 observed checkpoint locations, representing 69 unique
+checkpoint hashes, including the 11 verified adaptation finalists.
 The master inventory separates 70 scoped study/run entries from 143
 artifact catalog entries. Of the 70, 1 is verified with primary evidence
 for its stated claim, 4 are independently recalculated within scope,
