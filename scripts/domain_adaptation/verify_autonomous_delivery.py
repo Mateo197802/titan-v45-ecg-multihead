@@ -80,6 +80,19 @@ def verify(folder):
                 raise ValueError("unstable finalist roster")
             if sum(int(row["cycle"]) == cycle["number"] for row in stable) != len(roster):
                 raise ValueError("missing per-seed metrics")
+    replay = json.loads((folder.parent / "AUTONOMOUS_CHECKPOINT_REPLAY.json").read_bytes())
+    interval = json.loads((folder.parent / "AUTONOMOUS_INTERVAL_READBACK.json").read_bytes())
+    for audit in (replay, interval):
+        json_value(audit)
+        assert_hash(PROTOCOL, audit["protocol_sha256"])
+        if audit["test_opened"]:
+            raise ValueError("final audit opened historical test")
+    if (replay["finalist"] != selected["finalist"] or replay["chain"] != selected["predecessor_chain"]
+            or replay["max_absolute_probability_error"] > 1e-5
+            or set(replay["sample_counts"]) != {"validation", "chapman", "cpsc"}
+            or min(replay["sample_counts"].values()) < 1 or interval["max_absolute_error"] > 1e-12
+            or interval["scope"] != "CODE_SELECTION_ONLY" or interval["valid_replicates"] != 1000):
+        raise ValueError("checkpoint replay or independent interval readback failed")
 
 
 if __name__ == "__main__":
