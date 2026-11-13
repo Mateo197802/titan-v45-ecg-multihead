@@ -1,0 +1,94 @@
+{
+  "schema": "TITAN_V45_CLOSURE_EXPERIMENT_PROVENANCE_V1",
+  "status": "FINAL_NATIVE_VERIFIED",
+  "native_verifier_commit": "f23cffb5a467ba4022c064c3952a0fbde0903dc6",
+  "native_verification_receipt_sha256": "418f961fd0e60a25dfc6e2fddc3efb545544e2fc451598451d6d04839fae3270",
+  "starting_branch": "codex/titan-v45-four-reviewer-experiments",
+  "starting_commit": "bf081e9c2fd62704821f56d614399d7d0eb6e656",
+  "experiment_branch": "codex/titan-v45-scientific-closure",
+  "draft_pr": "Mateo197802/titan-v45-ecg-multihead#9",
+  "original_review_sha256": "fa20747434b7ecabf1ed9fa4189f94a9884418e2c0a2a2d439d02ca14eb3f427",
+  "historical_rubric_sha256": "275c28fa96d2429b4cbfca366196fd0fef195041a991a7a623d36f0fa7a8efa5",
+  "historical_register_commit": "4abb2de2bda3b3a2fa61b9418594690b5a3fc629",
+  "historical_fifteen_comment_register_sha256": "01849f3cf60520cd8e2396308a3e7165821b860b20497baf3511102797a34028",
+  "protocols": {
+    "LUDB": {
+      "frozen_commit": "208f7b4abfb409d77c4a370cdb7aa768a8364b82",
+      "config_sha256": "d4f8157e762ba411781c5a04f0b0a7a51a2ff7cd764ffe0bc2bfae1681d6ef6f",
+      "archive_sha256": "d03192c7361ab5deeaba3f0d46e274b9ecb0b74c9caf8964151e20f1b5a7df06",
+      "bootstrap_seed": 197837
+    },
+    "PTB_Diagnostic": {
+      "frozen_commit": "f37f6ca7f6836d550798e973141d70062686e68f",
+      "config_sha256": "3975bb5a8f2bcade7f559146d1c3f30a5553728b8ac94d84f40c4cec3c4d9db2",
+      "archive_sha256": "61e00fc9f38a391fc2a0d757dfa6a02a3f915ad7f0095f747e9c44df395371d3",
+      "bootstrap_seed": 197839
+    }
+  },
+  "executions": {
+    "33697": {
+      "scope": "LUDB all-release scoring and joint routing before reference access",
+      "code": "cb17ac132dd3242192d9996f51129a48e06b5d32",
+      "receipt_sha256": "73e5a4a9944a03c2c4a549f80e8ae9fa280d328f31fc925b910385ed8aac41c4"
+    },
+    "33699": {
+      "scope": "Original LUDB evaluator",
+      "code": "baceb368a08352b6ea74798f1c77159ef1ec139a",
+      "aggregate_sha256": "12ad265b5e9bd4a455c20aa2f46362a9beeface1831d1ffd731cb9fbf09bc47a",
+      "status": "SUPERSEDED_MULTILINE_REFERENCE_GRAMMAR"
+    },
+    "33720": {
+      "scope": "Versioned reference grammar correction on the immutable 33697 scores and routes",
+      "code": "10140a0b7c45e792106d3e9c08c8e93ddf3e5c1b",
+      "aggregate_sha256": "af72ae7bf04c807a88ea33db3076970aac780c3f7669b145b34b34c64cf87c29"
+    },
+    "33704": {
+      "scope": "Matched-head morphology comparison robustness; reuses sealed 33474 fits and 33596 evaluation",
+      "code": "d89dbc05c67b29d6cf7954ea2763d3b068d16775",
+      "aggregate_sha256": "81ebb598aeebd134db952d9b9bbb9a8bee583fdf2211bd64dc8320f93136cc79"
+    },
+    "33718": {
+      "scope": "Failed PTB Diagnostic score adapter; no sealed scores or evaluation",
+      "code": "1ca453f0d4ba1a4438a3c6e8873242444c6bb755",
+      "status": "FAILED_THRESHOLD_SCHEMA",
+      "score_rows_written": 0
+    },
+    "33737": {
+      "scope": "PTB Diagnostic frozen whole-source scoring, then explicit territory/control comparisons; read original thresholds in their sealed model structure",
+      "code": "ed14a1db1c31284b2cdb2488dbc29e447d2d179b",
+      "protocol_changed": false,
+      "aggregate_sha256": "8c3046fcc2d48ce241fcacc566e0fb17a89b0664e43e098adcf7bf8a44f8dcb4",
+      "score_receipt_sha256": "7d0894f5436ffe991326c6358f55c60fa33b0506b583ad33ab8f2e6409731916"
+    },
+    "33736": {
+      "scope": "Initial cached rhythm launcher rejected before model loading or scoring",
+      "code": "b25e3d2d8f696038c83809604f1da1b48ca56d5a",
+      "status": "FAILED_CLI_ARGUMENTS",
+      "score_rows_written": 0
+    },
+    "33747": {
+      "scope": "Score the unchanged V3AG global rhythm head from cached Stage A embeddings and morphology; separate exploratory operating point",
+      "code": "cce4773ead27da850f4793b09da7e241a31a841a",
+      "protocol_changed": false,
+      "feature_cache_sha256": "9269716a656211fbe81e3ede45b0ea09eaa2437442db8dd2a25fd4006c36592a",
+      "aggregate_sha256": "27477b63a035d2a1f545669536b664128f5c0f961363150ccb56335288d10041",
+      "score_receipt_sha256": "b4f2e451fabc9b23d73fc787ad1757cee75129480816ae3ac982ae19bc494ccd",
+      "bootstrap_seed": 197841
+    }
+  },
+  "model_and_policy_bindings": {
+    "original_model_hashes": "outputs/results/reviewer_closure_experiments/ludb_scoring_receipt.json#model_hashes",
+    "SPH_joint_policy_sha256": "c9183320a4dd923f037a93fc014fc2db6bc64f223ff67b5d297e540eefb43ae6",
+    "SPH_rhythm_Other_fit_sha256": "ae8fab7cb5b54a89c38a7e21f99f8b1da10f5cc7d02fa3702283efd73ba129ba",
+    "PTBXL_pathology_Other_fit_sha256": "d3fa39467877354e8b6d438380a965135fe0c5f7aa0d266c27f7417290b7c7ec"
+  },
+  "metadata_audits": {
+    "PTBXL_eleven_class_support": {
+      "sealed_prior_scoring_job": 33410,
+      "code": "e0feb79e372eafc98f4074b79df822c1e131f6fa",
+      "receipt_sha256": "1e758fcb0cc17e7cc15ff8be2fcb7911a6f102d4dd5d673cec440d409a187bcd",
+      "performed_inference": false
+    }
+  },
+  "no_individual_records_exported": true
+}

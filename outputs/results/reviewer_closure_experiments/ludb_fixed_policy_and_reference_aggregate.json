@@ -1,0 +1,4272 @@
+{
+  "schema": "TITAN_V45_CLOSURE_LUDB_EVALUATION_V1",
+  "job": "33720",
+  "score_job": "33697",
+  "scoring_receipt_sha256": "73e5a4a9944a03c2c4a549f80e8ae9fa280d328f31fc925b910385ed8aac41c4",
+  "frozen_protocol_sha256": "d4f8157e762ba411781c5a04f0b0a7a51a2ff7cd764ffe0bc2bfae1681d6ef6f",
+  "frozen_policy_sha256": "c9183320a4dd923f037a93fc014fc2db6bc64f223ff67b5d297e540eefb43ae6",
+  "source_reference_sha256": "dcd40141c6557af1fb413353b51c4ae979c7291a2e22a60377fe425e21f58a28",
+  "frozen_sph_other_head_sha256": "ae8fab7cb5b54a89c38a7e21f99f8b1da10f5cc7d02fa3702283efd73ba129ba",
+  "private_reference_route_ledger_sha256": "6c161eceedde2c8789a834d2cb8021fdd2639c905321fce0141a0cf7ddb3d47f",
+  "partition_audit": {
+    "source_unique_subjects_per_publisher": 200,
+    "eligible_records": 200,
+    "physical_waveforms_verified": 200,
+    "distinct_physical_waveforms": 200,
+    "subject_signal_components": 200,
+    "exact_duplicate_groups": 0,
+    "prior_stage_a_distinct_raw_signal_digests": 19217,
+    "lu_db_raw_signal_matches_to_stage_a": 0,
+    "prior_stage_a_inventory_sha256": "798866dc1dc00d3e81c9fda28711dd0ea57fb57a7fc2ac0a415ad20a97f17107",
+    "raw_overlap_limit": "Same byte encoding only; no cross-provider patient key or complete June training manifest.",
+    "lu_db_train_or_calibration_records": 0,
+    "historical_independence_certified": false
+  },
+  "independence": "new source transport; no target fitting; original historical patient exposure not certified",
+  "historical_quarantine": "WITHDRAW_HISTORICAL_CLAIM",
+  "second_stage_or_human_review": false,
+  "no_individual_records_exported": true,
+  "endpoints": {
+    "P6:AFIB": {
+      "estimates": {
+        "all_eligible": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "negative": 182,
+            "positive": 15,
+            "unknown": 3
+          },
+          "reference_components": {
+            "negative": 182,
+            "positive": 15,
+            "unknown": 3
+          },
+          "known_scored_ecgs": 197,
+          "positive_components_scored": 15,
+          "negative_components_scored": 182,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 176,
+            "fp": 6,
+            "fn": 2,
+            "tp": 13
+          },
+          "positive_reference_sensitivity": 0.8666666666666667,
+          "metrics": {
+            "rows": 197,
+            "positive_support": 15,
+            "negative_support": 182,
+            "predicted_positive_support": 19,
+            "tp": 13,
+            "tn": 176,
+            "fp": 6,
+            "fn": 2,
+            "accuracy": 0.9593908629441624,
+            "precision": 0.6842105263157895,
+            "recall": 0.8666666666666667,
+            "specificity": 0.967032967032967,
+            "f1": 0.7647058823529411,
+            "probability_rows": 197,
+            "missing_probability_rows": 0,
+            "probability_positive_support": 15,
+            "probability_negative_support": 182,
+            "auroc": 0.989010989010989,
+            "average_precision": 0.8889209700974406,
+            "brier_score": 0.03795736537293386,
+            "ece": 0.047264061560942275,
+            "undefined": {},
+            "npv": 0.9887640449438202
+          },
+          "status": "evaluated",
+          "cluster_intervals": {
+            "unit": "patient_or_record_group",
+            "groups": 197,
+            "seed": 197837,
+            "n_bootstrap": 2000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": 0.9289340101522843,
+                "high": 0.9847715736040609,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": 0.47058823529411764,
+                "high": 0.8888888888888888,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": 0.6666666666666666,
+                "high": 1.0,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": 0.9398824536119619,
+                "high": 0.9891891891891892,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": 0.9715909090909091,
+                "high": 1.0,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "f1": {
+                "low": 0.5806451612903226,
+                "high": 0.9,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": 0.9738560178169628,
+                "high": 0.9984387907174793,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": 0.732967758548641,
+                "high": 0.9821726190476189,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": 0.018185018267782602,
+                "high": 0.06136382866285091,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": 0.024354479730980552,
+                "high": 0.07453265695264856,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        },
+        "restricted_known_positive_profile": {
+          "eligible_ecgs": 59,
+          "reference_states": {
+            "negative": 44,
+            "positive": 15
+          },
+          "reference_components": {
+            "negative": 44,
+            "positive": 15
+          },
+          "known_scored_ecgs": 59,
+          "positive_components_scored": 15,
+          "negative_components_scored": 44,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 42,
+            "fp": 2,
+            "fn": 2,
+            "tp": 13
+          },
+          "positive_reference_sensitivity": 0.8666666666666667,
+          "metrics": {
+            "rows": 59,
+            "positive_support": 15,
+            "negative_support": 44,
+            "predicted_positive_support": 15,
+            "tp": 13,
+            "tn": 42,
+            "fp": 2,
+            "fn": 2,
+            "accuracy": 0.9322033898305084,
+            "precision": 0.8666666666666667,
+            "recall": 0.8666666666666667,
+            "specificity": 0.9545454545454546,
+            "f1": 0.8666666666666667,
+            "probability_rows": 59,
+            "missing_probability_rows": 0,
+            "probability_positive_support": 15,
+            "probability_negative_support": 44,
+            "auroc": 0.9909090909090909,
+            "average_precision": 0.9757936507936507,
+            "brier_score": 0.04107203136444074,
+            "ece": 0.05596526307442865,
+            "undefined": {},
+            "npv": 0.9545454545454546
+          },
+          "status": "evaluated",
+          "cluster_intervals": {
+            "unit": "patient_or_record_group",
+            "groups": 59,
+            "seed": 197837,
+            "n_bootstrap": 2000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": 0.864406779661017,
+                "high": 0.9830508474576272,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": 0.6666666666666666,
+                "high": 1.0,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": 0.6666666666666666,
+                "high": 1.0,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": 0.8888888888888888,
+                "high": 1.0,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": 0.8863474025974026,
+                "high": 1.0,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "f1": {
+                "low": 0.6956521739130435,
+                "high": 0.9714285714285714,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": 0.9684168755221386,
+                "high": 1.0,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": 0.913327380952381,
+                "high": 1.0,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": 0.006915826677863974,
+                "high": 0.08326605096815268,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": 0.01943338747930226,
+                "high": 0.10922999029573595,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        }
+      }
+    },
+    "P6:SB": {
+      "estimates": {
+        "all_eligible": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "positive": 24,
+            "negative": 173,
+            "unknown": 3
+          },
+          "reference_components": {
+            "positive": 24,
+            "negative": 173,
+            "unknown": 3
+          },
+          "known_scored_ecgs": 197,
+          "positive_components_scored": 24,
+          "negative_components_scored": 173,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 153,
+            "fp": 20,
+            "fn": 4,
+            "tp": 20
+          },
+          "positive_reference_sensitivity": 0.8333333333333334,
+          "metrics": {
+            "rows": 197,
+            "positive_support": 24,
+            "negative_support": 173,
+            "predicted_positive_support": 40,
+            "tp": 20,
+            "tn": 153,
+            "fp": 20,
+            "fn": 4,
+            "accuracy": 0.8781725888324873,
+            "precision": 0.5,
+            "recall": 0.8333333333333334,
+            "specificity": 0.884393063583815,
+            "f1": 0.625,
+            "probability_rows": 197,
+            "missing_probability_rows": 0,
+            "probability_positive_support": 24,
+            "probability_negative_support": 173,
+            "auroc": 0.9258188824662812,
+            "average_precision": 0.7081030535572443,
+            "brier_score": 0.21417801561296992,
+            "ece": 0.294018019685858,
+            "undefined": {},
+            "npv": 0.9745222929936306
+          },
+          "status": "evaluated",
+          "cluster_intervals": {
+            "unit": "patient_or_record_group",
+            "groups": 197,
+            "seed": 197837,
+            "n_bootstrap": 2000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": 0.8324873096446701,
+                "high": 0.9238578680203046,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": 0.3333333333333333,
+                "high": 0.65625,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": 0.6666666666666666,
+                "high": 0.9666935483870966,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": 0.8342541436464088,
+                "high": 0.9298347613219093,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": 0.9483787180561374,
+                "high": 0.9940119760479041,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "f1": {
+                "low": 0.4642857142857143,
+                "high": 0.754113826167646,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": 0.8682557537597277,
+                "high": 0.9717599527000395,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": 0.5256761591100214,
+                "high": 0.8581937257759783,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": 0.17438537360025014,
+                "high": 0.25721202633220114,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": 0.2459461030324313,
+                "high": 0.3460047812883687,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        },
+        "restricted_known_positive_profile": {
+          "eligible_ecgs": 59,
+          "reference_states": {
+            "positive": 24,
+            "negative": 35
+          },
+          "reference_components": {
+            "positive": 24,
+            "negative": 35
+          },
+          "known_scored_ecgs": 59,
+          "positive_components_scored": 24,
+          "negative_components_scored": 35,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 34,
+            "fp": 1,
+            "fn": 4,
+            "tp": 20
+          },
+          "positive_reference_sensitivity": 0.8333333333333334,
+          "metrics": {
+            "rows": 59,
+            "positive_support": 24,
+            "negative_support": 35,
+            "predicted_positive_support": 21,
+            "tp": 20,
+            "tn": 34,
+            "fp": 1,
+            "fn": 4,
+            "accuracy": 0.9152542372881356,
+            "precision": 0.9523809523809523,
+            "recall": 0.8333333333333334,
+            "specificity": 0.9714285714285714,
+            "f1": 0.8888888888888888,
+            "probability_rows": 59,
+            "missing_probability_rows": 0,
+            "probability_positive_support": 24,
+            "probability_negative_support": 35,
+            "auroc": 0.9678571428571429,
+            "average_precision": 0.964718567251462,
+            "brier_score": 0.10037235511527592,
+            "ece": 0.1507115262553796,
+            "undefined": {},
+            "npv": 0.8947368421052632
+          },
+          "status": "evaluated",
+          "cluster_intervals": {
+            "unit": "patient_or_record_group",
+            "groups": 59,
+            "seed": 197837,
+            "n_bootstrap": 2000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": 0.8305084745762712,
+                "high": 0.9830508474576272,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": 0.8421052631578947,
+                "high": 1.0,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": 0.6666666666666666,
+                "high": 0.9615384615384616,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": 0.9061743951612905,
+                "high": 1.0,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": 0.7906670746634027,
+                "high": 0.975609756097561,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "f1": {
+                "low": 0.7692307692307693,
+                "high": 0.975609756097561,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": 0.9187306501547988,
+                "high": 0.9977011494252873,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": 0.9095561594202899,
+                "high": 0.9977820473927259,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": 0.0577093570763533,
+                "high": 0.15047229824179348,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": 0.09095909400085403,
+                "high": 0.22711450948475628,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        }
+      }
+    },
+    "P6:STACH": {
+      "estimates": {
+        "all_eligible": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "negative": 193,
+            "positive": 4,
+            "unknown": 3
+          },
+          "reference_components": {
+            "negative": 193,
+            "positive": 4,
+            "unknown": 3
+          },
+          "known_scored_ecgs": 197,
+          "positive_components_scored": 4,
+          "negative_components_scored": 193,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 192,
+            "fp": 1,
+            "fn": 4,
+            "tp": 0
+          },
+          "positive_reference_sensitivity": 0.0,
+          "metrics": {
+            "rows": 197,
+            "positive_support": 4,
+            "negative_support": 193,
+            "predicted_positive_support": 1,
+            "tp": 0,
+            "tn": 192,
+            "fp": 1,
+            "fn": 4,
+            "accuracy": 0.9746192893401016,
+            "precision": 0.0,
+            "recall": 0.0,
+            "specificity": 0.9948186528497409,
+            "f1": 0.0,
+            "probability_rows": 197,
+            "missing_probability_rows": 0,
+            "probability_positive_support": 4,
+            "probability_negative_support": 193,
+            "auroc": 0.6994818652849741,
+            "average_precision": 0.05326748213358885,
+            "brier_score": 0.02710450489105803,
+            "ece": 0.03498812916775843,
+            "undefined": {},
+            "npv": 0.9795918367346939
+          },
+          "status": "sparse_descriptive"
+        },
+        "restricted_known_positive_profile": {
+          "eligible_ecgs": 59,
+          "reference_states": {
+            "negative": 55,
+            "positive": 4
+          },
+          "reference_components": {
+            "negative": 55,
+            "positive": 4
+          },
+          "known_scored_ecgs": 59,
+          "positive_components_scored": 4,
+          "negative_components_scored": 55,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 54,
+            "fp": 1,
+            "fn": 4,
+            "tp": 0
+          },
+          "positive_reference_sensitivity": 0.0,
+          "metrics": {
+            "rows": 59,
+            "positive_support": 4,
+            "negative_support": 55,
+            "predicted_positive_support": 1,
+            "tp": 0,
+            "tn": 54,
+            "fp": 1,
+            "fn": 4,
+            "accuracy": 0.9152542372881356,
+            "precision": 0.0,
+            "recall": 0.0,
+            "specificity": 0.9818181818181818,
+            "f1": 0.0,
+            "probability_rows": 59,
+            "missing_probability_rows": 0,
+            "probability_positive_support": 4,
+            "probability_negative_support": 55,
+            "auroc": 0.65,
+            "average_precision": 0.13242595818815334,
+            "brier_score": 0.07572027857185795,
+            "ece": 0.08683797722293454,
+            "undefined": {},
+            "npv": 0.9310344827586207
+          },
+          "status": "sparse_descriptive"
+        }
+      }
+    },
+    "P6:RBBB": {
+      "estimates": {
+        "all_eligible": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "unknown": 196,
+            "positive": 4
+          },
+          "reference_components": {
+            "unknown": 196,
+            "positive": 4
+          },
+          "known_scored_ecgs": 4,
+          "positive_components_scored": 4,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 0,
+            "fp": 0,
+            "fn": 1,
+            "tp": 3
+          },
+          "positive_reference_sensitivity": 0.75,
+          "status": "one_reference_polarity_only"
+        },
+        "restricted_known_positive_profile": {
+          "eligible_ecgs": 59,
+          "reference_states": {
+            "unknown": 55,
+            "positive": 4
+          },
+          "reference_components": {
+            "unknown": 55,
+            "positive": 4
+          },
+          "known_scored_ecgs": 4,
+          "positive_components_scored": 4,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 0,
+            "fp": 0,
+            "fn": 1,
+            "tp": 3
+          },
+          "positive_reference_sensitivity": 0.75,
+          "status": "one_reference_polarity_only"
+        }
+      }
+    },
+    "P6:1AVB": {
+      "estimates": {
+        "all_eligible": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "unknown": 190,
+            "positive": 10
+          },
+          "reference_components": {
+            "unknown": 190,
+            "positive": 10
+          },
+          "known_scored_ecgs": 10,
+          "positive_components_scored": 10,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 0,
+            "fp": 0,
+            "fn": 5,
+            "tp": 5
+          },
+          "positive_reference_sensitivity": 0.5,
+          "status": "one_reference_polarity_only"
+        },
+        "restricted_known_positive_profile": {
+          "eligible_ecgs": 59,
+          "reference_states": {
+            "unknown": 49,
+            "positive": 10
+          },
+          "reference_components": {
+            "unknown": 49,
+            "positive": 10
+          },
+          "known_scored_ecgs": 10,
+          "positive_components_scored": 10,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 0,
+            "fp": 0,
+            "fn": 5,
+            "tp": 5
+          },
+          "positive_reference_sensitivity": 0.5,
+          "status": "one_reference_polarity_only"
+        }
+      }
+    },
+    "P6:PVC": {
+      "estimates": {
+        "all_eligible": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "unknown": 193,
+            "positive": 7
+          },
+          "reference_components": {
+            "unknown": 193,
+            "positive": 7
+          },
+          "known_scored_ecgs": 7,
+          "positive_components_scored": 7,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 0,
+            "fp": 0,
+            "fn": 1,
+            "tp": 6
+          },
+          "positive_reference_sensitivity": 0.8571428571428571,
+          "status": "one_reference_polarity_only"
+        },
+        "restricted_known_positive_profile": {
+          "eligible_ecgs": 59,
+          "reference_states": {
+            "unknown": 52,
+            "positive": 7
+          },
+          "reference_components": {
+            "unknown": 52,
+            "positive": 7
+          },
+          "known_scored_ecgs": 7,
+          "positive_components_scored": 7,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 0,
+            "fp": 0,
+            "fn": 1,
+            "tp": 6
+          },
+          "positive_reference_sensitivity": 0.8571428571428571,
+          "status": "one_reference_polarity_only"
+        }
+      }
+    },
+    "P8:AFIB": {
+      "estimates": {
+        "all_eligible": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "negative": 182,
+            "positive": 15,
+            "unknown": 3
+          },
+          "reference_components": {
+            "negative": 182,
+            "positive": 15,
+            "unknown": 3
+          },
+          "known_scored_ecgs": 197,
+          "positive_components_scored": 15,
+          "negative_components_scored": 182,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 178,
+            "fp": 4,
+            "fn": 2,
+            "tp": 13
+          },
+          "positive_reference_sensitivity": 0.8666666666666667,
+          "metrics": {
+            "rows": 197,
+            "positive_support": 15,
+            "negative_support": 182,
+            "predicted_positive_support": 17,
+            "tp": 13,
+            "tn": 178,
+            "fp": 4,
+            "fn": 2,
+            "accuracy": 0.9695431472081218,
+            "precision": 0.7647058823529411,
+            "recall": 0.8666666666666667,
+            "specificity": 0.978021978021978,
+            "f1": 0.8125,
+            "probability_rows": 197,
+            "missing_probability_rows": 0,
+            "probability_positive_support": 15,
+            "probability_negative_support": 182,
+            "auroc": 0.9893772893772894,
+            "average_precision": 0.8978057889822596,
+            "brier_score": 0.03260857665200729,
+            "ece": 0.039043766677679455,
+            "undefined": {},
+            "npv": 0.9888888888888889
+          },
+          "status": "evaluated",
+          "cluster_intervals": {
+            "unit": "patient_or_record_group",
+            "groups": 197,
+            "seed": 197837,
+            "n_bootstrap": 2000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": 0.9441624365482234,
+                "high": 0.9898477157360406,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": 0.5454545454545454,
+                "high": 0.9444444444444444,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": 0.6666666666666666,
+                "high": 1.0,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": 0.9548022598870056,
+                "high": 0.9946236559139785,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": 0.9717514124293786,
+                "high": 1.0,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "f1": {
+                "low": 0.6363082039911309,
+                "high": 0.9375,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": 0.9743581081081081,
+                "high": 0.9987461372898281,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": 0.749999140460782,
+                "high": 0.9855778162055336,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": 0.014754905432108577,
+                "high": 0.05496003033167954,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": 0.023460434231246233,
+                "high": 0.06749850872341473,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        },
+        "restricted_known_positive_profile": {
+          "eligible_ecgs": 188,
+          "reference_states": {
+            "negative": 173,
+            "positive": 15
+          },
+          "reference_components": {
+            "negative": 173,
+            "positive": 15
+          },
+          "known_scored_ecgs": 188,
+          "positive_components_scored": 15,
+          "negative_components_scored": 173,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 172,
+            "fp": 1,
+            "fn": 2,
+            "tp": 13
+          },
+          "positive_reference_sensitivity": 0.8666666666666667,
+          "metrics": {
+            "rows": 188,
+            "positive_support": 15,
+            "negative_support": 173,
+            "predicted_positive_support": 14,
+            "tp": 13,
+            "tn": 172,
+            "fp": 1,
+            "fn": 2,
+            "accuracy": 0.9840425531914894,
+            "precision": 0.9285714285714286,
+            "recall": 0.8666666666666667,
+            "specificity": 0.9942196531791907,
+            "f1": 0.896551724137931,
+            "probability_rows": 188,
+            "missing_probability_rows": 0,
+            "probability_positive_support": 15,
+            "probability_negative_support": 173,
+            "auroc": 0.9949903660886319,
+            "average_precision": 0.95510989010989,
+            "brier_score": 0.019676690388841664,
+            "ece": 0.02998018248045991,
+            "undefined": {},
+            "npv": 0.9885057471264368
+          },
+          "status": "evaluated",
+          "cluster_intervals": {
+            "unit": "patient_or_record_group",
+            "groups": 188,
+            "seed": 197837,
+            "n_bootstrap": 2000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": 0.9627659574468085,
+                "high": 1.0,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": 0.75,
+                "high": 1.0,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": 0.6666666666666666,
+                "high": 1.0,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": 0.9820359281437125,
+                "high": 1.0,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": 0.9707559339525283,
+                "high": 1.0,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "f1": {
+                "low": 0.7368421052631579,
+                "high": 1.0,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": 0.9838602352633693,
+                "high": 1.0,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": 0.8529839205864403,
+                "high": 1.0,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": 0.008114814391938473,
+                "high": 0.03488725782368575,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": 0.016864986633389898,
+                "high": 0.052315289955581976,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        },
+        "accepted": {
+          "eligible_ecgs": 152,
+          "reference_states": {
+            "negative": 137,
+            "positive": 12,
+            "unknown": 3
+          },
+          "reference_components": {
+            "negative": 137,
+            "positive": 12,
+            "unknown": 3
+          },
+          "known_scored_ecgs": 149,
+          "positive_components_scored": 12,
+          "negative_components_scored": 137,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 134,
+            "fp": 3,
+            "fn": 1,
+            "tp": 11
+          },
+          "positive_reference_sensitivity": 0.9166666666666666,
+          "metrics": {
+            "rows": 149,
+            "positive_support": 12,
+            "negative_support": 137,
+            "predicted_positive_support": 14,
+            "tp": 11,
+            "tn": 134,
+            "fp": 3,
+            "fn": 1,
+            "accuracy": 0.9731543624161074,
+            "precision": 0.7857142857142857,
+            "recall": 0.9166666666666666,
+            "specificity": 0.9781021897810219,
+            "f1": 0.8461538461538461,
+            "probability_rows": 149,
+            "missing_probability_rows": 0,
+            "probability_positive_support": 12,
+            "probability_negative_support": 137,
+            "auroc": 0.9920924574209246,
+            "average_precision": 0.9417249417249416,
+            "brier_score": 0.033336905920275675,
+            "ece": 0.04456371646892604,
+            "undefined": {},
+            "npv": 0.9925925925925926
+          },
+          "status": "evaluated",
+          "cluster_intervals": {
+            "unit": "patient_or_record_group",
+            "groups": 149,
+            "seed": 197837,
+            "n_bootstrap": 2000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": 0.9463087248322147,
+                "high": 0.9932885906040269,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": 0.5454545454545454,
+                "high": 1.0,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": 0.7142857142857143,
+                "high": 1.0,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": 0.95,
+                "high": 1.0,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": 0.9770992366412213,
+                "high": 1.0,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "f1": {
+                "low": 0.6666666666666666,
+                "high": 0.9696969696969697,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": 0.9750434491978609,
+                "high": 1.0,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": 0.8174496336996337,
+                "high": 1.0,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": 0.013072927130547432,
+                "high": 0.058458619362757765,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": 0.02248836706752458,
+                "high": 0.07422790683263668,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        },
+        "abstained": {
+          "eligible_ecgs": 48,
+          "reference_states": {
+            "negative": 45,
+            "positive": 3
+          },
+          "reference_components": {
+            "negative": 45,
+            "positive": 3
+          },
+          "known_scored_ecgs": 48,
+          "positive_components_scored": 3,
+          "negative_components_scored": 45,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 44,
+            "fp": 1,
+            "fn": 1,
+            "tp": 2
+          },
+          "positive_reference_sensitivity": 0.6666666666666666,
+          "metrics": {
+            "rows": 48,
+            "positive_support": 3,
+            "negative_support": 45,
+            "predicted_positive_support": 3,
+            "tp": 2,
+            "tn": 44,
+            "fp": 1,
+            "fn": 1,
+            "accuracy": 0.9583333333333334,
+            "precision": 0.6666666666666666,
+            "recall": 0.6666666666666666,
+            "specificity": 0.9777777777777777,
+            "f1": 0.6666666666666666,
+            "probability_rows": 48,
+            "missing_probability_rows": 0,
+            "probability_positive_support": 3,
+            "probability_negative_support": 45,
+            "auroc": 0.9777777777777777,
+            "average_precision": 0.6388888888888888,
+            "brier_score": 0.030347721215090856,
+            "ece": 0.04877876593751651,
+            "undefined": {},
+            "npv": 0.9777777777777777
+          },
+          "status": "sparse_descriptive"
+        },
+        "technical_unscored": {
+          "eligible_ecgs": 0,
+          "reference_states": {},
+          "reference_components": {},
+          "known_scored_ecgs": 0,
+          "positive_components_scored": 0,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "status": "no_known_scored_references"
+        },
+        "jointly_scored_baseline": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "negative": 182,
+            "positive": 15,
+            "unknown": 3
+          },
+          "reference_components": {
+            "negative": 182,
+            "positive": 15,
+            "unknown": 3
+          },
+          "known_scored_ecgs": 197,
+          "positive_components_scored": 15,
+          "negative_components_scored": 182,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 178,
+            "fp": 4,
+            "fn": 2,
+            "tp": 13
+          },
+          "positive_reference_sensitivity": 0.8666666666666667,
+          "metrics": {
+            "rows": 197,
+            "positive_support": 15,
+            "negative_support": 182,
+            "predicted_positive_support": 17,
+            "tp": 13,
+            "tn": 178,
+            "fp": 4,
+            "fn": 2,
+            "accuracy": 0.9695431472081218,
+            "precision": 0.7647058823529411,
+            "recall": 0.8666666666666667,
+            "specificity": 0.978021978021978,
+            "f1": 0.8125,
+            "probability_rows": 197,
+            "missing_probability_rows": 0,
+            "probability_positive_support": 15,
+            "probability_negative_support": 182,
+            "auroc": 0.9893772893772894,
+            "average_precision": 0.8978057889822596,
+            "brier_score": 0.03260857665200729,
+            "ece": 0.039043766677679455,
+            "undefined": {},
+            "npv": 0.9888888888888889
+          },
+          "status": "evaluated",
+          "cluster_intervals": {
+            "unit": "patient_or_record_group",
+            "groups": 197,
+            "seed": 197837,
+            "n_bootstrap": 2000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": 0.9441624365482234,
+                "high": 0.9898477157360406,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": 0.5454545454545454,
+                "high": 0.9444444444444444,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": 0.6666666666666666,
+                "high": 1.0,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": 0.9548022598870056,
+                "high": 0.9946236559139785,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": 0.9717514124293786,
+                "high": 1.0,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "f1": {
+                "low": 0.6363082039911309,
+                "high": 0.9375,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": 0.9743581081081081,
+                "high": 0.9987461372898281,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": 0.749999140460782,
+                "high": 0.9855778162055336,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": 0.014754905432108577,
+                "high": 0.05496003033167954,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": 0.023460434231246233,
+                "high": 0.06749850872341473,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        }
+      },
+      "joint_positive_disposition": {
+        "emitted_tp": 11,
+        "abstained_positive_no_output": 3,
+        "abstained_baseline_counterfactual_fn": 1,
+        "emitted_fn": 1,
+        "all_reference_positives": 15
+      },
+      "route_scope_note": "For abstained and technical routes, per-profile baseline decisions are counterfactual only."
+    },
+    "P8:SB": {
+      "estimates": {
+        "all_eligible": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "positive": 24,
+            "negative": 173,
+            "unknown": 3
+          },
+          "reference_components": {
+            "positive": 24,
+            "negative": 173,
+            "unknown": 3
+          },
+          "known_scored_ecgs": 197,
+          "positive_components_scored": 24,
+          "negative_components_scored": 173,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 138,
+            "fp": 35,
+            "fn": 1,
+            "tp": 23
+          },
+          "positive_reference_sensitivity": 0.9583333333333334,
+          "metrics": {
+            "rows": 197,
+            "positive_support": 24,
+            "negative_support": 173,
+            "predicted_positive_support": 58,
+            "tp": 23,
+            "tn": 138,
+            "fp": 35,
+            "fn": 1,
+            "accuracy": 0.817258883248731,
+            "precision": 0.39655172413793105,
+            "recall": 0.9583333333333334,
+            "specificity": 0.7976878612716763,
+            "f1": 0.5609756097560976,
+            "probability_rows": 197,
+            "missing_probability_rows": 0,
+            "probability_positive_support": 24,
+            "probability_negative_support": 173,
+            "auroc": 0.9448458574181118,
+            "average_precision": 0.7326295630091854,
+            "brier_score": 0.15623059909162157,
+            "ece": 0.2086462202230081,
+            "undefined": {},
+            "npv": 0.9928057553956835
+          },
+          "status": "evaluated",
+          "cluster_intervals": {
+            "unit": "patient_or_record_group",
+            "groups": 197,
+            "seed": 197837,
+            "n_bootstrap": 2000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": 0.7614213197969543,
+                "high": 0.868020304568528,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": 0.2675821596244132,
+                "high": 0.5208559782608695,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": 0.8571428571428571,
+                "high": 1.0,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": 0.7365126488595842,
+                "high": 0.8536621024104978,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": 0.9774393369788106,
+                "high": 1.0,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "f1": {
+                "low": 0.4126984126984127,
+                "high": 0.6800103092783505,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": 0.9078978322850553,
+                "high": 0.9742635953265197,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": 0.5505135249456401,
+                "high": 0.8689522807502543,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": 0.11934281611932508,
+                "high": 0.19583108842210112,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": 0.16478484539910068,
+                "high": 0.2564686542926244,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        },
+        "restricted_known_positive_profile": {
+          "eligible_ecgs": 188,
+          "reference_states": {
+            "positive": 24,
+            "negative": 164
+          },
+          "reference_components": {
+            "positive": 24,
+            "negative": 164
+          },
+          "known_scored_ecgs": 188,
+          "positive_components_scored": 24,
+          "negative_components_scored": 164,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 129,
+            "fp": 35,
+            "fn": 1,
+            "tp": 23
+          },
+          "positive_reference_sensitivity": 0.9583333333333334,
+          "metrics": {
+            "rows": 188,
+            "positive_support": 24,
+            "negative_support": 164,
+            "predicted_positive_support": 58,
+            "tp": 23,
+            "tn": 129,
+            "fp": 35,
+            "fn": 1,
+            "accuracy": 0.8085106382978723,
+            "precision": 0.39655172413793105,
+            "recall": 0.9583333333333334,
+            "specificity": 0.7865853658536586,
+            "f1": 0.5609756097560976,
+            "probability_rows": 188,
+            "missing_probability_rows": 0,
+            "probability_positive_support": 24,
+            "probability_negative_support": 164,
+            "auroc": 0.9418191056910569,
+            "average_precision": 0.7326295630091854,
+            "brier_score": 0.16126984565385694,
+            "ece": 0.21303210812243745,
+            "undefined": {},
+            "npv": 0.9923076923076923
+          },
+          "status": "evaluated",
+          "cluster_intervals": {
+            "unit": "patient_or_record_group",
+            "groups": 188,
+            "seed": 197837,
+            "n_bootstrap": 2000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": 0.75,
+                "high": 0.8617021276595744,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": 0.27080853174603176,
+                "high": 0.5246110030564045,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": 0.8571428571428571,
+                "high": 1.0,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": 0.7215113156885309,
+                "high": 0.8484848484848485,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": 0.9752066115702479,
+                "high": 1.0,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "f1": {
+                "low": 0.417910447761194,
+                "high": 0.6818181818181818,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": 0.9032232862903226,
+                "high": 0.9723069301125703,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": 0.5646337200111172,
+                "high": 0.8661988476812595,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": 0.12157269922446487,
+                "high": 0.20201673409035537,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": 0.16378517448086694,
+                "high": 0.2620458530705246,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        },
+        "accepted": {
+          "eligible_ecgs": 152,
+          "reference_states": {
+            "positive": 20,
+            "negative": 129,
+            "unknown": 3
+          },
+          "reference_components": {
+            "positive": 20,
+            "negative": 129,
+            "unknown": 3
+          },
+          "known_scored_ecgs": 149,
+          "positive_components_scored": 20,
+          "negative_components_scored": 129,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 100,
+            "fp": 29,
+            "fn": 1,
+            "tp": 19
+          },
+          "positive_reference_sensitivity": 0.95,
+          "metrics": {
+            "rows": 149,
+            "positive_support": 20,
+            "negative_support": 129,
+            "predicted_positive_support": 48,
+            "tp": 19,
+            "tn": 100,
+            "fp": 29,
+            "fn": 1,
+            "accuracy": 0.7986577181208053,
+            "precision": 0.3958333333333333,
+            "recall": 0.95,
+            "specificity": 0.7751937984496124,
+            "f1": 0.5588235294117647,
+            "probability_rows": 149,
+            "missing_probability_rows": 0,
+            "probability_positive_support": 20,
+            "probability_negative_support": 129,
+            "auroc": 0.9519379844961241,
+            "average_precision": 0.7830304659498208,
+            "brier_score": 0.1631552684100507,
+            "ece": 0.2050278266574439,
+            "undefined": {},
+            "npv": 0.9900990099009901
+          },
+          "status": "evaluated",
+          "cluster_intervals": {
+            "unit": "patient_or_record_group",
+            "groups": 149,
+            "seed": 197837,
+            "n_bootstrap": 2000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": 0.7315436241610739,
+                "high": 0.8590604026845637,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": 0.25804147465437793,
+                "high": 0.5306448111159356,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": 0.8331521739130439,
+                "high": 1.0,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": 0.7037037037037037,
+                "high": 0.8396946564885496,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": 0.967741935483871,
+                "high": 1.0,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "f1": {
+                "low": 0.4,
+                "high": 0.684931506849315,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": 0.9131745351334255,
+                "high": 0.9813765182186235,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": 0.6024343481485982,
+                "high": 0.9145370910665027,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": 0.11851989620670737,
+                "high": 0.21120324791330292,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": 0.15526955127225728,
+                "high": 0.2606706914924044,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        },
+        "abstained": {
+          "eligible_ecgs": 48,
+          "reference_states": {
+            "negative": 44,
+            "positive": 4
+          },
+          "reference_components": {
+            "negative": 44,
+            "positive": 4
+          },
+          "known_scored_ecgs": 48,
+          "positive_components_scored": 4,
+          "negative_components_scored": 44,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 38,
+            "fp": 6,
+            "fn": 0,
+            "tp": 4
+          },
+          "positive_reference_sensitivity": 1.0,
+          "metrics": {
+            "rows": 48,
+            "positive_support": 4,
+            "negative_support": 44,
+            "predicted_positive_support": 10,
+            "tp": 4,
+            "tn": 38,
+            "fp": 6,
+            "fn": 0,
+            "accuracy": 0.875,
+            "precision": 0.4,
+            "recall": 1.0,
+            "specificity": 0.8636363636363636,
+            "f1": 0.5714285714285714,
+            "probability_rows": 48,
+            "missing_probability_rows": 0,
+            "probability_positive_support": 4,
+            "probability_negative_support": 44,
+            "auroc": 0.9204545454545454,
+            "average_precision": 0.513095238095238,
+            "brier_score": 0.13473527141566444,
+            "ece": 0.21987831691611368,
+            "undefined": {},
+            "npv": 1.0
+          },
+          "status": "sparse_descriptive"
+        },
+        "technical_unscored": {
+          "eligible_ecgs": 0,
+          "reference_states": {},
+          "reference_components": {},
+          "known_scored_ecgs": 0,
+          "positive_components_scored": 0,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "status": "no_known_scored_references"
+        },
+        "jointly_scored_baseline": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "positive": 24,
+            "negative": 173,
+            "unknown": 3
+          },
+          "reference_components": {
+            "positive": 24,
+            "negative": 173,
+            "unknown": 3
+          },
+          "known_scored_ecgs": 197,
+          "positive_components_scored": 24,
+          "negative_components_scored": 173,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 138,
+            "fp": 35,
+            "fn": 1,
+            "tp": 23
+          },
+          "positive_reference_sensitivity": 0.9583333333333334,
+          "metrics": {
+            "rows": 197,
+            "positive_support": 24,
+            "negative_support": 173,
+            "predicted_positive_support": 58,
+            "tp": 23,
+            "tn": 138,
+            "fp": 35,
+            "fn": 1,
+            "accuracy": 0.817258883248731,
+            "precision": 0.39655172413793105,
+            "recall": 0.9583333333333334,
+            "specificity": 0.7976878612716763,
+            "f1": 0.5609756097560976,
+            "probability_rows": 197,
+            "missing_probability_rows": 0,
+            "probability_positive_support": 24,
+            "probability_negative_support": 173,
+            "auroc": 0.9448458574181118,
+            "average_precision": 0.7326295630091854,
+            "brier_score": 0.15623059909162157,
+            "ece": 0.2086462202230081,
+            "undefined": {},
+            "npv": 0.9928057553956835
+          },
+          "status": "evaluated",
+          "cluster_intervals": {
+            "unit": "patient_or_record_group",
+            "groups": 197,
+            "seed": 197837,
+            "n_bootstrap": 2000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": 0.7614213197969543,
+                "high": 0.868020304568528,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": 0.2675821596244132,
+                "high": 0.5208559782608695,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": 0.8571428571428571,
+                "high": 1.0,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": 0.7365126488595842,
+                "high": 0.8536621024104978,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": 0.9774393369788106,
+                "high": 1.0,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "f1": {
+                "low": 0.4126984126984127,
+                "high": 0.6800103092783505,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": 0.9078978322850553,
+                "high": 0.9742635953265197,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": 0.5505135249456401,
+                "high": 0.8689522807502543,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": 0.11934281611932508,
+                "high": 0.19583108842210112,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": 0.16478484539910068,
+                "high": 0.2564686542926244,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        }
+      },
+      "joint_positive_disposition": {
+        "emitted_tp": 19,
+        "abstained_positive_no_output": 4,
+        "emitted_fn": 1,
+        "all_reference_positives": 24
+      },
+      "route_scope_note": "For abstained and technical routes, per-profile baseline decisions are counterfactual only."
+    },
+    "P8:STACH": {
+      "estimates": {
+        "all_eligible": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "negative": 193,
+            "positive": 4,
+            "unknown": 3
+          },
+          "reference_components": {
+            "negative": 193,
+            "positive": 4,
+            "unknown": 3
+          },
+          "known_scored_ecgs": 197,
+          "positive_components_scored": 4,
+          "negative_components_scored": 193,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 192,
+            "fp": 1,
+            "fn": 4,
+            "tp": 0
+          },
+          "positive_reference_sensitivity": 0.0,
+          "metrics": {
+            "rows": 197,
+            "positive_support": 4,
+            "negative_support": 193,
+            "predicted_positive_support": 1,
+            "tp": 0,
+            "tn": 192,
+            "fp": 1,
+            "fn": 4,
+            "accuracy": 0.9746192893401016,
+            "precision": 0.0,
+            "recall": 0.0,
+            "specificity": 0.9948186528497409,
+            "f1": 0.0,
+            "probability_rows": 197,
+            "missing_probability_rows": 0,
+            "probability_positive_support": 4,
+            "probability_negative_support": 193,
+            "auroc": 0.6567357512953368,
+            "average_precision": 0.038346386200863815,
+            "brier_score": 0.03632305670040355,
+            "ece": 0.05524220316704431,
+            "undefined": {},
+            "npv": 0.9795918367346939
+          },
+          "status": "sparse_descriptive"
+        },
+        "restricted_known_positive_profile": {
+          "eligible_ecgs": 188,
+          "reference_states": {
+            "negative": 184,
+            "positive": 4
+          },
+          "reference_components": {
+            "negative": 184,
+            "positive": 4
+          },
+          "known_scored_ecgs": 188,
+          "positive_components_scored": 4,
+          "negative_components_scored": 184,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 183,
+            "fp": 1,
+            "fn": 4,
+            "tp": 0
+          },
+          "positive_reference_sensitivity": 0.0,
+          "metrics": {
+            "rows": 188,
+            "positive_support": 4,
+            "negative_support": 184,
+            "predicted_positive_support": 1,
+            "tp": 0,
+            "tn": 183,
+            "fp": 1,
+            "fn": 4,
+            "accuracy": 0.973404255319149,
+            "precision": 0.0,
+            "recall": 0.0,
+            "specificity": 0.9945652173913043,
+            "f1": 0.0,
+            "probability_rows": 188,
+            "missing_probability_rows": 0,
+            "probability_positive_support": 4,
+            "probability_negative_support": 184,
+            "auroc": 0.6657608695652174,
+            "average_precision": 0.04159522626735741,
+            "brier_score": 0.03581631108284388,
+            "ece": 0.05250420359099993,
+            "undefined": {},
+            "npv": 0.9786096256684492
+          },
+          "status": "sparse_descriptive"
+        },
+        "accepted": {
+          "eligible_ecgs": 152,
+          "reference_states": {
+            "negative": 145,
+            "positive": 4,
+            "unknown": 3
+          },
+          "reference_components": {
+            "negative": 145,
+            "positive": 4,
+            "unknown": 3
+          },
+          "known_scored_ecgs": 149,
+          "positive_components_scored": 4,
+          "negative_components_scored": 145,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 145,
+            "fp": 0,
+            "fn": 4,
+            "tp": 0
+          },
+          "positive_reference_sensitivity": 0.0,
+          "metrics": {
+            "rows": 149,
+            "positive_support": 4,
+            "negative_support": 145,
+            "predicted_positive_support": 0,
+            "tp": 0,
+            "tn": 145,
+            "fp": 0,
+            "fn": 4,
+            "accuracy": 0.9731543624161074,
+            "precision": null,
+            "recall": 0.0,
+            "specificity": 1.0,
+            "f1": 0.0,
+            "probability_rows": 149,
+            "missing_probability_rows": 0,
+            "probability_positive_support": 4,
+            "probability_negative_support": 145,
+            "auroc": 0.6758620689655173,
+            "average_precision": 0.05358579350203061,
+            "brier_score": 0.040867447090672276,
+            "ece": 0.060376210088984805,
+            "undefined": {
+              "precision": "zero_denominator"
+            },
+            "npv": 0.9731543624161074
+          },
+          "status": "sparse_descriptive"
+        },
+        "abstained": {
+          "eligible_ecgs": 48,
+          "reference_states": {
+            "negative": 48
+          },
+          "reference_components": {
+            "negative": 48
+          },
+          "known_scored_ecgs": 48,
+          "positive_components_scored": 0,
+          "negative_components_scored": 48,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 47,
+            "fp": 1,
+            "fn": 0,
+            "tp": 0
+          },
+          "positive_reference_sensitivity": null,
+          "status": "one_reference_polarity_only"
+        },
+        "technical_unscored": {
+          "eligible_ecgs": 0,
+          "reference_states": {},
+          "reference_components": {},
+          "known_scored_ecgs": 0,
+          "positive_components_scored": 0,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "status": "no_known_scored_references"
+        },
+        "jointly_scored_baseline": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "negative": 193,
+            "positive": 4,
+            "unknown": 3
+          },
+          "reference_components": {
+            "negative": 193,
+            "positive": 4,
+            "unknown": 3
+          },
+          "known_scored_ecgs": 197,
+          "positive_components_scored": 4,
+          "negative_components_scored": 193,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 192,
+            "fp": 1,
+            "fn": 4,
+            "tp": 0
+          },
+          "positive_reference_sensitivity": 0.0,
+          "metrics": {
+            "rows": 197,
+            "positive_support": 4,
+            "negative_support": 193,
+            "predicted_positive_support": 1,
+            "tp": 0,
+            "tn": 192,
+            "fp": 1,
+            "fn": 4,
+            "accuracy": 0.9746192893401016,
+            "precision": 0.0,
+            "recall": 0.0,
+            "specificity": 0.9948186528497409,
+            "f1": 0.0,
+            "probability_rows": 197,
+            "missing_probability_rows": 0,
+            "probability_positive_support": 4,
+            "probability_negative_support": 193,
+            "auroc": 0.6567357512953368,
+            "average_precision": 0.038346386200863815,
+            "brier_score": 0.03632305670040355,
+            "ece": 0.05524220316704431,
+            "undefined": {},
+            "npv": 0.9795918367346939
+          },
+          "status": "sparse_descriptive"
+        }
+      },
+      "joint_positive_disposition": {
+        "emitted_fn": 4,
+        "all_reference_positives": 4
+      },
+      "route_scope_note": "For abstained and technical routes, per-profile baseline decisions are counterfactual only."
+    },
+    "P8:NSR": {
+      "estimates": {
+        "all_eligible": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "negative": 55,
+            "positive": 142,
+            "unknown": 3
+          },
+          "reference_components": {
+            "negative": 55,
+            "positive": 142,
+            "unknown": 3
+          },
+          "known_scored_ecgs": 197,
+          "positive_components_scored": 142,
+          "negative_components_scored": 55,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 45,
+            "fp": 10,
+            "fn": 51,
+            "tp": 91
+          },
+          "positive_reference_sensitivity": 0.6408450704225352,
+          "metrics": {
+            "rows": 197,
+            "positive_support": 142,
+            "negative_support": 55,
+            "predicted_positive_support": 101,
+            "tp": 91,
+            "tn": 45,
+            "fp": 10,
+            "fn": 51,
+            "accuracy": 0.6903553299492385,
+            "precision": 0.900990099009901,
+            "recall": 0.6408450704225352,
+            "specificity": 0.8181818181818182,
+            "f1": 0.7489711934156379,
+            "probability_rows": 197,
+            "missing_probability_rows": 0,
+            "probability_positive_support": 142,
+            "probability_negative_support": 55,
+            "auroc": 0.7792573623559539,
+            "average_precision": 0.8568470320622608,
+            "brier_score": 0.20350282018953553,
+            "ece": 0.22047377818560718,
+            "undefined": {},
+            "npv": 0.46875
+          },
+          "status": "evaluated",
+          "cluster_intervals": {
+            "unit": "patient_or_record_group",
+            "groups": 197,
+            "seed": 197837,
+            "n_bootstrap": 2000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": 0.6243654822335025,
+                "high": 0.7563451776649747,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": 0.8333333333333334,
+                "high": 0.9545454545454546,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": 0.5633698487219615,
+                "high": 0.7183150756390193,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": 0.7058823529411765,
+                "high": 0.9107142857142857,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": 0.36665841584158415,
+                "high": 0.5698924731182796,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "f1": {
+                "low": 0.6837606837606838,
+                "high": 0.8085184605757195,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": 0.6919654021070482,
+                "high": 0.8626930624433422,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": 0.7805513090624054,
+                "high": 0.9288244355191564,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": 0.16881372877221457,
+                "high": 0.23804835486829568,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": 0.1738076986772922,
+                "high": 0.2797455672638137,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        },
+        "restricted_known_positive_profile": {
+          "eligible_ecgs": 188,
+          "reference_states": {
+            "negative": 46,
+            "positive": 142
+          },
+          "reference_components": {
+            "negative": 46,
+            "positive": 142
+          },
+          "known_scored_ecgs": 188,
+          "positive_components_scored": 142,
+          "negative_components_scored": 46,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 41,
+            "fp": 5,
+            "fn": 51,
+            "tp": 91
+          },
+          "positive_reference_sensitivity": 0.6408450704225352,
+          "metrics": {
+            "rows": 188,
+            "positive_support": 142,
+            "negative_support": 46,
+            "predicted_positive_support": 96,
+            "tp": 91,
+            "tn": 41,
+            "fp": 5,
+            "fn": 51,
+            "accuracy": 0.7021276595744681,
+            "precision": 0.9479166666666666,
+            "recall": 0.6408450704225352,
+            "specificity": 0.8913043478260869,
+            "f1": 0.7647058823529411,
+            "probability_rows": 188,
+            "missing_probability_rows": 0,
+            "probability_positive_support": 142,
+            "probability_negative_support": 46,
+            "auroc": 0.8329761175750153,
+            "average_precision": 0.9249160421290428,
+            "brier_score": 0.19189268185100056,
+            "ece": 0.22768891487051385,
+            "undefined": {},
+            "npv": 0.44565217391304346
+          },
+          "status": "evaluated",
+          "cluster_intervals": {
+            "unit": "patient_or_record_group",
+            "groups": 188,
+            "seed": 197837,
+            "n_bootstrap": 2000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": 0.6434840425531917,
+                "high": 0.7660904255319142,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": 0.898989898989899,
+                "high": 0.9888888888888889,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": 0.5661599898580122,
+                "high": 0.7142857142857143,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": 0.7924528301886793,
+                "high": 0.972972972972973,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": 0.34443548387096773,
+                "high": 0.546394749460561,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "f1": {
+                "low": 0.7036910197869103,
+                "high": 0.820089402458159,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": 0.7582041089717484,
+                "high": 0.8989951575510652,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": 0.8715724987249923,
+                "high": 0.9655119882399024,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": 0.16064251244658634,
+                "high": 0.22275232330815595,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": 0.18448154028632646,
+                "high": 0.28519842428551706,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        },
+        "accepted": {
+          "eligible_ecgs": 152,
+          "reference_states": {
+            "negative": 45,
+            "positive": 104,
+            "unknown": 3
+          },
+          "reference_components": {
+            "negative": 45,
+            "positive": 104,
+            "unknown": 3
+          },
+          "known_scored_ecgs": 149,
+          "positive_components_scored": 104,
+          "negative_components_scored": 45,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 37,
+            "fp": 8,
+            "fn": 33,
+            "tp": 71
+          },
+          "positive_reference_sensitivity": 0.6826923076923077,
+          "metrics": {
+            "rows": 149,
+            "positive_support": 104,
+            "negative_support": 45,
+            "predicted_positive_support": 79,
+            "tp": 71,
+            "tn": 37,
+            "fp": 8,
+            "fn": 33,
+            "accuracy": 0.7248322147651006,
+            "precision": 0.8987341772151899,
+            "recall": 0.6826923076923077,
+            "specificity": 0.8222222222222222,
+            "f1": 0.7759562841530054,
+            "probability_rows": 149,
+            "missing_probability_rows": 0,
+            "probability_positive_support": 104,
+            "probability_negative_support": 45,
+            "auroc": 0.7957264957264958,
+            "average_precision": 0.8580577388843047,
+            "brier_score": 0.19698599159454425,
+            "ece": 0.20106972651767088,
+            "undefined": {},
+            "npv": 0.5285714285714286
+          },
+          "status": "evaluated",
+          "cluster_intervals": {
+            "unit": "patient_or_record_group",
+            "groups": 149,
+            "seed": 197837,
+            "n_bootstrap": 2000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": 0.6510067114093959,
+                "high": 0.7919463087248322,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": 0.8255813953488372,
+                "high": 0.958347602739726,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": 0.5882352941176471,
+                "high": 0.7685363247863246,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": 0.7058823529411765,
+                "high": 0.9216063348416287,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": 0.4126984126984127,
+                "high": 0.640625,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "f1": {
+                "low": 0.7017392619479734,
+                "high": 0.8383838383838383,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": 0.7074827870542156,
+                "high": 0.873789573659772,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": 0.7714416216110767,
+                "high": 0.9375081216164199,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": 0.15886657713914307,
+                "high": 0.23916172112513953,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": 0.1514143418330147,
+                "high": 0.2687463867995398,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        },
+        "abstained": {
+          "eligible_ecgs": 48,
+          "reference_states": {
+            "positive": 38,
+            "negative": 10
+          },
+          "reference_components": {
+            "positive": 38,
+            "negative": 10
+          },
+          "known_scored_ecgs": 48,
+          "positive_components_scored": 38,
+          "negative_components_scored": 10,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 8,
+            "fp": 2,
+            "fn": 18,
+            "tp": 20
+          },
+          "positive_reference_sensitivity": 0.5263157894736842,
+          "metrics": {
+            "rows": 48,
+            "positive_support": 38,
+            "negative_support": 10,
+            "predicted_positive_support": 22,
+            "tp": 20,
+            "tn": 8,
+            "fp": 2,
+            "fn": 18,
+            "accuracy": 0.5833333333333334,
+            "precision": 0.9090909090909091,
+            "recall": 0.5263157894736842,
+            "specificity": 0.8,
+            "f1": 0.6666666666666666,
+            "probability_rows": 48,
+            "missing_probability_rows": 0,
+            "probability_positive_support": 38,
+            "probability_negative_support": 10,
+            "auroc": 0.6868421052631579,
+            "average_precision": 0.8528305377944417,
+            "brier_score": 0.22373214228648766,
+            "ece": 0.2885305813203255,
+            "undefined": {},
+            "npv": 0.3076923076923077
+          },
+          "status": "evaluated",
+          "cluster_intervals": {
+            "unit": "patient_or_record_group",
+            "groups": 48,
+            "seed": 197837,
+            "n_bootstrap": 2000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": 0.4375,
+                "high": 0.7083333333333334,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": 0.7619047619047619,
+                "high": 1.0,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": 0.3684210526315789,
+                "high": 0.6842105263157895,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": 0.5,
+                "high": 1.0,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": 0.14285714285714285,
+                "high": 0.4827586206896552,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "f1": {
+                "low": 0.5098039215686274,
+                "high": 0.7887323943661971,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": 0.4351649305555556,
+                "high": 0.8989547038327527,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": 0.7109364881777099,
+                "high": 0.9818064913574073,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": 0.17612691222648183,
+                "high": 0.2782482473438153,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": 0.2131392781079436,
+                "high": 0.40008341624246274,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        },
+        "technical_unscored": {
+          "eligible_ecgs": 0,
+          "reference_states": {},
+          "reference_components": {},
+          "known_scored_ecgs": 0,
+          "positive_components_scored": 0,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "status": "no_known_scored_references"
+        },
+        "jointly_scored_baseline": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "negative": 55,
+            "positive": 142,
+            "unknown": 3
+          },
+          "reference_components": {
+            "negative": 55,
+            "positive": 142,
+            "unknown": 3
+          },
+          "known_scored_ecgs": 197,
+          "positive_components_scored": 142,
+          "negative_components_scored": 55,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 45,
+            "fp": 10,
+            "fn": 51,
+            "tp": 91
+          },
+          "positive_reference_sensitivity": 0.6408450704225352,
+          "metrics": {
+            "rows": 197,
+            "positive_support": 142,
+            "negative_support": 55,
+            "predicted_positive_support": 101,
+            "tp": 91,
+            "tn": 45,
+            "fp": 10,
+            "fn": 51,
+            "accuracy": 0.6903553299492385,
+            "precision": 0.900990099009901,
+            "recall": 0.6408450704225352,
+            "specificity": 0.8181818181818182,
+            "f1": 0.7489711934156379,
+            "probability_rows": 197,
+            "missing_probability_rows": 0,
+            "probability_positive_support": 142,
+            "probability_negative_support": 55,
+            "auroc": 0.7792573623559539,
+            "average_precision": 0.8568470320622608,
+            "brier_score": 0.20350282018953553,
+            "ece": 0.22047377818560718,
+            "undefined": {},
+            "npv": 0.46875
+          },
+          "status": "evaluated",
+          "cluster_intervals": {
+            "unit": "patient_or_record_group",
+            "groups": 197,
+            "seed": 197837,
+            "n_bootstrap": 2000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": 0.6243654822335025,
+                "high": 0.7563451776649747,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": 0.8333333333333334,
+                "high": 0.9545454545454546,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": 0.5633698487219615,
+                "high": 0.7183150756390193,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": 0.7058823529411765,
+                "high": 0.9107142857142857,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": 0.36665841584158415,
+                "high": 0.5698924731182796,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "f1": {
+                "low": 0.6837606837606838,
+                "high": 0.8085184605757195,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": 0.6919654021070482,
+                "high": 0.8626930624433422,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": 0.7805513090624054,
+                "high": 0.9288244355191564,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": 0.16881372877221457,
+                "high": 0.23804835486829568,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": 0.1738076986772922,
+                "high": 0.2797455672638137,
+                "valid_replicates": 2000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        }
+      },
+      "joint_positive_disposition": {
+        "abstained_positive_no_output": 38,
+        "emitted_tp": 71,
+        "abstained_baseline_counterfactual_fn": 18,
+        "emitted_fn": 33,
+        "all_reference_positives": 142
+      },
+      "route_scope_note": "For abstained and technical routes, per-profile baseline decisions are counterfactual only."
+    },
+    "P8:RBBB": {
+      "estimates": {
+        "all_eligible": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "unknown": 196,
+            "positive": 4
+          },
+          "reference_components": {
+            "unknown": 196,
+            "positive": 4
+          },
+          "known_scored_ecgs": 4,
+          "positive_components_scored": 4,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 0,
+            "fp": 0,
+            "fn": 1,
+            "tp": 3
+          },
+          "positive_reference_sensitivity": 0.75,
+          "status": "one_reference_polarity_only"
+        },
+        "restricted_known_positive_profile": {
+          "eligible_ecgs": 188,
+          "reference_states": {
+            "unknown": 184,
+            "positive": 4
+          },
+          "reference_components": {
+            "unknown": 184,
+            "positive": 4
+          },
+          "known_scored_ecgs": 4,
+          "positive_components_scored": 4,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 0,
+            "fp": 0,
+            "fn": 1,
+            "tp": 3
+          },
+          "positive_reference_sensitivity": 0.75,
+          "status": "one_reference_polarity_only"
+        },
+        "accepted": {
+          "eligible_ecgs": 152,
+          "reference_states": {
+            "unknown": 148,
+            "positive": 4
+          },
+          "reference_components": {
+            "unknown": 148,
+            "positive": 4
+          },
+          "known_scored_ecgs": 4,
+          "positive_components_scored": 4,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 0,
+            "fp": 0,
+            "fn": 1,
+            "tp": 3
+          },
+          "positive_reference_sensitivity": 0.75,
+          "status": "one_reference_polarity_only"
+        },
+        "abstained": {
+          "eligible_ecgs": 48,
+          "reference_states": {
+            "unknown": 48
+          },
+          "reference_components": {
+            "unknown": 48
+          },
+          "known_scored_ecgs": 0,
+          "positive_components_scored": 0,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "status": "no_known_scored_references"
+        },
+        "technical_unscored": {
+          "eligible_ecgs": 0,
+          "reference_states": {},
+          "reference_components": {},
+          "known_scored_ecgs": 0,
+          "positive_components_scored": 0,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "status": "no_known_scored_references"
+        },
+        "jointly_scored_baseline": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "unknown": 196,
+            "positive": 4
+          },
+          "reference_components": {
+            "unknown": 196,
+            "positive": 4
+          },
+          "known_scored_ecgs": 4,
+          "positive_components_scored": 4,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 0,
+            "fp": 0,
+            "fn": 1,
+            "tp": 3
+          },
+          "positive_reference_sensitivity": 0.75,
+          "status": "one_reference_polarity_only"
+        }
+      },
+      "joint_positive_disposition": {
+        "emitted_tp": 3,
+        "emitted_fn": 1,
+        "all_reference_positives": 4
+      },
+      "route_scope_note": "For abstained and technical routes, per-profile baseline decisions are counterfactual only."
+    },
+    "P8:PAC": {
+      "estimates": {
+        "all_eligible": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "unknown": 193,
+            "positive": 7
+          },
+          "reference_components": {
+            "unknown": 193,
+            "positive": 7
+          },
+          "known_scored_ecgs": 7,
+          "positive_components_scored": 7,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 0,
+            "fp": 0,
+            "fn": 5,
+            "tp": 2
+          },
+          "positive_reference_sensitivity": 0.2857142857142857,
+          "status": "one_reference_polarity_only"
+        },
+        "restricted_known_positive_profile": {
+          "eligible_ecgs": 188,
+          "reference_states": {
+            "unknown": 181,
+            "positive": 7
+          },
+          "reference_components": {
+            "unknown": 181,
+            "positive": 7
+          },
+          "known_scored_ecgs": 7,
+          "positive_components_scored": 7,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 0,
+            "fp": 0,
+            "fn": 5,
+            "tp": 2
+          },
+          "positive_reference_sensitivity": 0.2857142857142857,
+          "status": "one_reference_polarity_only"
+        },
+        "accepted": {
+          "eligible_ecgs": 152,
+          "reference_states": {
+            "unknown": 148,
+            "positive": 4
+          },
+          "reference_components": {
+            "unknown": 148,
+            "positive": 4
+          },
+          "known_scored_ecgs": 4,
+          "positive_components_scored": 4,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 0,
+            "fp": 0,
+            "fn": 4,
+            "tp": 0
+          },
+          "positive_reference_sensitivity": 0.0,
+          "status": "one_reference_polarity_only"
+        },
+        "abstained": {
+          "eligible_ecgs": 48,
+          "reference_states": {
+            "unknown": 45,
+            "positive": 3
+          },
+          "reference_components": {
+            "unknown": 45,
+            "positive": 3
+          },
+          "known_scored_ecgs": 3,
+          "positive_components_scored": 3,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 0,
+            "fp": 0,
+            "fn": 1,
+            "tp": 2
+          },
+          "positive_reference_sensitivity": 0.6666666666666666,
+          "status": "one_reference_polarity_only"
+        },
+        "technical_unscored": {
+          "eligible_ecgs": 0,
+          "reference_states": {},
+          "reference_components": {},
+          "known_scored_ecgs": 0,
+          "positive_components_scored": 0,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "status": "no_known_scored_references"
+        },
+        "jointly_scored_baseline": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "unknown": 193,
+            "positive": 7
+          },
+          "reference_components": {
+            "unknown": 193,
+            "positive": 7
+          },
+          "known_scored_ecgs": 7,
+          "positive_components_scored": 7,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 0,
+            "fp": 0,
+            "fn": 5,
+            "tp": 2
+          },
+          "positive_reference_sensitivity": 0.2857142857142857,
+          "status": "one_reference_polarity_only"
+        }
+      },
+      "joint_positive_disposition": {
+        "emitted_fn": 4,
+        "abstained_positive_no_output": 3,
+        "abstained_baseline_counterfactual_fn": 1,
+        "all_reference_positives": 7
+      },
+      "route_scope_note": "For abstained and technical routes, per-profile baseline decisions are counterfactual only."
+    },
+    "P8:1AVB": {
+      "estimates": {
+        "all_eligible": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "unknown": 190,
+            "positive": 10
+          },
+          "reference_components": {
+            "unknown": 190,
+            "positive": 10
+          },
+          "known_scored_ecgs": 10,
+          "positive_components_scored": 10,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 0,
+            "fp": 0,
+            "fn": 7,
+            "tp": 3
+          },
+          "positive_reference_sensitivity": 0.3,
+          "status": "one_reference_polarity_only"
+        },
+        "restricted_known_positive_profile": {
+          "eligible_ecgs": 188,
+          "reference_states": {
+            "unknown": 178,
+            "positive": 10
+          },
+          "reference_components": {
+            "unknown": 178,
+            "positive": 10
+          },
+          "known_scored_ecgs": 10,
+          "positive_components_scored": 10,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 0,
+            "fp": 0,
+            "fn": 7,
+            "tp": 3
+          },
+          "positive_reference_sensitivity": 0.3,
+          "status": "one_reference_polarity_only"
+        },
+        "accepted": {
+          "eligible_ecgs": 152,
+          "reference_states": {
+            "unknown": 145,
+            "positive": 7
+          },
+          "reference_components": {
+            "unknown": 145,
+            "positive": 7
+          },
+          "known_scored_ecgs": 7,
+          "positive_components_scored": 7,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 0,
+            "fp": 0,
+            "fn": 5,
+            "tp": 2
+          },
+          "positive_reference_sensitivity": 0.2857142857142857,
+          "status": "one_reference_polarity_only"
+        },
+        "abstained": {
+          "eligible_ecgs": 48,
+          "reference_states": {
+            "unknown": 45,
+            "positive": 3
+          },
+          "reference_components": {
+            "unknown": 45,
+            "positive": 3
+          },
+          "known_scored_ecgs": 3,
+          "positive_components_scored": 3,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 0,
+            "fp": 0,
+            "fn": 2,
+            "tp": 1
+          },
+          "positive_reference_sensitivity": 0.3333333333333333,
+          "status": "one_reference_polarity_only"
+        },
+        "technical_unscored": {
+          "eligible_ecgs": 0,
+          "reference_states": {},
+          "reference_components": {},
+          "known_scored_ecgs": 0,
+          "positive_components_scored": 0,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "status": "no_known_scored_references"
+        },
+        "jointly_scored_baseline": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "unknown": 190,
+            "positive": 10
+          },
+          "reference_components": {
+            "unknown": 190,
+            "positive": 10
+          },
+          "known_scored_ecgs": 10,
+          "positive_components_scored": 10,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 0,
+            "fp": 0,
+            "fn": 7,
+            "tp": 3
+          },
+          "positive_reference_sensitivity": 0.3,
+          "status": "one_reference_polarity_only"
+        }
+      },
+      "joint_positive_disposition": {
+        "emitted_tp": 2,
+        "abstained_positive_no_output": 3,
+        "abstained_baseline_counterfactual_fn": 2,
+        "emitted_fn": 5,
+        "all_reference_positives": 10
+      },
+      "route_scope_note": "For abstained and technical routes, per-profile baseline decisions are counterfactual only."
+    },
+    "P8:PVC": {
+      "estimates": {
+        "all_eligible": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "unknown": 193,
+            "positive": 7
+          },
+          "reference_components": {
+            "unknown": 193,
+            "positive": 7
+          },
+          "known_scored_ecgs": 7,
+          "positive_components_scored": 7,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 0,
+            "fp": 0,
+            "fn": 2,
+            "tp": 5
+          },
+          "positive_reference_sensitivity": 0.7142857142857143,
+          "status": "one_reference_polarity_only"
+        },
+        "restricted_known_positive_profile": {
+          "eligible_ecgs": 188,
+          "reference_states": {
+            "unknown": 181,
+            "positive": 7
+          },
+          "reference_components": {
+            "unknown": 181,
+            "positive": 7
+          },
+          "known_scored_ecgs": 7,
+          "positive_components_scored": 7,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 0,
+            "fp": 0,
+            "fn": 2,
+            "tp": 5
+          },
+          "positive_reference_sensitivity": 0.7142857142857143,
+          "status": "one_reference_polarity_only"
+        },
+        "accepted": {
+          "eligible_ecgs": 152,
+          "reference_states": {
+            "unknown": 148,
+            "positive": 4
+          },
+          "reference_components": {
+            "unknown": 148,
+            "positive": 4
+          },
+          "known_scored_ecgs": 4,
+          "positive_components_scored": 4,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 0,
+            "fp": 0,
+            "fn": 1,
+            "tp": 3
+          },
+          "positive_reference_sensitivity": 0.75,
+          "status": "one_reference_polarity_only"
+        },
+        "abstained": {
+          "eligible_ecgs": 48,
+          "reference_states": {
+            "unknown": 45,
+            "positive": 3
+          },
+          "reference_components": {
+            "unknown": 45,
+            "positive": 3
+          },
+          "known_scored_ecgs": 3,
+          "positive_components_scored": 3,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 0,
+            "fp": 0,
+            "fn": 1,
+            "tp": 2
+          },
+          "positive_reference_sensitivity": 0.6666666666666666,
+          "status": "one_reference_polarity_only"
+        },
+        "technical_unscored": {
+          "eligible_ecgs": 0,
+          "reference_states": {},
+          "reference_components": {},
+          "known_scored_ecgs": 0,
+          "positive_components_scored": 0,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "status": "no_known_scored_references"
+        },
+        "jointly_scored_baseline": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "unknown": 193,
+            "positive": 7
+          },
+          "reference_components": {
+            "unknown": 193,
+            "positive": 7
+          },
+          "known_scored_ecgs": 7,
+          "positive_components_scored": 7,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 0,
+            "fp": 0,
+            "fn": 2,
+            "tp": 5
+          },
+          "positive_reference_sensitivity": 0.7142857142857143,
+          "status": "one_reference_polarity_only"
+        }
+      },
+      "joint_positive_disposition": {
+        "abstained_positive_no_output": 3,
+        "abstained_baseline_counterfactual_fn": 1,
+        "emitted_tp": 3,
+        "emitted_fn": 1,
+        "all_reference_positives": 7
+      },
+      "route_scope_note": "For abstained and technical routes, per-profile baseline decisions are counterfactual only."
+    },
+    "P4:ASMI": {
+      "estimates": {
+        "all_eligible": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "unknown": 200
+          },
+          "reference_components": {
+            "unknown": 200
+          },
+          "known_scored_ecgs": 0,
+          "positive_components_scored": 0,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "status": "no_known_scored_references"
+        },
+        "restricted_known_positive_profile": {
+          "eligible_ecgs": 108,
+          "reference_states": {
+            "unknown": 108
+          },
+          "reference_components": {
+            "unknown": 108
+          },
+          "known_scored_ecgs": 0,
+          "positive_components_scored": 0,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "status": "no_known_scored_references"
+        },
+        "accepted": {
+          "eligible_ecgs": 152,
+          "reference_states": {
+            "unknown": 152
+          },
+          "reference_components": {
+            "unknown": 152
+          },
+          "known_scored_ecgs": 0,
+          "positive_components_scored": 0,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "status": "no_known_scored_references"
+        },
+        "abstained": {
+          "eligible_ecgs": 48,
+          "reference_states": {
+            "unknown": 48
+          },
+          "reference_components": {
+            "unknown": 48
+          },
+          "known_scored_ecgs": 0,
+          "positive_components_scored": 0,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "status": "no_known_scored_references"
+        },
+        "technical_unscored": {
+          "eligible_ecgs": 0,
+          "reference_states": {},
+          "reference_components": {},
+          "known_scored_ecgs": 0,
+          "positive_components_scored": 0,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "status": "no_known_scored_references"
+        },
+        "jointly_scored_baseline": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "unknown": 200
+          },
+          "reference_components": {
+            "unknown": 200
+          },
+          "known_scored_ecgs": 0,
+          "positive_components_scored": 0,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "status": "no_known_scored_references"
+        }
+      },
+      "joint_positive_disposition": {
+        "all_reference_positives": 0
+      },
+      "route_scope_note": "For abstained and technical routes, per-profile baseline decisions are counterfactual only."
+    },
+    "P4:LVH": {
+      "estimates": {
+        "all_eligible": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "positive": 108,
+            "unknown": 92
+          },
+          "reference_components": {
+            "positive": 108,
+            "unknown": 92
+          },
+          "known_scored_ecgs": 108,
+          "positive_components_scored": 108,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 0,
+            "fp": 0,
+            "fn": 69,
+            "tp": 39
+          },
+          "positive_reference_sensitivity": 0.3611111111111111,
+          "status": "one_reference_polarity_only"
+        },
+        "restricted_known_positive_profile": {
+          "eligible_ecgs": 108,
+          "reference_states": {
+            "positive": 108
+          },
+          "reference_components": {
+            "positive": 108
+          },
+          "known_scored_ecgs": 108,
+          "positive_components_scored": 108,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 0,
+            "fp": 0,
+            "fn": 69,
+            "tp": 39
+          },
+          "positive_reference_sensitivity": 0.3611111111111111,
+          "status": "one_reference_polarity_only"
+        },
+        "accepted": {
+          "eligible_ecgs": 152,
+          "reference_states": {
+            "positive": 82,
+            "unknown": 70
+          },
+          "reference_components": {
+            "positive": 82,
+            "unknown": 70
+          },
+          "known_scored_ecgs": 82,
+          "positive_components_scored": 82,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 0,
+            "fp": 0,
+            "fn": 49,
+            "tp": 33
+          },
+          "positive_reference_sensitivity": 0.4024390243902439,
+          "status": "one_reference_polarity_only"
+        },
+        "abstained": {
+          "eligible_ecgs": 48,
+          "reference_states": {
+            "positive": 26,
+            "unknown": 22
+          },
+          "reference_components": {
+            "positive": 26,
+            "unknown": 22
+          },
+          "known_scored_ecgs": 26,
+          "positive_components_scored": 26,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 0,
+            "fp": 0,
+            "fn": 20,
+            "tp": 6
+          },
+          "positive_reference_sensitivity": 0.23076923076923078,
+          "status": "one_reference_polarity_only"
+        },
+        "technical_unscored": {
+          "eligible_ecgs": 0,
+          "reference_states": {},
+          "reference_components": {},
+          "known_scored_ecgs": 0,
+          "positive_components_scored": 0,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "status": "no_known_scored_references"
+        },
+        "jointly_scored_baseline": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "positive": 108,
+            "unknown": 92
+          },
+          "reference_components": {
+            "positive": 108,
+            "unknown": 92
+          },
+          "known_scored_ecgs": 108,
+          "positive_components_scored": 108,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 0,
+            "fp": 0,
+            "fn": 69,
+            "tp": 39
+          },
+          "positive_reference_sensitivity": 0.3611111111111111,
+          "status": "one_reference_polarity_only"
+        }
+      },
+      "joint_positive_disposition": {
+        "emitted_tp": 33,
+        "abstained_positive_no_output": 26,
+        "abstained_baseline_counterfactual_fn": 20,
+        "emitted_fn": 49,
+        "all_reference_positives": 108
+      },
+      "route_scope_note": "For abstained and technical routes, per-profile baseline decisions are counterfactual only."
+    },
+    "P4:IMI": {
+      "estimates": {
+        "all_eligible": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "unknown": 200
+          },
+          "reference_components": {
+            "unknown": 200
+          },
+          "known_scored_ecgs": 0,
+          "positive_components_scored": 0,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "status": "no_known_scored_references"
+        },
+        "restricted_known_positive_profile": {
+          "eligible_ecgs": 108,
+          "reference_states": {
+            "unknown": 108
+          },
+          "reference_components": {
+            "unknown": 108
+          },
+          "known_scored_ecgs": 0,
+          "positive_components_scored": 0,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "status": "no_known_scored_references"
+        },
+        "accepted": {
+          "eligible_ecgs": 152,
+          "reference_states": {
+            "unknown": 152
+          },
+          "reference_components": {
+            "unknown": 152
+          },
+          "known_scored_ecgs": 0,
+          "positive_components_scored": 0,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "status": "no_known_scored_references"
+        },
+        "abstained": {
+          "eligible_ecgs": 48,
+          "reference_states": {
+            "unknown": 48
+          },
+          "reference_components": {
+            "unknown": 48
+          },
+          "known_scored_ecgs": 0,
+          "positive_components_scored": 0,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "status": "no_known_scored_references"
+        },
+        "technical_unscored": {
+          "eligible_ecgs": 0,
+          "reference_states": {},
+          "reference_components": {},
+          "known_scored_ecgs": 0,
+          "positive_components_scored": 0,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "status": "no_known_scored_references"
+        },
+        "jointly_scored_baseline": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "unknown": 200
+          },
+          "reference_components": {
+            "unknown": 200
+          },
+          "known_scored_ecgs": 0,
+          "positive_components_scored": 0,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "status": "no_known_scored_references"
+        }
+      },
+      "joint_positive_disposition": {
+        "all_reference_positives": 0
+      },
+      "route_scope_note": "For abstained and technical routes, per-profile baseline decisions are counterfactual only."
+    },
+    "P4:ISC_": {
+      "estimates": {
+        "all_eligible": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "unknown": 200
+          },
+          "reference_components": {
+            "unknown": 200
+          },
+          "known_scored_ecgs": 0,
+          "positive_components_scored": 0,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "status": "no_known_scored_references"
+        },
+        "restricted_known_positive_profile": {
+          "eligible_ecgs": 108,
+          "reference_states": {
+            "unknown": 108
+          },
+          "reference_components": {
+            "unknown": 108
+          },
+          "known_scored_ecgs": 0,
+          "positive_components_scored": 0,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "status": "no_known_scored_references"
+        },
+        "accepted": {
+          "eligible_ecgs": 152,
+          "reference_states": {
+            "unknown": 152
+          },
+          "reference_components": {
+            "unknown": 152
+          },
+          "known_scored_ecgs": 0,
+          "positive_components_scored": 0,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "status": "no_known_scored_references"
+        },
+        "abstained": {
+          "eligible_ecgs": 48,
+          "reference_states": {
+            "unknown": 48
+          },
+          "reference_components": {
+            "unknown": 48
+          },
+          "known_scored_ecgs": 0,
+          "positive_components_scored": 0,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "status": "no_known_scored_references"
+        },
+        "technical_unscored": {
+          "eligible_ecgs": 0,
+          "reference_states": {},
+          "reference_components": {},
+          "known_scored_ecgs": 0,
+          "positive_components_scored": 0,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "status": "no_known_scored_references"
+        },
+        "jointly_scored_baseline": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "unknown": 200
+          },
+          "reference_components": {
+            "unknown": 200
+          },
+          "known_scored_ecgs": 0,
+          "positive_components_scored": 0,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "status": "no_known_scored_references"
+        }
+      },
+      "joint_positive_disposition": {
+        "all_reference_positives": 0
+      },
+      "route_scope_note": "For abstained and technical routes, per-profile baseline decisions are counterfactual only."
+    }
+  },
+  "auxiliary_and_other": {
+    "2AVB": {
+      "released_auxiliary": {
+        "all_eligible": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "unknown": 200
+          },
+          "reference_components": {
+            "unknown": 200
+          },
+          "known_scored_ecgs": 0,
+          "positive_components_scored": 0,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "status": "no_known_scored_references"
+        }
+      },
+      "separately_trained_sph_head": {
+        "all_eligible": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "unknown": 200
+          },
+          "reference_components": {
+            "unknown": 200
+          },
+          "known_scored_ecgs": 0,
+          "positive_components_scored": 0,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "status": "no_known_scored_references"
+        }
+      }
+    },
+    "3AVB": {
+      "released_auxiliary": {
+        "all_eligible": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "unknown": 195,
+            "positive": 5
+          },
+          "reference_components": {
+            "unknown": 195,
+            "positive": 5
+          },
+          "known_scored_ecgs": 5,
+          "positive_components_scored": 5,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "status": "one_reference_polarity_only"
+        }
+      },
+      "candidate_status": "insufficient_training_or_calibration_support"
+    },
+    "ALMI": {
+      "released_auxiliary": {
+        "all_eligible": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "unknown": 200
+          },
+          "reference_components": {
+            "unknown": 200
+          },
+          "known_scored_ecgs": 0,
+          "positive_components_scored": 0,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "status": "no_known_scored_references"
+        }
+      },
+      "candidate_status": "no_compatible_calibrated_head"
+    },
+    "Flutter": {
+      "released_auxiliary": {
+        "all_eligible": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "negative": 194,
+            "positive": 3,
+            "unknown": 3
+          },
+          "reference_components": {
+            "negative": 194,
+            "positive": 3,
+            "unknown": 3
+          },
+          "known_scored_ecgs": 197,
+          "positive_components_scored": 3,
+          "negative_components_scored": 194,
+          "no_output": 0,
+          "ranking": {
+            "positive": 3,
+            "auroc": 0.10481099656357389,
+            "average_precision": 0.011209077680366261,
+            "compatible_reference_negatives": 194
+          },
+          "status": "sparse_rank_only"
+        }
+      },
+      "separately_trained_sph_head": {
+        "all_eligible": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "negative": 194,
+            "positive": 3,
+            "unknown": 3
+          },
+          "reference_components": {
+            "negative": 194,
+            "positive": 3,
+            "unknown": 3
+          },
+          "known_scored_ecgs": 197,
+          "positive_components_scored": 3,
+          "negative_components_scored": 194,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 180,
+            "fp": 14,
+            "fn": 0,
+            "tp": 3
+          },
+          "positive_reference_sensitivity": 1.0,
+          "metrics": {
+            "rows": 197,
+            "positive_support": 3,
+            "negative_support": 194,
+            "predicted_positive_support": 17,
+            "tp": 3,
+            "tn": 180,
+            "fp": 14,
+            "fn": 0,
+            "accuracy": 0.9289340101522843,
+            "precision": 0.17647058823529413,
+            "recall": 1.0,
+            "specificity": 0.9278350515463918,
+            "f1": 0.3,
+            "probability_rows": 197,
+            "missing_probability_rows": 0,
+            "probability_positive_support": 3,
+            "probability_negative_support": 194,
+            "auroc": 0.9896907216494846,
+            "average_precision": 0.4777777777777778,
+            "brier_score": 0.05099968666114245,
+            "ece": 0.0718690075261699,
+            "undefined": {},
+            "npv": 1.0
+          },
+          "status": "sparse_descriptive"
+        }
+      }
+    },
+    "ILMI": {
+      "released_auxiliary": {
+        "all_eligible": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "unknown": 200
+          },
+          "reference_components": {
+            "unknown": 200
+          },
+          "known_scored_ecgs": 0,
+          "positive_components_scored": 0,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "status": "no_known_scored_references"
+        }
+      },
+      "candidate_status": "no_compatible_calibrated_head"
+    },
+    "LAE": {
+      "released_auxiliary": {
+        "all_eligible": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "unknown": 200
+          },
+          "reference_components": {
+            "unknown": 200
+          },
+          "known_scored_ecgs": 0,
+          "positive_components_scored": 0,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "status": "no_known_scored_references"
+        }
+      },
+      "candidate_status": "no_compatible_calibrated_head"
+    },
+    "LBBB": {
+      "released_auxiliary": {
+        "all_eligible": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "unknown": 196,
+            "positive": 4
+          },
+          "reference_components": {
+            "unknown": 196,
+            "positive": 4
+          },
+          "known_scored_ecgs": 4,
+          "positive_components_scored": 4,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "status": "one_reference_polarity_only"
+        }
+      },
+      "separately_trained_sph_head": {
+        "all_eligible": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "unknown": 196,
+            "positive": 4
+          },
+          "reference_components": {
+            "unknown": 196,
+            "positive": 4
+          },
+          "known_scored_ecgs": 4,
+          "positive_components_scored": 4,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 0,
+            "fp": 0,
+            "fn": 0,
+            "tp": 4
+          },
+          "positive_reference_sensitivity": 1.0,
+          "status": "one_reference_polarity_only"
+        }
+      }
+    },
+    "LQTS": {
+      "released_auxiliary": {
+        "all_eligible": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "unknown": 200
+          },
+          "reference_components": {
+            "unknown": 200
+          },
+          "known_scored_ecgs": 0,
+          "positive_components_scored": 0,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "status": "no_known_scored_references"
+        }
+      },
+      "candidate_status": "no_compatible_calibrated_head"
+    },
+    "NSR": {
+      "released_auxiliary": {
+        "all_eligible": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "negative": 55,
+            "positive": 142,
+            "unknown": 3
+          },
+          "reference_components": {
+            "negative": 55,
+            "positive": 142,
+            "unknown": 3
+          },
+          "known_scored_ecgs": 0,
+          "positive_components_scored": 0,
+          "negative_components_scored": 0,
+          "no_output": 200,
+          "status": "no_known_scored_references"
+        }
+      },
+      "candidate_status": "no_compatible_calibrated_head"
+    },
+    "Other_pathology_unvalidated": {
+      "released_auxiliary": {
+        "all_eligible": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "unknown": 200
+          },
+          "reference_components": {
+            "unknown": 200
+          },
+          "known_scored_ecgs": 0,
+          "positive_components_scored": 0,
+          "negative_components_scored": 0,
+          "no_output": 200,
+          "status": "no_known_scored_references"
+        }
+      },
+      "candidate_status": "no_compatible_calibrated_head"
+    },
+    "P6_Other_mapped": {
+      "released_auxiliary": {
+        "all_eligible": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "unknown": 181,
+            "positive": 19
+          },
+          "reference_components": {
+            "unknown": 181,
+            "positive": 19
+          },
+          "known_scored_ecgs": 0,
+          "positive_components_scored": 0,
+          "negative_components_scored": 0,
+          "no_output": 200,
+          "status": "no_known_scored_references"
+        }
+      },
+      "separately_trained_sph_head": {
+        "all_eligible": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "unknown": 181,
+            "positive": 19
+          },
+          "reference_components": {
+            "unknown": 181,
+            "positive": 19
+          },
+          "known_scored_ecgs": 19,
+          "positive_components_scored": 19,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 0,
+            "fp": 0,
+            "fn": 6,
+            "tp": 13
+          },
+          "positive_reference_sensitivity": 0.6842105263157895,
+          "status": "one_reference_polarity_only"
+        }
+      }
+    },
+    "P8_Other_mapped": {
+      "released_auxiliary": {
+        "all_eligible": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "unknown": 188,
+            "positive": 12
+          },
+          "reference_components": {
+            "unknown": 188,
+            "positive": 12
+          },
+          "known_scored_ecgs": 0,
+          "positive_components_scored": 0,
+          "negative_components_scored": 0,
+          "no_output": 200,
+          "status": "no_known_scored_references"
+        }
+      },
+      "separately_trained_sph_head": {
+        "all_eligible": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "unknown": 188,
+            "positive": 12
+          },
+          "reference_components": {
+            "unknown": 188,
+            "positive": 12
+          },
+          "known_scored_ecgs": 12,
+          "positive_components_scored": 12,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "descriptive_confusion": {
+            "tn": 0,
+            "fp": 0,
+            "fn": 5,
+            "tp": 7
+          },
+          "positive_reference_sensitivity": 0.5833333333333334,
+          "status": "one_reference_polarity_only"
+        }
+      }
+    },
+    "PAC": {
+      "released_auxiliary": {
+        "all_eligible": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "unknown": 193,
+            "positive": 7
+          },
+          "reference_components": {
+            "unknown": 193,
+            "positive": 7
+          },
+          "known_scored_ecgs": 0,
+          "positive_components_scored": 0,
+          "negative_components_scored": 0,
+          "no_output": 200,
+          "status": "no_known_scored_references"
+        }
+      },
+      "candidate_status": "no_compatible_calibrated_head"
+    },
+    "Paced": {
+      "released_auxiliary": {
+        "all_eligible": {
+          "eligible_ecgs": 200,
+          "reference_states": {
+            "unknown": 191,
+            "positive": 9
+          },
+          "reference_components": {
+            "unknown": 191,
+            "positive": 9
+          },
+          "known_scored_ecgs": 9,
+          "positive_components_scored": 9,
+          "negative_components_scored": 0,
+          "no_output": 0,
+          "status": "one_reference_polarity_only"
+        }
+      },
+      "candidate_status": "no_compatible_calibrated_head"
+    }
+  },
+  "matched_restricted_contrast": {
+    "P6": {
+      "matched_endpoints": [
+        "P6:AFIB",
+        "P6:SB"
+      ],
+      "means": {
+        "all_eligible": {
+          "f1": 0.6948529411764706,
+          "accuracy": 0.9187817258883249
+        },
+        "restricted_known_positive_profile": {
+          "f1": 0.8777777777777778,
+          "accuracy": 0.923728813559322
+        }
+      }
+    },
+    "P8": {
+      "matched_endpoints": [
+        "P8:AFIB",
+        "P8:SB",
+        "P8:NSR"
+      ],
+      "means": {
+        "all_eligible": {
+          "f1": 0.7074822677239118,
+          "accuracy": 0.8257191201353637
+        },
+        "restricted_known_positive_profile": {
+          "f1": 0.7407444054156566,
+          "accuracy": 0.8315602836879433
+        }
+      }
+    },
+    "P4": {
+      "matched_endpoints": [],
+      "means": {
+        "all_eligible": {
+          "f1": null,
+          "accuracy": null
+        },
+        "restricted_known_positive_profile": {
+          "f1": null,
+          "accuracy": null
+        }
+      }
+    }
+  },
+  "matched_selective_contrast": {
+    "matched_endpoints": [
+      "P8:AFIB",
+      "P8:SB",
+      "P8:NSR"
+    ],
+    "means": {
+      "jointly_scored_baseline": {
+        "f1": 0.7074822677239118,
+        "accuracy": 0.8257191201353637
+      },
+      "accepted": {
+        "f1": 0.7269778865728721,
+        "accuracy": 0.8322147651006712
+      }
+    }
+  },
+  "reference_principal_rhythm_counts": {
+    "SB": 24,
+    "NSR": 142,
+    "AFIB": 15,
+    "other_specified_principal_rhythm": 9,
+    "Flutter": 3,
+    "STACH": 4,
+    "unknown": 3
+  },
+  "joint_selective": {
+    "routes": {
+      "accepted": 152,
+      "abstained": 48
+    },
+    "denominator_all_eligible": 200,
+    "denominator_scored_jointly": 200,
+    "opportunity_denominators": {
+      "baseline": 924,
+      "accepted": 697,
+      "abstained_counterfactual": 227
+    },
+    "wrong_opportunities": {
+      "baseline": 192,
+      "accepted": 139,
+      "abstained_counterfactual": 53
+    },
+    "coverage_all_eligible": 0.76,
+    "abstention_all_eligible": 0.24,
+    "risk_baseline": 0.2077922077922078,
+    "risk_accepted": 0.1994261119081779,
+    "risk_abstained_counterfactual": 0.23348017621145375,
+    "aurc_scored": 0.16306954242013888,
+    "cluster_intervals": {
+      "coverage_all_eligible": {
+        "bounds": [
+          0.7,
+          0.82
+        ],
+        "valid": 2000,
+        "invalid": 0
+      },
+      "abstention_all_eligible": {
+        "bounds": [
+          0.18,
+          0.3
+        ],
+        "valid": 2000,
+        "invalid": 0
+      },
+      "risk_baseline": {
+        "bounds": [
+          0.18241485591000153,
+          0.23415733048715823
+        ],
+        "valid": 2000,
+        "invalid": 0
+      },
+      "risk_accepted": {
+        "bounds": [
+          0.16863360323886642,
+          0.2311158818097876
+        ],
+        "valid": 2000,
+        "invalid": 0
+      },
+      "risk_abstained_counterfactual": {
+        "bounds": [
+          0.17982456140350878,
+          0.2850877192982456
+        ],
+        "valid": 2000,
+        "invalid": 0
+      },
+      "aurc_scored": {
+        "bounds": [
+          0.1283849626713639,
+          0.1979696375219314
+        ],
+        "valid": 2000,
+        "invalid": 0
+      }
+    },
+    "risk_coverage_grid": {
+      "attained_coverage": [
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        1.0
+      ],
+      "risk": [
+        0.07777777777777778,
+        0.12280701754385964,
+        0.13307984790874525,
+        0.15714285714285714,
+        0.17488789237668162,
+        0.18114602587800369,
+        0.19626168224299065,
+        0.19972826086956522,
+        0.2036144578313253,
+        0.2077922077922078
+      ]
+    }
+  },
+  "routing_by_principal_rhythm": {
+    "AFIB": {
+      "accepted": 12,
+      "abstained": 3
+    },
+    "Flutter": {
+      "accepted": 2,
+      "abstained": 1
+    },
+    "NSR": {
+      "abstained": 38,
+      "accepted": 104
+    },
+    "SB": {
+      "accepted": 20,
+      "abstained": 4
+    },
+    "STACH": {
+      "accepted": 4
+    },
+    "other_specified_principal_rhythm": {
+      "accepted": 7,
+      "abstained": 2
+    },
+    "unknown": {
+      "accepted": 3
+    }
+  }
+}

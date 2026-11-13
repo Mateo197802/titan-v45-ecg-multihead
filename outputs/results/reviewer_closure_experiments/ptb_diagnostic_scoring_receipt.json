@@ -1,0 +1,32 @@
+{
+  "schema": "TITAN_V45_PTB_DIAGNOSTIC_TRANSPORT_V1",
+  "stage": "score",
+  "job": "33737",
+  "protocol_sha256": "3975bb5a8f2bcade7f559146d1c3f30a5553728b8ac94d84f40c4cec3c4d9db2",
+  "source_archive_sha256": "61e00fc9f38a391fc2a0d757dfa6a02a3f915ad7f0095f747e9c44df395371d3",
+  "record_index_sha256": "1bdcd205432b66e98389e095c8ea9f2f642f79265a1874929a9cb6de270852fe",
+  "publisher_manifest_sha256": "994115d0484fe90daaff0e280ff6eeb1d8b76338f93d1687716efa3acf2cea83",
+  "all_source_records": 549,
+  "flow": {
+    "scored": 549
+  },
+  "technical_failure_types": {},
+  "native_model_assets_sha256": {
+    "backbone-v3ag-pathology.pt": "bf71e4cf8acc34031cb3611c7031e0649822e705fd7dcea354a3ea583ce920ee",
+    "specialists-v3ag-primary4-calibrated.pt": "cf5091e962fffb3254b1a71fe57236dd82ea0139093df192511499d931391dbc"
+  },
+  "published_thresholds": {
+    "ASMI": 0.6699999999999999,
+    "LVH": 0.705,
+    "IMI": 0.635,
+    "ISC_": 0.595
+  },
+  "transported_model_sha256": "d3fa39467877354e8b6d438380a965135fe0c5f7aa0d266c27f7417290b7c7ec",
+  "transported_thresholds": {
+    "ALMI": 0.5421124601293071,
+    "ILMI": 0.9400827477495122
+  },
+  "private_scores_sha256": "8217a67b8f23e1f5a1fdf08ebb2703101f027906a1633505191bb8763435e1db",
+  "reference_labels_used_for_scoring": false,
+  "no_individual_records_exported": true
+}

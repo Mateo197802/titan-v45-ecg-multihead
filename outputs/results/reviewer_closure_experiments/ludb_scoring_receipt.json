@@ -1,0 +1,134 @@
+{
+  "schema": "TITAN_V45_CLOSURE_LUDB_SCORE_V1",
+  "job": "33697",
+  "source_archive_sha256": "d03192c7361ab5deeaba3f0d46e274b9ecb0b74c9caf8964151e20f1b5a7df06",
+  "protocol_sha256": "d4f8157e762ba411781c5a04f0b0a7a51a2ff7cd764ffe0bc2bfae1681d6ef6f",
+  "policy_sha256": "c9183320a4dd923f037a93fc014fc2db6bc64f223ff67b5d297e540eefb43ae6",
+  "source_commit": "f4d6be30b0befea739cf2e35df1033230a1f5d10",
+  "no_individual_records_exported": true,
+  "publisher_manifest_sha256": "cccef1f3529519db8f26a333c97a6872a7d0e3e5c64a1448b76b161fd87fb75f",
+  "enrollment_sha256": "2a6ec024c409dfabe22b684e7e8f78011099f9e552c253c27de9cbec25630a5c",
+  "publisher_verified_waveform_files": 400,
+  "eligible_ecgs": 200,
+  "scored_by_profile": {
+    "P6": {
+      "scored": 200
+    },
+    "P8": {
+      "scored": 200
+    },
+    "P4": {
+      "scored": 200
+    }
+  },
+  "routes": {
+    "accepted": 152,
+    "abstained": 48
+  },
+  "technical_failure_types": {},
+  "reference_values_used": false,
+  "route_reference_values_used": false,
+  "thresholds": {
+    "P6": {
+      "AFIB": 0.82,
+      "SB": 0.835,
+      "STACH": 0.7749999999999999,
+      "RBBB": 0.5149999999999999,
+      "1AVB": 0.57,
+      "PVC": 0.42999999999999994
+    },
+    "P8": {
+      "AFIB": 0.8,
+      "SB": 0.55,
+      "STACH": 0.8,
+      "NSR": 0.525,
+      "RBBB": 0.725,
+      "PAC": 0.45,
+      "1AVB": 0.775,
+      "PVC": 0.725
+    },
+    "P4": {
+      "ASMI": 0.6699999999999999,
+      "LVH": 0.705,
+      "IMI": 0.635,
+      "ISC_": 0.595
+    }
+  },
+  "model_hashes": {
+    "backbone-v3f-original.pt": "ca5d4dcb4b9828e6c4339800fe81ec27f32d9b09a090bb57503bfb56746a8da8",
+    "specialists-v3p-e008-primary6-diagnostic.pt": "9c5a9265a7155e1206c551cc4e6d645b86363ba3dbdeb7baf7b9f173c314be3d",
+    "specialists-v3q-primary8-best-candidate.pt": "b30cb2bbb45f1231c93ff1c196aa966b57b49831cadb296131c0283e7b0ceb02",
+    "backbone-v3ag-pathology.pt": "bf71e4cf8acc34031cb3611c7031e0649822e705fd7dcea354a3ea583ce920ee",
+    "specialists-v3ag-primary4-calibrated.pt": "cf5091e962fffb3254b1a71fe57236dd82ea0139093df192511499d931391dbc"
+  },
+  "private_score_route_ledger_sha256": "44d09296231ebfefea2ed062773ac97d23a7b7bc632bf6fc05414c2ca859accd",
+  "torch": "2.10.0+cu128",
+  "device": "NVIDIA A100-SXM4-40GB",
+  "architecture": {
+    "rhythm_hidden_width_metadata": {
+      "P6": {
+        "declared": 192,
+        "stored": 512,
+        "metadata_matches": false
+      },
+      "P8": {
+        "declared": 192,
+        "stored": 512,
+        "metadata_matches": false
+      }
+    },
+    "P4_hidden_width_from_loaded_tensor": 512,
+    "specialist_input_widths": {
+      "P6": 681,
+      "P8": 681,
+      "P4": 670
+    },
+    "global_head_input_widths": {
+      "rhythm": 650,
+      "pathology": 640
+    },
+    "forward_input_checks": {
+      "V3F_backbone": {
+        "batches": 13,
+        "windows": 200
+      },
+      "V3F_global_rhythm": {
+        "batches": 13,
+        "windows": 200
+      },
+      "V3F_global_pathology": {
+        "batches": 13,
+        "windows": 200
+      },
+      "P6": {
+        "batches": 13,
+        "windows": 200
+      },
+      "P8": {
+        "batches": 13,
+        "windows": 200
+      },
+      "V3AG_backbone": {
+        "batches": 13,
+        "windows": 200
+      },
+      "V3AG_global_rhythm": {
+        "batches": 13,
+        "windows": 200
+      },
+      "V3AG_global_pathology": {
+        "batches": 13,
+        "windows": 200
+      },
+      "P4": {
+        "batches": 13,
+        "windows": 200
+      }
+    },
+    "zero_based_morphology_slice_start": 640,
+    "morphology_dim": 10,
+    "strict_state_dict_load": true
+  },
+  "preprocessor_sha256": "cdef92f694b8a950076131c07e65177984cdac2db3b1a11b1eacb3e569f42275",
+  "morphology_source_sha256": "2bd1c1822ed72d1531b1f62712d8007c7e2f21009056ad1a3ee905f37051fc3d"
+}

@@ -1,0 +1,63 @@
+{
+  "schema": "TITAN_V45_PTB_DIAGNOSTIC_ELIGIBILITY_V1",
+  "scope": "complete provider enrollment; enriched comparator, no inference",
+  "config_sha256": "def53e4ec5cdf58e96b7e57c364808fbe9d3eacd71209506f37bcb6d563db63d",
+  "source": "PhysioNet PTB Diagnostic ECG Database",
+  "version": "1.0.0",
+  "source_records": 549,
+  "source_subjects": 290,
+  "source_record_index_sha256": "1bdcd205432b66e98389e095c8ea9f2f642f79265a1874929a9cb6de270852fe",
+  "publisher_checksum_manifest_sha256": "994115d0484fe90daaff0e280ff6eeb1d8b76338f93d1687716efa3acf2cea83",
+  "verified_headers": 549,
+  "reference_manifest_sha256": "8f64cb20d38d6ad976cc6b9f4efeb692b59f3a411d0bf4a2a01e5653da417275",
+  "endpoints": {
+    "ASMI": {
+      "record_states": {
+        "unknown": 472,
+        "positive": 77
+      },
+      "subject_states": {
+        "no_known_polarity": 263,
+        "positive": 27
+      },
+      "eligible_for_territory_control_comparison": false
+    },
+    "IMI": {
+      "record_states": {
+        "unknown": 460,
+        "positive": 89
+      },
+      "subject_states": {
+        "no_known_polarity": 260,
+        "positive": 30
+      },
+      "eligible_for_territory_control_comparison": false
+    },
+    "ALMI": {
+      "record_states": {
+        "unknown": 506,
+        "positive": 43
+      },
+      "subject_states": {
+        "no_known_polarity": 274,
+        "positive": 16
+      },
+      "eligible_for_territory_control_comparison": false
+    },
+    "ILMI": {
+      "record_states": {
+        "unknown": 496,
+        "positive": 53
+      },
+      "subject_states": {
+        "no_known_polarity": 268,
+        "positive": 22
+      },
+      "eligible_for_territory_control_comparison": false
+    }
+  },
+  "model_performance_computed": false,
+  "historical_independence_certified": false,
+  "waveforms_downloaded": false,
+  "no_individual_records_exported": true
+}

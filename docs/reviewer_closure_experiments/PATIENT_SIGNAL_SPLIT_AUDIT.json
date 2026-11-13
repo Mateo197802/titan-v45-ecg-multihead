@@ -1,0 +1,65 @@
+{
+  "schema": "TITAN_V45_CLOSURE_PARTITION_ASSESSMENT_V1",
+  "status": "FINAL_NATIVE_VERIFIED",
+  "SPH_policy_isolation": {
+    "receipt": "outputs/results/reviewer_closure_experiments/sph_split_and_policy_audit.json",
+    "receipt_sha256": "f133cec9ba402ff7fb19ccf5ecaba8daae66c4f492829e3d0f13caa356fbd2d7",
+    "jobs": [33362, 33414],
+    "ECGs": {"calibration": 12901, "held": 12869},
+    "unique_source_subjects": {"calibration": 12340, "held": 12326},
+    "unique_exact_signal_digests": {"calibration": 12807, "held": 12795},
+    "cross_split_overlap": {"subject": 0, "exact_signal": 0, "connected_component": 0},
+    "exact_cutoffs_rederived": true,
+    "scope": "Isolation between the two partitions of the November SPH policy study, not independence from historical development."
+  },
+  "LUDB_transport": {
+    "full_release_scored": 200,
+    "source_subjects_per_provider": 200,
+    "target_training_or_calibration_ecgs": 0,
+    "native_scoring_job": 33697,
+    "native_reference_audit_job": 33720,
+    "native_reference_audit_sha256": "af72ae7bf04c807a88ea33db3076970aac780c3f7669b145b34b34c64cf87c29",
+    "physical_signals_verified": 200,
+    "distinct_physical_signals": 200,
+    "within_LUDB_exact_duplicate_groups": 0,
+    "prior_Stage_A_distinct_raw_signal_digests_compared": 19217,
+    "same_encoding_raw_matches": 0,
+    "source_key_scope": "Provider's one-record-per-subject documentation; not a cross-provider subject identifier.",
+    "same_encoding_only": "Native audit compares exact raw signal bytes against retained Stage A inventory, not near-duplicate or cross-encoding waveform equivalence."
+  },
+  "PTBXL_auxiliary_development": {
+    "official_folds": "1-9 only",
+    "eligible_metadata_ECGs": 19601,
+    "scoreable_cached_ECGs": 6205,
+    "cached_exact_signals_crossing_folds": 0,
+    "metadata_patients_crossing_folds": 0,
+    "partition_reference_receipt_sha256": "1e758fcb0cc17e7cc15ff8be2fcb7911a6f102d4dd5d673cec440d409a187bcd",
+    "native_readout_job": 33747,
+    "native_readout_sha256": "27477b63a035d2a1f545669536b664128f5c0f961363150ccb56335288d10041",
+    "calibration_folds_1_8_ECGs": 5410,
+    "held_fold_9_ECGs": 795,
+    "calibration_held_subject_overlap": 0,
+    "calibration_held_exact_signal_group_overlap": 0,
+    "fold_10_references_or_waveforms_used": false,
+    "not_a_new_untouched_test": true
+  },
+  "PTB_Diagnostic_transport": {
+    "source_eligible_ecgs": 549,
+    "source_subjects": 290,
+    "target_training_or_calibration_ecgs": 0,
+    "native_evaluation_job": 33737,
+    "scored_ECGs": 549,
+    "source_subject_exact_file_signal_components": 290,
+    "native_evaluation_sha256": "8c3046fcc2d48ce241fcacc566e0fb17a89b0664e43e098adcf7bf8a44f8dcb4",
+    "reference_source": "PTB Diagnostic v1.0.0 original header fields",
+    "fit_source": "Original P4 versus separately fitted PTB-XL Other heads are distinct; no target fitting and no PTB-XL fold 10.",
+    "uncertainty_unit": "Source subject and exact file-signal components"
+  },
+  "historical_isolation": {
+    "certified": false,
+    "missing": "Complete historical patient and signal inventory, cross-provider patient link and ancestry of all model inputs.",
+    "positive_overlap_evidence": "CODE-test is named in previously released specialist manifests, so it is not a new untouched historical test.",
+    "not_proven_by": ["different archive SHA-256", "distinct source name", "zero same-encoding raw signal overlap", "a source-specific subject identifier"]
+  },
+  "no_individual_records_exported": true
+}
