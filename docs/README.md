@@ -2,6 +2,8 @@
 
 This directory records architecture, evaluation protocols, CEDIA execution, provenance, release procedures, and scientific claim boundaries. Machine-readable profile contracts remain authoritative for loading artifacts; canonical result JSON remains authoritative for reported metrics.
 
+The [integration audit](integration/ALL_PULL_REQUESTS_INTEGRATION_MATRIX.md) records the original PRs and their dependencies. Its [scientific provenance guide](integration/SCIENTIFIC_PROVENANCE_PRESERVATION.md) distinguishes the released model, replays, November studies, adaptation candidates and V4.6.
+
 See [Evidence and Claim Boundaries](evidence-status.md) for the current Primary6, Primary4, and Primary8 status, metric definitions, source links, and the command that recomputes the published metrics from tracked predictions.
 
 The [frozen waveform audit](frozen-waveform-audit.md) reports the newer CEDIA inference and matched-reference comparison. The [disposition index](revision-data-dispositions.md) distinguishes new results, absent historical evidence and deferred external evaluation.

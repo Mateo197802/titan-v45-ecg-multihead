@@ -332,9 +332,8 @@ def main():
         saved = json.loads(a.model.read_bytes())
         if saved["binding"] != binding:
             raise ValueError("model inputs changed after fit")
-        from titan_v45.evaluation.specialist_heads import paired_bootstrap_metric_differences
-
         from titan_v45.evaluation.revision_report import binary_metrics
+        from titan_v45.evaluation.specialist_heads import paired_bootstrap_metric_differences
         output = {"binding": binding, "model_sha256": a.expected_model_sha256,
                   "scope": proto["scope"], "bootstrap": proto["statistics"],
                   "profiles": evaluate(proto, profiles, saved["profiles"], arrays[ARMS[0]],

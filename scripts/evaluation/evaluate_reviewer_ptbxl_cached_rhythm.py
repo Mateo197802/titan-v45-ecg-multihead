@@ -101,9 +101,8 @@ def score(args, records, matrix):
 
 
 def evaluate(args, records):
-    from titan_v45.evaluation.specialist_heads import bootstrap_binary_metrics
-
     from titan_v45.evaluation.revision_report import binary_metrics
+    from titan_v45.evaluation.specialist_heads import bootstrap_binary_metrics
 
     receipt = args.output / "scoring-receipt.json"
     check = json.loads(receipt.read_bytes())

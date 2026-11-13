@@ -172,9 +172,9 @@ def observe_endpoint(rows, refs, clusters, profile, label, code, auxiliary, seed
 
 def evaluate_stage(a, protocol, enrolled, inventory, hashes):
     from audit_reviewer_auxiliary_support import rank_metrics
-    from titan_v45.evaluation.specialist_heads import bootstrap_binary_metrics
 
     from titan_v45.evaluation.revision_report import binary_metrics
+    from titan_v45.evaluation.specialist_heads import bootstrap_binary_metrics
 
     receipt = json.loads(a.receipt.read_bytes())
     if (not a.expected_receipt_sha256 or digest(a.receipt) != a.expected_receipt_sha256

@@ -134,10 +134,10 @@ def check_runtime(runtime):
             "cascade fallback accounting")
 
 
-def verify_directory(results, docs):
+def verify_directory(results, docs, source_root=None):
     files = {f"results/{name}": (results/name).read_bytes() for name in sorted(RESULTS)}
     files.update({f"docs/{name}": (docs/name).read_bytes() for name in sorted(DOCS)})
-    root = Path(__file__).resolve().parents[2]
+    root = source_root or Path(__file__).resolve().parents[2]
     files.update({name: (root/name).read_bytes() for name in sorted(REPRODUCTION)})
     s, m, r = (load(results / n) for n in ("R2_4K_COVERAGE_RISK_AND_FALSE_NEGATIVES.json",
                                           "R2_3F_ABLATION_CONFIRMATORY_RESULTS.json",
@@ -164,8 +164,9 @@ def main():
     for name in ("results", "docs", "zip"):
         p.add_argument(f"--{name}", type=Path, required=True)
     p.add_argument("--build", action="store_true")
+    p.add_argument("--source-root", type=Path, help="Root containing the immutable experiment source snapshot")
     a = p.parse_args()
-    files = verify_directory(a.results, a.docs)
+    files = verify_directory(a.results, a.docs, a.source_root)
     files["SHA256SUMS"] = "".join(f"{hash_bytes(b)}  {n}\n" for n, b in files.items()).encode()
     if a.build:
         with ZipFile(a.zip, "x") as z:

@@ -196,9 +196,8 @@ def score(args, config, other, entries, checks, names, manifest):
 
 
 def evaluate(args, config, entries, names, manifest):
-    from titan_v45.evaluation.specialist_heads import bootstrap_binary_metrics
-
     from titan_v45.evaluation.revision_report import binary_metrics
+    from titan_v45.evaluation.specialist_heads import bootstrap_binary_metrics
 
     scores = args.output / "private-scores.jsonl"
     receipt = args.output / "scoring-receipt.json"

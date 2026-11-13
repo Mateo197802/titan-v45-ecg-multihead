@@ -33,6 +33,8 @@ jobs:
         run: python scripts/evaluation/verify_release_hashes.py
       - name: Verify public adaptation receipts
         run: python scripts/domain_adaptation/verify_adaptation_delivery.py docs/domain_adaptation/evidence
+      - name: Verify integrated public scientific evidence
+        run: python scripts/evaluation/verify_integrated_public_evidence.py
       - name: Verify public performance recovery evidence when present
         run: |
           if [ -d docs/performance_recovery/evidence ]; then

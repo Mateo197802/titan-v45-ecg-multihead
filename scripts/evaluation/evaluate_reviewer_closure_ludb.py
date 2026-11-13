@@ -283,9 +283,9 @@ def macro_contrast(endpoints, names, baseline, comparator):
 def analyze(rows, refs, rhythms, groups, receipt, protocol, morphology_model):
     from reviewer_pathology_other import probabilities
     from reviewer_rhythm_other import feature_vector
-    from titan_v45.evaluation.specialist_heads import bootstrap_binary_metrics
 
     from titan_v45.evaluation.revision_report import binary_metrics
+    from titan_v45.evaluation.specialist_heads import bootstrap_binary_metrics
 
     design = protocol["analysis"]["uncertainty"]
     contracts = receipt["thresholds"]

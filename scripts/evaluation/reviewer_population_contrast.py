@@ -152,7 +152,6 @@ def report_profiles(rows, refs, groups, frozen, protocol, metrics):
 
 def main():
     from titan_v45.data.sph import read_sph_dictionary, read_sph_metadata
-
     from titan_v45.evaluation.revision_report import binary_metrics
 
     p = argparse.ArgumentParser(description=__doc__)
