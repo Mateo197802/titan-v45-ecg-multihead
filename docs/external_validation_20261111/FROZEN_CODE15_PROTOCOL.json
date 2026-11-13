@@ -1,0 +1,36 @@
+{
+  "study": "PR6_CODE15_LOCKED_TRANSFER_V1",
+  "dataset_doi": "10.5281/zenodo.4916206",
+  "metadata_sha256": "f9f82f4c07c1793e2285915c69f1113f5a7db8a0f2cf2f4b90474502f406bc35",
+  "catalog_sha256": "b20c4991cdee599f98e7ecac4ded8be4d2856d203a51985e5ea4462108df9496",
+  "archives": "All 18 publisher archives; first checkpoint exams_part10.zip, fixed earlier by label-blind transport hash; partial results are not the full population and cannot promote.",
+  "cohort": "All exams in published index with SHA256('20261112|pr6-code15|'+patient_id) first byte < 32, in every archive. This patient-level 1/8 sample is independent of outcomes, preserves repeat examinations, and has no replacements.",
+  "signal": "Published I II III aVR aVL aVF V1..V6 at 400 Hz. Require centered 48-sample zero border; remove it. If both 648-sample borders are zero, exclude as 7 s or ambiguous. Reject non-finite or flat leads. Per-lead normalization after fixed source preprocessing; no gain inferred for HDF5 if units are undocumented.",
+  "reference": {"AFIB": "AF", "SB": "SB", "STACH": "ST", "RBBB": "RBBB", "1AVB": "1dAVb"},
+  "reference_limits": "Explicit structured publisher 0/1 only. Missing and nonbinary values are excluded endpoint-wise. Benchmark label agreement is not independent clinical adjudication.",
+  "evaluation": {
+    "profiles": ["P6", "P8"],
+    "thresholds": "unchanged release thresholds for both systems",
+    "decisions": "independent threshold calls for five endpoints; P8 top-1 fallback is not added to binary calls",
+    "bootstrap_replicates": 1000,
+    "bootstrap_seed": 20261112,
+    "minimum_distinct_positive_and_negative_patients": 20,
+    "bootstrap_unit": "source patient, paired across model/endpoint with all eligible examinations retained",
+    "promotion_macro_f1_gain_min": 0.03,
+    "promotion_paired_ci_lower_must_exceed": 0,
+    "promotion_max_sensitivity_drop": 0.05,
+    "promotion_max_macro_brier_increase": 0.01,
+    "promotion_max_empty_set_rate_increase": 0.01,
+    "promotion_requires_complete_sample_and_all_five_supported_endpoints": true,
+    "historical_independence": "Must report tested overlap separately; independence remains uncertified if source history or patient linkage is incomplete."
+  },
+  "candidate": {
+    "id": "anchored_linear_residual_v1",
+    "fit": "Stage A Chapman and CPSC train only, published feature cache verified, only supervised cells, inverse window multiplicity and equal source weight; validate on Chapman validation only for descriptive fit verification. No holdout or CODE data. No threshold selection.",
+    "l2": 0.05,
+    "residual_logit_cap": 1.5,
+    "maximum_iterations": 80
+  },
+  "stage_a_comparison": "Stage A was a development pilot (+0.02 F1, <=0.03 sensitivity drop); PR6 is a separately locked transfer gate (+0.03, paired lower CI >0, <=0.05 sensitivity drop, calibration and coverage constraints). No gate is retroactively weakened.",
+  "p4": "NOT_EVALUABLE_CODE15; require independently sourced endpoint-specific positive and negative reference, not CODE or MIMIC text absence."
+}

@@ -1,0 +1,45 @@
+{
+  "scope": "PR6 continuation after 048bd56; no external performance result in this receipt",
+  "code15_protocol_sha256": "75f9227ebb506bf0b1aabf215d425ba88cd82119f051bc4400e0c1756410bfd4",
+  "mimic_acquisition": {
+    "job": 33294,
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "selected": 6784,
+    "publisher_verified_ecgs": 6783,
+    "http_curl_22": 1,
+    "receipt_sha256": "57bfd7a963c080f8e68e37b84459d4b2644cf71cab7d32396bb8a533245626ce",
+    "private_acquisition_ledger_sha256": "476d4f63acd4445846ae231adbd20618c707ba84868cc429b067a659f97aa238"
+  },
+  "development": {
+    "job": 33316,
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "elapsed": "00:01:08",
+    "code_commit": "5a5306d6856fb17d4d08d61be275fa3eeb7c1803",
+    "grammar_audit_sha256": "6801763c5f493fd045521bc8b8ca4fbc8b1424d35f25f11fb94f4279bbe4d121",
+    "mimic_development_ecgs": 5770,
+    "mimic_retained_labels_extracted": false,
+    "specialist_train_ecgs": 8415,
+    "specialist_validation_ecgs": 812,
+    "candidate_receipt_sha256": "2f1461d63ec213660d3278c9956b1fbf759b5bbada1962d9a2af798ea28a0385",
+    "frozen_candidate_sha256": {
+      "P6": "7e5d4a4793b7d0a3cd3fa3f21ad0ba7ba3a4f827e5097cb3bfc4692789a6f07f",
+      "P8": "7a3cbeb6c55fabc838317a7921fe0c278e34d23c1d2167bac07e8d3688de9879"
+    },
+    "code_or_mimic_outcomes_used_for_fit": false,
+    "published_thresholds_changed": false,
+    "p4": "NOT_FIT_NO_ADDITIONAL_VALIDATED_REFERENCE"
+  },
+  "slurm": {
+    "mimic_qc": 33295,
+    "mimic_label_blind_inference": 33296,
+    "original_code_transport": {"job": 33290, "state": "CANCELLED", "bytes_preserved": 194043904},
+    "initial_parallel_transport": {"job": 33325, "state": "FAILED", "reason": "Unneeded SciPy import before download; replaced by dependency-free transport."},
+    "replacement_first_archive_transfer": 33328,
+    "first_archive_paired_evaluation": 33329,
+    "complete_archive_transfer": 33326,
+    "full_evaluation_reusing_first_archive": 33330
+  },
+  "promotion": "NOT_EVALUATED"
+}

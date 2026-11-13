@@ -1,0 +1,161 @@
+{
+  "bootstrap_unit": "ecg_record_not_patient",
+  "contrasts_mlp_minus_linear": {
+    "P6": {
+      "mlp_asymmetric_negative_gamma2": {
+        "delta_ci95": [
+          -0.01321176734464379,
+          0.013475956587151967
+        ],
+        "delta_valid_replicates": 1000,
+        "empty_sets": [
+          272,
+          261
+        ],
+        "five_endpoint_empty_set_delta": -0.010027347310847784,
+        "macro_brier_delta": 0.003834013481844329,
+        "macro_f1": [
+          0.7984916938229325,
+          0.7992051783777245
+        ],
+        "macro_f1_ci95": [
+          [
+            0.7652959708290626,
+            0.8279013973543137
+          ],
+          [
+            0.765030964490622,
+            0.8292924164333603
+          ]
+        ],
+        "macro_f1_classes": [
+          "AFIB",
+          "SB",
+          "STACH",
+          "RBBB",
+          "1AVB"
+        ],
+        "macro_f1_delta": 0.0007134845547920766,
+        "minimum_sensitivity_change": 0.0,
+        "observed_metric_gate_pass": false
+      },
+      "mlp_balanced_bce": {
+        "delta_ci95": [
+          -0.022749400985211176,
+          -0.0008154105856146912
+        ],
+        "delta_valid_replicates": 1000,
+        "empty_sets": [
+          272,
+          279
+        ],
+        "five_endpoint_empty_set_delta": 0.006381039197812188,
+        "macro_brier_delta": -0.0005754871041073132,
+        "macro_f1": [
+          0.7984916938229325,
+          0.7878204451414692
+        ],
+        "macro_f1_ci95": [
+          [
+            0.7652959708290626,
+            0.8279013973543137
+          ],
+          [
+            0.7541504147269289,
+            0.8176819801860723
+          ]
+        ],
+        "macro_f1_classes": [
+          "AFIB",
+          "SB",
+          "STACH",
+          "RBBB",
+          "1AVB"
+        ],
+        "macro_f1_delta": -0.01067124868146323,
+        "minimum_sensitivity_change": -0.053333333333333344,
+        "observed_metric_gate_pass": false
+      }
+    },
+    "P8": {
+      "mlp_asymmetric_negative_gamma2": {
+        "delta_ci95": [
+          -0.020391950286240697,
+          0.011317786059850145
+        ],
+        "delta_valid_replicates": 1000,
+        "empty_sets": [
+          285,
+          267
+        ],
+        "five_endpoint_empty_set_delta": -0.016408386508659972,
+        "macro_brier_delta": 0.003907949693285945,
+        "macro_f1": [
+          0.7970132991310054,
+          0.7927762538684626
+        ],
+        "macro_f1_ci95": [
+          [
+            0.7614322850283541,
+            0.8277344712435616
+          ],
+          [
+            0.7572228778206602,
+            0.8232785350439888
+          ]
+        ],
+        "macro_f1_classes": [
+          "AFIB",
+          "SB",
+          "STACH",
+          "RBBB",
+          "1AVB"
+        ],
+        "macro_f1_delta": -0.004237045262542783,
+        "minimum_sensitivity_change": -0.01333333333333342,
+        "observed_metric_gate_pass": false
+      },
+      "mlp_balanced_bce": {
+        "delta_ci95": [
+          -0.023501911112795502,
+          0.007741550551439546
+        ],
+        "delta_valid_replicates": 1000,
+        "empty_sets": [
+          285,
+          283
+        ],
+        "five_endpoint_empty_set_delta": -0.001823154056517784,
+        "macro_brier_delta": -0.0005880765023772771,
+        "macro_f1": [
+          0.7970132991310054,
+          0.789324323763258
+        ],
+        "macro_f1_ci95": [
+          [
+            0.7614322850283541,
+            0.8277344712435616
+          ],
+          [
+            0.7546191913574133,
+            0.8194295225561735
+          ]
+        ],
+        "macro_f1_classes": [
+          "AFIB",
+          "SB",
+          "STACH",
+          "RBBB",
+          "1AVB"
+        ],
+        "macro_f1_delta": -0.007688975367747375,
+        "minimum_sensitivity_change": -0.026666666666666727,
+        "observed_metric_gate_pass": false
+      }
+    }
+  },
+  "development_only": true,
+  "input_aggregate_sha256": "53ed375503088addfe1c74d9346477e4cee7da3af521926d0b2a4fd5a4756c13",
+  "private_predictions_sha256": "edb884674497e36312767e069e3369b6a5a22eab15be70eb42361b8573b13c55",
+  "verified_original_rows": 60
+}

@@ -1,0 +1,149 @@
+{
+  "counts": {
+    "1AVB": {
+      "unmentioned": 5770
+    },
+    "AFIB": {
+      "ambiguous": 196,
+      "positive": 214,
+      "uncertain": 15,
+      "unmentioned": 5345
+    },
+    "ASMI": {
+      "ambiguous": 8,
+      "historical": 144,
+      "uncertain": 10,
+      "unmentioned": 5608
+    },
+    "IMI": {
+      "ambiguous": 9,
+      "historical": 424,
+      "uncertain": 3,
+      "unmentioned": 5334
+    },
+    "ISC_": {
+      "unmapped": 5770
+    },
+    "LVH": {
+      "ambiguous": 28,
+      "positive": 175,
+      "uncertain": 106,
+      "unmentioned": 5461
+    },
+    "NSR": {
+      "unmentioned": 5770
+    },
+    "PAC": {
+      "positive": 1,
+      "unmentioned": 5769
+    },
+    "PVC": {
+      "ambiguous": 4,
+      "positive": 5,
+      "unmentioned": 5761
+    },
+    "RBBB": {
+      "ambiguous": 15,
+      "positive": 166,
+      "unmentioned": 5589
+    },
+    "SB": {
+      "ambiguous": 159,
+      "positive": 506,
+      "unmentioned": 5105
+    },
+    "STACH": {
+      "ambiguous": 64,
+      "positive": 485,
+      "uncertain": 12,
+      "unmentioned": 5209
+    }
+  },
+  "development_ecgs": 5770,
+  "interpretation": "Parser state coverage, not independently adjudicated accuracy.",
+  "patterns_by_original_state": {
+    "AF_COMPOUND": {
+      "ambiguous": 196,
+      "uncertain": 12
+    },
+    "AV_BLOCK_A_V_VARIANT": {
+      "unmentioned": 284
+    },
+    "AV_BLOCK_COMPOUND": {
+      "unmentioned": 284
+    },
+    "INFERIOR_AGE_UNDETERMINED": {
+      "historical": 387
+    },
+    "LVH_VOLTAGE_QUALIFIER": {
+      "ambiguous": 2
+    },
+    "RBBB_ABBREVIATION": {
+      "unmentioned": 165
+    },
+    "SINUS_COMPOUND": {
+      "unmentioned": 394
+    }
+  },
+  "proportions": {
+    "1AVB": {
+      "unmentioned": 1.0
+    },
+    "AFIB": {
+      "ambiguous": 0.03396880415944541,
+      "positive": 0.03708838821490468,
+      "uncertain": 0.0025996533795493936,
+      "unmentioned": 0.9263431542461005
+    },
+    "ASMI": {
+      "ambiguous": 0.0013864818024263432,
+      "historical": 0.024956672443674176,
+      "uncertain": 0.0017331022530329288,
+      "unmentioned": 0.9719237435008665
+    },
+    "IMI": {
+      "ambiguous": 0.001559792027729636,
+      "historical": 0.07348353552859618,
+      "uncertain": 0.0005199306759098787,
+      "unmentioned": 0.9244367417677642
+    },
+    "ISC_": {
+      "unmapped": 1.0
+    },
+    "LVH": {
+      "ambiguous": 0.004852686308492201,
+      "positive": 0.030329289428076257,
+      "uncertain": 0.018370883882149046,
+      "unmentioned": 0.9464471403812825
+    },
+    "NSR": {
+      "unmentioned": 1.0
+    },
+    "PAC": {
+      "positive": 0.0001733102253032929,
+      "unmentioned": 0.9998266897746967
+    },
+    "PVC": {
+      "ambiguous": 0.0006932409012131716,
+      "positive": 0.0008665511265164644,
+      "unmentioned": 0.9984402079722704
+    },
+    "RBBB": {
+      "ambiguous": 0.0025996533795493936,
+      "positive": 0.028769497400346622,
+      "unmentioned": 0.968630849220104
+    },
+    "SB": {
+      "ambiguous": 0.02755632582322357,
+      "positive": 0.08769497400346621,
+      "unmentioned": 0.8847487001733102
+    },
+    "STACH": {
+      "ambiguous": 0.011091854419410746,
+      "positive": 0.08405545927209705,
+      "uncertain": 0.0020797227036395147,
+      "unmentioned": 0.9027729636048527
+    }
+  },
+  "retained_labels_extracted": false
+}

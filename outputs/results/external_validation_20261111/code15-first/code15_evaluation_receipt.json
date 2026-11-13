@@ -1,0 +1,137 @@
+{
+  "aggregate_csv_sha256": "069d754af5a18339391e162f4e1110218400cfdd2a95a735783e7949e02524e6",
+  "aggregate_views_sha256": {
+    "EXTERNAL_CODE15_CALIBRATION.csv": "99012a71c3a3bd5adbfda36bafc0e556d5edb15046ad50159a1f2ef522b932e8",
+    "EXTERNAL_CODE15_MACRO.csv": "afb768686bafacd20db4a4b60e727e54873c4986024765c02332e25192d7d343",
+    "EXTERNAL_CODE15_RESULTS.csv": "fcea5496d7b7b3872897f621f66b2c4b0a6eb1a61ab117de04ad9475559a3109",
+    "EXTERNAL_PER_CLASS_CONFUSION.csv": "6a8c82574e4d82453535079b031e4b0981044f556f97aee0a88e638e650c08f0"
+  },
+  "archive_sha256": {
+    "exams_part10.zip": "22dba63939faf22602ed511a888bbd1a4e1c779a8d2634a6091300e5530077bd"
+  },
+  "baseline_hashes": {
+    "backbone-v3ag-pathology.pt": "bf71e4cf8acc34031cb3611c7031e0649822e705fd7dcea354a3ea583ce920ee",
+    "backbone-v3f-original.pt": "ca5d4dcb4b9828e6c4339800fe81ec27f32d9b09a090bb57503bfb56746a8da8",
+    "specialists-v3ag-primary4-calibrated.pt": "cf5091e962fffb3254b1a71fe57236dd82ea0139093df192511499d931391dbc",
+    "specialists-v3p-e008-primary6-diagnostic.pt": "9c5a9265a7155e1206c551cc4e6d645b86363ba3dbdeb7baf7b9f173c314be3d",
+    "specialists-v3q-primary8-best-candidate.pt": "b30cb2bbb45f1231c93ff1c196aa966b57b49831cadb296131c0283e7b0ceb02"
+  },
+  "candidate_receipt_sha256": "2f1461d63ec213660d3278c9956b1fbf759b5bbada1962d9a2af798ea28a0385",
+  "complete_archive_coverage": false,
+  "counts": {
+    "flat_lead": 1,
+    "selected_ecgs": 2461,
+    "short_or_ambiguous_code_duration": 7,
+    "source_ecgs": 20000,
+    "unexpected_code_padding": 1011
+  },
+  "historical_aligned_signatures": 573,
+  "historical_ineligible": {
+    "invalid_code_array": 167
+  },
+  "historical_patient_independence": "NOT_CERTIFIED",
+  "historical_release_archive_aligned_signatures": 0,
+  "n_ecg": 1442,
+  "n_patients": 1403,
+  "point_estimates_independently_verified": {
+    "aggregate_csv_sha256": "069d754af5a18339391e162f4e1110218400cfdd2a95a735783e7949e02524e6",
+    "metric_rows_verified": 20,
+    "patient_bootstrap_replayed": true,
+    "private_scores_sha256": "948128cb58deeff09f7633f7184db95cf84336f861d03e8ac468e59b1f9b95a9",
+    "scope": "Independent point estimates; optional exact patient-bootstrap replay.",
+    "status": "PASS"
+  },
+  "private_scores_sha256": "948128cb58deeff09f7633f7184db95cf84336f861d03e8ac468e59b1f9b95a9",
+  "private_selection_sha256": "92e2656fc7857aa94743d2db05c3625a1e4cec761977598cbc205a3b3470e0d3",
+  "private_shard_cache_sha256": "5067e92c3aa0b5a9e606313fea1fccdf9286fe0ca72c32d952d229e06d0bfd7d",
+  "promotion": {
+    "P6": {
+      "decision": "INCOMPLETE_NO_PROMOTION",
+      "delta_ci95": [
+        -0.02005627569663733,
+        0.026086394432987835
+      ],
+      "delta_valid_replicates": 1000,
+      "empty_sets": [
+        888,
+        858
+      ],
+      "five_endpoint_empty_set_delta": -0.020804438280166426,
+      "macro_brier_delta": -3.203084651548262e-05,
+      "macro_f1": [
+        0.4273852609378925,
+        0.43105132371163435
+      ],
+      "macro_f1_ci95": [
+        [
+          0.3702480193932677,
+          0.4728525546196694
+        ],
+        [
+          0.37106992538427963,
+          0.4783061750878287
+        ]
+      ],
+      "macro_f1_classes": [
+        "AFIB",
+        "SB",
+        "STACH",
+        "RBBB",
+        "1AVB"
+      ],
+      "macro_f1_delta": 0.0036660627737418626,
+      "minimum_sensitivity_change": -0.04761904761904767,
+      "observed_metric_gate_pass": false
+    },
+    "P8": {
+      "decision": "INCOMPLETE_NO_PROMOTION",
+      "delta_ci95": [
+        -0.05135304911676279,
+        0.012504501270794537
+      ],
+      "delta_valid_replicates": 1000,
+      "empty_sets": [
+        889,
+        849
+      ],
+      "five_endpoint_empty_set_delta": -0.0277392510402219,
+      "macro_brier_delta": 0.0065718820967282775,
+      "macro_f1": [
+        0.44975377610432077,
+        0.42911612177959596
+      ],
+      "macro_f1_ci95": [
+        [
+          0.38387486293390194,
+          0.5025450426890473
+        ],
+        [
+          0.36563525096560706,
+          0.4765996217032659
+        ]
+      ],
+      "macro_f1_classes": [
+        "AFIB",
+        "SB",
+        "STACH",
+        "RBBB",
+        "1AVB"
+      ],
+      "macro_f1_delta": -0.020637654324724763,
+      "minimum_sensitivity_change": -0.11904761904761907,
+      "observed_metric_gate_pass": false
+    }
+  },
+  "protocol_sha256": "75f9227ebb506bf0b1aabf215d425ba88cd82119f051bc4400e0c1756410bfd4",
+  "publisher_code_test_overlap": {
+    "aligned_signatures": 573,
+    "annotations_opened": false,
+    "archive_sha256": "00d32666adbdd9d34e028e84a4a627cdc2c970f3c794a52866f1c149ba58526f",
+    "doi": "10.5281/zenodo.3765780",
+    "excluded": {
+      "unexpected_code_padding": 254
+    }
+  },
+  "reused_verified_first_archive": false,
+  "within_code_duplicate_ecgs_excluded": 0
+}
