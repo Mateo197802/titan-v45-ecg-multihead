@@ -1,0 +1,34 @@
+{
+  "parent_commit": "732ecb1c8e697997cdedf85f67db70d38bd765ed",
+  "limits": {"cycles": 6, "fit_attempts": 30, "gpu_seconds": 43200, "job_minutes": 40, "stagnant_cycles": 3, "transient_retries": 1},
+  "seeds": [20261112, 20261113, 20261114],
+  "reference_seed": 20261112,
+  "phases": [
+    {"endpoint": "SB", "arms": ["linear", "residual", "late", "shared_gain", "balanced"]},
+    {"endpoint": "AFIB", "arms": ["hard_positive", "rr_temporal"]},
+    {"endpoint": "1AVB", "arms": ["conduction", "hard_negative"]},
+    {"endpoint": "SB", "arms": ["balanced", "late", "linear"]},
+    {"endpoint": "AFIB", "arms": ["hard_positive", "rr_temporal"]},
+    {"endpoint": "1AVB", "arms": ["conduction", "hard_negative"]}
+  ],
+  "epochs": {"readout": 12, "late": 3, "patience": 3},
+  "optimization": {"batch_size": 64, "readout_lr": 0.002, "backbone_lr": 0.000008, "weight_decay": 0.01, "anchor": 0.10, "hard_multiplier": 2.0},
+  "hypothesis": {
+    "linear": "Frozen embedding linear readout, without incumbent logits",
+    "residual": "Frozen embedding residual MLP over incumbent logits",
+    "late": "Train late ResNet and Transformer plus a focal-endpoint readout, preserve all other original decisions",
+    "shared_gain": "Use shared-gain waveform normalization for the replacement head, then calibrate CODE and Chapman separately",
+    "balanced": "Use CODE and Chapman training with source/class and patient weighting",
+    "hard_positive": "Emphasize positive training examples scored below incumbent AFIB cut",
+    "rr_temporal": "Learn AFIB readout with measured cross-lead RR proxy and missingness, no derived labels",
+    "conduction": "Combine global embedding with learned local II/V2 temporal pooling, no measured PR claim",
+    "hard_negative": "Emphasize negative training examples scored above incumbent 1AVB cut"
+  },
+  "selection": "All epochs and arm choices use repeatedly inspected CODE development only, with patient-grouped cross-fitted validation cuts. Stage 1 one seed per eligible arm, then two additional seeds for the highest ranked arm. Priority: CODE class feasibility, CODE calibration, both source guards, source stability, CODE F1/AP, Brier/ECE. Only accept a family with all three seeds passing every guard and all improving CODE F1; retain median F1 seed. No thresholds, checkpoints or gates chosen on historical test data.",
+  "sources": "CODE train/validation/calibration disjoint; Chapman training pool pre-split by provider group for its own descriptive calibrator in shared_gain only; Chapman validation is transfer/selection diagnostics; CPSC diagnostic only, no patient claims. Source F1 loss limit 0.03 per PR15. Source calibration never uses Chapman validation; reference labels unchanged.",
+  "stop": "Stop for integrity, budget, three cycles without reproducible incumbent change, or development F1 >= 0.70 with all guards, three seeds and positive lower paired CI. Reused development IC is descriptive only. Do not rerun exact same hypothesis with same incumbent. Never promote without independent confirmation.",
+  "independent_generalization": "NOT_EVALUATED",
+  "working_anchor": "A nonpromoted working composite may advance if the three-seed mean improves the same frozen rank; the development incumbent changes only after unanimous class, source and calibration guards plus individual F1 gains. A round without a reproducible working-composite advance counts as stagnant.",
+  "scheduler": "Nine afterany-linked SLURM slots, at most one cycle per successful slot; each 40-minute one-GPU request, below 12 hours even if every slot times out. Atomic state and fit receipts; one retry for interrupted attempts. Resume completed fit receipts without rerunning.",
+  "historic_tests_allowed": false
+}
