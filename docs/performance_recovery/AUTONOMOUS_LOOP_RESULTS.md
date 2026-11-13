@@ -6,6 +6,14 @@ cycles, 28 verified fits and 29 attempts. Slot `33851` timed out. Slot
 completed the fourth cycle. The stop was `CYCLE_BUDGET`, not a third
 stagnant cycle or depletion of the 12 GPU-hour ceiling.
 
+The frozen protocol's short stop description refers to incumbent change,
+while its more specific `working_anchor` rule defines stagnation using
+the experimental rank. The controller implemented the latter: cycles
+5 and 6 were the only consecutive stagnant rounds. A better diagnostic
+rank did not imply better CODE F1 or allow an incumbent replacement.
+CODE determined epoch selection; the exposed source diagnostics also
+influenced arm/family ranking as required by the source-priority rule.
+
 | Cycle | Focus | Decision |
 |---|---|---|
 | 1 | SB readout, normalization and balance | Shared-gain source policy retained as experimental anchor only |
@@ -41,6 +49,10 @@ F1 over the incumbent. The representative failed SB. AFIB and SB
 sensitivity/PPV were 0.576/0.507 and 0.509/0.351; 1AVB was 0.745/0.336.
 The 1AVB false positives increased from 61 to 81. STACH and RBBB were
 unchanged by construction.
+
+This is three-seed repeatability of the focal adjustment with the same
+prior composite fixed, not three independent reruns of the full search
+or evidence of stability on an untouched population.
 
 Chapman five-class macro-F1 was 0.526211 to 0.559327. Its SB AP rose
 from 0.651744 to 0.955119, but sensitivity at the locked CODE cut only
