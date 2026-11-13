@@ -5,7 +5,7 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [main, codex/titan-external-validation-20261111, codex/titan-duration-aware-adaptation]
+    branches: [main, codex/titan-external-validation-20261111, codex/titan-duration-aware-adaptation, codex/titan-performance-recovery]
 
 permissions:
   contents: read
@@ -50,6 +50,11 @@ jobs:
           fi
       - name: Tests
         run: python -m pytest -q
+      - name: Verify autonomous loop evidence when present
+        run: |
+          if [ -d docs/performance_recovery/autonomous_evidence ]; then
+            python scripts/domain_adaptation/verify_autonomous_delivery.py docs/performance_recovery/autonomous_evidence
+          fi
       - name: Build package
         if: matrix.python-version == '3.12'
         run: python -m build

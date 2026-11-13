@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 import argparse
-import fcntl
 import json
 import os
 import re
@@ -119,6 +118,8 @@ def paired(root, runner, fit):
 
 
 def execute(previous, archive, root, job):
+    import fcntl
+
     if not JOB.fullmatch(job):
         raise ValueError("numeric SLURM allocation required")
     c = settings()
