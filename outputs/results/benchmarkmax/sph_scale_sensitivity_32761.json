@@ -1,0 +1,366 @@
+{
+  "schema": "TITAN_V46_SPH_AMPLITUDE_SENSITIVITY_V1",
+  "scope": "Exploratory label-blind signal-scale perturbation, not clinical performance or unit certification.",
+  "experiment_commit": "a2353f0863f05e4b1ea844f9b0c4dd4e270a6c85",
+  "selected_records": 128,
+  "factors": [
+    0.5,
+    1.0,
+    2.0
+  ],
+  "baseline_replay_vs_archived": {
+    "records": 128,
+    "profiles": {
+      "P6": {
+        "score_changes": {
+          "1AVB": {
+            "mean_absolute": 2.9854501385423643e-09,
+            "max_absolute": 4.7280088490142536e-08,
+            "label_changes": 0
+          },
+          "AFIB": {
+            "mean_absolute": 2.7266365332579845e-09,
+            "max_absolute": 1.591165521286353e-07,
+            "label_changes": 0
+          },
+          "PVC": {
+            "mean_absolute": 5.801976604466825e-09,
+            "max_absolute": 1.0895030694291208e-07,
+            "label_changes": 0
+          },
+          "RBBB": {
+            "mean_absolute": 6.734997047561347e-09,
+            "max_absolute": 7.070104066086991e-08,
+            "label_changes": 0
+          },
+          "SB": {
+            "mean_absolute": 1.8425340556053523e-08,
+            "max_absolute": 1.5019151089479266e-07,
+            "label_changes": 0
+          },
+          "STACH": {
+            "mean_absolute": 2.390492487822116e-09,
+            "max_absolute": 5.587282647656622e-08,
+            "label_changes": 0
+          }
+        },
+        "top1_changes": 0,
+        "fallback_changes": 0
+      },
+      "P8": {
+        "score_changes": {
+          "1AVB": {
+            "mean_absolute": 1.546154019630798e-09,
+            "max_absolute": 2.9802322387695312e-08,
+            "label_changes": 0
+          },
+          "AFIB": {
+            "mean_absolute": 1.9375822983095784e-09,
+            "max_absolute": 7.82310962677002e-08,
+            "label_changes": 0
+          },
+          "NSR": {
+            "mean_absolute": 1.1259695990254587e-08,
+            "max_absolute": 1.1920928955078125e-07,
+            "label_changes": 0
+          },
+          "PAC": {
+            "mean_absolute": 1.5524885081201298e-08,
+            "max_absolute": 1.7881393432617188e-07,
+            "label_changes": 0
+          },
+          "PVC": {
+            "mean_absolute": 6.984297880781768e-09,
+            "max_absolute": 1.341104507446289e-07,
+            "label_changes": 0
+          },
+          "RBBB": {
+            "mean_absolute": 3.862789819778698e-09,
+            "max_absolute": 7.450580596923828e-08,
+            "label_changes": 0
+          },
+          "SB": {
+            "mean_absolute": 4.1268823907993925e-09,
+            "max_absolute": 8.940696716308594e-08,
+            "label_changes": 0
+          },
+          "STACH": {
+            "mean_absolute": 5.509689663709115e-09,
+            "max_absolute": 1.1920928955078125e-07,
+            "label_changes": 0
+          }
+        },
+        "top1_changes": 0,
+        "fallback_changes": 0
+      },
+      "P4": {
+        "score_changes": {
+          "ASMI": {
+            "mean_absolute": 4.47325874119997e-08,
+            "max_absolute": 1.7881393432617188e-07,
+            "label_changes": 0
+          },
+          "IMI": {
+            "mean_absolute": 4.057073965668678e-08,
+            "max_absolute": 2.384185791015625e-07,
+            "label_changes": 0
+          },
+          "ISC_": {
+            "mean_absolute": 4.5578417484648526e-08,
+            "max_absolute": 4.172325134277344e-07,
+            "label_changes": 0
+          },
+          "LVH": {
+            "mean_absolute": 4.2229657992720604e-08,
+            "max_absolute": 2.980232238769531e-07,
+            "label_changes": 0
+          }
+        },
+        "top1_changes": 0,
+        "fallback_changes": 0
+      }
+    }
+  },
+  "perturbations_vs_factor_1": {
+    "0.5": {
+      "records": 128,
+      "profiles": {
+        "P6": {
+          "score_changes": {
+            "1AVB": {
+              "mean_absolute": 0.0,
+              "max_absolute": 0.0,
+              "label_changes": 0
+            },
+            "AFIB": {
+              "mean_absolute": 0.0,
+              "max_absolute": 0.0,
+              "label_changes": 0
+            },
+            "PVC": {
+              "mean_absolute": 0.0,
+              "max_absolute": 0.0,
+              "label_changes": 0
+            },
+            "RBBB": {
+              "mean_absolute": 0.0,
+              "max_absolute": 0.0,
+              "label_changes": 0
+            },
+            "SB": {
+              "mean_absolute": 0.0,
+              "max_absolute": 0.0,
+              "label_changes": 0
+            },
+            "STACH": {
+              "mean_absolute": 0.0,
+              "max_absolute": 0.0,
+              "label_changes": 0
+            }
+          },
+          "top1_changes": 0,
+          "fallback_changes": 0
+        },
+        "P8": {
+          "score_changes": {
+            "1AVB": {
+              "mean_absolute": 0.0,
+              "max_absolute": 0.0,
+              "label_changes": 0
+            },
+            "AFIB": {
+              "mean_absolute": 0.0,
+              "max_absolute": 0.0,
+              "label_changes": 0
+            },
+            "NSR": {
+              "mean_absolute": 0.0,
+              "max_absolute": 0.0,
+              "label_changes": 0
+            },
+            "PAC": {
+              "mean_absolute": 0.0,
+              "max_absolute": 0.0,
+              "label_changes": 0
+            },
+            "PVC": {
+              "mean_absolute": 0.0,
+              "max_absolute": 0.0,
+              "label_changes": 0
+            },
+            "RBBB": {
+              "mean_absolute": 0.0,
+              "max_absolute": 0.0,
+              "label_changes": 0
+            },
+            "SB": {
+              "mean_absolute": 0.0,
+              "max_absolute": 0.0,
+              "label_changes": 0
+            },
+            "STACH": {
+              "mean_absolute": 0.0,
+              "max_absolute": 0.0,
+              "label_changes": 0
+            }
+          },
+          "top1_changes": 0,
+          "fallback_changes": 0
+        },
+        "P4": {
+          "score_changes": {
+            "ASMI": {
+              "mean_absolute": 0.0,
+              "max_absolute": 0.0,
+              "label_changes": 0
+            },
+            "IMI": {
+              "mean_absolute": 0.0,
+              "max_absolute": 0.0,
+              "label_changes": 0
+            },
+            "ISC_": {
+              "mean_absolute": 0.0,
+              "max_absolute": 0.0,
+              "label_changes": 0
+            },
+            "LVH": {
+              "mean_absolute": 0.0,
+              "max_absolute": 0.0,
+              "label_changes": 0
+            }
+          },
+          "top1_changes": 0,
+          "fallback_changes": 0
+        }
+      }
+    },
+    "2.0": {
+      "records": 128,
+      "profiles": {
+        "P6": {
+          "score_changes": {
+            "1AVB": {
+              "mean_absolute": 0.0,
+              "max_absolute": 0.0,
+              "label_changes": 0
+            },
+            "AFIB": {
+              "mean_absolute": 0.0,
+              "max_absolute": 0.0,
+              "label_changes": 0
+            },
+            "PVC": {
+              "mean_absolute": 0.0,
+              "max_absolute": 0.0,
+              "label_changes": 0
+            },
+            "RBBB": {
+              "mean_absolute": 0.0,
+              "max_absolute": 0.0,
+              "label_changes": 0
+            },
+            "SB": {
+              "mean_absolute": 0.0,
+              "max_absolute": 0.0,
+              "label_changes": 0
+            },
+            "STACH": {
+              "mean_absolute": 0.0,
+              "max_absolute": 0.0,
+              "label_changes": 0
+            }
+          },
+          "top1_changes": 0,
+          "fallback_changes": 0
+        },
+        "P8": {
+          "score_changes": {
+            "1AVB": {
+              "mean_absolute": 0.0,
+              "max_absolute": 0.0,
+              "label_changes": 0
+            },
+            "AFIB": {
+              "mean_absolute": 0.0,
+              "max_absolute": 0.0,
+              "label_changes": 0
+            },
+            "NSR": {
+              "mean_absolute": 0.0,
+              "max_absolute": 0.0,
+              "label_changes": 0
+            },
+            "PAC": {
+              "mean_absolute": 0.0,
+              "max_absolute": 0.0,
+              "label_changes": 0
+            },
+            "PVC": {
+              "mean_absolute": 0.0,
+              "max_absolute": 0.0,
+              "label_changes": 0
+            },
+            "RBBB": {
+              "mean_absolute": 0.0,
+              "max_absolute": 0.0,
+              "label_changes": 0
+            },
+            "SB": {
+              "mean_absolute": 0.0,
+              "max_absolute": 0.0,
+              "label_changes": 0
+            },
+            "STACH": {
+              "mean_absolute": 0.0,
+              "max_absolute": 0.0,
+              "label_changes": 0
+            }
+          },
+          "top1_changes": 0,
+          "fallback_changes": 0
+        },
+        "P4": {
+          "score_changes": {
+            "ASMI": {
+              "mean_absolute": 0.0,
+              "max_absolute": 0.0,
+              "label_changes": 0
+            },
+            "IMI": {
+              "mean_absolute": 0.0,
+              "max_absolute": 0.0,
+              "label_changes": 0
+            },
+            "ISC_": {
+              "mean_absolute": 0.0,
+              "max_absolute": 0.0,
+              "label_changes": 0
+            },
+            "LVH": {
+              "mean_absolute": 0.0,
+              "max_absolute": 0.0,
+              "label_changes": 0
+            }
+          },
+          "top1_changes": 0,
+          "fallback_changes": 0
+        }
+      }
+    }
+  },
+  "individual_records_exported": false,
+  "labels_used_for_selection_or_inference": false,
+  "model_sha256": {
+    "backbone-v3f-original.pt": "ca5d4dcb4b9828e6c4339800fe81ec27f32d9b09a090bb57503bfb56746a8da8",
+    "specialists-v3p-e008-primary6-diagnostic.pt": "9c5a9265a7155e1206c551cc4e6d645b86363ba3dbdeb7baf7b9f173c314be3d",
+    "specialists-v3q-primary8-best-candidate.pt": "b30cb2bbb45f1231c93ff1c196aa966b57b49831cadb296131c0283e7b0ceb02",
+    "backbone-v3ag-pathology.pt": "bf71e4cf8acc34031cb3611c7031e0649822e705fd7dcea354a3ea583ce920ee",
+    "specialists-v3ag-primary4-calibrated.pt": "cf5091e962fffb3254b1a71fe57236dd82ea0139093df192511499d931391dbc"
+  },
+  "frozen_protocol_sha256": "d788ad8cca94793cebb738496acc131e82b1ca1900976f11020b99a79a5fc366",
+  "frozen_ledger_sha256": "4a3a1e61b1784e06190d5caaa089fca04ef84792acb3a5f9fc1af3f9c1173462",
+  "script_sha256": "2228d242e001af7f40893ae8589556ee8cdce398665584cdfcfa079b76e3cd10",
+  "job_id": "32761",
+  "gpu": "NVIDIA A100-SXM4-40GB"
+}

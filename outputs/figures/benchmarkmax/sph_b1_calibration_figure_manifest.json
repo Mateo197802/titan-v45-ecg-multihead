@@ -1,0 +1,16 @@
+{
+  "schema": "TITAN_V46_SPH_B1_CALIBRATION_FIGURES_V1",
+  "scope": "Exploratory calibration diagnostics on previously observed SPH scores; not independent evaluation or clinical validation.",
+  "input": {
+    "path": "outputs/results/benchmarkmax/sph_b1_calibration_32758.json",
+    "sha256": "859b99a3208442a791badcbd9996001678e815b00d01194f9d521926feeb2272"
+  },
+  "generator": {
+    "path": "scripts/benchmarkmax/render_sph_b1_figure.py",
+    "sha256": "72958c9033ef43e6a207c6571429e1cbd36c1cb20ac837fc7b33830f4f45400f"
+  },
+  "assets": {
+    "sph_b1_calibration_deltas.png": "5454d855fb95f4c97ec1a4f508d1ae231e4a55b392c05361d9f9778a4c252d54",
+    "sph_b1_calibration_deltas.pdf": "3878fa1c6468574d84f87f53324bccc25edfc3c6cd2c4daa32d45ef622105de2"
+  }
+}

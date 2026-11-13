@@ -1,0 +1,1279 @@
+{
+  "design": {
+    "all_sph_previously_observed": true,
+    "bootstrap_metrics": [
+      "brier",
+      "ece",
+      "log_loss"
+    ],
+    "confirmatory_external_test": false,
+    "constant_baseline_has_no_fitted_threshold": true,
+    "fit_evaluation_patient_overlap": 0,
+    "fit_partition_matches_platt": true,
+    "metrics": [
+      "brier",
+      "ece",
+      "log_loss"
+    ],
+    "outer_folds": 5,
+    "patient_assignment_uses_labels": false,
+    "prevalence_estimator": "unweighted record-level ECG-statement prevalence in calibration-fit patients of each outer fold",
+    "seed": 197802
+  },
+  "endpoints": {
+    "P4:ASMI": {
+      "fold_support": [
+        {
+          "evaluation_support": {
+            "negative_records": 5044,
+            "patients": 4831,
+            "positive_patients": 15,
+            "positive_records": 15,
+            "records": 5059
+          },
+          "fit_prevalence": 0.003870967741935484,
+          "fit_support": {
+            "negative_records": 15440,
+            "patients": 14830,
+            "positive_patients": 52,
+            "positive_records": 60,
+            "records": 15500
+          },
+          "fit_test_patient_overlap": 0,
+          "fold": 0
+        },
+        {
+          "evaluation_support": {
+            "negative_records": 5245,
+            "patients": 5057,
+            "positive_patients": 20,
+            "positive_records": 27,
+            "records": 5272
+          },
+          "fit_prevalence": 0.003051353632409271,
+          "fit_support": {
+            "negative_records": 15356,
+            "patients": 14731,
+            "positive_patients": 46,
+            "positive_records": 47,
+            "records": 15403
+          },
+          "fit_test_patient_overlap": 0,
+          "fold": 1
+        },
+        {
+          "evaluation_support": {
+            "negative_records": 5020,
+            "patients": 4816,
+            "positive_patients": 15,
+            "positive_records": 16,
+            "records": 5036
+          },
+          "fit_prevalence": 0.003796653796653797,
+          "fit_support": {
+            "negative_records": 15481,
+            "patients": 14870,
+            "positive_patients": 51,
+            "positive_records": 59,
+            "records": 15540
+          },
+          "fit_test_patient_overlap": 0,
+          "fold": 2
+        },
+        {
+          "evaluation_support": {
+            "negative_records": 5169,
+            "patients": 4976,
+            "positive_patients": 19,
+            "positive_records": 20,
+            "records": 5189
+          },
+          "fit_prevalence": 0.003367875647668394,
+          "fit_support": {
+            "negative_records": 15388,
+            "patients": 14750,
+            "positive_patients": 45,
+            "positive_records": 52,
+            "records": 15440
+          },
+          "fit_test_patient_overlap": 0,
+          "fold": 3
+        },
+        {
+          "evaluation_support": {
+            "negative_records": 5201,
+            "patients": 4986,
+            "positive_patients": 13,
+            "positive_records": 13,
+            "records": 5214
+          },
+          "fit_prevalence": 0.00375040413837698,
+          "fit_support": {
+            "negative_records": 15407,
+            "patients": 14799,
+            "positive_patients": 50,
+            "positive_records": 58,
+            "records": 15465
+          },
+          "fit_test_patient_overlap": 0,
+          "fold": 4
+        }
+      ],
+      "metrics": {
+        "constant_prevalence_oof": {
+          "brier": 0.0035194046549828777,
+          "ece": 3.183642179708894e-05,
+          "log_loss": 0.023555854077609423
+        },
+        "platt_oof": {
+          "brier": 0.0035598449075203236,
+          "ece": 0.0005613613787799041,
+          "log_loss": 0.019616133371054757
+        },
+        "raw_v45_oof": {
+          "brier": 0.17447557902920383,
+          "ece": 0.36148920272320484,
+          "log_loss": 0.5258623880044703
+        }
+      },
+      "patient_cluster_bootstrap_deltas": {
+        "comparisons": {
+          "platt_minus_prevalence": {
+            "brier": {
+              "ci95": [
+                -0.00010179109606519732,
+                0.00018047340807330071
+              ],
+              "invalid_replicates": 0,
+              "point_difference_first_minus_second": 4.044025253744591e-05,
+              "valid_replicates": 2000
+            },
+            "ece": {
+              "ci95": [
+                -0.00017273351105816036,
+                0.0008306378079006061
+              ],
+              "invalid_replicates": 0,
+              "point_difference_first_minus_second": 0.0005295249569828151,
+              "valid_replicates": 2000
+            },
+            "log_loss": {
+              "ci95": [
+                -0.005476602574214907,
+                -0.002659353814450925
+              ],
+              "invalid_replicates": 0,
+              "point_difference_first_minus_second": -0.003939720706554666,
+              "valid_replicates": 2000
+            }
+          },
+          "raw_minus_prevalence": {
+            "brier": {
+              "ci95": [
+                0.1685799397353068,
+                0.17342807725509626
+              ],
+              "invalid_replicates": 0,
+              "point_difference_first_minus_second": 0.17095617437422095,
+              "valid_replicates": 2000
+            },
+            "ece": {
+              "ci95": [
+                0.35850458320430795,
+                0.363977953888754
+              ],
+              "invalid_replicates": 0,
+              "point_difference_first_minus_second": 0.36145736630140773,
+              "valid_replicates": 2000
+            },
+            "log_loss": {
+              "ci95": [
+                0.4946549321294148,
+                0.5096137863399565
+              ],
+              "invalid_replicates": 0,
+              "point_difference_first_minus_second": 0.5023065339268609,
+              "valid_replicates": 2000
+            }
+          }
+        },
+        "method": "paired unstratified percentile bootstrap on pooled out-of-fold scores",
+        "replicates": 2000,
+        "scope_limit": "conditional on fixed fold-specific Platt and prevalence estimates",
+        "seed": 197823,
+        "unit": "patient_id cluster; repeated ECGs sampled together"
+      },
+      "point_differences": {
+        "platt_minus_prevalence": {
+          "brier": 4.044025253744591e-05,
+          "ece": 0.0005295249569828151,
+          "log_loss": -0.003939720706554666
+        },
+        "raw_minus_prevalence": {
+          "brier": 0.17095617437422095,
+          "ece": 0.36145736630140773,
+          "log_loss": 0.5023065339268609
+        }
+      },
+      "reference": "Anteroseptal MI ECG statement; not acute or clinically adjudicated MI",
+      "source_support": {
+        "negative_records": 25679,
+        "patients": 24666,
+        "positive_patients": 82,
+        "positive_records": 91,
+        "records": 25770
+      }
+    },
+    "P4:IMI": {
+      "fold_support": [
+        {
+          "evaluation_support": {
+            "negative_records": 5034,
+            "patients": 4831,
+            "positive_patients": 25,
+            "positive_records": 25,
+            "records": 5059
+          },
+          "fit_prevalence": 0.005161290322580645,
+          "fit_support": {
+            "negative_records": 15420,
+            "patients": 14830,
+            "positive_patients": 77,
+            "positive_records": 80,
+            "records": 15500
+          },
+          "fit_test_patient_overlap": 0,
+          "fold": 0
+        },
+        {
+          "evaluation_support": {
+            "negative_records": 5249,
+            "patients": 5057,
+            "positive_patients": 23,
+            "positive_records": 23,
+            "records": 5272
+          },
+          "fit_prevalence": 0.005193793416866844,
+          "fit_support": {
+            "negative_records": 15323,
+            "patients": 14731,
+            "positive_patients": 77,
+            "positive_records": 80,
+            "records": 15403
+          },
+          "fit_test_patient_overlap": 0,
+          "fold": 1
+        },
+        {
+          "evaluation_support": {
+            "negative_records": 5009,
+            "patients": 4816,
+            "positive_patients": 26,
+            "positive_records": 27,
+            "records": 5036
+          },
+          "fit_prevalence": 0.004697554697554698,
+          "fit_support": {
+            "negative_records": 15467,
+            "patients": 14870,
+            "positive_patients": 71,
+            "positive_records": 73,
+            "records": 15540
+          },
+          "fit_test_patient_overlap": 0,
+          "fold": 2
+        },
+        {
+          "evaluation_support": {
+            "negative_records": 5166,
+            "patients": 4976,
+            "positive_patients": 21,
+            "positive_records": 23,
+            "records": 5189
+          },
+          "fit_prevalence": 0.0048575129533678756,
+          "fit_support": {
+            "negative_records": 15365,
+            "patients": 14750,
+            "positive_patients": 74,
+            "positive_records": 75,
+            "records": 15440
+          },
+          "fit_test_patient_overlap": 0,
+          "fold": 3
+        },
+        {
+          "evaluation_support": {
+            "negative_records": 5192,
+            "patients": 4986,
+            "positive_patients": 22,
+            "positive_records": 22,
+            "records": 5214
+          },
+          "fit_prevalence": 0.004914322664080181,
+          "fit_support": {
+            "negative_records": 15389,
+            "patients": 14799,
+            "positive_patients": 73,
+            "positive_records": 76,
+            "records": 15465
+          },
+          "fit_test_patient_overlap": 0,
+          "fold": 4
+        }
+      ],
+      "metrics": {
+        "constant_prevalence_oof": {
+          "brier": 0.004635085198944944,
+          "ece": 0.0003096020635644384,
+          "log_loss": 0.02966863599828783
+        },
+        "platt_oof": {
+          "brier": 0.004291277405536807,
+          "ece": 0.0006422750038617548,
+          "log_loss": 0.02180040257376322
+        },
+        "raw_v45_oof": {
+          "brier": 0.25099118278558136,
+          "ece": 0.4295111728378933,
+          "log_loss": 0.729391165679761
+        }
+      },
+      "patient_cluster_bootstrap_deltas": {
+        "comparisons": {
+          "platt_minus_prevalence": {
+            "brier": {
+              "ci95": [
+                -0.0005427371077531768,
+                -0.00017120331965353154
+              ],
+              "invalid_replicates": 0,
+              "point_difference_first_minus_second": -0.0003438077934081367,
+              "valid_replicates": 2000
+            },
+            "ece": {
+              "ci95": [
+                -7.893925230193528e-05,
+                0.0010346394160352214
+              ],
+              "invalid_replicates": 0,
+              "point_difference_first_minus_second": 0.00033267294029731636,
+              "valid_replicates": 2000
+            },
+            "log_loss": {
+              "ci95": [
+                -0.01007180268135954,
+                -0.005952145018732284
+              ],
+              "invalid_replicates": 0,
+              "point_difference_first_minus_second": -0.007868233424524609,
+              "valid_replicates": 2000
+            }
+          },
+          "raw_minus_prevalence": {
+            "brier": {
+              "ci95": [
+                0.24299842183409068,
+                0.24984306102765394
+              ],
+              "invalid_replicates": 0,
+              "point_difference_first_minus_second": 0.2463560975866364,
+              "valid_replicates": 2000
+            },
+            "ece": {
+              "ci95": [
+                0.4257795030459853,
+                0.43242765626495683
+              ],
+              "invalid_replicates": 0,
+              "point_difference_first_minus_second": 0.42920157077432886,
+              "valid_replicates": 2000
+            },
+            "log_loss": {
+              "ci95": [
+                0.6894431173107705,
+                0.710091176531413
+              ],
+              "invalid_replicates": 0,
+              "point_difference_first_minus_second": 0.6997225296814732,
+              "valid_replicates": 2000
+            }
+          }
+        },
+        "method": "paired unstratified percentile bootstrap on pooled out-of-fold scores",
+        "replicates": 2000,
+        "scope_limit": "conditional on fixed fold-specific Platt and prevalence estimates",
+        "seed": 197824,
+        "unit": "patient_id cluster; repeated ECGs sampled together"
+      },
+      "point_differences": {
+        "platt_minus_prevalence": {
+          "brier": -0.0003438077934081367,
+          "ece": 0.00033267294029731636,
+          "log_loss": -0.007868233424524609
+        },
+        "raw_minus_prevalence": {
+          "brier": 0.2463560975866364,
+          "ece": 0.42920157077432886,
+          "log_loss": 0.6997225296814732
+        }
+      },
+      "reference": "Inferior MI ECG statement; not acute or clinically adjudicated MI",
+      "source_support": {
+        "negative_records": 25650,
+        "patients": 24666,
+        "positive_patients": 117,
+        "positive_records": 120,
+        "records": 25770
+      }
+    },
+    "P4:LVH": {
+      "fold_support": [
+        {
+          "evaluation_support": {
+            "negative_records": 5012,
+            "patients": 4831,
+            "positive_patients": 45,
+            "positive_records": 47,
+            "records": 5059
+          },
+          "fit_prevalence": 0.008258064516129033,
+          "fit_support": {
+            "negative_records": 15372,
+            "patients": 14830,
+            "positive_patients": 122,
+            "positive_records": 128,
+            "records": 15500
+          },
+          "fit_test_patient_overlap": 0,
+          "fold": 0
+        },
+        {
+          "evaluation_support": {
+            "negative_records": 5226,
+            "patients": 5057,
+            "positive_patients": 43,
+            "positive_records": 46,
+            "records": 5272
+          },
+          "fit_prevalence": 0.008245147049276116,
+          "fit_support": {
+            "negative_records": 15276,
+            "patients": 14731,
+            "positive_patients": 122,
+            "positive_records": 127,
+            "records": 15403
+          },
+          "fit_test_patient_overlap": 0,
+          "fold": 1
+        },
+        {
+          "evaluation_support": {
+            "negative_records": 4998,
+            "patients": 4816,
+            "positive_patients": 37,
+            "positive_records": 38,
+            "records": 5036
+          },
+          "fit_prevalence": 0.008687258687258687,
+          "fit_support": {
+            "negative_records": 15405,
+            "patients": 14870,
+            "positive_patients": 128,
+            "positive_records": 135,
+            "records": 15540
+          },
+          "fit_test_patient_overlap": 0,
+          "fold": 2
+        },
+        {
+          "evaluation_support": {
+            "negative_records": 5151,
+            "patients": 4976,
+            "positive_patients": 37,
+            "positive_records": 38,
+            "records": 5189
+          },
+          "fit_prevalence": 0.008743523316062176,
+          "fit_support": {
+            "negative_records": 15305,
+            "patients": 14750,
+            "positive_patients": 128,
+            "positive_records": 135,
+            "records": 15440
+          },
+          "fit_test_patient_overlap": 0,
+          "fold": 3
+        },
+        {
+          "evaluation_support": {
+            "negative_records": 5174,
+            "patients": 4986,
+            "positive_patients": 39,
+            "positive_records": 40,
+            "records": 5214
+          },
+          "fit_prevalence": 0.008729388942774006,
+          "fit_support": {
+            "negative_records": 15330,
+            "patients": 14799,
+            "positive_patients": 128,
+            "positive_records": 135,
+            "records": 15465
+          },
+          "fit_test_patient_overlap": 0,
+          "fold": 4
+        }
+      ],
+      "metrics": {
+        "constant_prevalence_oof": {
+          "brier": 0.008044997110586346,
+          "ece": 0.00042220313599486935,
+          "log_loss": 0.04715854078620644
+        },
+        "platt_oof": {
+          "brier": 0.007890718147469753,
+          "ece": 0.00046619839336512663,
+          "log_loss": 0.04170320720080357
+        },
+        "raw_v45_oof": {
+          "brier": 0.34664834308512704,
+          "ece": 0.5235005663097372,
+          "log_loss": 0.9506751094711117
+        }
+      },
+      "patient_cluster_bootstrap_deltas": {
+        "comparisons": {
+          "platt_minus_prevalence": {
+            "brier": {
+              "ci95": [
+                -0.000241074977956803,
+                -7.05793135590248e-05
+              ],
+              "invalid_replicates": 0,
+              "point_difference_first_minus_second": -0.00015427896311659244,
+              "valid_replicates": 2000
+            },
+            "ece": {
+              "ci95": [
+                -0.00010707601105809093,
+                0.0004931719267466916
+              ],
+              "invalid_replicates": 0,
+              "point_difference_first_minus_second": 4.399525737025728e-05,
+              "valid_replicates": 2000
+            },
+            "log_loss": {
+              "ci95": [
+                -0.006968816490280314,
+                -0.003945051785457818
+              ],
+              "invalid_replicates": 0,
+              "point_difference_first_minus_second": -0.005455333585402872,
+              "valid_replicates": 2000
+            }
+          },
+          "raw_minus_prevalence": {
+            "brier": {
+              "ci95": [
+                0.33507813037932127,
+                0.34212123116665916
+              ],
+              "invalid_replicates": 0,
+              "point_difference_first_minus_second": 0.33860334597454067,
+              "valid_replicates": 2000
+            },
+            "ece": {
+              "ci95": [
+                0.5195962351960115,
+                0.5262218360554582
+              ],
+              "invalid_replicates": 0,
+              "point_difference_first_minus_second": 0.5230783631737423,
+              "valid_replicates": 2000
+            },
+            "log_loss": {
+              "ci95": [
+                0.8931236155116486,
+                0.9141874863712776
+              ],
+              "invalid_replicates": 0,
+              "point_difference_first_minus_second": 0.9035165686849053,
+              "valid_replicates": 2000
+            }
+          }
+        },
+        "method": "paired unstratified percentile bootstrap on pooled out-of-fold scores",
+        "replicates": 2000,
+        "scope_limit": "conditional on fixed fold-specific Platt and prevalence estimates",
+        "seed": 197825,
+        "unit": "patient_id cluster; repeated ECGs sampled together"
+      },
+      "point_differences": {
+        "platt_minus_prevalence": {
+          "brier": -0.00015427896311659244,
+          "ece": 4.399525737025728e-05,
+          "log_loss": -0.005455333585402872
+        },
+        "raw_minus_prevalence": {
+          "brier": 0.33860334597454067,
+          "ece": 0.5230783631737423,
+          "log_loss": 0.9035165686849053
+        }
+      },
+      "reference": "LVH ECG statement; not imaging-confirmed hypertrophy",
+      "source_support": {
+        "negative_records": 25561,
+        "patients": 24666,
+        "positive_patients": 201,
+        "positive_records": 209,
+        "records": 25770
+      }
+    },
+    "P6:PVC": {
+      "fold_support": [
+        {
+          "evaluation_support": {
+            "negative_records": 4851,
+            "patients": 4831,
+            "positive_patients": 203,
+            "positive_records": 208,
+            "records": 5059
+          },
+          "fit_prevalence": 0.04187096774193549,
+          "fit_support": {
+            "negative_records": 14851,
+            "patients": 14830,
+            "positive_patients": 628,
+            "positive_records": 649,
+            "records": 15500
+          },
+          "fit_test_patient_overlap": 0,
+          "fold": 0
+        },
+        {
+          "evaluation_support": {
+            "negative_records": 5037,
+            "patients": 5057,
+            "positive_patients": 225,
+            "positive_records": 235,
+            "records": 5272
+          },
+          "fit_prevalence": 0.04129065766409141,
+          "fit_support": {
+            "negative_records": 14767,
+            "patients": 14731,
+            "positive_patients": 620,
+            "positive_records": 636,
+            "records": 15403
+          },
+          "fit_test_patient_overlap": 0,
+          "fold": 1
+        },
+        {
+          "evaluation_support": {
+            "negative_records": 4853,
+            "patients": 4816,
+            "positive_patients": 176,
+            "positive_records": 183,
+            "records": 5036
+          },
+          "fit_prevalence": 0.0425997425997426,
+          "fit_support": {
+            "negative_records": 14878,
+            "patients": 14870,
+            "positive_patients": 645,
+            "positive_records": 662,
+            "records": 15540
+          },
+          "fit_test_patient_overlap": 0,
+          "fold": 2
+        },
+        {
+          "evaluation_support": {
+            "negative_records": 4960,
+            "patients": 4976,
+            "positive_patients": 223,
+            "positive_records": 229,
+            "records": 5189
+          },
+          "fit_prevalence": 0.041515544041450775,
+          "fit_support": {
+            "negative_records": 14799,
+            "patients": 14750,
+            "positive_patients": 621,
+            "positive_records": 641,
+            "records": 15440
+          },
+          "fit_test_patient_overlap": 0,
+          "fold": 3
+        },
+        {
+          "evaluation_support": {
+            "negative_records": 5002,
+            "patients": 4986,
+            "positive_patients": 205,
+            "positive_records": 212,
+            "records": 5214
+          },
+          "fit_prevalence": 0.04215971548658261,
+          "fit_support": {
+            "negative_records": 14813,
+            "patients": 14799,
+            "positive_patients": 634,
+            "positive_records": 652,
+            "records": 15465
+          },
+          "fit_test_patient_overlap": 0,
+          "fold": 4
+        }
+      ],
+      "metrics": {
+        "constant_prevalence_oof": {
+          "brier": 0.03969349761882437,
+          "ece": 0.00047678662482715517,
+          "log_loss": 0.17242179346360398
+        },
+        "platt_oof": {
+          "brier": 0.020962747859563955,
+          "ece": 0.003701430722850666,
+          "log_loss": 0.07904942759485845
+        },
+        "raw_v45_oof": {
+          "brier": 0.041028732473808865,
+          "ece": 0.0791161554878861,
+          "log_loss": 0.14827681218585428
+        }
+      },
+      "patient_cluster_bootstrap_deltas": {
+        "comparisons": {
+          "platt_minus_prevalence": {
+            "brier": {
+              "ci95": [
+                -0.02056194785918228,
+                -0.016975208488291475
+              ],
+              "invalid_replicates": 0,
+              "point_difference_first_minus_second": -0.018730749759260413,
+              "valid_replicates": 2000
+            },
+            "ece": {
+              "ci95": [
+                0.0008588873373555494,
+                0.005036714980293508
+              ],
+              "invalid_replicates": 0,
+              "point_difference_first_minus_second": 0.003224644098023511,
+              "valid_replicates": 2000
+            },
+            "log_loss": {
+              "ci95": [
+                -0.09989312130442422,
+                -0.08684154412262278
+              ],
+              "invalid_replicates": 0,
+              "point_difference_first_minus_second": -0.09337236586874553,
+              "valid_replicates": 2000
+            }
+          },
+          "raw_minus_prevalence": {
+            "brier": {
+              "ci95": [
+                -0.0013086722130544735,
+                0.0038784740322491567
+              ],
+              "invalid_replicates": 0,
+              "point_difference_first_minus_second": 0.0013352348549844975,
+              "valid_replicates": 2000
+            },
+            "ece": {
+              "ci95": [
+                0.07535436870492404,
+                0.0806368522743232
+              ],
+              "invalid_replicates": 0,
+              "point_difference_first_minus_second": 0.07863936886305894,
+              "valid_replicates": 2000
+            },
+            "log_loss": {
+              "ci95": [
+                -0.03260348699717353,
+                -0.01580576491187856
+              ],
+              "invalid_replicates": 0,
+              "point_difference_first_minus_second": -0.024144981277749694,
+              "valid_replicates": 2000
+            }
+          }
+        },
+        "method": "paired unstratified percentile bootstrap on pooled out-of-fold scores",
+        "replicates": 2000,
+        "scope_limit": "conditional on fixed fold-specific Platt and prevalence estimates",
+        "seed": 197827,
+        "unit": "patient_id cluster; repeated ECGs sampled together"
+      },
+      "point_differences": {
+        "platt_minus_prevalence": {
+          "brier": -0.018730749759260413,
+          "ece": 0.003224644098023511,
+          "log_loss": -0.09337236586874553
+        },
+        "raw_minus_prevalence": {
+          "brier": 0.0013352348549844975,
+          "ece": 0.07863936886305894,
+          "log_loss": -0.024144981277749694
+        }
+      },
+      "reference": "Ventricular premature-complex ECG statement; not beat-level event detection",
+      "source_support": {
+        "negative_records": 24703,
+        "patients": 24666,
+        "positive_patients": 1032,
+        "positive_records": 1067,
+        "records": 25770
+      }
+    },
+    "P6:RBBB": {
+      "fold_support": [
+        {
+          "evaluation_support": {
+            "negative_records": 4901,
+            "patients": 4831,
+            "positive_patients": 148,
+            "positive_records": 158,
+            "records": 5059
+          },
+          "fit_prevalence": 0.026,
+          "fit_support": {
+            "negative_records": 15097,
+            "patients": 14830,
+            "positive_patients": 372,
+            "positive_records": 403,
+            "records": 15500
+          },
+          "fit_test_patient_overlap": 0,
+          "fold": 0
+        },
+        {
+          "evaluation_support": {
+            "negative_records": 5131,
+            "patients": 5057,
+            "positive_patients": 130,
+            "positive_records": 141,
+            "records": 5272
+          },
+          "fit_prevalence": 0.02674803609686425,
+          "fit_support": {
+            "negative_records": 14991,
+            "patients": 14731,
+            "positive_patients": 384,
+            "positive_records": 412,
+            "records": 15403
+          },
+          "fit_test_patient_overlap": 0,
+          "fold": 1
+        },
+        {
+          "evaluation_support": {
+            "negative_records": 4913,
+            "patients": 4816,
+            "positive_patients": 112,
+            "positive_records": 123,
+            "records": 5036
+          },
+          "fit_prevalence": 0.02812097812097812,
+          "fit_support": {
+            "negative_records": 15103,
+            "patients": 14870,
+            "positive_patients": 407,
+            "positive_records": 437,
+            "records": 15540
+          },
+          "fit_test_patient_overlap": 0,
+          "fold": 2
+        },
+        {
+          "evaluation_support": {
+            "negative_records": 5033,
+            "patients": 4976,
+            "positive_patients": 147,
+            "positive_records": 156,
+            "records": 5189
+          },
+          "fit_prevalence": 0.026748704663212435,
+          "fit_support": {
+            "negative_records": 15027,
+            "patients": 14750,
+            "positive_patients": 380,
+            "positive_records": 413,
+            "records": 15440
+          },
+          "fit_test_patient_overlap": 0,
+          "fold": 3
+        },
+        {
+          "evaluation_support": {
+            "negative_records": 5082,
+            "patients": 4986,
+            "positive_patients": 121,
+            "positive_records": 132,
+            "records": 5214
+          },
+          "fit_prevalence": 0.027869382476559974,
+          "fit_support": {
+            "negative_records": 15034,
+            "patients": 14799,
+            "positive_patients": 401,
+            "positive_records": 431,
+            "records": 15465
+          },
+          "fit_test_patient_overlap": 0,
+          "fold": 4
+        }
+      ],
+      "metrics": {
+        "constant_prevalence_oof": {
+          "brier": 0.026796926363697227,
+          "ece": 0.00045491343228576744,
+          "log_loss": 0.1262120592039953
+        },
+        "platt_oof": {
+          "brier": 0.009906860669844468,
+          "ece": 0.000983099449936128,
+          "log_loss": 0.03567532088029226
+        },
+        "raw_v45_oof": {
+          "brier": 0.03567997356820812,
+          "ece": 0.07106286177243666,
+          "log_loss": 0.12777667647552454
+        }
+      },
+      "patient_cluster_bootstrap_deltas": {
+        "comparisons": {
+          "platt_minus_prevalence": {
+            "brier": {
+              "ci95": [
+                -0.018631650423148963,
+                -0.015220534006892016
+              ],
+              "invalid_replicates": 0,
+              "point_difference_first_minus_second": -0.01689006569385276,
+              "valid_replicates": 2000
+            },
+            "ece": {
+              "ci95": [
+                -0.0008634850014347009,
+                0.0022723333542687472
+              ],
+              "invalid_replicates": 0,
+              "point_difference_first_minus_second": 0.0005281860176503605,
+              "valid_replicates": 2000
+            },
+            "log_loss": {
+              "ci95": [
+                -0.09726606252652499,
+                -0.084109888885868
+              ],
+              "invalid_replicates": 0,
+              "point_difference_first_minus_second": -0.09053673832370304,
+              "valid_replicates": 2000
+            }
+          },
+          "raw_minus_prevalence": {
+            "brier": {
+              "ci95": [
+                0.00632927864749037,
+                0.011584037044845494
+              ],
+              "invalid_replicates": 0,
+              "point_difference_first_minus_second": 0.008883047204510896,
+              "valid_replicates": 2000
+            },
+            "ece": {
+              "ci95": [
+                0.06737880878094345,
+                0.07258039075213667
+              ],
+              "invalid_replicates": 0,
+              "point_difference_first_minus_second": 0.0706079483401509,
+              "valid_replicates": 2000
+            },
+            "log_loss": {
+              "ci95": [
+                -0.007580816395298144,
+                0.010963693277693568
+              ],
+              "invalid_replicates": 0,
+              "point_difference_first_minus_second": 0.001564617271529234,
+              "valid_replicates": 2000
+            }
+          }
+        },
+        "method": "paired unstratified percentile bootstrap on pooled out-of-fold scores",
+        "replicates": 2000,
+        "scope_limit": "conditional on fixed fold-specific Platt and prevalence estimates",
+        "seed": 197828,
+        "unit": "patient_id cluster; repeated ECGs sampled together"
+      },
+      "point_differences": {
+        "platt_minus_prevalence": {
+          "brier": -0.01689006569385276,
+          "ece": 0.0005281860176503605,
+          "log_loss": -0.09053673832370304
+        },
+        "raw_minus_prevalence": {
+          "brier": 0.008883047204510896,
+          "ece": 0.0706079483401509,
+          "log_loss": 0.001564617271529234
+        }
+      },
+      "reference": "Complete RBBB ECG statement; code 105 is not pooled",
+      "source_support": {
+        "negative_records": 25060,
+        "patients": 24666,
+        "positive_patients": 658,
+        "positive_records": 710,
+        "records": 25770
+      }
+    },
+    "P8:PAC": {
+      "fold_support": [
+        {
+          "evaluation_support": {
+            "negative_records": 4959,
+            "patients": 4831,
+            "positive_patients": 99,
+            "positive_records": 100,
+            "records": 5059
+          },
+          "fit_prevalence": 0.020838709677419354,
+          "fit_support": {
+            "negative_records": 15177,
+            "patients": 14830,
+            "positive_patients": 313,
+            "positive_records": 323,
+            "records": 15500
+          },
+          "fit_test_patient_overlap": 0,
+          "fold": 0
+        },
+        {
+          "evaluation_support": {
+            "negative_records": 5157,
+            "patients": 5057,
+            "positive_patients": 113,
+            "positive_records": 115,
+            "records": 5272
+          },
+          "fit_prevalence": 0.020385639161202364,
+          "fit_support": {
+            "negative_records": 15089,
+            "patients": 14731,
+            "positive_patients": 305,
+            "positive_records": 314,
+            "records": 15403
+          },
+          "fit_test_patient_overlap": 0,
+          "fold": 1
+        },
+        {
+          "evaluation_support": {
+            "negative_records": 4928,
+            "patients": 4816,
+            "positive_patients": 102,
+            "positive_records": 108,
+            "records": 5036
+          },
+          "fit_prevalence": 0.020463320463320462,
+          "fit_support": {
+            "negative_records": 15222,
+            "patients": 14870,
+            "positive_patients": 311,
+            "positive_records": 318,
+            "records": 15540
+          },
+          "fit_test_patient_overlap": 0,
+          "fold": 2
+        },
+        {
+          "evaluation_support": {
+            "negative_records": 5090,
+            "patients": 4976,
+            "positive_patients": 96,
+            "positive_records": 99,
+            "records": 5189
+          },
+          "fit_prevalence": 0.02117875647668394,
+          "fit_support": {
+            "negative_records": 15113,
+            "patients": 14750,
+            "positive_patients": 318,
+            "positive_records": 327,
+            "records": 15440
+          },
+          "fit_test_patient_overlap": 0,
+          "fold": 3
+        },
+        {
+          "evaluation_support": {
+            "negative_records": 5097,
+            "patients": 4986,
+            "positive_patients": 115,
+            "positive_records": 117,
+            "records": 5214
+          },
+          "fit_prevalence": 0.020303912059489167,
+          "fit_support": {
+            "negative_records": 15151,
+            "patients": 14799,
+            "positive_patients": 305,
+            "positive_records": 314,
+            "records": 15465
+          },
+          "fit_test_patient_overlap": 0,
+          "fold": 4
+        }
+      ],
+      "metrics": {
+        "constant_prevalence_oof": {
+          "brier": 0.020479336929272837,
+          "ece": 0.0002828650133957153,
+          "log_loss": 0.10160714755519455
+        },
+        "platt_oof": {
+          "brier": 0.017539920789346256,
+          "ece": 0.00288180254603373,
+          "log_loss": 0.07799648729632169
+        },
+        "raw_v45_oof": {
+          "brier": 0.07232526211107661,
+          "ece": 0.19922427804080217,
+          "log_loss": 0.28175724608218866
+        }
+      },
+      "patient_cluster_bootstrap_deltas": {
+        "comparisons": {
+          "platt_minus_prevalence": {
+            "brier": {
+              "ci95": [
+                -0.003749667509894707,
+                -0.002145966633056984
+              ],
+              "invalid_replicates": 0,
+              "point_difference_first_minus_second": -0.002939416139926581,
+              "valid_replicates": 2000
+            },
+            "ece": {
+              "ci95": [
+                0.001266869635247845,
+                0.004108578346317255
+              ],
+              "invalid_replicates": 0,
+              "point_difference_first_minus_second": 0.002598937532638015,
+              "valid_replicates": 2000
+            },
+            "log_loss": {
+              "ci95": [
+                -0.027729516650749124,
+                -0.019927960183405157
+              ],
+              "invalid_replicates": 0,
+              "point_difference_first_minus_second": -0.02361066025887286,
+              "valid_replicates": 2000
+            }
+          },
+          "raw_minus_prevalence": {
+            "brier": {
+              "ci95": [
+                0.04981055942052808,
+                0.05384069062355718
+              ],
+              "invalid_replicates": 0,
+              "point_difference_first_minus_second": 0.05184592518180377,
+              "valid_replicates": 2000
+            },
+            "ece": {
+              "ci95": [
+                0.19544753634644868,
+                0.20084733596930632
+              ],
+              "invalid_replicates": 0,
+              "point_difference_first_minus_second": 0.19894141302740645,
+              "valid_replicates": 2000
+            },
+            "log_loss": {
+              "ci95": [
+                0.1723621573147602,
+                0.18757300420773107
+              ],
+              "invalid_replicates": 0,
+              "point_difference_first_minus_second": 0.1801500985269941,
+              "valid_replicates": 2000
+            }
+          }
+        },
+        "method": "paired unstratified percentile bootstrap on pooled out-of-fold scores",
+        "replicates": 2000,
+        "scope_limit": "conditional on fixed fold-specific Platt and prevalence estimates",
+        "seed": 197826,
+        "unit": "patient_id cluster; repeated ECGs sampled together"
+      },
+      "point_differences": {
+        "platt_minus_prevalence": {
+          "brier": -0.002939416139926581,
+          "ece": 0.002598937532638015,
+          "log_loss": -0.02361066025887286
+        },
+        "raw_minus_prevalence": {
+          "brier": 0.05184592518180377,
+          "ece": 0.19894141302740645,
+          "log_loss": 0.1801500985269941
+        }
+      },
+      "reference": "Atrial premature-complex ECG statement; not beat-level event detection",
+      "source_support": {
+        "negative_records": 25231,
+        "patients": 24666,
+        "positive_patients": 525,
+        "positive_records": 539,
+        "records": 25770
+      }
+    }
+  },
+  "execution": {
+    "commit": "bf5aab0264610235e79cda786e64c524637606ff",
+    "config_sha256": "06db047ca88018790ef03e8c88f40b918e320c85394e752a5a9effb8e3a3ee2c",
+    "runner_sha256": "84785f099dd35548055c48e6efb27807ea4793725e1649fea865906183496e2d",
+    "runtime": {
+      "environment": "CEDIA miniconda3/3 conda environment yc_env2",
+      "versions": {
+        "numpy": "1.26.4",
+        "python": "3.10.18",
+        "scipy": "1.15.3"
+      }
+    },
+    "slurm_job_id": "32763",
+    "verifier_sha256": "53c7ae634c6fff4af4ca7e5fcb4246de6899973c42e7a222a1fdab4849747371"
+  },
+  "individual_identifiers_exported": false,
+  "input_sha256": {
+    "baseline_aggregate": "50487cd92a91924a0aa63549725eb26d9328f307a6a6d9cf57ac2655e85ad2ef",
+    "ledger": "4a3a1e61b1784e06190d5caaa089fca04ef84792acb3a5f9fc1af3f9c1173462",
+    "metadata": "c6f8dc5197758a3970aae554f8b6ee884d96656b121879bc0eb1adf367ea6d86",
+    "scoring_receipt": "8abdc5f6561fc3fea77eeb68e8aa34bc2d02396cad9c2e9fbeea70b4188dac92",
+    "v45_frozen_config": "d788ad8cca94793cebb738496acc131e82b1ca1900976f11020b99a79a5fc366"
+  },
+  "protocol_sha256": "6fb2eaf4e7ac1079a563b86dca98e1a46c187807234cfe3ade9ce3c77186ec7d",
+  "raw_signals_exported": false,
+  "record_level_scores_exported": false,
+  "schema": "TITAN_V46_SPH_B1_PREVALENCE_COMPARISON_V1",
+  "scope": "Supplementary exploratory analysis of previously observed SPH predictions; not an independent, locked, confirmatory, or clinical validation.",
+  "source": {
+    "patients": 24666,
+    "records": 25770,
+    "reference": "presence of the frozen primary ECG statement code; absence is not adjudicated disease absence"
+  },
+  "source_b1_config_sha256": "3e00a03b2376f1935ea5d2fb1197aae41e1884f17119f8291ed351d7a1d3d5ad",
+  "source_b1_result_sha256": "859b99a3208442a791badcbd9996001678e815b00d01194f9d521926feeb2272",
+  "source_b1_runner_sha256": "320621cdeb91d8d7abef2949a9ac41e49ce6d8bd277b66bd5836e40cb6720406"
+}

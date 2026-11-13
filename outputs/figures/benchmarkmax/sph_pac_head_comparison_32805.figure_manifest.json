@@ -1,0 +1,28 @@
+{
+  "cedia_slurm_job_id": "32805",
+  "execution_commit": "df86ca874a62286a7dd482346743e75a9555f2ba",
+  "files": {
+    "sph_pac_head_comparison_32805.pdf": "ca73464bdefcdf665a3ab7a3e09ba349e483316ad66e4e549be4897ffd4f1807",
+    "sph_pac_head_comparison_32805.png": "2b65a246f9650f0f23a57bde90e31b48ff188264f10dd11ea3b4e19f1d32adff"
+  },
+  "holdout_positive_records": 84,
+  "holdout_records": 3697,
+  "individual_records_exported": false,
+  "interval": {
+    "confidence_level": 0.95,
+    "method": "paired unstratified percentile bootstrap",
+    "replicates": 2000,
+    "unit": "patient_id cluster; repeated ECGs sampled together"
+  },
+  "metrics": [
+    "average_precision",
+    "sensitivity"
+  ],
+  "protocol_sha256": "5e566ef81b6f6b66643efea646b02ffa692fdd12d8630a16fda35d8ebe2a8a25",
+  "record_level_scores_exported": false,
+  "renderer_sha256": "ce528c8ac1b5c0320e7d40be3736de11c695c38dff3b0f746fca11069cdb7e0b",
+  "schema": "TITAN_V46_SPH_PAC_HEAD_FIGURE_V1",
+  "scope": "Exploratory development/adaptation on previously observed SPH; not independent, external, confirmatory, clinical, or prospective validation.",
+  "source_aggregate": "sph_pac_head_comparison_32805.json",
+  "source_aggregate_sha256": "722c68d885bc6cef308209d2b1ac3c4f8dd7164fb8e1c26d4de527d30959989a"
+}

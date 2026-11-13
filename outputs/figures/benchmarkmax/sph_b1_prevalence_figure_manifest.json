@@ -1,0 +1,20 @@
+{
+  "schema": "TITAN_V46_SPH_B1_PREVALENCE_FIGURE_MANIFEST_V1",
+  "scope": "Exploratory probability-error comparison on previously observed SPH; not independent, external, or clinical validation.",
+  "input": {
+    "path": "outputs/results/benchmarkmax/sph_b1_prevalence_comparison_32763.json",
+    "sha256": "b7c5b29743fc6710ba486bb6e393a01ba216db9598ad5b74995ad6cedb0cf530"
+  },
+  "generator": {
+    "path": "scripts/benchmarkmax/plot_sph_prevalence_comparison.py",
+    "sha256": "074dae7947f6a3d1b1affbbc20a4143fed4cc3ef4daa1ec8f181403a726ee896"
+  },
+  "execution": {
+    "cedia_job": 32763,
+    "commit": "bf5aab0264610235e79cda786e64c524637606ff"
+  },
+  "assets": {
+    "sph_b1_prevalence_comparison.png": "9dafc84f0a138fa44dd43d6c487a92637a08baf200006329a341c25b6e475c14",
+    "sph_b1_prevalence_comparison.pdf": "3d3e63b05ac2889155784a0ceb01316f7753d80251e1f053440a8fe69533c9b1"
+  }
+}

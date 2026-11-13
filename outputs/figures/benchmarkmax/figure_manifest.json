@@ -1,0 +1,22 @@
+{
+  "schema": "TITAN_V46_SPH_DIAGNOSTIC_FIGURES_V1",
+  "scope": "Exploratory figures from previously observed aggregate SPH statement comparisons; not independent evaluation or clinical adjudication.",
+  "input": {
+    "path": "outputs/results/benchmarkmax/sph_baseline_diagnostic_32726.json",
+    "sha256": "248b4857cbd4a92ad42bc96d78dab9f6431a0d572f9325684b520c31e27670c6"
+  },
+  "generator": {
+    "path": "scripts/benchmarkmax/plot_sph_baseline.py",
+    "sha256": "564d8ec6c086c247a5128d584ff774ab207352a8ed0ce1b583acfd1204fc2e34"
+  },
+  "assets": {
+    "sph_baseline_calibration.pdf": "a35a598b1894a2ad482c8426412ee9b2cdf076e1e1e55c922999d6bbba13fc35",
+    "sph_baseline_calibration.png": "38fc862d79080eeeb6d9a7a2c3331a481201939003f8d943c6b2a3d6e41fd46a",
+    "sph_baseline_pr.pdf": "1cd5bd3ea369858427ad398ae5095e63fe67cf4621bb149746bc271883b43476",
+    "sph_baseline_pr.png": "ca6e655f64c23f9e79e52a0735a869b326932adbf4e77db5a094f5a701bd2033",
+    "sph_baseline_roc.pdf": "9b0ecae929775583cb16252d9531b26e0c1b11b4f28053f84a16b25574f1915e",
+    "sph_baseline_roc.png": "b333877d7a68bd9a64feca50d46c9b91c622d0476998ad770c4de1e5e7edfeeb",
+    "sph_baseline_score_distributions.pdf": "a75670e804ca9dc2e87bba57b4646e7333580e3fd05ea36f9f02efbf6a666cbd",
+    "sph_baseline_score_distributions.png": "5370d5369d16ec28f33140e0140795939b583bf83c40a6a75e6b2e746d66e070"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "config_sha256": "b071edb6bb79a48c81b4c1d3d9aad7a683bf25e53b1826c0e6dd96262bf920e3",
+  "eligible_records": 25434,
+  "git_commit": "df86ca874a62286a7dd482346743e75a9555f2ba",
+  "holdout_records": 3697,
+  "individual_identifiers_exported": false,
+  "private_artifact_sha256": "433eb657f55de4414b2ed29487c90b45968488abf002239b030bb69e3b4b3c49",
+  "protocol_sha256": "5e566ef81b6f6b66643efea646b02ffa692fdd12d8630a16fda35d8ebe2a8a25",
+  "raw_signals_exported": false,
+  "record_level_scores_exported": false,
+  "report_sha256": "722c68d885bc6cef308209d2b1ac3c4f8dd7164fb8e1c26d4de527d30959989a",
+  "runner_sha256": "d58815206d8b5d6447c38fee8e1013ebb0290026ba072b9e48e66a8994502960",
+  "schema": "TITAN_V46_SPH_PAC_HEAD_COMPARISON_V2",
+  "slurm_wrapper_sha256": "c80c948a57c7c1e976e984a5c2aed634f1d015a6cf3e64e5464dc916c55e6d78",
+  "source_records": 25770,
+  "status": "aggregate_schema_hash_denominator_and_privacy_checks_passed",
+  "verifier_sha256": "1941e901344003813e19dfa5316225bfc8bfe27075a7bb9c0365c40893e81ce2"
+}
