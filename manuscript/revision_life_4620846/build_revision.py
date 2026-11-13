@@ -5,8 +5,8 @@ import re
 import shutil
 from pathlib import Path
 
-from reviewer_map import ROOT, REPO
-from revision_data import pct, sha, table, tex
+from reviewer_map import REPO, ROOT
+from revision_data import pct, sha, table
 
 ORIGINAL = Path.home() / ".codex/recovery/life-4620846-canonical-submission/extracted/mdpi_Articulo"
 LATEX = ROOT / "latex"
@@ -33,7 +33,7 @@ def build():
         i = s.index(start)
         j = s.index(stop, i + len(start))
         s = s[:i] + new.rstrip() + "\n\n" + s[j:]
-        line = next((n for n, l in enumerate(source.splitlines(), 1) if start in l), None)
+        line = next((n for n, text in enumerate(source.splitlines(), 1) if start in text), None)
         changes.append((comment, line, start, evidence))
 
     def replace(old, new, count=1):
@@ -46,7 +46,8 @@ def build():
         at = s.index(r"\label{" + label + "}")
         i, j = s.rindex(r"\begin{table}", 0, at), s.index(r"\end{table}", at)
         s = s[:i] + new + s[j+len(r"\end{table}"):]
-        changes.append((comment, next(n for n,l in enumerate(source.splitlines(), 1) if label in l), label, evidence))
+        line = next(n for n, text in enumerate(source.splitlines(), 1) if label in text)
+        changes.append((comment, line, label, evidence))
 
     edit(r"\abstract{", r"\keyword", r"""
 \abstract{This study designed and evaluated modular convolutional neural network (CNN)--Transformer specialists for ten-second 12-lead electrocardiograms (ECGs). The architecture uses a 58.35-million-parameter waveform backbone design with separate fitted rhythm and pathology versions. Primary6 is a six-output rhythm profile for atrial fibrillation, sinus bradycardia, sinus tachycardia, right bundle branch block, first-degree atrioventricular block, and premature ventricular contractions. Primary4 comprises four binary pathology panels: anteroseptal myocardial infarction, left ventricular hypertrophy, inferior myocardial infarction, and ischemic ST--T change. In the selected retrospective development evaluations, Primary6 achieved 95.19\% top-1 accuracy and 80.09\% mean binary F1 across 1,643 ECGs; Primary4 achieved 80.23\% mean binary accuracy and 79.35\% macro-F1 across 962 ECG--label observations from 733 ECGs. These estimates are conditional on profile eligibility and do not represent a complete diagnostic workflow. Separate retrospective analyses quantify sensitivity to denominator selection and distinguish score-based abstention from top-1 output. Five released weight files have verified SHA-256 digests; archived results can be recalculated, but the complete historical training chain and independence of all partitions cannot be established. Independent external evaluation remains in progress.}
@@ -358,7 +359,7 @@ Rossi, M.; et al. Clinical characteristics and outcomes of first diagnosed atria
     }
     for key, entry in bib_fixes.items():
         pat = r"(\\bibitem\[[^\]]+\]\{"+key+r"\})\n.*?(?=\n\\bibitem)"
-        s, changed = re.subn(pat, lambda m:m[1]+"\n"+entry+"\n\n", s, flags=re.S)
+        s, changed = re.subn(pat, lambda m, entry=entry: m[1]+"\n"+entry+"\n\n", s, flags=re.S)
         assert changed == 1
     s = re.sub(r"\\bibitem\[[^\]]+\]\{(?:Bai2024hybrid|Huang2024Efficient)\}\n.*?(?=\n\\bibitem)", "", s, flags=re.S)
     replace(r"\bibitem[He et~al.(2016)]{He2016Deep}", r"""

@@ -202,6 +202,16 @@ def test_repository_contains_only_manifested_manuscript_and_sph_images() -> None
         (ROOT / "outputs/results/benchmarkmax/sph_pac_head_comparison_32805.json").read_bytes()
     ).hexdigest()
 
+    draft_dir = ROOT / "manuscript/revision_life_4620846/latex/figures"
+    draft_manifest = json.loads((draft_dir / "figure_manifest.json").read_text(encoding="utf-8"))
+    assert draft_manifest["schema"] == "TITAN_LIFE_REVISION_DRAFT_FIGURES_V1"
+    draft_media = set()
+    for name, digest in draft_manifest["files"].items():
+        assert Path(name).name == name and Path(name).suffix in {".pdf", ".png"}
+        path = draft_dir / name
+        assert hashlib.sha256(path.read_bytes()).hexdigest() == digest
+        draft_media.add(path.relative_to(ROOT).as_posix())
+
     assert actual_media == (
         {f"outputs/figures/{name}" for name in expected}
         | {f"outputs/figures/external_sph/{name}" for name in sph_files}
@@ -210,4 +220,5 @@ def test_repository_contains_only_manifested_manuscript_and_sph_images() -> None
         | {f"outputs/figures/benchmarkmax/{name}" for name in expected_b1}
         | {f"outputs/figures/benchmarkmax/{name}" for name in expected_prevalence}
         | {f"outputs/figures/benchmarkmax/{name}" for name in expected_pac}
+        | draft_media
     )

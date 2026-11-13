@@ -10,7 +10,6 @@ from docx import Document
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 from docx.shared import Inches, Pt, RGBColor
-
 from reviewer_map import ROOT
 
 

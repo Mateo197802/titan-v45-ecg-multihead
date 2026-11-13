@@ -8,7 +8,7 @@ import subprocess
 import tempfile
 from collections import Counter
 from pathlib import Path
-from zipfile import ZipFile, ZIP_DEFLATED
+from zipfile import ZIP_DEFLATED, ZipFile
 
 from reviewer_map import DOCS, MAP, ROOT
 

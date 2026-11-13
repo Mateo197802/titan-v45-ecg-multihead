@@ -2,17 +2,21 @@
 import hashlib
 import json
 import re
-from pathlib import Path
 from zipfile import ZipFile
 
 import matplotlib
+
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from sklearn.metrics import average_precision_score, precision_recall_curve, roc_auc_score, roc_curve
-
-from reviewer_map import ROOT, REPO
+from reviewer_map import REPO, ROOT
+from sklearn.metrics import (
+    average_precision_score,
+    precision_recall_curve,
+    roc_auc_score,
+    roc_curve,
+)
 
 EVIDENCE = REPO / "outputs/results/external_dev"
 RELEASE = REPO / "outputs/models/release_weight_manifest.json"
@@ -142,7 +146,7 @@ def build_data():
         metrics[p] = {}
         for c, t in zip(classes, cfg["thresholds"], strict=True):
             y = (frame[f"truth_{c}"].to_numpy(dtype=bool) if p == 6 else
-                 frame.accepted_labels.str.split("|", regex=False).map(lambda labels: c in labels).to_numpy())
+                 frame.accepted_labels.str.split("|", regex=False).map(lambda labels, c=c: c in labels).to_numpy())
             s = frame[f"{'membership_' if p == 8 else ''}prob_{c}"].to_numpy()
             d = s >= t
             vectors[p][c] = (y, s)
@@ -150,10 +154,12 @@ def build_data():
             if p == 6:
                 assert np.array_equal(d, frame[f"threshold_pass_{c}"].to_numpy(dtype=bool))
             else:
-                d = frame.predicted_labels.str.split("|", regex=False).map(lambda labels: c in labels).to_numpy()
+                d = frame.predicted_labels.str.split("|", regex=False).map(lambda labels, c=c: c in labels).to_numpy()
                 metrics[p][c] = binary(y, d, s)
             assert np.isclose(metrics[p][c]["f1"], cfg["panels"][c]["f1"])
-        empty = ~(np.column_stack([vectors[p][c][1] >= t for c,t in zip(classes, cfg["thresholds"])]).any(axis=1))
+        empty = ~np.column_stack([
+            vectors[p][c][1] >= t for c, t in zip(classes, cfg["thresholds"], strict=True)
+        ]).any(axis=1)
         correct = frame["correct" if p == 6 else "accepted_correct"]
         assert (int(empty.sum()), int(correct[empty].sum())) == {6:(79,64), 8:(58,22)}[p]
         assert len(frame) == cfg["records"]
@@ -238,7 +244,7 @@ def build_data():
             ax.legend(frameon=False, fontsize=8, loc="best")
         save(fig, name)
     fig, ax = plt.subplots(figsize=(7.7, 3.6), layout="constrained")
-    for i, (s, n, k) in enumerate(src):
+    for i, (_, n, k) in enumerate(src):
         a,b = wilson(k,n)
         ax.errorbar(k/n, i, xerr=[[k/n-a],[b-k/n]], fmt="o", color="#245785", capsize=3)
     ax.set(yticks=range(len(src)), yticklabels=[f"{s.replace(chr(92),'')} (n={n})" for s,n,_ in src],

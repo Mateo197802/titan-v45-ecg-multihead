@@ -1,7 +1,6 @@
 """Draw new explanatory schematics without reusing third-party artwork."""
-from matplotlib.patches import FancyBboxPatch
 import matplotlib.pyplot as plt
-
+from matplotlib.patches import FancyBboxPatch
 from revision_data import save
 
 
