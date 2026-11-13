@@ -1,0 +1,25 @@
+{
+  "allocated_gpu_seconds": 9603,
+  "attempts": 29,
+  "audit_job": "33860",
+  "cycles": 6,
+  "files": {
+    "AUTONOMOUS_LOOP_EXECUTION_LEDGER.csv": "43e44a54592386c2235ae9a917b55a69874c0658104b89c95d5084402ceabad5",
+    "BEST_DEVELOPMENT_MODEL.json": "1082c158e087ecb8f1714f034f39fdcc6aee38224da42484ed757a36a8dd5f19",
+    "CLASSWISE_ERROR_EVOLUTION.csv": "1dc9f4df352fa591bd220a113f16ccb4f4a1e507eefe6e9c35f60ce4034e2b81",
+    "FINAL_PERFORMANCE_COMPARISON.csv": "3d7a7c7e36b8af74ab2490f975f950f63ec2ad0475b253e10befeae32ac2ee5c",
+    "ITERATION_HYPOTHESES_AND_DECISIONS.json": "db3830cce04ca27f6ac4bca04655803c6ff2c9483eed61cc766e8c2d5c4d826c",
+    "MULTISOURCE_GENERALIZATION_RESULTS.csv": "caafa375b600d520cf963d9f4fe4d3d96521c15f4522f0ecc973eff943f4a549",
+    "REMAINING_TECHNICAL_BLOCKERS.md": "5cd39e7ccc15bdfcb12f3a2d2a170b5e8c13ff4bff42b4cd086b81197170b7ac",
+    "THREE_SEED_STABILITY.csv": "ec7da881effa0e489a8ae091cec5a31295804f644803935721d261de25428b1a",
+    "TRAINING_CHECKPOINT_SHA256SUMS.txt": "92350df10dab6059efeccbcb950289934a6aabd82cd693fd450201ff2bf7d9db"
+  },
+  "finalist": "04-SB-balanced-20261113",
+  "historical_test_opened": false,
+  "independent_generalization": "NOT_EVALUATED",
+  "promotion": "NOT_AUTHORIZED",
+  "protocol_sha256": "1641bf793725d444e3ec2411e8de2756c8718d47c0fcfa999594fc3c4e0bf342",
+  "selection_reuse": true,
+  "stop": "CYCLE_BUDGET",
+  "verified_fits": 28
+}

@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 from pathlib import Path
 
 from verify_adaptation_delivery import assert_hash
@@ -12,7 +13,9 @@ ROOT = Path(__file__).resolve().parents[2]
 PROTOCOL = ROOT / "docs/performance_recovery/CORRECTIVE_PROTOCOL.json"
 REPORTS = {"CORRECTIVE_SELECTION.json", "CORRECTIVE_FITS.json", "CORRECTIVE_METRICS.csv",
            "CORRECTIVE_PAIRED_INTERVALS.csv"}
-EXTRAS = {"CORRECTIVE_DECISION.json", "CORRECTIVE_DIAGNOSIS.json", "CORRECTIVE_SLURM.csv"}
+EXTRAS = {"CORRECTIVE_DECISION.json", "CORRECTIVE_DIAGNOSIS.json", "CORRECTIVE_SLURM.csv",
+          "CORRECTIVE_REPRESENTATION_PROBE.csv", "CORRECTIVE_REPRESENTATION_RECEIPT.json",
+          "CORRECTIVE_PRIVATE_READBACK.json"}
 
 
 def verify(folder):
@@ -42,7 +45,19 @@ def verify(folder):
             or not audit["masked_gradient_zero"] or selection["test_opened"]):
         raise ValueError("development diagnostics not satisfied")
     jobs = {row["JobIDRaw"]: row for row in rows(folder / "CORRECTIVE_SLURM.csv")}
-    relevant = {audit["slurm_job"], decision["slurm_job"], *[r["slurm_job"] for r in fits]}
+    probe = json.loads((folder / "CORRECTIVE_REPRESENTATION_RECEIPT.json").read_bytes())
+    readback = json.loads((folder / "CORRECTIVE_PRIVATE_READBACK.json").read_bytes())
+    assert_hash(folder / "CORRECTIVE_REPRESENTATION_PROBE.csv", probe["results_sha256"])
+    assert_hash(folder / "CORRECTIVE_DECISION.json", readback["source_decision_sha256"])
+    if any(r["test_opened"] or r["protocol_sha256"] != decision["protocol_sha256"] for r in (probe, readback)):
+        raise ValueError("probe or readback protocol mismatch")
+    if len(probe["published_weights"]) != 5 or readback["max_absolute_error"] > 1e-7:
+        raise ValueError("physical model hashes or readback incomplete")
+    release = {r["name"]: r["sha256"] for r in json.loads((ROOT / "release-manifest.json").read_bytes())["assets"]}
+    if any(release.get(name) != sha for name, sha in probe["published_weights"].items()):
+        raise ValueError("physical checkpoint hashes differ from release")
+    relevant = {audit["slurm_job"], decision["slurm_job"], probe["slurm_job"], readback["slurm_job"],
+                *[r["slurm_job"] for r in fits]}
     if any(jobs[j]["State"] != "COMPLETED" or jobs[j]["ExitCode"] != "0:0" for j in relevant):
         raise ValueError("published evidence is not backed by completed jobs")
     if sum(int(j["ElapsedRaw"]) for j in jobs.values() if "gres/gpu" in j["AllocTRES"]) > protocol["gpu_allocation_hours_max"] * 3600:
@@ -55,16 +70,30 @@ def verify(folder):
         if (r["epoch"] not in r["history"] or r["calibration_opened"] or r["test_opened"]
                 or len(r["checkpoint_sha256"]) != 64):
             raise ValueError("invalid corrective fit receipt")
-    for row in rows(folder / "CORRECTIVE_METRICS.csv"):
+        chosen_epoch = min(r["history"], key=lambda h: (
+            *h["selection"][:2], *[-v for v in h["selection"][2:]]))
+        if r["epoch"] != chosen_epoch:
+            raise ValueError("corrective epoch differs from frozen selection rule")
+    metrics = rows(folder / "CORRECTIVE_METRICS.csv")
+    if len(metrics) != readback["rows_verified"]:
+        raise ValueError("not all metrics independently verified")
+    for row in metrics:
         check_counts(row)
         tn, fn = int(row["tn"]), int(row["fn"])
         if tn + fn and abs(float(row["npv"]) - tn / (tn + fn)) > 1e-12:
             raise ValueError("invalid NPV")
-    for r in rows(folder / "CORRECTIVE_PAIRED_INTERVALS.csv"):
+    intervals = rows(folder / "CORRECTIVE_PAIRED_INTERVALS.csv")
+    point = {(r["scope"], r["arm"], r["endpoint"], r["metric"]): float(r["value"]) for r in intervals}
+    for r in intervals:
         if r["scope"] == "cpsc" and r["resampling_unit"] != "ecg_only":
             raise ValueError("CPSC patient grouping is not certified")
         if not 0 <= int(r["valid_replicates"]) <= protocol["paired_bootstrap"]["replicates"]:
             raise ValueError("invalid bootstrap support")
+        if r["arm"] == "C-A":
+            key = (r["scope"], r["endpoint"], r["metric"])
+            a, c = (point[(key[0], arm, *key[1:])] for arm in ("A", "C"))
+            if not math.isclose(c - a, float(r["value"]), abs_tol=1e-12):
+                raise ValueError("paired point estimate differs from matched point metrics")
 
 
 if __name__ == "__main__":

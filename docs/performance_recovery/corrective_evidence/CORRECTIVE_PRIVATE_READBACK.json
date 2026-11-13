@@ -1,0 +1,8 @@
+{
+  "max_absolute_error": 3.3306690738754696e-16,
+  "protocol_sha256": "518e058411ea6a3771112a1c792549024b991415b250f3ac4c2211aeb55e1563",
+  "rows_verified": 26,
+  "slurm_job": "33832",
+  "source_decision_sha256": "d4c97fa1226ddef7fa313e107c8b213733217f8c362e27744b3864bba91db8bf",
+  "test_opened": false
+}

@@ -1,0 +1,18 @@
+{
+  "chain": [
+    "04-SB-balanced-20261113",
+    "03-1AVB-hard_negative-20261113",
+    "02-AFIB-rr_temporal-20261113",
+    "01-SB-shared_gain-20261114"
+  ],
+  "finalist": "04-SB-balanced-20261113",
+  "max_absolute_probability_error": 0.0,
+  "protocol_sha256": "1641bf793725d444e3ec2411e8de2756c8718d47c0fcfa999594fc3c4e0bf342",
+  "sample_counts": {
+    "chapman": 64,
+    "cpsc": 64,
+    "validation": 64
+  },
+  "slurm_job": "33861",
+  "test_opened": false
+}
