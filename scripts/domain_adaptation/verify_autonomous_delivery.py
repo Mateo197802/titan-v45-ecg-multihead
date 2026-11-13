@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from pathlib import Path
 
 from verify_adaptation_delivery import assert_hash
@@ -10,6 +11,8 @@ from verify_recovery_delivery import check_counts, json_value, rows
 
 ROOT = Path(__file__).resolve().parents[2]
 PROTOCOL = ROOT / "docs/performance_recovery/AUTONOMOUS_LOOP_PROTOCOL.json"
+SHA256 = re.compile(r"[0-9a-f]{64}\Z")
+FIT_ID = re.compile(r"[0-9]{2}-(?:SB|AFIB|1AVB)-[a-z_]+-[0-9]{8}\Z")
 FILES = {
     "AUTONOMOUS_LOOP_EXECUTION_LEDGER.csv", "ITERATION_HYPOTHESES_AND_DECISIONS.json",
     "CLASSWISE_ERROR_EVOLUTION.csv", "TRAINING_CHECKPOINT_SHA256SUMS.txt", "BEST_DEVELOPMENT_MODEL.json",
@@ -57,6 +60,26 @@ def verify(folder):
     selected = json.loads((folder / "BEST_DEVELOPMENT_MODEL.json").read_bytes())
     if selected["finalist"] != receipt["finalist"] or not set(selected["predecessor_chain"]) <= set(fits):
         raise ValueError("invalid finalized ancestry")
+    hashes = {}
+    for line in (folder / "TRAINING_CHECKPOINT_SHA256SUMS.txt").read_text(encoding="ascii").splitlines():
+        sha, name = line.split("  ", 1)
+        fit = name.removesuffix("/best.pt")
+        if not SHA256.fullmatch(sha) or not FIT_ID.fullmatch(fit) or fit in hashes or name == fit:
+            raise ValueError("invalid checkpoint roster")
+        hashes[fit] = sha
+    if set(hashes) != set(fits) or hashes.get(selected["finalist"]) != selected["fit"]["checkpoint_sha256"]:
+        raise ValueError("checkpoint SHA roster disagrees with the finalist")
+    for child, parent in zip(selected["predecessor_chain"], selected["predecessor_chain"][1:], strict=False):
+        if fits[child]["anchor_sha256"] != hashes[parent]:
+            raise ValueError("checkpoint ancestry is not hash-linked")
+    stable = rows(folder / "THREE_SEED_STABILITY.csv")
+    for cycle in history["cycles"]:
+        for family in cycle.get("family", []):
+            roster = family["members"]
+            if len(roster) != 3 or len(set(roster)) != 3 or not set(roster) <= set(fits):
+                raise ValueError("unstable finalist roster")
+            if sum(int(row["cycle"]) == cycle["number"] for row in stable) != len(roster):
+                raise ValueError("missing per-seed metrics")
 
 
 if __name__ == "__main__":
