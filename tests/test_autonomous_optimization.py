@@ -3,11 +3,14 @@ import json
 import sys
 from pathlib import Path
 
+import numpy as np
 import pytest
 
 SCRIPTS = Path(__file__).resolve().parents[1] / "scripts" / "domain_adaptation"
 sys.path.insert(0, str(SCRIPTS))
 try:
+    from autonomous_export import ancestry
+    from autonomous_interval_audit import interval
     from autonomous_loop import INITIAL, next_phase, qualifies, ranked, run_fit
     from autonomous_worker import settings
 finally:
@@ -74,3 +77,26 @@ def test_transient_attempt_retries_at_most_once(tmp_path):
             run_fit(tmp_path, path, state, InterruptedRunner(), phase, {}, "linear", 20261112, job)
     assert run_fit(tmp_path, path, state, InterruptedRunner(), phase, {}, "linear", 20261112, "102") is None
     assert len(json.loads(path.read_bytes())["attempts"]) == 2
+
+
+def test_composite_ancestry_checks_multiple_checkpoints_and_cycles():
+    fits = {"sb": {"checkpoint_sha256": "sb-hash", "anchor_sha256": "original"},
+            "afib": {"checkpoint_sha256": "afib-hash", "anchor_sha256": "sb-hash"},
+            "avb": {"checkpoint_sha256": "avb-hash", "anchor_sha256": "afib-hash"}}
+    assert ancestry(fits, "avb") == ["avb", "afib", "sb"]
+    fits["sb"]["anchor_sha256"] = "avb-hash"
+    with pytest.raises(ValueError, match="cyclic"):
+        ancestry(fits, "avb")
+
+
+def test_paired_interval_has_fixed_endpoints_and_patient_clusters():
+    patient = np.repeat(np.arange(20), 2)
+    y = np.column_stack([np.tile([0, 1], 20), np.tile([1, 0], 20)])
+    a = y * .8 + .1
+    worse = a.copy()
+    worse[0:2] = 1 - worse[0:2]
+    assert interval(y, a, a, patient, [.5, .5], [.5, .5], 100, 7) == (0., 0., 0., 100)
+    point, low, high, count = interval(y, a, worse, patient, [.5, .5], [.5, .5], 100, 7)
+    assert count == 100
+    assert low <= point < 0
+    assert high == 0.
