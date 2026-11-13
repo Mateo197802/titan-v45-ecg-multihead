@@ -66,7 +66,7 @@ def gradients(model, sample):
     return report
 
 
-def diagnose(previous, archived, out):
+def diagnose(previous, archived, output):
     c = cfg()
     bank = previous / "code-bank"
     split = audit_splits(bank)
@@ -115,7 +115,7 @@ def diagnose(previous, archived, out):
               "class_diagnosis": by_class, "chapman_sb_ap": ap,
               "chapman_sb_frontier_has_feasible": bool(frontier["feasible"].any()),
               "allow_source": bool(ap >= .5 and frontier["feasible"].any())}
-    write_json(out, result)
+    write_json(output, result)
     print(json.dumps({k: result[k] for k in ("diagnostic_pass", "max_probability_replay_error", "allow_source")}))
 
 
