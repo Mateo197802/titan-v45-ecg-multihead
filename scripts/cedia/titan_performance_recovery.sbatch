@@ -48,5 +48,6 @@ case "$mode" in
     score) python -B -u scripts/domain_adaptation/recovery_selection.py score "$@" ;;
     report) python -B -u scripts/domain_adaptation/recovery_reporting.py "$@" ;;
     corrective-audit) python -B -u scripts/domain_adaptation/corrective_audit.py "$@" ;;
+    corrective-fit) python -B -u scripts/domain_adaptation/corrective_fit.py "$@" ;;
     *) exit 2 ;;
 esac
