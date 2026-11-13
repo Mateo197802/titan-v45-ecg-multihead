@@ -35,6 +35,11 @@ jobs:
           if [ -d docs/performance_recovery/evidence ]; then
             python scripts/domain_adaptation/verify_recovery_delivery.py docs/performance_recovery/evidence
           fi
+      - name: Verify public corrective evidence when present
+        run: |
+          if [ -d docs/performance_recovery/corrective_evidence ]; then
+            python scripts/domain_adaptation/verify_corrective_delivery.py docs/performance_recovery/corrective_evidence
+          fi
       - name: Tests
         run: python -m pytest -q
       - name: Build package
