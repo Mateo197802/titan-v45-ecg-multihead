@@ -1,0 +1,13 @@
+{
+  "checkpoint_sha256": "c4a859cab3a65931258b226c3d168b2c4596ec907540c2fcb030742228b9d9b1",
+  "curves_sha256": "d4a983a76513a2e5811d565311bad5ee4b2aeaa40d40831954e42a5c9b50309d",
+  "ecgs": 2048,
+  "heldout_waveforms_opened": false,
+  "input_manifest_sha256": "418ee17b0554ba5cd9391ab732c5ce5b9edc7fdbbc35dc8f41769968001139ee",
+  "label_files_opened": false,
+  "patients": 2048,
+  "private_train_manifest_sha256": "63eb88ad5a6738dfeaceb89b8d109dd992e55370870e30d2919dd3a5c66a3a11",
+  "protocol_sha256": "25dde6d2a6bb3bef920221ae89b35bcc2eb2c9e42b9244cdb6cbdaf411ec231a",
+  "scope": "MIMIC_IV_ECG_TRAIN_WAVEFORMS_ONLY_SELF_SUPERVISION",
+  "slurm_job": "33700"
+}

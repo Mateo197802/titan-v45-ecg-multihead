@@ -1,0 +1,28 @@
+{
+  "additional_source_receipt_sha256": null,
+  "bank_receipt_sha256": "45e19b5f044c55c0a1a797886b9a1e9e7b65ffada917a73c0e09145fe4c6fa75",
+  "baseline_assets": {
+    "backbone-v3f-original.pt": "ca5d4dcb4b9828e6c4339800fe81ec27f32d9b09a090bb57503bfb56746a8da8"
+  },
+  "best_epoch": 4,
+  "calibration_or_test_opened": false,
+  "checkpoint_sha256": "67eca104dc67864eef898f45fca44a50e59f46d00f7447d5b52a61d437921eb4",
+  "code_commit": "41e9be7fce1522979f93457d916d858a0fcd9dde",
+  "curves_sha256": "964d1cf10939413d4f6da0cc8945dd880fa92d184839061bdcfaa3e74fe84b8c",
+  "gpu": "NVIDIA A100-SXM4-40GB",
+  "groupdro": false,
+  "mimic_ssl_checkpoint_sha256": null,
+  "mode": "partial_transformer_resnet_mlp",
+  "normalization": "per_lead_zscore",
+  "protocol_sha256": "e4fa12f255403b3d59b3188ee138fcf63c44f1a102f011a14db8f3ae099b8ac4",
+  "seed": 20261113,
+  "slurm_job": "33761",
+  "torch_version": "2.10.0+cu128",
+  "trainable_parameters": 16992199,
+  "training_sources": [
+    "code15"
+  ],
+  "validation_macro_ap": 0.5525718785447369,
+  "validation_macro_f1_at_half": 0.5550271569226675,
+  "validation_source": "code15"
+}

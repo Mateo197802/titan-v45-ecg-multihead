@@ -1,0 +1,48 @@
+{
+  "aggregates": {
+    "CALIBRATION_CURVES.csv": "1ab420aaa988b70c31c09e3de90239a82e7956655e3424cae056f6792ab64f76",
+    "EXTERNAL_MACRO_F1_COMPARISON.csv": "1734897fb6173f290de1d271ef2d394013db93ebe1dfc49056ddb049f3933262",
+    "EXTERNAL_PER_CLASS_RESULTS.csv": "0a9f7ea81ac7f68c218733c86db69d53e09432ca02255a009727828e14b90cee",
+    "PATIENT_BOOTSTRAP_CONFIDENCE_INTERVALS.csv": "2e2d9e2eed489970a0c7cb22444c9b5697542e264dab7dde9c5935d1d7c49806",
+    "PRECISION_RECALL_CURVES.csv": "46784121f0fe107c4b135814ff45364770b8721e68bf051028b114c96c487d28",
+    "WITHIN_CODE_PROMOTION_DECISION.json": "b187f9fcb18dd7b0f916e2862b9ecbceaaeb00f3e352a43e787e98721c706e34"
+  },
+  "candidate_sha256": "7408fd07d19ca62e88d13d6842f81403e354140b39e135de876afa23436a8340",
+  "independent_generalization": "NOT_EVALUATED",
+  "operating_thresholds": {
+    "P6": [
+      0.82,
+      0.835,
+      0.7749999999999999,
+      0.5149999999999999,
+      0.57
+    ],
+    "P8": [
+      0.8,
+      0.55,
+      0.8,
+      0.725,
+      0.775
+    ],
+    "candidate": [
+      0.66,
+      0.87,
+      0.48,
+      0.44,
+      0.51
+    ]
+  },
+  "private_prediction_sha256": "9f8e26e32308cfacdb298c0d7b914ccf250abf75e5d1ea624d813f2eb249eac7",
+  "protocol_sha256": "e4fa12f255403b3d59b3188ee138fcf63c44f1a102f011a14db8f3ae099b8ac4",
+  "released_assets": {
+    "backbone-v3f-original.pt": "ca5d4dcb4b9828e6c4339800fe81ec27f32d9b09a090bb57503bfb56746a8da8",
+    "specialists-v3p-e008-primary6-diagnostic.pt": "9c5a9265a7155e1206c551cc4e6d645b86363ba3dbdeb7baf7b9f173c314be3d",
+    "specialists-v3q-primary8-best-candidate.pt": "b30cb2bbb45f1231c93ff1c196aa966b57b49831cadb296131c0283e7b0ceb02"
+  },
+  "scope": "WITHIN_CODE_NOT_INSTITUTIONAL_CONFIRMATION",
+  "score_receipt_sha256": "b8dc9544f4072dc33f6656fdbbc0f0dfd1d49b8c8ab96edabe8decb7d7ccb222",
+  "selection_sha256": "cebc409aeda67b479679e893335e8bceff301e57b6dfdb79cb46639327bf97d5",
+  "test_ecgs": 4921,
+  "test_patients": 3891,
+  "threshold_file_sha256": "258fc17c2c8ae37bf9a3e57c6802fe621556a9ba33d942aa01478a396ab23fdf"
+}

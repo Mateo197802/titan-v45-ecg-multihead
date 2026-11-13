@@ -5,7 +5,7 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [main]
+    branches: [main, codex/titan-external-validation-20261111]
 
 permissions:
   contents: read
@@ -31,8 +31,20 @@ jobs:
         run: python -m ruff check .
       - name: Release hash declarations (missing physical assets reported explicitly)
         run: python scripts/evaluation/verify_release_hashes.py
+      - name: Verify public adaptation receipts
+        run: python scripts/domain_adaptation/verify_adaptation_delivery.py docs/domain_adaptation/evidence
       - name: Tests
         run: python -m pytest -q
       - name: Build package
         if: matrix.python-version == '3.12'
         run: python -m build
+      - name: Render aggregate adaptation figures outside the checkout
+        if: matrix.python-version == '3.12'
+        run: python scripts/domain_adaptation/plot_adaptation.py docs/domain_adaptation/evidence "$RUNNER_TEMP/titan-adaptation-figures"
+      - name: Upload aggregate adaptation figures
+        if: matrix.python-version == '3.12'
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: titan-adaptation-figures
+          path: ${{ runner.temp }}/titan-adaptation-figures/*.png
+          if-no-files-found: error
