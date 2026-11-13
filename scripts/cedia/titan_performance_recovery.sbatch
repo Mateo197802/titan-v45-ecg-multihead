@@ -49,6 +49,9 @@ case "$mode" in
     report) python -B -u scripts/domain_adaptation/recovery_reporting.py "$@" ;;
     corrective-audit) python -B -u scripts/domain_adaptation/corrective_audit.py "$@" ;;
     corrective-fit) python -B -u scripts/domain_adaptation/corrective_fit.py "$@" ;;
+    corrective-eval) python -B -u scripts/domain_adaptation/corrective_evaluate.py "$@" ;;
+    corrective-probe) python -B -u scripts/domain_adaptation/corrective_probe.py "$@" ;;
+    corrective-readback) python -B -u scripts/domain_adaptation/corrective_readback.py "$@" ;;
     corrective-group)
         failed=0
         for arm in targeted targeted_source; do
