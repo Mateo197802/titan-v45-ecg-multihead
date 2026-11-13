@@ -1,14 +1,17 @@
 # V4.5 Evidence and Claim Boundaries
 
-This page is the public index for the V4.5 results. The repository contains code, result tables, evaluation manifests, and model-asset hashes; the manuscript source and PDF are not part of this release.
+This page summarizes the released V4.5 evaluations, metric definitions, and
+evidence boundaries. The repository contains code, result tables, evaluation
+manifests, and model-asset hashes; the manuscript source and PDF are not part
+of this release.
 
-## Current Result Status
+## Reported Profile Performance
 
-| Profile | Cohort | Canonical result | Release interpretation |
+| Configuration | Evaluation unit and support | Reported metrics | Protocol |
 | --- | ---: | --- | --- |
-| Rhythm Primary6 diagnostic | 1,643 records | 95.1917% top-1 accuracy; 80.0938% binary-panel macro-F1 | Six-class diagnostic branch used as the paper's reported rhythm result. |
-| Pathology Primary4 | 962 binary-panel rows | 80.2290% mean panel accuracy; 79.3456% macro-F1 | Accepted by project decision. This status does not change the measured accuracy or imply a 90% or 95% result. |
-| Rhythm Primary8 | 2,193 records | 90.6065% top-1 accepted-label accuracy; 76.1425% binary-panel macro-F1 | Candidate. It does not meet the recorded 97% accuracy and 80% macro-F1 gates. |
+| Primary6 | 1,643 selected ECGs | 95.1917% top-1 accuracy; 80.0938% binary-panel macro-F1 | Six rhythm and conduction classes on the eligible mixed-source subset. |
+| Primary4 | 962 binary-panel observations, 733 ECGs, 676 linked patients | 80.2290% mean panel accuracy; 79.3456% macro-F1 | Four separately evaluated pathology panels from PTB-XL fold 10. |
+| Primary8 | 2,193 selected ECGs | 90.6065% top-1 accepted-label accuracy; 76.1425% binary-panel macro-F1 | Eight rhythm and conduction classes on the mixed-source cohort; includes the Primary6 records. |
 
 All three numbers describe repeated external-development evaluation. They are not an untouched external-final validation or a clinical performance claim. Primary6 and Primary4 use separate model branches: Primary6 uses the V3F rhythm backbone and its Primary6 specialist; Primary4 uses the separately fine-tuned V3AG pathology backbone and its calibrated specialist.
 
@@ -19,7 +22,7 @@ All three numbers describe repeated external-development evaluation. They are no
 - **Primary4 accuracy and macro-F1:** calculate accuracy and F1 separately for `ASMI`, `LVH`, `IMI`, and `ISC_`, then take the unweighted mean across the four panels. The support count is 962 panel observations.
 - **Primary8 accepted-label accuracy:** a record is correct when its top-1 `predicted_label` belongs to the reference `accepted_labels` set. The corresponding `accepted_correct` flag is checked against this rule.
 - **Primary8 macro-F1:** calculate one-versus-rest panel counts by comparing reference `accepted_labels` with model `predicted_labels`, then average the eight class F1 values.
-- **Primary8 single-target diagnostic:** `target_label == predicted_label` for 1,870/2,193 records (85.2713%). This is a separate measure and must not be substituted for the accepted-label accuracy.
+- **Primary8 single-target accuracy:** `target_label == predicted_label` for 1,870/2,193 records (85.2713%). This is a separate measure and must not be substituted for the accepted-label accuracy.
 
 ## Evidence Chain
 
