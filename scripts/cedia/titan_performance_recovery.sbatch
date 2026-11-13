@@ -54,6 +54,7 @@ case "$mode" in
     corrective-readback) python -B -u scripts/domain_adaptation/corrective_readback.py "$@" ;;
     autonomous) python -B -u scripts/domain_adaptation/autonomous_loop.py "$@" ;;
     autonomous-export) python -B -u scripts/domain_adaptation/autonomous_export.py "$@" ;;
+    autonomous-replay) python -B -u scripts/domain_adaptation/autonomous_replay.py "$@" ;;
     corrective-group)
         failed=0
         for arm in targeted targeted_source; do
