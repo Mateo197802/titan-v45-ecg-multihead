@@ -1,0 +1,126 @@
+{
+  "considered_runs": [
+    [
+      "33692",
+      "f42b196dfdfda0019a69344bae7d83a4eaab529ec5facf6666c23ff3bdd332c5"
+    ],
+    [
+      "33693",
+      "c4d05c5ed75e4d59075b318550f056a767e3c244165ff92ec37aba9bef18476d"
+    ],
+    [
+      "33694",
+      "e68f7d4f6fc622de50fded0e45fcf08bfbd2511778421d153702c8ddcdf314ba"
+    ],
+    [
+      "33696",
+      "a4f69f5954ed6b7ba663527a8b2ff8e82a22779ae99e92749d045989b38d4231"
+    ],
+    [
+      "33701",
+      "c3deadcf81e1ac04e6a679a069526bda94975568609ec5d6ecc11572ce1735eb"
+    ],
+    [
+      "33713",
+      "70d0742f2ae3e3b3c07fe044bf873b966b609bf00ec3de079d708bf7ff6115b8"
+    ],
+    [
+      "33735",
+      "7c95ecadf832e2159e72ba1b441703a554967f076097bf5778846b868029d555"
+    ],
+    [
+      "33743",
+      "b50ecc0479f36bf707f8de8fd1ef0f6ee60bba031c236667769d6d9014898277"
+    ],
+    [
+      "33761",
+      "0c39abe49c6bafe25ed6eb5eefa2bab16532f7560aa2d2a7d954f6d9b59f9e44"
+    ],
+    [
+      "33762",
+      "9e4dd94a421d0e76613aad84515f9a4e9430f7e62f11b2c0016d33ec91355118"
+    ]
+  ],
+  "finalists": [
+    {
+      "mean_macro_ap": 0.43962790782527267,
+      "mean_macro_f1_at_half": 0.4424286970370168,
+      "mode": "frozen_backbone_mlp",
+      "normalization": "per_lead_zscore",
+      "sd_macro_ap_population": 0.0019857271210253413,
+      "sd_macro_f1_at_half_population": 0.018349418995197677,
+      "seeds": [
+        {
+          "checkpoint_sha256": "fd287e4a704fcd163421e3014091eb064402ab8ffcf468770d80b5d5ef3999c6",
+          "seed": 20261112,
+          "slurm_job": "33692",
+          "validation_macro_ap": 0.43860074430755364,
+          "validation_macro_f1_at_half": 0.41796782054238746
+        },
+        {
+          "checkpoint_sha256": "252f3a9ef516abce993d395909e1d8319754788351b8bab2412ad9409b80890d",
+          "seed": 20261113,
+          "slurm_job": "33735",
+          "validation_macro_ap": 0.44240497575145543,
+          "validation_macro_f1_at_half": 0.44715574224998705
+        },
+        {
+          "checkpoint_sha256": "6e3031b9094224e9a7c7da8fbd001a8147c950dc9f5df60dcc21dbce207d51d7",
+          "seed": 20261114,
+          "slurm_job": "33713",
+          "validation_macro_ap": 0.43787800341680894,
+          "validation_macro_f1_at_half": 0.46216252831867594
+        }
+      ]
+    },
+    {
+      "mean_macro_ap": 0.5450224891973586,
+      "mean_macro_f1_at_half": 0.5581139499462766,
+      "mode": "partial_transformer_resnet_mlp",
+      "normalization": "per_lead_zscore",
+      "sd_macro_ap_population": 0.009054358762519194,
+      "sd_macro_f1_at_half_population": 0.019013444637120805,
+      "seeds": [
+        {
+          "checkpoint_sha256": "7408fd07d19ca62e88d13d6842f81403e354140b39e135de876afa23436a8340",
+          "seed": 20261112,
+          "slurm_job": "33696",
+          "validation_macro_ap": 0.5502047560208447,
+          "validation_macro_f1_at_half": 0.5827900159338536
+        },
+        {
+          "checkpoint_sha256": "67eca104dc67864eef898f45fca44a50e59f46d00f7447d5b52a61d437921eb4",
+          "seed": 20261113,
+          "slurm_job": "33761",
+          "validation_macro_ap": 0.5525718785447369,
+          "validation_macro_f1_at_half": 0.5550271569226675
+        },
+        {
+          "checkpoint_sha256": "a725e91400734a68a540e802bf83fd0af20ffb3176600aaf7c0093b0d61e045f",
+          "seed": 20261114,
+          "slurm_job": "33762",
+          "validation_macro_ap": 0.5322908330264942,
+          "validation_macro_f1_at_half": 0.5365246769823087
+        }
+      ]
+    }
+  ],
+  "protocol_sha256": "e4fa12f255403b3d59b3188ee138fcf63c44f1a102f011a14db8f3ae099b8ac4",
+  "selected_checkpoint_sha256": "7408fd07d19ca62e88d13d6842f81403e354140b39e135de876afa23436a8340",
+  "selected_mode": "partial_transformer_resnet_mlp",
+  "selected_normalization": "per_lead_zscore",
+  "selected_seed": 20261112,
+  "selected_training_receipt_sha256": "a4f69f5954ed6b7ba663527a8b2ff8e82a22779ae99e92749d045989b38d4231",
+  "selection_protocol_sha256": "9389c33d8061cda550f24ec80a8beea4d3786480f6ea6724a62647f07390c3a3",
+  "selection_source": "validation_only",
+  "shortlist": [
+    [
+      "frozen_backbone_mlp",
+      "per_lead_zscore"
+    ],
+    [
+      "partial_transformer_resnet_mlp",
+      "per_lead_zscore"
+    ]
+  ]
+}

@@ -202,6 +202,18 @@ def test_repository_contains_only_manifested_manuscript_and_sph_images() -> None
         (ROOT / "outputs/results/benchmarkmax/sph_pac_head_comparison_32805.json").read_bytes()
     ).hexdigest()
 
+    external_dir = ROOT / "docs/external_evidence"
+    external = json.loads((external_dir / "technical_package/MANIFEST.json").read_bytes())
+    external_files = {
+        f"figures/{stem}.{suffix}" for stem in (
+            "figure_01_global_comparison", "figure_02_classwise_metrics", "figure_03_sensitivity_ppv",
+            "figure_04_confusion_matrices", "figure_05_observed_precision_recall",
+        ) for suffix in ("svg", "pdf", "png")
+    }
+    assert {name for name in external["files"] if name.startswith("figures/")} == external_files
+    for name in external_files:
+        assert hashlib.sha256((external_dir / name).read_bytes()).hexdigest() == external["files"][name]["sha256"]
+
     assert actual_media == (
         {f"outputs/figures/{name}" for name in expected}
         | {f"outputs/figures/external_sph/{name}" for name in sph_files}
@@ -210,4 +222,5 @@ def test_repository_contains_only_manifested_manuscript_and_sph_images() -> None
         | {f"outputs/figures/benchmarkmax/{name}" for name in expected_b1}
         | {f"outputs/figures/benchmarkmax/{name}" for name in expected_prevalence}
         | {f"outputs/figures/benchmarkmax/{name}" for name in expected_pac}
+        | {f"docs/external_evidence/{name}" for name in external_files}
     )

@@ -1,0 +1,18 @@
+{
+  "exact_overlap_screen": "observed float32 waveform within CODE; not an inter-provider patient check",
+  "exclusions": {
+    "all_zero": 41,
+    "ambiguous_duration": 745,
+    "exact_waveform_cross_split": 10,
+    "exact_waveform_within_split": 127,
+    "flat_lead": 52
+  },
+  "full_qc_receipt_sha256": "45e19b5f044c55c0a1a797886b9a1e9e7b65ffada917a73c0e09145fe4c6fa75",
+  "independent_institutional_evaluation": false,
+  "patient_overlap": 0,
+  "per_record_data_exported": false,
+  "protocol_sha256": "e4fa12f255403b3d59b3188ee138fcf63c44f1a102f011a14db8f3ae099b8ac4",
+  "public_cohort_counts_sha256": "1048c0efc6758f4725c751f35f27ef4d4fc96e5a78f9f1600caa50586c8af0e9",
+  "reserved_test_endpoint_counts_exported": false,
+  "scope": "WITHIN_CODE_ONLY"
+}
