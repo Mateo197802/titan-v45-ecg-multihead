@@ -1,0 +1,10 @@
+JobIDRaw,State,ExitCode,ElapsedRaw,AllocTRES,attempts,verified_fits
+33848,COMPLETED,0:0,646,"billing=12,cpu=12,gres/gpu:a100-sxm4-40gb=1,gres/gpu=1,mem=20G,node=1",7,7
+33849,COMPLETED,0:0,1123,"billing=12,cpu=12,gres/gpu:a100-sxm4-40gb=1,gres/gpu=1,mem=20G,node=1",4,4
+33850,COMPLETED,0:0,1152,"billing=12,cpu=12,gres/gpu:a100-sxm4-40gb=1,gres/gpu=1,mem=20G,node=1",4,4
+33851,TIMEOUT,0:0,2410,"billing=12,cpu=12,gres/gpu:a100-sxm4-40gb=1,gres/gpu=1,mem=20G,node=1",4,3
+33852,COMPLETED,0:0,649,"billing=12,cpu=12,gres/gpu:a100-sxm4-40gb=1,gres/gpu=1,mem=20G,node=1",2,2
+33853,COMPLETED,0:0,1486,"billing=12,cpu=12,gres/gpu:a100-sxm4-40gb=1,gres/gpu=1,mem=20G,node=1",4,4
+33854,COMPLETED,0:0,2076,"billing=12,cpu=12,gres/gpu:a100-sxm4-40gb=1,gres/gpu=1,mem=20G,node=1",4,4
+33855,COMPLETED,0:0,36,"billing=12,cpu=12,gres/gpu:a100-sxm4-40gb=1,gres/gpu=1,mem=20G,node=1",0,0
+33856,COMPLETED,0:0,25,"billing=12,cpu=12,gres/gpu:a100-sxm4-40gb=1,gres/gpu=1,mem=20G,node=1",0,0
