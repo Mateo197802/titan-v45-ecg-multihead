@@ -1,0 +1,491 @@
+{
+  "archives": {
+    "exams_part0.zip": {
+      "bytes": 2672786404,
+      "publisher_md5": "2bed0dc753d16beef8c2f7627e2b6ea4",
+      "sha256": "4941375309c741ab676071f6bbd77c9ee739e0212535122bbb7e3f72e7ff7bf5"
+    },
+    "exams_part1.zip": {
+      "bytes": 2668177892,
+      "publisher_md5": "b32446cdb93247d07550509a204a061d",
+      "sha256": "ae0fccfb10cfdc938d883991587f190af837b2f742bc76b1d7852044768a3e41"
+    },
+    "exams_part10.zip": {
+      "bytes": 2672404916,
+      "publisher_md5": "26bf9e387289dabbb140c0453853872b",
+      "sha256": "22dba63939faf22602ed511a888bbd1a4e1c779a8d2634a6091300e5530077bd"
+    },
+    "exams_part11.zip": {
+      "bytes": 2665653597,
+      "publisher_md5": "dd99137b6c199c9558bc2c2b6ae0e4dc",
+      "sha256": "491ba8bfa3defc13cdc37af94dc9bfc7ddc90b03dd989288897795b2e3822053"
+    },
+    "exams_part12.zip": {
+      "bytes": 2674194718,
+      "publisher_md5": "c25b38260fb46edff089fa56eb442ddb",
+      "sha256": "ce47ac6180ba15868dec6277124c0f0ef41dfad54bba564d3a204117d4f65811"
+    },
+    "exams_part13.zip": {
+      "bytes": 2667409911,
+      "publisher_md5": "5472ba3186e39bd03e888e486143bf7a",
+      "sha256": "e39b90d72295a4a0923e3af89de09346e454256d24e15e2bf5a2c3e4ceec8bee"
+    },
+    "exams_part14.zip": {
+      "bytes": 2671739754,
+      "publisher_md5": "0a0458779f5e795df20cb07db6e50682",
+      "sha256": "e21fe30bf441bc09fb444719bc22ef72e504f719e71d919cc665ecc4b8f36658"
+    },
+    "exams_part15.zip": {
+      "bytes": 2695359122,
+      "publisher_md5": "cf99b9c54cf7c15b9b683511cd5e6d5a",
+      "sha256": "84ddf0a1ef567a3a0f308c6b2b8d240002a21be7105ba761d6d91f3299082e1a"
+    },
+    "exams_part16.zip": {
+      "bytes": 2725249232,
+      "publisher_md5": "64c210e19cf1c0abac3e643f88708ebd",
+      "sha256": "b66f46d9fd17162453891732039f4a62d4df66bba445610444a08d205a89b927"
+    },
+    "exams_part17.zip": {
+      "bytes": 782633664,
+      "publisher_md5": "6e9ac2e36197c4d301df91d7dc6877c0",
+      "sha256": "af7fd3e5fa9e091ab1936e720c7fc55f116cca0722592ce2bdbff644de22e2e9"
+    },
+    "exams_part2.zip": {
+      "bytes": 2675394813,
+      "publisher_md5": "e2862a75eeb6245b148c6c520245c0e0",
+      "sha256": "bdf054b71a92b279fbf630d0ad05199577c425a4083511457705a0391ad13bf4"
+    },
+    "exams_part3.zip": {
+      "bytes": 2676107654,
+      "publisher_md5": "623e073c1e1323cb69a219e5f9bedaf3",
+      "sha256": "ea3d0a24c67f92f01b1d91ba6ae0da26d15d17ce717a01ee727098c43032cf98"
+    },
+    "exams_part4.zip": {
+      "bytes": 2673870870,
+      "publisher_md5": "e5f958b7c31bd82a6bc76fcf6aed5713",
+      "sha256": "b17532eb40eff6c7ee632b2ef55e8b89cd8a6c3418de89b858da69a0696cbef1"
+    },
+    "exams_part5.zip": {
+      "bytes": 2673013182,
+      "publisher_md5": "2730cb080d03d61681ded6609c18c9d8",
+      "sha256": "fdb9cba13c4f8f5636360ae7cb455c0e97a4b26cc6899bd05d236ea81ca90e30"
+    },
+    "exams_part6.zip": {
+      "bytes": 2667377774,
+      "publisher_md5": "4cd7537330f0a62ffcc6cc40c63774eb",
+      "sha256": "33cd2b14fd156d8ada703a2c5f3cb17ce7cc70bc55939b115892752acb2027c6"
+    },
+    "exams_part7.zip": {
+      "bytes": 2671653394,
+      "publisher_md5": "aec8d97e8dde9ac15f5c671c168fdfbe",
+      "sha256": "a10c91440337560583375a423395cb13cc2f6eccbc03303d7d0b646a67ce6fc0"
+    },
+    "exams_part8.zip": {
+      "bytes": 2666112083,
+      "publisher_md5": "96adb16ee032e4e41528c04fd7b582ee",
+      "sha256": "1d0070dda22f02bca30c04f35ca0c2cc92ca9460fb43fa1d5977a663635e4401"
+    },
+    "exams_part9.zip": {
+      "bytes": 2668370881,
+      "publisher_md5": "8d74d7032396298304b51e447b73d40f",
+      "sha256": "7e9812179c45e1bb5adbbee5976ba0f5adf89f8b34356c9d77bdad06fc99555b"
+    }
+  },
+  "cohort_flow": {
+    "ecgs_excluded_as_aligned_duplicates": 504,
+    "ecgs_excluded_before_scoring": 18001,
+    "final_paired_ecgs": 24682,
+    "patients_with_no_scored_ecgs": 11781,
+    "patients_with_scored_ecgs": 17300,
+    "selected_ecgs": 43187,
+    "selected_patients": 29081,
+    "source_patients": 233770
+  },
+  "crc_verified_archives": 18,
+  "duration_contract_10_seconds": "LIMITED",
+  "duration_distribution": {
+    "exams_part0.zip": {
+      "scored": {
+        "0/0": 0,
+        "48/48": 0,
+        "581/581": 1389,
+        "648/648": 0,
+        "all_zero": 0,
+        "nonfinite": 0,
+        "other_border_pairs": 6
+      },
+      "selected": {
+        "0/0": 957,
+        "48/48": 0,
+        "581/581": 1430,
+        "648/648": 0,
+        "all_zero": 6,
+        "nonfinite": 0,
+        "other_border_pairs": 74
+      }
+    },
+    "exams_part1.zip": {
+      "scored": {
+        "0/0": 0,
+        "48/48": 1,
+        "581/581": 1497,
+        "648/648": 0,
+        "all_zero": 0,
+        "nonfinite": 0,
+        "other_border_pairs": 6
+      },
+      "selected": {
+        "0/0": 946,
+        "48/48": 1,
+        "581/581": 1532,
+        "648/648": 0,
+        "all_zero": 2,
+        "nonfinite": 0,
+        "other_border_pairs": 90
+      }
+    },
+    "exams_part10.zip": {
+      "scored": {
+        "0/0": 0,
+        "48/48": 0,
+        "581/581": 1406,
+        "648/648": 0,
+        "all_zero": 0,
+        "nonfinite": 0,
+        "other_border_pairs": 5
+      },
+      "selected": {
+        "0/0": 923,
+        "48/48": 0,
+        "581/581": 1438,
+        "648/648": 0,
+        "all_zero": 7,
+        "nonfinite": 0,
+        "other_border_pairs": 93
+      }
+    },
+    "exams_part11.zip": {
+      "scored": {
+        "0/0": 0,
+        "48/48": 1,
+        "581/581": 1452,
+        "648/648": 0,
+        "all_zero": 0,
+        "nonfinite": 0,
+        "other_border_pairs": 7
+      },
+      "selected": {
+        "0/0": 886,
+        "48/48": 1,
+        "581/581": 1484,
+        "648/648": 0,
+        "all_zero": 3,
+        "nonfinite": 0,
+        "other_border_pairs": 95
+      }
+    },
+    "exams_part12.zip": {
+      "scored": {
+        "0/0": 0,
+        "48/48": 0,
+        "581/581": 1441,
+        "648/648": 0,
+        "all_zero": 0,
+        "nonfinite": 0,
+        "other_border_pairs": 6
+      },
+      "selected": {
+        "0/0": 932,
+        "48/48": 0,
+        "581/581": 1478,
+        "648/648": 0,
+        "all_zero": 6,
+        "nonfinite": 0,
+        "other_border_pairs": 98
+      }
+    },
+    "exams_part13.zip": {
+      "scored": {
+        "0/0": 0,
+        "48/48": 0,
+        "581/581": 1413,
+        "648/648": 0,
+        "all_zero": 0,
+        "nonfinite": 0,
+        "other_border_pairs": 7
+      },
+      "selected": {
+        "0/0": 967,
+        "48/48": 0,
+        "581/581": 1445,
+        "648/648": 0,
+        "all_zero": 5,
+        "nonfinite": 0,
+        "other_border_pairs": 83
+      }
+    },
+    "exams_part14.zip": {
+      "scored": {
+        "0/0": 0,
+        "48/48": 2,
+        "581/581": 1419,
+        "648/648": 0,
+        "all_zero": 0,
+        "nonfinite": 0,
+        "other_border_pairs": 6
+      },
+      "selected": {
+        "0/0": 977,
+        "48/48": 2,
+        "581/581": 1453,
+        "648/648": 0,
+        "all_zero": 1,
+        "nonfinite": 0,
+        "other_border_pairs": 88
+      }
+    },
+    "exams_part15.zip": {
+      "scored": {
+        "0/0": 0,
+        "48/48": 1,
+        "581/581": 1351,
+        "648/648": 0,
+        "all_zero": 0,
+        "nonfinite": 0,
+        "other_border_pairs": 2
+      },
+      "selected": {
+        "0/0": 1007,
+        "48/48": 1,
+        "581/581": 1372,
+        "648/648": 0,
+        "all_zero": 7,
+        "nonfinite": 0,
+        "other_border_pairs": 100
+      }
+    },
+    "exams_part16.zip": {
+      "scored": {
+        "0/0": 0,
+        "48/48": 6,
+        "581/581": 1288,
+        "648/648": 0,
+        "all_zero": 0,
+        "nonfinite": 0,
+        "other_border_pairs": 2
+      },
+      "selected": {
+        "0/0": 1074,
+        "48/48": 6,
+        "581/581": 1302,
+        "648/648": 0,
+        "all_zero": 6,
+        "nonfinite": 0,
+        "other_border_pairs": 100
+      }
+    },
+    "exams_part17.zip": {
+      "scored": {
+        "0/0": 0,
+        "48/48": 1,
+        "581/581": 396,
+        "648/648": 0,
+        "all_zero": 0,
+        "nonfinite": 0,
+        "other_border_pairs": 0
+      },
+      "selected": {
+        "0/0": 279,
+        "48/48": 1,
+        "581/581": 405,
+        "648/648": 0,
+        "all_zero": 0,
+        "nonfinite": 0,
+        "other_border_pairs": 27
+      }
+    },
+    "exams_part2.zip": {
+      "scored": {
+        "0/0": 0,
+        "48/48": 1,
+        "581/581": 1446,
+        "648/648": 0,
+        "all_zero": 0,
+        "nonfinite": 0,
+        "other_border_pairs": 3
+      },
+      "selected": {
+        "0/0": 931,
+        "48/48": 1,
+        "581/581": 1473,
+        "648/648": 0,
+        "all_zero": 7,
+        "nonfinite": 0,
+        "other_border_pairs": 96
+      }
+    },
+    "exams_part3.zip": {
+      "scored": {
+        "0/0": 0,
+        "48/48": 0,
+        "581/581": 1455,
+        "648/648": 0,
+        "all_zero": 0,
+        "nonfinite": 0,
+        "other_border_pairs": 4
+      },
+      "selected": {
+        "0/0": 962,
+        "48/48": 0,
+        "581/581": 1492,
+        "648/648": 0,
+        "all_zero": 5,
+        "nonfinite": 0,
+        "other_border_pairs": 83
+      }
+    },
+    "exams_part4.zip": {
+      "scored": {
+        "0/0": 0,
+        "48/48": 0,
+        "581/581": 1461,
+        "648/648": 0,
+        "all_zero": 0,
+        "nonfinite": 0,
+        "other_border_pairs": 4
+      },
+      "selected": {
+        "0/0": 900,
+        "48/48": 0,
+        "581/581": 1495,
+        "648/648": 0,
+        "all_zero": 3,
+        "nonfinite": 0,
+        "other_border_pairs": 95
+      }
+    },
+    "exams_part5.zip": {
+      "scored": {
+        "0/0": 0,
+        "48/48": 1,
+        "581/581": 1408,
+        "648/648": 0,
+        "all_zero": 0,
+        "nonfinite": 0,
+        "other_border_pairs": 8
+      },
+      "selected": {
+        "0/0": 949,
+        "48/48": 1,
+        "581/581": 1443,
+        "648/648": 0,
+        "all_zero": 3,
+        "nonfinite": 0,
+        "other_border_pairs": 118
+      }
+    },
+    "exams_part6.zip": {
+      "scored": {
+        "0/0": 0,
+        "48/48": 1,
+        "581/581": 1524,
+        "648/648": 0,
+        "all_zero": 0,
+        "nonfinite": 0,
+        "other_border_pairs": 5
+      },
+      "selected": {
+        "0/0": 917,
+        "48/48": 1,
+        "581/581": 1552,
+        "648/648": 0,
+        "all_zero": 2,
+        "nonfinite": 0,
+        "other_border_pairs": 81
+      }
+    },
+    "exams_part7.zip": {
+      "scored": {
+        "0/0": 0,
+        "48/48": 0,
+        "581/581": 1416,
+        "648/648": 0,
+        "all_zero": 0,
+        "nonfinite": 0,
+        "other_border_pairs": 7
+      },
+      "selected": {
+        "0/0": 959,
+        "48/48": 0,
+        "581/581": 1443,
+        "648/648": 0,
+        "all_zero": 1,
+        "nonfinite": 0,
+        "other_border_pairs": 99
+      }
+    },
+    "exams_part8.zip": {
+      "scored": {
+        "0/0": 0,
+        "48/48": 0,
+        "581/581": 1370,
+        "648/648": 0,
+        "all_zero": 0,
+        "nonfinite": 0,
+        "other_border_pairs": 5
+      },
+      "selected": {
+        "0/0": 898,
+        "48/48": 0,
+        "581/581": 1397,
+        "648/648": 0,
+        "all_zero": 12,
+        "nonfinite": 0,
+        "other_border_pairs": 84
+      }
+    },
+    "exams_part9.zip": {
+      "scored": {
+        "0/0": 0,
+        "48/48": 0,
+        "581/581": 1446,
+        "648/648": 0,
+        "all_zero": 0,
+        "nonfinite": 0,
+        "other_border_pairs": 6
+      },
+      "selected": {
+        "0/0": 936,
+        "48/48": 0,
+        "581/581": 1477,
+        "648/648": 0,
+        "all_zero": 2,
+        "nonfinite": 0,
+        "other_border_pairs": 79
+      }
+    }
+  },
+  "first_archive_bit_exact_rows_retained": 1411,
+  "historical_patient_independence": "NOT_CERTIFIED",
+  "independent_metric_verification": {
+    "aggregate_csv_sha256": "2c8223616b0b14ead2383f4a6de89e3a219155b8e43578072f9b6f96b535df3e",
+    "metric_rows_verified": 20,
+    "patient_bootstrap_replayed": false,
+    "private_scores_sha256": "5a6418cf40ac7f469cfa2446a48dce5a3ceefb69c0c65f0111dec597e3e7bc26",
+    "scope": "Independent point estimates; optional exact patient-bootstrap replay.",
+    "status": "PASS"
+  },
+  "p4": "NOT_EVALUABLE",
+  "paired_bootstrap_verified_in_evaluation": true,
+  "promotion_gates": {
+    "P6": "FAIL",
+    "P8": "FAIL"
+  },
+  "scope": "FULL_FROZEN_SAMPLE_OPERATIONAL_BENCHMARK",
+  "source_receipt_sha256": {
+    "evaluation": "b697185dde787836457c779c0a6fd832dfa3c16d58badf99604ce441a06c39a7",
+    "padding": "c946effff8ebc57800085aa68a1cb67eb5941ce151197c720774c593941447c2",
+    "preflight": "b959bda5e957dd277d1be21b114cbdb5e6765605c47b1933a8be2a0c774c3a49",
+    "transport": "a6b2c0fee44c380721aaeb585497553bf327eabbd84b1171b4179bb9458e2315"
+  }
+}

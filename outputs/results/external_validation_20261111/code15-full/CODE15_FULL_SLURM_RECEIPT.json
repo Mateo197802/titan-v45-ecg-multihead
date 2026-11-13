@@ -1,0 +1,72 @@
+{
+  "scope": "completed locked CODE-15% benchmark; aggregate-only CEDIA execution receipt",
+  "time_zone": "America/Guayaquil",
+  "jobs": {
+    "33326": {
+      "phase": "resumable range transport",
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "started": "2026-11-12T01:47:43-05:00",
+      "ended": "2026-11-12T04:04:08-05:00",
+      "elapsed": "02:16:25",
+      "archive_count": 18,
+      "bytes": 46267509861,
+      "private_log_sha256": "72484192ee57b653eb7ce81fa636664106b6d1e8955c04190dde6ee232576175"
+    },
+    "33398": {
+      "phase": "initial preflight attempt",
+      "state": "FAILED",
+      "exit_code": "1:0",
+      "started": "2026-11-12T04:54:27-05:00",
+      "ended": "2026-11-12T04:54:30-05:00",
+      "failure": "mktemp: failed to create directory via template /tmp/titan-code-preflight-XXXXXX: Permission denied",
+      "private_log_sha256": "70b448cfad55351f8400396f48e67328222cb4a4245b4d517d15988db1c53745",
+      "dependent_jobs_cancelled_without_start": [33360, 33376, 33405]
+    },
+    "33572": {
+      "phase": "label-blind integrity and signal preflight",
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "started": "2026-11-12T10:34:52-05:00",
+      "ended": "2026-11-12T10:42:55-05:00",
+      "elapsed": "00:08:03",
+      "crc_verified_archives": 18,
+      "private_log_sha256": "3abb4cfa513bb8cdef8600411c7fd217472b4fa005103af73ebe44e7155e66c7"
+    },
+    "33573": {
+      "phase": "full paired inference, metrics and patient bootstrap replay",
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "started": "2026-11-12T10:43:22-05:00",
+      "ended": "2026-11-12T11:46:58-05:00",
+      "elapsed": "01:03:36",
+      "mode": "--reuse-partial",
+      "reused_first_archive_step": "33296.11",
+      "private_log_sha256": "bcb23ba63ab149bbfd46def301e4515a4636e743706053c395d18a6a5516d2fe"
+    },
+    "33574": {
+      "phase": "post-score membership and duration audit without outcomes",
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "started": "2026-11-12T11:48:28-05:00",
+      "ended": "2026-11-12T12:06:17-05:00",
+      "elapsed": "00:17:49",
+      "private_log_sha256": "16354965ab5e3eaf92fa624f0621a94b92fe5f0c1d148837a2d6677f99f24c02"
+    },
+    "33575": {
+      "phase": "independent point metrics and aggregate delivery seal",
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "started": "2026-11-12T12:06:29-05:00",
+      "ended": "2026-11-12T12:06:52-05:00",
+      "elapsed": "00:00:23",
+      "private_log_sha256": "f4efd1f96600cb67c12b87cb19940e0112ec25695175923cb2b87e17e783ee6e"
+    }
+  },
+  "recovered_chain_commit": "492caf65656dced80c1ce80d629cbd9649d398b1",
+  "transport_receipt_sha256": "a6b2c0fee44c380721aaeb585497553bf327eabbd84b1171b4179bb9458e2315",
+  "preflight_receipt_sha256": "b959bda5e957dd277d1be21b114cbdb5e6765605c47b1933a8be2a0c774c3a49",
+  "evaluation_receipt_sha256": "b697185dde787836457c779c0a6fd832dfa3c16d58badf99604ce441a06c39a7",
+  "padding_audit_sha256": "c946effff8ebc57800085aa68a1cb67eb5941ce151197c720774c593941447c2",
+  "delivery_receipt_sha256": "228f3a35ab87a45e66c285b6cc1896d509a5f2cec73762690adeccfa7d95248d"
+}

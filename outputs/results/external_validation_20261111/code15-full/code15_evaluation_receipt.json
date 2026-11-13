@@ -1,0 +1,165 @@
+{
+  "aggregate_csv_sha256": "2c8223616b0b14ead2383f4a6de89e3a219155b8e43578072f9b6f96b535df3e",
+  "aggregate_views_sha256": {
+    "EXTERNAL_CODE15_CALIBRATION.csv": "b33d547ea8ad76b6838007fb483eedad276d6f399f7cd87a60bd6af86f7eacf3",
+    "EXTERNAL_CODE15_MACRO.csv": "482bc96c3d7bdbd405a23d0191ff04d2234f3d03cd1fc260caf35ada2d459907",
+    "EXTERNAL_CODE15_RESULTS.csv": "8145bd40d4f483168983067ddf5ecfed934c673fa3090b76b11a5ea4e48cb6f3",
+    "EXTERNAL_PER_CLASS_CONFUSION.csv": "8e0723d1241a57f2477734ac4c2ca9b50c25b485ad42ee641c0fdcdcb71416c5"
+  },
+  "archive_sha256": {
+    "exams_part0.zip": "4941375309c741ab676071f6bbd77c9ee739e0212535122bbb7e3f72e7ff7bf5",
+    "exams_part1.zip": "ae0fccfb10cfdc938d883991587f190af837b2f742bc76b1d7852044768a3e41",
+    "exams_part10.zip": "22dba63939faf22602ed511a888bbd1a4e1c779a8d2634a6091300e5530077bd",
+    "exams_part11.zip": "491ba8bfa3defc13cdc37af94dc9bfc7ddc90b03dd989288897795b2e3822053",
+    "exams_part12.zip": "ce47ac6180ba15868dec6277124c0f0ef41dfad54bba564d3a204117d4f65811",
+    "exams_part13.zip": "e39b90d72295a4a0923e3af89de09346e454256d24e15e2bf5a2c3e4ceec8bee",
+    "exams_part14.zip": "e21fe30bf441bc09fb444719bc22ef72e504f719e71d919cc665ecc4b8f36658",
+    "exams_part15.zip": "84ddf0a1ef567a3a0f308c6b2b8d240002a21be7105ba761d6d91f3299082e1a",
+    "exams_part16.zip": "b66f46d9fd17162453891732039f4a62d4df66bba445610444a08d205a89b927",
+    "exams_part17.zip": "af7fd3e5fa9e091ab1936e720c7fc55f116cca0722592ce2bdbff644de22e2e9",
+    "exams_part2.zip": "bdf054b71a92b279fbf630d0ad05199577c425a4083511457705a0391ad13bf4",
+    "exams_part3.zip": "ea3d0a24c67f92f01b1d91ba6ae0da26d15d17ce717a01ee727098c43032cf98",
+    "exams_part4.zip": "b17532eb40eff6c7ee632b2ef55e8b89cd8a6c3418de89b858da69a0696cbef1",
+    "exams_part5.zip": "fdb9cba13c4f8f5636360ae7cb455c0e97a4b26cc6899bd05d236ea81ca90e30",
+    "exams_part6.zip": "33cd2b14fd156d8ada703a2c5f3cb17ce7cc70bc55939b115892752acb2027c6",
+    "exams_part7.zip": "a10c91440337560583375a423395cb13cc2f6eccbc03303d7d0b646a67ce6fc0",
+    "exams_part8.zip": "1d0070dda22f02bca30c04f35ca0c2cc92ca9460fb43fa1d5977a663635e4401",
+    "exams_part9.zip": "7e9812179c45e1bb5adbbee5976ba0f5adf89f8b34356c9d77bdad06fc99555b"
+  },
+  "baseline_hashes": {
+    "backbone-v3ag-pathology.pt": "bf71e4cf8acc34031cb3611c7031e0649822e705fd7dcea354a3ea583ce920ee",
+    "backbone-v3f-original.pt": "ca5d4dcb4b9828e6c4339800fe81ec27f32d9b09a090bb57503bfb56746a8da8",
+    "specialists-v3ag-primary4-calibrated.pt": "cf5091e962fffb3254b1a71fe57236dd82ea0139093df192511499d931391dbc",
+    "specialists-v3p-e008-primary6-diagnostic.pt": "9c5a9265a7155e1206c551cc4e6d645b86363ba3dbdeb7baf7b9f173c314be3d",
+    "specialists-v3q-primary8-best-candidate.pt": "b30cb2bbb45f1231c93ff1c196aa966b57b49831cadb296131c0283e7b0ceb02"
+  },
+  "candidate_receipt_sha256": "2f1461d63ec213660d3278c9956b1fbf759b5bbada1962d9a2af798ea28a0385",
+  "cohort_flow": {
+    "ecgs_excluded_as_aligned_duplicates": 504,
+    "ecgs_excluded_before_scoring": 18001,
+    "final_paired_ecgs": 24682,
+    "patients_with_no_scored_ecgs": 11781,
+    "patients_with_scored_ecgs": 17300,
+    "selected_ecgs": 43187,
+    "selected_patients": 29081,
+    "source_patients": 233770
+  },
+  "complete_archive_coverage": true,
+  "counts": {
+    "flat_lead": 29,
+    "selected_ecgs": 43187,
+    "short_or_ambiguous_code_duration": 82,
+    "source_ecgs": 345779,
+    "unexpected_code_padding": 17890
+  },
+  "historical_aligned_signatures": 573,
+  "historical_ineligible": {
+    "invalid_code_array": 167
+  },
+  "historical_patient_independence": "NOT_CERTIFIED",
+  "historical_release_archive_aligned_signatures": 0,
+  "n_ecg": 24682,
+  "n_patients": 17300,
+  "point_estimates_independently_verified": {
+    "aggregate_csv_sha256": "2c8223616b0b14ead2383f4a6de89e3a219155b8e43578072f9b6f96b535df3e",
+    "metric_rows_verified": 20,
+    "patient_bootstrap_replayed": true,
+    "private_scores_sha256": "5a6418cf40ac7f469cfa2446a48dce5a3ceefb69c0c65f0111dec597e3e7bc26",
+    "scope": "Independent point estimates; optional exact patient-bootstrap replay.",
+    "status": "PASS"
+  },
+  "preflight_receipt_sha256": "b959bda5e957dd277d1be21b114cbdb5e6765605c47b1933a8be2a0c774c3a49",
+  "private_scores_sha256": "5a6418cf40ac7f469cfa2446a48dce5a3ceefb69c0c65f0111dec597e3e7bc26",
+  "private_selection_sha256": "5e7f13b85de45c97c0ce98088653bcf804df0b87e767380e79711f4d66b7de6d",
+  "private_shard_cache_sha256": null,
+  "promotion": {
+    "P6": {
+      "decision": "FAIL",
+      "delta_ci95": [
+        -0.006898517011344065,
+        0.004992474828975408
+      ],
+      "delta_valid_replicates": 1000,
+      "empty_sets": [
+        15092,
+        14730
+      ],
+      "five_endpoint_empty_set_delta": -0.014666558625719084,
+      "macro_brier_delta": -0.000736374776970717,
+      "macro_f1": [
+        0.42874316803888923,
+        0.4281044188016437
+      ],
+      "macro_f1_ci95": [
+        [
+          0.4155352414177977,
+          0.4420017527048538
+        ],
+        [
+          0.4145937616802794,
+          0.4407557109197931
+        ]
+      ],
+      "macro_f1_classes": [
+        "AFIB",
+        "SB",
+        "STACH",
+        "RBBB",
+        "1AVB"
+      ],
+      "macro_f1_delta": -0.000638749237245545,
+      "minimum_sensitivity_change": -0.017612524461839474,
+      "observed_metric_gate_pass": false
+    },
+    "P8": {
+      "decision": "FAIL",
+      "delta_ci95": [
+        -0.019582999973979737,
+        -0.005405608921024338
+      ],
+      "delta_valid_replicates": 1000,
+      "empty_sets": [
+        15408,
+        14609
+      ],
+      "five_endpoint_empty_set_delta": -0.03237176890041327,
+      "macro_brier_delta": 0.006206694118631874,
+      "macro_f1": [
+        0.44918638533051813,
+        0.4363879685315316
+      ],
+      "macro_f1_ci95": [
+        [
+          0.4327892284573292,
+          0.4625276010450159
+        ],
+        [
+          0.4211264787482973,
+          0.4503332016320611
+        ]
+      ],
+      "macro_f1_classes": [
+        "AFIB",
+        "SB",
+        "STACH",
+        "RBBB",
+        "1AVB"
+      ],
+      "macro_f1_delta": -0.012798416798986597,
+      "minimum_sensitivity_change": -0.023483365949119372,
+      "observed_metric_gate_pass": false
+    }
+  },
+  "protocol_sha256": "75f9227ebb506bf0b1aabf215d425ba88cd82119f051bc4400e0c1756410bfd4",
+  "publisher_code_test_overlap": {
+    "aligned_signatures": 573,
+    "annotations_opened": false,
+    "archive_sha256": "00d32666adbdd9d34e028e84a4a627cdc2c970f3c794a52866f1c149ba58526f",
+    "doi": "10.5281/zenodo.3765780",
+    "excluded": {
+      "unexpected_code_padding": 254
+    }
+  },
+  "reused_verified_first_archive": true,
+  "within_code_duplicate_ecgs_excluded": 504
+}

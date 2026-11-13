@@ -1,0 +1,41 @@
+{
+  "study": "TITAN-V45-EXTERNAL-20261111",
+  "status": "ACQUISITION_RULE_FROZEN_PERFORMANCE_PROTOCOL_NOT_RELEASED",
+  "baseline_repository_commit": "f4d6be30b0befea739cf2e35df1033230a1f5d10",
+  "mimic_acquisition": {
+    "version": "1.0",
+    "seed": "20261111",
+    "patient_limit": 4096,
+    "max_records_per_patient": 2,
+    "selection": "lowest SHA256 UTF-8 of seed|patient|subject_id; within patient lowest SHA256 of seed|record|study_id; tie by source ID; no replacements",
+    "split": "order selected patients by SHA256 of seed|split|subject_id, tie by ID; floor cumulative boundaries 65%, 75%, 85%; all records inherit split",
+    "allowed_origin": "https://physionet.org/files/mimic-iv-ecg/1.0/",
+    "signal_scope": "WFDB header and signal only, with both publisher SHA256 hashes verified; do not download Clinical Database, MIMIC-IV-Note or note linkage",
+    "bytes_max_per_component": 262144,
+    "download_workers": 8
+  },
+  "baseline": {
+    "backbone-v3f-original.pt": "ca5d4dcb4b9828e6c4339800fe81ec27f32d9b09a090bb57503bfb56746a8da8",
+    "backbone-v3ag-pathology.pt": "bf71e4cf8acc34031cb3611c7031e0649822e705fd7dcea354a3ea583ce920ee",
+    "specialists-v3p-e008-primary6-diagnostic.pt": "9c5a9265a7155e1206c551cc4e6d645b86363ba3dbdeb7baf7b9f173c314be3d",
+    "specialists-v3q-primary8-best-candidate.pt": "b30cb2bbb45f1231c93ff1c196aa966b57b49831cadb296131c0283e7b0ceb02",
+    "specialists-v3ag-primary4-calibrated.pt": "cf5091e962fffb3254b1a71fe57236dd82ea0139093df192511499d931391dbc"
+  },
+  "before_performance": [
+    "complete or record every acquisition failure without replacements",
+    "verify physical amplitude, gain, 12 canonical leads, duration, hashes and patient isolation",
+    "report within-source and historical overlap controls, distinguishing untested comparisons",
+    "freeze machine-reference ontology, label audit, thresholds, calibration, eligible supports, metrics and promotion rules",
+    "do not load retained outcomes for training, validation or calibration",
+    "do not access CODE-15% outcomes for model selection"
+  ],
+  "design": {
+    "zero_shot": "released models, frozen preprocessing and thresholds; machine statement agreement is not clinical validation",
+    "mimic_adapted": "held-out MIMIC patients; not a different hospital",
+    "code15_transfer": "five shared rhythm labels; one evaluation after model freeze; no P4 endpoint claim",
+    "historical_backbone_exposure": "NOT_CERTIFIED",
+    "promotion_macro_f1_gain_min": 0.03,
+    "promotion_paired_ci_lower_must_exceed": 0,
+    "promotion_max_sensitivity_drop": 0.05
+  }
+}

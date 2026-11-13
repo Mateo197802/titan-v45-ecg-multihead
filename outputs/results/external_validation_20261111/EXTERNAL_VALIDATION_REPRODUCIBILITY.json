@@ -1,0 +1,90 @@
+{
+  "schema": "TITAN_EXTERNAL_PREFLIGHT_RECEIPT_V1",
+  "study_status": "ACQUISITION_ACTIVE_REFERENCE_SUPPORT_FAILED_PERFORMANCE_NOT_RUN",
+  "historical_weights_or_results_modified": false,
+  "artifact_boundary": "Aggregate evidence only; waveforms, identifiers, statements, row hashes and feature caches stay on CEDIA.",
+  "protocol_sha256": "e1c9b9febcab13c6a155b6054e4f1c358960e1e682f392fd9ff048957211a482",
+  "metadata": {
+    "job": 33277,
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "receipt_sha256": "31127e87c8b3612e0cdc38d6c54ca97f2ab37c58ecda8cf870a9e2e15dbf0f58",
+    "mimic_record_list": {
+      "rows": 800035,
+      "bytes": 70403124,
+      "sha256": "b6f113023e955406e924a9ce10c1108f3bf8080e14cfe2f3ba3a2e858ebb621b",
+      "publisher_checksum_matched": true
+    },
+    "mimic_machine_measurements": {
+      "rows": 800035,
+      "bytes": 182674683,
+      "sha256": "56f6b1413221bce95bd6f48b28ca1acf27ae0b073d6f2c1d12f3af7500eabbb6",
+      "publisher_checksum_matched": true
+    },
+    "code15_exams": {
+      "rows": 345779,
+      "bytes": 35500900,
+      "sha256": "f9f82f4c07c1793e2285915c69f1113f5a7db8a0f2cf2f4b90474502f406bc35",
+      "publisher_md5_matched": true
+    }
+  },
+  "frozen_mimic_selection": {
+    "manifest_sha256": "3f06b58e8f0c1f93197449868f586008ccba0544561c325ec07a08f7eb1106bc",
+    "ecgs": 6784,
+    "patients": 4096,
+    "ecgs_by_split": {"train": 4396, "validation": 690, "calibration": 684, "test": 1014},
+    "patients_by_split": {"train": 2662, "validation": 410, "calibration": 409, "test": 615},
+    "counts_are_selected_not_waveform_qc_eligible": true
+  },
+  "frozen_model_probe": {
+    "job": 33281,
+    "code_commit": "781553a0394dd879367b323ba7872aa3cf099098",
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "receipt_sha256": "b8bb8e0f00388094897265bc9ad662f9a0df1fc0194b6f3e99c023d1d88b9ffc",
+    "scope": "Label-blind training-split smoke test on actual MIMIC ECGs, not a metric.",
+    "ecgs_scored": 3,
+    "errors": 0,
+    "verified_release_assets": 5,
+    "profiles": ["P6", "P8", "P4"],
+    "p6_raw_width_before_projection": 8,
+    "gpu": "NVIDIA A100-SXM4-40GB",
+    "pytorch": "2.10.0+cu128",
+    "cuda": "12.8",
+    "reports_read": false,
+    "performance_computed": false
+  },
+  "development_reference_support": {
+    "job": 33293,
+    "code_commit": "7b05c68042aee8dbf9724139f90bb3b1024a1b9f",
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "private_receipt_sha256": "6807c16d6fa611aae79abcc70bd645606ddbda30f971e1e299e869fa93c55b05",
+    "gate_sha256": "361988ebd00cbd597c4024b454013e1f5be91478ff0352e3f52ace713cddc929",
+    "joined_development_ecgs": 5770,
+    "report_fields_checked": 18,
+    "endpoint_states_audited": 12,
+    "max_explicit_negative_patients_in_any_endpoint_by_split": {"train": 0, "validation": 0, "calibration": 0},
+    "endpoints_passed": 0,
+    "retained_labels_extracted": false,
+    "performance_computed": false
+  },
+  "jobs_at_snapshot": {
+    "mimic_waveform_acquisition": {"id": 33294, "state": "RUNNING", "verified_ecgs_observed_minimum": 384},
+    "mimic_waveform_qc": {"id": 33295, "state": "PENDING"},
+    "mimic_cohort_frozen_inference_no_labels": {"id": 33296, "state": "PENDING"},
+    "code15_single_shard_transport_no_labels": {"id": 33290, "state": "PENDING"},
+    "initial_reference_and_acquisition": {"ids": [33286, 33279], "state": "FAILED", "exit_code": "127:0", "reason": "module unavailable in sh; retried under Bash"},
+    "obsolete_dependencies": {"ids": [33287, 33288], "state": "CANCELLED"}
+  },
+  "scientific_status": {
+    "original_model_performance": "NOT_RUN_REFERENCE_SUPPORT",
+    "specialist_training": "NOT_RUN_REFERENCE_SUPPORT",
+    "adapted_mimic_patient_holdout": "NOT_RUN",
+    "code15_cross_source_confirmation": "NOT_RUN_LOCKED",
+    "code_ii_blind_test": "NO_VERIFIED_SUBMISSION_ROUTE",
+    "independent_clinical_validation": "NOT_RUN",
+    "historical_backbone_patient_independence": "NOT_CERTIFIED",
+    "other_or_clinical_quarantine": "NOT_ASSESSED"
+  }
+}
