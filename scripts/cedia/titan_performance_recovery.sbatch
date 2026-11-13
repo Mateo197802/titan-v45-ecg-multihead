@@ -47,5 +47,6 @@ case "$mode" in
     select) python -B -u scripts/domain_adaptation/recovery_selection.py select "$@" ;;
     score) python -B -u scripts/domain_adaptation/recovery_selection.py score "$@" ;;
     report) python -B -u scripts/domain_adaptation/recovery_reporting.py "$@" ;;
+    corrective-audit) python -B -u scripts/domain_adaptation/corrective_audit.py "$@" ;;
     *) exit 2 ;;
 esac
