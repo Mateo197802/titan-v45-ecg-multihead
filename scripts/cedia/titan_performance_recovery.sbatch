@@ -55,6 +55,7 @@ case "$mode" in
     autonomous) python -B -u scripts/domain_adaptation/autonomous_loop.py "$@" ;;
     autonomous-export) python -B -u scripts/domain_adaptation/autonomous_export.py "$@" ;;
     autonomous-replay) python -B -u scripts/domain_adaptation/autonomous_replay.py "$@" ;;
+    autonomous-interval-audit) python -B -u scripts/domain_adaptation/autonomous_interval_audit.py "$@" ;;
     corrective-group)
         failed=0
         for arm in targeted targeted_source; do
