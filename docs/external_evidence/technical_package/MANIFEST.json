@@ -271,9 +271,9 @@
       "sha256": "b8dc9544f4072dc33f6656fdbbc0f0dfd1d49b8c8ab96edabe8decb7d7ccb222"
     },
     "technical_package/verify_external_evidence.py": {
-      "bytes": 8647,
+      "bytes": 8937,
       "role": "technical_package",
-      "sha256": "51101ff9f18595c1f95bd2c7c320adf6da4a3285841383416f744f2c77d0db6b"
+      "sha256": "147c2ff255db20e3913cfcdf0b041623878df27f0e630b286c7c580cceeacc16"
     }
   },
   "primary_commit": "63c74b3fde2c51f7f8cde4ad396d77a1bd16cb29",

@@ -2,6 +2,8 @@
 import importlib
 import io
 import json
+import subprocess
+import sys
 from pathlib import Path
 from zipfile import ZipFile, ZipInfo
 
@@ -15,8 +17,6 @@ ZIP = PACKAGE / "TITAN_V45_EXTERNAL_EVIDENCE_PACKAGE.zip"
 
 @pytest.fixture(scope="module")
 def scripts():
-    import sys
-
     path = str(ROOT / "scripts/evaluation")
     sys.path.insert(0, path)
     try:
@@ -34,6 +34,12 @@ def test_package_extracts_and_offline_reconciles(scripts, tmp_path):
     with ZipFile(ZIP) as z:
         z.extractall(tmp_path)
     assert verifier.verify(tmp_path) == report
+    standalone = tmp_path / verifier.TECH / "verify_external_evidence.py"
+    for target in (tmp_path, ZIP, tmp_path):
+        execution = subprocess.run([sys.executable, str(standalone), str(target)], cwd=tmp_path,
+                                   check=True, capture_output=True, text=True)
+        assert json.loads(execution.stdout) == report
+    assert not list(tmp_path.rglob("__pycache__"))
     src = verifier.source_snapshot(verifier.read_zip(ZIP.read_bytes()))
     _, macro, comparison, pr = tables.calculate(src)
     assert [round(macro[2][k], 6) for k in (

@@ -7,19 +7,26 @@ import json
 import posixpath
 import re
 import stat
+import sys
 from pathlib import Path
 from zipfile import ZipFile
 
-from external_evidence_tables import (
-    PRIMARY,
-    SOURCE_FILES,
-    csv_rows,
-    git_blob,
-    require,
-    sha,
-    tables,
-    verified_sources,
-)
+# The standalone verifier must not create an unsealed file inside the extraction.
+_previous_bytecode_policy = sys.dont_write_bytecode
+try:
+    sys.dont_write_bytecode = True
+    from external_evidence_tables import (
+        PRIMARY,
+        SOURCE_FILES,
+        csv_rows,
+        git_blob,
+        require,
+        sha,
+        tables,
+        verified_sources,
+    )
+finally:
+    sys.dont_write_bytecode = _previous_bytecode_policy
 
 ZIP_NAME = "TITAN_V45_EXTERNAL_EVIDENCE_PACKAGE.zip"
 TECH = "technical_package"
