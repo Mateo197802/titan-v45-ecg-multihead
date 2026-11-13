@@ -1,0 +1,72 @@
+{
+  "schema": "TITAN_V45_PTB_DIAGNOSTIC_ELIGIBILITY_V2",
+  "scope": "complete provider enrollment; enriched comparator, no inference",
+  "config_sha256": "bc536603a3fddb09999c1e18a76fffa8419c83f2c08d26777692c7066c8d7edf",
+  "source": "PhysioNet PTB Diagnostic ECG Database",
+  "version": "1.0.0",
+  "source_records": 549,
+  "source_subjects": 290,
+  "source_record_index_sha256": "1bdcd205432b66e98389e095c8ea9f2f642f79265a1874929a9cb6de270852fe",
+  "publisher_checksum_manifest_sha256": "994115d0484fe90daaff0e280ff6eeb1d8b76338f93d1687716efa3acf2cea83",
+  "verified_headers": 549,
+  "reference_manifest_sha256": "1df70161443ce8a10baf88f50569b44d4b3977c1908714c32acd4fb928e67356",
+  "endpoints": {
+    "ASMI": {
+      "record_states": {
+        "unknown": 392,
+        "positive": 77,
+        "explicit_control": 80
+      },
+      "subject_states": {
+        "no_known_polarity": 211,
+        "positive": 27,
+        "explicit_control": 52
+      },
+      "eligible_for_territory_control_comparison": true
+    },
+    "IMI": {
+      "record_states": {
+        "unknown": 380,
+        "positive": 89,
+        "explicit_control": 80
+      },
+      "subject_states": {
+        "no_known_polarity": 208,
+        "positive": 30,
+        "explicit_control": 52
+      },
+      "eligible_for_territory_control_comparison": true
+    },
+    "ALMI": {
+      "record_states": {
+        "unknown": 426,
+        "positive": 43,
+        "explicit_control": 80
+      },
+      "subject_states": {
+        "no_known_polarity": 222,
+        "positive": 16,
+        "explicit_control": 52
+      },
+      "eligible_for_territory_control_comparison": true
+    },
+    "ILMI": {
+      "record_states": {
+        "unknown": 416,
+        "positive": 53,
+        "explicit_control": 80
+      },
+      "subject_states": {
+        "no_known_polarity": 216,
+        "positive": 22,
+        "explicit_control": 52
+      },
+      "eligible_for_territory_control_comparison": true
+    }
+  },
+  "model_performance_computed": false,
+  "historical_independence_certified": false,
+  "reused_verified_headers": true,
+  "waveforms_downloaded": false,
+  "no_individual_records_exported": true
+}

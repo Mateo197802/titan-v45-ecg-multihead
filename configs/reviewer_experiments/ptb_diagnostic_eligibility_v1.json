@@ -1,0 +1,26 @@
+{
+  "schema": "TITAN_V45_PTB_DIAGNOSTIC_ELIGIBILITY_V1",
+  "dataset": "PhysioNet PTB Diagnostic ECG Database",
+  "version": "1.0.0",
+  "doi": "10.13026/C28C71",
+  "source_url": "https://physionet.org/files/ptbdb/1.0.0/",
+  "license": "Open Data Commons Attribution License v1.0",
+  "records": 549,
+  "subjects": 290,
+  "source_manifest": "SHA256SUMS.txt",
+  "condition_field": "reason for admission",
+  "territory_field": "acute infarction (localization)",
+  "required_condition": "myocardial infarction",
+  "explicit_control": "healthy control",
+  "territories": {
+    "ASMI": "antero-septal",
+    "IMI": "inferior",
+    "ALMI": "antero-lateral",
+    "ILMI": "infero-lateral"
+  },
+  "unknown": "No compatible clinical source label. Different or mixed territory, non-MI disease, missing condition or contradictory fields are not controls.",
+  "groups": "Publisher patient folders; retain every RECORDS ECG and report per-patient supports. Detect differing within-patient known states and keep them visible.",
+  "eligibility_gate": "At least five unambiguous positive patients and five explicit control patients in the released cohort for an endpoint-specific comparison.",
+  "execution": "Stage 1 provider-checksummed headers only, no scores or fitting. Stage 2 if supported: all 549 RECORDS rows eligible, untouched P4 at its published operating points and V3AG auxiliary ranks where no published threshold exists. Compare explicit compatible clinical territory vs healthy control; no category relabeling.",
+  "restrictions": "Clinical source descriptors are distinct from an independent contemporaneous ECG adjudication; enriched comparator, not natural-prevalence predictive values. No pooling with LUDB or SPH. Different from PTB-XL; overlap cannot be certified from provider name, namespace or raw binary digests."
+}

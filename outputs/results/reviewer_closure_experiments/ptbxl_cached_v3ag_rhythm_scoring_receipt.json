@@ -1,0 +1,16 @@
+{
+  "job": "33747",
+  "scored": 6205,
+  "asset_sha256": {
+    "backbone-v3ag-pathology.pt": "bf71e4cf8acc34031cb3611c7031e0649822e705fd7dcea354a3ea583ce920ee",
+    "specialists-v3ag-primary4-calibrated.pt": "cf5091e962fffb3254b1a71fe57236dd82ea0139093df192511499d931391dbc"
+  },
+  "cached_features_sha256": "9269716a656211fbe81e3ede45b0ea09eaa2437442db8dd2a25fd4006c36592a",
+  "feature_metadata_sha256": "c3a5e7a7d3d08c92fb1e2d7175a8fe1d87ebfb3df51f530ba7929bc66b185321",
+  "private_score_sha256": "c14ec7cdf3bebbc2e9d378ddd9df49df02255e6c518d4c006f99a98d8c40d55c",
+  "archived_probability_columns_checked": 16,
+  "max_absolute_archived_score_error": 4.76837158203125e-07,
+  "source_reference_values_used": false,
+  "waveform_inference": false,
+  "native_runtime": "2.10.0+cu128"
+}
