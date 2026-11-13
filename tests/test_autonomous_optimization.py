@@ -12,7 +12,8 @@ try:
     from autonomous_export import ancestry
     from autonomous_interval_audit import interval
     from autonomous_loop import INITIAL, next_phase, qualifies, ranked, run_fit
-    from autonomous_worker import settings
+    from autonomous_worker import PROTOCOL, settings
+    from train_duration_aware import digest
 finally:
     sys.path.remove(str(SCRIPTS))
 
@@ -77,6 +78,25 @@ def test_transient_attempt_retries_at_most_once(tmp_path):
             run_fit(tmp_path, path, state, InterruptedRunner(), phase, {}, "linear", 20261112, job)
     assert run_fit(tmp_path, path, state, InterruptedRunner(), phase, {}, "linear", 20261112, "102") is None
     assert len(json.loads(path.read_bytes())["attempts"]) == 2
+
+
+def test_resume_publishes_completed_receipt_without_retraining(tmp_path):
+    fit_id = "01-SB-linear-20261112"
+    stage = tmp_path / "attempts" / f"{fit_id}-1"
+    stage.mkdir(parents=True)
+    (tmp_path / "fits").mkdir()
+    (stage / "best.pt").write_bytes(b"synthetic checkpoint")
+    (stage / "private_scores.npz").write_bytes(b"synthetic scores")
+    receipt = {"checkpoint_sha256": digest(stage / "best.pt"), "scores_sha256": digest(stage / "private_scores.npz"),
+               "protocol_sha256": digest(PROTOCOL), "test_opened": False}
+    (stage / "fit.json").write_text(json.dumps(receipt), encoding="utf-8")
+    state = {"attempts": [{"fit": fit_id, "stage": stage.name, "job": "100", "outcome": "STARTED"}]}
+    phase = {"number": 1, "endpoint": "SB"}
+    # A missing runner proves a completed attempt is never dispatched again.
+    assert run_fit(tmp_path, tmp_path / "state.json", state, None, phase, {}, "linear", 20261112, "101") == receipt
+    assert (tmp_path / "fits" / fit_id / "fit.json").is_file()
+    assert not stage.exists()
+    assert len(state["attempts"]) == 1
 
 
 def test_composite_ancestry_checks_multiple_checkpoints_and_cycles():
