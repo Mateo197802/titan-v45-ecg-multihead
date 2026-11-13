@@ -1,0 +1,250 @@
+{
+  "input_sha256_lf_normalized": {
+    "data/external_dev/pathology/release_cohort_report.json": "d4aa671e9318c92e1451b01f1baf9f6c65de1167fb8033d37ca28278ec5f25c0",
+    "data/external_dev/rhythm/release_cohort_report.json": "86322509300447e86645c38fef1c2ee262a5eef18b64ee085ae8778defb4d7ec",
+    "data/manifests/external_dev/pathology_primary4_panels.csv": "26796bdde9f9a736fc7594b65e7e881b4967f15a8665fa5231f5001cbbc105d0",
+    "data/manifests/external_dev/rhythm_primary6_diagnostic_records.csv": "db6de6b83c353d7a671482667e91ac1d78de76bb169d5cd751874cb7b0d600ca",
+    "data/manifests/external_dev/rhythm_primary8_records.csv": "b7e044ca1696eced6ac25f93cc1574d7c596c1cadfd4a98f86ca9d42699a11d0",
+    "outputs/results/external_dev/evidence/pathology_primary4_ASMI_record_predictions.csv": "2859facb689f732178b03c2f66559849401460235a80397c4c4bbb30aef46fe1",
+    "outputs/results/external_dev/evidence/pathology_primary4_IMI_record_predictions.csv": "d3dd64b4a2d3cd184d414f012b2f739a120bd96b3b501c21442ddf19da389c56",
+    "outputs/results/external_dev/evidence/pathology_primary4_ISC__record_predictions.csv": "fc09c2590f5940137378c3465e085122353e7c43200e8174c99890c45a525672",
+    "outputs/results/external_dev/evidence/pathology_primary4_LVH_record_predictions.csv": "cab4373122e731428ff92198022e8c7e5bea881600db027dd53d6d8cba0c0e1f",
+    "outputs/results/external_dev/evidence/rhythm_primary6_record_predictions.csv": "2f51cf51e6eb392dbd8ba165df73a698c0478166d364844c72bca382f5d7cc76",
+    "outputs/results/external_dev/evidence/rhythm_primary8_record_predictions.csv": "1c7fa4ebed66f5683109aa7f1db8c6669cdbc4d96842ddf432ed53f03d8cf0a6",
+    "outputs/results/external_dev/pathology_primary4_metrics.json": "6b5f8494abd63991a06c059bfe60014fd866f466e5ba145e23a84e203ba0a34e",
+    "outputs/results/external_dev/rhythm_primary6_metrics.json": "6e0f5f67e0e8facc1ce0576653377a51c685caa978ec1ff9c0a5bb3f616e2724",
+    "outputs/results/external_dev/rhythm_primary8_metrics.json": "cc664094b32a1f881aa417bd5ccc12367a2d7f388e56de823c30d4084933f66a",
+    "outputs/results/primary/canonical_profiles.json": "045880ecc6a1f7755e386d466f00ab351faf5e392f5e21e7a7b35622319e23c0",
+    "release-manifest.json": "44ff950d0c64d78b3a8af11f8bc7e558707088d1e9dea127ecf9558012facedf",
+    "scripts/evaluation/verify_release_evidence.py": "f3b300151f8873e2d714d92cb4b8947c3e520945029c33dcfeafc691824f8dad",
+    "src/titan_v45/evaluation/release_evidence.py": "916f29521f71d1e6d205fa83524ed15e4357b8d616526a985a8aafd29f38fcc0"
+  },
+  "model_assets": {
+    "pathology_primary4": {
+      "backbone": {
+        "name": "backbone-v3ag-pathology.pt",
+        "sha256": "bf71e4cf8acc34031cb3611c7031e0649822e705fd7dcea354a3ea583ce920ee"
+      },
+      "specialist": {
+        "name": "specialists-v3ag-primary4-calibrated.pt",
+        "sha256": "cf5091e962fffb3254b1a71fe57236dd82ea0139093df192511499d931391dbc"
+      }
+    },
+    "rhythm_primary6_diagnostic": {
+      "backbone": {
+        "name": "backbone-v3f-original.pt",
+        "sha256": "ca5d4dcb4b9828e6c4339800fe81ec27f32d9b09a090bb57503bfb56746a8da8"
+      },
+      "specialist": {
+        "name": "specialists-v3p-e008-primary6-diagnostic.pt",
+        "sha256": "9c5a9265a7155e1206c551cc4e6d645b86363ba3dbdeb7baf7b9f173c314be3d"
+      }
+    },
+    "rhythm_primary8": {
+      "backbone": {
+        "name": "backbone-v3f-original.pt",
+        "sha256": "ca5d4dcb4b9828e6c4339800fe81ec27f32d9b09a090bb57503bfb56746a8da8"
+      },
+      "specialist": {
+        "name": "specialists-v3q-primary8-best-candidate.pt",
+        "sha256": "b30cb2bbb45f1231c93ff1c196aa966b57b49831cadb296131c0283e7b0ceb02"
+      }
+    }
+  },
+  "profiles": {
+    "pathology_primary4": {
+      "macro_f1": 0.7934563704063461,
+      "mean_accuracy": 0.8022904853689048,
+      "panel_rows": 962,
+      "panels": {
+        "ASMI": {
+          "accuracy": 0.8333333333333334,
+          "f1": 0.8122605363984674,
+          "fn": 41,
+          "fp": 8,
+          "records": 294,
+          "tn": 139,
+          "tp": 106
+        },
+        "IMI": {
+          "accuracy": 0.7815533980582524,
+          "f1": 0.7887323943661971,
+          "fn": 19,
+          "fp": 26,
+          "records": 206,
+          "tn": 77,
+          "tp": 84
+        },
+        "ISC_": {
+          "accuracy": 0.9201680672268907,
+          "f1": 0.9155555555555556,
+          "fn": 16,
+          "fp": 3,
+          "records": 238,
+          "tn": 116,
+          "tp": 103
+        },
+        "LVH": {
+          "accuracy": 0.6741071428571429,
+          "f1": 0.6572769953051644,
+          "fn": 42,
+          "fp": 31,
+          "records": 224,
+          "tn": 81,
+          "tp": 70
+        }
+      },
+      "release_role": "primary4_pathology"
+    },
+    "rhythm_primary6_diagnostic": {
+      "accuracy": 0.9519172245891662,
+      "correct": 1564,
+      "macro_f1": 0.8009383239876122,
+      "panels": {
+        "1AVB": {
+          "accuracy": 0.9628727936701157,
+          "f1": 0.6257668711656442,
+          "fn": 29,
+          "fp": 32,
+          "support": 1643,
+          "tn": 1531,
+          "tp": 51
+        },
+        "AFIB": {
+          "accuracy": 0.9586122945830797,
+          "f1": 0.9095744680851063,
+          "fn": 48,
+          "fp": 20,
+          "support": 1643,
+          "tn": 1233,
+          "tp": 342
+        },
+        "PVC": {
+          "accuracy": 0.9592209373097992,
+          "f1": 0.6564102564102564,
+          "fn": 30,
+          "fp": 37,
+          "support": 1643,
+          "tn": 1512,
+          "tp": 64
+        },
+        "RBBB": {
+          "accuracy": 0.9640900791235545,
+          "f1": 0.7773584905660378,
+          "fn": 13,
+          "fp": 46,
+          "support": 1643,
+          "tn": 1481,
+          "tp": 103
+        },
+        "SB": {
+          "accuracy": 0.9360925136944613,
+          "f1": 0.9295774647887324,
+          "fn": 99,
+          "fp": 6,
+          "support": 1643,
+          "tn": 845,
+          "tp": 693
+        },
+        "STACH": {
+          "accuracy": 0.9616555082166768,
+          "f1": 0.9069423929098966,
+          "fn": 55,
+          "fp": 8,
+          "support": 1643,
+          "tn": 1273,
+          "tp": 307
+        }
+      },
+      "records": 1643,
+      "release_role": "primary6_diagnostic"
+    },
+    "rhythm_primary8": {
+      "accepted_accuracy": 0.9060647514819882,
+      "accepted_correct": 1987,
+      "macro_f1": 0.7614253535094375,
+      "panels": {
+        "1AVB": {
+          "accuracy": 0.9749202006383949,
+          "f1": 0.6258503401360545,
+          "fn": 34,
+          "fp": 21,
+          "support": 2193,
+          "tn": 2092,
+          "tp": 46
+        },
+        "AFIB": {
+          "accuracy": 0.9712722298221614,
+          "f1": 0.9182879377431906,
+          "fn": 36,
+          "fp": 27,
+          "support": 2193,
+          "tn": 1776,
+          "tp": 354
+        },
+        "NSR": {
+          "accuracy": 0.9151846785225718,
+          "f1": 0.8342245989304813,
+          "fn": 124,
+          "fp": 62,
+          "support": 2193,
+          "tn": 1539,
+          "tp": 468
+        },
+        "PAC": {
+          "accuracy": 0.9507523939808481,
+          "f1": 0.47058823529411764,
+          "fn": 55,
+          "fp": 53,
+          "support": 2193,
+          "tn": 2037,
+          "tp": 48
+        },
+        "PVC": {
+          "accuracy": 0.9689922480620154,
+          "f1": 0.6179775280898876,
+          "fn": 39,
+          "fp": 29,
+          "support": 2193,
+          "tn": 2070,
+          "tp": 55
+        },
+        "RBBB": {
+          "accuracy": 0.9753761969904241,
+          "f1": 0.7768595041322314,
+          "fn": 22,
+          "fp": 32,
+          "support": 2193,
+          "tn": 2045,
+          "tp": 94
+        },
+        "SB": {
+          "accuracy": 0.9585043319653442,
+          "f1": 0.9425867507886435,
+          "fn": 45,
+          "fp": 46,
+          "support": 2193,
+          "tn": 1355,
+          "tp": 747
+        },
+        "STACH": {
+          "accuracy": 0.9689922480620154,
+          "f1": 0.9050279329608939,
+          "fn": 38,
+          "fp": 30,
+          "support": 2193,
+          "tn": 1801,
+          "tp": 324
+        }
+      },
+      "records": 2193,
+      "release_role": "primary8_candidate",
+      "single_label_accuracy": 0.8527131782945736,
+      "single_label_correct": 1870
+    }
+  },
+  "release_tag": "v0.1.0",
+  "schema": "TITAN_V45_RECOMPUTED_RELEASE_EVIDENCE_V1",
+  "scope": "Recomputes metrics from released record-level prediction tables; does not run ECG inference or retraining.",
+  "verification": "passed"
+}

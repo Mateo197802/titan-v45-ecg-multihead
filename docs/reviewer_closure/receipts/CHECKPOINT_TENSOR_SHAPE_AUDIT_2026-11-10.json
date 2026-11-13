@@ -1,0 +1,102 @@
+{
+  "schema": "TITAN_V45_CHECKPOINT_STATIC_SHAPE_AUDIT_V1",
+  "date": "2026-11-10",
+  "method": "Verified the full asset SHA-256 against the release manifest, read the bounded ZIP data.pkl member, and tokenized protocol-2 pickle metadata with pickletools.genops. No unpickling, torch.load, tensor allocation, inference, or training.",
+  "internal_paths_omitted": true,
+  "rhythm_specialists": {
+    "P6": {
+      "checkpoint_sha256": "9c5a9265a7155e1206c551cc4e6d645b86363ba3dbdeb7baf7b9f173c314be3d",
+      "checkpoint_bytes": 22354966,
+      "data_pkl_bytes": 19517,
+      "data_pkl_sha256": "c6d5604d9195e329a43985548666c88e5363b1c0914c9c1f32801dd202452392",
+      "declared_hidden_width": 192,
+      "stored_hidden_width": 512,
+      "head_count": 8,
+      "weight_tensor_count": 24,
+      "per_head_weight_shapes": {
+        "layer_1": [512, 681],
+        "layer_4": [512, 512],
+        "layer_7": [1, 512]
+      }
+    },
+    "P8": {
+      "checkpoint_sha256": "b30cb2bbb45f1231c93ff1c196aa966b57b49831cadb296131c0283e7b0ceb02",
+      "checkpoint_bytes": 29498326,
+      "data_pkl_bytes": 21118,
+      "data_pkl_sha256": "1853db0dca381c71aa32cdb36324586791ce00242909d27930901a566837d4dc",
+      "declared_hidden_width": 192,
+      "stored_hidden_width": 512,
+      "head_count": 8,
+      "weight_tensor_count": 24,
+      "per_head_weight_shapes": {
+        "layer_1": [512, 681],
+        "layer_4": [512, 512],
+        "layer_7": [1, 512]
+      }
+    }
+  },
+  "pathology_specialist": {
+    "P4": {
+      "checkpoint_sha256": "cf5091e962fffb3254b1a71fe57236dd82ea0139093df192511499d931391dbc",
+      "checkpoint_bytes": 29413606,
+      "data_pkl_bytes": 23573,
+      "data_pkl_sha256": "a9ffbff593769117d17afa7f90bd76a93c41f0bd54106b629f793fd3749ed624",
+      "head_count": 4,
+      "weight_tensor_count": 12,
+      "per_head_weight_shapes": {
+        "layer_1": [512, 670],
+        "layer_4": [512, 512],
+        "layer_7": [1, 512]
+      }
+    }
+  },
+  "global_backbones": {
+    "V3F": {
+      "checkpoint_sha256": "ca5d4dcb4b9828e6c4339800fe81ec27f32d9b09a090bb57503bfb56746a8da8",
+      "checkpoint_bytes": 233565900,
+      "data_pkl_bytes": 52754,
+      "data_pkl_sha256": "8b46fc5b7b23b110dcb2d8b102b6b6fd6002d6d5258203b5ff69911cacd57377",
+      "observed_tensors": {
+        "rhythm_projection": [512, 650],
+        "rhythm_output": [14, 512],
+        "pathology_projection": [512, 640],
+        "pathology_output": [7, 512],
+        "quality_hidden_and_output": [[128, 640], [1, 128]],
+        "biometrics_hidden_and_output": [[256, 640], [3, 256]],
+        "axis_outputs": {
+          "rate_frequency": [3, 256],
+          "supraventricular_irregular": [2, 256],
+          "ectopy": [2, 256],
+          "conduction": [6, 256],
+          "repolarization_qt": [1, 256]
+        }
+      }
+    },
+    "V3AG": {
+      "checkpoint_sha256": "bf71e4cf8acc34031cb3611c7031e0649822e705fd7dcea354a3ea583ce920ee",
+      "checkpoint_bytes": 233566092,
+      "data_pkl_bytes": 52965,
+      "data_pkl_sha256": "1c2d3d07499ad5053cd7bf01644647a9ef3d0bb965bbfe8945c92865cf4c46f7",
+      "observed_tensors": {
+        "rhythm_projection": [512, 650],
+        "rhythm_output": [14, 512],
+        "pathology_projection": [512, 640],
+        "pathology_output": [7, 512],
+        "quality_hidden_and_output": [[128, 640], [1, 128]],
+        "biometrics_hidden_and_output": [[256, 640], [3, 256]],
+        "axis_outputs": {
+          "rate_frequency": [3, 256],
+          "supraventricular_irregular": [2, 256],
+          "ectopy": [2, 256],
+          "conduction": [6, 256],
+          "repolarization_qt": [1, 256]
+        }
+      }
+    }
+  },
+  "limitations": [
+    "Tensor dimensions do not establish training data, supervision, optimization, job consumption, or clinical performance.",
+    "The P6/P8 metadata-width discrepancy remains unexplained historically.",
+    "The architecture contract declares 58,352,219 backbone parameters; this receipt did not independently sum every serialized parameter."
+  ]
+}

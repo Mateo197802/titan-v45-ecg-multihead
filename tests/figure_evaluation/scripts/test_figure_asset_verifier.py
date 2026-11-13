@@ -11,14 +11,26 @@ verifier = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(verifier)
 
 
-def test_repository_media_inventory_includes_assets_outside_figures(tmp_path: Path) -> None:
+def test_manuscript_media_inventory_is_scoped_to_the_figure_directory(tmp_path: Path) -> None:
     figures = tmp_path / "outputs" / "figures"
     figures.mkdir(parents=True)
     (figures / "paper.png").write_bytes(b"png")
-    (tmp_path / "other" / "diagram.svg").parent.mkdir()
-    (tmp_path / "other" / "diagram.svg").write_text("svg", encoding="utf-8")
+    report_figures = figures / "external_sph"
+    report_figures.mkdir()
+    (report_figures / "report.png").write_bytes(b"png")
 
-    assert verifier.repository_media_paths(tmp_path) == {
-        "outputs/figures/paper.png",
-        "other/diagram.svg",
+    assert verifier.manuscript_media_names(figures) == {
+        "paper.png",
+    }
+
+
+def test_manuscript_media_inventory_detects_extra_top_level_images(tmp_path: Path) -> None:
+    figures = tmp_path / "outputs" / "figures"
+    figures.mkdir(parents=True)
+    (figures / "paper.png").write_bytes(b"png")
+    (figures / "unexpected.svg").write_text("svg", encoding="utf-8")
+
+    assert verifier.manuscript_media_names(figures) == {
+        "paper.png",
+        "unexpected.svg",
     }

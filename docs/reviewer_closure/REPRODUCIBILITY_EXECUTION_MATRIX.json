@@ -1,0 +1,93 @@
+{
+  "schema": "TITAN_V45_REPRODUCIBILITY_EXECUTION_MATRIX_V1",
+  "as_of": "2026-11-10",
+  "source_head_checked": "381c8943189ade49ca1cb29b3b65be97133ada83",
+  "principle": "Prediction replay, weight identity, preprocessing, training, data selection, calibration, and external validation are separate reproducibility claims.",
+  "execution_this_pass": {
+    "new_slurm_jobs": 0,
+    "gpu_used": false,
+    "external_data_downloaded": false,
+    "manuscript_edited": false,
+    "raw_cedia_logs_transferred": false,
+    "source": "docs/reviewer_closure/receipts/CEDIA_JOB_LOGS_2026-11-10.json"
+  },
+  "components": [
+    {
+      "component": "Release artifact identity",
+      "status": "VERIFIED_WITH_DEFINED_SCOPE",
+      "evidence_refs": ["configs/profiles/rhythm_primary6_diagnostic.json", "configs/profiles/rhythm_primary8.json", "configs/profiles/pathology_primary4.json", "outputs/results/revision_20261107/rhythm_waveform.json", "docs/reviewer_closure/receipts/RELEASE_METRICS_RECHECK_2026-11-10.json"],
+      "result": "Published asset hashes and profile contracts are recorded; the CEDIA audit did not re-download multi-gigabyte release weights.",
+      "limitation": "No fresh local byte verification of physical release checkpoints in this pass."
+    },
+    {
+      "component": "Saved decision replay",
+      "status": "EXPERIMENT_COMPLETED_WITH_LIMITATIONS",
+      "evidence_refs": ["outputs/results/revision_20261107/rhythm_waveform.json", "outputs/results/revision_20261107/pathology_waveform.json", "docs/reviewer_closure/REPLAY_EQUIVALENCE_DISPOSITION.md"],
+      "result": "P4 decisions 962/962; maximum probability difference 0.0006194114685058594. P6 top-1 1642/1643. P8 top-1 and binary sets 2193/2193, including 58 fallbacks.",
+      "limitation": "P4 strict probability equivalence fails the frozen 1e-5 criterion; decision agreement is not performance validation."
+    },
+    {
+      "component": "Historical preprocessing and loader",
+      "status": "HISTORICAL_SOURCE_NOT_RECOVERED",
+      "evidence_refs": ["docs/reviewer_closure/HISTORICAL_LOADER_IDENTITY_AND_REPLAY.md", "docs/reviewer_closure/HISTORICAL_RECOVERY_FINAL_EXECUTION.md"],
+      "result": "A 32,435-byte CEDIA candidate has SHA-256 a2c854acd43615a1ed78b5ed77c46a0252ec3607438df32d6a88e52fb0f91ddc.",
+      "limitation": "Expected original is 36,271 bytes and SHA-256 fc8d7367f9f2c108376839435021ec3172fe2757faa4a615f0ef5d39cbf1e855; they do not match."
+    },
+    {
+      "component": "Backbone and specialist checkpoint architecture",
+      "status": "VERIFIED_WITH_DEFINED_SCOPE",
+      "evidence_refs": ["outputs/results/revision_20261107/rhythm_waveform.json", "docs/reviewer_closure/SPECIALIST_192_512_ARCHITECTURE_RESOLUTION.md"],
+      "result": "Retained replay reports P6/P8 declared width 192 and stored tensor width 512; inference code instantiates from tensor shape and strict-loads.",
+      "limitation": "Historical cause and exact training-time architecture lineage are not recovered."
+    },
+    {
+      "component": "Historical training run reproduction",
+      "status": "HISTORICAL_SOURCE_NOT_RECOVERED",
+      "evidence_refs": ["docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md", "docs/reviewer_closure/CHECKPOINT_JOB_MANIFEST_VERIFICATION_FINAL.md"],
+      "result": "Some job IDs, outputs and launcher records survive.",
+      "limitation": "Not every training script/config, exact data manifest and checkpoint SHA edge survives for each released model."
+    },
+    {
+      "component": "Data selection and patient isolation",
+      "status": "HISTORICAL_SOURCE_NOT_RECOVERED",
+      "evidence_refs": ["docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md", "docs/reviewer_closure/GENERALIZATION_AND_COHORT_INDEPENDENCE_AUDIT.md"],
+      "result": "Selected cohorts and a bounded fold mapping are documented.",
+      "limitation": "Complete job-linked source manifests, parent populations, patient mappings and signal de-duplication across all pretraining sources are absent. Patient isolation is not certified."
+    },
+    {
+      "component": "Calibration reproduction",
+      "status": "VERIFIED_WITH_DEFINED_SCOPE",
+      "evidence_refs": ["docs/reviewer_closure/receipts/CEDIA_JOB_LOGS_2026-11-10.json", "configs/profiles/pathology_primary4.json"],
+      "result": "Job 17296 surviving launcher/log identifies calibration and evaluation manifest aliases; final P4 thresholds match the released config.",
+      "limitation": "Panel bytes, patient maps and released checkpoint hash edge are not retained; calibration/test patient separation is not certified."
+    },
+    {
+      "component": "P6 checkpoint-selection gate",
+      "status": "VERIFIED_WITH_DEFINED_SCOPE",
+      "evidence_refs": ["docs/reviewer_closure/receipts/CEDIA_JOB_LOGS_2026-11-10.json"],
+      "result": "Jobs 17314/17315 record external metrics by epoch and an epoch-8 V3H gate at 0.95 accuracy/0.80 macro-F1.",
+      "limitation": "The sweep input manifest digest is absent; this is development/selection evidence, not an independent test."
+    },
+    {
+      "component": "Full-class supervision and Other",
+      "status": "HISTORICAL_SOURCE_NOT_RECOVERED",
+      "evidence_refs": ["docs/reviewer_closure/AUXILIARY_CLASS_TRAINING_EVIDENCE.md", "docs/reviewer_closure/OTHER_CLASS_COVERAGE_EXPERIMENT.md"],
+      "result": "Output contracts and reconstructed score emission are inspectable.",
+      "limitation": "Checkpoint-linked label supports, loss masks and validated Other performance are not demonstrated."
+    },
+    {
+      "component": "Historical selective prediction/quarantine",
+      "status": "NOT_SATISFIED",
+      "evidence_refs": ["docs/reviewer_closure/QUARANTINE_HISTORICAL_VS_PROSPECTIVE.md", "docs/reviewer_closure/SELECTIVE_PREDICTION_EXPERIMENT.md"],
+      "result": "Empty threshold sets and fallback counts are preserved as their own behaviors.",
+      "limitation": "No authentic uncertainty policy, denominator or pre/post-quarantine ledger; quarantine rate is not assessed."
+    },
+    {
+      "component": "Independent clinical/external validation",
+      "status": "NEEDS_INDEPENDENT_DATA",
+      "evidence_refs": ["docs/reviewer_closure/GENERALIZATION_DATASET_ELIGIBILITY.md", "docs/reviewer_closure/GENERALIZATION_EXPERIMENT_RESULTS.md"],
+      "result": "No new independent experiment was run in this pass.",
+      "limitation": "Previously consulted SPH and V3H selection data cannot serve as an untouched test; no alternative cohort access/eligibility was confirmed."
+    }
+  ]
+}

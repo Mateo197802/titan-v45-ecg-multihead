@@ -1,0 +1,1576 @@
+{
+  "schema": "TITAN_V45_GENERALIZATION_PER_CLASS_METRICS_V1",
+  "as_of": "2026-11-10",
+  "source_path": "outputs/results/external_sph/sph_aggregate_32669.json",
+  "source_sha256": "09f93d9f310baaca672a33b0f369593cd88835a8ef08dc9929945c57cf18c988",
+  "source_schema": "TITAN_V45_SPH_ENDPOINT_RESULTS_V1",
+  "protocol_commit": "eb1c67b9229af875a9f868797b0c2f5c546e3dac",
+  "protocol_sha256": "d788ad8cca94793cebb738496acc131e82b1ca1900976f11020b99a79a5fc366",
+  "scoring_receipt_sha256": "8abdc5f6561fc3fea77eeb68e8aa34bc2d02396cad9c2e9fbeea70b4188dac92",
+  "scoring_ledger_sha256": "4a3a1e61b1784e06190d5caaa089fca04ef84792acb3a5f9fc1af3f9c1173462",
+  "evaluation_scope": {
+    "study_scope": "transfer_to_distinct_hospital_source_with_historical_traceability_limitations",
+    "source_records": 25770,
+    "scored_records_per_profile": 25770,
+    "patient_clusters_for_interval_design": 24666,
+    "profiles": [
+      "P6",
+      "P8",
+      "P4"
+    ],
+    "compatible_statement_endpoints": 14,
+    "independent_test": false,
+    "clinical_adjudication": false,
+    "quarantine_assessed": false,
+    "interpretation": "Existing SPH ECG-statement transfer results only; not a new independent validation experiment or clinical diagnosis study."
+  },
+  "endpoints": [
+    {
+      "endpoint": "P6:AFIB",
+      "profile": "P6",
+      "label": "AFIB",
+      "reference_semantics": "SPH documented ECG statement; not clinical diagnosis",
+      "n": 25770,
+      "source_records": 25770,
+      "positive_support": 675,
+      "negative_support": 25095,
+      "patient_clusters": 24666,
+      "confusion": {
+        "tp": 628,
+        "tn": 24983,
+        "fp": 112,
+        "fn": 47
+      },
+      "metrics": {
+        "accuracy": 0.9938300349243306,
+        "precision": 0.8486486486486486,
+        "recall": 0.9303703703703704,
+        "specificity": 0.9955369595536959,
+        "f1": 0.8876325088339223,
+        "auroc": 0.9986533838081956,
+        "average_precision": 0.943291968139309,
+        "brier_score": 0.009152189071437134,
+        "ece": 0.01568979576714067
+      },
+      "patient_cluster_bootstrap_95ci": {
+        "accuracy": {
+          "low": 0.9928146968578864,
+          "high": 0.994762046509894,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "auroc": {
+          "low": 0.9982808493528411,
+          "high": 0.9989868093079853,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "average_precision": {
+          "low": 0.9236297157806317,
+          "high": 0.9606602547139536,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "brier_score": {
+          "low": 0.008312655738008204,
+          "high": 0.01001463718170106,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "ece": {
+          "low": 0.01448408433528509,
+          "high": 0.016888900547048225,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "f1": {
+          "low": 0.8692406341529307,
+          "high": 0.9037984649702092,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "npv": {
+          "low": 0.9975610731278237,
+          "high": 0.9986407638904816,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "precision": {
+          "low": 0.8224571353137123,
+          "high": 0.8729519154904883,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "sensitivity": {
+          "low": 0.9101102880249246,
+          "high": 0.9491790369812848,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "specificity": {
+          "low": 0.994650913630899,
+          "high": 0.9963289610060414,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        }
+      },
+      "discordant_exact_duplicate_sensitivity": {
+        "conflicting_duplicate_groups": 2,
+        "source_records_excluded": 4,
+        "scored_records_retained": 25766,
+        "metrics": {
+          "tp": 627,
+          "tn": 24982,
+          "fp": 111,
+          "fn": 46,
+          "accuracy": 0.993906698750291,
+          "precision": 0.8495934959349594,
+          "recall": 0.9316493313521546,
+          "specificity": 0.995576455585223,
+          "f1": 0.888731396172927,
+          "auroc": 0.9986703845054495,
+          "average_precision": 0.9437276219617529,
+          "brier_score": 0.009096719701690327,
+          "ece": 0.01564258926658526
+        }
+      }
+    },
+    {
+      "endpoint": "P6:SB",
+      "profile": "P6",
+      "label": "SB",
+      "reference_semantics": "SPH documented ECG statement; not clinical diagnosis",
+      "n": 25770,
+      "source_records": 25770,
+      "positive_support": 2711,
+      "negative_support": 23059,
+      "patient_clusters": 24666,
+      "confusion": {
+        "tp": 2228,
+        "tn": 22030,
+        "fp": 1029,
+        "fn": 483
+      },
+      "metrics": {
+        "accuracy": 0.9413271245634459,
+        "precision": 0.684065090574148,
+        "recall": 0.8218369605311693,
+        "specificity": 0.9553753415152435,
+        "f1": 0.7466487935656837,
+        "auroc": 0.9687469711275339,
+        "average_precision": 0.8116744110636065,
+        "brier_score": 0.11106360994899489,
+        "ece": 0.17950783213433877
+      },
+      "patient_cluster_bootstrap_95ci": {
+        "accuracy": {
+          "low": 0.938466875381395,
+          "high": 0.9441226414715981,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "auroc": {
+          "low": 0.9658359316067214,
+          "high": 0.9714175713966383,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "average_precision": {
+          "low": 0.7955685091789355,
+          "high": 0.8266050608437304,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "brier_score": {
+          "low": 0.10849215917327035,
+          "high": 0.11382804162324063,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "ece": {
+          "low": 0.17612021138420267,
+          "high": 0.18308844211367328,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "f1": {
+          "low": 0.7346462466273371,
+          "high": 0.7583179871878125,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "npv": {
+          "low": 0.9766605629682568,
+          "high": 0.9804552336187885,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "precision": {
+          "low": 0.6674739895775834,
+          "high": 0.6998441002890495,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "sensitivity": {
+          "low": 0.8072561099911663,
+          "high": 0.8358756494050612,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "specificity": {
+          "low": 0.9525892797080668,
+          "high": 0.9580982298606983,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        }
+      },
+      "discordant_exact_duplicate_sensitivity": {
+        "conflicting_duplicate_groups": 0,
+        "source_records_excluded": 0,
+        "scored_records_retained": 25770,
+        "metrics": {
+          "tp": 2228,
+          "tn": 22030,
+          "fp": 1029,
+          "fn": 483,
+          "accuracy": 0.9413271245634459,
+          "precision": 0.684065090574148,
+          "recall": 0.8218369605311693,
+          "specificity": 0.9553753415152435,
+          "f1": 0.7466487935656837,
+          "auroc": 0.9687469711275339,
+          "average_precision": 0.8116744110636065,
+          "brier_score": 0.11106360994899489,
+          "ece": 0.17950783213433877
+        }
+      }
+    },
+    {
+      "endpoint": "P6:STACH",
+      "profile": "P6",
+      "label": "STACH",
+      "reference_semantics": "SPH documented ECG statement; not clinical diagnosis",
+      "n": 25770,
+      "source_records": 25770,
+      "positive_support": 725,
+      "negative_support": 25045,
+      "patient_clusters": 24666,
+      "confusion": {
+        "tp": 618,
+        "tn": 24861,
+        "fp": 184,
+        "fn": 107
+      },
+      "metrics": {
+        "accuracy": 0.9887077997671712,
+        "precision": 0.770573566084788,
+        "recall": 0.8524137931034482,
+        "specificity": 0.9926532241964464,
+        "f1": 0.8094302554027505,
+        "auroc": 0.9918740474043275,
+        "average_precision": 0.8786994644242296,
+        "brier_score": 0.017533516196863098,
+        "ece": 0.03858541388389453
+      },
+      "patient_cluster_bootstrap_95ci": {
+        "accuracy": {
+          "low": 0.9873701048275925,
+          "high": 0.9899891937482601,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "auroc": {
+          "low": 0.9862133917618008,
+          "high": 0.9955404070379974,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "average_precision": {
+          "low": 0.8531423423367832,
+          "high": 0.9033680008901346,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "brier_score": {
+          "low": 0.016467515898794312,
+          "high": 0.01862937660472365,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "ece": {
+          "low": 0.03696571691017604,
+          "high": 0.04021626952021832,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "f1": {
+          "low": 0.7862331393596143,
+          "high": 0.8308320485415865,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "npv": {
+          "low": 0.9948395303728993,
+          "high": 0.9965515408314763,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "precision": {
+          "low": 0.7401893449687568,
+          "high": 0.8000118764845605,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "sensitivity": {
+          "low": 0.825502890925654,
+          "high": 0.8789115646258503,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "specificity": {
+          "low": 0.9915573110634658,
+          "high": 0.9937246436659383,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        }
+      },
+      "discordant_exact_duplicate_sensitivity": {
+        "conflicting_duplicate_groups": 0,
+        "source_records_excluded": 0,
+        "scored_records_retained": 25770,
+        "metrics": {
+          "tp": 618,
+          "tn": 24861,
+          "fp": 184,
+          "fn": 107,
+          "accuracy": 0.9887077997671712,
+          "precision": 0.770573566084788,
+          "recall": 0.8524137931034482,
+          "specificity": 0.9926532241964464,
+          "f1": 0.8094302554027505,
+          "auroc": 0.9918740474043275,
+          "average_precision": 0.8786994644242296,
+          "brier_score": 0.017533516196863098,
+          "ece": 0.03858541388389453
+        }
+      }
+    },
+    {
+      "endpoint": "P6:RBBB",
+      "profile": "P6",
+      "label": "RBBB",
+      "reference_semantics": "SPH documented ECG statement; not clinical diagnosis",
+      "n": 25770,
+      "source_records": 25770,
+      "positive_support": 710,
+      "negative_support": 25060,
+      "patient_clusters": 24666,
+      "confusion": {
+        "tp": 686,
+        "tn": 23993,
+        "fp": 1067,
+        "fn": 24
+      },
+      "metrics": {
+        "accuracy": 0.9576639503298409,
+        "precision": 0.39132915002852253,
+        "recall": 0.9661971830985916,
+        "specificity": 0.9574221867517957,
+        "f1": 0.5570442549736094,
+        "auroc": 0.9874986792261952,
+        "average_precision": 0.8063639945843525,
+        "brier_score": 0.03567997356820812,
+        "ece": 0.07106286177243665
+      },
+      "patient_cluster_bootstrap_95ci": {
+        "accuracy": {
+          "low": 0.9550422121511033,
+          "high": 0.9599953827390179,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "auroc": {
+          "low": 0.9830021931593712,
+          "high": 0.9912634892592516,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "average_precision": {
+          "low": 0.7749553986427443,
+          "high": 0.8355308052462792,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "brier_score": {
+          "low": 0.03405517752867785,
+          "high": 0.037378499961294775,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "ece": {
+          "low": 0.06900903028987415,
+          "high": 0.07325236470192502,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "f1": {
+          "low": 0.5314832029696407,
+          "high": 0.5811711195106718,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "npv": {
+          "low": 0.9985820704763304,
+          "high": 0.9993743528449257,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "precision": {
+          "low": 0.3671492014599464,
+          "high": 0.4149621099170235,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "sensitivity": {
+          "low": 0.9519094766619519,
+          "high": 0.9784675569983653,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "specificity": {
+          "low": 0.9547878710052313,
+          "high": 0.9597930600591594,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        }
+      },
+      "discordant_exact_duplicate_sensitivity": {
+        "conflicting_duplicate_groups": 0,
+        "source_records_excluded": 0,
+        "scored_records_retained": 25770,
+        "metrics": {
+          "tp": 686,
+          "tn": 23993,
+          "fp": 1067,
+          "fn": 24,
+          "accuracy": 0.9576639503298409,
+          "precision": 0.39132915002852253,
+          "recall": 0.9661971830985916,
+          "specificity": 0.9574221867517957,
+          "f1": 0.5570442549736094,
+          "auroc": 0.9874986792261952,
+          "average_precision": 0.8063639945843525,
+          "brier_score": 0.03567997356820812,
+          "ece": 0.07106286177243665
+        }
+      }
+    },
+    {
+      "endpoint": "P6:PVC",
+      "profile": "P6",
+      "label": "PVC",
+      "reference_semantics": "SPH documented ECG statement; not clinical diagnosis",
+      "n": 25770,
+      "source_records": 25770,
+      "positive_support": 1067,
+      "negative_support": 24703,
+      "patient_clusters": 24666,
+      "confusion": {
+        "tp": 905,
+        "tn": 23328,
+        "fp": 1375,
+        "fn": 162
+      },
+      "metrics": {
+        "accuracy": 0.9403570042685293,
+        "precision": 0.3969298245614035,
+        "recall": 0.8481724461105904,
+        "specificity": 0.944338744282071,
+        "f1": 0.5407827905587093,
+        "auroc": 0.9562223014472856,
+        "average_precision": 0.6538842270135854,
+        "brier_score": 0.041028732473808865,
+        "ece": 0.07911615548788611
+      },
+      "patient_cluster_bootstrap_95ci": {
+        "accuracy": {
+          "low": 0.9374295830522877,
+          "high": 0.9435050926572353,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "auroc": {
+          "low": 0.94955709176401,
+          "high": 0.9626011904100639,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "average_precision": {
+          "low": 0.6227848742493876,
+          "high": 0.6855293642629436,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "brier_score": {
+          "low": 0.03943784585929245,
+          "high": 0.04257022831127932,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "ece": {
+          "low": 0.07671881952279096,
+          "high": 0.08141198165838583,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "f1": {
+          "low": 0.5201871152543306,
+          "high": 0.5617153962042633,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "npv": {
+          "low": 0.992056825218801,
+          "high": 0.9941470617884823,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "precision": {
+          "low": 0.3760677221516097,
+          "high": 0.4172757011282917,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "sensitivity": {
+          "low": 0.8264699805542051,
+          "high": 0.8697746682433319,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "specificity": {
+          "low": 0.941378884586806,
+          "high": 0.9473472741622417,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        }
+      },
+      "discordant_exact_duplicate_sensitivity": {
+        "conflicting_duplicate_groups": 0,
+        "source_records_excluded": 0,
+        "scored_records_retained": 25770,
+        "metrics": {
+          "tp": 905,
+          "tn": 23328,
+          "fp": 1375,
+          "fn": 162,
+          "accuracy": 0.9403570042685293,
+          "precision": 0.3969298245614035,
+          "recall": 0.8481724461105904,
+          "specificity": 0.944338744282071,
+          "f1": 0.5407827905587093,
+          "auroc": 0.9562223014472856,
+          "average_precision": 0.6538842270135854,
+          "brier_score": 0.041028732473808865,
+          "ece": 0.07911615548788611
+        }
+      }
+    },
+    {
+      "endpoint": "P8:AFIB",
+      "profile": "P8",
+      "label": "AFIB",
+      "reference_semantics": "SPH documented ECG statement; not clinical diagnosis",
+      "n": 25770,
+      "source_records": 25770,
+      "positive_support": 675,
+      "negative_support": 25095,
+      "patient_clusters": 24666,
+      "confusion": {
+        "tp": 632,
+        "tn": 24959,
+        "fp": 136,
+        "fn": 43
+      },
+      "metrics": {
+        "accuracy": 0.9930539386883973,
+        "precision": 0.8229166666666666,
+        "recall": 0.9362962962962963,
+        "specificity": 0.9945805937437736,
+        "f1": 0.875952875952876,
+        "auroc": 0.9986638329901928,
+        "average_precision": 0.9426251044915842,
+        "brier_score": 0.008830412879517338,
+        "ece": 0.01744242678387639
+      },
+      "patient_cluster_bootstrap_95ci": {
+        "accuracy": {
+          "low": 0.9919772572108265,
+          "high": 0.9940955109319579,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "auroc": {
+          "low": 0.9983065655836312,
+          "high": 0.9989924319212031,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "average_precision": {
+          "low": 0.9226985568001217,
+          "high": 0.9602308622990504,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "brier_score": {
+          "low": 0.007955724398660621,
+          "high": 0.009747613536208552,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "ece": {
+          "low": 0.016209968397294654,
+          "high": 0.01870140994960988,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "f1": {
+          "low": 0.8565399345512082,
+          "high": 0.8939090597971501,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "npv": {
+          "low": 0.9977508622860551,
+          "high": 0.9988020616518505,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "precision": {
+          "low": 0.7933652046089754,
+          "high": 0.8490123626560186,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "sensitivity": {
+          "low": 0.9170161496879254,
+          "high": 0.9549758393780133,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "specificity": {
+          "low": 0.9936003624719532,
+          "high": 0.995495890487162,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        }
+      },
+      "discordant_exact_duplicate_sensitivity": {
+        "conflicting_duplicate_groups": 2,
+        "source_records_excluded": 4,
+        "scored_records_retained": 25766,
+        "metrics": {
+          "tp": 630,
+          "tn": 24959,
+          "fp": 134,
+          "fn": 43,
+          "accuracy": 0.993130482030583,
+          "precision": 0.824607329842932,
+          "recall": 0.9361069836552749,
+          "specificity": 0.99465986530108,
+          "f1": 0.8768267223382046,
+          "auroc": 0.9986780232512764,
+          "average_precision": 0.9429782341523024,
+          "brier_score": 0.00877172298299698,
+          "ece": 0.017387771981326496
+        }
+      }
+    },
+    {
+      "endpoint": "P8:SB",
+      "profile": "P8",
+      "label": "SB",
+      "reference_semantics": "SPH documented ECG statement; not clinical diagnosis",
+      "n": 25770,
+      "source_records": 25770,
+      "positive_support": 2711,
+      "negative_support": 23059,
+      "patient_clusters": 24666,
+      "confusion": {
+        "tp": 2396,
+        "tn": 21827,
+        "fp": 1232,
+        "fn": 315
+      },
+      "metrics": {
+        "accuracy": 0.9399689561505626,
+        "precision": 0.6604189636163176,
+        "recall": 0.883806713389893,
+        "specificity": 0.9465718374604276,
+        "f1": 0.7559551979807541,
+        "auroc": 0.9795441661214863,
+        "average_precision": 0.8470358869713722,
+        "brier_score": 0.04640089190601906,
+        "ece": 0.05140830529877018
+      },
+      "patient_cluster_bootstrap_95ci": {
+        "accuracy": {
+          "low": 0.9369942748846766,
+          "high": 0.9429117386538314,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "auroc": {
+          "low": 0.9778058480482698,
+          "high": 0.9811962549736831,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "average_precision": {
+          "low": 0.8335405767371586,
+          "high": 0.859456792989967,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "brier_score": {
+          "low": 0.0444952293442986,
+          "high": 0.048415004659419454,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "ece": {
+          "low": 0.04896418231506198,
+          "high": 0.054015286167439024,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "f1": {
+          "low": 0.7434874306917372,
+          "high": 0.7670862449295439,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "npv": {
+          "low": 0.9841192335491773,
+          "high": 0.9873727726512169,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "precision": {
+          "low": 0.6445133900375325,
+          "high": 0.6756238434431945,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "sensitivity": {
+          "low": 0.8709671472071557,
+          "high": 0.8956439563616166,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "specificity": {
+          "low": 0.9436060579030636,
+          "high": 0.949526961041554,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        }
+      },
+      "discordant_exact_duplicate_sensitivity": {
+        "conflicting_duplicate_groups": 0,
+        "source_records_excluded": 0,
+        "scored_records_retained": 25770,
+        "metrics": {
+          "tp": 2396,
+          "tn": 21827,
+          "fp": 1232,
+          "fn": 315,
+          "accuracy": 0.9399689561505626,
+          "precision": 0.6604189636163176,
+          "recall": 0.883806713389893,
+          "specificity": 0.9465718374604276,
+          "f1": 0.7559551979807541,
+          "auroc": 0.9795441661214863,
+          "average_precision": 0.8470358869713722,
+          "brier_score": 0.04640089190601906,
+          "ece": 0.05140830529877018
+        }
+      }
+    },
+    {
+      "endpoint": "P8:STACH",
+      "profile": "P8",
+      "label": "STACH",
+      "reference_semantics": "SPH documented ECG statement; not clinical diagnosis",
+      "n": 25770,
+      "source_records": 25770,
+      "positive_support": 725,
+      "negative_support": 25045,
+      "patient_clusters": 24666,
+      "confusion": {
+        "tp": 637,
+        "tn": 24769,
+        "fp": 276,
+        "fn": 88
+      },
+      "metrics": {
+        "accuracy": 0.9858750485060147,
+        "precision": 0.6976998904709748,
+        "recall": 0.8786206896551724,
+        "specificity": 0.9889798362946696,
+        "f1": 0.7777777777777778,
+        "auroc": 0.9901603320918898,
+        "average_precision": 0.8701572043635254,
+        "brier_score": 0.023007239500378057,
+        "ece": 0.049902588285366666
+      },
+      "patient_cluster_bootstrap_95ci": {
+        "accuracy": {
+          "low": 0.9844085120381024,
+          "high": 0.9873265761112946,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "auroc": {
+          "low": 0.9849792396399532,
+          "high": 0.9941685143391322,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "average_precision": {
+          "low": 0.8451111902732893,
+          "high": 0.8939450580671736,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "brier_score": {
+          "low": 0.021769832303664766,
+          "high": 0.02430990374888606,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "ece": {
+          "low": 0.048081780762997635,
+          "high": 0.05161380964062913,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "f1": {
+          "low": 0.7547139900216557,
+          "high": 0.7995287048179825,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "npv": {
+          "low": 0.9956483066155422,
+          "high": 0.9972215818529097,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "precision": {
+          "low": 0.6670329369425755,
+          "high": 0.7276588158554202,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "sensitivity": {
+          "low": 0.8526159783445787,
+          "high": 0.9025377676443472,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "specificity": {
+          "low": 0.987645783391839,
+          "high": 0.9902933175139577,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        }
+      },
+      "discordant_exact_duplicate_sensitivity": {
+        "conflicting_duplicate_groups": 0,
+        "source_records_excluded": 0,
+        "scored_records_retained": 25770,
+        "metrics": {
+          "tp": 637,
+          "tn": 24769,
+          "fp": 276,
+          "fn": 88,
+          "accuracy": 0.9858750485060147,
+          "precision": 0.6976998904709748,
+          "recall": 0.8786206896551724,
+          "specificity": 0.9889798362946696,
+          "f1": 0.7777777777777778,
+          "auroc": 0.9901603320918898,
+          "average_precision": 0.8701572043635254,
+          "brier_score": 0.023007239500378057,
+          "ece": 0.049902588285366666
+        }
+      }
+    },
+    {
+      "endpoint": "P8:RBBB",
+      "profile": "P8",
+      "label": "RBBB",
+      "reference_semantics": "SPH documented ECG statement; not clinical diagnosis",
+      "n": 25770,
+      "source_records": 25770,
+      "positive_support": 710,
+      "negative_support": 25060,
+      "patient_clusters": 24666,
+      "confusion": {
+        "tp": 669,
+        "tn": 24338,
+        "fp": 722,
+        "fn": 41
+      },
+      "metrics": {
+        "accuracy": 0.9703919285991462,
+        "precision": 0.4809489575844716,
+        "recall": 0.9422535211267605,
+        "specificity": 0.9711891460494813,
+        "f1": 0.6368396001903855,
+        "auroc": 0.9896215280509876,
+        "average_precision": 0.8808854827313723,
+        "brier_score": 0.026856471064288404,
+        "ece": 0.047121255689318645
+      },
+      "patient_cluster_bootstrap_95ci": {
+        "accuracy": {
+          "low": 0.9682863466344485,
+          "high": 0.9725007861571995,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "auroc": {
+          "low": 0.9851005481785217,
+          "high": 0.993454205176168,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "average_precision": {
+          "low": 0.8580638504826804,
+          "high": 0.9011287568569282,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "brier_score": {
+          "low": 0.02535407870357532,
+          "high": 0.028382038748180214,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "ece": {
+          "low": 0.04514064929528775,
+          "high": 0.04912122686919793,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "f1": {
+          "low": 0.6110297342529779,
+          "high": 0.6603693334040367,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "npv": {
+          "low": 0.9977835219220059,
+          "high": 0.9988122092596206,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "precision": {
+          "low": 0.4538267654805991,
+          "high": 0.5077395276805453,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "sensitivity": {
+          "low": 0.9248207962558118,
+          "high": 0.9589081150364495,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "specificity": {
+          "low": 0.9691272999461826,
+          "high": 0.9733185288239683,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        }
+      },
+      "discordant_exact_duplicate_sensitivity": {
+        "conflicting_duplicate_groups": 0,
+        "source_records_excluded": 0,
+        "scored_records_retained": 25770,
+        "metrics": {
+          "tp": 669,
+          "tn": 24338,
+          "fp": 722,
+          "fn": 41,
+          "accuracy": 0.9703919285991462,
+          "precision": 0.4809489575844716,
+          "recall": 0.9422535211267605,
+          "specificity": 0.9711891460494813,
+          "f1": 0.6368396001903855,
+          "auroc": 0.9896215280509876,
+          "average_precision": 0.8808854827313723,
+          "brier_score": 0.026856471064288404,
+          "ece": 0.047121255689318645
+        }
+      }
+    },
+    {
+      "endpoint": "P8:PAC",
+      "profile": "P8",
+      "label": "PAC",
+      "reference_semantics": "SPH documented ECG statement; not clinical diagnosis",
+      "n": 25770,
+      "source_records": 25770,
+      "positive_support": 539,
+      "negative_support": 25231,
+      "patient_clusters": 24666,
+      "confusion": {
+        "tp": 332,
+        "tn": 23596,
+        "fp": 1635,
+        "fn": 207
+      },
+      "metrics": {
+        "accuracy": 0.9285215366705472,
+        "precision": 0.16878495170310118,
+        "recall": 0.6159554730983302,
+        "specificity": 0.9351987634259443,
+        "f1": 0.2649640861931365,
+        "auroc": 0.8496237253859679,
+        "average_precision": 0.2895270930867443,
+        "brier_score": 0.07232526211107661,
+        "ece": 0.19922427804080217
+      },
+      "patient_cluster_bootstrap_95ci": {
+        "accuracy": {
+          "low": 0.9254059555382446,
+          "high": 0.9316162271182037,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "auroc": {
+          "low": 0.8283312534161071,
+          "high": 0.8701919495929654,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "average_precision": {
+          "low": 0.24802173841890796,
+          "high": 0.3341821029950461,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "brier_score": {
+          "low": 0.07096082029342543,
+          "high": 0.07378226645479002,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "ece": {
+          "low": 0.1970487964909915,
+          "high": 0.2014486883389931,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "f1": {
+          "low": 0.2411065594740141,
+          "high": 0.2873807911401745,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "npv": {
+          "low": 0.9901152883322382,
+          "high": 0.9924284004925096,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "precision": {
+          "low": 0.15199509028930053,
+          "high": 0.18534143109880882,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "sensitivity": {
+          "low": 0.5747561656065171,
+          "high": 0.6566881118714951,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "specificity": {
+          "low": 0.9320346401920732,
+          "high": 0.9381965747909446,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        }
+      },
+      "discordant_exact_duplicate_sensitivity": {
+        "conflicting_duplicate_groups": 1,
+        "source_records_excluded": 2,
+        "scored_records_retained": 25768,
+        "metrics": {
+          "tp": 331,
+          "tn": 23596,
+          "fp": 1634,
+          "fn": 207,
+          "accuracy": 0.928554796647004,
+          "precision": 0.16844783715012723,
+          "recall": 0.6152416356877324,
+          "specificity": 0.9352358303606817,
+          "f1": 0.26448262085497404,
+          "auroc": 0.8494149733234908,
+          "average_precision": 0.28947931390032633,
+          "brier_score": 0.07231117396684222,
+          "ece": 0.19923493323035982
+        }
+      }
+    },
+    {
+      "endpoint": "P8:PVC",
+      "profile": "P8",
+      "label": "PVC",
+      "reference_semantics": "SPH documented ECG statement; not clinical diagnosis",
+      "n": 25770,
+      "source_records": 25770,
+      "positive_support": 1067,
+      "negative_support": 24703,
+      "patient_clusters": 24666,
+      "confusion": {
+        "tp": 822,
+        "tn": 24107,
+        "fp": 596,
+        "fn": 245
+      },
+      "metrics": {
+        "accuracy": 0.9673651532790066,
+        "precision": 0.5796897038081805,
+        "recall": 0.7703842549203374,
+        "specificity": 0.9758733757033559,
+        "f1": 0.6615694164989939,
+        "auroc": 0.9728171995395268,
+        "average_precision": 0.7038857923801835,
+        "brier_score": 0.03974058988061354,
+        "ece": 0.08973053480079524
+      },
+      "patient_cluster_bootstrap_95ci": {
+        "accuracy": {
+          "low": 0.965269924043423,
+          "high": 0.9696454436135687,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "auroc": {
+          "low": 0.9679531940031626,
+          "high": 0.9774511533155509,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "average_precision": {
+          "low": 0.6731024511967524,
+          "high": 0.7328948084546955,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "brier_score": {
+          "low": 0.038209718717448854,
+          "high": 0.04122584096248361,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "ece": {
+          "low": 0.08754769561763477,
+          "high": 0.09192581179138208,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "f1": {
+          "low": 0.6400958654089414,
+          "high": 0.6834643113791041,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "npv": {
+          "low": 0.9886961293473019,
+          "high": 0.9911154872446063,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "precision": {
+          "low": 0.553845050215208,
+          "high": 0.6063624778533321,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "sensitivity": {
+          "low": 0.7458450535639476,
+          "high": 0.795625957253046,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "specificity": {
+          "low": 0.9740322180522805,
+          "high": 0.9778559276936395,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        }
+      },
+      "discordant_exact_duplicate_sensitivity": {
+        "conflicting_duplicate_groups": 0,
+        "source_records_excluded": 0,
+        "scored_records_retained": 25770,
+        "metrics": {
+          "tp": 822,
+          "tn": 24107,
+          "fp": 596,
+          "fn": 245,
+          "accuracy": 0.9673651532790066,
+          "precision": 0.5796897038081805,
+          "recall": 0.7703842549203374,
+          "specificity": 0.9758733757033559,
+          "f1": 0.6615694164989939,
+          "auroc": 0.9728171995395268,
+          "average_precision": 0.7038857923801835,
+          "brier_score": 0.03974058988061354,
+          "ece": 0.08973053480079524
+        }
+      }
+    },
+    {
+      "endpoint": "P4:ASMI",
+      "profile": "P4",
+      "label": "ASMI",
+      "reference_semantics": "SPH documented ECG statement; not clinical diagnosis",
+      "n": 25770,
+      "source_records": 25770,
+      "positive_support": 91,
+      "negative_support": 25679,
+      "patient_clusters": 24666,
+      "confusion": {
+        "tp": 56,
+        "tn": 23460,
+        "fp": 2219,
+        "fn": 35
+      },
+      "metrics": {
+        "accuracy": 0.9125339542103221,
+        "precision": 0.024615384615384615,
+        "recall": 0.6153846153846154,
+        "specificity": 0.913586977686047,
+        "f1": 0.047337278106508875,
+        "auroc": 0.8762130427693728,
+        "average_precision": 0.052632401750934275,
+        "brier_score": 0.17447557902920383,
+        "ece": 0.36148920272320495
+      },
+      "patient_cluster_bootstrap_95ci": {
+        "accuracy": {
+          "low": 0.9089848815712518,
+          "high": 0.9161175052191746,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "auroc": {
+          "low": 0.8385691611425304,
+          "high": 0.9107488028531956,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "average_precision": {
+          "low": 0.029947870506052826,
+          "high": 0.0966092772144188,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "brier_score": {
+          "low": 0.17226734534274102,
+          "high": 0.17663012706920228,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "ece": {
+          "low": 0.3588689848840288,
+          "high": 0.3640407453614531,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "f1": {
+          "low": 0.03508656661364317,
+          "high": 0.06091033856698555,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "npv": {
+          "low": 0.9979497627803261,
+          "high": 0.9990179941749601,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "precision": {
+          "low": 0.01813445091102028,
+          "high": 0.031851766733372776,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "sensitivity": {
+          "low": 0.5113573232323232,
+          "high": 0.7195243902439024,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "specificity": {
+          "low": 0.910065063020838,
+          "high": 0.9171862190029791,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        }
+      },
+      "discordant_exact_duplicate_sensitivity": {
+        "conflicting_duplicate_groups": 0,
+        "source_records_excluded": 0,
+        "scored_records_retained": 25770,
+        "metrics": {
+          "tp": 56,
+          "tn": 23460,
+          "fp": 2219,
+          "fn": 35,
+          "accuracy": 0.9125339542103221,
+          "precision": 0.024615384615384615,
+          "recall": 0.6153846153846154,
+          "specificity": 0.913586977686047,
+          "f1": 0.047337278106508875,
+          "auroc": 0.8762130427693728,
+          "average_precision": 0.052632401750934275,
+          "brier_score": 0.17447557902920383,
+          "ece": 0.36148920272320495
+        }
+      }
+    },
+    {
+      "endpoint": "P4:LVH",
+      "profile": "P4",
+      "label": "LVH",
+      "reference_semantics": "SPH documented ECG statement; not clinical diagnosis",
+      "n": 25770,
+      "source_records": 25770,
+      "positive_support": 209,
+      "negative_support": 25561,
+      "patient_clusters": 24666,
+      "confusion": {
+        "tp": 150,
+        "tn": 17692,
+        "fp": 7869,
+        "fn": 59
+      },
+      "metrics": {
+        "accuracy": 0.6923554520760574,
+        "precision": 0.01870557426112982,
+        "recall": 0.7177033492822966,
+        "specificity": 0.6921481945150816,
+        "f1": 0.036460865337870685,
+        "auroc": 0.7942901950096298,
+        "average_precision": 0.05033218257393412,
+        "brier_score": 0.34664834308512704,
+        "ece": 0.5235005663097372
+      },
+      "patient_cluster_bootstrap_95ci": {
+        "accuracy": {
+          "low": 0.6867644705361843,
+          "high": 0.6979313365474287,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "auroc": {
+          "low": 0.7625461768464341,
+          "high": 0.823195548680374,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "average_precision": {
+          "low": 0.03503752985699396,
+          "high": 0.07471275388064663,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "brier_score": {
+          "low": 0.3434473830946282,
+          "high": 0.3498464955033312,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "ece": {
+          "low": 0.5201548218802589,
+          "high": 0.5268566189649948,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "f1": {
+          "low": 0.030374993828210614,
+          "high": 0.042826476726834845,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "npv": {
+          "low": 0.9958089563262852,
+          "high": 0.9975130353492376,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "precision": {
+          "low": 0.01554589523140465,
+          "high": 0.02205911983516283,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "sensitivity": {
+          "low": 0.6549844470046083,
+          "high": 0.7795740372317749,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "specificity": {
+          "low": 0.6865140877221411,
+          "high": 0.6978127595728522,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        }
+      },
+      "discordant_exact_duplicate_sensitivity": {
+        "conflicting_duplicate_groups": 0,
+        "source_records_excluded": 0,
+        "scored_records_retained": 25770,
+        "metrics": {
+          "tp": 150,
+          "tn": 17692,
+          "fp": 7869,
+          "fn": 59,
+          "accuracy": 0.6923554520760574,
+          "precision": 0.01870557426112982,
+          "recall": 0.7177033492822966,
+          "specificity": 0.6921481945150816,
+          "f1": 0.036460865337870685,
+          "auroc": 0.7942901950096298,
+          "average_precision": 0.05033218257393412,
+          "brier_score": 0.34664834308512704,
+          "ece": 0.5235005663097372
+        }
+      }
+    },
+    {
+      "endpoint": "P4:IMI",
+      "profile": "P4",
+      "label": "IMI",
+      "reference_semantics": "SPH documented ECG statement; not clinical diagnosis",
+      "n": 25770,
+      "source_records": 25770,
+      "positive_support": 120,
+      "negative_support": 25650,
+      "patient_clusters": 24666,
+      "confusion": {
+        "tp": 107,
+        "tn": 19285,
+        "fp": 6365,
+        "fn": 13
+      },
+      "metrics": {
+        "accuracy": 0.7525029103608848,
+        "precision": 0.016532756489493202,
+        "recall": 0.8916666666666667,
+        "specificity": 0.7518518518518519,
+        "f1": 0.03246359223300971,
+        "auroc": 0.9087703053931125,
+        "average_precision": 0.14346090627227184,
+        "brier_score": 0.25099118278558136,
+        "ece": 0.42951117283789325
+      },
+      "patient_cluster_bootstrap_95ci": {
+        "accuracy": {
+          "low": 0.7470805484292874,
+          "high": 0.7579813955353536,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "auroc": {
+          "low": 0.8814875120427119,
+          "high": 0.9318918090753824,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "average_precision": {
+          "low": 0.08867064217887066,
+          "high": 0.21544604492419436,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "brier_score": {
+          "low": 0.24783036738601752,
+          "high": 0.25415696075641425,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "ece": {
+          "low": 0.4261893539575129,
+          "high": 0.4326879792227092,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "f1": {
+          "low": 0.026497470204819414,
+          "high": 0.038744045106378994,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "npv": {
+          "low": 0.9989568038531617,
+          "high": 0.9996395950974525,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "precision": {
+          "low": 0.01344376977832432,
+          "high": 0.019809735353234836,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "sensitivity": {
+          "low": 0.8320595419847329,
+          "high": 0.9434000304321364,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        },
+        "specificity": {
+          "low": 0.7463993651685064,
+          "high": 0.7573445829562451,
+          "valid_replicates": 2000,
+          "invalid_replicates": 0
+        }
+      },
+      "discordant_exact_duplicate_sensitivity": {
+        "conflicting_duplicate_groups": 0,
+        "source_records_excluded": 0,
+        "scored_records_retained": 25770,
+        "metrics": {
+          "tp": 107,
+          "tn": 19285,
+          "fp": 6365,
+          "fn": 13,
+          "accuracy": 0.7525029103608848,
+          "precision": 0.016532756489493202,
+          "recall": 0.8916666666666667,
+          "specificity": 0.7518518518518519,
+          "f1": 0.03246359223300971,
+          "auroc": 0.9087703053931125,
+          "average_precision": 0.14346090627227184,
+          "brier_score": 0.25099118278558136,
+          "ece": 0.42951117283789325
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "No overall Primary6, Primary8 or Primary4 clinical accuracy is defined across incompatible or proxy-only references.",
+    "Scores are conditional on a documented SPH ECG statement and are not clinical disease labels.",
+    "No external recalibration, threshold tuning, retraining or checkpoint selection was performed.",
+    "Historical full training-data lineage is incomplete; complete independence is not certified.",
+    "Exact duplicate-connected patient components are used for bootstrap; approximate duplicates are not assessed."
+  ]
+}

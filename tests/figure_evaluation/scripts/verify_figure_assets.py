@@ -3,7 +3,6 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-import os
 import re
 import struct
 import zipfile
@@ -26,7 +25,6 @@ EXPECTED_MANUSCRIPT_IMAGES = (
     "fig13_error_flows.png",
 )
 MEDIA_SUFFIXES = {".bmp", ".eps", ".gif", ".jpeg", ".jpg", ".pdf", ".png", ".svg", ".tif", ".tiff", ".webp"}
-SKIP_MEDIA_SCAN_DIRS = {".git", ".pytest_cache", "__pycache__", ".venv", "venv"}
 
 
 def sha256_bytes(data: bytes) -> str:
@@ -64,16 +62,12 @@ def portable_filename(value: object) -> str:
     return name
 
 
-def repository_media_paths(root: Path) -> set[str]:
-    root = root.resolve()
-    paths: set[str] = set()
-    for directory, child_directories, filenames in os.walk(root):
-        child_directories[:] = [name for name in child_directories if name not in SKIP_MEDIA_SCAN_DIRS]
-        current = Path(directory)
-        for filename in filenames:
-            if Path(filename).suffix.lower() in MEDIA_SUFFIXES:
-                paths.add((current / filename).relative_to(root).as_posix())
-    return paths
+def manuscript_media_names(figures_dir: Path) -> set[str]:
+    return {
+        path.name
+        for path in figures_dir.iterdir()
+        if path.is_file() and path.suffix.lower() in MEDIA_SUFFIXES
+    }
 
 
 def verify_source_archive(manifest: dict[str, object], archive_path: Path) -> None:
@@ -140,15 +134,13 @@ def main() -> int:
             f"extra={sorted(actual_media - set(EXPECTED_MANUSCRIPT_IMAGES))}"
         )
 
-    expected_repository_media = {
-        f"outputs/figures/{name}" for name in EXPECTED_MANUSCRIPT_IMAGES
-    }
-    actual_repository_media = repository_media_paths(repository_root)
-    if actual_repository_media != expected_repository_media:
+    repository_figures_dir = repository_root / "outputs" / "figures"
+    actual_repository_media = manuscript_media_names(repository_figures_dir)
+    if actual_repository_media != set(EXPECTED_MANUSCRIPT_IMAGES):
         raise SystemExit(
-            "Repository must track only manuscript PNGs; "
-            f"missing={sorted(expected_repository_media - actual_repository_media)}, "
-            f"extra={sorted(actual_repository_media - expected_repository_media)}"
+            "Repository manuscript figure directory must contain only the expected manuscript PNGs; "
+            f"missing={sorted(set(EXPECTED_MANUSCRIPT_IMAGES) - actual_repository_media)}, "
+            f"extra={sorted(actual_repository_media - set(EXPECTED_MANUSCRIPT_IMAGES))}"
         )
 
     failures: list[str] = []

@@ -1,0 +1,57 @@
+{
+  "schema": "TITAN_V45_CEDIA_TARGETED_RECOVERY_SEARCH_V1",
+  "observed_on": "2026-11-11",
+  "host_alias": "cedia",
+  "remote_host_verified": true,
+  "authorized_account_home_confirmed": true,
+  "method": "Read-only filename and metadata search over named regular files; no file contents or archive members were opened.",
+  "scopes": [
+    {
+      "scope_id": "AUTHORIZED_V45_PROJECT_ROOT",
+      "description": "Known V4.5 project root under the authorized account home; recursive, same-filesystem search, without following symlinks.",
+      "patterns": [
+        "data_loader_ultra.py",
+        "titan_v45_41m_multihead_optuna*.db*",
+        "titan_v45_41m_multihead_optuna*.sqlite*",
+        "selected_candidate_v3c_trial6_final.json",
+        "submit_titan_v45_final_a100.sh",
+        "titan_v4_final_best.pt",
+        "titan_v4_v3f_finetuned_best.pt",
+        "filenames containing job IDs 13169, 13172, 13181, 13239, 13304, 16748-16759, 16768, 16781, 15874, 15880, 15885-15887, 15903 or 15905",
+        "plan_ae_primary_cascade_policy_20260618*",
+        "primary_cascade_policy*",
+        "quarantine_manifest*",
+        "v3h_rhythm_external_gate_holdout_accepted_balanced_manifest.csv",
+        "v3s_p4_highconf_panel_index.json",
+        "v3m_ptbxl_full_p4_folds1_9_train_split90_manifest.csv",
+        "v3m_ptbxl_full_p4_folds1_9_val_split10_manifest.csv",
+        "v3m_internal_val_p4_panel_index.json",
+        "v3p_rhythm_train_v3j_plus_incart_svdb_virtual_manifest.csv",
+        "label_separator_validation_strict_primary_model_ready.csv"
+      ],
+      "matches": 0,
+      "result": "NO_MATCH_IN_SCOPED_ROOT"
+    },
+    {
+      "scope_id": "KNOWN_BACKUP_DIRECTORIES",
+      "description": "Known BACKUPS and datos_zip directories under the authorized account home; recursive filename-only search for TITAN/V45/V4.5/Plan-AE names and Git bundles.",
+      "patterns": ["*titan*", "*v45*", "*v4.5*", "*plan_ae*", "*.bundle"],
+      "matches": 0,
+      "result": "NO_MATCHING_ARCHIVE_OR_BUNDLE_NAME"
+    }
+  ],
+  "search_execution": {
+    "scoped_query_passes": 2,
+    "scoped_search_exit_code": 0,
+    "broad_home_traversal": "INTERRUPTED_AND_EXCLUDED_FROM_EVIDENCE",
+    "broad_home_traversal_reason": "A whole-home filename scan was stopped as too broad; no conclusion is based on that incomplete attempt.",
+    "archive_contents_inspected": false,
+    "clinical_data_read": false,
+    "scripts_executed": false,
+    "jobs_launched": false,
+    "files_transferred": false
+  },
+  "conclusion": "No named target was found in the bounded roots and filename patterns above. This does not establish absence from other account locations, institutional backup catalogs, privileged scheduler storage, collaborators, or archives whose filenames do not match the patterns.",
+  "reviewer_links": ["R1-1", "R1-2", "R1-4", "R2-3a", "R2-3f", "R2-4k", "A-06"],
+  "status_or_coverage_change": false
+}
