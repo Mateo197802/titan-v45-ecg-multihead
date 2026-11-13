@@ -1,0 +1,81 @@
+{
+  "P4": "NOT_EVALUABLE",
+  "P6_P8_promotion": "NOT_AUTHORIZED_BY_THIS_EVALUATION",
+  "all_five_endpoints_estimable": true,
+  "compared_with": {
+    "P6": {
+      "gain_and_safeguards_pass": false,
+      "macro_f1_delta": 0.25469575972689606,
+      "paired_ci_low": 0.2220341446260872,
+      "safeguards": {
+        "1AVB_ppv": {
+          "delta": 0.0773065476190476,
+          "pass": true
+        },
+        "1AVB_sensitivity": {
+          "delta": 0.21951219512195125,
+          "pass": true
+        },
+        "AFIB_ppv": {
+          "delta": 0.34576220425277027,
+          "pass": true
+        },
+        "AFIB_sensitivity": {
+          "delta": -0.12871287128712872,
+          "pass": false
+        },
+        "RBBB_ppv": {
+          "delta": 0.4129228566314659,
+          "pass": true
+        },
+        "RBBB_sensitivity": {
+          "delta": 0.03007518796992481,
+          "pass": true
+        },
+        "macro_brier": {
+          "delta": -0.0898357594967725,
+          "pass": true
+        }
+      }
+    },
+    "P8": {
+      "gain_and_safeguards_pass": false,
+      "macro_f1_delta": 0.2322914944840202,
+      "paired_ci_low": 0.19772144209273312,
+      "safeguards": {
+        "1AVB_ppv": {
+          "delta": -0.06087853773584906,
+          "pass": false
+        },
+        "1AVB_sensitivity": {
+          "delta": 0.3536585365853659,
+          "pass": true
+        },
+        "AFIB_ppv": {
+          "delta": 0.311060507482108,
+          "pass": true
+        },
+        "AFIB_sensitivity": {
+          "delta": -0.06930693069306926,
+          "pass": false
+        },
+        "RBBB_ppv": {
+          "delta": 0.24806949806949807,
+          "pass": true
+        },
+        "RBBB_sensitivity": {
+          "delta": 0.08270676691729317,
+          "pass": true
+        },
+        "macro_brier": {
+          "delta": -0.08017298583491768,
+          "pass": true
+        }
+      }
+    }
+  },
+  "external_adaptation": "FAIL",
+  "independent_generalization": "NOT_EVALUATED",
+  "research_target_met": false,
+  "scope": "WITHIN_CODE_NOT_INSTITUTIONAL_CONFIRMATION"
+}

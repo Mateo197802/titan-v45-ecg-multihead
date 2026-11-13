@@ -1,0 +1,72 @@
+{
+  "study": "TITAN_DURATION_AWARE_MULTISOURCE_V1",
+  "historical_benchmark_commit": "85d673ac04986fe1c50a8cf39d8279344a708647",
+  "development_only": true,
+  "endpoints": {"AFIB": "AF", "SB": "SB", "STACH": "ST", "RBBB": "RBBB", "1AVB": "1dAVb"},
+  "code": {
+    "doi": "10.5281/zenodo.4916206",
+    "metadata_sha256": "f9f82f4c07c1793e2285915c69f1113f5a7db8a0f2cf2f4b90474502f406bc35",
+    "archive_receipt_sha256": "a6b2c0fee44c380721aaeb585497553bf327eabbd84b1171b4179bb9458e2315",
+    "assignment_seed": "titan-da-v1-patient-20261112",
+    "split_cutoffs_percent": [70, 80, 90, 100],
+    "patient_caps": {"train": 8000, "validation": 2500, "calibration": 2500, "test": 4000},
+    "max_records_per_patient": 2,
+    "exclude_historical_pr6_patients_from": ["validation", "calibration", "test"],
+    "cohort_scope": "within CODE, previously examined source; no confirmation claim",
+    "labels": "explicit publisher flags, unrecognized values masked; no clinical adjudication claim"
+  },
+  "waveform": {
+    "input_rate_hz": 400,
+    "output_rate_hz": 125,
+    "admitted_zero_borders": [[581, 581], [0, 0], [48, 48]],
+    "window_policy": "short: entire 2934 samples; long: center 4000 observed samples; other patterns excluded",
+    "filter": {"type": "zero phase Butterworth SOS", "band_hz": [0.05, 45.0], "order": 3},
+    "normalizations": ["per_lead_zscore", "robust_shared_gain"],
+    "temporal_mask": "remove invalid suffix before convolution, length-bucket forward; no synthetic padding enters model",
+    "unknown_amplitude_units": "use native amplitude; do not infer individual acquisition gain from HDF5"
+  },
+  "training": {
+    "seeds": [20261112, 20261113, 20261114],
+    "batch_size": 32,
+    "max_epochs": 6,
+    "early_stop_patience": 2,
+    "head_lr": 0.0005,
+    "transformer_lr": 0.00002,
+    "resnet_lr": 0.000008,
+    "full_backbone_lr": 0.000005,
+    "anchor_lambda": 0.02,
+    "gradient_clip": 1.0,
+    "weight_decay": 0.01,
+    "candidates": ["released_P6", "released_P8", "frozen_backbone_mlp", "partial_transformer_mlp",
+                   "partial_transformer_resnet_mlp", "masked_mimic_partial", "multisource_groupdro", "full_regularized"],
+    "budget": {"max_supervised_fits": 12, "max_ssl_fits": 1, "max_gpu_hours": 42, "max_hours_per_fit": 4},
+    "selection": "validation macro AP first; non-finite loss aborts; calibration never used to fit weights; no test metrics for selection",
+    "deep_gate": "Run one full-regularized seed if partial fails +0.03 validation macro-F1 against frozen on identical patient rows, or if verified cross-source forgetting motivates it. No retries for performance.",
+    "repeat_rule": "repeat frozen and best eligible non-frozen variant on the other two seeds; disclose all completed variants and failures"
+  },
+  "calibration": {
+    "thresholds": "per endpoint fit on calibration only, from 0.05 to 0.95 in 0.01 steps; maximize F1 subject to sensitivity >=0.50 for AFIB/RBBB/1AVB; if infeasible choose highest sensitivity and record",
+    "bootstrap_unit": "patient",
+    "bootstrap_replicates": 1000,
+    "bootstrap_seed": 20261112,
+    "support_min_positive_and_negative_patients": 20
+  },
+  "promotion": {
+    "development_goal_macro_f1": 0.70,
+    "confirmatory_macro_f1_gain_min": 0.03,
+    "confirmatory_paired_lower_ci_strictly_positive": true,
+    "max_sensitivity_drop_afib_rbbb_1avb": 0.05,
+    "max_precision_drop_afib_rbbb_1avb": 0.05,
+    "max_macro_brier_increase": 0.01,
+    "min_confirmatory_positive_and_negative_patients_per_class": 20,
+    "requires_authorized_unexamined_institution": true,
+    "historical_pr6_gate_unchanged": true
+  },
+  "source_policy": {
+    "code": "supervised development only",
+    "chapman_cpsc": "verify authorized signal and patient manifests before supervised development; known historical exposure; unsupported labels masked",
+    "mimic": "approved waveform subset and train patients only; no reports or inferred negatives; no confirmatory use",
+    "heedb": "no acquisition without explicit credentials, DUA and CEDIA authorization; physician labels must be audited before any test",
+    "p4": "separate eligibility required; do not map history or nonspecific abnormalities to current ECG endpoints"
+  }
+}

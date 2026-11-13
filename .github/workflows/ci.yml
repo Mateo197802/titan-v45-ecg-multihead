@@ -35,6 +35,9 @@ jobs:
         run: python scripts/domain_adaptation/verify_adaptation_delivery.py docs/domain_adaptation/evidence
       - name: Verify integrated public scientific evidence
         run: python scripts/evaluation/verify_integrated_public_evidence.py
+      - name: Verify downloadable external evidence and pinned primary aggregates
+        if: matrix.python-version == '3.12'
+        run: python scripts/evaluation/verify_external_evidence.py docs/external_evidence --repo .
       - name: Verify public performance recovery evidence when present
         run: |
           if [ -d docs/performance_recovery/evidence ]; then
