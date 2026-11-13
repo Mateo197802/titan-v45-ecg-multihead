@@ -1,0 +1,103 @@
+{
+  "job": "33369",
+  "scope": "complete SPH V1 denominator, with ranking only on a known-statement subset; development, not independent or clinical validation",
+  "source_ecgs": 25770,
+  "scored_flow": {
+    "metadata_records": 25770,
+    "archive_records": 25770,
+    "status_counts": {
+      "scored": 25770
+    },
+    "scored_records": 25770
+  },
+  "ontology_sha256": "2484a170f7abceb34a4bbf2459e1697202eb0b66fb86dd8590c8ce08adf4eb7e",
+  "baseline_receipt_sha256": "6b52867f0a9834a3eb698c76749d7a5d16d35dd1dc3fa0e24e88ed07eefc846b",
+  "endpoints": {
+    "Flutter": {
+      "mapping": {
+        "name": "Flutter",
+        "code": 51,
+        "description": "Atrial flutter",
+        "profile": "P8",
+        "score_key": "backbone_0",
+        "scale": "mean auxiliary rhythm logit"
+      },
+      "all_source_reference_states": {
+        "explicit_normal_control": 13905,
+        "unknown": 11766,
+        "positive": 99
+      },
+      "reference_by_scoring_state": {
+        "explicit_normal_control:scored": 13905,
+        "unknown:scored": 11766,
+        "positive:scored": 99
+      },
+      "ranking_known_statement_subset": {
+        "positive": 99,
+        "explicit_normal_control": 13905,
+        "auroc": 0.0743893447237568,
+        "average_precision": 0.0036876852833789484
+      }
+    },
+    "LAE": {
+      "mapping": {
+        "name": "LAE",
+        "code": 140,
+        "description": "Left atrial enlargement",
+        "profile": "P4",
+        "score_key": "LAE",
+        "scale": "auxiliary backbone sigmoid"
+      },
+      "all_source_reference_states": {
+        "explicit_normal_control": 13905,
+        "unknown": 11846,
+        "positive": 19
+      },
+      "reference_by_scoring_state": {
+        "explicit_normal_control:scored": 13905,
+        "unknown:scored": 11846,
+        "positive:scored": 19
+      },
+      "ranking_known_statement_subset": {
+        "positive": 19,
+        "explicit_normal_control": 13905,
+        "auroc": 0.3037301992846193,
+        "average_precision": 0.05360332787554139
+      }
+    }
+  },
+  "observable_other_support_only": {
+    "P6_other_rhythm_observable_subset": {
+      "unknown": 11227,
+      "explicit_normal_control": 13905,
+      "positive": 638
+    },
+    "P8_other_rhythm_observable_subset": {
+      "unknown": 11766,
+      "explicit_normal_control": 13905,
+      "positive": 99
+    },
+    "P4_other_pathology_observable_subset": {
+      "unknown": 11846,
+      "explicit_normal_control": 13905,
+      "positive": 19
+    }
+  },
+  "unknown_auxiliary_reference": [
+    "LBBB",
+    "2AVB",
+    "3AVB",
+    "LQTS",
+    "Paced",
+    "ALMI",
+    "ILMI"
+  ],
+  "normal_code": {
+    "code": 1,
+    "description": "Normal ECG",
+    "not_equivalent_to": "NSR"
+  },
+  "record_identifiers_exported": false,
+  "other_classifier_validated": false,
+  "auxiliary_training_inferred_from_scores": false
+}

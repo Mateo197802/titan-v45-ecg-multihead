@@ -1,0 +1,1602 @@
+{
+  "scope": "SPH retrospective development; mapped ECG statements, not independent or clinical validation",
+  "binding": {
+    "protocol_sha256": "6c41da3153b9b45b82ba2af4820f4044e873759b0abd907d70ee197b6281dac6",
+    "scoring_receipt_sha256": "6b52867f0a9834a3eb698c76749d7a5d16d35dd1dc3fa0e24e88ed07eefc846b",
+    "private_duplicate_index_sha256": "24eae465775c82c6ffa8fa9739a66d59f294f9de9190b903ea2b417b978f68ea"
+  },
+  "job": "33396",
+  "split_ecgs": {
+    "calibration": 5149,
+    "train": 15501,
+    "held": 5120
+  },
+  "split_components": {
+    "train": 14864,
+    "calibration": 4927,
+    "held": 4875
+  },
+  "cross_split_patient_or_exact_signal_components": 0,
+  "unique_ecgs": 25770,
+  "unique_patients": 24666,
+  "record_identifiers_exported": false,
+  "non_evaluable": {
+    "NSR": "SPH Normal ECG is not an explicit NSR statement and is never part of Other",
+    "LQTS": "prolonged QT statement 148 is not LQTS syndrome",
+    "Paced": "no usable SPH Paced statement",
+    "unmapped_abnormal_rhythm": "not a known Other reference or known negative"
+  },
+  "endpoints": {
+    "P6_Other_mapped": {
+      "status": "evaluated",
+      "all_metadata_reference_scoring_flow": {
+        "calibration": {
+          "control:scored": 2764,
+          "unknown:scored": 2234,
+          "positive:scored": 147,
+          "discordant_exact_signal:scored": 4
+        },
+        "held": {
+          "control:scored": 2754,
+          "unknown:scored": 2217,
+          "positive:scored": 141,
+          "discordant_exact_signal:scored": 8
+        },
+        "train": {
+          "unknown:scored": 6652,
+          "control:scored": 8379,
+          "positive:scored": 458,
+          "discordant_exact_signal:scored": 12
+        }
+      },
+      "held_scored_calls_by_reference_state": {
+        "candidate": {
+          "control:negative": 2711,
+          "unknown:negative": 1898,
+          "unknown:positive": 319,
+          "positive:positive": 88,
+          "control:positive": 43,
+          "positive:negative": 53,
+          "discordant_exact_signal:positive": 2,
+          "discordant_exact_signal:negative": 6
+        },
+        "released_auxiliary_comparator": {
+          "control:positive": 2754,
+          "unknown:positive": 2212,
+          "positive:positive": 140,
+          "unknown:negative": 5,
+          "positive:negative": 1,
+          "discordant_exact_signal:positive": 8
+        }
+      },
+      "matched_known_held_ecgs": 2895,
+      "known_statement_metrics": {
+        "candidate": {
+          "calibration_threshold": 0.29633888942128483,
+          "metrics": {
+            "rows": 2895,
+            "positive_support": 141,
+            "negative_support": 2754,
+            "predicted_positive_support": 131,
+            "tp": 88,
+            "tn": 2711,
+            "fp": 43,
+            "fn": 53,
+            "accuracy": 0.966839378238342,
+            "precision": 0.6717557251908397,
+            "recall": 0.624113475177305,
+            "specificity": 0.9843863471314451,
+            "f1": 0.6470588235294118,
+            "probability_rows": 2895,
+            "missing_probability_rows": 0,
+            "probability_positive_support": 141,
+            "probability_negative_support": 2754,
+            "auroc": 0.9315811430955361,
+            "average_precision": 0.6854171502277581,
+            "brier_score": 0.024705781985224336,
+            "ece": 0.010553265342938972,
+            "undefined": {},
+            "negative_predictive_value": 0.9808248914616498
+          },
+          "intervals": {
+            "unit": "patient_or_record_group",
+            "groups": 2794,
+            "seed": 197826,
+            "n_bootstrap": 1000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": 0.9603984252366667,
+                "high": 0.97327455768579,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": 0.5872929606625259,
+                "high": 0.75177304964539,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": 0.5499917218543047,
+                "high": 0.7023175701901927,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": 0.9799996360989811,
+                "high": 0.9884479658803755,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": 0.9759281250616043,
+                "high": 0.985941132822483,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "f1": {
+                "low": 0.5742452523940919,
+                "high": 0.7080327473089267,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": 0.9048376410109444,
+                "high": 0.9535197224505162,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": 0.6110967803713967,
+                "high": 0.756444932179989,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": 0.020042703342638735,
+                "high": 0.029008937686617657,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": 0.007393292997996641,
+                "high": 0.017014913877316837,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        },
+        "released_auxiliary_comparator": {
+          "calibration_threshold": 6.547122843869602e-10,
+          "metrics": {
+            "rows": 2895,
+            "positive_support": 141,
+            "negative_support": 2754,
+            "predicted_positive_support": 2894,
+            "tp": 140,
+            "tn": 0,
+            "fp": 2754,
+            "fn": 1,
+            "accuracy": 0.04835924006908463,
+            "precision": 0.04837595024187975,
+            "recall": 0.9929078014184397,
+            "specificity": 0.0,
+            "f1": 0.09225700164744646,
+            "probability_rows": 2895,
+            "missing_probability_rows": 0,
+            "probability_positive_support": 141,
+            "probability_negative_support": 2754,
+            "auroc": 0.1902120448915053,
+            "average_precision": 0.02785003169541926,
+            "brier_score": 0.06858853429197928,
+            "ece": 0.12213581824036723,
+            "undefined": {},
+            "negative_predictive_value": 0.0
+          },
+          "intervals": {
+            "unit": "patient_or_record_group",
+            "groups": 2794,
+            "seed": 197826,
+            "n_bootstrap": 1000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": 0.04023412390717195,
+                "high": 0.056671117892556494,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": 0.04023447172675098,
+                "high": 0.05672944208688022,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": 0.975300925925926,
+                "high": 1.0,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": 0.0,
+                "high": 0.0,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": 0.0,
+                "high": 0.0,
+                "valid_replicates": 628,
+                "invalid_replicates": 372
+              },
+              "f1": {
+                "low": 0.07735590070192062,
+                "high": 0.10726349338381623,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": 0.1511924765127982,
+                "high": 0.23361781317673053,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": 0.023264490791744214,
+                "high": 0.03319749136109017,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": 0.060422947865377705,
+                "high": 0.07620904792247343,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": 0.11293794891540428,
+                "high": 0.13033152167274725,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        }
+      },
+      "paired_candidate_minus_comparator": {
+        "unit": "paired_patient_or_record_group",
+        "groups": 2794,
+        "seed": 197826,
+        "n_bootstrap": 1000,
+        "confidence": 0.95,
+        "intervals": {
+          "accuracy": {
+            "low": 0.9059449995619383,
+            "high": 0.9316307984220704,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "precision": {
+            "low": 0.5404370918364625,
+            "high": 0.6961610694942497,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "recall": {
+            "low": -0.4485480605285593,
+            "high": -0.2878246753246753,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "specificity": {
+            "low": 0.9799996360989811,
+            "high": 0.9884479658803755,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "negative_predictive_value": {
+            "low": 0.9761309633982012,
+            "high": 0.9860046911572548,
+            "valid_replicates": 628,
+            "invalid_replicates": 372
+          },
+          "f1": {
+            "low": 0.4876101890840188,
+            "high": 0.615547656419812,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "auroc": {
+            "low": 0.6788546121245754,
+            "high": 0.7965156692164662,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "average_precision": {
+            "low": 0.5850396852503309,
+            "high": 0.7293166081814945,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "brier_score": {
+            "low": -0.049666956300002875,
+            "high": -0.03809313869866099,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "ece": {
+            "low": -0.11961616878484033,
+            "high": -0.09990482635287536,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          }
+        }
+      }
+    },
+    "P8_Other_mapped": {
+      "status": "evaluated",
+      "all_metadata_reference_scoring_flow": {
+        "calibration": {
+          "control:scored": 2764,
+          "unknown:scored": 2339,
+          "positive:scored": 42,
+          "discordant_exact_signal:scored": 4
+        },
+        "held": {
+          "control:scored": 2754,
+          "unknown:scored": 2315,
+          "positive:scored": 43,
+          "discordant_exact_signal:scored": 8
+        },
+        "train": {
+          "unknown:scored": 6984,
+          "control:scored": 8379,
+          "positive:scored": 128,
+          "discordant_exact_signal:scored": 10
+        }
+      },
+      "held_scored_calls_by_reference_state": {
+        "candidate": {
+          "control:negative": 2753,
+          "unknown:negative": 2168,
+          "unknown:positive": 147,
+          "positive:positive": 20,
+          "positive:negative": 23,
+          "discordant_exact_signal:positive": 2,
+          "discordant_exact_signal:negative": 6,
+          "control:positive": 1
+        },
+        "released_auxiliary_comparator": {
+          "control:positive": 2754,
+          "unknown:positive": 2310,
+          "positive:positive": 42,
+          "unknown:negative": 5,
+          "positive:negative": 1,
+          "discordant_exact_signal:positive": 8
+        }
+      },
+      "matched_known_held_ecgs": 2797,
+      "known_statement_metrics": {
+        "candidate": {
+          "calibration_threshold": 0.6490850597228517,
+          "metrics": {
+            "rows": 2797,
+            "positive_support": 43,
+            "negative_support": 2754,
+            "predicted_positive_support": 21,
+            "tp": 20,
+            "tn": 2753,
+            "fp": 1,
+            "fn": 23,
+            "accuracy": 0.9914193779048981,
+            "precision": 0.9523809523809523,
+            "recall": 0.46511627906976744,
+            "specificity": 0.9996368917937546,
+            "f1": 0.625,
+            "probability_rows": 2797,
+            "missing_probability_rows": 0,
+            "probability_positive_support": 43,
+            "probability_negative_support": 2754,
+            "auroc": 0.9497559575078954,
+            "average_precision": 0.6717674554904969,
+            "brier_score": 0.0070552447076698945,
+            "ece": 0.002343967886348627,
+            "undefined": {},
+            "negative_predictive_value": 0.9917146974063401
+          },
+          "intervals": {
+            "unit": "patient_or_record_group",
+            "groups": 2702,
+            "seed": 197826,
+            "n_bootstrap": 1000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": 0.9875657215752803,
+                "high": 0.9949785691879689,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": 0.84,
+                "high": 1.0,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": 0.31246527777777783,
+                "high": 0.6280256288561935,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": 0.9989054989521113,
+                "high": 1.0,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": 0.9878292042029464,
+                "high": 0.994993070377992,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "f1": {
+                "low": 0.4666279069767442,
+                "high": 0.7605969148222669,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": 0.9140408103632648,
+                "high": 0.978774270507973,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": 0.5136554188014825,
+                "high": 0.8196221404509836,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": 0.004510452677519594,
+                "high": 0.009980715257920441,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": 0.0024275058169773004,
+                "high": 0.006302084358389056,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        },
+        "released_auxiliary_comparator": {
+          "calibration_threshold": 6.547122843869602e-10,
+          "metrics": {
+            "rows": 2797,
+            "positive_support": 43,
+            "negative_support": 2754,
+            "predicted_positive_support": 2796,
+            "tp": 42,
+            "tn": 0,
+            "fp": 2754,
+            "fn": 1,
+            "accuracy": 0.015016088666428316,
+            "precision": 0.015021459227467811,
+            "recall": 0.9767441860465116,
+            "specificity": 0.0,
+            "f1": 0.029587883057414582,
+            "probability_rows": 2797,
+            "missing_probability_rows": 0,
+            "probability_positive_support": 43,
+            "probability_negative_support": 2754,
+            "auroc": 0.1912904696762426,
+            "average_precision": 0.008898870231929574,
+            "brier_score": 0.038302408421773786,
+            "ece": 0.10709917773923679,
+            "undefined": {},
+            "negative_predictive_value": 0.0
+          },
+          "intervals": {
+            "unit": "patient_or_record_group",
+            "groups": 2702,
+            "seed": 197826,
+            "n_bootstrap": 1000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": 0.010375578068336827,
+                "high": 0.020328828714081922,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": 0.01037567084078712,
+                "high": 0.02034333946088748,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": 0.9210526315789473,
+                "high": 1.0,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": 0.0,
+                "high": 0.0,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": 0.0,
+                "high": 0.0,
+                "valid_replicates": 643,
+                "invalid_replicates": 357
+              },
+              "f1": {
+                "low": 0.020538061871693953,
+                "high": 0.03984760230671443,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": 0.12969779630638273,
+                "high": 0.26249458934982955,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": 0.006451024425709056,
+                "high": 0.012397702748279293,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": 0.03391256449568566,
+                "high": 0.04323904798985354,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": 0.10138222906083534,
+                "high": 0.1132167581501605,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        }
+      },
+      "paired_candidate_minus_comparator": {
+        "unit": "paired_patient_or_record_group",
+        "groups": 2702,
+        "seed": 197826,
+        "n_bootstrap": 1000,
+        "confidence": 0.95,
+        "intervals": {
+          "accuracy": {
+            "low": 0.968134336942438,
+            "high": 0.9839055793991416,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "precision": {
+            "low": 0.8250175021038011,
+            "high": 0.988583863863711,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "recall": {
+            "low": -0.6666666666666667,
+            "high": -0.3540962837837838,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "specificity": {
+            "low": 0.9989054989521113,
+            "high": 1.0,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "negative_predictive_value": {
+            "low": 0.9877227471085287,
+            "high": 0.9946289491406318,
+            "valid_replicates": 643,
+            "invalid_replicates": 357
+          },
+          "f1": {
+            "low": 0.44234812569705084,
+            "high": 0.7302747298634297,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "auroc": {
+            "low": 0.664492107461028,
+            "high": 0.8389992496458551,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "average_precision": {
+            "low": 0.5052410219359782,
+            "high": 0.810208386937699,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "brier_score": {
+            "low": -0.035377828100779024,
+            "high": -0.027903705314554703,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "ece": {
+            "low": -0.11004200289034168,
+            "high": -0.09610645232370787,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          }
+        }
+      }
+    },
+    "Flutter": {
+      "status": "evaluated",
+      "all_metadata_reference_scoring_flow": {
+        "calibration": {
+          "control:scored": 2764,
+          "unknown:scored": 2362,
+          "positive:scored": 21,
+          "discordant_exact_signal:scored": 2
+        },
+        "held": {
+          "control:scored": 2754,
+          "unknown:scored": 2339,
+          "positive:scored": 19,
+          "discordant_exact_signal:scored": 8
+        },
+        "train": {
+          "unknown:scored": 7055,
+          "control:scored": 8379,
+          "positive:scored": 57,
+          "discordant_exact_signal:scored": 10
+        }
+      },
+      "held_scored_calls_by_reference_state": {
+        "candidate": {
+          "control:negative": 2753,
+          "unknown:negative": 2203,
+          "unknown:positive": 136,
+          "positive:positive": 15,
+          "positive:negative": 4,
+          "discordant_exact_signal:positive": 2,
+          "discordant_exact_signal:negative": 6,
+          "control:positive": 1
+        },
+        "released_auxiliary_comparator": {
+          "control:positive": 2754,
+          "unknown:positive": 2334,
+          "positive:positive": 18,
+          "unknown:negative": 5,
+          "positive:negative": 1,
+          "discordant_exact_signal:positive": 8
+        }
+      },
+      "matched_known_held_ecgs": 2773,
+      "known_statement_metrics": {
+        "candidate": {
+          "calibration_threshold": 0.6147444901743943,
+          "metrics": {
+            "rows": 2773,
+            "positive_support": 19,
+            "negative_support": 2754,
+            "predicted_positive_support": 16,
+            "tp": 15,
+            "tn": 2753,
+            "fp": 1,
+            "fn": 4,
+            "accuracy": 0.998196898665705,
+            "precision": 0.9375,
+            "recall": 0.7894736842105263,
+            "specificity": 0.9996368917937546,
+            "f1": 0.8571428571428571,
+            "probability_rows": 2773,
+            "missing_probability_rows": 0,
+            "probability_positive_support": 19,
+            "probability_negative_support": 2754,
+            "auroc": 0.9978022398043038,
+            "average_precision": 0.8780763237032586,
+            "brier_score": 0.0016571019877724676,
+            "ece": 0.0011370331164749594,
+            "undefined": {},
+            "negative_predictive_value": 0.9985491476242292
+          },
+          "intervals": {
+            "unit": "patient_or_record_group",
+            "groups": 2681,
+            "seed": 197826,
+            "n_bootstrap": 1000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": 0.996739100887215,
+                "high": 0.9996397726954326,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": 0.7857142857142857,
+                "high": 1.0,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": 0.5881127450980393,
+                "high": 0.95,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": 0.9989054889585871,
+                "high": 1.0,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": 0.9970887388404571,
+                "high": 0.9996392528915969,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "f1": {
+                "low": 0.7095825426944973,
+                "high": 0.9696969696969697,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": 0.993581792673653,
+                "high": 1.0,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": 0.7243334302337429,
+                "high": 1.0,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": 0.00048615434577391003,
+                "high": 0.00308744050069241,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": 0.0008656163213826652,
+                "high": 0.003004478846485813,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        },
+        "released_auxiliary_comparator": {
+          "calibration_threshold": 4.2588066406779035e-10,
+          "metrics": {
+            "rows": 2773,
+            "positive_support": 19,
+            "negative_support": 2754,
+            "predicted_positive_support": 2772,
+            "tp": 18,
+            "tn": 0,
+            "fp": 2754,
+            "fn": 1,
+            "accuracy": 0.006491164803461955,
+            "precision": 0.006493506493506494,
+            "recall": 0.9473684210526315,
+            "specificity": 0.0,
+            "f1": 0.012898602651379433,
+            "probability_rows": 2773,
+            "missing_probability_rows": 0,
+            "probability_positive_support": 19,
+            "probability_negative_support": 2754,
+            "auroc": 0.0901463899399916,
+            "average_precision": 0.003785158677003434,
+            "brier_score": 0.0189422035358069,
+            "ece": 0.07426962489644506,
+            "undefined": {},
+            "negative_predictive_value": 0.0
+          },
+          "intervals": {
+            "unit": "patient_or_record_group",
+            "groups": 2681,
+            "seed": 197826,
+            "n_bootstrap": 1000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": 0.003607438584006717,
+                "high": 0.009691313711414214,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": 0.003607438584006717,
+                "high": 0.009698362982764816,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": 0.8235294117647058,
+                "high": 1.0,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": 0.0,
+                "high": 0.0,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": 0.0,
+                "high": 0.0,
+                "valid_replicates": 583,
+                "invalid_replicates": 417
+              },
+              "f1": {
+                "low": 0.007188943495541948,
+                "high": 0.019196587273373623,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": 0.03364678689708923,
+                "high": 0.17925364591323087,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": 0.0022943674563167195,
+                "high": 0.005975388259610649,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": 0.01600691811082688,
+                "high": 0.022119380598347588,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": 0.07001652227251727,
+                "high": 0.07853730554397588,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        }
+      },
+      "paired_candidate_minus_comparator": {
+        "unit": "paired_patient_or_record_group",
+        "groups": 2681,
+        "seed": 197826,
+        "n_bootstrap": 1000,
+        "confidence": 0.95,
+        "intervals": {
+          "accuracy": {
+            "low": 0.9876855096084699,
+            "high": 0.9953187313614119,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "precision": {
+            "low": 0.7806561952018594,
+            "high": 0.9956787900612172,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "recall": {
+            "low": -0.33333333333333326,
+            "high": 0.0,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "specificity": {
+            "low": 0.9989054889585871,
+            "high": 1.0,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "negative_predictive_value": {
+            "low": 0.9967540069579435,
+            "high": 0.9996350283809856,
+            "valid_replicates": 583,
+            "invalid_replicates": 417
+          },
+          "f1": {
+            "low": 0.697469296661202,
+            "high": 0.9581882338285216,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "auroc": {
+            "low": 0.8144878060836866,
+            "high": 0.9657959940377272,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "average_precision": {
+            "low": 0.7202194768081581,
+            "high": 0.9956478421891563,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "brier_score": {
+            "low": -0.020249016536028116,
+            "high": -0.014599940188976335,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "ece": {
+            "low": -0.07702561611192985,
+            "high": -0.06759295354156235,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          }
+        }
+      }
+    },
+    "LBBB": {
+      "status": "evaluated",
+      "all_metadata_reference_scoring_flow": {
+        "calibration": {
+          "control:scored": 2764,
+          "unknown:scored": 2367,
+          "positive:scored": 14,
+          "discordant_exact_signal:scored": 4
+        },
+        "held": {
+          "control:scored": 2754,
+          "unknown:scored": 2342,
+          "positive:scored": 18,
+          "discordant_exact_signal:scored": 6
+        },
+        "train": {
+          "unknown:scored": 7063,
+          "control:scored": 8379,
+          "positive:scored": 51,
+          "discordant_exact_signal:scored": 8
+        }
+      },
+      "held_scored_calls_by_reference_state": {
+        "candidate": {
+          "control:negative": 2748,
+          "unknown:negative": 2143,
+          "unknown:positive": 199,
+          "positive:positive": 6,
+          "positive:negative": 12,
+          "control:positive": 6,
+          "discordant_exact_signal:negative": 6
+        },
+        "released_auxiliary_comparator": {
+          "control:positive": 2753,
+          "unknown:positive": 2309,
+          "unknown:negative": 33,
+          "positive:positive": 18,
+          "control:negative": 1,
+          "discordant_exact_signal:positive": 6
+        }
+      },
+      "matched_known_held_ecgs": 2772,
+      "known_statement_metrics": {
+        "candidate": {
+          "calibration_threshold": 0.141993433010964,
+          "metrics": {
+            "rows": 2772,
+            "positive_support": 18,
+            "negative_support": 2754,
+            "predicted_positive_support": 12,
+            "tp": 6,
+            "tn": 2748,
+            "fp": 6,
+            "fn": 12,
+            "accuracy": 0.9935064935064936,
+            "precision": 0.5,
+            "recall": 0.3333333333333333,
+            "specificity": 0.9978213507625272,
+            "f1": 0.4,
+            "probability_rows": 2772,
+            "missing_probability_rows": 0,
+            "probability_positive_support": 18,
+            "probability_negative_support": 2754,
+            "auroc": 0.9301218429758735,
+            "average_precision": 0.3909543661435044,
+            "brier_score": 0.005118945139074993,
+            "ece": 0.0015677199240822469,
+            "undefined": {},
+            "negative_predictive_value": 0.9956521739130435
+          },
+          "intervals": {
+            "unit": "patient_or_record_group",
+            "groups": 2677,
+            "seed": 197826,
+            "n_bootstrap": 1000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": 0.9903050322843682,
+                "high": 0.9964029423477753,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": 0.16666666666666666,
+                "high": 0.8003124999999998,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": 0.1,
+                "high": 0.5714285714285714,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": 0.995986792848153,
+                "high": 0.9992764175409489,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": 0.9931256554248201,
+                "high": 0.9978417654086652,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "f1": {
+                "low": 0.125,
+                "high": 0.6111111111111112,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": 0.8730673329458366,
+                "high": 0.9729153433820724,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": 0.13024048985819642,
+                "high": 0.6787828000236847,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": 0.002800905332317579,
+                "high": 0.007665494952484452,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": 0.0007831181375165939,
+                "high": 0.004650069067763113,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        },
+        "released_auxiliary_comparator": {
+          "calibration_threshold": 6.004794883551767e-09,
+          "metrics": {
+            "rows": 2772,
+            "positive_support": 18,
+            "negative_support": 2754,
+            "predicted_positive_support": 2771,
+            "tp": 18,
+            "tn": 1,
+            "fp": 2753,
+            "fn": 0,
+            "accuracy": 0.006854256854256854,
+            "precision": 0.006495849873691808,
+            "recall": 1.0,
+            "specificity": 0.00036310820624546115,
+            "f1": 0.012907852276801721,
+            "probability_rows": 2772,
+            "missing_probability_rows": 0,
+            "probability_positive_support": 18,
+            "probability_negative_support": 2754,
+            "auroc": 0.338315984830146,
+            "average_precision": 0.004758300247027566,
+            "brier_score": 0.027847184176604596,
+            "ece": 0.11166462973884897,
+            "undefined": {},
+            "negative_predictive_value": 1.0
+          },
+          "intervals": {
+            "unit": "patient_or_record_group",
+            "groups": 2677,
+            "seed": 197826,
+            "n_bootstrap": 1000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": 0.003606202668589975,
+                "high": 0.010496027930524471,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": 0.0032501829156758736,
+                "high": 0.010117354813205852,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": 1.0,
+                "high": 1.0,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": 0.0,
+                "high": 0.0010961106483766705,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": 1.0,
+                "high": 1.0,
+                "valid_replicates": 631,
+                "invalid_replicates": 369
+              },
+              "f1": {
+                "low": 0.006479306898166594,
+                "high": 0.020032038155232818,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": 0.2326685790150787,
+                "high": 0.4707835436553381,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": 0.0027439395162702986,
+                "high": 0.00805874261423249,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": 0.02467478687567937,
+                "high": 0.03133406547759379,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": 0.1065953360423595,
+                "high": 0.1163912505100611,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        }
+      },
+      "paired_candidate_minus_comparator": {
+        "unit": "paired_patient_or_record_group",
+        "groups": 2677,
+        "seed": 197826,
+        "n_bootstrap": 1000,
+        "confidence": 0.95,
+        "intervals": {
+          "accuracy": {
+            "low": 0.9807892694483992,
+            "high": 0.9924705543955697,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "precision": {
+            "low": 0.16192549900928804,
+            "high": 0.7947210399411546,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "recall": {
+            "low": -0.9,
+            "high": -0.4285714285714286,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "specificity": {
+            "low": 0.9952898123926439,
+            "high": 0.9992719396414456,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "negative_predictive_value": {
+            "low": -0.00688468175299814,
+            "high": -0.0020806668893217084,
+            "valid_replicates": 631,
+            "invalid_replicates": 369
+          },
+          "f1": {
+            "low": 0.11845287805380302,
+            "high": 0.5962061320326241,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "auroc": {
+            "low": 0.41836586382320623,
+            "high": 0.7268417155951588,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "average_precision": {
+            "low": 0.12444301641756164,
+            "high": 0.6735062376817433,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "brier_score": {
+            "low": -0.024422315646236672,
+            "high": -0.02108120054846634,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "ece": {
+            "low": -0.11418538840270444,
+            "high": -0.1030169241674032,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          }
+        }
+      }
+    },
+    "2AVB": {
+      "status": "evaluated",
+      "all_metadata_reference_scoring_flow": {
+        "calibration": {
+          "control:scored": 2764,
+          "unknown:scored": 2372,
+          "positive:scored": 11,
+          "discordant_exact_signal:scored": 2
+        },
+        "held": {
+          "control:scored": 2754,
+          "unknown:scored": 2350,
+          "positive:scored": 10,
+          "discordant_exact_signal:scored": 6
+        },
+        "train": {
+          "unknown:scored": 7089,
+          "control:scored": 8379,
+          "discordant_exact_signal:scored": 8,
+          "positive:scored": 25
+        }
+      },
+      "held_scored_calls_by_reference_state": {
+        "candidate": {
+          "control:negative": 2753,
+          "unknown:negative": 2254,
+          "unknown:positive": 96,
+          "positive:positive": 7,
+          "positive:negative": 3,
+          "discordant_exact_signal:negative": 6,
+          "control:positive": 1
+        },
+        "released_auxiliary_comparator": {
+          "control:positive": 2753,
+          "unknown:positive": 2323,
+          "unknown:negative": 27,
+          "control:negative": 1,
+          "positive:positive": 9,
+          "discordant_exact_signal:positive": 6,
+          "positive:negative": 1
+        }
+      },
+      "matched_known_held_ecgs": 2764,
+      "known_statement_metrics": {
+        "candidate": {
+          "calibration_threshold": 0.3919254410110292,
+          "metrics": {
+            "rows": 2764,
+            "positive_support": 10,
+            "negative_support": 2754,
+            "predicted_positive_support": 8,
+            "tp": 7,
+            "tn": 2753,
+            "fp": 1,
+            "fn": 3,
+            "accuracy": 0.9985528219971056,
+            "precision": 0.875,
+            "recall": 0.7,
+            "specificity": 0.9996368917937546,
+            "f1": 0.7777777777777778,
+            "probability_rows": 2764,
+            "missing_probability_rows": 0,
+            "probability_positive_support": 10,
+            "probability_negative_support": 2754,
+            "auroc": 0.993355119825708,
+            "average_precision": 0.7658998457682669,
+            "brier_score": 0.0016123961227217023,
+            "ece": 0.0019279507649869426,
+            "undefined": {},
+            "negative_predictive_value": 0.9989114658925979
+          },
+          "intervals": {
+            "unit": "patient_or_record_group",
+            "groups": 2672,
+            "seed": 197826,
+            "n_bootstrap": 1000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": 0.997093023255814,
+                "high": 0.9996391227061563,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": 0.5992857142857149,
+                "high": 1.0,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": 0.3634740259740261,
+                "high": 1.0,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": 0.9989042896915408,
+                "high": 1.0,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": 0.9974692468217139,
+                "high": 1.0,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "f1": {
+                "low": 0.5,
+                "high": 0.9474937343358394,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": 0.9791510368784493,
+                "high": 1.0,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": 0.4496599575537597,
+                "high": 1.0,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": 0.0005815338874178841,
+                "high": 0.0029209302029622347,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": 0.0008973906041799287,
+                "high": 0.0035407179782565175,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        },
+        "released_auxiliary_comparator": {
+          "calibration_threshold": 2.3421968808889915e-09,
+          "metrics": {
+            "rows": 2764,
+            "positive_support": 10,
+            "negative_support": 2754,
+            "predicted_positive_support": 2762,
+            "tp": 9,
+            "tn": 1,
+            "fp": 2753,
+            "fn": 1,
+            "accuracy": 0.00361794500723589,
+            "precision": 0.0032585083272990588,
+            "recall": 0.9,
+            "specificity": 0.00036310820624546115,
+            "f1": 0.006493506493506494,
+            "probability_rows": 2764,
+            "missing_probability_rows": 0,
+            "probability_positive_support": 10,
+            "probability_negative_support": 2754,
+            "auroc": 0.09673202614379083,
+            "average_precision": 0.0020989665443095933,
+            "brier_score": 0.006541643647104309,
+            "ece": 0.04007223104661742,
+            "undefined": {},
+            "negative_predictive_value": 0.5
+          },
+          "intervals": {
+            "unit": "patient_or_record_group",
+            "groups": 2672,
+            "seed": 197826,
+            "n_bootstrap": 1000,
+            "confidence": 0.95,
+            "intervals": {
+              "accuracy": {
+                "low": 0.0014456089627755693,
+                "high": 0.006159531954472365,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "precision": {
+                "low": 0.0014241605920150668,
+                "high": 0.0057783637131789654,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "recall": {
+                "low": 0.6666666666666666,
+                "high": 1.0,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "specificity": {
+                "low": 0.0,
+                "high": 0.0010945110414128404,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "negative_predictive_value": {
+                "low": 0.0,
+                "high": 1.0,
+                "valid_replicates": 858,
+                "invalid_replicates": 142
+              },
+              "f1": {
+                "low": 0.002844225197860177,
+                "high": 0.01148198318982271,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "auroc": {
+                "low": 0.019360657816593324,
+                "high": 0.23385745420436987,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "average_precision": {
+                "low": 0.0010936783308327968,
+                "high": 0.003856143227930245,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "brier_score": {
+                "low": 0.004430307235584816,
+                "high": 0.009065231854051545,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              },
+              "ece": {
+                "low": 0.037255842097038715,
+                "high": 0.04257235797131589,
+                "valid_replicates": 1000,
+                "invalid_replicates": 0
+              }
+            }
+          }
+        }
+      },
+      "paired_candidate_minus_comparator": {
+        "unit": "paired_patient_or_record_group",
+        "groups": 2672,
+        "seed": 197826,
+        "n_bootstrap": 1000,
+        "confidence": 0.95,
+        "intervals": {
+          "accuracy": {
+            "low": 0.9916302003932834,
+            "high": 0.9978315865558366,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "precision": {
+            "low": 0.5956963895682711,
+            "high": 0.9981930051170796,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "recall": {
+            "low": -0.625,
+            "high": 0.18181818181818177,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "specificity": {
+            "low": 0.9981784897799869,
+            "high": 1.0,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "negative_predictive_value": {
+            "low": -0.0018156401562921364,
+            "high": 0.999637943519189,
+            "valid_replicates": 858,
+            "invalid_replicates": 142
+          },
+          "f1": {
+            "low": 0.4934562339154679,
+            "high": 0.9430677246586767,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "auroc": {
+            "low": 0.7450229960883031,
+            "high": 0.979497182988218,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "average_precision": {
+            "low": 0.4471975198491002,
+            "high": 0.998027321884272,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "brier_score": {
+            "low": -0.006704448194074066,
+            "high": -0.0034711217188511446,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          },
+          "ece": {
+            "low": -0.0409985575421748,
+            "high": -0.03446349588415751,
+            "valid_replicates": 1000,
+            "invalid_replicates": 0
+          }
+        }
+      }
+    },
+    "3AVB": {
+      "status": "insufficient_training_or_calibration_support",
+      "all_metadata_reference_scoring_flow": {
+        "calibration": {
+          "control:scored": 2764,
+          "unknown:scored": 2377,
+          "discordant_exact_signal:scored": 2,
+          "positive:scored": 6
+        },
+        "held": {
+          "control:scored": 2754,
+          "unknown:scored": 2354,
+          "positive:scored": 6,
+          "discordant_exact_signal:scored": 6
+        },
+        "train": {
+          "unknown:scored": 7104,
+          "control:scored": 8379,
+          "positive:scored": 10,
+          "discordant_exact_signal:scored": 8
+        }
+      }
+    }
+  },
+  "candidate": "deterministic L2 logistic head on released P6 and P8 class scores and six V3F auxiliary scores; no backbone changes",
+  "comparator": "maximum mapped V3F auxiliary window-mean softmax probability; threshold fitted on calibration, not a published decision rule; P6 has no PAC decision score so PAC is unrepresented in its comparator",
+  "held_outcomes_evaluated": true,
+  "private_model_sha256": "ae8fab7cb5b54a89c38a7e21f99f8b1da10f5cc7d02fa3702283efd73ba129ba"
+}

@@ -1,0 +1,13 @@
+JobIDRaw,State,ExitCode,ElapsedRaw,AllocTRES,Start,End
+33782,COMPLETED,0:0,382,"billing=12,cpu=12,gres/gpu:a100-sxm4-40gb=1,gres/gpu=1,mem=20G,node=1",2026-11-12T17:52:17,2026-11-12T17:58:39
+33785,COMPLETED,0:0,35,"billing=2,cpu=2,mem=20G,node=1",2026-11-12T17:59:54,2026-11-12T18:00:29
+33790,COMPLETED,0:0,261,"billing=12,cpu=12,gres/gpu:a100-sxm4-40gb=1,gres/gpu=1,mem=20G,node=1",2026-11-12T18:02:54,2026-11-12T18:07:15
+33791,COMPLETED,0:0,534,"billing=12,cpu=12,gres/gpu:a100-sxm4-40gb=1,gres/gpu=1,mem=20G,node=1",2026-11-12T18:07:24,2026-11-12T18:16:18
+33792,COMPLETED,0:0,368,"billing=12,cpu=12,gres/gpu:a100-sxm4-40gb=1,gres/gpu=1,mem=20G,node=1",2026-11-12T18:16:43,2026-11-12T18:22:51
+33800,COMPLETED,0:0,24,"billing=2,cpu=2,mem=20G,node=1",2026-11-12T18:31:54,2026-11-12T18:32:18
+33801,COMPLETED,0:0,266,"billing=12,cpu=12,gres/gpu:a100-sxm4-40gb=1,gres/gpu=1,mem=20G,node=1",2026-11-12T18:32:24,2026-11-12T18:36:50
+33802,COMPLETED,0:0,37,"billing=2,cpu=2,mem=20G,node=1",2026-11-12T18:37:24,2026-11-12T18:38:01
+33803,COMPLETED,0:0,615,"billing=12,cpu=12,gres/gpu:a100-sxm4-40gb=1,gres/gpu=1,mem=20G,node=1",2026-11-12T18:38:24,2026-11-12T18:48:39
+33804,COMPLETED,0:0,90,"billing=2,cpu=2,mem=20G,node=1",2026-11-12T18:49:24,2026-11-12T18:50:54
+33805,COMPLETED,0:0,96,"billing=12,cpu=12,gres/gpu:a100-sxm4-40gb=1,gres/gpu=1,mem=20G,node=1",2026-11-12T18:51:24,2026-11-12T18:53:00
+33806,COMPLETED,0:0,96,"billing=2,cpu=2,mem=20G,node=1",2026-11-12T18:53:24,2026-11-12T18:55:00

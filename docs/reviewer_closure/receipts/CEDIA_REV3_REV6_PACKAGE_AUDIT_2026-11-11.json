@@ -1,0 +1,299 @@
+{
+  "adjacent_revision_comparisons": {
+    "REV3_to_REV4": {
+      "added_members": 2,
+      "removed_members": 0,
+      "same_path_changed_bytes": 7,
+      "same_path_same_bytes": 23,
+      "shared_content_hashes": 23,
+      "shared_member_paths": 30
+    },
+    "REV4_to_REV5": {
+      "added_members": 2,
+      "removed_members": 0,
+      "same_path_changed_bytes": 6,
+      "same_path_same_bytes": 26,
+      "shared_content_hashes": 26,
+      "shared_member_paths": 32
+    },
+    "REV5_to_REV6": {
+      "added_members": 13,
+      "removed_members": 0,
+      "same_path_changed_bytes": 9,
+      "same_path_same_bytes": 25,
+      "shared_content_hashes": 25,
+      "shared_member_paths": 34
+    }
+  },
+  "clinical_rows_or_identifiers_exported": false,
+  "git_tree_comparisons": {
+    "PR3": {
+      "comparison": {
+        "exact_content_match_count": 1,
+        "exact_content_matches": [
+          {
+            "archive_member": "codigo_archivo_fuentes/MODEL_CORE/titan_v4_hybrid.py.txt",
+            "tracked_paths": [
+              "scripts/cedia/recovery_candidates/backbone_20260629.py"
+            ]
+          }
+        ],
+        "exact_relative_path_and_bytes_count": 0,
+        "payload_member_count": 47
+      },
+      "tracked_file_count": 591
+    },
+    "PR4": {
+      "comparison": {
+        "exact_content_match_count": 1,
+        "exact_content_matches": [
+          {
+            "archive_member": "codigo_archivo_fuentes/MODEL_CORE/titan_v4_hybrid.py.txt",
+            "tracked_paths": [
+              "scripts/cedia/recovery_candidates/backbone_20260629.py"
+            ]
+          }
+        ],
+        "exact_relative_path_and_bytes_count": 0,
+        "payload_member_count": 47
+      },
+      "tracked_file_count": 368
+    }
+  },
+  "packages": [
+    {
+      "archive_bytes": 72143,
+      "archive_name": "TITAN_V45_CEDIA_EXCLUSIVO_2026-11-10_REV3.zip",
+      "archive_sha256": "1975a1bbc65a004b444676e7627349e43d9516898215a3b5ecbf242539c9c986",
+      "bounded_privacy_scan": {
+        "common_private_key_or_token_markers": 0,
+        "csv_headers_with_record_or_patient_id_fields": 0,
+        "json_record_identifier_values_detected": 0,
+        "oversize_text_members_not_scanned": 0,
+        "scope": "Static bounded text scan only; not a universal privacy or licensing certification.",
+        "source_receipts_contain_internal_paths": true,
+        "text_members_scanned": 31
+      },
+      "checksum_entry_count": 30,
+      "crc_ok": true,
+      "duplicate_names": 0,
+      "expected_sha256_match": true,
+      "export_provenance_rows": 28,
+      "export_source_hashes_recomputed": false,
+      "exported_payload_hash_matches": 28,
+      "identical_export_rows": 15,
+      "inventory_classification_counts": {
+        "CEDIA_CANDIDATE_NOT_AUTHENTICATED": 1,
+        "CEDIA_HISTORICAL_COPY_VERIFIED": 28,
+        "CEDIA_ORIGINAL_VERIFIED": 7,
+        "CEDIA_REFERENCE_ONLY": 76,
+        "CUSTODIAN_RECOVERY_REQUIRED": 6,
+        "NOT_FOUND_IN_SEARCHED_CEDIA_SOURCES": 29
+      },
+      "inventory_digest_nature_counts": {
+        "": 109,
+        "calculado_sobre_bytes": 36,
+        "reportado_en_stdout_no_recalculado": 2
+      },
+      "inventory_rows": 147,
+      "member_count": 31,
+      "revision": 3,
+      "safe_member_names": true,
+      "sanitized_export_rows": 13,
+      "single_root": true,
+      "source_code_members": [],
+      "valid": true
+    },
+    {
+      "archive_bytes": 84643,
+      "archive_name": "TITAN_V45_CEDIA_EXCLUSIVO_2026-11-10_REV4.zip",
+      "archive_sha256": "3a87a980c76c1602f450e1aaab720245b566aee4807c21e3f779b73c0469b77a",
+      "bounded_privacy_scan": {
+        "common_private_key_or_token_markers": 0,
+        "csv_headers_with_record_or_patient_id_fields": 0,
+        "json_record_identifier_values_detected": 0,
+        "oversize_text_members_not_scanned": 0,
+        "scope": "Static bounded text scan only; not a universal privacy or licensing certification.",
+        "source_receipts_contain_internal_paths": true,
+        "text_members_scanned": 33
+      },
+      "checksum_entry_count": 32,
+      "crc_ok": true,
+      "duplicate_names": 0,
+      "expected_sha256_match": true,
+      "export_provenance_rows": 30,
+      "export_source_hashes_recomputed": false,
+      "exported_payload_hash_matches": 30,
+      "identical_export_rows": 16,
+      "inventory_classification_counts": {
+        "CEDIA_CANDIDATE_NOT_AUTHENTICATED": 1,
+        "CEDIA_HISTORICAL_COPY_VERIFIED": 40,
+        "CEDIA_ORIGINAL_VERIFIED": 7,
+        "CEDIA_REFERENCE_ONLY": 119,
+        "CUSTODIAN_RECOVERY_REQUIRED": 6,
+        "NOT_FOUND_IN_SEARCHED_CEDIA_SOURCES": 27
+      },
+      "inventory_digest_nature_counts": {
+        "": 150,
+        "calculado_sobre_bytes": 48,
+        "reportado_en_stdout_no_recalculado": 2
+      },
+      "inventory_rows": 200,
+      "member_count": 33,
+      "revision": 4,
+      "safe_member_names": true,
+      "sanitized_export_rows": 14,
+      "single_root": true,
+      "source_code_members": [],
+      "valid": true
+    },
+    {
+      "archive_bytes": 92679,
+      "archive_name": "TITAN_V45_CEDIA_EXCLUSIVO_2026-11-10_REV5.zip",
+      "archive_sha256": "0e88146b007f68feba2ff643f6d98126d139f19d37fe395931bd640453005773",
+      "bounded_privacy_scan": {
+        "common_private_key_or_token_markers": 0,
+        "csv_headers_with_record_or_patient_id_fields": 0,
+        "json_record_identifier_values_detected": 0,
+        "oversize_text_members_not_scanned": 0,
+        "scope": "Static bounded text scan only; not a universal privacy or licensing certification.",
+        "source_receipts_contain_internal_paths": true,
+        "text_members_scanned": 35
+      },
+      "checksum_entry_count": 34,
+      "crc_ok": true,
+      "duplicate_names": 0,
+      "expected_sha256_match": true,
+      "export_provenance_rows": 32,
+      "export_source_hashes_recomputed": false,
+      "exported_payload_hash_matches": 32,
+      "identical_export_rows": 17,
+      "inventory_classification_counts": {
+        "CEDIA_CANDIDATE_NOT_AUTHENTICATED": 1,
+        "CEDIA_HISTORICAL_COPY_VERIFIED": 44,
+        "CEDIA_ORIGINAL_VERIFIED": 7,
+        "CEDIA_REFERENCE_ONLY": 119,
+        "CUSTODIAN_RECOVERY_REQUIRED": 6,
+        "NOT_FOUND_IN_SEARCHED_CEDIA_SOURCES": 83
+      },
+      "inventory_digest_nature_counts": {
+        "": 206,
+        "calculado_sobre_bytes": 52,
+        "reportado_en_stdout_no_recalculado": 2
+      },
+      "inventory_rows": 260,
+      "member_count": 35,
+      "revision": 5,
+      "safe_member_names": true,
+      "sanitized_export_rows": 15,
+      "single_root": true,
+      "source_code_members": [],
+      "valid": true
+    },
+    {
+      "archive_bytes": 172840,
+      "archive_name": "TITAN_V45_CEDIA_EXCLUSIVO_2026-11-10_REV6.zip",
+      "archive_sha256": "4bf835059dfdf40f7fd4b0c1879d94b1175efcb091f6cf9065a5e482a3ad2b11",
+      "bounded_privacy_scan": {
+        "common_private_key_or_token_markers": 0,
+        "csv_headers_with_record_or_patient_id_fields": 0,
+        "json_record_identifier_values_detected": 0,
+        "oversize_text_members_not_scanned": 0,
+        "scope": "Static bounded text scan only; not a universal privacy or licensing certification.",
+        "source_receipts_contain_internal_paths": true,
+        "text_members_scanned": 48
+      },
+      "checksum_entry_count": 47,
+      "crc_ok": true,
+      "duplicate_names": 0,
+      "expected_sha256_match": true,
+      "export_provenance_rows": 45,
+      "export_source_hashes_recomputed": false,
+      "exported_payload_hash_matches": 45,
+      "identical_export_rows": 29,
+      "inventory_classification_counts": {
+        "CEDIA_CANDIDATE_NOT_AUTHENTICATED": 1,
+        "CEDIA_HISTORICAL_COPY_VERIFIED": 56,
+        "CEDIA_ORIGINAL_VERIFIED": 7,
+        "CEDIA_REFERENCE_ONLY": 120,
+        "CUSTODIAN_RECOVERY_REQUIRED": 6,
+        "NOT_FOUND_IN_SEARCHED_CEDIA_SOURCES": 83
+      },
+      "inventory_digest_nature_counts": {
+        "": 206,
+        "calculado_sobre_bytes": 64,
+        "reportado_en_inventario_no_recalculado": 1,
+        "reportado_en_stdout_no_recalculado": 2
+      },
+      "inventory_rows": 273,
+      "member_count": 48,
+      "revision": 6,
+      "safe_member_names": true,
+      "sanitized_export_rows": 16,
+      "single_root": true,
+      "source_code_members": [
+        {
+          "bytes": 9189,
+          "member": "codigo_archivo_fuentes/MODEL_CORE/titan_v4_hybrid.py.txt",
+          "sha256": "46bb36737a93a4cfe4be4417f6c62bcbfd0e8e7e8356f31f532ad21662075c80"
+        },
+        {
+          "bytes": 19107,
+          "member": "codigo_archivo_fuentes/TRAINING/build_v3ag_replacement_manifests.py.txt",
+          "sha256": "1c0c290dee89985243a0402d5ea8663bb94d11b7fbd658788b41f0a7faece13f"
+        },
+        {
+          "bytes": 12760,
+          "member": "codigo_archivo_fuentes/TRAINING/calibrate_primary6_no_nsr_pac.py.txt",
+          "sha256": "caeaf533e9195cd56e52813dce5691ffb52b26abd928060b5767a17c3371cd11"
+        },
+        {
+          "bytes": 20937,
+          "member": "codigo_archivo_fuentes/TRAINING/evaluate_external_v3c_adapted_hpc.py.txt",
+          "sha256": "c03213c02f6432172259a08910b9cc62d2f6419cd6ada7fcead61baa13587f67"
+        },
+        {
+          "bytes": 63398,
+          "member": "codigo_archivo_fuentes/TRAINING/optuna_search_hpc.py.txt",
+          "sha256": "dbfeea1d46f93f23297a74194ecd9e06d72e78f8163bdaab8db9767c2de0715c"
+        },
+        {
+          "bytes": 23314,
+          "member": "codigo_archivo_fuentes/TRAINING/titan_v45_multihead_contract.py.txt",
+          "sha256": "fb64ce8f57119de896812c1d6609f1431e9fad4180605f73cb77eb25adacfd53"
+        },
+        {
+          "bytes": 22488,
+          "member": "codigo_archivo_fuentes/TRAINING/titan_v45_multihead_runtime.py.txt",
+          "sha256": "f5161ac848b9012c0d541fba49a1a061c8258cb10e32fde75341934f21c90af3"
+        },
+        {
+          "bytes": 147362,
+          "member": "codigo_archivo_fuentes/TRAINING/train_v3d_specialists_hpc.py.txt",
+          "sha256": "8e8d59889a0458c47a90f9735ff6ba017c7e1a79582d11529a608e1816e671fe"
+        },
+        {
+          "bytes": 3247,
+          "member": "codigo_archivo_fuentes/TRAINING/v3ag_source_cv.py.txt",
+          "sha256": "fc4d9e7f99bae13a2e4ceeb2937824dc605f4d3631518229db9df5db130a12ea"
+        },
+        {
+          "bytes": 9062,
+          "member": "codigo_archivo_fuentes/TRAINING/v3d_gate_tools.py.txt",
+          "sha256": "818428ed31cec0cd8a40c0c822eb9b9fb7eee28afc2b08201dd94ffc7d54cec3"
+        }
+      ],
+      "valid": true
+    }
+  ],
+  "raw_packages_published": false,
+  "recovered_code_executed": false,
+  "revision_order": [
+    3,
+    4,
+    5,
+    6
+  ],
+  "schema": "TITAN_CEDIA_EXCLUSIVE_REVISION_AUDIT_V1",
+  "valid": true
+}

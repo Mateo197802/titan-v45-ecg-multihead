@@ -1,0 +1,420 @@
+{
+  "schema": "TITAN_V45_HISTORICAL_RECOVERY_CANONICAL_INDEX_V1",
+  "as_of_local_date": "2026-11-11",
+  "repository": "Mateo197802/titan-v45-ecg-multihead",
+  "pull_requests": {
+    "pr3": {
+      "head": "34ef99dcd5de5e49e062eb10b0878da3a3731b51",
+      "state": "open_draft",
+      "merge_performed": false
+    },
+    "pr4": {
+      "head": "1d556ba5a58255b1eef97221da8107a9c8d120b0",
+      "state": "open_draft",
+      "modified": true,
+      "ci": {"state":"pass","checks":3,"matrix":["3.10","3.11","3.12"]}
+    },
+    "pr5": {
+      "head": "8dfc29d83910dee7d2caea7a6028b96d481a134a",
+      "state": "open_draft",
+      "used_as_v45_evidence": false,
+      "modified": false
+    }
+  },
+  "evidence_levels": {
+    "A": "Historical source bytes or original artifacts; byte identity does not establish job use unless linked.",
+    "B": "Historical indirect evidence such as scheduler metadata, receipts, paths, or hashes reported by a run.",
+    "C": "Reproducible verification executed during this audit on supplied bytes or published aggregates.",
+    "D": "Interpretation or narrative without independent primary evidence."
+  },
+  "package_integrity": [
+    {
+      "id": "PKG-COMPLETE-20261110",
+      "sha256": "23523fb59501b916cc6cea55ad0ae669387dbd0b10267a2d4bac7d353f8b5d06",
+      "audit": "PASS",
+      "files": 97,
+      "inventory_rows": 95,
+      "checksum_entries": 96,
+      "crc_ok": true,
+      "unsafe_members": 0,
+      "duplicate_names": 0,
+      "comparison_note": "Verified with the existing recovery-bundle auditor; no source code in the archive was executed."
+    },
+    {
+      "id": "PKG-DIRECTED2-20261110",
+      "sha256": "d1d77535d2b1995fc8a1ba5e3b47cf9c63703cd29d4ef63334e5402fe731e82f",
+      "audit": "PASS",
+      "files": 38,
+      "inventory_rows": 36,
+      "checksum_entries": 37,
+      "crc_ok": true,
+      "unsafe_members": 0,
+      "duplicate_names": 0,
+      "comparison_note": "Previously integrated on PR #3; treated as prior evidence, not as new evidence in this round."
+    },
+    {
+      "id": "PKG-CEDIA-OUTER-20261110",
+      "sha256": "4e7b9dcfbecf90a0427a60972a03020aaeb5a5e7e279ae0b826aa47cc252298b",
+      "audit": "PASS",
+      "outer_members": 2,
+      "nested_archives": 2,
+      "crc_ok": true,
+      "unsafe_members": 0,
+      "duplicate_names": 0,
+      "rev1": {
+        "sha256": "29c66d104bc9cda5676c31add41070ed3a63cfec4d714fcaa009f222b84f2513",
+        "member_count": 27,
+        "internal_sha_entries": 26,
+        "inventory_rows": 75,
+        "export_provenance_rows": 24,
+        "identical_copy_labels": 13,
+        "sanitized_copy_labels": 11,
+        "integrity": "PASS"
+      },
+      "rev2": {
+        "sha256": "e9fa64ee9c8adbc21414be1a4939a0ae4e1aa04f366d8a3b5dace686cc2a6b44",
+        "member_count": 29,
+        "internal_sha_entries": 28,
+        "inventory_rows": 145,
+        "export_provenance_rows": 26,
+        "identical_copy_labels": 14,
+        "sanitized_copy_labels": 12,
+        "integrity": "PASS"
+      },
+      "rev1_to_rev2": {
+        "shared_members": 26,
+        "same_path_same_bytes": 18,
+        "same_path_changed_bytes": 8,
+        "added_in_rev2": 2,
+        "removed_in_rev2": 0,
+        "interpretation": "Version expansion/update; not by itself a scientific result contradiction."
+      }
+    },
+    {"id":"PKG-CEDIA-REV3-20261110","sha256":"1975a1bbc65a004b444676e7627349e43d9516898215a3b5ecbf242539c9c986","audit":"PASS","files":31,"inventory_rows":147,"checksum_entries":30,"crc_ok":true,"unsafe_members":0,"duplicate_names":0,"source_bytes_reauthenticated":false},
+    {"id":"PKG-CEDIA-REV4-20261110","sha256":"3a87a980c76c1602f450e1aaab720245b566aee4807c21e3f779b73c0469b77a","audit":"PASS","files":33,"inventory_rows":200,"checksum_entries":32,"crc_ok":true,"unsafe_members":0,"duplicate_names":0,"source_bytes_reauthenticated":false},
+    {"id":"PKG-CEDIA-REV5-20261110","sha256":"0e88146b007f68feba2ff643f6d98126d139f19d37fe395931bd640453005773","audit":"PASS","files":35,"inventory_rows":260,"checksum_entries":34,"crc_ok":true,"unsafe_members":0,"duplicate_names":0,"source_bytes_reauthenticated":false},
+    {"id":"PKG-CEDIA-REV6-20261110","sha256":"4bf835059dfdf40f7fd4b0c1879d94b1175efcb091f6cf9065a5e482a3ad2b11","audit":"PASS","files":48,"inventory_rows":273,"checksum_entries":47,"crc_ok":true,"unsafe_members":0,"duplicate_names":0,"source_bytes_reauthenticated":false,"export_rows":45,"exported_payload_hash_matches":45,"identical_copy_labels":29,"sanitized_copy_labels":16}
+  ],
+  "byte_comparisons": {
+    "complete_recovery_against_current_pr3_git_tree": {
+      "ref": "307ddaf3e3d840a624009d10f53923db307a500c",
+      "payloads_compared": 95,
+      "tracked_files_compared": 583,
+      "byte_identical_payloads": 11,
+      "exact_relative_path_and_bytes": 0,
+      "same_basename_different_bytes": 14,
+      "auditor": "scripts.evaluation.audit_recovery_bundle"
+    },
+    "directed2_recovery_against_current_pr3_git_tree": {
+      "ref": "307ddaf3e3d840a624009d10f53923db307a500c",
+      "payloads_compared": 37,
+      "tracked_files_compared": 583,
+      "byte_identical_payloads": 0,
+      "exact_relative_path_and_bytes": 0,
+      "same_basename_different_bytes": 0,
+      "auditor": "scripts.evaluation.audit_recovery_bundle"
+    },
+    "rev2_against_complete_recovery": {
+      "rev2_members_compared": 28,
+      "complete_payloads_compared": 95,
+      "shared_sha256_count": 0
+    },
+    "rev2_against_directed2": {
+      "rev2_members_compared": 28,
+      "directed2_payloads_compared": 35,
+      "shared_sha256_count": 0
+    },
+    "rev2_against_pr3_and_pr4_git_trees": {
+      "refs": [
+        "307ddaf3e3d840a624009d10f53923db307a500c",
+        "3cfedf39a81a22c867fde04faf9b1a1dd2f60448"
+      ],
+      "rev2_members_compared": 28,
+      "git_file_ref_entries_compared": 951,
+      "byte_identical_count": 0,
+      "same_basename_different_bytes_count": 0
+    }
+  },
+  "exported_inventory_summary": {
+    "rev1": {
+      "row_count": 75,
+      "classification_counts": {
+        "CEDIA_HISTORICAL_COPY_VERIFIED": 24,
+        "CEDIA_ORIGINAL_VERIFIED": 5,
+        "CEDIA_CANDIDATE_NOT_AUTHENTICATED": 1,
+        "NOT_FOUND_IN_SEARCHED_CEDIA_SOURCES": 29,
+        "CEDIA_REFERENCE_ONLY": 10,
+        "CUSTODIAN_RECOVERY_REQUIRED": 6
+      },
+      "hash_fields": 30,
+      "unique_hashes": 28,
+      "duplicate_hash_groups": 2,
+      "duplicate_extra_rows": 2,
+      "source_hashes_recomputed_from_original_cedia_bytes": false
+    },
+    "rev2": {
+      "row_count": 145,
+      "classification_counts": {
+        "CEDIA_HISTORICAL_COPY_VERIFIED": 28,
+        "CEDIA_ORIGINAL_VERIFIED": 5,
+        "CEDIA_CANDIDATE_NOT_AUTHENTICATED": 1,
+        "NOT_FOUND_IN_SEARCHED_CEDIA_SOURCES": 29,
+        "CEDIA_REFERENCE_ONLY": 76,
+        "CUSTODIAN_RECOVERY_REQUIRED": 6
+      },
+      "hash_fields": 36,
+      "unique_hashes": 33,
+      "duplicate_hash_groups": 3,
+      "duplicate_extra_rows": 3,
+      "digest_field_kinds": {
+        "calculated_on_source_bytes_as_reported": 34,
+        "reported_in_stdout_not_recomputed": 2,
+        "no_digest_field": 109
+      },
+      "source_hashes_recomputed_from_original_cedia_bytes": false,
+      "interpretation": "Inventory classifications and source-byte digest nature are reported metadata. Original data/log bytes were not transferred for this audit."
+    }
+  },
+  "privacy_screening": {
+    "rev2_text_members_scanned": 29,
+    "common_secret_markers": 0,
+    "csv_record_or_patient_id_headers": 0,
+    "json_record_identifier_values": 0,
+    "internal_paths_detected_in_source_receipts": true,
+    "raw_private_packages_published": false,
+    "scope_limit": "Static bounded scan only; it is not a universal privacy, licensing, or publication authorization."
+  },
+  "assertions": [
+    {
+      "id": "CEDIA-ASSERT-PLAN-LINEAGE",
+      "classification": "NEW_SUPPORTED_BUT_UNVERIFIED_LINK",
+      "claim": "Plan W/Z/AC/AD/AE/AF jobs are recorded completed, but the evidence describes path and submission declarations rather than a scheduler-linked or byte-verified execution chain.",
+      "source_ids": ["PKG-CEDIA-OUTER-20261110"],
+      "evidence_level": "B",
+      "job_ids": ["15874", "15880", "15885", "15886", "15887", "15903", "15905"],
+      "edge_status": "SUPPORTED_NOT_CRYPTO_LINKED",
+      "limits": [
+        "No afterok dependency links jobs within W/Z/AC/AD/AE/AF; W has a dependency on job 15873 outside this sequence.",
+        "No file-open/read digest or exact executed-script bytes prove that the declared inputs were consumed.",
+        "SubmitLine hashes are not hashes of executed script or model/input bytes."
+      ],
+      "reviewer_ids": ["R1-2", "R2-4e", "R2-4k"],
+      "publication": "Sanitized job identifiers and digests only; no raw SubmitLine or paths."
+    },
+    {
+      "id": "CEDIA-ASSERT-V3C-TRIAL6-CORROBORATION",
+      "classification": "DUPLICATED_EVIDENCE",
+      "claim": "CEDIA REV2 repeats the recorded terminal states and submission/path references for V3C jobs 16748-16759, 16768 and 16781 already represented in the directed2 provenance graph; it adds no trial-6 JSON bytes, intermediate checkpoint bytes, scheduler logs, input-read digest or output digest.",
+      "source_ids": ["PKG-CEDIA-OUTER-20261110"],
+      "existing_evidence": "docs/reviewer_closure/V3C_TRIAL6_CHECKPOINT_LINEAGE.md",
+      "job_ids": ["16748-16759", "16768", "16781"],
+      "trial_snapshot": {"rows": 9, "planned_trials": 12, "trial6_ranking_score": 0.6245117257, "trial8_ranking_score": 0.5831962899, "trial8_peak_composite_score": 0.6509403856},
+      "new_source_artifacts": 0,
+      "lineage_completion": false,
+      "evidence_level": "B",
+      "reviewer_ids": ["R1-1"],
+      "interpretation": "Twelve completed SLURM segments do not mean twelve complete trials. Trial 6 ranking and trial 8 peak-score distinction remain properties of the already versioned snapshot; no job-to-release checkpoint edge is added."
+    },
+    {
+      "id": "CEDIA-ASSERT-PLAN-AE-INPUT-DIGESTS",
+      "classification": "NEW_SUPPORTED_BUT_UNVERIFIED_LINK",
+      "claim": "Both Plan AF stdout summaries report the same SHA-256 values for the Plan AE policy and quarantine manifest; the source files are absent from the checked CEDIA listing and the digests were not recomputed from their bytes.",
+      "source_ids": ["PKG-CEDIA-OUTER-20261110"],
+      "evidence_level": "B",
+      "job_ids": ["15903", "15905"],
+      "reported_hashes": {
+        "policy": "14c4e62376d7fdfe86221648d153170c164392f633bd3864225bb25f3dd8a14e",
+        "quarantine_manifest": "9a08a369c563576947a0a9da9b916db376efe6c582c9e0e6563b36589d841bad"
+      },
+      "source_bytes_available": false,
+      "independent_hash_recomputation": false,
+      "reviewer_ids": ["R1-2", "R2-4k"]
+    },
+    {
+      "id": "CEDIA-ASSERT-PLAN-AF-REPORTED-OUTPUTS",
+      "classification": "NEW_SUPPORTED_BUT_UNVERIFIED_LINK",
+      "claim": "Two CEDIA receipt entries report matching Plan AF aggregate summaries and 23 handoff rows; both report valid_for_gate=0 and external_gate_allowed=false.",
+      "source_ids": ["PKG-CEDIA-OUTER-20261110"],
+      "evidence_level": "B",
+      "job_ids": ["15903", "15905"],
+      "stdout_hashes_as_reported_by_cedia": {
+        "15903": "ed9e3bc4b3ea169649050bea9ada71c7ac33b8bfe118ef9ee421f025e6d4981a",
+        "15905": "93f6a9c95d9b03f723a177a8e09adfddd7c496d55b20f9029a8857df1923cd91"
+      },
+      "stdout_bytes_as_reported": {"15903": 3799, "15905": 4708},
+      "reported_metrics": {
+        "handoff_rows": 23,
+        "valid_for_gate": 0,
+        "external_gate_allowed": false,
+        "rhythm_evaluated_rows": 1895,
+        "rhythm_accuracy": 0.8506596306068601,
+        "rhythm_macro_f1": 0.8451000156963052,
+        "pathology_evaluated_rows": 2105,
+        "pathology_labelwise_accuracy": 0.9745368171021378,
+        "pathology_macro_f1": 0.6803098698964074,
+        "primary_internal_accuracy_mean": 0.912598223854499,
+        "package_primary_class_balanced_macro_f1": 0.7862463921963416
+      },
+      "raw_stdout_transferred_or_rehashed_here": false,
+      "metrics_recomputed_from_per_record_predictions": false,
+      "quarantine_denominator": null,
+      "quarantine_rate": null,
+      "reviewer_ids": ["R1-2", "R2-4e", "R2-4k"],
+      "interpretation": "The 23-row handoff is not a quarantine denominator. Evaluated-row counts are not all-input eligible populations. Do not divide 23 by either profile row count or infer pre/post performance."
+    },
+    {
+      "id": "CEDIA-ASSERT-SPLIT-CACHE-KEYS",
+      "classification": "NEW_SUPPORTED_BUT_UNVERIFIED_LINK",
+      "claim": "A CEDIA report describes four May cache train/validation pairs with zero exact (source,record) key overlap; no patient-ID column or job-consumption link is shown.",
+      "source_ids": ["PKG-CEDIA-OUTER-20261110"],
+      "evidence_level": "B",
+      "families": ["PATHOLOGY_10", "PATHOLOGY_10_V2", "PATHOLOGY_PRIMARY_V1", "RHYTHM_14"],
+      "patient_isolation_certified": false,
+      "signal_duplicate_check_performed": false,
+      "job_consumption_linked": false,
+      "reviewer_ids": ["R1-1", "R2-3a"],
+      "limits": ["PATHOLOGY_10_V2 duplicates PATHOLOGY_10 bytes and is not independent.", "May cache keys do not prove June checkpoint training inputs or patient-level separation."]
+    },
+    {
+      "id": "CEDIA-ASSERT-AUXILIARY-CACHE-SUPPORT",
+      "classification": "NEW_SUPPORTED_BUT_UNVERIFIED_LINK",
+      "claim": "A CEDIA May cache summary reports positive-label counts for ALMI, ILMI, and LAE; these are cache row counts and not effective loss supports or checkpoint-linked training/evaluation evidence.",
+      "source_ids": ["PKG-CEDIA-OUTER-20261110"],
+      "evidence_level": "B",
+      "reported_train_validation_positive_rows": {
+        "ALMI": [244, 44],
+        "ILMI": [271, 50],
+        "LAE": [273, 52]
+      },
+      "duplicate_cache_note": "PATHOLOGY_10_V2 reports identical bytes to PATHOLOGY_10.",
+      "checkpoint_linked_supervision": false,
+      "effective_loss_supports_available": false,
+      "reviewer_ids": ["R2-3c", "R2-3d"]
+    },
+    {
+      "id": "CEDIA-ASSERT-LOADER-CANDIDATE",
+      "classification": "CORROBORATES_EXISTING_EVIDENCE",
+      "claim": "A recovered September loader candidate is not the expected V4.5 loader by size or SHA-256.",
+      "source_ids": ["PKG-CEDIA-OUTER-20261110"],
+      "evidence_level": "B",
+      "expected_original": {
+        "bytes_lf": 36271,
+        "sha256": "fc8d7367f9f2c108376839435021ec3172fe2757faa4a615f0ef5d39cbf1e855"
+      },
+      "candidate": {
+        "raw_bytes": 32051,
+        "raw_sha256": "4a6de903d1518dcbf9a468eedd56c341cd6682a23713e7d4a5e0e5490aefa5f0",
+        "lf_normalized_sha256": "6587fe3751135e098c187408c317335d82aa8f39df431958248986ee563f2cc8",
+        "status": "CANDIDATE_NOT_AUTHENTICATED"
+      },
+      "reviewer_ids": ["R2-3f"]
+    },
+    {
+      "id": "CEDIA-ASSERT-OPTUNA-41M",
+      "classification": "CORROBORATES_EXISTING_EVIDENCE",
+      "claim": "The three known 41M jobs are reported failed and the original databases, sidecars, complete history, and trial-to-checkpoint links remain unavailable in the bounded CEDIA sources.",
+      "source_ids": ["PKG-CEDIA-OUTER-20261110"],
+      "evidence_level": "B",
+      "jobs": {"13169": "FAILED 1:0", "13172": "FAILED 9:0", "13181": "FAILED 9:0"},
+      "database_bytes_recovered": false,
+      "two_generations_kept_separate": true,
+      "reviewer_ids": ["R1-4", "A-06"],
+      "governing_pr": 4
+    },
+    {
+      "id": "CEDIA-ASSERT-BACKBONE-HASH-CORROBORATION",
+      "classification": "CORROBORATES_EXISTING_EVIDENCE",
+      "claim": "CEDIA reports matching hashes for the two already published V3F/V3AG backbone files; this corroborates existing release-file integrity but does not link either file to a producing job.",
+      "source_ids": ["PKG-CEDIA-OUTER-20261110"],
+      "evidence_level": "B",
+      "checkpoint_job_link": "UNVERIFIED",
+      "reviewer_ids": ["R1-1", "R2-3a"]
+    }
+  ],
+  "reconciliation_counts": {
+    "new_verified_originals_linked_to_v45_execution": 0,
+    "new_verified_historical_execution_links": 0,
+    "new_supported_but_unverified_links": 5,
+    "new_derived_checks": 1,
+    "corroborates_existing_evidence": 3,
+    "duplicated_evidence_records": 1,
+    "scientific_contradictions_newly_resolved": 0,
+    "scientific_contradictions_opened": 0,
+    "wrong_model_version_edges_rejected": 1,
+    "classification_scope": "Nine CEDIA assertions plus one separately registered aggregate recheck; the five CEDIA inventory rows labeled CEDIA_ORIGINAL_VERIFIED are not equivalent to five V4.5 checkpoint-linked experiment artifacts."
+  },
+  "derived_verifications": [
+    {
+      "id": "DERIVED-V4-MAY-LEGACY-ROUTING-RECHECK-20261110",
+      "classification": "NEW_DERIVED_CHECK",
+      "source_package_id": "PKG-COMPLETE-20261110",
+      "source_package_sha256": "23523fb59501b916cc6cea55ad0ae669387dbd0b10267a2d4bac7d353f8b5d06",
+      "artifact": "docs/reviewer_closure/receipts/LEGACY_V4_QUARANTINE_RECOMPUTATION_2026-11-10.json",
+      "input_sha256": {
+        "confusion_matrix_csv": "88246c9c82ae9684bae90b22ee96c168085ae11a4a1c79a328995769e41876e9",
+        "error_subset_routing_json": "9a7d026c95e084c955321d9f8f613542201ad435c88f32d2b4ff551f0b94cf2f"
+      },
+      "population": 672,
+      "unit": "ECG record; routing was only recalculated on the 211-record error subset",
+      "method": "Existing versioned read-only aggregate verifier; recomputed confusion-matrix totals, accuracy, macro-F1, error-subset action sum and coverage",
+      "result": {
+        "correct": 461,
+        "errors": 211,
+        "accuracy": 0.6860119047619048,
+        "macro_f1": 0.681162272058885,
+        "accepted_error_subset": 107,
+        "error_subset_coverage": 0.5071090047393365,
+        "full_population_quarantine_rate": null
+      },
+      "receipt_reproduced": true,
+      "evidence_level": "C",
+      "reviewer_ids": ["R1-2", "R2-4k"],
+      "limitation": "This is TITAN V4 May Primary-9 legacy evidence, not V4.5 June quarantine, human review, clinical OOD adjudication, or post-routing outcome evidence. It does not satisfy the V4.5 workflow request."
+    }
+  ],
+  "reviewer_disposition": {
+    "technical_peer_review_ids": 15,
+    "technical_items_with_status_change": 0,
+    "technical_items_with_coverage_point_change": 0,
+    "previous_statuses_and_coverage_preserved": true,
+    "editorial_only_reviewer_items_unchanged": 21,
+    "internal_audits_separate": 12,
+    "manuscript_edited": false
+  },
+  "execution_guardrails": {
+    "recovered_code_executed": false,
+    "new_cedia_search_performed": false,
+    "training_or_inference_run": false,
+    "thresholds_or_historical_metrics_changed": false,
+    "raw_logs_manifests_or_internal_paths_published": false,
+    "pr3_merged": false,
+    "pr4_modified": false,
+    "pr5_modified": false
+  },
+  "rev3_rev6_integration": {
+    "receipt": "docs/reviewer_closure/receipts/CEDIA_REV3_REV6_PACKAGE_AUDIT_2026-11-11.json",
+    "targeted_search_receipt": "docs/reviewer_closure/receipts/CEDIA_TARGETED_RECOVERY_SEARCH_2026-11-11.json",
+    "report": "docs/reviewer_closure/CEDIA_FINAL_RECOVERY_REPORT.md",
+    "pr3_head_at_start": "52ae5743f33419e3d045d4e0c9ab58d93607e90a",
+    "pr3_head_after_evidence_integration": "34ef99dcd5de5e49e062eb10b0878da3a3731b51",
+    "pr4_head_at_start": "3cfedf39a81a22c867fde04faf9b1a1dd2f60448",
+    "pr4_head_after_update": "1d556ba5a58255b1eef97221da8107a9c8d120b0",
+    "adjacent_revision_comparison": {
+      "REV3_to_REV4": {"shared": 30, "same_bytes": 23, "changed": 7, "added": 2},
+      "REV4_to_REV5": {"shared": 32, "same_bytes": 26, "changed": 6, "added": 2},
+      "REV5_to_REV6": {"shared": 34, "same_bytes": 25, "changed": 9, "added": 13}
+    },
+    "rev6_git_tree_comparison": {"payload_members": 47, "tracked_files_pr3": 591, "tracked_files_pr4": 368, "byte_identical_contents_per_tree": 1, "exact_path_and_bytes_per_tree": 0, "new_contents_vs_pr3": 9, "duplicated_content_vs_pr3": 1},
+    "source_code_copies": "Hashes, sizes, duplicate classification and job-link limits are in HISTORICAL_PROVENANCE_GRAPH.json and CEDIA_SOURCE_CODE_AUTHENTICATION.md.",
+    "new_originals_linked_to_v45_jobs_and_checkpoints": 0,
+    "v3c_v3f_parent_path_concordance": "PATH_REFERENCE_ONLY; metadata text matches job 16781 input path; job output identity remains unverified",
+    "optuna_41m": "Static 60/40 objective implementation copy remains unlinked to May jobs and separate from PR4's 45/35/10/10 log-derived observation.",
+    "plan_ae_af": "Repeated reported hashes and 23 AF handoff rows do not establish source bytes, the complete denominator, or pre/post outcomes.",
+    "targeted_cedia_search": "A direct read-only filename/metadata search over the known V4.5 root and named backup directories found no matching target names. This bounded search does not establish global absence.",
+    "coverage": {"previous_points": 18.5, "new_points": 19.5, "subrequirements": 40, "previous_pct": 46.25, "new_pct": 48.75, "delta_pp": 2.5, "reviewer_satisfaction_changes": 0},
+    "pr4_modified_in_separate_checkout": true,
+    "pr5_modified": false,
+    "manuscript_edited": false,
+    "private_package_published": false
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "schema": "TITAN_V46_SPH_B1_PREVALENCE_COMPARISON_PROTOCOL_V1",
+  "status": "frozen_before_prevalence_comparator_execution",
+  "runtime": {
+    "environment": "CEDIA miniconda3/3 conda environment yc_env2",
+    "versions": {
+      "python": "3.10.18",
+      "numpy": "1.26.4",
+      "scipy": "1.15.3"
+    }
+  },
+  "source": {
+    "records": 25770,
+    "patients": 24666,
+    "b1_protocol_seed": 197802,
+    "b1_outer_folds": 5
+  },
+  "input_sha256": {
+    "metadata": "c6f8dc5197758a3970aae554f8b6ee884d96656b121879bc0eb1adf367ea6d86",
+    "ledger": "4a3a1e61b1784e06190d5caaa089fca04ef84792acb3a5f9fc1af3f9c1173462",
+    "v45_frozen_config": "d788ad8cca94793cebb738496acc131e82b1ca1900976f11020b99a79a5fc366",
+    "scoring_receipt": "8abdc5f6561fc3fea77eeb68e8aa34bc2d02396cad9c2e9fbeea70b4188dac92",
+    "baseline_aggregate": "50487cd92a91924a0aa63549725eb26d9328f307a6a6d9cf57ac2655e85ad2ef"
+  },
+  "source_b1_config_sha256": "3e00a03b2376f1935ea5d2fb1197aae41e1884f17119f8291ed351d7a1d3d5ad",
+  "source_b1_runner_sha256": "320621cdeb91d8d7abef2949a9ac41e49ce6d8bd277b66bd5836e40cb6720406",
+  "source_b1_result_sha256": "859b99a3208442a791badcbd9996001678e815b00d01194f9d521926feeb2272",
+  "runner_sha256": "84785f099dd35548055c48e6efb27807ea4793725e1649fea865906183496e2d",
+  "verifier_sha256": "53c7ae634c6fff4af4ca7e5fcb4246de6899973c42e7a222a1fdab4849747371",
+  "protocol_sha256": "6fb2eaf4e7ac1079a563b86dca98e1a46c187807234cfe3ade9ce3c77186ec7d",
+  "endpoints": [
+    {"name": "P4:ASMI", "reference": "Anteroseptal MI ECG statement; not acute or clinically adjudicated MI"},
+    {"name": "P4:IMI", "reference": "Inferior MI ECG statement; not acute or clinically adjudicated MI"},
+    {"name": "P4:LVH", "reference": "LVH ECG statement; not imaging-confirmed hypertrophy"},
+    {"name": "P8:PAC", "reference": "Atrial premature-complex ECG statement; not beat-level event detection"},
+    {"name": "P6:PVC", "reference": "Ventricular premature-complex ECG statement; not beat-level event detection"},
+    {"name": "P6:RBBB", "reference": "Complete RBBB ECG statement; code 105 is not pooled"}
+  ],
+  "prevalence_estimator": "unweighted record-level ECG-statement prevalence in calibration-fit patients of each outer fold",
+  "metrics": ["Brier", "10-bin_equal_width_ECE", "log_loss"],
+  "bootstrap": {
+    "unit": "patient_id cluster; all repeated ECGs sampled together",
+    "method": "paired unstratified percentile bootstrap on pooled out-of-fold scores",
+    "replicates": 2000,
+    "base_seed": 197823,
+    "delta_metrics": ["brier", "ece", "log_loss"],
+    "confidence_level": 0.95,
+    "scope_limit": "conditional on fixed fold-specific Platt and prevalence estimates"
+  },
+  "privacy": {
+    "individual_identifiers_exported": false,
+    "record_level_scores_exported": false,
+    "raw_signals_exported": false,
+    "aggregate_receipt_mode": "0600 in CEDIA until sanitized aggregate is copied into the repository"
+  }
+}

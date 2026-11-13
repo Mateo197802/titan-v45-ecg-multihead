@@ -1,0 +1,38 @@
+{
+  "scope": "retrospective development policy; no independent validation",
+  "target_scored_coverage": 0.9,
+  "counts": {
+    "held_records": 12869,
+    "calibration_records": 12901,
+    "calibration_scored": 12901
+  },
+  "calibration_components": 12340,
+  "held_components": 12326,
+  "shared_components": 0,
+  "policies": {
+    "P6": {
+      "accept_at_or_above": 0.06013779089543536,
+      "accepted_calibration": 11611,
+      "scored_calibration": 12901
+    },
+    "P8": {
+      "accept_at_or_above": 0.037162774801254295,
+      "accepted_calibration": 11611,
+      "scored_calibration": 12901
+    },
+    "P4": {
+      "accept_at_or_above": 0.014417142868041966,
+      "accepted_calibration": 11611,
+      "scored_calibration": 12901
+    }
+  },
+  "held_scores_used_for_selection": false,
+  "reference_labels_used": false,
+  "cascade_implemented": false,
+  "private_split_sha256": "080288760b11bf6138bba5e3e5ebcfaa5f6c1da40af81c7090254f58458f46e4",
+  "job": "33362",
+  "phase_sha256": "401b75de6bbed680355bc2cd38e247c9718e0f0b89776c9991389f6c463f154f",
+  "scoring_receipt_sha256": "6b52867f0a9834a3eb698c76749d7a5d16d35dd1dc3fa0e24e88ed07eefc846b",
+  "duplicate_index_sha256": "24eae465775c82c6ffa8fa9739a66d59f294f9de9190b903ea2b417b978f68ea",
+  "scoring_ledger_sha256": "4a3a1e61b1784e06190d5caaa089fca04ef84792acb3a5f9fc1af3f9c1173462"
+}

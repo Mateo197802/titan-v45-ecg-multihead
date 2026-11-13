@@ -1,0 +1,26 @@
+{
+  "schema": "TITAN_V45_RETAINED_WFDB_SCRATCH_STAGE_V1",
+  "source_release_manifest_sha256": "44ff950d0c64d78b3a8af11f8bc7e558707088d1e9dea127ecf9558012facedf",
+  "packages": {
+    "Chapman-Shaoxing-Ningbo": {
+      "archive_bytes": 97120385,
+      "archive_sha256": "ec6ade27ab77b9807d41331016def56e54cbb96fba528fd7aca811e5a468f2fb",
+      "members": {
+        ".hea": 2193,
+        ".mat": 2193,
+        "records_with_header_and_data": 2193
+      }
+    },
+    "PTB-XL-fold10": {
+      "archive_bytes": 10977160,
+      "archive_sha256": "fc1c3fc5374af962a8fc5903b6d1dd99a44ebfd7c66e0dfceaa106167afee558",
+      "members": {
+        ".dat": 733,
+        ".hea": 733,
+        "records_with_header_and_data": 733
+      }
+    }
+  },
+  "only_supported_wfdb_members_staged": true,
+  "record_identifiers_in_receipt": false
+}

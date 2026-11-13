@@ -1,0 +1,78 @@
+{
+  "schema": "TITAN_V45_SCIENTIFIC_CLOSURE_VERIFICATION_V1",
+  "scheduler": {
+    "33697": {
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed": "00:06:39"
+    },
+    "33699": {
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed": "00:00:47"
+    },
+    "33704": {
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed": "00:01:32"
+    },
+    "33718": {
+      "state": "FAILED",
+      "exit_code": "1:0",
+      "elapsed": "00:01:56"
+    },
+    "33720": {
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed": "00:01:28"
+    },
+    "33736": {
+      "state": "FAILED",
+      "exit_code": "2:0",
+      "elapsed": "00:00:59"
+    },
+    "33737": {
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed": "00:02:24"
+    },
+    "33747": {
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed": "00:01:24"
+    }
+  },
+  "public_sha256": {
+    "score": "73e5a4a9944a03c2c4a549f80e8ae9fa280d328f31fc925b910385ed8aac41c4",
+    "evaluate": "af72ae7bf04c807a88ea33db3076970aac780c3f7669b145b34b34c64cf87c29",
+    "morphology": "81ebb598aeebd134db952d9b9bbb9a8bee583fdf2211bd64dc8320f93136cc79",
+    "ptb_score": "7d0894f5436ffe991326c6358f55c60fa33b0506b583ad33ab8f2e6409731916",
+    "ptb_evaluate": "8c3046fcc2d48ce241fcacc566e0fb17a89b0664e43e098adcf7bf8a44f8dcb4",
+    "ptbxl_rhythm_score": "b4f2e451fabc9b23d73fc787ad1757cee75129480816ae3ac982ae19bc494ccd",
+    "ptbxl_rhythm_evaluate": "27477b63a035d2a1f545669536b664128f5c0f961363150ccb56335288d10041",
+    "sph": "f133cec9ba402ff7fb19ccf5ecaba8daae66c4f492829e3d0f13caa356fbd2d7",
+    "ptb_eligibility": "fc179fe166b340c37b1372201243c4d48268d0270d691562a3187b706fa94eaf",
+    "ptb_eligibility_superseded": "4e97e47839971f35f81333f46458ba6ab8ea01c1f3bf81c7b15fa58fc84547f9",
+    "ptbxl_support": "1e758fcb0cc17e7cc15ff8be2fcb7911a6f102d4dd5d673cec440d409a187bcd"
+  },
+  "public_files": {
+    "score": "ludb_scoring_receipt.json",
+    "evaluate": "ludb_fixed_policy_and_reference_aggregate.json",
+    "morphology": "morphology_robustness_aggregate.json",
+    "sph": "sph_split_and_policy_audit.json",
+    "ptb_score": "ptb_diagnostic_scoring_receipt.json",
+    "ptb_evaluate": "ptb_diagnostic_transport_aggregate.json",
+    "ptb_eligibility": "ptb_diagnostic_eligibility_verified_v2.json",
+    "ptb_eligibility_superseded": "ptb_diagnostic_eligibility_superseded_v1.json",
+    "ptbxl_support": "ptbxl_other_support_verified_v2.json",
+    "ptbxl_rhythm_score": "ptbxl_cached_v3ag_rhythm_scoring_receipt.json",
+    "ptbxl_rhythm_evaluate": "ptbxl_cached_v3ag_rhythm_aggregate.json"
+  },
+  "superseded_evaluations_not_used": {
+    "33699": "multiline source grammar corrected",
+    "33718": "wrong sealed model threshold key; no rows or receipt produced",
+    "33736": "unexpected shell arguments rejected before scoring"
+  },
+  "science_consistency_verified": true,
+  "record_level_export_performed": false
+}

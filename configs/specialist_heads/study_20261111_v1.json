@@ -1,0 +1,129 @@
+{
+  "schema": "TITAN_V45_NEW_SPECIALIST_HEAD_STUDY_V1",
+  "study_id": "specialist-heads-20261111-v1",
+  "status": "FROZEN_BEFORE_MODEL_PERFORMANCE_EVALUATION",
+  "scope": "new_post_hoc_development_experiment_not_a_reconstruction_of_historical_v4_5_training",
+  "historical_assets": {
+    "immutable": true,
+    "rhythm_backbone": "backbone-v3f-original.pt",
+    "rhythm_p6_baseline": "specialists-v3p-e008-primary6-diagnostic.pt",
+    "rhythm_p8_baseline": "specialists-v3q-primary8-best-candidate.pt",
+    "pathology_backbone": "backbone-v3ag-pathology.pt",
+    "pathology_p4_baseline": "specialists-v3ag-primary4-calibrated.pt"
+  },
+  "data_policy": {
+    "no_sp_h_or_v3h_as_new_test": true,
+    "no_fold10_training_validation_or_new_test": true,
+    "no_manual_review_queue_or_locked_holdout": true,
+    "no_missing_or_unknown_labels_as_negatives": true,
+    "row_level_data_and_predictions_stay_in_authorized_cedia_storage": true,
+    "exact_signal_deduplication": "sha256_of_raw_waveform_file_before_split; keep one deterministic representative; remove cross-partition duplicates from validation/calibration/source-holdout",
+    "near_duplicate_detection": "not_claimed_by_raw_file_sha256; residual limitation"
+  },
+  "rhythm": {
+    "classes_p8": ["AFIB", "SB", "STACH", "NSR", "RBBB", "PAC", "1AVB", "PVC"],
+    "classes_p6": ["AFIB", "SB", "STACH", "RBBB", "1AVB", "PVC"],
+    "label_source": "PhysioNet/CinC Challenge 2021 SNOMED-CT Dx header statements",
+    "label_groups": {
+      "AFIB": ["164889003"],
+      "SB": ["426177001"],
+      "STACH": ["427084000"],
+      "NSR": ["426783006"],
+      "RBBB": ["59118001", "713427006", "713426002"],
+      "PAC": ["284470004", "63593006"],
+      "1AVB": ["270492004"],
+      "PVC": ["427172004", "17338001"]
+    },
+    "mapping_basis": "Challenge 2021 scored SNOMED mappings; CRBBB/IRBBB with RBBB, SVPB with PAC, and VPB with PVC",
+    "training_sources": ["chapman_shaoxing", "cpsc2018"],
+    "chapman_split": {
+      "unit": "record_as_patient_proxy_from_source_reported_10247_patients_and_10247_recordings",
+      "algorithm": "sha256(study_id + normalized_relative_record_key), first_u64_fraction",
+      "train_fraction": 0.8,
+      "early_stopping_validation_fraction": 0.1,
+      "threshold_calibration_fraction": 0.1,
+      "seed": 20261111
+    },
+    "cpsc2018_split": "entire available public training-source copy used for training only; patient identifiers unavailable; no within-source evaluation",
+    "development_source_holdout": {
+      "source": "georgia",
+      "policy": "entire available source held out; remove exact duplicate waveform files and records present in the prior public V4.5 evaluation manifest before scoring",
+      "supported_endpoints": ["AFIB", "SB", "STACH", "RBBB", "PAC", "1AVB", "PVC"],
+      "unsupported_endpoint": "NSR",
+      "patient_ids": "unavailable; any reported interval is record-clustered, not patient-grouped"
+    },
+    "preprocessing": {
+      "candidate_path": "prepare_rhythm_record; fixed 125 Hz, 10 s windows with existing waveform contract",
+      "morphology_sha256_lf": "2bd1c1822ed72d1531b1f62712d8007c7e2f21009056ad1a3ee905f37051fc3d",
+      "event_extractor_trainer_sha256": "8e8d59889a0458c47a90f9735ff6ba017c7e1a79582d11529a608e1816e671fe",
+      "historical_loader_identity": "not_certified"
+    },
+    "window_aggregation": {
+      "P6": "sigmoid(mean_window_logits)",
+      "P8": "mean_window_sigmoid_probabilities",
+      "training_window_weight": "each ECG contributes total weight 1 regardless of window count"
+    }
+  },
+  "pathology": {
+    "classes_p4": ["ASMI", "LVH", "IMI", "ISC_"],
+    "source": "PTB-XL v1.0.3 SCP-ECG statements and official patient folds",
+    "positive_rule": "target SCP code likelihood > 0",
+    "negative_control_rule": "explicit NORM likelihood > 0 and no P4 target code present with positive or zero likelihood",
+    "unknown_rule": "unannotated, zero-likelihood, and non-control rows are masked, never converted to negative",
+    "split": {
+      "folds_1_to_7": "train",
+      "fold_8": "early_stopping_validation",
+      "fold_9": "patient-grouped 50/50 threshold_calibration and internal_evaluation split using stable patient-id hash",
+      "fold_10": "excluded from all new work",
+      "seed": 20261111
+    },
+    "preprocessing": {
+      "candidate_path": "prepare_p4_record; fixed 125 Hz, first 10 s window",
+      "morphology_sha256_lf": "2bd1c1822ed72d1531b1f62712d8007c7e2f21009056ad1a3ee905f37051fc3d",
+      "historical_loader_identity": "not_certified"
+    },
+    "external_source_evaluation": "not_run"
+  },
+  "candidate_training": {
+    "trainable_components": "specialist_heads_only",
+    "backbone": "frozen",
+    "architecture": "ClassWiseBinaryMLP",
+    "hidden_dim": 192,
+    "dropout": 0.25,
+    "optimizer": "AdamW",
+    "learning_rate": 0.001,
+    "batch_size": 256,
+    "max_epochs": 40,
+    "early_stopping_patience": 6,
+    "positive_weight_clip": [1, 10],
+    "focal_gamma": 2.0,
+    "selection_metric": "record_aggregated_masked_validation_BCE",
+    "primary_candidate": "weighted_bce_seed_20261111",
+    "loss_comparison": {
+      "weighted_bce": "source-balanced elements and training-only negative/positive ratio clipped to [1, 10]",
+      "source_balanced_bce": "source-balanced elements without positive-class multiplier",
+      "focal": "source-balanced elements, gamma=2, positive alpha from training-only weighted class prevalence"
+    },
+    "seeds": [20261111, 20261112, 20261113],
+    "selection_rule": "primary candidate is fixed before holdout scoring; ablations are descriptive and never selected using Georgia, CPSC, or PTB-XL fold-9 evaluation",
+    "leave_one_source_out_sensitivity": "one additional fixed weighted-BCE seed-20261111 rhythm model trains on Chapman plus eligible Georgia rows and evaluates CPSC; exclude previously public V4.5 Georgia rows and exact duplicates; not independent validation",
+    "optuna": "not_run_for_bounded_fixed_architecture_stage_A; no search until the predeclared pilot is reviewed"
+  },
+  "thresholds": {
+    "baseline": "published checkpoint thresholds unchanged",
+    "candidate": "per-class F1 maximization on the separate calibration split; ties choose the highest threshold",
+    "source_holdout_labels_used_for_tuning": false
+  },
+  "statistics": {
+    "confidence": 0.95,
+    "bootstrap_replicates": 2000,
+    "seed": 20261111,
+    "grouping": "patient when a validated patient key exists; otherwise ECG record and explicitly not patient-level",
+    "unsupported_metrics": "null/not estimable, never zero-imputed"
+  },
+  "success_targets_not_guarantees": {
+    "macro_f1_absolute_gain": 0.02,
+    "maximum_priority_sensitivity_drop": 0.03,
+    "external_independent_validation": "NOT_RUN unless a separately eligible and unexposed cohort is demonstrated"
+  }
+}

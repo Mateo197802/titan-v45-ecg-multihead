@@ -1,0 +1,9 @@
+{
+  "schema": "TITAN_V45_SPH_ECE_CORRECTION_RECEIPT_V1",
+  "correction": "bootstrap ECE bins use the frozen point-estimate searchsorted edges",
+  "wrapper_sha256": "42d93aa62c96403f623e14e9a231a13094b46301cc2ee67491a7d876bfce95d5",
+  "frozen_evaluator_sha256": "87a289f5e214ec75c154f68497803602dd807abe3a331b596526268d2e9fab02",
+  "aggregate_sha256": "09f93d9f310baaca672a33b0f369593cd88835a8ef08dc9929945c57cf18c988",
+  "frozen_evaluator_receipt_sha256": "487f2a4fddc5e7b68ee6d065b00259ad0fb0c6454ac88792cf564e8dee463856",
+  "other_bootstrap_metrics_modified": false
+}

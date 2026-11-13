@@ -1,0 +1,201 @@
+{
+  "files": {
+    "ADDITIONAL_SOURCE_RECEIPT.json": {
+      "bytes": 2786,
+      "sha256": "06c5dd9d6fc5e6116efaece3206f177467261a60bb1959ee7a91d81ce9f69b3f"
+    },
+    "CALIBRATION_CURVES.csv": {
+      "bytes": 9492,
+      "sha256": "1ab420aaa988b70c31c09e3de90239a82e7956655e3424cae056f6792ab64f76"
+    },
+    "CANDIDATE_SELECTION_RECEIPT.json": {
+      "bytes": 4218,
+      "sha256": "cebc409aeda67b479679e893335e8bceff301e57b6dfdb79cb46639327bf97d5"
+    },
+    "CHECKPOINT_SHA256SUMS.txt": {
+      "bytes": 1456,
+      "sha256": "98a1def356467cc469b4005f5ba308999112ae90e2f95f6151f4077a8ba5cccd"
+    },
+    "EXTERNAL_DATA_MANIFESTS_SUMMARY.csv": {
+      "bytes": 238,
+      "sha256": "1048c0efc6758f4725c751f35f27ef4d4fc96e5a78f9f1600caa50586c8af0e9"
+    },
+    "EXTERNAL_MACRO_F1_COMPARISON.csv": {
+      "bytes": 1864,
+      "sha256": "1734897fb6173f290de1d271ef2d394013db93ebe1dfc49056ddb049f3933262"
+    },
+    "EXTERNAL_PER_CLASS_RESULTS.csv": {
+      "bytes": 13436,
+      "sha256": "0a9f7ea81ac7f68c218733c86db69d53e09432ca02255a009727828e14b90cee"
+    },
+    "FINETUNING_LEARNING_CURVES.csv": {
+      "bytes": 20994,
+      "sha256": "4d2174f5c136a5b4f6d3f4a3bf9a903e6d8a2fd71d8706d241ea6b61d8503a09"
+    },
+    "FROZEN_CANDIDATE_THRESHOLDS.json": {
+      "bytes": 1054,
+      "sha256": "258fc17c2c8ae37bf9a3e57c6802fe621556a9ba33d942aa01478a396ab23fdf"
+    },
+    "MODEL_ARCHITECTURE_ABLATIONS.csv": {
+      "bytes": 914,
+      "sha256": "2ccc1e5857e01ed6f3c219f56fd5e7295edfe3b322697f0b2756c2e7d7c85426"
+    },
+    "PATIENT_AND_SIGNAL_LEAKAGE_AUDIT.json": {
+      "bytes": 757,
+      "sha256": "3e457d05d87c0b5a3391e9953374fb06a0d2ff8d938baedc90416a885878af03"
+    },
+    "PATIENT_BOOTSTRAP_CONFIDENCE_INTERVALS.csv": {
+      "bytes": 101405,
+      "sha256": "2e2d9e2eed489970a0c7cb22444c9b5697542e264dab7dde9c5935d1d7c49806"
+    },
+    "PRECISION_RECALL_CURVES.csv": {
+      "bytes": 75217,
+      "sha256": "46784121f0fe107c4b135814ff45364770b8721e68bf051028b114c96c487d28"
+    },
+    "PREPROCESSING_REPRODUCIBILITY.json": {
+      "bytes": 908,
+      "sha256": "9f3bd3663c91d9245bb4fa9e1664085348eb454b9200680f1d75e356ce56b428"
+    },
+    "SIGNAL_PROCESSING_ABLATIONS.csv": {
+      "bytes": 17071,
+      "sha256": "ddfc514561d47eb7cd1563a3dd58cc89b410d5bca9235a46d543525a2844a6f2"
+    },
+    "SLURM_EXECUTION_LEDGER.csv": {
+      "bytes": 4035,
+      "sha256": "bdbbab39345ba501b900b80bb860aee355756a6607f3c6bdce6ef8a65da1b83e"
+    },
+    "SOURCE_DESCRIPTOR_PROBE.json": {
+      "bytes": 1351,
+      "sha256": "3db3ce8ef9ea56a698083aee9b90bfbbf7731722039e0009f435b713081515ae"
+    },
+    "SOURCE_GENERALIZATION_MATRIX.csv": {
+      "bytes": 19578,
+      "sha256": "d962c8d3d72d25a93779828e7ee1fd0b8821ac6d5c351e7f2db919f87db597cd"
+    },
+    "SOURCE_GENERALIZATION_RECEIPT.json": {
+      "bytes": 1172,
+      "sha256": "5c083b3bc42436d0643df8bbd7973dbded46d098aa7e671de22f931440a474b1"
+    },
+    "TRAINING_EXPERIMENTS_COMPLETE.csv": {
+      "bytes": 2547,
+      "sha256": "daeee690d43af7b03fcf00822393b4373dd6721c7cd2f627b5b355934a1453c2"
+    },
+    "VALIDATION_BASELINES_RECEIPT.json": {
+      "bytes": 669,
+      "sha256": "556c9084e77e0e8ee90f5655df6d796af7eb19e097da924fe2a2e51bec920873"
+    },
+    "WITHIN_CODE_EVALUATION_RECEIPT.json": {
+      "bytes": 2044,
+      "sha256": "cb09a7e987bbf2bc5513f40323e48f813dfd7af8eec87ec12ae40d4aa601a60f"
+    },
+    "WITHIN_CODE_INDEPENDENT_READBACK.json": {
+      "bytes": 541,
+      "sha256": "e0edbee6ab477ce59383434e2c6687a7107110fcb787261c23588adb1b57bd02"
+    },
+    "WITHIN_CODE_PROMOTION_DECISION.json": {
+      "bytes": 2076,
+      "sha256": "b187f9fcb18dd7b0f916e2862b9ecbceaaeb00f3e352a43e787e98721c706e34"
+    },
+    "WITHIN_CODE_SCORE_RECEIPT.json": {
+      "bytes": 1284,
+      "sha256": "b8dc9544f4072dc33f6656fdbbc0f0dfd1d49b8c8ab96edabe8decb7d7ccb222"
+    },
+    "chapman_only_partial-per_lead_zscore-20261112/FINETUNING_LEARNING_CURVES.csv": {
+      "bytes": 1753,
+      "sha256": "ac05a00cc338f8f196c7ae43232e9359018e5d70efa443d2d9f46c7ec8808959"
+    },
+    "chapman_only_partial-per_lead_zscore-20261112/TRAINING_RECEIPT.json": {
+      "bytes": 1187,
+      "sha256": "3f22b182c750e9b97900a4e994a571aeaa8f42742437a89f214cc0771a7cdfa5"
+    },
+    "frozen_backbone_mlp-per_lead_zscore-20261112/FINETUNING_LEARNING_CURVES.csv": {
+      "bytes": 1768,
+      "sha256": "f93138ce17e8b600629306e4b331eb18b99112b357aede8d9b00e6a273b754fe"
+    },
+    "frozen_backbone_mlp-per_lead_zscore-20261112/TRAINING_RECEIPT.json": {
+      "bytes": 1012,
+      "sha256": "f42b196dfdfda0019a69344bae7d83a4eaab529ec5facf6666c23ff3bdd332c5"
+    },
+    "frozen_backbone_mlp-per_lead_zscore-20261113/FINETUNING_LEARNING_CURVES.csv": {
+      "bytes": 1770,
+      "sha256": "1e1ea31145e2456ddeb8d1134c0dd97e83b76f04c748af8e6e20fcf8f05858d8"
+    },
+    "frozen_backbone_mlp-per_lead_zscore-20261113/TRAINING_RECEIPT.json": {
+      "bytes": 1105,
+      "sha256": "7c95ecadf832e2159e72ba1b441703a554967f076097bf5778846b868029d555"
+    },
+    "frozen_backbone_mlp-per_lead_zscore-20261114/FINETUNING_LEARNING_CURVES.csv": {
+      "bytes": 1769,
+      "sha256": "e40b24d3d25124e0dc7ce12d7c9f31412832285df3f69104c140823d9547b502"
+    },
+    "frozen_backbone_mlp-per_lead_zscore-20261114/TRAINING_RECEIPT.json": {
+      "bytes": 1105,
+      "sha256": "70d0742f2ae3e3b3c07fe044bf873b966b609bf00ec3de079d708bf7ff6115b8"
+    },
+    "frozen_backbone_mlp-robust_shared_gain-20261112/FINETUNING_LEARNING_CURVES.csv": {
+      "bytes": 1668,
+      "sha256": "91cf74ec36122101a405b5d08a0faf3c4ba400c95243d17bfc410f4dbff2d788"
+    },
+    "frozen_backbone_mlp-robust_shared_gain-20261112/TRAINING_RECEIPT.json": {
+      "bytes": 1013,
+      "sha256": "c4d05c5ed75e4d59075b318550f056a767e3c244165ff92ec37aba9bef18476d"
+    },
+    "masked_mimic_partial-per_lead_zscore-20261112/FINETUNING_LEARNING_CURVES.csv": {
+      "bytes": 1768,
+      "sha256": "77f32b09453f6eb3b4f5741f6f979b2c8f4b87f9c1adbd167d95d5418e3a5406"
+    },
+    "masked_mimic_partial-per_lead_zscore-20261112/TRAINING_RECEIPT.json": {
+      "bytes": 1075,
+      "sha256": "c3deadcf81e1ac04e6a679a069526bda94975568609ec5d6ecc11572ce1735eb"
+    },
+    "mimic_ssl/SSL_LEARNING_CURVES.csv": {
+      "bytes": 80,
+      "sha256": "d4a983a76513a2e5811d565311bad5ee4b2aeaa40d40831954e42a5c9b50309d"
+    },
+    "mimic_ssl/SSL_TRAINING_RECEIPT.json": {
+      "bytes": 661,
+      "sha256": "f41d36c4b0109b87c304f334e16e9f4e35b38eb715ba1376544a64e8755677c4"
+    },
+    "multisource_groupdro-per_lead_zscore-20261112/FINETUNING_LEARNING_CURVES.csv": {
+      "bytes": 1797,
+      "sha256": "1278e5279b3b219018c136b614686e5650b39cda3f22282edc40af07ff2c2b9e"
+    },
+    "multisource_groupdro-per_lead_zscore-20261112/TRAINING_RECEIPT.json": {
+      "bytes": 1207,
+      "sha256": "b50ecc0479f36bf707f8de8fd1ef0f6ee60bba031c236667769d6d9014898277"
+    },
+    "partial_transformer_mlp-per_lead_zscore-20261112/FINETUNING_LEARNING_CURVES.csv": {
+      "bytes": 1760,
+      "sha256": "5ae5a230f3cd32c8f283a7f1ef355163ace3cc13f3555014a97286b58fea0cda"
+    },
+    "partial_transformer_mlp-per_lead_zscore-20261112/TRAINING_RECEIPT.json": {
+      "bytes": 1016,
+      "sha256": "e68f7d4f6fc622de50fded0e45fcf08bfbd2511778421d153702c8ddcdf314ba"
+    },
+    "partial_transformer_resnet_mlp-per_lead_zscore-20261112/FINETUNING_LEARNING_CURVES.csv": {
+      "bytes": 1762,
+      "sha256": "4b348d6c8932e469e6c32ac60ce481bed0a9156e7f9fd78f4437855f5dfd3b05"
+    },
+    "partial_transformer_resnet_mlp-per_lead_zscore-20261112/TRAINING_RECEIPT.json": {
+      "bytes": 1024,
+      "sha256": "a4f69f5954ed6b7ba663527a8b2ff8e82a22779ae99e92749d045989b38d4231"
+    },
+    "partial_transformer_resnet_mlp-per_lead_zscore-20261113/FINETUNING_LEARNING_CURVES.csv": {
+      "bytes": 1734,
+      "sha256": "964d1cf10939413d4f6da0cc8945dd880fa92d184839061bdcfaa3e74fe84b8c"
+    },
+    "partial_transformer_resnet_mlp-per_lead_zscore-20261113/TRAINING_RECEIPT.json": {
+      "bytes": 1117,
+      "sha256": "0c39abe49c6bafe25ed6eb5eefa2bab16532f7560aa2d2a7d954f6d9b59f9e44"
+    },
+    "partial_transformer_resnet_mlp-per_lead_zscore-20261114/FINETUNING_LEARNING_CURVES.csv": {
+      "bytes": 1459,
+      "sha256": "a35e6852065c23117afe7ad2a341a17bc824d2c1dace5c6f0edd97b9e6d4f5a1"
+    },
+    "partial_transformer_resnet_mlp-per_lead_zscore-20261114/TRAINING_RECEIPT.json": {
+      "bytes": 1117,
+      "sha256": "9e4dd94a421d0e76613aad84515f9a4e9430f7e62f11b2c0016d33ec91355118"
+    }
+  },
+  "scope": "PUBLIC_AGGREGATES_ONLY"
+}

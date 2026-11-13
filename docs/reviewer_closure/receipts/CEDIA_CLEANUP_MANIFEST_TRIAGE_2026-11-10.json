@@ -1,0 +1,104 @@
+{
+  "schema": "TITAN_V45_CEDIA_CLEANUP_MANIFEST_TRIAGE_V1",
+  "observed_on": "2026-11-10",
+  "manifest": {
+    "basename": "cedia_cleanup_manifest_20260630.json",
+    "private_location_published": false,
+    "bytes": 225427,
+    "sha256": "91ac37b57bfe38e911f783194f69770ea967ead24a07580b7091414949aeab58",
+    "mtime_utc": "2026-06-30T18:01:26.639710+00:00",
+    "mtime_proves_creation_or_job_use": false,
+    "candidate_count": 1438,
+    "per_entry_sha256_present": false,
+    "per_entry_mtime_present": false,
+    "embedded_confirmation_digest_matches_file": false,
+    "embedded_confirmation_digest_semantics_verified": false
+  },
+  "optuna_inventory": {
+    "nonempty_logs_listed": [
+      {
+        "job_id": 13169,
+        "basename": "slurm_optuna_13169.log",
+        "listed_bytes": 2017109,
+        "content_recovered": false
+      },
+      {
+        "job_id": 13172,
+        "basename": "slurm_optuna_13172.log",
+        "listed_bytes": 2011026,
+        "content_recovered": false
+      },
+      {
+        "job_id": 13181,
+        "basename": "slurm_optuna_13181.log",
+        "listed_bytes": 2007135,
+        "content_recovered": false
+      }
+    ],
+    "zero_byte_error_logs_listed": [
+      "slurm_optuna_error_13169.log",
+      "slurm_optuna_error_13172.log",
+      "slurm_optuna_error_13181.log"
+    ],
+    "database_listed": false
+  },
+  "bounded_search": {
+    "project_roots": [
+      "known V4.5 project tree",
+      "known revision-recovery project tree"
+    ],
+    "directory_depth_limit_below_roots": 8,
+    "directory_symlinks_followed": false,
+    "directory_count": 4914,
+    "unique_optuna_artifacts_found": [
+      {
+        "basename": "optuna_trials.csv",
+        "bytes": 1319
+      },
+      {
+        "basename": "optuna_best_parameters.csv",
+        "bytes": 210
+      }
+    ],
+    "target_logs_found": false,
+    "database_candidates_found": false,
+    "stage_archive_optuna_name_hits": 0,
+    "archive_extracted": false
+  },
+  "historical_target_name_search": {
+    "exact_target_names_checked": [
+      "v3m_ptbxl_full_p4_folds1_9_train_split90_manifest.csv",
+      "v3m_ptbxl_full_p4_folds1_9_val_split10_manifest.csv",
+      "v3m_internal_val_p4_panel_index.json",
+      "v3p_rhythm_train_v3j_plus_incart_svdb_virtual_manifest.csv",
+      "label_separator_validation_strict_primary_model_ready.csv",
+      "data_loader_ultra.py",
+      "titan_v45_41m_multihead_optuna.db",
+      "p0_curated_quarantine_manifest.csv",
+      "run_ood_quarantine.py"
+    ],
+    "exact_target_match_count": 0,
+    "term_entry_counts": {
+      "v3h": 0,
+      "v3s": 0,
+      "v3m": 0,
+      "v3p": 0,
+      "loader": 0,
+      "quarantine": 0,
+      "split90": 0,
+      "split10": 0,
+      "panel_index": 0,
+      "optuna": 6,
+      "sqlite": 0,
+      "manifest": 0
+    },
+    "scope": "Basename search of this cleanup manifest only; not a search of all CEDIA storage or all backups."
+  },
+  "interpretation": {
+    "classification": "REFERENCED_ONLY",
+    "demonstrates": "The cleanup manifest lists six Optuna-related log entries and their sizes.",
+    "does_not_demonstrate": "The log bytes, original SQLite study, trial-to-checkpoint lineage, exact files consumed by jobs, or availability of a restorable backup.",
+    "scope_limit": "These are bounded checks of the named CEDIA project trees and one stage archive listing, not a claim that all CEDIA or institutional backups were searched.",
+    "reviewer_status_change": false
+  }
+}

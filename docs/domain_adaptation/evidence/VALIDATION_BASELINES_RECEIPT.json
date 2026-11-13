@@ -1,0 +1,13 @@
+{
+  "assets": {
+    "backbone-v3f-original.pt": "ca5d4dcb4b9828e6c4339800fe81ec27f32d9b09a090bb57503bfb56746a8da8",
+    "specialists-v3p-e008-primary6-diagnostic.pt": "9c5a9265a7155e1206c551cc4e6d645b86363ba3dbdeb7baf7b9f173c314be3d",
+    "specialists-v3q-primary8-best-candidate.pt": "b30cb2bbb45f1231c93ff1c196aa966b57b49831cadb296131c0283e7b0ceb02"
+  },
+  "historical_benchmark_changed": false,
+  "metrics_sha256": "ddfc514561d47eb7cd1563a3dd58cc89b410d5bca9235a46d543525a2844a6f2",
+  "protocol_sha256": "e4fa12f255403b3d59b3188ee138fcf63c44f1a102f011a14db8f3ae099b8ac4",
+  "rows": 60,
+  "scope": "CODE_VALIDATION_CORRECTED_WAVEFORMS_ONLY",
+  "test_opened": false
+}

@@ -1,0 +1,36 @@
+{
+  "schema": "TITAN_V45_REVIEWER_MORPHOLOGY_RETRAINED_V1",
+  "scope": "new matched frozen-backbone head retraining, retrospective development; not historical replay or independent validation",
+  "profiles": ["P6", "P8", "P4"],
+  "upstream_feature_commit": "f4d6be30b0befea739cf2e35df1033230a1f5d10",
+  "arms": {
+    "with_morphology": "all ten normalized candidate values enter both frozen backbone and head composition",
+    "without_morphology": "same architecture and feature widths, but all ten inputs zeroed before backbone and head composition"
+  },
+  "sources": {
+    "rhythm": "Chapman only; Stage A documented record-as-patient proxy, not independently validated patient identifiers",
+    "pathology": "PTB-XL v1.0.3, official patient folds 1-7 train, frozen Stage A fold-9 calibration/internal evaluation; fold 8 not used, fold 10 forbidden"
+  },
+  "rhythm_split": {"seed": "titan-v45-morph-ablation-20261112-v1", "train_cut": 0.70, "calibration_cut": 0.85},
+  "dedup": "reuse hash-sealed Stage A exact waveform exclusions; additionally verify no component or signal crosses active splits from private inventory",
+  "training": {
+    "model": "classwise linear logistic head on frozen features, equal architecture in both arms",
+    "optimizer": "deterministic full-batch L-BFGS-B, zero initialization, train-only feature centering/scaling, equal ECG weighting within class",
+    "l2": 0.01,
+    "max_iterations": 250,
+    "minimum_training_records_per_polarity": 20,
+    "minimum_calibration_records_per_polarity": 5,
+    "nonconvergence": "mark endpoint unsupported in both arms",
+    "calibration": "F1-maximizing threshold on calibration records only, ties pick highest threshold",
+    "rhythm_window_aggregation": "P6 sigmoid of mean logits; P8 mean sigmoid; P4 one window"
+  },
+  "statistics": {
+    "replicates": 1000,
+    "seed": 197823,
+    "level": 0.95,
+    "unit": "PTB-XL patient or Chapman record-as-patient proxy",
+    "primary_contrast": "paired with minus without endpoint macro-F1",
+    "secondary": ["sensitivity", "AUROC", "average_precision", "Brier", "ECE"],
+    "unsupported": "null when there is no common valid support; no favorable endpoint substitution"
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "schema": "TITAN_SPECIALIST_DATASET_SPLITS_PUBLIC_AGGREGATE_V1",
+  "study_id": "specialist-heads-20261111-v2",
+  "protocol_revision": 2,
+  "configuration_sha256": "6be93477c3905c38a7cdd257cf6007a6a1246ce27354d067024ef1f5f5c9c14c",
+  "individual_records_or_ids_included": false,
+  "rhythm": {
+    "profiles": ["P6", "P8"],
+    "included_records_scored": 11133,
+    "windows_scored": 13725,
+    "sources": {
+      "chapman_shaoxing": {
+        "candidate_records": 10247,
+        "included_records": 8355,
+        "excluded_prior_v45_evaluation_records": 1879,
+        "excluded_byte_identical_previous_v45_evaluation_waveforms": 1,
+        "excluded_other_byte_identical_waveform_duplicates": 11,
+        "excluded_invalid_wfdb_headers": 1,
+        "split_records": {
+          "train": 6734,
+          "validation": 812,
+          "calibration": 809
+        },
+        "split_grouping": "record_as_patient_proxy_from_source_report",
+        "verified_patient_ids_available": false
+      },
+      "cpsc2018": {
+        "candidate_records": 1697,
+        "included_records": 1681,
+        "excluded_byte_identical_waveform_duplicates": 16,
+        "split_records": {
+          "train": 1681
+        },
+        "verified_patient_ids_available": false
+      },
+      "georgia": {
+        "candidate_records": 1116,
+        "included_records": 1097,
+        "excluded_byte_identical_waveform_duplicates": 19,
+        "split_records": {
+          "development_source_holdout": 1097
+        },
+        "verified_patient_ids_available": false
+      }
+    },
+    "exact_waveform_duplicates_remaining_among_included_records": 0,
+    "near_duplicate_signals_ruled_out": false,
+    "preprocessing_target_hz": 125,
+    "window_duration_seconds": 10,
+    "sp_h_or_v3h_used": false,
+    "prior_public_v45_evaluation_reused": false
+  },
+  "pathology": {
+    "profile": "P4",
+    "source": "PTB-XL v1.0.3",
+    "candidate_records": 6205,
+    "included_records": 6205,
+    "split_records": {
+      "folds_1_to_7_train": 4744,
+      "fold_8_validation": 666,
+      "fold_9_calibration": 405,
+      "fold_9_internal_evaluation": 390
+    },
+    "fold_10_used": false,
+    "patient_group_hashes_available_for_included_records": true,
+    "patient_group_overlap_between_splits": 0,
+    "exact_waveform_duplicate_overlap_between_splits": 0,
+    "preprocessing_target_hz": 125,
+    "window_duration_seconds": 10,
+    "label_contract": "positive target SCP likelihood; negative only with explicit NORM control and no positive or unknown P4 target; other rows masked"
+  },
+  "privacy_and_scope": {
+    "row_level_data_or_predictions_published": false,
+    "patient_or_ecg_identifiers_published": false,
+    "private_inventory_or_feature_cache_published": false,
+    "candidate_checkpoints_published": false,
+    "independent_external_validation": "NOT_RUN"
+  }
+}

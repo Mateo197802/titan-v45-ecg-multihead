@@ -1,0 +1,60 @@
+{
+  "schema": "TITAN_V45_REVIEWER_15_COVERAGE_CEILING_V1",
+  "as_of": "2026-11-11",
+  "source_register": "docs/reviewer_closure/TECHNICAL_15_EVIDENCE_CEILING_EXECUTION.json",
+  "rubric_source": "docs/reviewer_closure/REVIEWER_15_EVIDENCE_UPDATE.json",
+  "rubric": {
+    "VERIFIED_BOUNDED": 1.0,
+    "bounded_or_indirect_statuses": 0.5,
+    "unresolved_absent_failed_or_unassessed": 0.0,
+    "formula": "100 * sum(subrequirement weights) / count(existing subrequirements)",
+    "aggregate_scope": "40 pre-existing technical subrequirements across 15 reviewer comments; not probability of acceptance or experiment success",
+    "newly_admitted_partial_statuses": [
+      "STATIC_SOURCE_SEMANTICS_VERIFIED_NOT_JOB_LINKED",
+      "STATIC_SOURCE_MISMATCH_MECHANISM_VERIFIED_NOT_JOB_LINKED"
+    ],
+    "why_partial": "Recovered source bytes establish behavior/mechanism in the copied implementation but are not linked to the released checkpoint's producing job."
+  },
+  "aggregate": {
+    "previous_weighted_points": 18.5,
+    "previous_subrequirements": 40,
+    "previous_coverage_pct": 46.25,
+    "new_weighted_points": 19.5,
+    "new_subrequirements": 40,
+    "new_coverage_pct": 48.75,
+    "delta_percentage_points": 2.5,
+    "peer_comments_satisfied": 0,
+    "peer_comments_partially_addressed": 12,
+    "peer_comments_not_satisfied": 3,
+    "global_status_changes": 0,
+    "satisfaction_changes": 0
+  },
+  "documentary_ceiling": {
+    "quantitative_pct": null,
+    "reason": "The complete universe of institutional backups is not enumerable; the REV3-REV6 CEDIA search is bounded to sources stated in its read-only receipt.",
+    "qualitative": "Use per-item recovery categories below. Do not describe a bounded negative search as global nonexistence."
+  },
+  "latest_bounded_search": {
+    "receipt": "docs/reviewer_closure/receipts/CEDIA_TARGETED_RECOVERY_SEARCH_2026-11-11.json",
+    "matching_named_artifacts": 0,
+    "coverage_or_status_change": false,
+    "interpretation": "The search extends the documented filename-search boundary in the named CEDIA roots; it found no matching names and does not establish global absence or add scientific coverage."
+  },
+  "items": [
+    {"id":"R1-1","previous_pct":50.0,"new_pct":50.0,"delta_pp":0.0,"satisfaction":"PARTIALLY_ADDRESSED","historical_ceiling":"RECOVERY_LIMITED_BY_MISSING_JOB_MANIFESTS_AND_PATIENT_LINEAGE","scientific_requirement":"INDEPENDENT_VALIDATION_REQUIRES_A_NEW_ELIGIBLE_COHORT_IF_CLAIMED","next_action":"Custodian search for exact checkpoint/source manifests and read/write digests; otherwise retain independence limitation."},
+    {"id":"R1-2","previous_pct":33.3,"new_pct":33.3,"delta_pp":0.0,"satisfaction":"PARTIALLY_ADDRESSED","historical_ceiling":"CUSTODIAN_RECOVERY_MAY_FIND_PARENT_POPULATION_OR_LEDGER","scientific_requirement":"ORIGINAL_PREPOST_QUARANTINE_NOT_DEMONSTRATED","next_action":"Request original eligible population, exclusion ledger, score/policy and record-level pre/post transitions; never infer rate from handoff rows."},
+    {"id":"R1-3","previous_pct":50.0,"new_pct":50.0,"delta_pp":0.0,"satisfaction":"PARTIALLY_ADDRESSED","historical_ceiling":"NOT_RECOVERABLE_FROM_MODEL_OUTPUTS_ALONE","scientific_requirement":"CLINICAL_OR_TEMPORAL_REFERENCE_REQUIRED_FOR_INCIDENT_AF","next_action":"Use ECG-statement wording or obtain a valid clinical/longitudinal reference."},
+    {"id":"R1-4","previous_pct":25.0,"new_pct":25.0,"delta_pp":0.0,"satisfaction":"PARTIALLY_ADDRESSED","historical_ceiling":"A10_HASH_CORRECTION_DOCUMENTED; DATABASE_RECOVERY_CUSTODIAN_DEPENDENT","scientific_requirement":"ORIGINAL_OPTUNA_HISTORY_AND_TRIAL_CHECKPOINT_LINK_MISSING","next_action":"Keep A10 correction in PR #4; request SQLite generations, sidecars and promotion receipts separately."},
+    {"id":"R2-general","previous_pct":50.0,"new_pct":50.0,"delta_pp":0.0,"satisfaction":"NOT_SATISFIED","historical_ceiling":"HISTORICAL_CLASS_COVERAGE_INCOMPLETE","scientific_requirement":"NEW_ONTOLOGY_COMPATIBLE_ALL_CLASS_EVALUATION_REQUIRED_IF_OTHER_CLAIM_RETAINED","next_action":"Author decision on scope; new labels/cohort and protocol for Other, or remove performance claim."},
+    {"id":"R2-2b","previous_pct":50.0,"new_pct":50.0,"delta_pp":0.0,"satisfaction":"PARTIALLY_ADDRESSED","historical_ceiling":"TECHNICAL_SOURCE_MAY_BE_RECOVERABLE; RIGHTS_REVIEW_IS_HUMAN","scientific_requirement":"CREATOR_LICENSE_AND_EXECUTED_PROCESS_CONFIRMATION","next_action":"Obtain author/rightsholder confirmation and document figure provenance during editorial phase."},
+    {"id":"R2-3a","previous_pct":50.0,"new_pct":50.0,"delta_pp":0.0,"satisfaction":"PARTIALLY_ADDRESSED","historical_ceiling":"CUSTODIAN_DEPENDENT_EXACT_MANIFESTS_AND_PATIENT_MAPS","scientific_requirement":"PATIENT_ISOLATION_NOT_CERTIFIED","next_action":"Request actual files consumed and job read digests; compare patient and waveform identities in restricted CEDIA."},
+    {"id":"R2-3c","previous_pct":66.7,"new_pct":83.3,"delta_pp":16.7,"satisfaction":"PARTIALLY_ADDRESSED","historical_ceiling":"STATIC_CODE_SEMANTICS_RECOVERED; CHECKPOINT_LINK_AND_CLASS_SUPPORTS_MISSING","scientific_requirement":"RUN_SPECIFIC_SUPERVISION_AND_PER_CLASS_METRICS","next_action":"Recover exact manifests, labels/masks, job source digest and checkpoint-linked metrics; otherwise narrow claims."},
+    {"id":"R2-3d","previous_pct":66.7,"new_pct":83.3,"delta_pp":16.7,"satisfaction":"NOT_SATISFIED","historical_ceiling":"IMPLEMENTED_TRAINING_PATH_RECOVERED; HISTORICAL_EXECUTION_AND_PERFORMANCE_UNVERIFIED","scientific_requirement":"ALMI_ILMI_LAE_SUPPORTS_AND_HELDOUT_METRICS_NOT_ESTABLISHED","next_action":"Use historical job-linked evidence if custodially available; otherwise describe as unvalidated outputs or run a separately approved study."},
+    {"id":"R2-3e","previous_pct":50.0,"new_pct":50.0,"delta_pp":0.0,"satisfaction":"PARTIALLY_ADDRESSED","historical_ceiling":"NO_HISTORICAL_ROLE_LEDGER_IN_INSPECTED_SOURCES","scientific_requirement":"ROLE_MEANING_REQUIRES_AUTHENTIC_POLICY_OR_NARROW_EDITORIAL_DEFINITION","next_action":"Request policy/transition ledger or define Role only as an implementation field."},
+    {"id":"R2-3f","previous_pct":25.0,"new_pct":25.0,"delta_pp":0.0,"satisfaction":"PARTIALLY_ADDRESSED","historical_ceiling":"LOADER_TARGET_NOT_RECOVERED; SOURCE_SHOWS_ONLY_A_POSSIBLE_192_512_WRITER_MISMATCH","scientific_requirement":"EXACT_LOADER_AND_STRICT_REPLAY_EQUIVALENCE_REMAIN_UNMET","next_action":"Request exact loader bytes plus job import receipt; preserve P4 residual and tolerance."},
+    {"id":"R2-4a","previous_pct":75.0,"new_pct":75.0,"delta_pp":0.0,"satisfaction":"PARTIALLY_ADDRESSED","historical_ceiling":"DEVELOPMENT_USE_LINEAGE_INCOMPLETE","scientific_requirement":"SPH_TRANSFER_IS_NOT_INDEPENDENT_CLINICAL_VALIDATION","next_action":"Keep scope wording distinct; any independent cohort is a new experiment."},
+    {"id":"R2-4e","previous_pct":50.0,"new_pct":50.0,"delta_pp":0.0,"satisfaction":"PARTIALLY_ADDRESSED","historical_ceiling":"HISTORICAL_ROUTE_NOT_RECOVERED_FROM_AVAILABLE_LEDGER","scientific_requirement":"ALL_INPUT_ROUTING_AND_QUARANTINE_MEANING_NOT_DEMONSTRATED","next_action":"Request policy and per-record ledger or restrict claims; do not conflate fallback with quarantine."},
+    {"id":"R2-4k","previous_pct":0.0,"new_pct":0.0,"delta_pp":0.0,"satisfaction":"NOT_SATISFIED","historical_ceiling":"CUSTODIAN_DEPENDENT_POLICY_AND_LEDGER; NO_GLOBAL_ABSENCE_CLAIM","scientific_requirement":"NO_VALID_QUARANTINE_DENOMINATOR_OR_PREPOST_EFFECT","next_action":"Request AE policy/manifests, full denominator, checkpoint hash and restricted per-record transitions; else retain NOT_ASSESSED."},
+    {"id":"R2-5","previous_pct":50.0,"new_pct":50.0,"delta_pp":0.0,"satisfaction":"PARTIALLY_ADDRESSED","historical_ceiling":"NO_BEAT_LEVEL_REFERENCE_IN_RECOVERED_PACKAGES","scientific_requirement":"BEAT_LEVEL_CLAIM_REQUIRES_BEAT_ANNOTATIONS; RECORD_LEVEL_SCOPE_CAN_BE_NARROWED","next_action":"Narrow to record-level ECG statements or design a separate beat-level study."}
+  ]
+}

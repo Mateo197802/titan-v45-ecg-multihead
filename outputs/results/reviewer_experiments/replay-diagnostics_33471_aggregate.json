@@ -1,0 +1,381 @@
+{
+  "schema": "TITAN_V45_REPLAY_RESIDUAL_DIAGNOSTICS_V1",
+  "scope": "paired_selected_development_outputs_only",
+  "historical_atol": 1e-05,
+  "historical_pipeline_equivalence_claimed": false,
+  "margins_are_descriptive_not_future_robustness_guarantees": true,
+  "sealed_comparison_sha256": "d8e5603a8e3090c17a223ba80f397cee8d99c6f713465ceb9660ce4e17c2566d",
+  "private_ledger_sha256": {
+    "P4": "ecd173d834842705321698876433ede8ea1a3fa390500f5da33b34a8755491ca",
+    "rhythm": "1eac4fba2f28e4cebcc58d8a21ae64a3ecaf71c1d2e8102a7bea6c46cd44a059"
+  },
+  "archived_reference_sha256_lf": {
+    "pathology_primary4_ASMI_record_predictions.csv": "2859facb689f732178b03c2f66559849401460235a80397c4c4bbb30aef46fe1",
+    "pathology_primary4_LVH_record_predictions.csv": "cab4373122e731428ff92198022e8c7e5bea881600db027dd53d6d8cba0c0e1f",
+    "pathology_primary4_IMI_record_predictions.csv": "d3dd64b4a2d3cd184d414f012b2f739a120bd96b3b501c21442ddf19da389c56",
+    "pathology_primary4_ISC__record_predictions.csv": "fc09c2590f5940137378c3465e085122353e7c43200e8174c99890c45a525672",
+    "rhythm_primary6_record_predictions.csv": "2f51cf51e6eb392dbd8ba165df73a698c0478166d364844c72bca382f5d7cc76",
+    "rhythm_primary8_record_predictions.csv": "1c7fa4ebed66f5683109aa7f1db8c6669cdbc4d96842ddf432ed53f03d8cf0a6"
+  },
+  "P4": {
+    "ASMI": {
+      "threshold": 0.67,
+      "score": {
+        "pairs": 294,
+        "mean_signed_difference": 3.785005181419606e-05,
+        "mean_absolute_difference": 7.643622859400146e-05,
+        "median_absolute_difference": 5.3554773330688477e-05,
+        "p95_absolute_difference": 0.00025650709867477403,
+        "p99_absolute_difference": 0.00033972173929214467,
+        "max_absolute_difference": 0.0003706216812133789,
+        "above_historical_atol": 253,
+        "counts_above_diagnostic_tolerances": {
+          "1e-05": 253,
+          "0.0001": 80,
+          "0.001": 0
+        }
+      },
+      "decision_changes": 0,
+      "minimum_archived_margin": 0.0008232760429381925,
+      "minimum_replayed_margin": 0.0007826852798461514,
+      "archived_margin_at_most_observed_max_error": 0
+    },
+    "LVH": {
+      "threshold": 0.705,
+      "score": {
+        "pairs": 224,
+        "mean_signed_difference": 4.7175334267584344e-05,
+        "mean_absolute_difference": 9.331614793544369e-05,
+        "median_absolute_difference": 5.811452865600586e-05,
+        "p95_absolute_difference": 0.0002842292189598083,
+        "p99_absolute_difference": 0.00044284909963607797,
+        "max_absolute_difference": 0.0005390644073486328,
+        "above_historical_atol": 203,
+        "counts_above_diagnostic_tolerances": {
+          "1e-05": 203,
+          "0.0001": 75,
+          "0.001": 0
+        }
+      },
+      "decision_changes": 0,
+      "minimum_archived_margin": 0.0005659627914428311,
+      "minimum_replayed_margin": 0.0005296039581298428,
+      "archived_margin_at_most_observed_max_error": 0
+    },
+    "IMI": {
+      "threshold": 0.635,
+      "score": {
+        "pairs": 206,
+        "mean_signed_difference": -7.1662451023037e-05,
+        "mean_absolute_difference": 9.99845672868988e-05,
+        "median_absolute_difference": 7.26059079170227e-05,
+        "p95_absolute_difference": 0.0003081709146499634,
+        "p99_absolute_difference": 0.0003954812884330747,
+        "max_absolute_difference": 0.0006194114685058594,
+        "above_historical_atol": 183,
+        "counts_above_diagnostic_tolerances": {
+          "1e-05": 183,
+          "0.0001": 82,
+          "0.001": 0
+        }
+      },
+      "decision_changes": 0,
+      "minimum_archived_margin": 0.0006755089759826749,
+      "minimum_replayed_margin": 0.0009414052963256925,
+      "archived_margin_at_most_observed_max_error": 0
+    },
+    "ISC_": {
+      "threshold": 0.595,
+      "score": {
+        "pairs": 238,
+        "mean_signed_difference": 3.3399992145034446e-05,
+        "mean_absolute_difference": 7.5842349735253e-05,
+        "median_absolute_difference": 4.456937313079834e-05,
+        "p95_absolute_difference": 0.00026898980140686033,
+        "p99_absolute_difference": 0.0004057154059410093,
+        "max_absolute_difference": 0.0005366206169128418,
+        "above_historical_atol": 197,
+        "counts_above_diagnostic_tolerances": {
+          "1e-05": 197,
+          "0.0001": 58,
+          "0.001": 0
+        }
+      },
+      "decision_changes": 0,
+      "minimum_archived_margin": 0.005765290260314915,
+      "minimum_replayed_margin": 0.005842359066009495,
+      "archived_margin_at_most_observed_max_error": 0
+    }
+  },
+  "P6": {
+    "records": 1643,
+    "score": {
+      "pairs": 9858,
+      "mean_signed_difference": 1.918803942894717e-06,
+      "mean_absolute_difference": 3.469965247205115e-05,
+      "median_absolute_difference": 3.296047721057754e-06,
+      "p95_absolute_difference": 0.00017531085272169108,
+      "p99_absolute_difference": 0.00039391558262842294,
+      "max_absolute_difference": 0.0019060099985065693,
+      "above_historical_atol": 3687,
+      "counts_above_diagnostic_tolerances": {
+        "1e-05": 3687,
+        "0.0001": 1047,
+        "0.001": 9
+      }
+    },
+    "top1_changes": 1,
+    "archived_top_ties": 0,
+    "replayed_top_ties": 0,
+    "archived_margin_at_most_twice_observed_max_error": 1,
+    "changes_with_same_top_two_candidates": 1,
+    "changed_rows": {
+      "archived_winner_margin_min": 1.9937778590550792e-05,
+      "archived_winner_margin_max": 1.9937778590550792e-05,
+      "new_winner_margin_min": 5.589570144126643e-05,
+      "new_winner_margin_max": 5.589570144126643e-05,
+      "max_score_drift_on_changed_rows": 0.0004371784358766506,
+      "old_winner_minus_new_winner_after_replay_max": -5.589570144126643e-05
+    },
+    "score_field": "prob",
+    "by_class": {
+      "AFIB": {
+        "pairs": 1643,
+        "mean_signed_difference": 1.2418476299545147e-05,
+        "mean_absolute_difference": 2.7555348251111613e-05,
+        "median_absolute_difference": 4.956808242578793e-07,
+        "p95_absolute_difference": 0.0001661914294433018,
+        "p99_absolute_difference": 0.00038701305288839165,
+        "max_absolute_difference": 0.0011825122028631396,
+        "above_historical_atol": 404,
+        "counts_above_diagnostic_tolerances": {
+          "1e-05": 404,
+          "0.0001": 141,
+          "0.001": 2
+        }
+      },
+      "SB": {
+        "pairs": 1643,
+        "mean_signed_difference": 7.5725366966060386e-06,
+        "mean_absolute_difference": 3.245728594002138e-05,
+        "median_absolute_difference": 4.620893478413102e-06,
+        "p95_absolute_difference": 0.0001602321109158089,
+        "p99_absolute_difference": 0.0004138242496418649,
+        "max_absolute_difference": 0.0019060099985065693,
+        "above_historical_atol": 625,
+        "counts_above_diagnostic_tolerances": {
+          "1e-05": 625,
+          "0.0001": 135,
+          "0.001": 2
+        }
+      },
+      "STACH": {
+        "pairs": 1643,
+        "mean_signed_difference": -3.5356607311597274e-06,
+        "mean_absolute_difference": 2.6584644333657947e-05,
+        "median_absolute_difference": 1.4472621848726774e-06,
+        "p95_absolute_difference": 0.00015155812362098374,
+        "p99_absolute_difference": 0.00031905766464200585,
+        "max_absolute_difference": 0.0009144096421923598,
+        "above_historical_atol": 506,
+        "counts_above_diagnostic_tolerances": {
+          "1e-05": 506,
+          "0.0001": 133,
+          "0.001": 0
+        }
+      },
+      "RBBB": {
+        "pairs": 1643,
+        "mean_signed_difference": -2.180782773294192e-05,
+        "mean_absolute_difference": 3.892588798256192e-05,
+        "median_absolute_difference": 2.963885490876077e-06,
+        "p95_absolute_difference": 0.0001967851934276564,
+        "p99_absolute_difference": 0.0003944081628772873,
+        "max_absolute_difference": 0.0015174721073848985,
+        "above_historical_atol": 616,
+        "counts_above_diagnostic_tolerances": {
+          "1e-05": 616,
+          "0.0001": 216,
+          "0.001": 2
+        }
+      },
+      "1AVB": {
+        "pairs": 1643,
+        "mean_signed_difference": 9.884230043170852e-06,
+        "mean_absolute_difference": 4.517108241622856e-05,
+        "median_absolute_difference": 1.295480369619198e-05,
+        "p95_absolute_difference": 0.00018413681659980568,
+        "p99_absolute_difference": 0.00039120928506871565,
+        "max_absolute_difference": 0.0011116039856631926,
+        "above_historical_atol": 879,
+        "counts_above_diagnostic_tolerances": {
+          "1e-05": 879,
+          "0.0001": 232,
+          "0.001": 1
+        }
+      },
+      "PVC": {
+        "pairs": 1643,
+        "mean_signed_difference": 6.981069082147918e-06,
+        "mean_absolute_difference": 3.7503665908725476e-05,
+        "median_absolute_difference": 4.745198841474979e-06,
+        "p95_absolute_difference": 0.00017187575043278998,
+        "p99_absolute_difference": 0.00042435704774854155,
+        "max_absolute_difference": 0.001246038748491607,
+        "above_historical_atol": 657,
+        "counts_above_diagnostic_tolerances": {
+          "1e-05": 657,
+          "0.0001": 190,
+          "0.001": 2
+        }
+      }
+    }
+  },
+  "P8": {
+    "records": 2193,
+    "score": {
+      "pairs": 17544,
+      "mean_signed_difference": 1.8035703192393648e-07,
+      "mean_absolute_difference": 4.660540436017765e-05,
+      "median_absolute_difference": 8.646398782730103e-06,
+      "p95_absolute_difference": 0.00021313726902008048,
+      "p99_absolute_difference": 0.0004385367035865783,
+      "max_absolute_difference": 0.0017378628253936768,
+      "above_historical_atol": 8490,
+      "counts_above_diagnostic_tolerances": {
+        "1e-05": 8490,
+        "0.0001": 2590,
+        "0.001": 9
+      }
+    },
+    "top1_changes": 0,
+    "archived_top_ties": 0,
+    "replayed_top_ties": 0,
+    "archived_margin_at_most_twice_observed_max_error": 6,
+    "changes_with_same_top_two_candidates": 0,
+    "changed_rows": null,
+    "score_field": "membership_prob",
+    "by_class": {
+      "AFIB": {
+        "pairs": 2193,
+        "mean_signed_difference": 9.698761434192788e-06,
+        "mean_absolute_difference": 3.1320111592543615e-05,
+        "median_absolute_difference": 8.601928129792213e-07,
+        "p95_absolute_difference": 0.00018066465854644776,
+        "p99_absolute_difference": 0.0003784084320068358,
+        "max_absolute_difference": 0.0009597241878509521,
+        "above_historical_atol": 655,
+        "counts_above_diagnostic_tolerances": {
+          "1e-05": 655,
+          "0.0001": 223,
+          "0.001": 0
+        }
+      },
+      "SB": {
+        "pairs": 2193,
+        "mean_signed_difference": 1.5909321889932745e-05,
+        "mean_absolute_difference": 3.963645818524697e-05,
+        "median_absolute_difference": 2.9407674446702003e-06,
+        "p95_absolute_difference": 0.00021461248397827156,
+        "p99_absolute_difference": 0.0005069777369499205,
+        "max_absolute_difference": 0.0017378628253936768,
+        "above_historical_atol": 778,
+        "counts_above_diagnostic_tolerances": {
+          "1e-05": 778,
+          "0.0001": 260,
+          "0.001": 2
+        }
+      },
+      "STACH": {
+        "pairs": 2193,
+        "mean_signed_difference": 1.2303833845687343e-06,
+        "mean_absolute_difference": 3.767602641872641e-05,
+        "median_absolute_difference": 3.1692907214164734e-06,
+        "p95_absolute_difference": 0.00019193589687347415,
+        "p99_absolute_difference": 0.00035061776638031,
+        "max_absolute_difference": 0.001279577612876892,
+        "above_historical_atol": 866,
+        "counts_above_diagnostic_tolerances": {
+          "1e-05": 866,
+          "0.0001": 271,
+          "0.001": 2
+        }
+      },
+      "NSR": {
+        "pairs": 2193,
+        "mean_signed_difference": -2.6923691799566013e-05,
+        "mean_absolute_difference": 6.802272425520237e-05,
+        "median_absolute_difference": 3.4868717193603516e-05,
+        "p95_absolute_difference": 0.0002448525279760361,
+        "p99_absolute_difference": 0.0004061019420623775,
+        "max_absolute_difference": 0.001176595687866211,
+        "above_historical_atol": 1711,
+        "counts_above_diagnostic_tolerances": {
+          "1e-05": 1711,
+          "0.0001": 504,
+          "0.001": 1
+        }
+      },
+      "RBBB": {
+        "pairs": 2193,
+        "mean_signed_difference": -1.7571107204120884e-05,
+        "mean_absolute_difference": 3.477175412545097e-05,
+        "median_absolute_difference": 1.0624644346535206e-06,
+        "p95_absolute_difference": 0.00019856542348861705,
+        "p99_absolute_difference": 0.0004308086633682247,
+        "max_absolute_difference": 0.0011361241340637207,
+        "above_historical_atol": 659,
+        "counts_above_diagnostic_tolerances": {
+          "1e-05": 659,
+          "0.0001": 238,
+          "0.001": 2
+        }
+      },
+      "PAC": {
+        "pairs": 2193,
+        "mean_signed_difference": -1.3899117315530796e-06,
+        "mean_absolute_difference": 6.540199406856709e-05,
+        "median_absolute_difference": 3.260374069213867e-05,
+        "p95_absolute_difference": 0.00023931264877319366,
+        "p99_absolute_difference": 0.00048254966735839785,
+        "max_absolute_difference": 0.0007895231246948242,
+        "above_historical_atol": 1601,
+        "counts_above_diagnostic_tolerances": {
+          "1e-05": 1601,
+          "0.0001": 444,
+          "0.001": 0
+        }
+      },
+      "1AVB": {
+        "pairs": 2193,
+        "mean_signed_difference": 9.148635263166713e-06,
+        "mean_absolute_difference": 4.6503402631456826e-05,
+        "median_absolute_difference": 6.854534149169922e-06,
+        "p95_absolute_difference": 0.00021067857742309572,
+        "p99_absolute_difference": 0.0004463580250740051,
+        "max_absolute_difference": 0.0010029375553131104,
+        "above_historical_atol": 1016,
+        "counts_above_diagnostic_tolerances": {
+          "1e-05": 1016,
+          "0.0001": 317,
+          "0.001": 1
+        }
+      },
+      "PVC": {
+        "pairs": 2193,
+        "mean_signed_difference": 1.1340465018770493e-05,
+        "mean_absolute_difference": 4.9510763604226954e-05,
+        "median_absolute_difference": 1.430511474609375e-05,
+        "p95_absolute_difference": 0.0002090394496917725,
+        "p99_absolute_difference": 0.00044754594564437816,
+        "max_absolute_difference": 0.0011888742446899414,
+        "above_historical_atol": 1204,
+        "counts_above_diagnostic_tolerances": {
+          "1e-05": 1204,
+          "0.0001": 333,
+          "0.001": 1
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "schema": "TITAN_V45_REVIEWER_JOINT_SELECTIVE_V1",
+  "scope": "one decision per ECG on the held SPH development components; not independent validation",
+  "profiles_in_joint_route": ["P8", "P4"],
+  "diagnostic_profile_not_in_route": "P6",
+  "input_policy": "the sealed development cutoffs from job 33362, no refitting or inspection of held outcomes to choose this joint rule",
+  "signed_margin": "minimum of P8 and P4 profile confidence minus each profile's own frozen cutoff",
+  "route": "accept if signed margin is nonnegative; otherwise abstain. Technical unscored records remain unscored.",
+  "accepted_prediction": "emit the unchanged P8 and P4 label sets, including original P8 fallback when present",
+  "abstained_prediction": "emit no label set; original model predictions retained only for a counterfactual comparison",
+  "cascade": "not implemented; no referral, review, or stage-two prediction inferred",
+  "risk": "mean per-ECG binary statement error across all mapped P8/P4 endpoints",
+  "intervals": {"seed": 197834, "replicates": 1000, "level": 0.95}
+}

@@ -1,0 +1,764 @@
+{
+  "schema": "TITAN_V45_NOVEMBER_REPLAY_CONTRAST_V1",
+  "job": "33472",
+  "scope": "selected retrospective panels; never a reproduction of the missing original loader",
+  "archived_comparison_anchor_sha256": "d8e5603a8e3090c17a223ba80f397cee8d99c6f713465ceb9660ce4e17c2566d",
+  "archived_reference_sha256_lf": {
+    "pathology_primary4_ASMI_record_predictions.csv": "2859facb689f732178b03c2f66559849401460235a80397c4c4bbb30aef46fe1",
+    "pathology_primary4_LVH_record_predictions.csv": "cab4373122e731428ff92198022e8c7e5bea881600db027dd53d6d8cba0c0e1f",
+    "pathology_primary4_IMI_record_predictions.csv": "d3dd64b4a2d3cd184d414f012b2f739a120bd96b3b501c21442ddf19da389c56",
+    "pathology_primary4_ISC__record_predictions.csv": "fc09c2590f5940137378c3465e085122353e7c43200e8174c99890c45a525672",
+    "rhythm_primary6_record_predictions.csv": "2f51cf51e6eb392dbd8ba165df73a698c0478166d364844c72bca382f5d7cc76",
+    "rhythm_primary8_record_predictions.csv": "1c7fa4ebed66f5683109aa7f1db8c6669cdbc4d96842ddf432ed53f03d8cf0a6"
+  },
+  "provenance": {
+    "P4": {
+      "previous_job": 32448,
+      "previous": {
+        "runner_commit": "02019b832fafecd0c263ea556c70f16fa0a50ccf",
+        "runner_aggregate_sha256": "592e2bbab96cd03e23caf5ba4c29b746293a0f6e7584ed4b6fc069160c2d5f46",
+        "release_assets": {
+          "backbone-v3ag-pathology.pt": "bf71e4cf8acc34031cb3611c7031e0649822e705fd7dcea354a3ea583ce920ee",
+          "specialists-v3ag-primary4-calibrated.pt": "cf5091e962fffb3254b1a71fe57236dd82ea0139093df192511499d931391dbc",
+          "external-dev-pathology-ptbxl-fold10.tar.zst": "fc1c3fc5374af962a8fc5903b6d1dd99a44ebfd7c66e0dfceaa106167afee558"
+        },
+        "manifest_sha256_lf": {
+          "pathology_primary4_panels.csv": "26796bdde9f9a736fc7594b65e7e881b4967f15a8665fa5231f5001cbbc105d0"
+        },
+        "device": "cuda",
+        "torch": "2.10.0+cu128",
+        "morphology_candidate_sha256_lf": "2bd1c1822ed72d1531b1f62712d8007c7e2f21009056ad1a3ee905f37051fc3d",
+        "ledger_sha256": "ecd173d834842705321698876433ede8ea1a3fa390500f5da33b34a8755491ca"
+      },
+      "current": {
+        "runner_commit": "02019b832fafecd0c263ea556c70f16fa0a50ccf",
+        "runner_aggregate_sha256": "592e2bbab96cd03e23caf5ba4c29b746293a0f6e7584ed4b6fc069160c2d5f46",
+        "release_assets": {
+          "backbone-v3ag-pathology.pt": "bf71e4cf8acc34031cb3611c7031e0649822e705fd7dcea354a3ea583ce920ee",
+          "specialists-v3ag-primary4-calibrated.pt": "cf5091e962fffb3254b1a71fe57236dd82ea0139093df192511499d931391dbc",
+          "external-dev-pathology-ptbxl-fold10.tar.zst": "fc1c3fc5374af962a8fc5903b6d1dd99a44ebfd7c66e0dfceaa106167afee558"
+        },
+        "manifest_sha256_lf": {
+          "pathology_primary4_panels.csv": "26796bdde9f9a736fc7594b65e7e881b4967f15a8665fa5231f5001cbbc105d0"
+        },
+        "device": "cuda",
+        "torch": "2.10.0+cu128",
+        "morphology_candidate_sha256_lf": "2bd1c1822ed72d1531b1f62712d8007c7e2f21009056ad1a3ee905f37051fc3d",
+        "ledger_sha256": "ecd173d834842705321698876433ede8ea1a3fa390500f5da33b34a8755491ca"
+      },
+      "native_ledgers_byte_identical": true
+    },
+    "rhythm": {
+      "previous_job": 32461,
+      "previous": {
+        "runner_commit": "cfe6d59fa5cc4be10de0d7c6803fa5208fae0072",
+        "runner_aggregate_sha256": "123d21f4512b988eb24bcff90b971c62510c547b7f766e059137f072c2d871b4",
+        "release_assets": {
+          "backbone-v3f-original.pt": "ca5d4dcb4b9828e6c4339800fe81ec27f32d9b09a090bb57503bfb56746a8da8",
+          "specialists-v3p-e008-primary6-diagnostic.pt": "9c5a9265a7155e1206c551cc4e6d645b86363ba3dbdeb7baf7b9f173c314be3d",
+          "specialists-v3q-primary8-best-candidate.pt": "b30cb2bbb45f1231c93ff1c196aa966b57b49831cadb296131c0283e7b0ceb02",
+          "external-dev-rhythm-chapman-shaoxing.tar.zst": "ec6ade27ab77b9807d41331016def56e54cbb96fba528fd7aca811e5a468f2fb"
+        },
+        "manifest_sha256_lf": {
+          "rhythm_primary6_diagnostic_records.csv": "db6de6b83c353d7a671482667e91ac1d78de76bb169d5cd751874cb7b0d600ca",
+          "rhythm_primary8_records.csv": "b7e044ca1696eced6ac25f93cc1574d7c596c1cadfd4a98f86ca9d42699a11d0"
+        },
+        "device": "cuda",
+        "torch": "2.10.0+cu128",
+        "morphology_candidate_sha256_lf": "2bd1c1822ed72d1531b1f62712d8007c7e2f21009056ad1a3ee905f37051fc3d",
+        "ledger_sha256": "1eac4fba2f28e4cebcc58d8a21ae64a3ecaf71c1d2e8102a7bea6c46cd44a059"
+      },
+      "current": {
+        "runner_commit": "cfe6d59fa5cc4be10de0d7c6803fa5208fae0072",
+        "runner_aggregate_sha256": "123d21f4512b988eb24bcff90b971c62510c547b7f766e059137f072c2d871b4",
+        "release_assets": {
+          "backbone-v3f-original.pt": "ca5d4dcb4b9828e6c4339800fe81ec27f32d9b09a090bb57503bfb56746a8da8",
+          "specialists-v3p-e008-primary6-diagnostic.pt": "9c5a9265a7155e1206c551cc4e6d645b86363ba3dbdeb7baf7b9f173c314be3d",
+          "specialists-v3q-primary8-best-candidate.pt": "b30cb2bbb45f1231c93ff1c196aa966b57b49831cadb296131c0283e7b0ceb02",
+          "external-dev-rhythm-chapman-shaoxing.tar.zst": "ec6ade27ab77b9807d41331016def56e54cbb96fba528fd7aca811e5a468f2fb"
+        },
+        "manifest_sha256_lf": {
+          "rhythm_primary6_diagnostic_records.csv": "db6de6b83c353d7a671482667e91ac1d78de76bb169d5cd751874cb7b0d600ca",
+          "rhythm_primary8_records.csv": "b7e044ca1696eced6ac25f93cc1574d7c596c1cadfd4a98f86ca9d42699a11d0"
+        },
+        "device": "cuda",
+        "torch": "2.10.0+cu128",
+        "morphology_candidate_sha256_lf": "2bd1c1822ed72d1531b1f62712d8007c7e2f21009056ad1a3ee905f37051fc3d",
+        "ledger_sha256": "1eac4fba2f28e4cebcc58d8a21ae64a3ecaf71c1d2e8102a7bea6c46cd44a059"
+      },
+      "native_ledgers_byte_identical": true
+    }
+  },
+  "previous_native_versus_current_native": {
+    "P4": {
+      "source_records": 733,
+      "workflow_state_changes": 0,
+      "comparisons": {
+        "P4": {
+          "previous_scored": 733,
+          "matched_scored": 733,
+          "previously_scored_missing_now": 0,
+          "newly_scored": 0,
+          "score_differences_by_class": {
+            "ASMI": {
+              "pairs": 733,
+              "mean_signed_difference": 0.0,
+              "mean_absolute_difference": 0.0,
+              "median_absolute_difference": 0.0,
+              "p95_absolute_difference": 0.0,
+              "p99_absolute_difference": 0.0,
+              "max_absolute_difference": 0.0,
+              "above_historical_atol": 0,
+              "counts_above_diagnostic_tolerances": {
+                "1e-05": 0,
+                "0.0001": 0,
+                "0.001": 0
+              }
+            },
+            "LVH": {
+              "pairs": 733,
+              "mean_signed_difference": 0.0,
+              "mean_absolute_difference": 0.0,
+              "median_absolute_difference": 0.0,
+              "p95_absolute_difference": 0.0,
+              "p99_absolute_difference": 0.0,
+              "max_absolute_difference": 0.0,
+              "above_historical_atol": 0,
+              "counts_above_diagnostic_tolerances": {
+                "1e-05": 0,
+                "0.0001": 0,
+                "0.001": 0
+              }
+            },
+            "IMI": {
+              "pairs": 733,
+              "mean_signed_difference": 0.0,
+              "mean_absolute_difference": 0.0,
+              "median_absolute_difference": 0.0,
+              "p95_absolute_difference": 0.0,
+              "p99_absolute_difference": 0.0,
+              "max_absolute_difference": 0.0,
+              "above_historical_atol": 0,
+              "counts_above_diagnostic_tolerances": {
+                "1e-05": 0,
+                "0.0001": 0,
+                "0.001": 0
+              }
+            },
+            "ISC_": {
+              "pairs": 733,
+              "mean_signed_difference": 0.0,
+              "mean_absolute_difference": 0.0,
+              "median_absolute_difference": 0.0,
+              "p95_absolute_difference": 0.0,
+              "p99_absolute_difference": 0.0,
+              "max_absolute_difference": 0.0,
+              "above_historical_atol": 0,
+              "counts_above_diagnostic_tolerances": {
+                "1e-05": 0,
+                "0.0001": 0,
+                "0.001": 0
+              }
+            }
+          },
+          "decision_changes_by_field": {
+            "pathology": 0
+          }
+        },
+        "auxiliary": {
+          "matched_scored": 733,
+          "score_differences_by_class": {
+            "ALMI": {
+              "pairs": 733,
+              "mean_signed_difference": 0.0,
+              "mean_absolute_difference": 0.0,
+              "median_absolute_difference": 0.0,
+              "p95_absolute_difference": 0.0,
+              "p99_absolute_difference": 0.0,
+              "max_absolute_difference": 0.0,
+              "above_historical_atol": 0,
+              "counts_above_diagnostic_tolerances": {
+                "1e-05": 0,
+                "0.0001": 0,
+                "0.001": 0
+              }
+            },
+            "ILMI": {
+              "pairs": 733,
+              "mean_signed_difference": 0.0,
+              "mean_absolute_difference": 0.0,
+              "median_absolute_difference": 0.0,
+              "p95_absolute_difference": 0.0,
+              "p99_absolute_difference": 0.0,
+              "max_absolute_difference": 0.0,
+              "above_historical_atol": 0,
+              "counts_above_diagnostic_tolerances": {
+                "1e-05": 0,
+                "0.0001": 0,
+                "0.001": 0
+              }
+            },
+            "LAE": {
+              "pairs": 733,
+              "mean_signed_difference": 0.0,
+              "mean_absolute_difference": 0.0,
+              "median_absolute_difference": 0.0,
+              "p95_absolute_difference": 0.0,
+              "p99_absolute_difference": 0.0,
+              "max_absolute_difference": 0.0,
+              "above_historical_atol": 0,
+              "counts_above_diagnostic_tolerances": {
+                "1e-05": 0,
+                "0.0001": 0,
+                "0.001": 0
+              }
+            }
+          }
+        }
+      }
+    },
+    "rhythm": {
+      "source_records": 2193,
+      "workflow_state_changes": 0,
+      "comparisons": {
+        "P6": {
+          "previous_scored": 1643,
+          "matched_scored": 1643,
+          "previously_scored_missing_now": 0,
+          "newly_scored": 0,
+          "score_differences_by_class": {
+            "AFIB": {
+              "pairs": 1643,
+              "mean_signed_difference": 0.0,
+              "mean_absolute_difference": 0.0,
+              "median_absolute_difference": 0.0,
+              "p95_absolute_difference": 0.0,
+              "p99_absolute_difference": 0.0,
+              "max_absolute_difference": 0.0,
+              "above_historical_atol": 0,
+              "counts_above_diagnostic_tolerances": {
+                "1e-05": 0,
+                "0.0001": 0,
+                "0.001": 0
+              }
+            },
+            "SB": {
+              "pairs": 1643,
+              "mean_signed_difference": 0.0,
+              "mean_absolute_difference": 0.0,
+              "median_absolute_difference": 0.0,
+              "p95_absolute_difference": 0.0,
+              "p99_absolute_difference": 0.0,
+              "max_absolute_difference": 0.0,
+              "above_historical_atol": 0,
+              "counts_above_diagnostic_tolerances": {
+                "1e-05": 0,
+                "0.0001": 0,
+                "0.001": 0
+              }
+            },
+            "STACH": {
+              "pairs": 1643,
+              "mean_signed_difference": 0.0,
+              "mean_absolute_difference": 0.0,
+              "median_absolute_difference": 0.0,
+              "p95_absolute_difference": 0.0,
+              "p99_absolute_difference": 0.0,
+              "max_absolute_difference": 0.0,
+              "above_historical_atol": 0,
+              "counts_above_diagnostic_tolerances": {
+                "1e-05": 0,
+                "0.0001": 0,
+                "0.001": 0
+              }
+            },
+            "RBBB": {
+              "pairs": 1643,
+              "mean_signed_difference": 0.0,
+              "mean_absolute_difference": 0.0,
+              "median_absolute_difference": 0.0,
+              "p95_absolute_difference": 0.0,
+              "p99_absolute_difference": 0.0,
+              "max_absolute_difference": 0.0,
+              "above_historical_atol": 0,
+              "counts_above_diagnostic_tolerances": {
+                "1e-05": 0,
+                "0.0001": 0,
+                "0.001": 0
+              }
+            },
+            "1AVB": {
+              "pairs": 1643,
+              "mean_signed_difference": 0.0,
+              "mean_absolute_difference": 0.0,
+              "median_absolute_difference": 0.0,
+              "p95_absolute_difference": 0.0,
+              "p99_absolute_difference": 0.0,
+              "max_absolute_difference": 0.0,
+              "above_historical_atol": 0,
+              "counts_above_diagnostic_tolerances": {
+                "1e-05": 0,
+                "0.0001": 0,
+                "0.001": 0
+              }
+            },
+            "PVC": {
+              "pairs": 1643,
+              "mean_signed_difference": 0.0,
+              "mean_absolute_difference": 0.0,
+              "median_absolute_difference": 0.0,
+              "p95_absolute_difference": 0.0,
+              "p99_absolute_difference": 0.0,
+              "max_absolute_difference": 0.0,
+              "above_historical_atol": 0,
+              "counts_above_diagnostic_tolerances": {
+                "1e-05": 0,
+                "0.0001": 0,
+                "0.001": 0
+              }
+            }
+          },
+          "decision_changes_by_field": {
+            "top1": 0,
+            "labels": 0,
+            "used_fallback": 0
+          }
+        },
+        "P8": {
+          "previous_scored": 2193,
+          "matched_scored": 2193,
+          "previously_scored_missing_now": 0,
+          "newly_scored": 0,
+          "score_differences_by_class": {
+            "AFIB": {
+              "pairs": 2193,
+              "mean_signed_difference": 0.0,
+              "mean_absolute_difference": 0.0,
+              "median_absolute_difference": 0.0,
+              "p95_absolute_difference": 0.0,
+              "p99_absolute_difference": 0.0,
+              "max_absolute_difference": 0.0,
+              "above_historical_atol": 0,
+              "counts_above_diagnostic_tolerances": {
+                "1e-05": 0,
+                "0.0001": 0,
+                "0.001": 0
+              }
+            },
+            "SB": {
+              "pairs": 2193,
+              "mean_signed_difference": 0.0,
+              "mean_absolute_difference": 0.0,
+              "median_absolute_difference": 0.0,
+              "p95_absolute_difference": 0.0,
+              "p99_absolute_difference": 0.0,
+              "max_absolute_difference": 0.0,
+              "above_historical_atol": 0,
+              "counts_above_diagnostic_tolerances": {
+                "1e-05": 0,
+                "0.0001": 0,
+                "0.001": 0
+              }
+            },
+            "STACH": {
+              "pairs": 2193,
+              "mean_signed_difference": 0.0,
+              "mean_absolute_difference": 0.0,
+              "median_absolute_difference": 0.0,
+              "p95_absolute_difference": 0.0,
+              "p99_absolute_difference": 0.0,
+              "max_absolute_difference": 0.0,
+              "above_historical_atol": 0,
+              "counts_above_diagnostic_tolerances": {
+                "1e-05": 0,
+                "0.0001": 0,
+                "0.001": 0
+              }
+            },
+            "NSR": {
+              "pairs": 2193,
+              "mean_signed_difference": 0.0,
+              "mean_absolute_difference": 0.0,
+              "median_absolute_difference": 0.0,
+              "p95_absolute_difference": 0.0,
+              "p99_absolute_difference": 0.0,
+              "max_absolute_difference": 0.0,
+              "above_historical_atol": 0,
+              "counts_above_diagnostic_tolerances": {
+                "1e-05": 0,
+                "0.0001": 0,
+                "0.001": 0
+              }
+            },
+            "RBBB": {
+              "pairs": 2193,
+              "mean_signed_difference": 0.0,
+              "mean_absolute_difference": 0.0,
+              "median_absolute_difference": 0.0,
+              "p95_absolute_difference": 0.0,
+              "p99_absolute_difference": 0.0,
+              "max_absolute_difference": 0.0,
+              "above_historical_atol": 0,
+              "counts_above_diagnostic_tolerances": {
+                "1e-05": 0,
+                "0.0001": 0,
+                "0.001": 0
+              }
+            },
+            "PAC": {
+              "pairs": 2193,
+              "mean_signed_difference": 0.0,
+              "mean_absolute_difference": 0.0,
+              "median_absolute_difference": 0.0,
+              "p95_absolute_difference": 0.0,
+              "p99_absolute_difference": 0.0,
+              "max_absolute_difference": 0.0,
+              "above_historical_atol": 0,
+              "counts_above_diagnostic_tolerances": {
+                "1e-05": 0,
+                "0.0001": 0,
+                "0.001": 0
+              }
+            },
+            "1AVB": {
+              "pairs": 2193,
+              "mean_signed_difference": 0.0,
+              "mean_absolute_difference": 0.0,
+              "median_absolute_difference": 0.0,
+              "p95_absolute_difference": 0.0,
+              "p99_absolute_difference": 0.0,
+              "max_absolute_difference": 0.0,
+              "above_historical_atol": 0,
+              "counts_above_diagnostic_tolerances": {
+                "1e-05": 0,
+                "0.0001": 0,
+                "0.001": 0
+              }
+            },
+            "PVC": {
+              "pairs": 2193,
+              "mean_signed_difference": 0.0,
+              "mean_absolute_difference": 0.0,
+              "median_absolute_difference": 0.0,
+              "p95_absolute_difference": 0.0,
+              "p99_absolute_difference": 0.0,
+              "max_absolute_difference": 0.0,
+              "above_historical_atol": 0,
+              "counts_above_diagnostic_tolerances": {
+                "1e-05": 0,
+                "0.0001": 0,
+                "0.001": 0
+              }
+            }
+          },
+          "decision_changes_by_field": {
+            "top1": 0,
+            "labels": 0,
+            "used_fallback": 0
+          }
+        },
+        "auxiliary": {
+          "matched_scored": 2193,
+          "score_differences_by_class": {
+            "Flutter": {
+              "pairs": 2193,
+              "mean_signed_difference": 0.0,
+              "mean_absolute_difference": 0.0,
+              "median_absolute_difference": 0.0,
+              "p95_absolute_difference": 0.0,
+              "p99_absolute_difference": 0.0,
+              "max_absolute_difference": 0.0,
+              "above_historical_atol": 0,
+              "counts_above_diagnostic_tolerances": {
+                "1e-05": 0,
+                "0.0001": 0,
+                "0.001": 0
+              }
+            },
+            "LBBB": {
+              "pairs": 2193,
+              "mean_signed_difference": 0.0,
+              "mean_absolute_difference": 0.0,
+              "median_absolute_difference": 0.0,
+              "p95_absolute_difference": 0.0,
+              "p99_absolute_difference": 0.0,
+              "max_absolute_difference": 0.0,
+              "above_historical_atol": 0,
+              "counts_above_diagnostic_tolerances": {
+                "1e-05": 0,
+                "0.0001": 0,
+                "0.001": 0
+              }
+            },
+            "2AVB": {
+              "pairs": 2193,
+              "mean_signed_difference": 0.0,
+              "mean_absolute_difference": 0.0,
+              "median_absolute_difference": 0.0,
+              "p95_absolute_difference": 0.0,
+              "p99_absolute_difference": 0.0,
+              "max_absolute_difference": 0.0,
+              "above_historical_atol": 0,
+              "counts_above_diagnostic_tolerances": {
+                "1e-05": 0,
+                "0.0001": 0,
+                "0.001": 0
+              }
+            },
+            "3AVB": {
+              "pairs": 2193,
+              "mean_signed_difference": 0.0,
+              "mean_absolute_difference": 0.0,
+              "median_absolute_difference": 0.0,
+              "p95_absolute_difference": 0.0,
+              "p99_absolute_difference": 0.0,
+              "max_absolute_difference": 0.0,
+              "above_historical_atol": 0,
+              "counts_above_diagnostic_tolerances": {
+                "1e-05": 0,
+                "0.0001": 0,
+                "0.001": 0
+              }
+            },
+            "LQTS": {
+              "pairs": 2193,
+              "mean_signed_difference": 0.0,
+              "mean_absolute_difference": 0.0,
+              "median_absolute_difference": 0.0,
+              "p95_absolute_difference": 0.0,
+              "p99_absolute_difference": 0.0,
+              "max_absolute_difference": 0.0,
+              "above_historical_atol": 0,
+              "counts_above_diagnostic_tolerances": {
+                "1e-05": 0,
+                "0.0001": 0,
+                "0.001": 0
+              }
+            },
+            "Paced": {
+              "pairs": 2193,
+              "mean_signed_difference": 0.0,
+              "mean_absolute_difference": 0.0,
+              "median_absolute_difference": 0.0,
+              "p95_absolute_difference": 0.0,
+              "p99_absolute_difference": 0.0,
+              "max_absolute_difference": 0.0,
+              "above_historical_atol": 0,
+              "counts_above_diagnostic_tolerances": {
+                "1e-05": 0,
+                "0.0001": 0,
+                "0.001": 0
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "archived_predictions_versus_current_native": {
+    "P4": {
+      "ASMI": {
+        "archived_rows": 294,
+        "matched_rows": 294,
+        "missing_scores": 0,
+        "diagnostics": {
+          "threshold": 0.67,
+          "score": {
+            "pairs": 294,
+            "mean_signed_difference": 3.785005181419606e-05,
+            "mean_absolute_difference": 7.643622859400146e-05,
+            "median_absolute_difference": 5.3554773330688477e-05,
+            "p95_absolute_difference": 0.00025650709867477403,
+            "p99_absolute_difference": 0.00033972173929214467,
+            "max_absolute_difference": 0.0003706216812133789,
+            "above_historical_atol": 253,
+            "counts_above_diagnostic_tolerances": {
+              "1e-05": 253,
+              "0.0001": 80,
+              "0.001": 0
+            }
+          },
+          "decision_changes": 0,
+          "minimum_archived_margin": 0.0008232760429381925,
+          "minimum_replayed_margin": 0.0007826852798461514,
+          "archived_margin_at_most_observed_max_error": 0
+        }
+      },
+      "LVH": {
+        "archived_rows": 224,
+        "matched_rows": 224,
+        "missing_scores": 0,
+        "diagnostics": {
+          "threshold": 0.705,
+          "score": {
+            "pairs": 224,
+            "mean_signed_difference": 4.7175334267584344e-05,
+            "mean_absolute_difference": 9.331614793544369e-05,
+            "median_absolute_difference": 5.811452865600586e-05,
+            "p95_absolute_difference": 0.0002842292189598083,
+            "p99_absolute_difference": 0.00044284909963607797,
+            "max_absolute_difference": 0.0005390644073486328,
+            "above_historical_atol": 203,
+            "counts_above_diagnostic_tolerances": {
+              "1e-05": 203,
+              "0.0001": 75,
+              "0.001": 0
+            }
+          },
+          "decision_changes": 0,
+          "minimum_archived_margin": 0.0005659627914428311,
+          "minimum_replayed_margin": 0.0005296039581298428,
+          "archived_margin_at_most_observed_max_error": 0
+        }
+      },
+      "IMI": {
+        "archived_rows": 206,
+        "matched_rows": 206,
+        "missing_scores": 0,
+        "diagnostics": {
+          "threshold": 0.635,
+          "score": {
+            "pairs": 206,
+            "mean_signed_difference": -7.1662451023037e-05,
+            "mean_absolute_difference": 9.99845672868988e-05,
+            "median_absolute_difference": 7.26059079170227e-05,
+            "p95_absolute_difference": 0.0003081709146499634,
+            "p99_absolute_difference": 0.0003954812884330747,
+            "max_absolute_difference": 0.0006194114685058594,
+            "above_historical_atol": 183,
+            "counts_above_diagnostic_tolerances": {
+              "1e-05": 183,
+              "0.0001": 82,
+              "0.001": 0
+            }
+          },
+          "decision_changes": 0,
+          "minimum_archived_margin": 0.0006755089759826749,
+          "minimum_replayed_margin": 0.0009414052963256925,
+          "archived_margin_at_most_observed_max_error": 0
+        }
+      },
+      "ISC_": {
+        "archived_rows": 238,
+        "matched_rows": 238,
+        "missing_scores": 0,
+        "diagnostics": {
+          "threshold": 0.595,
+          "score": {
+            "pairs": 238,
+            "mean_signed_difference": 3.3399992145034446e-05,
+            "mean_absolute_difference": 7.5842349735253e-05,
+            "median_absolute_difference": 4.456937313079834e-05,
+            "p95_absolute_difference": 0.00026898980140686033,
+            "p99_absolute_difference": 0.0004057154059410093,
+            "max_absolute_difference": 0.0005366206169128418,
+            "above_historical_atol": 197,
+            "counts_above_diagnostic_tolerances": {
+              "1e-05": 197,
+              "0.0001": 58,
+              "0.001": 0
+            }
+          },
+          "decision_changes": 0,
+          "minimum_archived_margin": 0.005765290260314915,
+          "minimum_replayed_margin": 0.005842359066009495,
+          "archived_margin_at_most_observed_max_error": 0
+        }
+      }
+    },
+    "P6": {
+      "archived_rows": 1643,
+      "matched_rows": 1643,
+      "missing_scores": 0,
+      "binary_set_changes": 0,
+      "window_count_changes": 0,
+      "diagnostics": {
+        "records": 1643,
+        "score": {
+          "pairs": 9858,
+          "mean_signed_difference": 1.918803942894717e-06,
+          "mean_absolute_difference": 3.469965247205115e-05,
+          "median_absolute_difference": 3.296047721057754e-06,
+          "p95_absolute_difference": 0.00017531085272169108,
+          "p99_absolute_difference": 0.00039391558262842294,
+          "max_absolute_difference": 0.0019060099985065693,
+          "above_historical_atol": 3687,
+          "counts_above_diagnostic_tolerances": {
+            "1e-05": 3687,
+            "0.0001": 1047,
+            "0.001": 9
+          }
+        },
+        "top1_changes": 1,
+        "archived_top_ties": 0,
+        "replayed_top_ties": 0,
+        "archived_margin_at_most_twice_observed_max_error": 1,
+        "changes_with_same_top_two_candidates": 1,
+        "changed_rows": {
+          "archived_winner_margin_min": 1.9937778590550792e-05,
+          "archived_winner_margin_max": 1.9937778590550792e-05,
+          "new_winner_margin_min": 5.589570144126643e-05,
+          "new_winner_margin_max": 5.589570144126643e-05,
+          "max_score_drift_on_changed_rows": 0.0004371784358766506,
+          "old_winner_minus_new_winner_after_replay_max": -5.589570144126643e-05
+        }
+      }
+    },
+    "P8": {
+      "archived_rows": 2193,
+      "matched_rows": 2193,
+      "missing_scores": 0,
+      "binary_set_changes": 0,
+      "window_count_changes": 0,
+      "diagnostics": {
+        "records": 2193,
+        "score": {
+          "pairs": 17544,
+          "mean_signed_difference": 1.8035703192393648e-07,
+          "mean_absolute_difference": 4.660540436017765e-05,
+          "median_absolute_difference": 8.646398782730103e-06,
+          "p95_absolute_difference": 0.00021313726902008048,
+          "p99_absolute_difference": 0.0004385367035865783,
+          "max_absolute_difference": 0.0017378628253936768,
+          "above_historical_atol": 8490,
+          "counts_above_diagnostic_tolerances": {
+            "1e-05": 8490,
+            "0.0001": 2590,
+            "0.001": 9
+          }
+        },
+        "top1_changes": 0,
+        "archived_top_ties": 0,
+        "replayed_top_ties": 0,
+        "archived_margin_at_most_twice_observed_max_error": 6,
+        "changes_with_same_top_two_candidates": 0,
+        "changed_rows": null
+      }
+    }
+  },
+  "matched_p4_panel_observations": 962,
+  "scored_route_union": {
+    "inputs": 2926,
+    "pre_counts": {
+      "pathology_only": 733,
+      "rhythm_only": 2193
+    },
+    "post_counts": {
+      "quarantine_not_assessed": 2926
+    },
+    "transitions": {
+      "pathology_only->quarantine_not_assessed": 733,
+      "rhythm_only->quarantine_not_assessed": 2193
+    },
+    "quarantine_assessed": 0,
+    "quarantine_rate_among_assessed": null,
+    "quarantine_rate_all_inputs": null,
+    "unit": "source_and_record_id_not_verified_patient",
+    "exact_key_overlap": 0,
+    "p4_keys": 733,
+    "rhythm_keys": 2193,
+    "historical_parent_population_recovered": false
+  },
+  "historical_preprocessing_certified": false,
+  "record_identifiers_exported": false
+}

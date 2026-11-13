@@ -1,0 +1,42 @@
+{
+  "schema": "TITAN_V45_TWO_COMMENT_PROTOCOLS_AND_SPLITS_V1",
+  "baseline_commit": "e5aa65ec1ef43cf5477e688c934577f5dcc4d75c",
+  "native_runtime_commit": "f4d6be30b0befea739cf2e35df1033230a1f5d10",
+  "frozen_protocol_sha256": {
+    "morphology": "bcc253559a28a56f4cc5aa2aa2dbbe34205ce435ff476adeff0708f5c3820dab",
+    "selective": "bcc253559a28a56f4cc5aa2aa2dbbe34205ce435ff476adeff0708f5c3820dab",
+    "runtime": "0a923bdd818d6117c363be2d1bc918ddf05c30ac8e16be6be465c2735102e082"
+  },
+  "protocol_code_paths": [
+    "configs/reviewer_experiments/two_comment_rigorous_v1.json",
+    "configs/reviewer_experiments/two_comment_gpu_v1.json"
+  ],
+  "inputs": {
+    "SPH": {
+      "calibration_ecgs": 12901,
+      "held_ecgs": 12869,
+      "split_sha256": "080288760b11bf6138bba5e3e5ebcfaa5f6c1da40af81c7090254f58458f46e4",
+      "grouping": "connected patient and exact-signal components; original held/calibration separation verified",
+      "reference": "mapped source statement presence/absence; not verified clinical negatives"
+    },
+    "LUDB": {
+      "eligible_ecgs": 200,
+      "source_version": "1.0.1",
+      "archive_sha256": "d03192c7361ab5deeaba3f0d46e274b9ecb0b74c9caf8964151e20f1b5a7df06",
+      "grouping": "source subject and exact waveform component; no authenticated cross-source patient linkage",
+      "reference": "explicit known source statements only; unknown findings remain unknown",
+      "fit_or_tune": false
+    },
+    "matched_morphology": {
+      "feature_receipt_sha256": "de65d38ef6c3c00cae2546858924ab87a7656e754fe4a52aaac7a2d7b328f3cb",
+      "stage_a_inventory_sha256": "798866dc1dc00d3e81c9fda28711dd0ea57fb57a7fc2ac0a415ad20a97f17107",
+      "rhythm": "sealed Chapman record-proxy grouping, deterministic train/calibration/held split, no new waveform acquisition",
+      "pathology": "official PTB-XL patient folds 1-7 train, fold 8 unused, frozen fold-9 calibration/internal evaluation; fold 10 excluded",
+      "assessment": "reuse development holdouts, not eligible for confirmation"
+    }
+  },
+  "individual_ecg_artifacts": "restricted in CEDIA only",
+  "independent_confirmatory_cohort": null,
+  "historical_quarantine": "WITHDRAW_HISTORICAL_CLAIM",
+  "authorized_external_gate_release": false
+}

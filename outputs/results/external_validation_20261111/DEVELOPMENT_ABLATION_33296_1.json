@@ -1,0 +1,638 @@
+{
+  "aggregate_csv_sha256": "53ed375503088addfe1c74d9346477e4cee7da3af521926d0b2a4fd5a4756c13",
+  "baseline_score_diagnostics": {
+    "P6": {
+      "descriptive/georgia/1AVB/negative": {
+        "median": 0.0247851880107487,
+        "n_ecg": 1010
+      },
+      "descriptive/georgia/1AVB/positive": {
+        "median": 0.7347657189428227,
+        "n_ecg": 87
+      },
+      "descriptive/georgia/AFIB/negative": {
+        "median": 0.0012325173855972941,
+        "n_ecg": 1054
+      },
+      "descriptive/georgia/AFIB/positive": {
+        "median": 0.9897989169824774,
+        "n_ecg": 43
+      },
+      "descriptive/georgia/RBBB/negative": {
+        "median": 0.002234545556613467,
+        "n_ecg": 1022
+      },
+      "descriptive/georgia/RBBB/positive": {
+        "median": 0.8789981832692646,
+        "n_ecg": 75
+      },
+      "descriptive/georgia/SB/negative": {
+        "median": 9.687897600112602e-06,
+        "n_ecg": 764
+      },
+      "descriptive/georgia/SB/positive": {
+        "median": 0.9610635877924153,
+        "n_ecg": 333
+      },
+      "descriptive/georgia/STACH/negative": {
+        "median": 0.0007013671794810182,
+        "n_ecg": 735
+      },
+      "descriptive/georgia/STACH/positive": {
+        "median": 0.9812049334376673,
+        "n_ecg": 362
+      },
+      "train/chapman_shaoxing/1AVB/negative": {
+        "median": 0.011320994173248384,
+        "n_ecg": 6580
+      },
+      "train/chapman_shaoxing/1AVB/positive": {
+        "median": 0.772118734565993,
+        "n_ecg": 154
+      },
+      "train/chapman_shaoxing/AFIB/negative": {
+        "median": 0.00013327416673611912,
+        "n_ecg": 5619
+      },
+      "train/chapman_shaoxing/AFIB/positive": {
+        "median": 0.9932826573215559,
+        "n_ecg": 1115
+      },
+      "train/chapman_shaoxing/RBBB/negative": {
+        "median": 0.0035380423481900353,
+        "n_ecg": 6441
+      },
+      "train/chapman_shaoxing/RBBB/positive": {
+        "median": 0.9413940059110795,
+        "n_ecg": 293
+      },
+      "train/chapman_shaoxing/SB/negative": {
+        "median": 0.0005577190627019093,
+        "n_ecg": 4226
+      },
+      "train/chapman_shaoxing/SB/positive": {
+        "median": 0.962915633921624,
+        "n_ecg": 2508
+      },
+      "train/chapman_shaoxing/STACH/negative": {
+        "median": 0.0009850484654563615,
+        "n_ecg": 5744
+      },
+      "train/chapman_shaoxing/STACH/positive": {
+        "median": 0.9845999240416545,
+        "n_ecg": 990
+      },
+      "train/cpsc2018/1AVB/negative": {
+        "median": 0.010129235452363407,
+        "n_ecg": 1507
+      },
+      "train/cpsc2018/1AVB/positive": {
+        "median": 0.9385100017592642,
+        "n_ecg": 174
+      },
+      "train/cpsc2018/AFIB/negative": {
+        "median": 0.00028894428739852074,
+        "n_ecg": 1374
+      },
+      "train/cpsc2018/AFIB/positive": {
+        "median": 0.9958460183091088,
+        "n_ecg": 307
+      },
+      "train/cpsc2018/RBBB/negative": {
+        "median": 0.0038953573036311765,
+        "n_ecg": 1231
+      },
+      "train/cpsc2018/RBBB/positive": {
+        "median": 0.9750538966312399,
+        "n_ecg": 450
+      },
+      "train/cpsc2018/SB/negative": {
+        "median": null,
+        "n_ecg": 0
+      },
+      "train/cpsc2018/SB/positive": {
+        "median": null,
+        "n_ecg": 0
+      },
+      "train/cpsc2018/STACH/negative": {
+        "median": null,
+        "n_ecg": 0
+      },
+      "train/cpsc2018/STACH/positive": {
+        "median": null,
+        "n_ecg": 0
+      },
+      "validation/chapman_shaoxing/1AVB/negative": {
+        "median": 0.011229715521638423,
+        "n_ecg": 797
+      },
+      "validation/chapman_shaoxing/1AVB/positive": {
+        "median": 0.8375834947812896,
+        "n_ecg": 15
+      },
+      "validation/chapman_shaoxing/AFIB/negative": {
+        "median": 0.00011637365168581754,
+        "n_ecg": 669
+      },
+      "validation/chapman_shaoxing/AFIB/positive": {
+        "median": 0.9928353901063542,
+        "n_ecg": 143
+      },
+      "validation/chapman_shaoxing/RBBB/negative": {
+        "median": 0.0029426713602959454,
+        "n_ecg": 777
+      },
+      "validation/chapman_shaoxing/RBBB/positive": {
+        "median": 0.941488431905613,
+        "n_ecg": 35
+      },
+      "validation/chapman_shaoxing/SB/negative": {
+        "median": 0.0006836277717466367,
+        "n_ecg": 505
+      },
+      "validation/chapman_shaoxing/SB/positive": {
+        "median": 0.9649240267170972,
+        "n_ecg": 307
+      },
+      "validation/chapman_shaoxing/STACH/negative": {
+        "median": 0.0007688572800357469,
+        "n_ecg": 691
+      },
+      "validation/chapman_shaoxing/STACH/positive": {
+        "median": 0.9838492641104736,
+        "n_ecg": 121
+      }
+    },
+    "P8": {
+      "descriptive/georgia/1AVB/negative": {
+        "median": 0.00824751378968358,
+        "n_ecg": 1010
+      },
+      "descriptive/georgia/1AVB/positive": {
+        "median": 0.7482122778892517,
+        "n_ecg": 87
+      },
+      "descriptive/georgia/AFIB/negative": {
+        "median": 0.00336818746291101,
+        "n_ecg": 1054
+      },
+      "descriptive/georgia/AFIB/positive": {
+        "median": 0.9910904169082642,
+        "n_ecg": 43
+      },
+      "descriptive/georgia/RBBB/negative": {
+        "median": 0.0005388999124988914,
+        "n_ecg": 1022
+      },
+      "descriptive/georgia/RBBB/positive": {
+        "median": 0.9386193156242371,
+        "n_ecg": 75
+      },
+      "descriptive/georgia/SB/negative": {
+        "median": 2.07506633387311e-06,
+        "n_ecg": 764
+      },
+      "descriptive/georgia/SB/positive": {
+        "median": 0.9776455163955688,
+        "n_ecg": 333
+      },
+      "descriptive/georgia/STACH/negative": {
+        "median": 0.0006943177431821823,
+        "n_ecg": 735
+      },
+      "descriptive/georgia/STACH/positive": {
+        "median": 0.9936740398406982,
+        "n_ecg": 362
+      },
+      "train/chapman_shaoxing/1AVB/negative": {
+        "median": 0.007524622138589621,
+        "n_ecg": 6580
+      },
+      "train/chapman_shaoxing/1AVB/positive": {
+        "median": 0.7721604108810425,
+        "n_ecg": 154
+      },
+      "train/chapman_shaoxing/AFIB/negative": {
+        "median": 0.0003922105534002185,
+        "n_ecg": 5619
+      },
+      "train/chapman_shaoxing/AFIB/positive": {
+        "median": 0.9936906099319458,
+        "n_ecg": 1115
+      },
+      "train/chapman_shaoxing/RBBB/negative": {
+        "median": 0.0007337763090617955,
+        "n_ecg": 6441
+      },
+      "train/chapman_shaoxing/RBBB/positive": {
+        "median": 0.972790539264679,
+        "n_ecg": 293
+      },
+      "train/chapman_shaoxing/SB/negative": {
+        "median": 6.454154208768159e-05,
+        "n_ecg": 4226
+      },
+      "train/chapman_shaoxing/SB/positive": {
+        "median": 0.9765595495700836,
+        "n_ecg": 2508
+      },
+      "train/chapman_shaoxing/STACH/negative": {
+        "median": 0.002695633564144373,
+        "n_ecg": 5744
+      },
+      "train/chapman_shaoxing/STACH/positive": {
+        "median": 0.9942494034767151,
+        "n_ecg": 990
+      },
+      "train/cpsc2018/1AVB/negative": {
+        "median": 0.00615202181506902,
+        "n_ecg": 1507
+      },
+      "train/cpsc2018/1AVB/positive": {
+        "median": 0.9415925443172455,
+        "n_ecg": 174
+      },
+      "train/cpsc2018/AFIB/negative": {
+        "median": 0.000847831106511876,
+        "n_ecg": 1374
+      },
+      "train/cpsc2018/AFIB/positive": {
+        "median": 0.9962614476680756,
+        "n_ecg": 307
+      },
+      "train/cpsc2018/RBBB/negative": {
+        "median": 0.0010684308035706636,
+        "n_ecg": 1231
+      },
+      "train/cpsc2018/RBBB/positive": {
+        "median": 0.9835798442363739,
+        "n_ecg": 450
+      },
+      "train/cpsc2018/SB/negative": {
+        "median": null,
+        "n_ecg": 0
+      },
+      "train/cpsc2018/SB/positive": {
+        "median": null,
+        "n_ecg": 0
+      },
+      "train/cpsc2018/STACH/negative": {
+        "median": null,
+        "n_ecg": 0
+      },
+      "train/cpsc2018/STACH/positive": {
+        "median": null,
+        "n_ecg": 0
+      },
+      "validation/chapman_shaoxing/1AVB/negative": {
+        "median": 0.00620327889919281,
+        "n_ecg": 797
+      },
+      "validation/chapman_shaoxing/1AVB/positive": {
+        "median": 0.8541689515113831,
+        "n_ecg": 15
+      },
+      "validation/chapman_shaoxing/AFIB/negative": {
+        "median": 0.0003717527724802494,
+        "n_ecg": 669
+      },
+      "validation/chapman_shaoxing/AFIB/positive": {
+        "median": 0.9926619529724121,
+        "n_ecg": 143
+      },
+      "validation/chapman_shaoxing/RBBB/negative": {
+        "median": 0.0005867452709935606,
+        "n_ecg": 777
+      },
+      "validation/chapman_shaoxing/RBBB/positive": {
+        "median": 0.9748343825340271,
+        "n_ecg": 35
+      },
+      "validation/chapman_shaoxing/SB/negative": {
+        "median": 7.595117494929582e-05,
+        "n_ecg": 505
+      },
+      "validation/chapman_shaoxing/SB/positive": {
+        "median": 0.9778449535369873,
+        "n_ecg": 307
+      },
+      "validation/chapman_shaoxing/STACH/negative": {
+        "median": 0.002285744994878769,
+        "n_ecg": 691
+      },
+      "validation/chapman_shaoxing/STACH/positive": {
+        "median": 0.9939392805099487,
+        "n_ecg": 121
+      }
+    }
+  },
+  "code15_inputs_opened": false,
+  "feature_cache_sha256": "9269716a656211fbe81e3ede45b0ea09eaa2437442db8dd2a25fd4006c36592a",
+  "mimic_inputs_opened": false,
+  "promotion": "NOT_ASSESSED_DEVELOPMENT_ONLY",
+  "protocol_sha256": "ead2d7fb0af50cc1619f32a943ceac6cf72a448c2c57d7b9ffb28fb310c21583",
+  "runs": {
+    "P6": {
+      "anchored_linear_residual_v1": {
+        "georgia_descriptive": {
+          "delta_ci95": [
+            0.012265512654400488,
+            0.044992037173093406
+          ],
+          "delta_valid_replicates": 1000,
+          "empty_sets": [
+            262,
+            272
+          ],
+          "five_endpoint_empty_set_delta": 0.009115770282588892,
+          "macro_brier_delta": -0.006908936564477777,
+          "macro_f1": [
+            0.771187493995034,
+            0.7984916938229325
+          ],
+          "macro_f1_ci95": [
+            [
+              0.7363399678738468,
+              0.8000234241856167
+            ],
+            [
+              0.7652959708290626,
+              0.8279013973543137
+            ]
+          ],
+          "macro_f1_classes": [
+            "AFIB",
+            "SB",
+            "STACH",
+            "RBBB",
+            "1AVB"
+          ],
+          "macro_f1_delta": 0.02730419982789838,
+          "minimum_sensitivity_change": -0.02298850574712641,
+          "observed_metric_gate_pass": false
+        }
+      },
+      "mlp_asymmetric_negative_gamma2": {
+        "checkpoint_sha256": "a5bc0ead9769c34ac35750ae889a4cdcd471a5355e10146f1312d43430113b7a",
+        "epoch": 7,
+        "georgia_descriptive": {
+          "delta_ci95": [
+            0.01307896909815332,
+            0.043803702522506344
+          ],
+          "delta_valid_replicates": 1000,
+          "empty_sets": [
+            262,
+            261
+          ],
+          "five_endpoint_empty_set_delta": -0.000911577028258892,
+          "macro_brier_delta": -0.003074923082633448,
+          "macro_f1": [
+            0.771187493995034,
+            0.7992051783777245
+          ],
+          "macro_f1_ci95": [
+            [
+              0.7363399678738468,
+              0.8000234241856167
+            ],
+            [
+              0.765030964490622,
+              0.8292924164333603
+            ]
+          ],
+          "macro_f1_classes": [
+            "AFIB",
+            "SB",
+            "STACH",
+            "RBBB",
+            "1AVB"
+          ],
+          "macro_f1_delta": 0.028017684382690457,
+          "minimum_sensitivity_change": 0.0,
+          "observed_metric_gate_pass": false
+        },
+        "history": [
+          0.14513852693794702,
+          0.14324840711829198,
+          0.14613238410262452,
+          0.1395960627028766,
+          0.13516480775721942,
+          0.13385539978539227,
+          0.13373830400615336,
+          0.13723247494316643,
+          0.13488638402893685,
+          0.13441315802081757
+        ],
+        "validation_bce": 0.13373830400615336
+      },
+      "mlp_balanced_bce": {
+        "checkpoint_sha256": "66d37836f6646c69be3d558592fbc10a6105de01f76aaf3083e3a9ee0ec5503d",
+        "epoch": 6,
+        "georgia_descriptive": {
+          "delta_ci95": [
+            -0.000625368093084157,
+            0.03521019026836845
+          ],
+          "delta_valid_replicates": 1000,
+          "empty_sets": [
+            262,
+            279
+          ],
+          "five_endpoint_empty_set_delta": 0.01549680948040108,
+          "macro_brier_delta": -0.007484423668585091,
+          "macro_f1": [
+            0.771187493995034,
+            0.7878204451414692
+          ],
+          "macro_f1_ci95": [
+            [
+              0.7363399678738468,
+              0.8000234241856167
+            ],
+            [
+              0.7541504147269289,
+              0.8176819801860723
+            ]
+          ],
+          "macro_f1_classes": [
+            "AFIB",
+            "SB",
+            "STACH",
+            "RBBB",
+            "1AVB"
+          ],
+          "macro_f1_delta": 0.01663295114643515,
+          "minimum_sensitivity_change": -0.03448275862068961,
+          "observed_metric_gate_pass": false
+        },
+        "history": [
+          0.12276041147809981,
+          0.1225513658448763,
+          0.12223815191522427,
+          0.11870736224616098,
+          0.1191770384623421,
+          0.11548880660208007,
+          0.11621316906894463,
+          0.119330039291236,
+          0.11876938564626487
+        ],
+        "validation_bce": 0.11548880660208007
+      }
+    },
+    "P8": {
+      "anchored_linear_residual_v1": {
+        "georgia_descriptive": {
+          "delta_ci95": [
+            0.004704780813016489,
+            0.04245582454156221
+          ],
+          "delta_valid_replicates": 1000,
+          "empty_sets": [
+            260,
+            285
+          ],
+          "five_endpoint_empty_set_delta": 0.02278942570647219,
+          "macro_brier_delta": -0.008450775804650212,
+          "macro_f1": [
+            0.7747354401405196,
+            0.7970132991310054
+          ],
+          "macro_f1_ci95": [
+            [
+              0.7382119546850942,
+              0.8036832503720761
+            ],
+            [
+              0.7614322850283541,
+              0.8277344712435616
+            ]
+          ],
+          "macro_f1_classes": [
+            "AFIB",
+            "SB",
+            "STACH",
+            "RBBB",
+            "1AVB"
+          ],
+          "macro_f1_delta": 0.022277858990485688,
+          "minimum_sensitivity_change": -0.046511627906976716,
+          "observed_metric_gate_pass": false
+        }
+      },
+      "mlp_asymmetric_negative_gamma2": {
+        "checkpoint_sha256": "ceb154fcfd1dfed4293e575f1b366d744faaecb64b7692af5ef4122d852213a2",
+        "epoch": 6,
+        "georgia_descriptive": {
+          "delta_ci95": [
+            -0.0008268916018336224,
+            0.03677529249432733
+          ],
+          "delta_valid_replicates": 1000,
+          "empty_sets": [
+            260,
+            267
+          ],
+          "five_endpoint_empty_set_delta": 0.006381039197812216,
+          "macro_brier_delta": -0.0045428261113642674,
+          "macro_f1": [
+            0.7747354401405196,
+            0.7927762538684626
+          ],
+          "macro_f1_ci95": [
+            [
+              0.7382119546850942,
+              0.8036832503720761
+            ],
+            [
+              0.7572228778206602,
+              0.8232785350439888
+            ]
+          ],
+          "macro_f1_classes": [
+            "AFIB",
+            "SB",
+            "STACH",
+            "RBBB",
+            "1AVB"
+          ],
+          "macro_f1_delta": 0.018040813727942907,
+          "minimum_sensitivity_change": -0.01933701657458564,
+          "observed_metric_gate_pass": false
+        },
+        "history": [
+          0.13894855313234442,
+          0.1375611428465183,
+          0.14134524716556676,
+          0.1356367284678251,
+          0.13234545571009657,
+          0.13050110501479964,
+          0.13093892643929775,
+          0.13118822222669935,
+          0.13204349564343265
+        ],
+        "validation_bce": 0.13050110501479964
+      },
+      "mlp_balanced_bce": {
+        "checkpoint_sha256": "bdc923cd19c5899bd78bb05a2e8beaf4b856fc45980edc152ff4d3552a7f3823",
+        "epoch": 7,
+        "georgia_descriptive": {
+          "delta_ci95": [
+            -0.0026092656059001564,
+            0.031757556596613536
+          ],
+          "delta_valid_replicates": 1000,
+          "empty_sets": [
+            260,
+            283
+          ],
+          "five_endpoint_empty_set_delta": 0.020966271649954404,
+          "macro_brier_delta": -0.00903885230702749,
+          "macro_f1": [
+            0.7747354401405196,
+            0.789324323763258
+          ],
+          "macro_f1_ci95": [
+            [
+              0.7382119546850942,
+              0.8036832503720761
+            ],
+            [
+              0.7546191913574133,
+              0.8194295225561735
+            ]
+          ],
+          "macro_f1_classes": [
+            "AFIB",
+            "SB",
+            "STACH",
+            "RBBB",
+            "1AVB"
+          ],
+          "macro_f1_delta": 0.014588883622738313,
+          "minimum_sensitivity_change": -0.04143646408839785,
+          "observed_metric_gate_pass": false
+        },
+        "history": [
+          0.1275637357584881,
+          0.12428224536350686,
+          0.1257039080454142,
+          0.11950304854363251,
+          0.11910902555555439,
+          0.1199262581846464,
+          0.11798025147215958,
+          0.11987711978413271,
+          0.11952484712767428,
+          0.11909408809741832
+        ],
+        "validation_bce": 0.11798025147215958
+      }
+    }
+  },
+  "scope": "PR6 DEVELOPMENT ONLY, prospectively specified before CODE outcomes; Georgia was inspected in Stage A and is not a new confirmation cohort",
+  "split_ecgs": {
+    "descriptive": 1097,
+    "train": 8415,
+    "validation": 812
+  }
+}

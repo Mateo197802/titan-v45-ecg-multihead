@@ -1,0 +1,70 @@
+{
+  "schema": "TITAN_V45_SPH_INDEPENDENT_BINARY_BOOTSTRAP_V1",
+  "endpoints": {
+    "P6:AFIB": {
+      "binary_metrics": 6,
+      "primary_and_sensitivity": true
+    },
+    "P6:SB": {
+      "binary_metrics": 6,
+      "primary_and_sensitivity": true
+    },
+    "P6:STACH": {
+      "binary_metrics": 6,
+      "primary_and_sensitivity": true
+    },
+    "P6:RBBB": {
+      "binary_metrics": 6,
+      "primary_and_sensitivity": true
+    },
+    "P6:PVC": {
+      "binary_metrics": 6,
+      "primary_and_sensitivity": true
+    },
+    "P8:AFIB": {
+      "binary_metrics": 6,
+      "primary_and_sensitivity": true
+    },
+    "P8:SB": {
+      "binary_metrics": 6,
+      "primary_and_sensitivity": true
+    },
+    "P8:STACH": {
+      "binary_metrics": 6,
+      "primary_and_sensitivity": true
+    },
+    "P8:RBBB": {
+      "binary_metrics": 6,
+      "primary_and_sensitivity": true
+    },
+    "P8:PAC": {
+      "binary_metrics": 6,
+      "primary_and_sensitivity": true
+    },
+    "P8:PVC": {
+      "binary_metrics": 6,
+      "primary_and_sensitivity": true
+    },
+    "P4:ASMI": {
+      "binary_metrics": 6,
+      "primary_and_sensitivity": true
+    },
+    "P4:LVH": {
+      "binary_metrics": 6,
+      "primary_and_sensitivity": true
+    },
+    "P4:IMI": {
+      "binary_metrics": 6,
+      "primary_and_sensitivity": true
+    }
+  },
+  "individual_records_exported": false,
+  "script_sha256": "7421d662914c385469c97de8465bf4cd107132610c867813e0507df4b5b9cf25",
+  "inputs": {
+    "metadata": "c6f8dc5197758a3970aae554f8b6ee884d96656b121879bc0eb1adf367ea6d86",
+    "ledger": "4a3a1e61b1784e06190d5caaa089fca04ef84792acb3a5f9fc1af3f9c1173462",
+    "duplicate_index": "24eae465775c82c6ffa8fa9739a66d59f294f9de9190b903ea2b417b978f68ea",
+    "aggregate": "09f93d9f310baaca672a33b0f369593cd88835a8ef08dc9929945c57cf18c988",
+    "protocol": "d788ad8cca94793cebb738496acc131e82b1ca1900976f11020b99a79a5fc366"
+  }
+}

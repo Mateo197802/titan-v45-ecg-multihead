@@ -1,0 +1,311 @@
+{
+  "schema": "TITAN_V45_SPH_FROZEN_TRANSFER_PROTOCOL_V1",
+  "stage": "full_population",
+  "frozen_before_performance": true,
+  "expected_source_records": 25770,
+  "source_population": {
+    "dataset": "SPH ECG dataset V1",
+    "institution": "Shandong Provincial Hospital",
+    "collection_doi": "10.6084/m9.figshare.c.5779802.v1",
+    "signals_doi": "10.6084/m9.figshare.17912444.v1",
+    "metadata_doi": "10.6084/m9.figshare.17912441.v1",
+    "dictionary_doi": "10.6084/m9.figshare.17912507.v1",
+    "records": 25770,
+    "patients": 24666,
+    "patients_with_repeated_ecgs": 1066,
+    "sampling_rate_hz": 500,
+    "lead_order": ["I", "II", "III", "aVR", "aVL", "aVF", "V1", "V2", "V3", "V4", "V5", "V6"],
+    "stored_dtype": "float16",
+    "physical_units": "not provided in HDF5 attributes; no mV conversion",
+    "minimum_samples_observed": 5000,
+    "maximum_samples_observed": 28000
+  },
+  "source_sha256": {
+    "code.csv": "4d22759fd19d37133c78d439a5726f9e0bc412cc17483c424926ce9abb33c8fc",
+    "metadata.csv": "c6f8dc5197758a3970aae554f8b6ee884d96656b121879bc0eb1adf367ea6d86",
+    "records.tar.gz": "cebad89d7d25663272eeb45545712d76302d334bb107cdc23fd15390c9194e55"
+  },
+  "preperformance_controls": {
+    "aggregates": {
+      "control_receipt": {
+        "path": "outputs/results/external_sph/sph_preperformance_controls_20261108.json",
+        "sha256": "c49c2be0200aef2ceedc9b395db5d8fdc3a64ab58e5520dfd1b21fc433a3e419"
+      },
+      "source_inventory": {
+        "path": "outputs/results/external_sph/source_inventory_32617.json",
+        "sha256": "8321abf1d91f0a97ae65b8e9d3a47ba4f5460055ac7780fd84ad2cc86efd2cf7",
+        "cedia_job_id": "32617",
+        "job_commit": "f6e27fa"
+      },
+      "duplicate_amplitude": {
+        "path": "outputs/results/external_sph/sph_duplicate_amplitude_audit_32627.json",
+        "sha256": "8924d7331aaccc1dd0d86ddb3cbfe02f124bb410c067724842a1b88926469bbc",
+        "cedia_job_id": "32627",
+        "job_commit": "93e942328901d5fd7fa11f9bf2b3826317d235ed"
+      },
+      "retained_source_staging": {
+        "path": "outputs/results/external_sph/sph_retained_source_staging_receipt_32633.json",
+        "sha256": "a117e0ed4df666ff3267120e7beb0070dcea1b3baefad0c0f56859615d5f329f",
+        "cedia_job_id": "32633",
+        "job_commit": "ca6df11212cc3af9d19a7361bcc43eeffd70d899"
+      },
+      "cross_source_signature": {
+        "path": "outputs/results/external_sph/sph_retained_source_signature_audit_32633.json",
+        "sha256": "6b290dd80d9d30aa0758aa16e7ac3963b950894ad43d501236804637dd9f47d8",
+        "cedia_job_id": "32633",
+        "job_commit": "ca6df11212cc3af9d19a7361bcc43eeffd70d899"
+      }
+    },
+    "private_duplicate_index_sha256": "24eae465775c82c6ffa8fa9739a66d59f294f9de9190b903ea2b417b978f68ea",
+    "duplicate_policy": {
+      "primary_analysis": "retain all eligible ECG rows, including exact duplicates",
+      "exact_groups": 168,
+      "excess_duplicate_records": 168,
+      "records_in_duplicate_groups": 336,
+      "groups_crossing_patient_ids": 0,
+      "groups_with_primary_code_set_conflicts": 25,
+      "sensitivity": "for each endpoint, exclude every member only from that endpoint analysis if binary target presence differs within its exact-waveform group",
+      "bootstrap_unit": "connected components of patient IDs linked by exact waveform SHA-256"
+    },
+    "independence_screen": {
+      "sph_records_compared": 25770,
+      "retained_chapman_shaoxing_ningbo_records": 2193,
+      "retained_ptbxl_fold10_records": 733,
+      "cross_source_signature_groups": 0,
+      "technical_failures": 0,
+      "independence_certified": false,
+      "limitation": "historical V3F/V3AG pretraining and fine-tuning sources and splits are incomplete"
+    }
+  },
+  "profiles": {
+    "P6": {
+      "designation": "diagnostic profile",
+      "backbone": "backbone-v3f-original.pt",
+      "specialist": "specialists-v3p-e008-primary6-diagnostic.pt",
+      "classes": ["AFIB", "SB", "STACH", "RBBB", "1AVB", "PVC"],
+      "aggregation": "mean raw logits over all rhythm windows, then sigmoid and frozen thresholds",
+      "fallback": false
+    },
+    "P8": {
+      "designation": "candidate profile",
+      "backbone": "backbone-v3f-original.pt",
+      "specialist": "specialists-v3q-primary8-best-candidate.pt",
+      "classes": ["AFIB", "SB", "STACH", "NSR", "RBBB", "PAC", "1AVB", "PVC"],
+      "aggregation": "sigmoid each window logit, then average membership over all rhythm windows and apply frozen thresholds",
+      "fallback": "existing top-1 when no threshold is crossed; reported separately, not quarantine or human review"
+    },
+    "P4": {
+      "designation": "calibrated pathology profile",
+      "backbone": "backbone-v3ag-pathology.pt",
+      "specialist": "specialists-v3ag-primary4-calibrated.pt",
+      "classes": ["ASMI", "LVH", "IMI", "ISC_"],
+      "aggregation": "one fixed first-window probability per ECG and the checkpoint's frozen thresholds",
+      "fallback": false
+    }
+  },
+  "model_sha256": {
+    "backbone-v3f-original.pt": "ca5d4dcb4b9828e6c4339800fe81ec27f32d9b09a090bb57503bfb56746a8da8",
+    "specialists-v3p-e008-primary6-diagnostic.pt": "9c5a9265a7155e1206c551cc4e6d645b86363ba3dbdeb7baf7b9f173c314be3d",
+    "specialists-v3q-primary8-best-candidate.pt": "b30cb2bbb45f1231c93ff1c196aa966b57b49831cadb296131c0283e7b0ceb02",
+    "backbone-v3ag-pathology.pt": "bf71e4cf8acc34031cb3611c7031e0649822e705fd7dcea354a3ea583ce920ee",
+    "specialists-v3ag-primary4-calibrated.pt": "cf5091e962fffb3254b1a71fe57236dd82ea0139093df192511499d931391dbc"
+  },
+  "model_architecture": {
+    "family": "1D residual SE backbone with Transformer encoder and specialist MLPs",
+    "input_shape": [12, 1250],
+    "backbone_parameters": 58352219,
+    "input_leads": 12,
+    "morphology_features": 10,
+    "global_rhythm_outputs": 14,
+    "global_pathology_outputs": 7,
+    "d_model": 640,
+    "transformer_layers": 9,
+    "attention_heads": 10,
+    "feedforward_width": 2560,
+    "stage_channels": [96, 192, 384, 768],
+    "backbone_dropout": 0.15,
+    "rhythm_specialist_feature_width": 681,
+    "pathology_specialist_feature_width": 670,
+    "P6_and_P8_share_backbone": true,
+    "P4_uses_separate_backbone": true
+  },
+  "classes": {
+    "P6": ["AFIB", "SB", "STACH", "RBBB", "1AVB", "PVC"],
+    "P8": ["AFIB", "SB", "STACH", "NSR", "RBBB", "PAC", "1AVB", "PVC"],
+    "P4": ["ASMI", "LVH", "IMI", "ISC_"]
+  },
+  "thresholds": {
+    "P6": {
+      "AFIB": 0.82,
+      "SB": 0.835,
+      "STACH": 0.7749999999999999,
+      "RBBB": 0.5149999999999999,
+      "1AVB": 0.57,
+      "PVC": 0.42999999999999994
+    },
+    "P8": {
+      "AFIB": 0.8,
+      "SB": 0.55,
+      "STACH": 0.8,
+      "NSR": 0.525,
+      "RBBB": 0.725,
+      "PAC": 0.45,
+      "1AVB": 0.775,
+      "PVC": 0.725
+    },
+    "P4": {
+      "ASMI": 0.6699999999999999,
+      "LVH": 0.705,
+      "IMI": 0.635,
+      "ISC_": 0.595
+    }
+  },
+  "signal_processing": {
+    "input_sample_rate_hz": 500,
+    "output_sample_rate_hz": 125,
+    "filter": "third-order Butterworth bandpass 0.5-45 Hz, causal lfilter",
+    "resampling": "polyphase 500 Hz to 125 Hz",
+    "normalization": "lead-wise z-score with existing 1e-6 standard-deviation floor",
+    "morphology_implementation_sha256": "2bd1c1822ed72d1531b1f62712d8007c7e2f21009056ad1a3ee905f37051fc3d",
+    "rhythm_window_seconds": 10,
+    "rhythm_stride_seconds": 5,
+    "rhythm_terminal_window": "existing deterministic terminal-window rule",
+    "P4_context_seconds": 12,
+    "P4_scored_window_seconds": 10,
+    "technical_duration_min_seconds": 10,
+    "technical_duration_max_seconds": 60,
+    "physical_unit_conversion": false
+  },
+  "endpoints": [
+    {"profile": "P6", "name": "AFIB", "codes": [50], "reference": "AF statement on this ECG; not incident AF"},
+    {"profile": "P6", "name": "SB", "codes": [22], "reference": "sinus bradycardia ECG statement"},
+    {"profile": "P6", "name": "STACH", "codes": [21], "reference": "sinus tachycardia ECG statement"},
+    {"profile": "P6", "name": "RBBB", "codes": [106], "reference": "complete right bundle-branch block ECG statement; code 105 excluded"},
+    {"profile": "P6", "name": "PVC", "codes": [60], "reference": "ventricular premature-complex statement; not beat detection"},
+    {"profile": "P8", "name": "AFIB", "codes": [50], "reference": "AF statement on this ECG; not incident AF"},
+    {"profile": "P8", "name": "SB", "codes": [22], "reference": "sinus bradycardia ECG statement"},
+    {"profile": "P8", "name": "STACH", "codes": [21], "reference": "sinus tachycardia ECG statement"},
+    {"profile": "P8", "name": "RBBB", "codes": [106], "reference": "complete right bundle-branch block ECG statement; code 105 excluded"},
+    {"profile": "P8", "name": "PAC", "codes": [30], "reference": "atrial premature-complex ECG statement; code 31 excluded"},
+    {"profile": "P8", "name": "PVC", "codes": [60], "reference": "ventricular premature-complex statement; not beat detection"},
+    {"profile": "P4", "name": "ASMI", "codes": [165], "reference": "anteroseptal MI ECG statement; no acuity inference"},
+    {"profile": "P4", "name": "LVH", "codes": [142], "reference": "ECG LVH statement; not imaging-confirmed hypertrophy"},
+    {"profile": "P4", "name": "IMI", "codes": [161], "reference": "inferior MI ECG statement; no acuity inference"}
+  ],
+  "reference_policy": {
+    "positive": "presence of the frozen primary code in the source ECG record",
+    "negative": "target statement not recorded; not adjudicated clinical absence",
+    "multiple_statements": "preserve multiple primary codes on each ECG",
+    "not_evaluable": {"NSR": [1], "1AVB": [82], "ISC_": [145, 146]},
+    "excluded_from_primary_mapping": {"RBBB": [105], "PAC": [31]}
+  },
+  "metrics": {
+    "ece_bins": 10,
+    "metrics_per_endpoint": ["confusion_counts", "accuracy", "sensitivity", "specificity", "PPV", "NPV", "F1", "AUROC", "average_precision", "Brier_score", "ECE"],
+    "pooled_profile_accuracy": false,
+    "report_full_source_support_and_scored_denominators": true
+  },
+  "reporting": {
+    "input": "aggregate endpoint report only; never a record-level ledger",
+    "script": "scripts/external_validation/plot_sph_aggregate.py",
+    "formats": ["png", "pdf"],
+    "outputs": [
+      "sph_profile_coverage",
+      "sph_endpoint_metrics",
+      "sph_duplicate_sensitivity"
+    ],
+    "render_environment": {
+      "python": "3.12.10",
+      "matplotlib": "3.11.0",
+      "numpy": "2.4.6",
+      "pillow": "12.3.0"
+    }
+  },
+  "bootstrap": {
+    "unit": "patient connected component from exact duplicate links",
+    "method": "unstratified percentile cluster bootstrap",
+    "replicates": 2000,
+    "seed": 197813,
+    "rng": "numpy.PCG64",
+    "confidence_level": 0.95,
+    "endpoint_seed_rule": "base seed plus zero-based index in the frozen endpoint array",
+    "report_valid_and_invalid_replicates": true
+  },
+  "inference": {
+    "records_per_batch": 16,
+    "seed": 197813,
+    "deterministic_algorithms": true,
+    "cudnn_deterministic": true,
+    "cudnn_benchmark": false,
+    "allow_tf32": false,
+    "cublas_workspace_config": ":4096:8",
+    "model_mode": "eval",
+    "gradients_enabled": false,
+    "route_uses_reference_labels": false
+  },
+  "environment": {
+    "device_contains": "A100",
+    "versions": {
+      "python": "3.11.14",
+      "torch": "2.10.0+cu128",
+      "cuda": "12.8",
+      "numpy": "2.2.6",
+      "scipy": "1.15.3",
+      "h5py": "3.13.0",
+      "wfdb": "4.3.0",
+      "zstandard": "0.23.0"
+    },
+    "python_deps_archive_sha256": "5ea9a481f100342a4b7c9aaf98294659340d05ba20dba645007f37a3fbb6cc45",
+    "h5py_deps_archive_sha256": "e2ad92e7a9258e6ca5872b87d5cdde2ab1b6fb2d80cf69f890043e58df8baf61",
+    "omp_threads": 4,
+    "mkl_threads": 4,
+    "torch_threads": 2
+  },
+  "quarantine": {
+    "historical_policy_recovered": false,
+    "rate": null,
+    "interpretation": "not assessed, not zero; P8 top-1 fallback is a separate rule"
+  },
+  "implementation_sha256": {
+    "docs/external_validation/sph_protocol.md": "4d03783deac6d749061dc2045a29b2443bc604eff52ef4fbc4ff8eb3bff14d2c",
+    "docs/external_validation/sph_dataset_audit.md": "42149579bf57bf3024aef232681761558ec02d28fa0a52cfdbd930f61263b89b",
+    "docs/external_validation/sph_independence_assessment.md": "d196df3dc4bc288c976410b475f87b8789093fb71f55d45af29350de07d5491e",
+    "docs/external_validation/sph_label_harmonization.md": "b8d5506ab8593792a9590cae9b09b152bce52aa84d2d3f0e0ddf0a1ecfe41996",
+    "docs/external_validation/sph_label_harmonization.json": "29b10787e43893858efb1728c972c9126b27d141cf1c370008fcc26ffcc23cda",
+    "scripts/external_validation/score_sph_frozen.py": "4139e17fcc87d8252466f28860a770efd2a9587962ab4ec878917b6bd0d7a196",
+    "scripts/external_validation/plot_sph_aggregate.py": "05fdf03b04425b3e52566a86003e3047995a837b06e8502edb0633708b4260e5",
+    "scripts/external_validation/evaluate_sph_ledger.py": "87a289f5e214ec75c154f68497803602dd807abe3a331b596526268d2e9fab02",
+    "scripts/external_validation/audit_sph_cross_source.py": "6e9f5b3f943c1ec74848c0818c9c09fc9c250f24a6bc4ea23c010fd2c4766003",
+    "scripts/external_validation/audit_sph_duplicates.py": "da0eeb0c560176790b8cadbe14e28accecc9ce8e46b189b215b958de80a5637c",
+    "scripts/external_validation/stage_retained_wfdb_archives.py": "a790eabf0a052af9e91145ad7b7ed76c0d6587fde4bca1fd684c381f7f0b1eff",
+    "scripts/cedia/audit_sph_cross_source.sbatch": "2a73873517e095bf18884fa638881f2878b1d309817dcb9d57a4e304cdffa325",
+    "scripts/cedia/score_sph_frozen.sbatch": "1d2ee95c58258b7caead810e3551e0e835eae95cf1f9d76fe0f4d388359f535a",
+    "scripts/cedia/evaluate_sph_ledger.sbatch": "6d8fcfb448e1a41cf4429cba0d6b1e8a6578ac43243d408d39465412990fdec8",
+    "scripts/cedia/audit_sph_duplicates.sbatch": "f04273561759e4762a160653c286d5249e6140382ee2e69ff575694b77b946c4",
+    "scripts/cedia/recovery_candidates/morphology_features_v4.py": "2bd1c1822ed72d1531b1f62712d8007c7e2f21009056ad1a3ee905f37051fc3d",
+    "src/titan_v45/data/sph.py": "210e5ec70f1263521c21287a0bd825987c08c67c3b9e0242fadae6cd0fe9aa2b",
+    "src/titan_v45/data/sph_waveform.py": "d1b980b40ef2fca6492e42ccca12750fd2af1f79401eb40d92cc6a06812710a0",
+    "src/titan_v45/data/reconstructed.py": "cdef92f694b8a950076131c07e65177984cdac2db3b1a11b1eacb3e569f42275",
+    "src/titan_v45/data/preprocessing.py": "a344f85502f10008cf43a30fd378d656eea8ab63dc313ffa423f1df17717fc2a",
+    "src/titan_v45/data/sph_cross_source.py": "7f067f834d6db61d76f9e9422b30a8b4e62df2124a654ed68640bd5758fbcea9",
+    "src/titan_v45/data/sph_duplicates.py": "715dcbfba1be30c35704432670091896267c99aba026bfcaef80d44784e0fbd9",
+    "src/titan_v45/evaluation/sph_scoring.py": "17944e3e38e681a440eeef31442113eeae9894b25a23e8e7b526ce20644f2d3d",
+    "src/titan_v45/evaluation/sph_report.py": "892b9613acb857d649d05c36901a1c7e7986c8d18fb112f63582ac7cb59da1b7",
+    "src/titan_v45/evaluation/revision_report.py": "e0dfc3c824e6d08ae7c82069190fe67c15f1b41b17d295f1f02fd4338ca3f3d9",
+    "src/titan_v45/evaluation/decision_policy.py": "9f4c96c74371e0aa7b044191feed6ddc56a944e0b86197444ce6f1350b499b79",
+    "src/titan_v45/models/backbone.py": "0ecfd5988ed2f5f38c262cd1cb80681a173eb93d12963e8e4f3bde7f556cc783",
+    "src/titan_v45/models/frozen_rhythm.py": "37093e0c4825cfa5162e967409e30f60923bee57e1b8db0e46275011eefe00d1",
+    "src/titan_v45/models/frozen_pathology.py": "f59e05c2b3d8eea963bb209baa497ff2a12a27b02f5eb78a8bb72724b0ebfb8a",
+    "src/titan_v45/models/features.py": "b7c5549508b2280ca14e32ff92880cc1ced97bb8d588a7ac313ed47d4096716f",
+    "src/titan_v45/models/factory.py": "47116df2b298d22cdbcc1afe5fbc1f814e9ad538b27f0c83d940189108293457",
+    "src/titan_v45/models/specialists.py": "696ce4ac05d8181cae0e8f21d2c5dee572bf04a49d4291df7ae0bd2f13850273",
+    "src/titan_v45/cascade/policy.py": "83bb9a82b06e187882a208e713a6ce170d393f3b107f0c6a2fdb71c57183ab4f",
+    "src/titan_v45/cascade/run_pathology.py": "73387901e3dddf00fda82453a32fe605b44a58e0fee3948720b289e366704f7c",
+    "docs/provenance/recovered-original-sources-20261029.zip": "bb32e8a7f2bf32b8182a14195a04c3dda9d9356fe0ae5c580f9da353a863803b",
+    "release-manifest.json": "44ff950d0c64d78b3a8af11f8bc7e558707088d1e9dea127ecf9558012facedf",
+    "outputs/models/heads/global_head_contracts.json": "ac73de5baf2e1b5416b37611c173f7d4979627639477fae2c68197e50c37d5fc",
+    "outputs/results/revision_20261029/p6_calibration_lineage_summary.json": "4b4e55c8fbec130dd253907618b580ac7686bdd413ece4a0d6c16464f6e802fa",
+    "outputs/results/external_dev/rhythm_primary8_metrics.json": "cc664094b32a1f881aa417bd5ccc12367a2d7f388e56de823c30d4084933f66a",
+    "outputs/results/internal/pathology_primary4_calibration.json": "998a5ad5217e68802825806a55f3f53ca88491f8360d1e17d223b3d05c61f8ef"
+  }
+}

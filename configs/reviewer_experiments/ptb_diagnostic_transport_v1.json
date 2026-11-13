@@ -1,0 +1,27 @@
+{
+  "schema": "TITAN_V45_PTB_DIAGNOSTIC_TRANSPORT_V1",
+  "scope": "Complementary clinical territory vs explicitly healthy controls in an enriched retrospective release, not an all-comers or independent test.",
+  "provider_archive_url": "https://physionet-open.s3.amazonaws.com/ptbdb/ptbdb-1.0.0.zip",
+  "provider_release": "10.13026/C28C71",
+  "reference_eligibility_receipt_sha256": "fc179fe166b340c37b1372201243c4d48268d0270d691562a3187b706fa94eaf",
+  "native_scorer_commit": "f4d6be30b0befea739cf2e35df1033230a1f5d10",
+  "published_profile": "P4",
+  "published_endpoint_thresholds": "unchanged from released checkpoint",
+  "reference_labels_in_scoring": false,
+  "new_fit_or_calibration": false,
+  "sph_or_ludb_pooled": false,
+  "all_source_records": 549,
+  "all_source_subjects": 290,
+  "pathology_other_fit_job": 33390,
+  "pathology_other_model_sha256": "d3fa39467877354e8b6d438380a965135fe0c5f7aa0d266c27f7417290b7c7ec",
+  "endpoints": {
+    "ASMI": "Published P4 ASMI at its original threshold; clinical antero-septal acute MI.",
+    "IMI": "Published P4 IMI at its original threshold; clinical inferior acute MI.",
+    "ALMI": "Published V3AG auxiliary rank without released threshold and separately trained fixed PTB-XL head; clinical antero-lateral acute MI.",
+    "ILMI": "Published V3AG auxiliary rank without released threshold and separately trained fixed PTB-XL head; clinical infero-lateral acute MI."
+  },
+  "references": "Read and seal route-free scoring of all 549 ECGs first; only then join the audit V2 clinical labels. Different and compound territories, other diseases and missing records remain visible as unknowns.",
+  "statistical_design": {"seed": 197839, "replicates": 2000, "confidence": 0.95, "two_sided_minimum_clusters_per_polarity": 5},
+  "split_rule": "All publisher ECGs are held against existing weights; no test fitting or threshold changes. Cluster by source patient and exact signal components; historical cross-provider subject isolation not certified.",
+  "limitation": "Provider clinical localization and healthy controls give a specific contrast. PPV/NPV are conditional on this enriched cohort. No patient care, no cascade, no LAE proxy, and no change to original released artifacts."
+}

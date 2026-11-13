@@ -1,0 +1,1015 @@
+{
+  "scope_excluded": [
+    "R1-1",
+    "R2-2b",
+    "R2-4a"
+  ],
+  "totals": {
+    "global": {
+      "points": 20.5,
+      "criteria": 40,
+      "comments": 15,
+      "coverage_pct": 51.25
+    },
+    "active": {
+      "points": 16.5,
+      "criteria": 33,
+      "comments": 12,
+      "coverage_pct": 50.0
+    }
+  },
+  "delta_points": 0,
+  "rubric": {
+    "full_status": "VERIFIED_BOUNDED",
+    "full": 1,
+    "partial": 0.5,
+    "other": 0,
+    "partial_statuses": [
+      "BOUNDED_SIGNATURE_SCREEN_NO_CANDIDATES; FULL_HISTORY_UNCERTIFIED",
+      "CHECKPOINT_METADATA_MISMATCH_RECORDED",
+      "COOCCURRENCE_RETAINED_NOT_ADJUDICATED",
+      "DEVELOPMENT_SELECTION_EXPOSURE_SUPPORTED_WITHOUT_EXACT_17314_MANIFEST_BINDING",
+      "STATIC_SOURCE_MISMATCH_MECHANISM_VERIFIED_NOT_JOB_LINKED",
+      "STATIC_SOURCE_SEMANTICS_VERIFIED_NOT_JOB_LINKED",
+      "VERIFIED_AS_RECONSTRUCTED_CANDIDATE",
+      "VERIFIED_FOR_SELECTED_MAPPING_ONLY",
+      "VERIFIED_FROM_RETAINED_AGGREGATE",
+      "VERIFIED_IN_SEPARATE_PR_4_EVIDENCE_NOT_REEXECUTED_HERE"
+    ]
+  },
+  "baseline_sha256": "7019ad0a40c5fe3af0ac87b356c7a997be221cd40a0e3a57bf934e6ce211cd1e",
+  "scope_note": "Baseline 20.5/40 accepted as input; no upgrade here. Coverage is not acceptance or evidence of clinical validity.",
+  "reference_commits": {
+    "main": "2677a3333069c16915cb71acd55d0f0176570bcf",
+    "pr3": "68274ee05dab1e5aaa48aa588262b5b8289cbbd4",
+    "pr4": "81a75ec69f086dae7c295d65f1c2720416d9db81"
+  },
+  "rows": [
+    {
+      "id": "R1-1.1",
+      "comment": "R1-1",
+      "criterion": "Full-source SPH transfer denominator and compatible endpoint coverage",
+      "scope": "excluded",
+      "status": "VERIFIED_BOUNDED",
+      "baseline_points": 1,
+      "points": 1,
+      "evidence_groups": [],
+      "evidence_ids": [],
+      "limit": "Fuera de alcance; estado previo preservado, no reevaluado."
+    },
+    {
+      "id": "R1-1.2",
+      "comment": "R1-1",
+      "criterion": "Historical training-source, patient and signal independence",
+      "scope": "excluded",
+      "status": "NOT_CERTIFIED",
+      "baseline_points": 0,
+      "points": 0,
+      "evidence_groups": [],
+      "evidence_ids": [],
+      "limit": "Fuera de alcance; estado previo preservado, no reevaluado."
+    },
+    {
+      "id": "R1-1.3",
+      "comment": "R1-1",
+      "criterion": "V3H status as independent test versus model-selection evidence",
+      "scope": "excluded",
+      "status": "DEVELOPMENT_SELECTION_EXPOSURE_SUPPORTED_WITHOUT_EXACT_17314_MANIFEST_BINDING",
+      "baseline_points": 0.5,
+      "points": 0.5,
+      "evidence_groups": [],
+      "evidence_ids": [],
+      "limit": "Fuera de alcance; estado previo preservado, no reevaluado."
+    },
+    {
+      "id": "R1-2.1",
+      "comment": "R1-2",
+      "criterion": "Full eligible denominator for the later SPH transfer",
+      "scope": "active",
+      "status": "VERIFIED_BOUNDED",
+      "baseline_points": 1,
+      "points": 1,
+      "evidence_groups": [
+        "P4",
+        "THRESH",
+        "AE",
+        "AFLOG",
+        "SPH"
+      ],
+      "evidence_ids": [
+        "E-09f93d9f310baaca",
+        "E-13cd76089dde1df4",
+        "E-1beb13bbabd38308",
+        "E-200ac0242f79834e",
+        "E-38ef4fb993335f6e",
+        "E-47ecb9ecf86b4f0c",
+        "E-561f7ae59706b8f9",
+        "E-64b5ff1f8136bff6",
+        "E-8abdc5f6561fc3fe",
+        "E-93f6a9c95d9b03f7",
+        "E-988953a16b61405c",
+        "E-a35eb1b31b5f6d14",
+        "E-a8d1cc1d80b5e9c7",
+        "E-b3abb38cbf88dcda",
+        "E-ba60486938b30bd4",
+        "E-d87f0eb55be1f4db",
+        "E-e77998eac5fe2c7c",
+        "E-ed9e3bc4b3ea1696",
+        "E-f25d4632d855253d"
+      ],
+      "limit": "All 25,770 source ECG were technically scored under P6, P8 and P4; endpoint denominators are separately defined."
+    },
+    {
+      "id": "R1-2.2",
+      "comment": "R1-2",
+      "criterion": "June historical parent population and exclusion reasons",
+      "scope": "active",
+      "status": "NOT_RECOVERED_IN_INSPECTED_SOURCES",
+      "baseline_points": 0,
+      "points": 0,
+      "evidence_groups": [
+        "P4",
+        "THRESH",
+        "AE",
+        "AFLOG",
+        "SPH"
+      ],
+      "evidence_ids": [
+        "E-09f93d9f310baaca",
+        "E-13cd76089dde1df4",
+        "E-1beb13bbabd38308",
+        "E-200ac0242f79834e",
+        "E-38ef4fb993335f6e",
+        "E-47ecb9ecf86b4f0c",
+        "E-561f7ae59706b8f9",
+        "E-64b5ff1f8136bff6",
+        "E-8abdc5f6561fc3fe",
+        "E-93f6a9c95d9b03f7",
+        "E-988953a16b61405c",
+        "E-a35eb1b31b5f6d14",
+        "E-a8d1cc1d80b5e9c7",
+        "E-b3abb38cbf88dcda",
+        "E-ba60486938b30bd4",
+        "E-d87f0eb55be1f4db",
+        "E-e77998eac5fe2c7c",
+        "E-ed9e3bc4b3ea1696",
+        "E-f25d4632d855253d"
+      ],
+      "limit": "Selected P6/P8/P4 manifests do not recover the preselection population; the bounded filename search found no matching parent manifests in the named roots."
+    },
+    {
+      "id": "R1-2.3",
+      "comment": "R1-2",
+      "criterion": "Original quarantine pre/post accuracy and rate",
+      "scope": "active",
+      "status": "NOT_ASSESSED",
+      "baseline_points": 0,
+      "points": 0,
+      "evidence_groups": [
+        "P4",
+        "THRESH",
+        "AE",
+        "AFLOG",
+        "SPH"
+      ],
+      "evidence_ids": [
+        "E-09f93d9f310baaca",
+        "E-13cd76089dde1df4",
+        "E-1beb13bbabd38308",
+        "E-200ac0242f79834e",
+        "E-38ef4fb993335f6e",
+        "E-47ecb9ecf86b4f0c",
+        "E-561f7ae59706b8f9",
+        "E-64b5ff1f8136bff6",
+        "E-8abdc5f6561fc3fe",
+        "E-93f6a9c95d9b03f7",
+        "E-988953a16b61405c",
+        "E-a35eb1b31b5f6d14",
+        "E-a8d1cc1d80b5e9c7",
+        "E-b3abb38cbf88dcda",
+        "E-ba60486938b30bd4",
+        "E-d87f0eb55be1f4db",
+        "E-e77998eac5fe2c7c",
+        "E-ed9e3bc4b3ea1696",
+        "E-f25d4632d855253d"
+      ],
+      "limit": "No linked historical score, policy, ledger or complete denominator; the bounded filename search found no named policy/ledger and no rate is inferred."
+    },
+    {
+      "id": "R1-3.1",
+      "comment": "R1-3",
+      "criterion": "Stored AF flag versus retained code 164889003",
+      "scope": "active",
+      "status": "VERIFIED_BOUNDED",
+      "baseline_points": 1,
+      "points": 1,
+      "evidence_groups": [
+        "AF"
+      ],
+      "evidence_ids": [
+        "E-42199ccc5392daec",
+        "E-d9b00fb5855fd8c1"
+      ],
+      "limit": "P6 1,643/1,643 and P8 2,193/2,193 rows reconciled; 390 AF-positive rows per overlapping profile; zero mismatches/unresolved rows."
+    },
+    {
+      "id": "R1-3.2",
+      "comment": "R1-3",
+      "criterion": "Conflicting AF/NSR code handling",
+      "scope": "active",
+      "status": "COOCCURRENCE_RETAINED_NOT_ADJUDICATED",
+      "baseline_points": 0.5,
+      "points": 0.5,
+      "evidence_groups": [
+        "AF"
+      ],
+      "evidence_ids": [
+        "E-42199ccc5392daec",
+        "E-d9b00fb5855fd8c1"
+      ],
+      "limit": "One code-level AF/NSR co-occurrence remains visible; no inferred correction."
+    },
+    {
+      "id": "R1-3.3",
+      "comment": "R1-3",
+      "criterion": "Incident, first-diagnosis or longitudinal AF",
+      "scope": "active",
+      "status": "NOT_ESTABLISHED",
+      "baseline_points": 0,
+      "points": 0,
+      "evidence_groups": [
+        "AF"
+      ],
+      "evidence_ids": [
+        "E-42199ccc5392daec",
+        "E-d9b00fb5855fd8c1"
+      ],
+      "limit": "No event dates or longitudinal adjudication."
+    },
+    {
+      "id": "R1-4.1",
+      "comment": "R1-4",
+      "criterion": "Correction of measured checkpoint hashes and sizes",
+      "scope": "active",
+      "status": "VERIFIED_BOUNDED",
+      "baseline_points": 1,
+      "points": 1,
+      "evidence_groups": [
+        "HASH"
+      ],
+      "evidence_ids": [
+        "E-0dcd3ae9783e4433",
+        "E-24ad31844eaa625a",
+        "E-267f221543bda118",
+        "E-62e80ebc94f08e03",
+        "E-aafb02caa5a95eeb"
+      ],
+      "limit": "Does not recover the generic placeholder files, intermediate checkpoint, or Optuna database."
+    },
+    {
+      "id": "R1-4.2",
+      "comment": "R1-4",
+      "criterion": "Original Optuna SQLite and generic prediction artifact",
+      "scope": "active",
+      "status": "NOT_RECOVERED",
+      "baseline_points": 0,
+      "points": 0,
+      "evidence_groups": [
+        "OPT",
+        "TRAIN"
+      ],
+      "evidence_ids": [
+        "E-355e9d47fffee165",
+        "E-37e7d548688fa678",
+        "E-4c73808c2edd876a",
+        "E-6630f307a0e9638d",
+        "E-77c561ab272b3344",
+        "E-94f0ccdc9c1a81ff",
+        "E-b25c8e4d888d7455",
+        "E-bcb3b5110509ae52",
+        "E-c81856625adc4dc5",
+        "E-e77a8262181f180c",
+        "E-fca68301adda1148",
+        "E-fe34fe392b351b90"
+      ],
+      "limit": "No substitute DB or hash is fabricated. REV6 adds a static 60/40 source copy but not the May job version, effective arguments, SQLite bytes or a trial-to-checkpoint edge; the direct search found no matching database name in the scoped roots and PR4 remains separate."
+    },
+    {
+      "id": "R2-general.1",
+      "comment": "R2-general",
+      "criterion": "Declared output and operational profile classes",
+      "scope": "active",
+      "status": "VERIFIED_BOUNDED",
+      "baseline_points": 1,
+      "points": 1,
+      "evidence_groups": [
+        "LOSS",
+        "AE",
+        "P4"
+      ],
+      "evidence_ids": [
+        "E-13cd76089dde1df4",
+        "E-200ac0242f79834e",
+        "E-3acc629c564f8abf",
+        "E-47ecb9ecf86b4f0c",
+        "E-49869d8d41376c3d",
+        "E-561f7ae59706b8f9",
+        "E-64b5ff1f8136bff6",
+        "E-9f1a828214e52a01",
+        "E-a35eb1b31b5f6d14",
+        "E-a850bb69eff77c77",
+        "E-a8d1cc1d80b5e9c7",
+        "E-b3abb38cbf88dcda",
+        "E-de7bf2ed157b017b",
+        "E-e77998eac5fe2c7c"
+      ],
+      "limit": "Backbone declares 14 rhythm and seven pathology outputs; P6 has six, P8 eight, P4 four."
+    },
+    {
+      "id": "R2-general.2",
+      "comment": "R2-general",
+      "criterion": "All-class compatible reference performance or validated Other",
+      "scope": "active",
+      "status": "NOT_AVAILABLE",
+      "baseline_points": 0,
+      "points": 0,
+      "evidence_groups": [
+        "LOSS",
+        "AE",
+        "P4"
+      ],
+      "evidence_ids": [
+        "E-13cd76089dde1df4",
+        "E-200ac0242f79834e",
+        "E-3acc629c564f8abf",
+        "E-47ecb9ecf86b4f0c",
+        "E-49869d8d41376c3d",
+        "E-561f7ae59706b8f9",
+        "E-64b5ff1f8136bff6",
+        "E-9f1a828214e52a01",
+        "E-a35eb1b31b5f6d14",
+        "E-a850bb69eff77c77",
+        "E-a8d1cc1d80b5e9c7",
+        "E-b3abb38cbf88dcda",
+        "E-de7bf2ed157b017b",
+        "E-e77998eac5fe2c7c"
+      ],
+      "limit": "SPH has 14 compatible endpoints; no validated Other output or complete ontology is present. NSR is not Other."
+    },
+    {
+      "id": "R2-2b.1",
+      "comment": "R2-2b",
+      "criterion": "Archive and exact figure-file provenance",
+      "scope": "excluded",
+      "status": "VERIFIED_BOUNDED",
+      "baseline_points": 1,
+      "points": 1,
+      "evidence_groups": [],
+      "evidence_ids": [],
+      "limit": "Fuera de alcance; estado previo preservado, no reevaluado."
+    },
+    {
+      "id": "R2-2b.2",
+      "comment": "R2-2b",
+      "criterion": "Creator identity, third-party rights and execution truth of depicted process",
+      "scope": "excluded",
+      "status": "REQUIRES_AUTHOR_OR_RIGHTSHOLDER_CONFIRMATION",
+      "baseline_points": 0,
+      "points": 0,
+      "evidence_groups": [],
+      "evidence_ids": [],
+      "limit": "Fuera de alcance; estado previo preservado, no reevaluado."
+    },
+    {
+      "id": "R2-3a.1",
+      "comment": "R2-3a",
+      "criterion": "Selected evaluation denominators",
+      "scope": "active",
+      "status": "VERIFIED_BOUNDED",
+      "baseline_points": 1,
+      "points": 1,
+      "evidence_groups": [
+        "P4",
+        "THRESH"
+      ],
+      "evidence_ids": [
+        "E-200ac0242f79834e",
+        "E-38ef4fb993335f6e",
+        "E-47ecb9ecf86b4f0c",
+        "E-64b5ff1f8136bff6",
+        "E-ba60486938b30bd4",
+        "E-d87f0eb55be1f4db",
+        "E-e77998eac5fe2c7c"
+      ],
+      "limit": "P6 1,643 ECG; P8 2,193 including P6; P4 962 panel rows across 733 ECG/676 linked patients; SPH 25,770 ECG/24,666 source patients."
+    },
+    {
+      "id": "R2-3a.2",
+      "comment": "R2-3a",
+      "criterion": "Selected P4 mapping to official PTB-XL folds",
+      "scope": "active",
+      "status": "VERIFIED_FOR_SELECTED_MAPPING_ONLY",
+      "baseline_points": 0.5,
+      "points": 0.5,
+      "evidence_groups": [
+        "P4",
+        "SPLIT"
+      ],
+      "evidence_ids": [
+        "E-200ac0242f79834e",
+        "E-38326cbd3d609a6b",
+        "E-47ecb9ecf86b4f0c",
+        "E-4ed6b5abe4452765",
+        "E-64b5ff1f8136bff6",
+        "E-7a92ccac550b5055",
+        "E-b738b33ee4e751e9",
+        "E-e77998eac5fe2c7c"
+      ],
+      "limit": "Selected P4 mapping falls in fold 10 with no overlap against official folds 1-9; this is not proof of historical job inputs."
+    },
+    {
+      "id": "R2-3a.3",
+      "comment": "R2-3a",
+      "criterion": "Actual historical train/validation/calibration/selection manifests linked to checkpoints",
+      "scope": "active",
+      "status": "VERIFIED_FROM_RETAINED_AGGREGATE",
+      "baseline_points": 0.5,
+      "points": 0.5,
+      "evidence_groups": [
+        "TRAIN",
+        "COHORT",
+        "SPLIT",
+        "P4"
+      ],
+      "evidence_ids": [
+        "E-200ac0242f79834e",
+        "E-38326cbd3d609a6b",
+        "E-47ecb9ecf86b4f0c",
+        "E-4c73808c2edd876a",
+        "E-4d78dccd75c34ed8",
+        "E-4ed6b5abe4452765",
+        "E-64b5ff1f8136bff6",
+        "E-6630f307a0e9638d",
+        "E-77c561ab272b3344",
+        "E-7a92ccac550b5055",
+        "E-7b07003513b96324",
+        "E-94f0ccdc9c1a81ff",
+        "E-b738b33ee4e751e9",
+        "E-bcb3b5110509ae52",
+        "E-c81856625adc4dc5",
+        "E-e4b68a641de92ce5",
+        "E-e77998eac5fe2c7c",
+        "E-e77a8262181f180c",
+        "E-fc40995786e62547"
+      ],
+      "limit": "No full byte-identical checkpoint-linked manifest suite, joint source/class/window table, or patient/signal isolation."
+    },
+    {
+      "id": "R2-3c.1",
+      "comment": "R2-3c",
+      "criterion": "Primary/global rhythm class contract",
+      "scope": "active",
+      "status": "VERIFIED_BOUNDED",
+      "baseline_points": 1,
+      "points": 1,
+      "evidence_groups": [
+        "TRAIN",
+        "LOSS"
+      ],
+      "evidence_ids": [
+        "E-3acc629c564f8abf",
+        "E-49869d8d41376c3d",
+        "E-4c73808c2edd876a",
+        "E-6630f307a0e9638d",
+        "E-77c561ab272b3344",
+        "E-94f0ccdc9c1a81ff",
+        "E-9f1a828214e52a01",
+        "E-a850bb69eff77c77",
+        "E-bcb3b5110509ae52",
+        "E-c81856625adc4dc5",
+        "E-de7bf2ed157b017b",
+        "E-e77a8262181f180c"
+      ],
+      "limit": "14 global outputs; P8 has eight, P6 six; six additional rhythm outputs are declared secondary scores."
+    },
+    {
+      "id": "R2-3c.2",
+      "comment": "R2-3c",
+      "criterion": "NSR interpretation and observed SPH decisions",
+      "scope": "active",
+      "status": "VERIFIED_BOUNDED",
+      "baseline_points": 1,
+      "points": 1,
+      "evidence_groups": [
+        "TRAIN",
+        "LOSS"
+      ],
+      "evidence_ids": [
+        "E-3acc629c564f8abf",
+        "E-49869d8d41376c3d",
+        "E-4c73808c2edd876a",
+        "E-6630f307a0e9638d",
+        "E-77c561ab272b3344",
+        "E-94f0ccdc9c1a81ff",
+        "E-9f1a828214e52a01",
+        "E-a850bb69eff77c77",
+        "E-bcb3b5110509ae52",
+        "E-c81856625adc4dc5",
+        "E-de7bf2ed157b017b",
+        "E-e77a8262181f180c"
+      ],
+      "limit": "NSR is normal sinus rhythm, not Other or a rare arrhythmia class; SPH P8 had 16,700 NSR top-1 outputs."
+    },
+    {
+      "id": "R2-3c.3",
+      "comment": "R2-3c",
+      "criterion": "Historical auxiliary class supervision and performance",
+      "scope": "active",
+      "status": "STATIC_SOURCE_SEMANTICS_VERIFIED_NOT_JOB_LINKED",
+      "baseline_points": 0.5,
+      "points": 0.5,
+      "evidence_groups": [
+        "TRAIN",
+        "LOSS"
+      ],
+      "evidence_ids": [
+        "E-3acc629c564f8abf",
+        "E-49869d8d41376c3d",
+        "E-4c73808c2edd876a",
+        "E-6630f307a0e9638d",
+        "E-77c561ab272b3344",
+        "E-94f0ccdc9c1a81ff",
+        "E-9f1a828214e52a01",
+        "E-a850bb69eff77c77",
+        "E-bcb3b5110509ae52",
+        "E-c81856625adc4dc5",
+        "E-de7bf2ed157b017b",
+        "E-e77a8262181f180c"
+      ],
+      "limit": "Static source copies show a generic 14-output rhythm target/loss path and a separate V3F P8/P4 fine-tune path. No job read digest, checkpoint link, exact label supports or secondary-class metrics were recovered."
+    },
+    {
+      "id": "R2-3d.1",
+      "comment": "R2-3d",
+      "criterion": "Declared auxiliary pathology outputs",
+      "scope": "active",
+      "status": "VERIFIED_BOUNDED",
+      "baseline_points": 1,
+      "points": 1,
+      "evidence_groups": [
+        "LOSS",
+        "AFLOG"
+      ],
+      "evidence_ids": [
+        "E-3acc629c564f8abf",
+        "E-49869d8d41376c3d",
+        "E-93f6a9c95d9b03f7",
+        "E-9f1a828214e52a01",
+        "E-a850bb69eff77c77",
+        "E-de7bf2ed157b017b",
+        "E-ed9e3bc4b3ea1696"
+      ],
+      "limit": "ALMI, ILMI and LAE are three of seven global pathology outputs."
+    },
+    {
+      "id": "R2-3d.2",
+      "comment": "R2-3d",
+      "criterion": "Reconstructed score emission",
+      "scope": "active",
+      "status": "VERIFIED_BOUNDED",
+      "baseline_points": 1,
+      "points": 1,
+      "evidence_groups": [
+        "LOSS",
+        "AFLOG"
+      ],
+      "evidence_ids": [
+        "E-3acc629c564f8abf",
+        "E-49869d8d41376c3d",
+        "E-93f6a9c95d9b03f7",
+        "E-9f1a828214e52a01",
+        "E-a850bb69eff77c77",
+        "E-de7bf2ed157b017b",
+        "E-ed9e3bc4b3ea1696"
+      ],
+      "limit": "All three scores were emitted for 733 selected P4 ECG with no frozen action policy."
+    },
+    {
+      "id": "R2-3d.3",
+      "comment": "R2-3d",
+      "criterion": "Historical supervised supports and evaluated performance",
+      "scope": "active",
+      "status": "STATIC_SOURCE_SEMANTICS_VERIFIED_NOT_JOB_LINKED",
+      "baseline_points": 0.5,
+      "points": 0.5,
+      "evidence_groups": [
+        "LOSS",
+        "AFLOG"
+      ],
+      "evidence_ids": [
+        "E-3acc629c564f8abf",
+        "E-49869d8d41376c3d",
+        "E-93f6a9c95d9b03f7",
+        "E-9f1a828214e52a01",
+        "E-a850bb69eff77c77",
+        "E-de7bf2ed157b017b",
+        "E-ed9e3bc4b3ea1696"
+      ],
+      "limit": "REV6 shows a seven-output pathology loss path with a row-level label-presence mask, not a per-class unknown mask; omitted labels enter as zero. This proves source behavior only, not effective supports, historical execution, checkpoint linkage, calibration or performance."
+    },
+    {
+      "id": "R2-3e.1",
+      "comment": "R2-3e",
+      "criterion": "Current code-level primary/secondary class role contract",
+      "scope": "active",
+      "status": "VERIFIED_BOUNDED",
+      "baseline_points": 1,
+      "points": 1,
+      "evidence_groups": [
+        "AE",
+        "AFLOG",
+        "THRESH"
+      ],
+      "evidence_ids": [
+        "E-13cd76089dde1df4",
+        "E-38ef4fb993335f6e",
+        "E-561f7ae59706b8f9",
+        "E-93f6a9c95d9b03f7",
+        "E-a35eb1b31b5f6d14",
+        "E-a8d1cc1d80b5e9c7",
+        "E-b3abb38cbf88dcda",
+        "E-ba60486938b30bd4",
+        "E-d87f0eb55be1f4db",
+        "E-ed9e3bc4b3ea1696"
+      ],
+      "limit": "The implementation scores selected waveforms and records class outputs; auxiliary action is no_frozen_policy."
+    },
+    {
+      "id": "R2-3e.2",
+      "comment": "R2-3e",
+      "criterion": "Selected reconstructed transitions and fallback counts",
+      "scope": "active",
+      "status": "VERIFIED_FROM_RETAINED_AGGREGATE",
+      "baseline_points": 0.5,
+      "points": 0.5,
+      "evidence_groups": [
+        "AE",
+        "AFLOG",
+        "THRESH"
+      ],
+      "evidence_ids": [
+        "E-13cd76089dde1df4",
+        "E-38ef4fb993335f6e",
+        "E-561f7ae59706b8f9",
+        "E-93f6a9c95d9b03f7",
+        "E-a35eb1b31b5f6d14",
+        "E-a8d1cc1d80b5e9c7",
+        "E-b3abb38cbf88dcda",
+        "E-ba60486938b30bd4",
+        "E-d87f0eb55be1f4db",
+        "E-ed9e3bc4b3ea1696"
+      ],
+      "limit": "P8 has 58 selected-cohort fallbacks; transitions end in quarantine_not_assessed because no policy exists, not because a quarantine action occurred."
+    },
+    {
+      "id": "R2-3e.3",
+      "comment": "R2-3e",
+      "criterion": "Historical per-record role assignment or actual human review",
+      "scope": "active",
+      "status": "NOT_RECOVERED",
+      "baseline_points": 0,
+      "points": 0,
+      "evidence_groups": [
+        "AE",
+        "AFLOG",
+        "THRESH"
+      ],
+      "evidence_ids": [
+        "E-13cd76089dde1df4",
+        "E-38ef4fb993335f6e",
+        "E-561f7ae59706b8f9",
+        "E-93f6a9c95d9b03f7",
+        "E-a35eb1b31b5f6d14",
+        "E-a8d1cc1d80b5e9c7",
+        "E-b3abb38cbf88dcda",
+        "E-ba60486938b30bd4",
+        "E-d87f0eb55be1f4db",
+        "E-ed9e3bc4b3ea1696"
+      ],
+      "limit": "No authentic historical role/transition ledger or reviewer actions/outcomes."
+    },
+    {
+      "id": "R2-3f.1",
+      "comment": "R2-3f",
+      "criterion": "Candidate morphology feature implementation and hash",
+      "scope": "active",
+      "status": "VERIFIED_AS_RECONSTRUCTED_CANDIDATE",
+      "baseline_points": 0.5,
+      "points": 0.5,
+      "evidence_groups": [
+        "MORPH",
+        "LOSS",
+        "REPLAY"
+      ],
+      "evidence_ids": [
+        "E-2bd1c1822ed72d15",
+        "E-3acc629c564f8abf",
+        "E-49869d8d41376c3d",
+        "E-8946a78d44fed5df",
+        "E-9f1a828214e52a01",
+        "E-a850bb69eff77c77",
+        "E-de7bf2ed157b017b",
+        "E-f5dba0f232bc1a78"
+      ],
+      "limit": "Ten deterministic descriptors are identified; exact historical loader is not recovered."
+    },
+    {
+      "id": "R2-3f.2",
+      "comment": "R2-3f",
+      "criterion": "Exact original loader identity",
+      "scope": "active",
+      "status": "NOT_RECOVERED",
+      "baseline_points": 0,
+      "points": 0,
+      "evidence_groups": [
+        "MORPH",
+        "LOSS",
+        "REPLAY"
+      ],
+      "evidence_ids": [
+        "E-2bd1c1822ed72d15",
+        "E-3acc629c564f8abf",
+        "E-49869d8d41376c3d",
+        "E-8946a78d44fed5df",
+        "E-9f1a828214e52a01",
+        "E-a850bb69eff77c77",
+        "E-de7bf2ed157b017b",
+        "E-f5dba0f232bc1a78"
+      ],
+      "limit": "Expected loader 36,271 bytes, SHA-256 fc8d7367f9f2c108376839435021ec3172fe2757faa4a615f0ef5d39cbf1e855; none of 34 examined candidates or the latest name search matched."
+    },
+    {
+      "id": "R2-3f.3",
+      "comment": "R2-3f",
+      "criterion": "Numerical replay under frozen tolerance",
+      "scope": "active",
+      "status": "STRICT_EQUIVALENCE_FAILS",
+      "baseline_points": 0,
+      "points": 0,
+      "evidence_groups": [
+        "MORPH",
+        "LOSS",
+        "REPLAY"
+      ],
+      "evidence_ids": [
+        "E-2bd1c1822ed72d15",
+        "E-3acc629c564f8abf",
+        "E-49869d8d41376c3d",
+        "E-8946a78d44fed5df",
+        "E-9f1a828214e52a01",
+        "E-a850bb69eff77c77",
+        "E-de7bf2ed157b017b",
+        "E-f5dba0f232bc1a78"
+      ],
+      "limit": "P4 decisions agree 962/962, but max score residual 0.0006194114685058594 exceeds 1e-5; P6 has one top-1 mismatch/1,643 and P8 top-1/binary sets agree 2,193/2,193."
+    },
+    {
+      "id": "R2-3f.4",
+      "comment": "R2-3f",
+      "criterion": "Specialist hidden-width metadata",
+      "scope": "active",
+      "status": "STATIC_SOURCE_MISMATCH_MECHANISM_VERIFIED_NOT_JOB_LINKED",
+      "baseline_points": 0.5,
+      "points": 0.5,
+      "evidence_groups": [
+        "MORPH",
+        "LOSS",
+        "REPLAY"
+      ],
+      "evidence_ids": [
+        "E-2bd1c1822ed72d15",
+        "E-3acc629c564f8abf",
+        "E-49869d8d41376c3d",
+        "E-8946a78d44fed5df",
+        "E-9f1a828214e52a01",
+        "E-a850bb69eff77c77",
+        "E-de7bf2ed157b017b",
+        "E-f5dba0f232bc1a78"
+      ],
+      "limit": "A separate P4 epoch-report source path can build 512-wide heads while writing a 192 field. It is not linked to the released P4 checkpoint and does not explain the P6/P8 runtime width discrepancy; no coverage point is added."
+    },
+    {
+      "id": "R2-4a.1",
+      "comment": "R2-4a",
+      "criterion": "Selected external-development cohorts and units",
+      "scope": "excluded",
+      "status": "VERIFIED_BOUNDED",
+      "baseline_points": 1,
+      "points": 1,
+      "evidence_groups": [],
+      "evidence_ids": [],
+      "limit": "Fuera de alcance; estado previo preservado, no reevaluado."
+    },
+    {
+      "id": "R2-4a.2",
+      "comment": "R2-4a",
+      "criterion": "SPH source relation to retained development data",
+      "scope": "excluded",
+      "status": "BOUNDED_SIGNATURE_SCREEN_NO_CANDIDATES; FULL_HISTORY_UNCERTIFIED",
+      "baseline_points": 0.5,
+      "points": 0.5,
+      "evidence_groups": [],
+      "evidence_ids": [],
+      "limit": "Fuera de alcance; estado previo preservado, no reevaluado."
+    },
+    {
+      "id": "R2-4e.1",
+      "comment": "R2-4e",
+      "criterion": "Frozen SPH profile scores and thresholds reconcile to full denominator",
+      "scope": "active",
+      "status": "VERIFIED_BOUNDED",
+      "baseline_points": 1,
+      "points": 1,
+      "evidence_groups": [
+        "THRESH",
+        "P4"
+      ],
+      "evidence_ids": [
+        "E-200ac0242f79834e",
+        "E-38ef4fb993335f6e",
+        "E-47ecb9ecf86b4f0c",
+        "E-64b5ff1f8136bff6",
+        "E-ba60486938b30bd4",
+        "E-d87f0eb55be1f4db",
+        "E-e77998eac5fe2c7c"
+      ],
+      "limit": "Each profile scores 25,770/25,770; P6 has 16,785 empty sets; P4 8,343; P8 forced top-1 fallback 801."
+    },
+    {
+      "id": "R2-4e.2",
+      "comment": "R2-4e",
+      "criterion": "Selected waveform fallback and no-label-routing behavior",
+      "scope": "active",
+      "status": "VERIFIED_FROM_RETAINED_AGGREGATE",
+      "baseline_points": 0.5,
+      "points": 0.5,
+      "evidence_groups": [
+        "THRESH",
+        "P4"
+      ],
+      "evidence_ids": [
+        "E-200ac0242f79834e",
+        "E-38ef4fb993335f6e",
+        "E-47ecb9ecf86b4f0c",
+        "E-64b5ff1f8136bff6",
+        "E-ba60486938b30bd4",
+        "E-d87f0eb55be1f4db",
+        "E-e77998eac5fe2c7c"
+      ],
+      "limit": "P8 selected replay had 58 fallbacks; reference labels were not used for routing."
+    },
+    {
+      "id": "R2-4e.3",
+      "comment": "R2-4e",
+      "criterion": "Historical quarantine meaning or rate",
+      "scope": "active",
+      "status": "NOT_ASSESSED",
+      "baseline_points": 0,
+      "points": 0,
+      "evidence_groups": [
+        "THRESH",
+        "P4"
+      ],
+      "evidence_ids": [
+        "E-200ac0242f79834e",
+        "E-38ef4fb993335f6e",
+        "E-47ecb9ecf86b4f0c",
+        "E-64b5ff1f8136bff6",
+        "E-ba60486938b30bd4",
+        "E-d87f0eb55be1f4db",
+        "E-e77998eac5fe2c7c"
+      ],
+      "limit": "Fallbacks and empty sets are not quarantine or clinician review."
+    },
+    {
+      "id": "R2-4k.1",
+      "comment": "R2-4k",
+      "criterion": "Authentic historical quarantine denominator, policy and score",
+      "scope": "active",
+      "status": "NOT_RECOVERED",
+      "baseline_points": 0,
+      "points": 0,
+      "evidence_groups": [
+        "AE",
+        "AFLOG",
+        "THRESH",
+        "SPH"
+      ],
+      "evidence_ids": [
+        "E-09f93d9f310baaca",
+        "E-13cd76089dde1df4",
+        "E-1beb13bbabd38308",
+        "E-38ef4fb993335f6e",
+        "E-561f7ae59706b8f9",
+        "E-8abdc5f6561fc3fe",
+        "E-93f6a9c95d9b03f7",
+        "E-988953a16b61405c",
+        "E-a35eb1b31b5f6d14",
+        "E-a8d1cc1d80b5e9c7",
+        "E-b3abb38cbf88dcda",
+        "E-ba60486938b30bd4",
+        "E-d87f0eb55be1f4db",
+        "E-ed9e3bc4b3ea1696",
+        "E-f25d4632d855253d"
+      ],
+      "limit": "REV6 reports two AF summaries with 23 handoff rows and repeated AE policy/manifest hashes, but original policy/manifest bytes and job-read digests are absent. The direct name search found no match in its roots. No checkpoint/job-linked uncertainty score, complete denominator, or frozen policy is verified."
+    },
+    {
+      "id": "R2-4k.2",
+      "comment": "R2-4k",
+      "criterion": "SPH quarantine rate",
+      "scope": "active",
+      "status": "NOT_ASSESSED_NOT_ZERO",
+      "baseline_points": 0,
+      "points": 0,
+      "evidence_groups": [
+        "AE",
+        "AFLOG",
+        "THRESH",
+        "SPH"
+      ],
+      "evidence_ids": [
+        "E-09f93d9f310baaca",
+        "E-13cd76089dde1df4",
+        "E-1beb13bbabd38308",
+        "E-38ef4fb993335f6e",
+        "E-561f7ae59706b8f9",
+        "E-8abdc5f6561fc3fe",
+        "E-93f6a9c95d9b03f7",
+        "E-988953a16b61405c",
+        "E-a35eb1b31b5f6d14",
+        "E-a8d1cc1d80b5e9c7",
+        "E-b3abb38cbf88dcda",
+        "E-ba60486938b30bd4",
+        "E-d87f0eb55be1f4db",
+        "E-ed9e3bc4b3ea1696",
+        "E-f25d4632d855253d"
+      ],
+      "limit": "The aggregate records zero assessed quarantine records and a null rate; this is not a measured zero rate."
+    },
+    {
+      "id": "R2-5.1",
+      "comment": "R2-5",
+      "criterion": "SPH PVC statement denominator and endpoint consistency",
+      "scope": "active",
+      "status": "VERIFIED_BOUNDED",
+      "baseline_points": 1,
+      "points": 1,
+      "evidence_groups": [
+        "PVC",
+        "THRESH",
+        "SPH"
+      ],
+      "evidence_ids": [
+        "E-09f93d9f310baaca",
+        "E-1beb13bbabd38308",
+        "E-38ef4fb993335f6e",
+        "E-8287735c74e3f334",
+        "E-87fb7437747af800",
+        "E-8abdc5f6561fc3fe",
+        "E-988953a16b61405c",
+        "E-ba60486938b30bd4",
+        "E-d87f0eb55be1f4db",
+        "E-f25d4632d855253d"
+      ],
+      "limit": "1,067 positive and 24,703 negative ECG-statement rows; P6/P8 F1 are distinct profile results."
+    },
+    {
+      "id": "R2-5.2",
+      "comment": "R2-5",
+      "criterion": "Beat-level detection, localization or episode count",
+      "scope": "active",
+      "status": "NOT_MEASURED",
+      "baseline_points": 0,
+      "points": 0,
+      "evidence_groups": [
+        "PVC",
+        "THRESH",
+        "SPH"
+      ],
+      "evidence_ids": [
+        "E-09f93d9f310baaca",
+        "E-1beb13bbabd38308",
+        "E-38ef4fb993335f6e",
+        "E-8287735c74e3f334",
+        "E-87fb7437747af800",
+        "E-8abdc5f6561fc3fe",
+        "E-988953a16b61405c",
+        "E-ba60486938b30bd4",
+        "E-d87f0eb55be1f4db",
+        "E-f25d4632d855253d"
+      ],
+      "limit": "No beat annotations, timing-matching rule or beat denominator."
+    }
+  ]
+}

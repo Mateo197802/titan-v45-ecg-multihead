@@ -1,0 +1,17 @@
+{
+  "schema": "TITAN_V45_SPH_AGGREGATE_FIGURE_MANIFEST_V1",
+  "source_aggregate": "outputs/results/external_sph/sph_aggregate_normalized_32669.json",
+  "source_aggregate_sha256": "50487cd92a91924a0aa63549725eb26d9328f307a6a6d9cf57ac2655e85ad2ef",
+  "renderer": "scripts/external_validation/plot_sph_aggregate_corrected.py",
+  "renderer_sha256": "3926639a2dc2803845492cdc701b47acacc4b9a1777dfb07b98eb68d7e046591",
+  "base_renderer_sha256": "05fdf03b04425b3e52566a86003e3047995a837b06e8502edb0633708b4260e5",
+  "render_environment": {"python": "3.12.10", "numpy": "2.4.6", "matplotlib": "3.11.0", "pillow": "12.3.0"},
+  "assets": {
+    "sph_duplicate_sensitivity.pdf": "cc0fa5e2c230335f1769dc3def515095636f616c79be81746cbb3b6aca5bb5da",
+    "sph_duplicate_sensitivity.png": "35e9b8cfdc1c8611981cc6000854028629a0141027747692a125455fd68dd7fa",
+    "sph_endpoint_metrics.pdf": "b8c07e0fd70fbf6b639e48253f2d54fc940fe444b25a5ca683c6c7bb3867d83c",
+    "sph_endpoint_metrics.png": "7992b5cc2f126f826330f8bbd46c915d509cf6ea7a8a78aeba304c6010ee0f96",
+    "sph_profile_coverage.pdf": "024798badb96c7471a6abb6d13ae1d627dcf8246d538168f26473bd0a81fa957",
+    "sph_profile_coverage.png": "7b6188ee440f8fc1596b6d1ce56c1a3ae0fbb4a38c13580391295716c40d9292"
+  }
+}

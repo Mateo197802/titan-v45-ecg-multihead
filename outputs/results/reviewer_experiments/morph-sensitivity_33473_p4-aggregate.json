@@ -1,0 +1,49 @@
+{
+  "scope": "paired zero-input sensitivity on selected historical replay; not a retrained ablation",
+  "intervention": "replace the complete normalized morphology vector by zero at preprocessing output",
+  "unchanged": [
+    "waveforms",
+    "published weights",
+    "lead masks",
+    "event features",
+    "thresholds"
+  ],
+  "source_commit": "02019b832fafecd0c263ea556c70f16fa0a50ccf",
+  "job": "33473",
+  "baseline_ledger_sha256": "ecd173d834842705321698876433ede8ea1a3fa390500f5da33b34a8755491ca",
+  "private_perturbed_ledger_sha256": "a4ba88c8aec19a4503d6034de2e6515c102719ef93d343e6170e499ea32aa77c",
+  "release_sha256": {
+    "backbone-v3ag-pathology.pt": "bf71e4cf8acc34031cb3611c7031e0649822e705fd7dcea354a3ea583ce920ee",
+    "specialists-v3ag-primary4-calibrated.pt": "cf5091e962fffb3254b1a71fe57236dd82ea0139093df192511499d931391dbc",
+    "external-dev-pathology-ptbxl-fold10.tar.zst": "fc1c3fc5374af962a8fc5903b6d1dd99a44ebfd7c66e0dfceaa106167afee558"
+  },
+  "window_calls": 733,
+  "profiles": {
+    "P4": {
+      "intended_records": 733,
+      "ledger_universe_records": 733,
+      "paired_scored": 733,
+      "decision_changes": 8,
+      "scoring_status_disagreements": 0,
+      "by_class": {
+        "ASMI": {
+          "mean_absolute_delta": 0.0010381036756959164,
+          "max_absolute_delta": 0.004421651363372803
+        },
+        "LVH": {
+          "mean_absolute_delta": 0.002529886355455253,
+          "max_absolute_delta": 0.01159203052520752
+        },
+        "IMI": {
+          "mean_absolute_delta": 0.0034064268960146103,
+          "max_absolute_delta": 0.013402581214904785
+        },
+        "ISC_": {
+          "mean_absolute_delta": 0.001168448025424867,
+          "max_absolute_delta": 0.01150771975517273
+        }
+      }
+    }
+  },
+  "identifiers_exported": false
+}

@@ -1,0 +1,293 @@
+{
+  "schema": "TITAN_V45_REVIEWER_INDEX_POST_SPH_V1",
+  "items": [
+    {
+      "id": "R1-1",
+      "concern": "Independent external validation",
+      "disposition": "EXPERIMENT_COMPLETED",
+      "evidence_and_action": "[SPH delivery audit](SPH_DELIVERY_AUDIT.md), [all-input coverage](ALL_INPUT_FLOW_COVERAGE.md), [CEDIA lineage](CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md), and the separate [exploratory PAC probe](../external_validation/sph_pac_probe_results.md). Commit `99b1065` adds a PAC-scoped, hash-pinned publication receipt and code-30/31 audit; code-31-only rows remain included, and the probe remains same-source, previously exposed and nonconfirmatory. Confusion-derived metrics are recalculated publicly; score metrics/intervals are bound to the CEDIA execution digests, not recomputed from restricted rows. This does not supply independent clinical validation. Jobs 17314/17315 show V3H informed P6 epoch selection; exact 17314 manifest is missing."
+    },
+    {
+      "id": "R1-2",
+      "concern": "Population and flow denominator",
+      "disposition": "EVIDENCE_CEILING_REACHED",
+      "evidence_and_action": "[All-input coverage](ALL_INPUT_FLOW_COVERAGE.md), [bounded recovery](R1_2_EVIDENCE_CEILING.md), and [recovered-vs-missing inventory](RECOVERED_VS_MISSING_HISTORICAL_EVIDENCE.md); historical preselection population and exclusion reasons remain unavailable."
+    },
+    {
+      "id": "R1-3",
+      "concern": "AF incidence versus ECG statement",
+      "disposition": "VERIFIED_WITH_LIMITATIONS",
+      "evidence_and_action": "[AF/PVC reference disposition](AF_PVC_REFERENCE_DISPOSITION.md); 390 retained AF flags agree with stored codes per overlapping profile, not an incident-AF study."
+    },
+    {
+      "id": "R1-4",
+      "concern": "Invalid artifact hashes",
+      "disposition": "VERIFIED_WITH_LIMITATIONS",
+      "evidence_and_action": "[Hash correction](../hash-correction-20261028.md); separate PR #4, missing historical artifacts remain unavailable."
+    },
+    {
+      "id": "R2-general",
+      "concern": "Excluded classes and Other",
+      "disposition": "CLAIM_WITHDRAWAL_REQUIRED",
+      "evidence_and_action": "[All-input coverage](ALL_INPUT_FLOW_COVERAGE.md) reports all three profiles across 25,770 SPH ECG and the 14 compatible endpoints; the [PAC-only exploratory probe](../external_validation/sph_pac_probe_results.md) does not evaluate `Other` or the full cascade. `Other` and incompatible references remain unvalidated."
+    },
+    {
+      "id": "R2-1a",
+      "concern": "Define P6 and P4 in abstract",
+      "disposition": "MANUSCRIPT_UPDATE_ONLY",
+      "evidence_and_action": "Define terms in the future manuscript."
+    },
+    {
+      "id": "R2-1b",
+      "concern": "Define abbreviations on first use",
+      "disposition": "MANUSCRIPT_UPDATE_ONLY",
+      "evidence_and_action": "Check first occurrence in the future manuscript."
+    },
+    {
+      "id": "R2-2a",
+      "concern": "Introduction references",
+      "disposition": "MANUSCRIPT_UPDATE_ONLY",
+      "evidence_and_action": "Align citations with the final scope."
+    },
+    {
+      "id": "R2-2b",
+      "concern": "Origin and purpose of figures 1 and 2",
+      "disposition": "ACTIVE_RECOVERY_REQUIRED",
+      "evidence_and_action": "[Archive-level provenance](R2-2B_FIGURES_1_2_PROVENANCE.md) verifies purpose, paths and image hashes; author/source records for creation, third-party assets and permissions remain outstanding."
+    },
+    {
+      "id": "R2-2c",
+      "concern": "Comparator selection",
+      "disposition": "MANUSCRIPT_UPDATE_ONLY",
+      "evidence_and_action": "Reassess comparison table against final scope."
+    },
+    {
+      "id": "R2-2d",
+      "concern": "Unreported parameters and comparability",
+      "disposition": "MANUSCRIPT_UPDATE_ONLY",
+      "evidence_and_action": "Mark missing parameters and avoid unequal comparisons."
+    },
+    {
+      "id": "R2-2e",
+      "concern": "SCP and abbreviations",
+      "disposition": "MANUSCRIPT_UPDATE_ONLY",
+      "evidence_and_action": "Define terms and verify usage."
+    },
+    {
+      "id": "R2-2f",
+      "concern": "Introduction table placement",
+      "disposition": "MANUSCRIPT_UPDATE_ONLY",
+      "evidence_and_action": "Resolve placement and claims in the future manuscript."
+    },
+    {
+      "id": "R2-3a",
+      "concern": "Datasets and splits",
+      "disposition": "EVIDENCE_CEILING_REACHED",
+      "evidence_and_action": "[Split audit](SPLIT_CALIBRATION_DISPOSITION.md), [checkpoint-to-split lineage](CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md), and [recovery inventory](RECOVERED_VS_MISSING_HISTORICAL_EVIDENCE.md); SLURM records completed jobs, but linked split manifests and patient isolation remain unavailable."
+    },
+    {
+      "id": "R2-3b",
+      "concern": "Design versus evaluation",
+      "disposition": "MANUSCRIPT_UPDATE_ONLY",
+      "evidence_and_action": "Distinguish architecture, historical development, V3H model selection, reconstructed replay and later SPH transfer; see [checkpoint lineage](CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md)."
+    },
+    {
+      "id": "R2-3c",
+      "concern": "Auxiliary classes and training",
+      "disposition": "VERIFIED_WITH_LIMITATIONS",
+      "evidence_and_action": "[Role/supervision audit](ROLE_SUPERVISION_AND_ROUTING.md) and [auxiliary-output disposition](OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md); output contracts alone do not establish checkpoint-linked training support."
+    },
+    {
+      "id": "R2-3d",
+      "concern": "ALMI, ILMI and LAE training",
+      "disposition": "EVIDENCE_CEILING_REACHED",
+      "evidence_and_action": "[Role/supervision audit](ROLE_SUPERVISION_AND_ROUTING.md) and [auxiliary-output disposition](OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md); checkpoint-linked supervision remains unverified."
+    },
+    {
+      "id": "R2-3e",
+      "concern": "Role definitions",
+      "disposition": "VERIFIED_WITH_LIMITATIONS",
+      "evidence_and_action": "[Role and routing audit](ROLE_SUPERVISION_AND_ROUTING.md) and [quarantine provenance](OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md); distinguish code roles and selected replay from historical all-input routing."
+    },
+    {
+      "id": "R2-3f",
+      "concern": "Morphology and feature architecture",
+      "disposition": "EVIDENCE_CEILING_REACHED",
+      "evidence_and_action": "[Replay equivalence](REPLAY_EQUIVALENCE_DISPOSITION.md) and [loader identity audit](HISTORICAL_LOADER_IDENTITY_AND_REPLAY.md): exact loader remains absent; 962/962 decisions do not meet the 1e-5 probability tolerance."
+    },
+    {
+      "id": "R2-3g",
+      "concern": "Brier score in methods",
+      "disposition": "MANUSCRIPT_UPDATE_ONLY",
+      "evidence_and_action": "Add definition and remove unsupported numerical methods claim."
+    },
+    {
+      "id": "R2-3h",
+      "concern": "Accuracy equations and tasks",
+      "disposition": "MANUSCRIPT_UPDATE_ONLY",
+      "evidence_and_action": "Define rhythm and pathology endpoints separately."
+    },
+    {
+      "id": "R2-4a",
+      "concern": "External-development terminology",
+      "disposition": "VERIFIED_WITH_LIMITATIONS",
+      "evidence_and_action": "[Evidence status](../evidence-status.md) and [checkpoint lineage](CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md); V3H informed P6 selection, and SPH remains a separate transfer result with incomplete full-backbone lineage."
+    },
+    {
+      "id": "R2-4b",
+      "concern": "Figure cross-reference",
+      "disposition": "MANUSCRIPT_UPDATE_ONLY",
+      "evidence_and_action": "Correct figure reference."
+    },
+    {
+      "id": "R2-4c",
+      "concern": "Overstated F1 interpretation",
+      "disposition": "MANUSCRIPT_UPDATE_ONLY",
+      "evidence_and_action": "Use measured values and qualified language."
+    },
+    {
+      "id": "R2-4d",
+      "concern": "Figure metrics versus confidence intervals",
+      "disposition": "MANUSCRIPT_UPDATE_ONLY",
+      "evidence_and_action": "Describe what is actually plotted."
+    },
+    {
+      "id": "R2-4e",
+      "concern": "No threshold crossed",
+      "disposition": "EXPERIMENT_COMPLETED_WITH_LIMITATIONS",
+      "evidence_and_action": "[All-input coverage](ALL_INPUT_FLOW_COVERAGE.md) and [routing disposition](OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md): P6/P4 empty sets and P8 fallback on 801/25,770 SPH ECG are measured; they are not quarantine or human review."
+    },
+    {
+      "id": "R2-4f",
+      "concern": "Confusion matrix presentation",
+      "disposition": "MANUSCRIPT_UPDATE_ONLY",
+      "evidence_and_action": "Harmonize labels and denominators."
+    },
+    {
+      "id": "R2-4g",
+      "concern": "Duplicated figures",
+      "disposition": "MANUSCRIPT_UPDATE_ONLY",
+      "evidence_and_action": "Reconcile figures against their source data."
+    },
+    {
+      "id": "R2-4h",
+      "concern": "ROC and PR tracing definition",
+      "disposition": "MANUSCRIPT_UPDATE_ONLY",
+      "evidence_and_action": "Define plotted units and derivation."
+    },
+    {
+      "id": "R2-4i",
+      "concern": "AUROC wording",
+      "disposition": "MANUSCRIPT_UPDATE_ONLY",
+      "evidence_and_action": "Qualify the interpretation of the reported value."
+    },
+    {
+      "id": "R2-4j",
+      "concern": "Frequency versus accuracy plot",
+      "disposition": "MANUSCRIPT_UPDATE_ONLY",
+      "evidence_and_action": "Verify axes, bins and denominators."
+    },
+    {
+      "id": "R2-4k",
+      "concern": "Quarantine and pre/post rates",
+      "disposition": "CLAIM_WITHDRAWAL_REQUIRED",
+      "evidence_and_action": "[All-input coverage](ALL_INPUT_FLOW_COVERAGE.md), [routing audit](ROLE_SUPERVISION_AND_ROUTING.md), and [quarantine provenance](OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md): no linked uncertainty-policy ledger; rate is not assessed, not zero."
+    },
+    {
+      "id": "R2-4l",
+      "concern": "Rhythm top-1",
+      "disposition": "MANUSCRIPT_UPDATE_ONLY",
+      "evidence_and_action": "Define the decision and denominator."
+    },
+    {
+      "id": "R2-4m",
+      "concern": "Figure readability",
+      "disposition": "MANUSCRIPT_UPDATE_ONLY",
+      "evidence_and_action": "Final layout and rendering remain pending."
+    },
+    {
+      "id": "R2-5",
+      "concern": "PVC record versus beat level",
+      "disposition": "VERIFIED_WITH_LIMITATIONS",
+      "evidence_and_action": "[AF/PVC reference disposition](AF_PVC_REFERENCE_DISPOSITION.md); SPH comparisons are ECG statements, not validated beat detection."
+    },
+    {
+      "id": "R2-6",
+      "concern": "Distortion and citation claim",
+      "disposition": "MANUSCRIPT_UPDATE_ONLY",
+      "evidence_and_action": "Remove unsupported general claim and verify citation."
+    },
+    {
+      "id": "A-01",
+      "concern": "P4 panel versus unique ECG count",
+      "disposition": "VERIFIED_WITH_LIMITATIONS",
+      "evidence_and_action": "[Data dispositions](../revision-data-dispositions.md); preserve 962 panel rows and 733 distinct record keys."
+    },
+    {
+      "id": "A-02",
+      "concern": "Source distribution and aliases",
+      "disposition": "VERIFIED_WITH_LIMITATIONS",
+      "evidence_and_action": "[Source and rights disposition](SOURCE_RIGHTS_DISPOSITION.md); checksum matches and source aliases do not prove independent institutions or patient isolation."
+    },
+    {
+      "id": "A-03",
+      "concern": "Per-class metric inconsistencies",
+      "disposition": "MANUSCRIPT_UPDATE_ONLY",
+      "evidence_and_action": "Use audited source tables and verify the final manuscript values."
+    },
+    {
+      "id": "A-04",
+      "concern": "Thresholds and calibration isolation",
+      "disposition": "VERIFIED_WITH_LIMITATIONS",
+      "evidence_and_action": "[Split and calibration audit](SPLIT_CALIBRATION_DISPOSITION.md) and [CEDIA source triage](EVIDENCE_SOURCE_TRIAGE.md); P4 thresholds and P6/P8 vector dimensions are reconciled, but released-checkpoint linkage and patient isolation remain unverified."
+    },
+    {
+      "id": "A-05",
+      "concern": "Backbone relationships",
+      "disposition": "MANUSCRIPT_UPDATE_ONLY",
+      "evidence_and_action": "Describe shared V3F and separate V3AG accurately."
+    },
+    {
+      "id": "A-06",
+      "concern": "Optuna history and quarantine",
+      "disposition": "CLAIM_WITHDRAWAL_REQUIRED",
+      "evidence_and_action": "[Optuna/A10 evidence is tracked separately in PR #4](https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/4); nine trial rows survive, but the original study database, complete history and promotion linkage are unavailable."
+    },
+    {
+      "id": "A-07",
+      "concern": "Data availability URL",
+      "disposition": "MANUSCRIPT_UPDATE_ONLY",
+      "evidence_and_action": "Cite the verified final artifact and restricted inputs."
+    },
+    {
+      "id": "A-08",
+      "concern": "Missing supplement CSVs",
+      "disposition": "MANUSCRIPT_UPDATE_ONLY",
+      "evidence_and_action": "Inventory only files actually included in the final supplement."
+    },
+    {
+      "id": "A-09",
+      "concern": "Incorrect DOI",
+      "disposition": "MANUSCRIPT_UPDATE_ONLY",
+      "evidence_and_action": "Verify replacement reference in the final bibliography."
+    },
+    {
+      "id": "A-10",
+      "concern": "Mixed archive provenance and rights",
+      "disposition": "VERIFIED_WITH_LIMITATIONS",
+      "evidence_and_action": "[Source and rights disposition](SOURCE_RIGHTS_DISPOSITION.md); 84 selected signals identified, package-wide additional redistribution remains on HOLD, and the existing release asset remains public."
+    },
+    {
+      "id": "A-11",
+      "concern": "MC/Grad-CAM clinical claims",
+      "disposition": "CLAIM_WITHDRAWAL_REQUIRED",
+      "evidence_and_action": "No clinical adjudication established; remove unsupported claims."
+    },
+    {
+      "id": "A-12",
+      "concern": "Reader study",
+      "disposition": "CLAIM_WITHDRAWAL_REQUIRED",
+      "evidence_and_action": "No reader study established; remove unsupported claims."
+    }
+  ]
+}

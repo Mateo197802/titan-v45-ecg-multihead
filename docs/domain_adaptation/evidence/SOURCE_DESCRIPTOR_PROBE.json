@@ -1,0 +1,45 @@
+{
+  "additional_source_receipt_sha256": "06c5dd9d6fc5e6116efaece3206f177467261a60bb1959ee7a91d81ce9f69b3f",
+  "balanced_accuracy": 0.820966978340632,
+  "code_bank_receipt_sha256": "45e19b5f044c55c0a1a797886b9a1e9e7b65ffada917a73c0e09145fe4c6fa75",
+  "diagnostic_labels_used": false,
+  "ecg_duration_seconds": 10,
+  "l2": 0.01,
+  "metrics": {
+    "accuracy": 0.8075511274252754,
+    "auroc": 0.9068398627056456,
+    "average_precision": 0.8422316721558301,
+    "brier_score": 0.13019785779773432,
+    "ece": 0.08872483279019036,
+    "f1": 0.7687460617517329,
+    "fn": 90,
+    "fp": 277,
+    "missing_probability_rows": 0,
+    "negative_support": 1207,
+    "positive_support": 700,
+    "precision": 0.6877113866967306,
+    "predicted_positive_support": 887,
+    "probability_negative_support": 1207,
+    "probability_positive_support": 700,
+    "probability_rows": 1907,
+    "recall": 0.8714285714285714,
+    "rows": 1907,
+    "specificity": 0.7705053852526926,
+    "tn": 930,
+    "tp": 610,
+    "undefined": {}
+  },
+  "negative_source": "code15",
+  "positive_source": "chapman_shaoxing",
+  "probe_scope": "7 descriptors; does not measure the trained specialist's reliance on them",
+  "scope": "SOURCE_RECOGNITION_ONLY_NOT_DIAGNOSTIC",
+  "test_opened": false,
+  "training_ecgs": [
+    3945,
+    1998
+  ],
+  "validation_ecgs": [
+    1207,
+    700
+  ]
+}

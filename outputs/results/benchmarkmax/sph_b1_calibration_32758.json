@@ -1,0 +1,2198 @@
+{
+  "design": {
+    "all_spH_already_observed": true,
+    "approximate_patient_partition": {
+      "fit": 60,
+      "outer_evaluation": 20,
+      "threshold_tune": 20
+    },
+    "bootstrap": {
+      "base_seed": 197813,
+      "confidence_level": 0.95,
+      "delta_metrics": [
+        "accuracy",
+        "sensitivity",
+        "specificity",
+        "ppv",
+        "npv",
+        "f1",
+        "auroc",
+        "average_precision",
+        "brier",
+        "ece"
+      ],
+      "method": "paired unstratified percentile bootstrap on out-of-fold predictions",
+      "replicates": 2000,
+      "rng": "numpy.PCG64",
+      "scope_limit": "conditional on the fitted cross-fold calibrators; calibrators are not refit inside bootstrap replicates",
+      "unit": "patient cluster; repeated ECGs sampled together"
+    },
+    "calibration_at_0_5": "reported as a descriptive reference point, not clinical decision policy",
+    "confirmatory_external_test": false,
+    "ece_bins": 10,
+    "fit_tune_test_patient_overlap": 0,
+    "frozen_score_source": "V4.5 SPH ledger; weights and raw scores were not changed",
+    "method": "positive-slope Platt scaling on score logits",
+    "outer_folds": 5,
+    "patient_assignment_uses_labels": false,
+    "threshold_objective": "maximum F1 on the separate threshold-tuning partition"
+  },
+  "endpoints": {
+    "P4:ASMI": {
+      "fold_support": [
+        {
+          "fit": {
+            "negative_records": 15440,
+            "patients": 14830,
+            "positive_patients": 52,
+            "positive_records": 60,
+            "records": 15500
+          },
+          "test": {
+            "negative_records": 5044,
+            "patients": 4831,
+            "positive_patients": 15,
+            "positive_records": 15,
+            "records": 5059
+          },
+          "threshold_tune": {
+            "negative_records": 5195,
+            "patients": 5005,
+            "positive_patients": 15,
+            "positive_records": 16,
+            "records": 5211
+          }
+        },
+        {
+          "fit": {
+            "negative_records": 15356,
+            "patients": 14731,
+            "positive_patients": 46,
+            "positive_records": 47,
+            "records": 15403
+          },
+          "test": {
+            "negative_records": 5245,
+            "patients": 5057,
+            "positive_patients": 20,
+            "positive_records": 27,
+            "records": 5272
+          },
+          "threshold_tune": {
+            "negative_records": 5078,
+            "patients": 4878,
+            "positive_patients": 16,
+            "positive_records": 17,
+            "records": 5095
+          }
+        },
+        {
+          "fit": {
+            "negative_records": 15481,
+            "patients": 14870,
+            "positive_patients": 51,
+            "positive_records": 59,
+            "records": 15540
+          },
+          "test": {
+            "negative_records": 5020,
+            "patients": 4816,
+            "positive_patients": 15,
+            "positive_records": 16,
+            "records": 5036
+          },
+          "threshold_tune": {
+            "negative_records": 5178,
+            "patients": 4980,
+            "positive_patients": 16,
+            "positive_records": 16,
+            "records": 5194
+          }
+        },
+        {
+          "fit": {
+            "negative_records": 15388,
+            "patients": 14750,
+            "positive_patients": 45,
+            "positive_records": 52,
+            "records": 15440
+          },
+          "test": {
+            "negative_records": 5169,
+            "patients": 4976,
+            "positive_patients": 19,
+            "positive_records": 20,
+            "records": 5189
+          },
+          "threshold_tune": {
+            "negative_records": 5122,
+            "patients": 4940,
+            "positive_patients": 18,
+            "positive_records": 19,
+            "records": 5141
+          }
+        },
+        {
+          "fit": {
+            "negative_records": 15407,
+            "patients": 14799,
+            "positive_patients": 50,
+            "positive_records": 58,
+            "records": 15465
+          },
+          "test": {
+            "negative_records": 5201,
+            "patients": 4986,
+            "positive_patients": 13,
+            "positive_records": 13,
+            "records": 5214
+          },
+          "threshold_tune": {
+            "negative_records": 5071,
+            "patients": 4881,
+            "positive_patients": 19,
+            "positive_records": 20,
+            "records": 5091
+          }
+        }
+      ],
+      "paired_patient_cluster_bootstrap_delta": {
+        "intervals": {
+          "accuracy": {
+            "bootstrap_mean_difference_calibrated_minus_raw": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": 0.0,
+            "valid_replicates": 2000
+          },
+          "auroc": {
+            "bootstrap_mean_difference_calibrated_minus_raw": -0.003135891369106817,
+            "ci95": [
+              -0.007006765413322372,
+              0.0007623673199509312
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": -0.0031179537390838563,
+            "valid_replicates": 2000
+          },
+          "average_precision": {
+            "bootstrap_mean_difference_calibrated_minus_raw": -0.0017541046961985125,
+            "ci95": [
+              -0.005601519333520504,
+              0.0010354821461430852
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": -0.001607847243452816,
+            "valid_replicates": 2000
+          },
+          "brier": {
+            "bootstrap_mean_difference_calibrated_minus_raw": -0.1709121206289121,
+            "ci95": [
+              -0.17326160186079267,
+              -0.16861894301533129
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": -0.1709157341216835,
+            "valid_replicates": 2000
+          },
+          "ece": {
+            "bootstrap_mean_difference_calibrated_minus_raw": -0.3607650011281589,
+            "ci95": [
+              -0.3634576043641013,
+              -0.3579453293013023
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": -0.36092784134442496,
+            "valid_replicates": 2000
+          },
+          "f1": {
+            "bootstrap_mean_difference_calibrated_minus_raw": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": 0.0,
+            "valid_replicates": 2000
+          },
+          "npv": {
+            "bootstrap_mean_difference_calibrated_minus_raw": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": 0.0,
+            "valid_replicates": 2000
+          },
+          "ppv": {
+            "bootstrap_mean_difference_calibrated_minus_raw": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": 0.0,
+            "valid_replicates": 2000
+          },
+          "sensitivity": {
+            "bootstrap_mean_difference_calibrated_minus_raw": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": 0.0,
+            "valid_replicates": 2000
+          },
+          "specificity": {
+            "bootstrap_mean_difference_calibrated_minus_raw": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": 0.0,
+            "valid_replicates": 2000
+          }
+        },
+        "method": "paired unstratified percentile bootstrap",
+        "replicates": 2000,
+        "seed": 197813,
+        "unit": "patient_id cluster; repeated ECGs sampled together"
+      },
+      "platt_at_0_5_reference_operating_point": {
+        "metrics": {
+          "accuracy": 0.9962747380675204,
+          "auroc": 0.873095089030289,
+          "average_precision": 0.05102455450748145,
+          "brier": 0.0035598449075203236,
+          "confusion": {
+            "fn": 90,
+            "fp": 6,
+            "tn": 25673,
+            "tp": 1
+          },
+          "ece": 0.0005613613787799041,
+          "f1": 0.02040816326530612,
+          "negative_support": 25679,
+          "npv": 0.9965066180180879,
+          "positive_support": 91,
+          "ppv": 0.14285714285714285,
+          "predicted_positive_support": 7,
+          "records": 25770,
+          "sensitivity": 0.01098901098901099,
+          "specificity": 0.9997663460415125
+        },
+        "not_a_clinical_threshold": true
+      },
+      "platt_nested_cv": {
+        "fold_threshold_quantiles": [
+          0.010728997029777358,
+          0.04057085686498539,
+          0.12272989458058149
+        ],
+        "metrics": {
+          "accuracy": 0.9865735351183547,
+          "auroc": 0.873095089030289,
+          "average_precision": 0.05102455450748145,
+          "brier": 0.0035598449075203236,
+          "confusion": {
+            "fn": 78,
+            "fp": 268,
+            "tn": 25411,
+            "tp": 13
+          },
+          "ece": 0.0005613613787799041,
+          "f1": 0.06989247311827956,
+          "negative_support": 25679,
+          "npv": 0.9969398564086469,
+          "positive_support": 91,
+          "ppv": 0.046263345195729534,
+          "predicted_positive_support": 281,
+          "records": 25770,
+          "sensitivity": 0.14285714285714285,
+          "specificity": 0.9895634565208925
+        },
+        "slope_quantiles": [
+          1.0172868503524992,
+          1.0409125428618546,
+          1.0921800423316765
+        ],
+        "threshold_selection": "maximum F1 on disjoint threshold-tuning patients in each outer fold"
+      },
+      "raw_nested_cv": {
+        "fold_threshold_quantiles": [
+          0.7488788962364197,
+          0.9131260514259338,
+          0.9694914221763611
+        ],
+        "metrics": {
+          "accuracy": 0.9865735351183547,
+          "auroc": 0.8762130427693728,
+          "average_precision": 0.05263240175093427,
+          "brier": 0.17447557902920383,
+          "confusion": {
+            "fn": 78,
+            "fp": 268,
+            "tn": 25411,
+            "tp": 13
+          },
+          "ece": 0.36148920272320484,
+          "f1": 0.06989247311827956,
+          "negative_support": 25679,
+          "npv": 0.9969398564086469,
+          "positive_support": 91,
+          "ppv": 0.046263345195729534,
+          "predicted_positive_support": 281,
+          "records": 25770,
+          "sensitivity": 0.14285714285714285,
+          "specificity": 0.9895634565208925
+        },
+        "threshold_selection": "maximum F1 on disjoint threshold-tuning patients in each outer fold"
+      },
+      "reference": "Anteroseptal MI ECG statement; not acute or clinically adjudicated MI",
+      "source_support": {
+        "negative_records": 25679,
+        "patients": 24666,
+        "patients_with_negative_records": 24588,
+        "patients_with_positive_records": 82,
+        "positive_records": 91,
+        "records": 25770
+      },
+      "v45_frozen_baseline": {
+        "decision_source": "saved V4.5 labels, including the existing P8 fallback where applicable",
+        "fallback_target_decisions": 0,
+        "frozen_threshold": 0.6699999999999999,
+        "metrics": {
+          "accuracy": 0.9125339542103221,
+          "auroc": 0.8762130427693728,
+          "average_precision": 0.05263240175093427,
+          "brier": 0.17447557902920383,
+          "confusion": {
+            "fn": 35,
+            "fp": 2219,
+            "tn": 23460,
+            "tp": 56
+          },
+          "ece": 0.36148920272320484,
+          "f1": 0.047337278106508875,
+          "negative_support": 25679,
+          "npv": 0.998510321344967,
+          "positive_support": 91,
+          "ppv": 0.024615384615384615,
+          "predicted_positive_support": 2275,
+          "records": 25770,
+          "sensitivity": 0.6153846153846154,
+          "specificity": 0.913586977686047
+        }
+      }
+    },
+    "P4:IMI": {
+      "fold_support": [
+        {
+          "fit": {
+            "negative_records": 15420,
+            "patients": 14830,
+            "positive_patients": 77,
+            "positive_records": 80,
+            "records": 15500
+          },
+          "test": {
+            "negative_records": 5034,
+            "patients": 4831,
+            "positive_patients": 25,
+            "positive_records": 25,
+            "records": 5059
+          },
+          "threshold_tune": {
+            "negative_records": 5196,
+            "patients": 5005,
+            "positive_patients": 15,
+            "positive_records": 15,
+            "records": 5211
+          }
+        },
+        {
+          "fit": {
+            "negative_records": 15323,
+            "patients": 14731,
+            "positive_patients": 77,
+            "positive_records": 80,
+            "records": 15403
+          },
+          "test": {
+            "negative_records": 5249,
+            "patients": 5057,
+            "positive_patients": 23,
+            "positive_records": 23,
+            "records": 5272
+          },
+          "threshold_tune": {
+            "negative_records": 5078,
+            "patients": 4878,
+            "positive_patients": 17,
+            "positive_records": 17,
+            "records": 5095
+          }
+        },
+        {
+          "fit": {
+            "negative_records": 15467,
+            "patients": 14870,
+            "positive_patients": 71,
+            "positive_records": 73,
+            "records": 15540
+          },
+          "test": {
+            "negative_records": 5009,
+            "patients": 4816,
+            "positive_patients": 26,
+            "positive_records": 27,
+            "records": 5036
+          },
+          "threshold_tune": {
+            "negative_records": 5174,
+            "patients": 4980,
+            "positive_patients": 20,
+            "positive_records": 20,
+            "records": 5194
+          }
+        },
+        {
+          "fit": {
+            "negative_records": 15365,
+            "patients": 14750,
+            "positive_patients": 74,
+            "positive_records": 75,
+            "records": 15440
+          },
+          "test": {
+            "negative_records": 5166,
+            "patients": 4976,
+            "positive_patients": 21,
+            "positive_records": 23,
+            "records": 5189
+          },
+          "threshold_tune": {
+            "negative_records": 5119,
+            "patients": 4940,
+            "positive_patients": 22,
+            "positive_records": 22,
+            "records": 5141
+          }
+        },
+        {
+          "fit": {
+            "negative_records": 15389,
+            "patients": 14799,
+            "positive_patients": 73,
+            "positive_records": 76,
+            "records": 15465
+          },
+          "test": {
+            "negative_records": 5192,
+            "patients": 4986,
+            "positive_patients": 22,
+            "positive_records": 22,
+            "records": 5214
+          },
+          "threshold_tune": {
+            "negative_records": 5069,
+            "patients": 4881,
+            "positive_patients": 22,
+            "positive_records": 22,
+            "records": 5091
+          }
+        }
+      ],
+      "paired_patient_cluster_bootstrap_delta": {
+        "intervals": {
+          "accuracy": {
+            "bootstrap_mean_difference_calibrated_minus_raw": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": 0.0,
+            "valid_replicates": 2000
+          },
+          "auroc": {
+            "bootstrap_mean_difference_calibrated_minus_raw": -0.003498009967757885,
+            "ci95": [
+              -0.006462034510692277,
+              -0.0009115206583940386
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": -0.003509421702404203,
+            "valid_replicates": 2000
+          },
+          "average_precision": {
+            "bootstrap_mean_difference_calibrated_minus_raw": -0.0008787633161522892,
+            "ci95": [
+              -0.0077859669302188335,
+              0.006363086368313096
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": -0.0012316903307605376,
+            "valid_replicates": 2000
+          },
+          "brier": {
+            "bootstrap_mean_difference_calibrated_minus_raw": -0.24678215326497163,
+            "ci95": [
+              -0.25010882643050314,
+              -0.24358334024926945
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": -0.24669990538004455,
+            "valid_replicates": 2000
+          },
+          "ece": {
+            "bootstrap_mean_difference_calibrated_minus_raw": -0.4287653587165371,
+            "ci95": [
+              -0.43197982072208624,
+              -0.42565022961350735
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": -0.42886889783403154,
+            "valid_replicates": 2000
+          },
+          "f1": {
+            "bootstrap_mean_difference_calibrated_minus_raw": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": 0.0,
+            "valid_replicates": 2000
+          },
+          "npv": {
+            "bootstrap_mean_difference_calibrated_minus_raw": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": 0.0,
+            "valid_replicates": 2000
+          },
+          "ppv": {
+            "bootstrap_mean_difference_calibrated_minus_raw": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": 0.0,
+            "valid_replicates": 2000
+          },
+          "sensitivity": {
+            "bootstrap_mean_difference_calibrated_minus_raw": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": 0.0,
+            "valid_replicates": 2000
+          },
+          "specificity": {
+            "bootstrap_mean_difference_calibrated_minus_raw": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": 0.0,
+            "valid_replicates": 2000
+          }
+        },
+        "method": "paired unstratified percentile bootstrap",
+        "replicates": 2000,
+        "seed": 197814,
+        "unit": "patient_id cluster; repeated ECGs sampled together"
+      },
+      "platt_at_0_5_reference_operating_point": {
+        "metrics": {
+          "accuracy": 0.9953822273961971,
+          "auroc": 0.9052608836907082,
+          "average_precision": 0.1422292159415113,
+          "brier": 0.004291277405536807,
+          "confusion": {
+            "fn": 119,
+            "fp": 0,
+            "tn": 25650,
+            "tp": 1
+          },
+          "ece": 0.0006422750038617548,
+          "f1": 0.01652892561983471,
+          "negative_support": 25650,
+          "npv": 0.9953820481974466,
+          "positive_support": 120,
+          "ppv": 1.0,
+          "predicted_positive_support": 1,
+          "records": 25770,
+          "sensitivity": 0.008333333333333333,
+          "specificity": 1.0
+        },
+        "not_a_clinical_threshold": true
+      },
+      "platt_nested_cv": {
+        "fold_threshold_quantiles": [
+          0.13301399830494162,
+          0.1538923215840716,
+          0.16736330460784327
+        ],
+        "metrics": {
+          "accuracy": 0.9939464493597207,
+          "auroc": 0.9052608836907082,
+          "average_precision": 0.1422292159415113,
+          "brier": 0.004291277405536807,
+          "confusion": {
+            "fn": 95,
+            "fp": 61,
+            "tn": 25589,
+            "tp": 25
+          },
+          "ece": 0.0006422750038617548,
+          "f1": 0.24271844660194175,
+          "negative_support": 25650,
+          "npv": 0.9963011991901572,
+          "positive_support": 120,
+          "ppv": 0.29069767441860467,
+          "predicted_positive_support": 86,
+          "records": 25770,
+          "sensitivity": 0.20833333333333334,
+          "specificity": 0.9976218323586744
+        },
+        "slope_quantiles": [
+          1.1913080318348166,
+          1.208878714493415,
+          1.3385601672585095
+        ],
+        "threshold_selection": "maximum F1 on disjoint threshold-tuning patients in each outer fold"
+      },
+      "raw_nested_cv": {
+        "fold_threshold_quantiles": [
+          0.9776768088340759,
+          0.9776768088340759,
+          0.9809436202049255
+        ],
+        "metrics": {
+          "accuracy": 0.9939464493597207,
+          "auroc": 0.9087703053931124,
+          "average_precision": 0.14346090627227184,
+          "brier": 0.25099118278558136,
+          "confusion": {
+            "fn": 95,
+            "fp": 61,
+            "tn": 25589,
+            "tp": 25
+          },
+          "ece": 0.4295111728378933,
+          "f1": 0.24271844660194175,
+          "negative_support": 25650,
+          "npv": 0.9963011991901572,
+          "positive_support": 120,
+          "ppv": 0.29069767441860467,
+          "predicted_positive_support": 86,
+          "records": 25770,
+          "sensitivity": 0.20833333333333334,
+          "specificity": 0.9976218323586744
+        },
+        "threshold_selection": "maximum F1 on disjoint threshold-tuning patients in each outer fold"
+      },
+      "reference": "Inferior MI ECG statement; not acute or clinically adjudicated MI",
+      "source_support": {
+        "negative_records": 25650,
+        "patients": 24666,
+        "patients_with_negative_records": 24556,
+        "patients_with_positive_records": 117,
+        "positive_records": 120,
+        "records": 25770
+      },
+      "v45_frozen_baseline": {
+        "decision_source": "saved V4.5 labels, including the existing P8 fallback where applicable",
+        "fallback_target_decisions": 0,
+        "frozen_threshold": 0.635,
+        "metrics": {
+          "accuracy": 0.7525029103608848,
+          "auroc": 0.9087703053931124,
+          "average_precision": 0.14346090627227184,
+          "brier": 0.25099118278558136,
+          "confusion": {
+            "fn": 13,
+            "fp": 6365,
+            "tn": 19285,
+            "tp": 107
+          },
+          "ece": 0.4295111728378933,
+          "f1": 0.03246359223300971,
+          "negative_support": 25650,
+          "npv": 0.9993263550627008,
+          "positive_support": 120,
+          "ppv": 0.016532756489493202,
+          "predicted_positive_support": 6472,
+          "records": 25770,
+          "sensitivity": 0.8916666666666667,
+          "specificity": 0.7518518518518519
+        }
+      }
+    },
+    "P4:LVH": {
+      "fold_support": [
+        {
+          "fit": {
+            "negative_records": 15372,
+            "patients": 14830,
+            "positive_patients": 122,
+            "positive_records": 128,
+            "records": 15500
+          },
+          "test": {
+            "negative_records": 5012,
+            "patients": 4831,
+            "positive_patients": 45,
+            "positive_records": 47,
+            "records": 5059
+          },
+          "threshold_tune": {
+            "negative_records": 5177,
+            "patients": 5005,
+            "positive_patients": 34,
+            "positive_records": 34,
+            "records": 5211
+          }
+        },
+        {
+          "fit": {
+            "negative_records": 15276,
+            "patients": 14731,
+            "positive_patients": 122,
+            "positive_records": 127,
+            "records": 15403
+          },
+          "test": {
+            "negative_records": 5226,
+            "patients": 5057,
+            "positive_patients": 43,
+            "positive_records": 46,
+            "records": 5272
+          },
+          "threshold_tune": {
+            "negative_records": 5059,
+            "patients": 4878,
+            "positive_patients": 36,
+            "positive_records": 36,
+            "records": 5095
+          }
+        },
+        {
+          "fit": {
+            "negative_records": 15405,
+            "patients": 14870,
+            "positive_patients": 128,
+            "positive_records": 135,
+            "records": 15540
+          },
+          "test": {
+            "negative_records": 4998,
+            "patients": 4816,
+            "positive_patients": 37,
+            "positive_records": 38,
+            "records": 5036
+          },
+          "threshold_tune": {
+            "negative_records": 5158,
+            "patients": 4980,
+            "positive_patients": 36,
+            "positive_records": 36,
+            "records": 5194
+          }
+        },
+        {
+          "fit": {
+            "negative_records": 15305,
+            "patients": 14750,
+            "positive_patients": 128,
+            "positive_records": 135,
+            "records": 15440
+          },
+          "test": {
+            "negative_records": 5151,
+            "patients": 4976,
+            "positive_patients": 37,
+            "positive_records": 38,
+            "records": 5189
+          },
+          "threshold_tune": {
+            "negative_records": 5105,
+            "patients": 4940,
+            "positive_patients": 36,
+            "positive_records": 36,
+            "records": 5141
+          }
+        },
+        {
+          "fit": {
+            "negative_records": 15330,
+            "patients": 14799,
+            "positive_patients": 128,
+            "positive_records": 135,
+            "records": 15465
+          },
+          "test": {
+            "negative_records": 5174,
+            "patients": 4986,
+            "positive_patients": 39,
+            "positive_records": 40,
+            "records": 5214
+          },
+          "threshold_tune": {
+            "negative_records": 5057,
+            "patients": 4881,
+            "positive_patients": 34,
+            "positive_records": 34,
+            "records": 5091
+          }
+        }
+      ],
+      "paired_patient_cluster_bootstrap_delta": {
+        "intervals": {
+          "accuracy": {
+            "bootstrap_mean_difference_calibrated_minus_raw": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": 0.0,
+            "valid_replicates": 2000
+          },
+          "auroc": {
+            "bootstrap_mean_difference_calibrated_minus_raw": -0.00045448716001360935,
+            "ci95": [
+              -0.0012675025079751546,
+              0.00038125237143394605
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": -0.00044606681568004625,
+            "valid_replicates": 2000
+          },
+          "average_precision": {
+            "bootstrap_mean_difference_calibrated_minus_raw": -0.001213825525828819,
+            "ci95": [
+              -0.003781818442205881,
+              0.0004468008358947898
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": -0.000954450207613651,
+            "valid_replicates": 2000
+          },
+          "brier": {
+            "bootstrap_mean_difference_calibrated_minus_raw": -0.33880253358534596,
+            "ci95": [
+              -0.34226205757172184,
+              -0.3352210027920278
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": -0.33875762493765726,
+            "valid_replicates": 2000
+          },
+          "ece": {
+            "bootstrap_mean_difference_calibrated_minus_raw": -0.5228203010186848,
+            "ci95": [
+              -0.5260079572504515,
+              -0.5194318654111927
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": -0.523034367916372,
+            "valid_replicates": 2000
+          },
+          "f1": {
+            "bootstrap_mean_difference_calibrated_minus_raw": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": 0.0,
+            "valid_replicates": 2000
+          },
+          "npv": {
+            "bootstrap_mean_difference_calibrated_minus_raw": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": 0.0,
+            "valid_replicates": 2000
+          },
+          "ppv": {
+            "bootstrap_mean_difference_calibrated_minus_raw": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": 0.0,
+            "valid_replicates": 2000
+          },
+          "sensitivity": {
+            "bootstrap_mean_difference_calibrated_minus_raw": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": 0.0,
+            "valid_replicates": 2000
+          },
+          "specificity": {
+            "bootstrap_mean_difference_calibrated_minus_raw": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": 0.0,
+            "valid_replicates": 2000
+          }
+        },
+        "method": "paired unstratified percentile bootstrap",
+        "replicates": 2000,
+        "seed": 197815,
+        "unit": "patient_id cluster; repeated ECGs sampled together"
+      },
+      "platt_at_0_5_reference_operating_point": {
+        "metrics": {
+          "accuracy": 0.9918897943344975,
+          "auroc": 0.7938441281939498,
+          "average_precision": 0.04937773236632047,
+          "brier": 0.007890718147469753,
+          "confusion": {
+            "fn": 209,
+            "fp": 0,
+            "tn": 25561,
+            "tp": 0
+          },
+          "ece": 0.00046619839336512663,
+          "f1": 0.0,
+          "negative_support": 25561,
+          "npv": 0.9918897943344975,
+          "positive_support": 209,
+          "ppv": null,
+          "predicted_positive_support": 0,
+          "records": 25770,
+          "sensitivity": 0.0,
+          "specificity": 1.0
+        },
+        "not_a_clinical_threshold": true
+      },
+      "platt_nested_cv": {
+        "fold_threshold_quantiles": [
+          0.059428251435953434,
+          0.06576207151145337,
+          0.07251393747839714
+        ],
+        "metrics": {
+          "accuracy": 0.9857586340706248,
+          "auroc": 0.7938441281939498,
+          "average_precision": 0.04937773236632047,
+          "brier": 0.007890718147469753,
+          "confusion": {
+            "fn": 183,
+            "fp": 184,
+            "tn": 25377,
+            "tp": 26
+          },
+          "ece": 0.00046619839336512663,
+          "f1": 0.12410501193317422,
+          "negative_support": 25561,
+          "npv": 0.9928403755868545,
+          "positive_support": 209,
+          "ppv": 0.12380952380952381,
+          "predicted_positive_support": 210,
+          "records": 25770,
+          "sensitivity": 0.12440191387559808,
+          "specificity": 0.992801533586323
+        },
+        "slope_quantiles": [
+          0.9048446081299264,
+          0.9374398466198274,
+          0.9751550592307908
+        ],
+        "threshold_selection": "maximum F1 on disjoint threshold-tuning patients in each outer fold"
+      },
+      "raw_nested_cv": {
+        "fold_threshold_quantiles": [
+          0.9575377106666565,
+          0.9575377106666565,
+          0.9609537124633789
+        ],
+        "metrics": {
+          "accuracy": 0.9857586340706248,
+          "auroc": 0.7942901950096298,
+          "average_precision": 0.05033218257393412,
+          "brier": 0.34664834308512704,
+          "confusion": {
+            "fn": 183,
+            "fp": 184,
+            "tn": 25377,
+            "tp": 26
+          },
+          "ece": 0.5235005663097372,
+          "f1": 0.12410501193317422,
+          "negative_support": 25561,
+          "npv": 0.9928403755868545,
+          "positive_support": 209,
+          "ppv": 0.12380952380952381,
+          "predicted_positive_support": 210,
+          "records": 25770,
+          "sensitivity": 0.12440191387559808,
+          "specificity": 0.992801533586323
+        },
+        "threshold_selection": "maximum F1 on disjoint threshold-tuning patients in each outer fold"
+      },
+      "reference": "LVH ECG statement; not imaging-confirmed hypertrophy",
+      "source_support": {
+        "negative_records": 25561,
+        "patients": 24666,
+        "patients_with_negative_records": 24469,
+        "patients_with_positive_records": 201,
+        "positive_records": 209,
+        "records": 25770
+      },
+      "v45_frozen_baseline": {
+        "decision_source": "saved V4.5 labels, including the existing P8 fallback where applicable",
+        "fallback_target_decisions": 0,
+        "frozen_threshold": 0.705,
+        "metrics": {
+          "accuracy": 0.6923554520760574,
+          "auroc": 0.7942901950096298,
+          "average_precision": 0.05033218257393412,
+          "brier": 0.34664834308512704,
+          "confusion": {
+            "fn": 59,
+            "fp": 7869,
+            "tn": 17692,
+            "tp": 150
+          },
+          "ece": 0.5235005663097372,
+          "f1": 0.036460865337870685,
+          "negative_support": 25561,
+          "npv": 0.9966762435919103,
+          "positive_support": 209,
+          "ppv": 0.01870557426112982,
+          "predicted_positive_support": 8019,
+          "records": 25770,
+          "sensitivity": 0.7177033492822966,
+          "specificity": 0.6921481945150816
+        }
+      }
+    },
+    "P6:PVC": {
+      "fold_support": [
+        {
+          "fit": {
+            "negative_records": 14851,
+            "patients": 14830,
+            "positive_patients": 628,
+            "positive_records": 649,
+            "records": 15500
+          },
+          "test": {
+            "negative_records": 4851,
+            "patients": 4831,
+            "positive_patients": 203,
+            "positive_records": 208,
+            "records": 5059
+          },
+          "threshold_tune": {
+            "negative_records": 5001,
+            "patients": 5005,
+            "positive_patients": 201,
+            "positive_records": 210,
+            "records": 5211
+          }
+        },
+        {
+          "fit": {
+            "negative_records": 14767,
+            "patients": 14731,
+            "positive_patients": 620,
+            "positive_records": 636,
+            "records": 15403
+          },
+          "test": {
+            "negative_records": 5037,
+            "patients": 5057,
+            "positive_patients": 225,
+            "positive_records": 235,
+            "records": 5272
+          },
+          "threshold_tune": {
+            "negative_records": 4899,
+            "patients": 4878,
+            "positive_patients": 187,
+            "positive_records": 196,
+            "records": 5095
+          }
+        },
+        {
+          "fit": {
+            "negative_records": 14878,
+            "patients": 14870,
+            "positive_patients": 645,
+            "positive_records": 662,
+            "records": 15540
+          },
+          "test": {
+            "negative_records": 4853,
+            "patients": 4816,
+            "positive_patients": 176,
+            "positive_records": 183,
+            "records": 5036
+          },
+          "threshold_tune": {
+            "negative_records": 4972,
+            "patients": 4980,
+            "positive_patients": 211,
+            "positive_records": 222,
+            "records": 5194
+          }
+        },
+        {
+          "fit": {
+            "negative_records": 14799,
+            "patients": 14750,
+            "positive_patients": 621,
+            "positive_records": 641,
+            "records": 15440
+          },
+          "test": {
+            "negative_records": 4960,
+            "patients": 4976,
+            "positive_patients": 223,
+            "positive_records": 229,
+            "records": 5189
+          },
+          "threshold_tune": {
+            "negative_records": 4944,
+            "patients": 4940,
+            "positive_patients": 188,
+            "positive_records": 197,
+            "records": 5141
+          }
+        },
+        {
+          "fit": {
+            "negative_records": 14813,
+            "patients": 14799,
+            "positive_patients": 634,
+            "positive_records": 652,
+            "records": 15465
+          },
+          "test": {
+            "negative_records": 5002,
+            "patients": 4986,
+            "positive_patients": 205,
+            "positive_records": 212,
+            "records": 5214
+          },
+          "threshold_tune": {
+            "negative_records": 4888,
+            "patients": 4881,
+            "positive_patients": 193,
+            "positive_records": 203,
+            "records": 5091
+          }
+        }
+      ],
+      "paired_patient_cluster_bootstrap_delta": {
+        "intervals": {
+          "accuracy": {
+            "bootstrap_mean_difference_calibrated_minus_raw": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": 0.0,
+            "valid_replicates": 2000
+          },
+          "auroc": {
+            "bootstrap_mean_difference_calibrated_minus_raw": -0.00015459041415081214,
+            "ci95": [
+              -0.00024616024132187995,
+              -6.0602034163440035e-05
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": -0.00015441173095132044,
+            "valid_replicates": 2000
+          },
+          "average_precision": {
+            "bootstrap_mean_difference_calibrated_minus_raw": -0.0020280814541987907,
+            "ci95": [
+              -0.003184409551734502,
+              -0.000885213020659418
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": -0.00203539424669541,
+            "valid_replicates": 2000
+          },
+          "brier": {
+            "bootstrap_mean_difference_calibrated_minus_raw": -0.020076102893729485,
+            "ci95": [
+              -0.021360350161129388,
+              -0.01880577766763199
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": -0.02006598461424491,
+            "valid_replicates": 2000
+          },
+          "ece": {
+            "bootstrap_mean_difference_calibrated_minus_raw": -0.07490491965507243,
+            "ci95": [
+              -0.07737182732438096,
+              -0.0723950374680678
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": -0.07541472476503544,
+            "valid_replicates": 2000
+          },
+          "f1": {
+            "bootstrap_mean_difference_calibrated_minus_raw": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": 0.0,
+            "valid_replicates": 2000
+          },
+          "npv": {
+            "bootstrap_mean_difference_calibrated_minus_raw": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": 0.0,
+            "valid_replicates": 2000
+          },
+          "ppv": {
+            "bootstrap_mean_difference_calibrated_minus_raw": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": 0.0,
+            "valid_replicates": 2000
+          },
+          "sensitivity": {
+            "bootstrap_mean_difference_calibrated_minus_raw": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": 0.0,
+            "valid_replicates": 2000
+          },
+          "specificity": {
+            "bootstrap_mean_difference_calibrated_minus_raw": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": 0.0,
+            "valid_replicates": 2000
+          }
+        },
+        "method": "paired unstratified percentile bootstrap",
+        "replicates": 2000,
+        "seed": 197817,
+        "unit": "patient_id cluster; repeated ECGs sampled together"
+      },
+      "platt_at_0_5_reference_operating_point": {
+        "metrics": {
+          "accuracy": 0.9729142413659294,
+          "auroc": 0.9560678897163343,
+          "average_precision": 0.65184883276689,
+          "brier": 0.020962747859563955,
+          "confusion": {
+            "fn": 480,
+            "fp": 218,
+            "tn": 24485,
+            "tp": 587
+          },
+          "ece": 0.003701430722850666,
+          "f1": 0.6271367521367521,
+          "negative_support": 24703,
+          "npv": 0.9807730823152413,
+          "positive_support": 1067,
+          "ppv": 0.7291925465838509,
+          "predicted_positive_support": 805,
+          "records": 25770,
+          "sensitivity": 0.5501405810684161,
+          "specificity": 0.9911751609116302
+        },
+        "not_a_clinical_threshold": true
+      },
+      "platt_nested_cv": {
+        "fold_threshold_quantiles": [
+          0.24026333064578034,
+          0.24233800124483856,
+          0.3503108809764193
+        ],
+        "metrics": {
+          "accuracy": 0.9683740783857199,
+          "auroc": 0.9560678897163343,
+          "average_precision": 0.65184883276689,
+          "brier": 0.020962747859563955,
+          "confusion": {
+            "fn": 304,
+            "fp": 511,
+            "tn": 24192,
+            "tp": 763
+          },
+          "ece": 0.003701430722850666,
+          "f1": 0.6518581802648441,
+          "negative_support": 24703,
+          "npv": 0.9875898105813194,
+          "positive_support": 1067,
+          "ppv": 0.5989010989010989,
+          "predicted_positive_support": 1274,
+          "records": 25770,
+          "sensitivity": 0.7150890346766635,
+          "specificity": 0.9793142533295551
+        },
+        "slope_quantiles": [
+          1.1039745553455407,
+          1.122686492852553,
+          1.126681569701888
+        ],
+        "threshold_selection": "maximum F1 on disjoint threshold-tuning patients in each outer fold"
+      },
+      "raw_nested_cv": {
+        "fold_threshold_quantiles": [
+          0.6990097117305052,
+          0.6990097117305052,
+          0.7957255275219947
+        ],
+        "metrics": {
+          "accuracy": 0.9683740783857199,
+          "auroc": 0.9562223014472856,
+          "average_precision": 0.6538842270135854,
+          "brier": 0.041028732473808865,
+          "confusion": {
+            "fn": 304,
+            "fp": 511,
+            "tn": 24192,
+            "tp": 763
+          },
+          "ece": 0.0791161554878861,
+          "f1": 0.6518581802648441,
+          "negative_support": 24703,
+          "npv": 0.9875898105813194,
+          "positive_support": 1067,
+          "ppv": 0.5989010989010989,
+          "predicted_positive_support": 1274,
+          "records": 25770,
+          "sensitivity": 0.7150890346766635,
+          "specificity": 0.9793142533295551
+        },
+        "threshold_selection": "maximum F1 on disjoint threshold-tuning patients in each outer fold"
+      },
+      "reference": "Ventricular premature-complex ECG statement; not beat-level event detection",
+      "source_support": {
+        "negative_records": 24703,
+        "patients": 24666,
+        "patients_with_negative_records": 23696,
+        "patients_with_positive_records": 1032,
+        "positive_records": 1067,
+        "records": 25770
+      },
+      "v45_frozen_baseline": {
+        "decision_source": "saved V4.5 labels, including the existing P8 fallback where applicable",
+        "fallback_target_decisions": 0,
+        "frozen_threshold": 0.42999999999999994,
+        "metrics": {
+          "accuracy": 0.9403570042685293,
+          "auroc": 0.9562223014472856,
+          "average_precision": 0.6538842270135854,
+          "brier": 0.041028732473808865,
+          "confusion": {
+            "fn": 162,
+            "fp": 1375,
+            "tn": 23328,
+            "tp": 905
+          },
+          "ece": 0.0791161554878861,
+          "f1": 0.5407827905587093,
+          "negative_support": 24703,
+          "npv": 0.993103448275862,
+          "positive_support": 1067,
+          "ppv": 0.3969298245614035,
+          "predicted_positive_support": 2280,
+          "records": 25770,
+          "sensitivity": 0.8481724461105904,
+          "specificity": 0.944338744282071
+        }
+      }
+    },
+    "P6:RBBB": {
+      "fold_support": [
+        {
+          "fit": {
+            "negative_records": 15097,
+            "patients": 14830,
+            "positive_patients": 372,
+            "positive_records": 403,
+            "records": 15500
+          },
+          "test": {
+            "negative_records": 4901,
+            "patients": 4831,
+            "positive_patients": 148,
+            "positive_records": 158,
+            "records": 5059
+          },
+          "threshold_tune": {
+            "negative_records": 5062,
+            "patients": 5005,
+            "positive_patients": 138,
+            "positive_records": 149,
+            "records": 5211
+          }
+        },
+        {
+          "fit": {
+            "negative_records": 14991,
+            "patients": 14731,
+            "positive_patients": 384,
+            "positive_records": 412,
+            "records": 15403
+          },
+          "test": {
+            "negative_records": 5131,
+            "patients": 5057,
+            "positive_patients": 130,
+            "positive_records": 141,
+            "records": 5272
+          },
+          "threshold_tune": {
+            "negative_records": 4938,
+            "patients": 4878,
+            "positive_patients": 144,
+            "positive_records": 157,
+            "records": 5095
+          }
+        },
+        {
+          "fit": {
+            "negative_records": 15103,
+            "patients": 14870,
+            "positive_patients": 407,
+            "positive_records": 437,
+            "records": 15540
+          },
+          "test": {
+            "negative_records": 4913,
+            "patients": 4816,
+            "positive_patients": 112,
+            "positive_records": 123,
+            "records": 5036
+          },
+          "threshold_tune": {
+            "negative_records": 5044,
+            "patients": 4980,
+            "positive_patients": 139,
+            "positive_records": 150,
+            "records": 5194
+          }
+        },
+        {
+          "fit": {
+            "negative_records": 15027,
+            "patients": 14750,
+            "positive_patients": 380,
+            "positive_records": 413,
+            "records": 15440
+          },
+          "test": {
+            "negative_records": 5033,
+            "patients": 4976,
+            "positive_patients": 147,
+            "positive_records": 156,
+            "records": 5189
+          },
+          "threshold_tune": {
+            "negative_records": 5000,
+            "patients": 4940,
+            "positive_patients": 131,
+            "positive_records": 141,
+            "records": 5141
+          }
+        },
+        {
+          "fit": {
+            "negative_records": 15034,
+            "patients": 14799,
+            "positive_patients": 401,
+            "positive_records": 431,
+            "records": 15465
+          },
+          "test": {
+            "negative_records": 5082,
+            "patients": 4986,
+            "positive_patients": 121,
+            "positive_records": 132,
+            "records": 5214
+          },
+          "threshold_tune": {
+            "negative_records": 4944,
+            "patients": 4881,
+            "positive_patients": 136,
+            "positive_records": 147,
+            "records": 5091
+          }
+        }
+      ],
+      "paired_patient_cluster_bootstrap_delta": {
+        "intervals": {
+          "accuracy": {
+            "bootstrap_mean_difference_calibrated_minus_raw": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": 0.0,
+            "valid_replicates": 2000
+          },
+          "auroc": {
+            "bootstrap_mean_difference_calibrated_minus_raw": -9.83649498950222e-05,
+            "ci95": [
+              -0.0002285686782673657,
+              9.539789374304865e-06
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": -9.880512123017215e-05,
+            "valid_replicates": 2000
+          },
+          "average_precision": {
+            "bootstrap_mean_difference_calibrated_minus_raw": -0.0005378190643160496,
+            "ci95": [
+              -0.002088447928512516,
+              0.0010084244540341548
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": -0.000542393531902996,
+            "valid_replicates": 2000
+          },
+          "brier": {
+            "bootstrap_mean_difference_calibrated_minus_raw": -0.025784765049965495,
+            "ci95": [
+              -0.02726175981347175,
+              -0.024274652324087775
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": -0.025773112898363655,
+            "valid_replicates": 2000
+          },
+          "ece": {
+            "bootstrap_mean_difference_calibrated_minus_raw": -0.06926520472016531,
+            "ci95": [
+              -0.07143839748688188,
+              -0.06694790368360237
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": -0.07007976232250053,
+            "valid_replicates": 2000
+          },
+          "f1": {
+            "bootstrap_mean_difference_calibrated_minus_raw": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": 0.0,
+            "valid_replicates": 2000
+          },
+          "npv": {
+            "bootstrap_mean_difference_calibrated_minus_raw": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": 0.0,
+            "valid_replicates": 2000
+          },
+          "ppv": {
+            "bootstrap_mean_difference_calibrated_minus_raw": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": 0.0,
+            "valid_replicates": 2000
+          },
+          "sensitivity": {
+            "bootstrap_mean_difference_calibrated_minus_raw": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": 0.0,
+            "valid_replicates": 2000
+          },
+          "specificity": {
+            "bootstrap_mean_difference_calibrated_minus_raw": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": 0.0,
+            "valid_replicates": 2000
+          }
+        },
+        "method": "paired unstratified percentile bootstrap",
+        "replicates": 2000,
+        "seed": 197818,
+        "unit": "patient_id cluster; repeated ECGs sampled together"
+      },
+      "platt_at_0_5_reference_operating_point": {
+        "metrics": {
+          "accuracy": 0.9867287543655413,
+          "auroc": 0.987399874104965,
+          "average_precision": 0.8058216010524495,
+          "brier": 0.009906860669844468,
+          "confusion": {
+            "fn": 193,
+            "fp": 149,
+            "tn": 24911,
+            "tp": 517
+          },
+          "ece": 0.000983099449936128,
+          "f1": 0.751453488372093,
+          "negative_support": 25060,
+          "npv": 0.9923119821542383,
+          "positive_support": 710,
+          "ppv": 0.7762762762762763,
+          "predicted_positive_support": 666,
+          "records": 25770,
+          "sensitivity": 0.7281690140845071,
+          "specificity": 0.9940542697525938
+        },
+        "not_a_clinical_threshold": true
+      },
+      "platt_nested_cv": {
+        "fold_threshold_quantiles": [
+          0.37542814770685884,
+          0.4291275940924578,
+          0.5003496790084561
+        ],
+        "metrics": {
+          "accuracy": 0.9858750485060147,
+          "auroc": 0.987399874104965,
+          "average_precision": 0.8058216010524495,
+          "brier": 0.009906860669844468,
+          "confusion": {
+            "fn": 180,
+            "fp": 184,
+            "tn": 24876,
+            "tp": 530
+          },
+          "ece": 0.000983099449936128,
+          "f1": 0.7443820224719101,
+          "negative_support": 25060,
+          "npv": 0.992816091954023,
+          "positive_support": 710,
+          "ppv": 0.742296918767507,
+          "predicted_positive_support": 714,
+          "records": 25770,
+          "sensitivity": 0.7464788732394366,
+          "specificity": 0.9926576217079011
+        },
+        "slope_quantiles": [
+          1.1277098583648704,
+          1.1306295843474414,
+          1.1756458241472114
+        ],
+        "threshold_selection": "maximum F1 on disjoint threshold-tuning patients in each outer fold"
+      },
+      "raw_nested_cv": {
+        "fold_threshold_quantiles": [
+          0.9328102910732421,
+          0.9481020023197837,
+          0.9565810464388064
+        ],
+        "metrics": {
+          "accuracy": 0.9858750485060147,
+          "auroc": 0.9874986792261952,
+          "average_precision": 0.8063639945843525,
+          "brier": 0.03567997356820812,
+          "confusion": {
+            "fn": 180,
+            "fp": 184,
+            "tn": 24876,
+            "tp": 530
+          },
+          "ece": 0.07106286177243666,
+          "f1": 0.7443820224719101,
+          "negative_support": 25060,
+          "npv": 0.992816091954023,
+          "positive_support": 710,
+          "ppv": 0.742296918767507,
+          "predicted_positive_support": 714,
+          "records": 25770,
+          "sensitivity": 0.7464788732394366,
+          "specificity": 0.9926576217079011
+        },
+        "threshold_selection": "maximum F1 on disjoint threshold-tuning patients in each outer fold"
+      },
+      "reference": "Complete RBBB ECG statement; code 105 is not pooled",
+      "source_support": {
+        "negative_records": 25060,
+        "patients": 24666,
+        "patients_with_negative_records": 24018,
+        "patients_with_positive_records": 658,
+        "positive_records": 710,
+        "records": 25770
+      },
+      "v45_frozen_baseline": {
+        "decision_source": "saved V4.5 labels, including the existing P8 fallback where applicable",
+        "fallback_target_decisions": 0,
+        "frozen_threshold": 0.5149999999999999,
+        "metrics": {
+          "accuracy": 0.9576639503298409,
+          "auroc": 0.9874986792261952,
+          "average_precision": 0.8063639945843525,
+          "brier": 0.03567997356820812,
+          "confusion": {
+            "fn": 24,
+            "fp": 1067,
+            "tn": 23993,
+            "tp": 686
+          },
+          "ece": 0.07106286177243666,
+          "f1": 0.5570442549736094,
+          "negative_support": 25060,
+          "npv": 0.9990007078319524,
+          "positive_support": 710,
+          "ppv": 0.39132915002852253,
+          "predicted_positive_support": 1753,
+          "records": 25770,
+          "sensitivity": 0.9661971830985916,
+          "specificity": 0.9574221867517957
+        }
+      }
+    },
+    "P8:PAC": {
+      "fold_support": [
+        {
+          "fit": {
+            "negative_records": 15177,
+            "patients": 14830,
+            "positive_patients": 313,
+            "positive_records": 323,
+            "records": 15500
+          },
+          "test": {
+            "negative_records": 4959,
+            "patients": 4831,
+            "positive_patients": 99,
+            "positive_records": 100,
+            "records": 5059
+          },
+          "threshold_tune": {
+            "negative_records": 5095,
+            "patients": 5005,
+            "positive_patients": 113,
+            "positive_records": 116,
+            "records": 5211
+          }
+        },
+        {
+          "fit": {
+            "negative_records": 15089,
+            "patients": 14731,
+            "positive_patients": 305,
+            "positive_records": 314,
+            "records": 15403
+          },
+          "test": {
+            "negative_records": 5157,
+            "patients": 5057,
+            "positive_patients": 113,
+            "positive_records": 115,
+            "records": 5272
+          },
+          "threshold_tune": {
+            "negative_records": 4985,
+            "patients": 4878,
+            "positive_patients": 107,
+            "positive_records": 110,
+            "records": 5095
+          }
+        },
+        {
+          "fit": {
+            "negative_records": 15222,
+            "patients": 14870,
+            "positive_patients": 311,
+            "positive_records": 318,
+            "records": 15540
+          },
+          "test": {
+            "negative_records": 4928,
+            "patients": 4816,
+            "positive_patients": 102,
+            "positive_records": 108,
+            "records": 5036
+          },
+          "threshold_tune": {
+            "negative_records": 5081,
+            "patients": 4980,
+            "positive_patients": 112,
+            "positive_records": 113,
+            "records": 5194
+          }
+        },
+        {
+          "fit": {
+            "negative_records": 15113,
+            "patients": 14750,
+            "positive_patients": 318,
+            "positive_records": 327,
+            "records": 15440
+          },
+          "test": {
+            "negative_records": 5090,
+            "patients": 4976,
+            "positive_patients": 96,
+            "positive_records": 99,
+            "records": 5189
+          },
+          "threshold_tune": {
+            "negative_records": 5028,
+            "patients": 4940,
+            "positive_patients": 111,
+            "positive_records": 113,
+            "records": 5141
+          }
+        },
+        {
+          "fit": {
+            "negative_records": 15151,
+            "patients": 14799,
+            "positive_patients": 305,
+            "positive_records": 314,
+            "records": 15465
+          },
+          "test": {
+            "negative_records": 5097,
+            "patients": 4986,
+            "positive_patients": 115,
+            "positive_records": 117,
+            "records": 5214
+          },
+          "threshold_tune": {
+            "negative_records": 4983,
+            "patients": 4881,
+            "positive_patients": 105,
+            "positive_records": 108,
+            "records": 5091
+          }
+        }
+      ],
+      "paired_patient_cluster_bootstrap_delta": {
+        "intervals": {
+          "accuracy": {
+            "bootstrap_mean_difference_calibrated_minus_raw": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": 0.0,
+            "valid_replicates": 2000
+          },
+          "auroc": {
+            "bootstrap_mean_difference_calibrated_minus_raw": -0.00035938467883822985,
+            "ci95": [
+              -0.0007519804449598793,
+              5.797438476194383e-05
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": -0.00035368923981005107,
+            "valid_replicates": 2000
+          },
+          "average_precision": {
+            "bootstrap_mean_difference_calibrated_minus_raw": -0.0007498229006215329,
+            "ci95": [
+              -0.0030089875005344796,
+              0.0015438198807342872
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": -0.0008559372299148937,
+            "valid_replicates": 2000
+          },
+          "brier": {
+            "bootstrap_mean_difference_calibrated_minus_raw": -0.054757574599033625,
+            "ci95": [
+              -0.056286401975534577,
+              -0.05324471395849337
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": -0.05478534132173035,
+            "valid_replicates": 2000
+          },
+          "ece": {
+            "bootstrap_mean_difference_calibrated_minus_raw": -0.19582567602864867,
+            "ci95": [
+              -0.19804847980969464,
+              -0.19334081090994784
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": -0.19634247549476844,
+            "valid_replicates": 2000
+          },
+          "f1": {
+            "bootstrap_mean_difference_calibrated_minus_raw": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": 0.0,
+            "valid_replicates": 2000
+          },
+          "npv": {
+            "bootstrap_mean_difference_calibrated_minus_raw": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": 0.0,
+            "valid_replicates": 2000
+          },
+          "ppv": {
+            "bootstrap_mean_difference_calibrated_minus_raw": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": 0.0,
+            "valid_replicates": 2000
+          },
+          "sensitivity": {
+            "bootstrap_mean_difference_calibrated_minus_raw": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": 0.0,
+            "valid_replicates": 2000
+          },
+          "specificity": {
+            "bootstrap_mean_difference_calibrated_minus_raw": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "invalid_replicates": 0,
+            "point_difference_calibrated_minus_raw": 0.0,
+            "valid_replicates": 2000
+          }
+        },
+        "method": "paired unstratified percentile bootstrap",
+        "replicates": 2000,
+        "seed": 197816,
+        "unit": "patient_id cluster; repeated ECGs sampled together"
+      },
+      "platt_at_0_5_reference_operating_point": {
+        "metrics": {
+          "accuracy": 0.9794334497477687,
+          "auroc": 0.8492700361461579,
+          "average_precision": 0.28867115585682934,
+          "brier": 0.017539920789346256,
+          "confusion": {
+            "fn": 468,
+            "fp": 62,
+            "tn": 25169,
+            "tp": 71
+          },
+          "ece": 0.00288180254603373,
+          "f1": 0.2113095238095238,
+          "negative_support": 25231,
+          "npv": 0.9817451339860358,
+          "positive_support": 539,
+          "ppv": 0.5338345864661654,
+          "predicted_positive_support": 133,
+          "records": 25770,
+          "sensitivity": 0.13172541743970315,
+          "specificity": 0.9975427054020848
+        },
+        "not_a_clinical_threshold": true
+      },
+      "platt_nested_cv": {
+        "fold_threshold_quantiles": [
+          0.08040527033772019,
+          0.08433450053279515,
+          0.08623534055190854
+        ],
+        "metrics": {
+          "accuracy": 0.9707799767171129,
+          "auroc": 0.8492700361461579,
+          "average_precision": 0.28867115585682934,
+          "brier": 0.017539920789346256,
+          "confusion": {
+            "fn": 315,
+            "fp": 438,
+            "tn": 24793,
+            "tp": 224
+          },
+          "ece": 0.00288180254603373,
+          "f1": 0.373022481265612,
+          "negative_support": 25231,
+          "npv": 0.9874541978652223,
+          "positive_support": 539,
+          "ppv": 0.338368580060423,
+          "predicted_positive_support": 662,
+          "records": 25770,
+          "sensitivity": 0.4155844155844156,
+          "specificity": 0.9826404026792438
+        },
+        "slope_quantiles": [
+          1.005807536587978,
+          1.048725478310677,
+          1.066161035051837
+        ],
+        "threshold_selection": "maximum F1 on disjoint threshold-tuning patients in each outer fold"
+      },
+      "raw_nested_cv": {
+        "fold_threshold_quantiles": [
+          0.6529295444488525,
+          0.6529295444488525,
+          0.6534414291381836
+        ],
+        "metrics": {
+          "accuracy": 0.9707799767171129,
+          "auroc": 0.849623725385968,
+          "average_precision": 0.28952709308674424,
+          "brier": 0.07232526211107661,
+          "confusion": {
+            "fn": 315,
+            "fp": 438,
+            "tn": 24793,
+            "tp": 224
+          },
+          "ece": 0.19922427804080217,
+          "f1": 0.373022481265612,
+          "negative_support": 25231,
+          "npv": 0.9874541978652223,
+          "positive_support": 539,
+          "ppv": 0.338368580060423,
+          "predicted_positive_support": 662,
+          "records": 25770,
+          "sensitivity": 0.4155844155844156,
+          "specificity": 0.9826404026792438
+        },
+        "threshold_selection": "maximum F1 on disjoint threshold-tuning patients in each outer fold"
+      },
+      "reference": "Atrial premature-complex ECG statement; not beat-level event detection",
+      "source_support": {
+        "negative_records": 25231,
+        "patients": 24666,
+        "patients_with_negative_records": 24180,
+        "patients_with_positive_records": 525,
+        "positive_records": 539,
+        "records": 25770
+      },
+      "v45_frozen_baseline": {
+        "decision_source": "saved V4.5 labels, including the existing P8 fallback where applicable",
+        "fallback_target_decisions": 4,
+        "frozen_threshold": 0.45,
+        "metrics": {
+          "accuracy": 0.9285215366705472,
+          "auroc": 0.849623725385968,
+          "average_precision": 0.28952709308674424,
+          "brier": 0.07232526211107661,
+          "confusion": {
+            "fn": 207,
+            "fp": 1635,
+            "tn": 23596,
+            "tp": 332
+          },
+          "ece": 0.19922427804080217,
+          "f1": 0.2649640861931365,
+          "negative_support": 25231,
+          "npv": 0.9913036171911104,
+          "positive_support": 539,
+          "ppv": 0.16878495170310118,
+          "predicted_positive_support": 1967,
+          "records": 25770,
+          "sensitivity": 0.6159554730983302,
+          "specificity": 0.9351987634259443
+        }
+      }
+    }
+  },
+  "execution": {
+    "b1_config_sha256": "3e00a03b2376f1935ea5d2fb1197aae41e1884f17119f8291ed351d7a1d3d5ad",
+    "commit": "62cff27a16f621d564a22bd3a50259a7b2d79745",
+    "runtime": {
+      "environment": "CEDIA miniconda3/3 conda environment yc_env2",
+      "versions": {
+        "numpy": "1.26.4",
+        "python": "3.10.18",
+        "scipy": "1.15.3"
+      }
+    },
+    "script_sha256": "320621cdeb91d8d7abef2949a9ac41e49ce6d8bd277b66bd5836e40cb6720406",
+    "slurm_job_id": "32758"
+  },
+  "individual_identifiers_exported": false,
+  "input_sha256": {
+    "baseline_aggregate": "50487cd92a91924a0aa63549725eb26d9328f307a6a6d9cf57ac2655e85ad2ef",
+    "ledger": "4a3a1e61b1784e06190d5caaa089fca04ef84792acb3a5f9fc1af3f9c1173462",
+    "metadata": "c6f8dc5197758a3970aae554f8b6ee884d96656b121879bc0eb1adf367ea6d86",
+    "scoring_receipt": "8abdc5f6561fc3fea77eeb68e8aa34bc2d02396cad9c2e9fbeea70b4188dac92",
+    "v45_frozen_config": "d788ad8cca94793cebb738496acc131e82b1ca1900976f11020b99a79a5fc366"
+  },
+  "record_level_outputs_exported": false,
+  "schema": "TITAN_V46_SPH_B1_CALIBRATION_DIAGNOSTIC_V1",
+  "scope": "Exploratory V4.6 adaptation diagnostic on previously observed SPH; not an independent, locked, confirmatory, or clinical validation.",
+  "source": {
+    "patients": 24666,
+    "records": 25770,
+    "reference": "presence of the frozen primary code on an ECG; absence is not adjudicated disease absence"
+  },
+  "source_v45_model_sha256": {
+    "backbone-v3ag-pathology.pt": "bf71e4cf8acc34031cb3611c7031e0649822e705fd7dcea354a3ea583ce920ee",
+    "backbone-v3f-original.pt": "ca5d4dcb4b9828e6c4339800fe81ec27f32d9b09a090bb57503bfb56746a8da8",
+    "specialists-v3ag-primary4-calibrated.pt": "cf5091e962fffb3254b1a71fe57236dd82ea0139093df192511499d931391dbc",
+    "specialists-v3p-e008-primary6-diagnostic.pt": "9c5a9265a7155e1206c551cc4e6d645b86363ba3dbdeb7baf7b9f173c314be3d",
+    "specialists-v3q-primary8-best-candidate.pt": "b30cb2bbb45f1231c93ff1c196aa966b57b49831cadb296131c0283e7b0ceb02"
+  },
+  "source_v45_protocol_commit": "eb1c67b9229af875a9f868797b0c2f5c546e3dac"
+}

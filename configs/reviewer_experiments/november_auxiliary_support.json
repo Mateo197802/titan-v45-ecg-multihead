@@ -1,0 +1,23 @@
+{
+  "schema": "TITAN_V45_SPH_AUXILIARY_SUPPORT_V1",
+  "scope": "complete SPH V1 denominator, with ranking only on a known-statement subset; development, not independent or clinical validation",
+  "normal": {"code": 1, "description": "Normal ECG", "not_equivalent_to": "NSR"},
+  "endpoints": [
+    {"name": "Flutter", "code": 51, "description": "Atrial flutter", "profile": "P8", "score_key": "backbone_0", "scale": "mean auxiliary rhythm logit"},
+    {"name": "LAE", "code": 140, "description": "Left atrial enlargement", "profile": "P4", "score_key": "LAE", "scale": "auxiliary backbone sigmoid"}
+  ],
+  "declared_auxiliary_without_validated_mapping": ["LBBB", "2AVB", "3AVB", "LQTS", "Paced", "ALMI", "ILMI"],
+  "reference": {
+    "positive": "target statement present without Normal ECG",
+    "explicit_control": "Normal ECG is the only primary statement",
+    "ambiguous": "Normal ECG and any other primary statement, not a valid control",
+    "unknown": "all other records; never convert to negative"
+  },
+  "other_support_screen": {
+    "P6_other_rhythm_observable_subset": [30, 51],
+    "P8_other_rhythm_observable_subset": [51],
+    "P4_other_pathology_observable_subset": [140],
+    "interpretation": "lower-bound support of mapped out-of-profile statements; not a complete Other target, not a classifier and excludes Normal ECG"
+  },
+  "scoring": "threshold-free AUROC and average precision only; no frozen auxiliary thresholds, no confusion matrix or clinical operating point"
+}

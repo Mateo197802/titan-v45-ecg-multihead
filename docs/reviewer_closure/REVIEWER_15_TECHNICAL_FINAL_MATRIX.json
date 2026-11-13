@@ -1,0 +1,475 @@
+{
+  "schema": "TITAN_V45_REVIEWER_15_TECHNICAL_FINAL_MATRIX_V1",
+  "as_of": "2026-11-10",
+  "source_matrix": "docs/reviewer_closure/REVIEWER_48_DETAILED.json",
+  "source_head_checked": "4d5e7cc6928c23d9088e20182cc5937b53ab3058",
+  "new_execution_receipt": "docs/reviewer_closure/receipts/CEDIA_JOB_LOGS_2026-11-10.json",
+  "counts": {
+    "technical_reviewer_comments": 15,
+    "reviewer_satisfaction": {
+      "PARTIALLY_ADDRESSED": 12,
+      "NOT_SATISFIED": 3
+    },
+    "satisfaction_changes_from_source_matrix": 0,
+    "manuscript_edited": false,
+    "new_independent_experiment_run": false
+  },
+  "status_definitions": {
+    "VERIFIED_COMPLETE": "The exact subrequirement is supported by evidence within its stated scope.",
+    "VERIFIED_WITH_DEFINED_SCOPE": "A bounded result is reproducible, but the full reviewer request is broader.",
+    "EXPERIMENT_COMPLETED": "The specified experiment was executed with its intended protocol and complete evidence.",
+    "EXPERIMENT_COMPLETED_WITH_LIMITATIONS": "An experiment ran, but limits prevent the broader claim.",
+    "HISTORICAL_SOURCE_NOT_RECOVERED": "The required original bytes or lineage were not found in the sources inspected.",
+    "NEEDS_INDEPENDENT_DATA": "A new, eligible and not-previously-consulted dataset is required.",
+    "NEEDS_AUTHOR_OR_CUSTODIAN_APPROVAL": "A provenance, rights, clinical or scope decision cannot be inferred by Codex.",
+    "NOT_SATISFIED": "The evidence requirement is not met; wording alone would not close it."
+  },
+  "items": [
+    {
+      "id": "R1-1",
+      "request": "Clarify that an external-development holdout from public sources used during development is not equivalent to independent external validation; provide source-level training, validation and holdout counts or evaluate a truly independent cohort, and moderate generalizability and deployment claims.",
+      "technical_status": "EXPERIMENT_COMPLETED_WITH_LIMITATIONS",
+      "reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+      "manuscript_state": "SIN_EDITAR",
+      "subrequirements": [
+        {
+          "requirement": "Later SPH transfer denominator and compatible endpoints",
+          "status": "EXPERIMENT_COMPLETED_WITH_LIMITATIONS",
+          "finding": "25,770 ECG from 24,666 source patients were scored under P6/P8/P4; 14 compatible ECG-statement endpoints have aggregate results.",
+          "limit": "SPH had already been consulted, the labels are statements rather than clinical adjudication, and the run is not confirmatory independent validation.",
+          "evidence_refs": ["docs/reviewer_closure/SPH_DELIVERY_AUDIT.md", "docs/external_validation/sph_results.md", "docs/reviewer_closure/receipts/SPH_AGGREGATE_VALIDATION_2026-11-10.json", "docs/reviewer_closure/GENERALIZATION_PER_CLASS_METRICS.json", "docs/reviewer_closure/GENERALIZATION_ERROR_ANALYSIS.md"]
+        },
+        {
+          "requirement": "P6 V3H holdout exposure during candidate gating",
+          "status": "VERIFIED_WITH_DEFINED_SCOPE",
+          "finding": "Job 17314 records external scores across 12 epochs; job 17315 names the V3H accepted/balanced manifest and gates epoch 8 at top-1 accuracy >=0.95 and macro-F1 >=0.80. Epoch 8 passes at 0.9519172246 and 0.8009383239876123, matching rounded P6 headlines.",
+          "limit": "The 17314 sweep manifest digest is absent. Identical epoch-8 checkpoint/results strongly link the sweep and gate report but are not a cryptographic same-file proof.",
+          "evidence_refs": ["docs/reviewer_closure/receipts/CEDIA_JOB_LOGS_2026-11-10.json", "outputs/results/revision_20261107/rhythm_waveform.json"]
+        },
+        {
+          "requirement": "Fully independent patient/signal evaluation and clinical validation",
+          "status": "NEEDS_INDEPENDENT_DATA",
+          "finding": "No eligible untouched cohort or fully linked historical pretraining lineage is established.",
+          "limit": "Neither V3H nor previously consulted SPH can be relabeled as an independent test.",
+          "evidence_refs": ["docs/reviewer_closure/GENERALIZATION_AND_COHORT_INDEPENDENCE_AUDIT.md", "docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md", "docs/reviewer_closure/GENERALIZATION_DATASET_ELIGIBILITY.md", "docs/reviewer_closure/GENERALIZATION_EXPERIMENT_PROTOCOL.md", "docs/reviewer_closure/GENERALIZATION_EXPERIMENT_RESULTS.md"]
+        }
+      ],
+      "remaining_actions": ["Retain external-development terminology for V3H and SPH.", "Obtain an eligible untouched cohort and document complete pretraining/source overlap before claiming independent generalization.", "Authors approve any claim withdrawal or scope change."]
+    },
+    {
+      "id": "R1-2",
+      "request": "Report the complete clinical workflow, including primary and cascade classes, complete population denominator, excluded cases and reasons, and pre/post-quarantine outcomes.",
+      "technical_status": "EXPERIMENT_COMPLETED_WITH_LIMITATIONS",
+      "reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+      "manuscript_state": "SIN_EDITAR",
+      "subrequirements": [
+        {
+          "requirement": "Later SPH all-source technical scoring denominator",
+          "status": "EXPERIMENT_COMPLETED_WITH_LIMITATIONS",
+          "finding": "25,770 ECG were scored under three profiles; 14 compatible statement endpoints were evaluated.",
+          "limit": "This is a later transfer population and does not reconstruct the June V4.5 all-input population or clinical pathway.",
+          "evidence_refs": ["docs/reviewer_closure/SPH_DELIVERY_AUDIT.md", "docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md"]
+        },
+        {
+          "requirement": "June preselection population and exclusion reasons",
+          "status": "HISTORICAL_SOURCE_NOT_RECOVERED",
+          "finding": "Selected manifests and recovered outputs do not contain the authentic parent population plus exclusion ledger.",
+          "limit": "Selected cohort sizes cannot be inverted to derive the source denominator.",
+          "evidence_refs": ["docs/reviewer_closure/RECOVERED_VS_MISSING_HISTORICAL_EVIDENCE.md", "docs/reviewer_closure/HISTORICAL_RECOVERY_FINAL_EXECUTION.md"]
+        },
+        {
+          "requirement": "Historical quarantine pre/post denominator and outcomes",
+          "status": "HISTORICAL_SOURCE_NOT_RECOVERED",
+          "finding": "No checkpoint/job-linked uncertainty score, frozen policy, or per-ECG transition ledger was recovered.",
+          "limit": "The rate is not zero; it is not assessed.",
+          "evidence_refs": ["docs/reviewer_closure/QUARANTINE_HISTORICAL_VS_PROSPECTIVE.md", "docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md", "docs/reviewer_closure/SELECTIVE_PREDICTION_EXPERIMENT.md"]
+        }
+      ],
+      "remaining_actions": ["Use the source-bounded SPH flow only as a separate later analysis.", "Request any preselection parent/exclusion ledger from the custodian if newly identified.", "Do not infer the missing historical quarantine rate."]
+    },
+    {
+      "id": "R1-3",
+      "request": "Describe how AF reference labels were created and harmonized by source, how multiple AF labels were handled, and whether AF is incident or prevalent.",
+      "technical_status": "VERIFIED_WITH_LIMITATIONS",
+      "reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+      "manuscript_state": "SIN_EDITAR",
+      "subrequirements": [
+        {
+          "requirement": "Stored AF flag versus retained source code",
+          "status": "VERIFIED_WITH_DEFINED_SCOPE",
+          "finding": "AF flags reconcile for 1,643 P6 and 2,193 P8 rows; 390 positive rows per overlapping profile, with zero mismatches or unresolved rows.",
+          "limit": "This verifies coding consistency for retained rows, not independent clinical adjudication.",
+          "evidence_refs": ["docs/reviewer_closure/receipts/AF_REFERENCE_RECHECK_2026-11-10.json", "docs/reviewer_closure/AF_PVC_REFERENCE_DISPOSITION.md"]
+        },
+        {
+          "requirement": "AF/NSR co-occurrence semantics",
+          "status": "VERIFIED_WITH_DEFINED_SCOPE",
+          "finding": "One source-code co-occurrence is retained and not auto-corrected.",
+          "limit": "No clinical adjudication establishes which code should prevail.",
+          "evidence_refs": ["docs/reviewer_closure/receipts/AF_REFERENCE_RECHECK_2026-11-10.json"]
+        },
+        {
+          "requirement": "Incident/first-diagnosis AF status",
+          "status": "NEEDS_INDEPENDENT_DATA",
+          "finding": "No onset date, longitudinal event history or clinical adjudication is available.",
+          "limit": "The supported endpoint is source-coded AF statement presence, not incident AF.",
+          "evidence_refs": ["docs/reviewer_closure/AF_PVC_REFERENCE_DISPOSITION.md"]
+        }
+      ],
+      "remaining_actions": ["Describe AF by source and as statement/code presence.", "Remove incident or first-diagnosis language unless authors obtain longitudinal adjudicated data."]
+    },
+    {
+      "id": "R1-4",
+      "request": "Replace the empty-file and placeholder values in A10 with checksums for actual archived models, optimization results and predictions.",
+      "technical_status": "VERIFIED_WITH_LIMITATIONS",
+      "reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+      "manuscript_state": "SIN_EDITAR",
+      "subrequirements": [
+        {
+          "requirement": "Measured model hashes and A10 correction",
+          "status": "VERIFIED_WITH_DEFINED_SCOPE",
+          "finding": "Five physical model hashes/sizes and the correction are documented separately in PR #4.",
+          "limit": "This PR #3 session did not independently re-hash those large files or merge PR #4.",
+          "evidence_refs": ["docs/hash-correction-20261028.md", "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/4"]
+        },
+        {
+          "requirement": "Original Optuna DB and generic prediction artifact",
+          "status": "HISTORICAL_SOURCE_NOT_RECOVERED",
+          "finding": "No original SQLite/WAL/SHM or verified generic prediction artifact is linked to released weights.",
+          "limit": "Trial fragments or similarly named files cannot substitute for the database or trial-to-checkpoint lineage.",
+          "evidence_refs": ["https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/4", "docs/reviewer_closure/receipts/CEDIA_JOB_LOGS_2026-11-10.json", "docs/reviewer_closure/HISTORICAL_RECOVERY_FINAL_EXECUTION.md"]
+        }
+      ],
+      "remaining_actions": ["Keep A10/Optuna work in PR #4.", "Do not claim the original Optuna history is reproduced without its database and checkpoint linkage."]
+    },
+    {
+      "id": "R2-general",
+      "request": "Represent excluded rhythm and pathology classes as Other arrhythmia/Other pathologies, add them to the primary-to-cascade workflow and evaluate the full class range.",
+      "technical_status": "NEW_EXPERIMENT_REQUIRED",
+      "reviewer_satisfaction": "NOT_SATISFIED",
+      "manuscript_state": "SIN_EDITAR",
+      "subrequirements": [
+        {
+          "requirement": "Existing output contract and operational profiles",
+          "status": "VERIFIED_WITH_DEFINED_SCOPE",
+          "finding": "The backbone declares 14 rhythm and seven pathology outputs; operational P6/P8/P4 profiles contain six/eight/four classes.",
+          "limit": "A declared output or auxiliary score is not proof of historical supervision or performance.",
+          "evidence_refs": ["docs/reviewer_closure/FULL_CLASS_COVERAGE_AND_ROUTING_AUDIT.md", "outputs/models/heads/global_head_contracts.json", "docs/reviewer_closure/OTHER_CLASS_COVERAGE_EXPERIMENT.md"]
+        },
+        {
+          "requirement": "Validated Other class and complete all-input clinical ontology",
+          "status": "NOT_SATISFIED",
+          "finding": "No trained/validated Other output or complete compatible reference ontology exists; NSR is not Other.",
+          "limit": "Existing SPH endpoint results cover compatible ECG statements only.",
+          "evidence_refs": ["docs/reviewer_closure/OTHER_CLASS_COVERAGE_EXPERIMENT.md", "docs/reviewer_closure/FULL_CLASS_COVERAGE_AND_ROUTING_AUDIT.md"]
+        },
+        {
+          "requirement": "New all-class experiment",
+          "status": "NEEDS_INDEPENDENT_DATA",
+          "finding": "Requires a predeclared ontology, complete labels and a separate development/evaluation design.",
+          "limit": "No new labels, negatives or Other outcomes may be inferred from absent codes.",
+          "evidence_refs": ["docs/reviewer_closure/GENERALIZATION_EXPERIMENT_PROTOCOL.md", "docs/reviewer_closure/OTHER_CLASS_COVERAGE_EXPERIMENT.md"]
+        }
+      ],
+      "remaining_actions": ["Authors/clinical experts approve ontology and reference mapping.", "A new research branch must implement and evaluate the class extension; do not attribute it to V4.5."]
+    },
+    {
+      "id": "R2-2b",
+      "request": "Explain the purpose of Figures 1 and 2 and identify their sources or provenance.",
+      "technical_status": "ACTIVE_RECOVERY_REQUIRED",
+      "reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+      "manuscript_state": "SIN_EDITAR",
+      "subrequirements": [
+        {
+          "requirement": "Archive/source-file provenance",
+          "status": "VERIFIED_WITH_DEFINED_SCOPE",
+          "finding": "The archive, callouts/captions and repository figure hashes are recorded and matched.",
+          "limit": "File identity does not establish the creator or prove every depicted operation actually ran.",
+          "evidence_refs": ["docs/reviewer_closure/R2-2B_FIGURES_1_2_PROVENANCE.md"]
+        },
+        {
+          "requirement": "Creator, third-party assets, permission and diagram execution truth",
+          "status": "NEEDS_AUTHOR_OR_CUSTODIAN_APPROVAL",
+          "finding": "No verified creator/permission record or execution evidence is in the available sources.",
+          "limit": "Cannot infer authorship, rights or execution from a hash or file appearance.",
+          "evidence_refs": ["docs/reviewer_closure/R2-2B_FIGURES_1_2_PROVENANCE.md"]
+        }
+      ],
+      "remaining_actions": ["Authors identify creators and confirm rights/permissions.", "State in the later manuscript revision what each figure actually represents."]
+    },
+    {
+      "id": "R2-3a",
+      "request": "Describe each database, available and used classes, segment counts, and ECG/patient numbers by training, validation and test split; explain what happened to remaining classes.",
+      "technical_status": "EVIDENCE_CEILING_REACHED",
+      "reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+      "manuscript_state": "SIN_EDITAR",
+      "subrequirements": [
+        {
+          "requirement": "Selected evaluation populations and units",
+          "status": "VERIFIED_WITH_DEFINED_SCOPE",
+          "finding": "P6=1,643 ECG; P8=2,193 ECG including P6; P4=962 panel observations over 733 ECG/676 linked patients; SPH=25,770 ECG/24,666 source patients.",
+          "limit": "Panel rows, ECG and patients are distinct units and overlapping profile counts are not additive.",
+          "evidence_refs": ["docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md", "docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md"]
+        },
+        {
+          "requirement": "P6 gate and P4 calibration/evaluation manifests named by retained CEDIA job reports",
+          "status": "VERIFIED_WITH_DEFINED_SCOPE",
+          "finding": "Job 17315 names the internal separator manifest and V3H accepted/balanced external manifest. Job 17296 uses distinct V3M internal-calibration and V3S external-panel-index aliases; its metrics and threshold vector match the released P4 values after rounding.",
+          "limit": "Input file bytes, complete patient maps and released-checkpoint SHA links are absent; distinct filenames do not prove patient-disjointness.",
+          "evidence_refs": ["docs/reviewer_closure/receipts/CEDIA_JOB_LOGS_2026-11-10.json", "docs/reviewer_closure/CHECKPOINT_JOB_MANIFEST_VERIFICATION_FINAL.md"]
+        },
+        {
+          "requirement": "Historical train/validation/calibration/selection splits linked to each released checkpoint",
+          "status": "HISTORICAL_SOURCE_NOT_RECOVERED",
+          "finding": "The June parent population, full split manifests, exclusions and patient mappings remain unavailable in inspected sources.",
+          "limit": "No leakage finding is made; patient isolation is not certified.",
+          "evidence_refs": ["docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md", "docs/reviewer_closure/HISTORICAL_RECOVERY_FINAL_EXECUTION.md"]
+        }
+      ],
+      "remaining_actions": ["Report selected counts with units separately.", "Request exact job-linked manifests and exclusions only if the custodian identifies another backup.", "Do not claim historical patient isolation from fold names alone."]
+    },
+    {
+      "id": "R2-3c",
+      "request": "Explain how primary, cascade and auxiliary rhythm labels are used in training and evaluation, including whether NSR is a rare class.",
+      "technical_status": "VERIFIED_WITH_LIMITATIONS",
+      "reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+      "manuscript_state": "SIN_EDITAR",
+      "subrequirements": [
+        {
+          "requirement": "Global and operational rhythm class contracts",
+          "status": "VERIFIED_WITH_DEFINED_SCOPE",
+          "finding": "The global contract has 14 rhythm outputs; P8 operationally predicts eight and P6 six. Six other global outputs are auxiliary scores, not proven cascade actions.",
+          "limit": "A code-level output contract is not a training-support ledger.",
+          "evidence_refs": ["docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md", "outputs/models/heads/global_head_contracts.json"]
+        },
+        {
+          "requirement": "NSR meaning and observed P8 outputs",
+          "status": "VERIFIED_WITH_DEFINED_SCOPE",
+          "finding": "NSR denotes normal sinus rhythm; the SPH P8 run recorded 16,700 NSR top-1 outputs.",
+          "limit": "A top-1 count is not a prevalence estimate and NSR is not Other.",
+          "evidence_refs": ["docs/reviewer_closure/FULL_CLASS_COVERAGE_AND_ROUTING_AUDIT.md", "docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md"]
+        },
+        {
+          "requirement": "Historical class supervision and per-class training supports",
+          "status": "HISTORICAL_SOURCE_NOT_RECOVERED",
+          "finding": "Checkpoint-linked labels/masks, positive and negative supports, loss contributions and promotion evidence are missing for the cascade/auxiliary outputs.",
+          "limit": "Do not infer historical training from code, output width or a score column.",
+          "evidence_refs": ["docs/reviewer_closure/AUXILIARY_CLASS_TRAINING_EVIDENCE.md", "docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md", "docs/reviewer_closure/RECOVERED_VS_MISSING_HISTORICAL_EVIDENCE.md"]
+        }
+      ],
+      "remaining_actions": ["Use precise primary/auxiliary terminology.", "Do not present auxiliary outputs as validated cascade performance without the historical masks and metrics."]
+    },
+    {
+      "id": "R2-3d",
+      "request": "Clarify whether ALMI, ILMI and LAE were trained and evaluated or merely logged as auxiliary outputs.",
+      "technical_status": "EVIDENCE_CEILING_REACHED",
+      "reviewer_satisfaction": "NOT_SATISFIED",
+      "manuscript_state": "SIN_EDITAR",
+      "subrequirements": [
+        {
+          "requirement": "Declared outputs and reconstructed score emission",
+          "status": "VERIFIED_WITH_DEFINED_SCOPE",
+          "finding": "ALMI, ILMI and LAE are among seven global pathology outputs; reconstructed P4 inference emitted three auxiliary scores for 733 selected ECG.",
+          "limit": "Score emission does not establish that the released checkpoint was supervised or evaluated on these classes.",
+          "evidence_refs": ["docs/reviewer_closure/AUXILIARY_CLASS_TRAINING_EVIDENCE.md", "outputs/results/revision_20261107/pathology_waveform.json"]
+        },
+        {
+          "requirement": "Historical training support, loss masks and evaluated metrics",
+          "status": "HISTORICAL_SOURCE_NOT_RECOVERED",
+          "finding": "No checkpoint-linked support counts, masks, manifests or class-specific evaluation were recovered.",
+          "limit": "The reviewer request is not satisfied by a documentation-only explanation.",
+          "evidence_refs": ["docs/reviewer_closure/RECOVERED_VS_MISSING_HISTORICAL_EVIDENCE.md", "docs/reviewer_closure/AUXILIARY_CLASS_TRAINING_EVIDENCE.md", "docs/reviewer_closure/HISTORICAL_RECOVERY_FINAL_EXECUTION.md"]
+        }
+      ],
+      "remaining_actions": ["Withdraw performance claims for ALMI/ILMI/LAE unless authentic source evidence is found.", "A new labeled experiment is distinct from V4.5 and needs author-approved ontology/data rights."]
+    },
+    {
+      "id": "R2-3e",
+      "request": "Define what Role means in Table 5 and how role assignments and cascade transitions are determined.",
+      "technical_status": "VERIFIED_WITH_LIMITATIONS",
+      "reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+      "manuscript_state": "SIN_EDITAR",
+      "subrequirements": [
+        {
+          "requirement": "Current code-level primary/auxiliary roles and reconstructed decisions",
+          "status": "EXPERIMENT_COMPLETED_WITH_LIMITATIONS",
+          "finding": "Selected waveform replay records the operational profile; P8 has 58 selected-cohort fallbacks. Reference labels are not used for routing.",
+          "limit": "The replay is not the historical all-input workflow, and no frozen quarantine action policy exists.",
+          "evidence_refs": ["docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md", "outputs/results/revision_20261107/rhythm_waveform.json"]
+        },
+        {
+          "requirement": "Historical per-record role ledger and human review actions",
+          "status": "HISTORICAL_SOURCE_NOT_RECOVERED",
+          "finding": "No authentic historical role/transition ledger or reviewer action/outcome records were located.",
+          "limit": "Fallback, empty sets and a derived role label do not show clinician review.",
+          "evidence_refs": ["docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md", "docs/reviewer_closure/QUARANTINE_HISTORICAL_VS_PROSPECTIVE.md"]
+        }
+      ],
+      "remaining_actions": ["Define Role using code-derived semantics only after author approval.", "Do not claim historical cascade benefit or human-in-the-loop performance."]
+    },
+    {
+      "id": "R2-3f",
+      "request": "Name and define the ten morphology features, explain asymmetric arrows in Figures 5 and 6, and identify the corresponding historical preprocessing/loader behavior.",
+      "technical_status": "EVIDENCE_CEILING_REACHED",
+      "reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+      "manuscript_state": "SIN_EDITAR",
+      "subrequirements": [
+        {
+          "requirement": "Candidate morphology descriptors and replay comparison",
+          "status": "EXPERIMENT_COMPLETED_WITH_LIMITATIONS",
+          "finding": "A hash-pinned reconstructed feature candidate exists; P4 replay decisions agree 962/962, P6 top-1 agrees 1,642/1,643 and P8 agrees 2,193/2,193.",
+          "limit": "P4 maximum score residual 0.0006194114685058594 exceeds the frozen 1e-5 criterion; P6/P8 agreement is not exact historical preprocessing equivalence.",
+          "evidence_refs": ["docs/reviewer_closure/HISTORICAL_LOADER_IDENTITY_AND_REPLAY.md", "docs/reviewer_closure/REPLAY_EQUIVALENCE_DISPOSITION.md"]
+        },
+        {
+          "requirement": "Original loader identity",
+          "status": "HISTORICAL_SOURCE_NOT_RECOVERED",
+          "finding": "The expected 36,271-byte loader SHA-256 fc8d7367f9f2c108376839435021ec3172fe2757faa4a615f0ef5d39cbf1e855 was not matched; the CEDIA candidate is 32,435 bytes.",
+          "limit": "The candidate is not the original and no replay may relabel it as such.",
+          "evidence_refs": ["docs/reviewer_closure/HISTORICAL_LOADER_IDENTITY_AND_REPLAY.md", "docs/reviewer_closure/HISTORICAL_RECOVERY_FINAL_EXECUTION.md"]
+        },
+        {
+          "requirement": "Specialist hidden-width root cause",
+          "status": "HISTORICAL_SOURCE_NOT_RECOVERED",
+          "finding": "The retained waveform receipt reports metadata width 192 and stored tensor width 512 for P6/P8; the recovered trainer uses 512 for classwise heads but is not linked to these checkpoints.",
+          "limit": "No checkpoint training source or original checkpoint bytes currently establish why metadata and tensors differ.",
+          "evidence_refs": ["docs/reviewer_closure/SPECIALIST_192_512_ARCHITECTURE_RESOLUTION.md", "outputs/results/revision_20261107/rhythm_waveform.json"]
+        }
+      ],
+      "remaining_actions": ["Preserve the 1e-5 tolerance and current historical replay results.", "Only reopen loader identity on authenticated original bytes or a newly identified backup source.", "Keep diagram semantics for later author-approved manuscript editing."]
+    },
+    {
+      "id": "R2-4a",
+      "request": "Define the external-development evidence package, say whether it is a test dataset, and explain whether it is independent from training.",
+      "technical_status": "VERIFIED_WITH_LIMITATIONS",
+      "reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+      "manuscript_state": "SIN_EDITAR",
+      "subrequirements": [
+        {
+          "requirement": "Selected cohort names, units and packages",
+          "status": "VERIFIED_WITH_DEFINED_SCOPE",
+          "finding": "P6=1,643 ECG, P8=2,193 including P6, and P4=962 panel observations over 733 ECG; SPH is a separate later transfer package.",
+          "limit": "Selected development cohorts are not automatically independent tests.",
+          "evidence_refs": ["docs/reviewer_closure/EVIDENCE_TO_CLAIM_MAP.md", "docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md"]
+        },
+        {
+          "requirement": "Complete independence from training and model selection",
+          "status": "NOT_SATISFIED",
+          "finding": "P6 V3H is used in the epoch gate; complete V3F/V3AG training-source lineage and patient/signal linkage remain incomplete.",
+          "limit": "Do not describe the packages as independent external clinical validation.",
+          "evidence_refs": ["docs/reviewer_closure/receipts/CEDIA_JOB_LOGS_2026-11-10.json", "docs/reviewer_closure/GENERALIZATION_AND_COHORT_INDEPENDENCE_AUDIT.md"]
+        }
+      ],
+      "remaining_actions": ["Use external-development wording and describe selection exposure.", "Independent generalization needs a new eligible cohort and author-approved protocol."]
+    },
+    {
+      "id": "R2-4e",
+      "request": "Explain what happens when no class score crosses its threshold and how such cases are routed.",
+      "technical_status": "EXPERIMENT_COMPLETED_WITH_LIMITATIONS",
+      "reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+      "manuscript_state": "SIN_EDITAR",
+      "subrequirements": [
+        {
+          "requirement": "Frozen SPH thresholds, empty-set and fallback behavior",
+          "status": "EXPERIMENT_COMPLETED_WITH_LIMITATIONS",
+          "finding": "All 25,770 ECG were scored per profile; P6 produced 16,785 empty sets, P4 8,343, P8 used 801 forced top-1 fallbacks.",
+          "limit": "These are profile decision outcomes, not quarantine, Other, abstention or human review; SPH was already consulted.",
+          "evidence_refs": ["docs/reviewer_closure/FULL_CLASS_COVERAGE_AND_ROUTING_AUDIT.md", "docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md"]
+        },
+        {
+          "requirement": "Historical uncertainty/quarantine rate",
+          "status": "HISTORICAL_SOURCE_NOT_RECOVERED",
+          "finding": "No original uncertainty score, policy, denominator or pre/post ledger is available.",
+          "limit": "The quarantine rate is not assessed, not zero.",
+          "evidence_refs": ["docs/reviewer_closure/QUARANTINE_HISTORICAL_VS_PROSPECTIVE.md", "docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md"]
+        }
+      ],
+      "remaining_actions": ["State the exact no-threshold/fallback behavior and its cohort.", "Do not claim clinician routing or historical quarantine."]
+    },
+    {
+      "id": "R2-4k",
+      "request": "Define the quarantine rate and pre/post-quarantine accuracy and explain how those values are obtained.",
+      "technical_status": "EVIDENCE_CEILING_REACHED",
+      "reviewer_satisfaction": "NOT_SATISFIED",
+      "manuscript_state": "SIN_EDITAR",
+      "subrequirements": [
+        {
+          "requirement": "Authentic historical quarantine policy, score and denominator",
+          "status": "HISTORICAL_SOURCE_NOT_RECOVERED",
+          "finding": "No checkpoint/job-linked uncertainty inputs, thresholded action policy or per-record pre/post ledger was recovered.",
+          "limit": "A rate cannot be calculated from aggregate accuracy or empty threshold sets.",
+          "evidence_refs": ["docs/reviewer_closure/QUARANTINE_HISTORICAL_VS_PROSPECTIVE.md", "docs/reviewer_closure/RECOVERED_VS_MISSING_HISTORICAL_EVIDENCE.md"]
+        },
+        {
+          "requirement": "SPH quarantine rate",
+          "status": "NOT_SATISFIED",
+          "finding": "The retained report records zero quarantine-assessed cases and a null rate.",
+          "limit": "Null means not assessed; it must not be changed to 0%.",
+          "evidence_refs": ["outputs/results/revision_20261107/rhythm_waveform.json", "outputs/results/revision_20261107/pathology_waveform.json"]
+        }
+      ],
+      "remaining_actions": ["Withdraw unsupported historic pre/post-quarantine numbers or recover the authentic ledger.", "A prospective selective-prediction study requires a new frozen policy and independent labeled data."]
+    },
+    {
+      "id": "R2-5",
+      "request": "Acknowledge that PVC is often analyzed at heartbeat level and avoid treating 10-second ECG classification as beat-level detection.",
+      "technical_status": "VERIFIED_WITH_LIMITATIONS",
+      "reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+      "manuscript_state": "SIN_EDITAR",
+      "subrequirements": [
+        {
+          "requirement": "Record-level PVC ECG-statement endpoint",
+          "status": "VERIFIED_WITH_DEFINED_SCOPE",
+          "finding": "Available V4.5 rhythm outputs and reference labels are ECG-record/statement level.",
+          "limit": "No R-peak-to-event localization or episode-matching metric is produced.",
+          "evidence_refs": ["docs/reviewer_closure/AF_PVC_REFERENCE_DISPOSITION.md", "docs/reviewer_closure/METRIC_DEFINITIONS.md", "docs/reviewer_closure/GENERALIZATION_PER_CLASS_METRICS.json", "docs/reviewer_closure/GENERALIZATION_ERROR_ANALYSIS.md"]
+        },
+        {
+          "requirement": "Beat-level PVC detection or clinical utility",
+          "status": "NEEDS_INDEPENDENT_DATA",
+          "finding": "No beat-labeled dataset, temporal matching protocol or beat-level reference is available in this V4.5 evidence package.",
+          "limit": "Cannot infer beat detection from a positive ECG-level PVC statement.",
+          "evidence_refs": ["docs/reviewer_closure/AF_PVC_REFERENCE_DISPOSITION.md", "docs/reviewer_closure/GENERALIZATION_DATASET_ELIGIBILITY.md"]
+        }
+      ],
+      "remaining_actions": ["Restrict claims to ECG-level PVC statement classification.", "A beat-level study needs appropriate annotations and a separate protocol."]
+    }
+  ],
+  "recovery_zip_reconciliation": {
+    "as_of": "2026-11-10",
+    "archive": "TITAN_V45_RECUPERACION_COMPLETA_2026-11-10.zip",
+    "archive_sha256": "23523fb59501b916cc6cea55ad0ae669387dbd0b10267a2d4bac7d353f8b5d06",
+    "integrity_receipt": "docs/reviewer_closure/receipts/RECOVERY_ZIP_AUDIT_2026-11-10.json",
+    "pr3_head_checked": "4d5e7cc6928c23d9088e20182cc5937b53ab3058",
+    "pr4_head_checked": "54ef45e3b79e5b14f41d9e3edae084eb3f4e9bcf",
+    "verification": {
+      "inventory_rows_verified": "95/95",
+      "sha256sum_entries_verified": "96/96",
+      "crc_valid": true,
+      "payloads_byte_identical_to_tracked_pr3_or_pr4_files": 11,
+      "payloads_not_byte_identical": 84,
+      "archive_extracted": false,
+      "recovered_code_executed": false,
+      "reviewer_satisfaction_changes": 0,
+      "manuscript_edited": false
+    },
+    "item_updates": [
+      {"id":"R1-1","new_evidence":"V3C scheduler/path receipts and previously fixed SPH aggregate reconciled; SPH is previously consulted, not independent.","verified_complete_within_scope":["SPH aggregate denominator/endpoints and bounded V3C route-reference status"],"overall_status_unchanged":"EXPERIMENT_COMPLETED_WITH_LIMITATIONS / PARTIALLY_ADDRESSED","remaining":"Untouched eligible cohort and full checkpoint-to-training-source/pretraining-overlap lineage."},
+      {"id":"R1-2","new_evidence":"Independent recomputation of V4 May Primary-9 aggregate and error-subset routing: 672 total, 461 correct, 211 errors; 107 accepted, 53 known-boundary, 51 ood_real.","verified_complete_within_scope":["V4 May aggregate arithmetic and 211-error denominator"],"overall_status_unchanged":"EXPERIMENT_COMPLETED_WITH_LIMITATIONS / PARTIALLY_ADDRESSED","remaining":"V4.5 June preselection denominator/exclusions and authentic checkpoint-linked pre/post quarantine ledger; V4 May is not transferable."},
+      {"id":"R1-3","new_evidence":"No clinical or longitudinal reference was authenticated in the recovery package.","verified_complete_within_scope":[],"overall_status_unchanged":"VERIFIED_WITH_LIMITATIONS / PARTIALLY_ADDRESSED","remaining":"Source-specific clinical reference and temporal evidence before incident/first-diagnosis AF claims."},
+      {"id":"R1-4","new_evidence":"V3C nine-trial export/config are exact Git duplicates; PR4 receipts describe two separate 41M generations but no original SQLite bytes or checkpoint promotion edge.","verified_complete_within_scope":["Available V3C ranking-versus-peak distinction","Bounded 41M log-derived trial observations, documented separately in PR4"],"overall_status_unchanged":"VERIFIED_WITH_LIMITATIONS / PARTIALLY_ADDRESSED","remaining":"Original Optuna DB/WAL/SHM or authenticated complete export, configuration and promotion link; A10 rights/artifacts remain separate."},
+      {"id":"R2-general","new_evidence":"Serialized architecture confirms output dimensions only; no all-class model, approved ontology or all-input evaluation was added.","verified_complete_within_scope":["Current global output widths: 14 rhythm and 7 pathology, not proof of Other-class training/evaluation"],"overall_status_unchanged":"NEW_EXPERIMENT_REQUIRED / NOT_SATISFIED","remaining":"Approved ontology/reference and frozen all-input/all-class experiment, or author-approved claim restriction."},
+      {"id":"R2-2b","new_evidence":"No new authenticated source for figure creator or redistribution rights.","verified_complete_within_scope":[],"overall_status_unchanged":"ACTIVE_RECOVERY_REQUIRED / PARTIALLY_ADDRESSED","remaining":"Author/rightsholder confirmation, source files and permissions."},
+      {"id":"R2-3a","new_evidence":"Selected cohort counts, public checkpoint identities and V3C submission references reconciled; job names and filenames do not prove manifest reads.","verified_complete_within_scope":["Selected P6/P8/P4 denominators and published checkpoint file identity; selected cohorts are not training splits"],"overall_status_unchanged":"EVIDENCE_CEILING_REACHED / PARTIALLY_ADDRESSED","remaining":"Job-linked train/validation/calibration manifests, source versions, patient maps, exclusions and overlap results."},
+      {"id":"R2-3c","new_evidence":"Global and specialist tensor dimensions statically inspected without unpickling; no loss-mask/support proof.","verified_complete_within_scope":["Serialized global/head dimensions"],"overall_status_unchanged":"VERIFIED_WITH_LIMITATIONS / PARTIALLY_ADDRESSED","remaining":"Historical loss masks, per-class supports, consumed manifests and proof of cascade/auxiliary label participation."},
+      {"id":"R2-3d","new_evidence":"No job-linked ALMI/ILMI/LAE supervision or evaluation record authenticated.","verified_complete_within_scope":[],"overall_status_unchanged":"EVIDENCE_CEILING_REACHED / NOT_SATISFIED","remaining":"Historical label masks/supports and validation metrics tied to the checkpoint, or restrict claims."},
+      {"id":"R2-3e","new_evidence":"Recovered routing aggregate is V4 May and covers only 211 errors; it contains no V4.5 June human-review ledger.","verified_complete_within_scope":["V4 May action arithmetic and separation from V4.5"],"overall_status_unchanged":"VERIFIED_WITH_LIMITATIONS / PARTIALLY_ADDRESSED","remaining":"Historical V4.5 role definitions, full transition ledger and evidence of actual human review if claimed."},
+      {"id":"R2-3f","new_evidence":"Physical checkpoint hashes and tensor dimensions verified; candidate loaders remain nonidentical; replay remains 962/962 decisions with max probability difference 0.0006194115 > 1e-5.","verified_complete_within_scope":["Published checkpoint identity/dimensions and preserved replay discrepancy"],"overall_status_unchanged":"EVIDENCE_CEILING_REACHED / PARTIALLY_ADDRESSED","remaining":"Exact original loader and checkpoint-linked preprocessing/morphology/event implementation; strict numerical equivalence is not met."},
+      {"id":"R2-4a","new_evidence":"SPH aggregate/protocol are exact Git duplicates; no untouched-cohort or historical source-selection proof added.","verified_complete_within_scope":["External-development versus independent-validation distinction"],"overall_status_unchanged":"VERIFIED_WITH_LIMITATIONS / PARTIALLY_ADDRESSED","remaining":"Complete source-selection lineage or eligible independent evaluation."},
+      {"id":"R2-4e","new_evidence":"Existing SPH summaries preserve empty threshold sets and top-1 fallback as separate states; none becomes Other, abstention or quarantine.","verified_complete_within_scope":["Current reported empty-set/fallback counts and semantics"],"overall_status_unchanged":"EXPERIMENT_COMPLETED_WITH_LIMITATIONS / PARTIALLY_ADDRESSED","remaining":"Any Other/abstention claim needs a separate frozen policy and evaluation."},
+      {"id":"R2-4k","new_evidence":"V4 May routing arithmetic recomputed; global 672-record quarantine rate is null because routing covered only the 211 errors.","verified_complete_within_scope":["V4 May error-subset denominator and arithmetic"],"overall_status_unchanged":"EVIDENCE_CEILING_REACHED / NOT_SATISFIED","remaining":"V4.5 June score, frozen policy, complete eligible denominator, per-record transitions/outcomes, or withdraw historical-rate claim."},
+      {"id":"R2-5","new_evidence":"No beat-level timing/localization labels or PVC episode reference were added.","verified_complete_within_scope":[],"overall_status_unchanged":"VERIFIED_WITH_LIMITATIONS / PARTIALLY_ADDRESSED","remaining":"Keep PVC at ECG-statement level unless beat-level data and a new protocol are supplied."}
+    ],
+    "scope_note": "VERIFIED_COMPLETE_WITHIN_SCOPE applies only to the listed bounded subrequirements. It does not upgrade reviewer satisfaction, certify historical patient independence, or establish exact original-loader reproduction."
+  }
+}

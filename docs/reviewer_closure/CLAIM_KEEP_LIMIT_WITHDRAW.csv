@@ -1,0 +1,21 @@
+claim_id,comments,decision,claim,evidence_groups,limit
+C01,R1-4,CONSERVAR,Identidad de cinco archivos de release mediante SHA-256 y tamaño,HASH,No acredita reproducibilidad del proceso.
+C02,R1-4,CONSERVAR CON ALCANCE LIMITADO,Trial 6 promovido y 50 épocas de 16768; ejecución 16781 y digest de la salida V3F histórica,TRAIN|OPT|HASH,No se identifican por digest los bytes del checkpoint intermedio consumido.
+C03,R1-4,RETIRAR O NO SOSTENER,Hashes placeholder y reproducción íntegra del estudio,OPT|HASH,No hay SQLite íntegra ni recibos de lectura/escritura completos.
+C04,R2-3a,CONSERVAR CON ALCANCE LIMITADO,7485 archivos; 9945 ventanas; 9021 train y 924 validation en 16768,TRAIN,No son pacientes ni una tabla conjunta fuente-clase-split.
+C05,R2-3a,CONSERVAR CON ALCANCE LIMITADO,Cruces de 206–207 y 165–166 pacientes en la reconstrucción interna V3M,SPLIT,Condicionado a metadata y un ECG no identificado; no extrapolar.
+C06,R2-3a,RETIRAR O NO SOSTENER,Ausencia histórica general de leakage,SPLIT|COHORT,Separar record_id no asegura separar pacientes o señales.
+C07,R1-2|R2-3a,CONSERVAR CON ALCANCE LIMITADO,"P4 80,23% de accuracy media y 79,35% macro-F1; 962 observaciones sobre 733 ECG; 962/962 concordantes con SCP",P4,Paneles seleccionados; no adjudicación ni accuracy por paciente.
+C08,R1-2|R2-general,CONSERVAR CON ALCANCE LIMITADO,"P6 95,19% top-1 y 80,09% macro-F1 en 1643 ECG seleccionados",THRESH|COHORT,No estima todas las clases o prevalencia clínica natural.
+C09,R2-general|R1-2,RETIRAR O NO SOSTENER,Desempeño probado de Other y flujo completo de triage,AE|P4,Requiere evaluación nueva con referencia y denominador completos.
+C10,R2-3c|R2-3d,CONSERVAR CON ALCANCE LIMITADO,Pérdida directa V3F restringida a índices Primary8 y Pathology4 en la implementación recuperada,LOSS|TRAIN,No determina supervisión previa ni eficacia auxiliar.
+C11,R2-3c|R2-3d,RETIRAR O NO SOSTENER,Métricas auxiliares 41M atribuibles al release V3F/V3AG,LOSS,Experimentos y pesos distintos.
+C12,R2-3e,CONSERVAR CON ALCANCE LIMITADO,Role es pertenencia a un contrato nombrado,AE|AFLOG,No acredita transiciones por ECG ni intervención humana.
+C13,R2-3f,CONSERVAR CON ALCANCE LIMITADO,Diez proxies morfológicos y su paso a ambas llamadas en el código recuperado,MORPH|LOSS,No son intervalos clínicos ni un loader importado autenticado.
+C14,R2-3f,RETIRAR O NO SOSTENER,Equivalencia numérica estricta de replay P4,REPLAY,Residual máximo excede tolerancia pese a concordancia de decisiones.
+C15,R2-4e,CONSERVAR CON ALCANCE LIMITADO,"P6 79/1643 sin clase sobre umbral con 64 aciertos top-1; P8 58/2193 con fallback y 22 aciertos",THRESH,No mide abstención; no extrapolar a SPH.
+C16,R2-4k,CONSERVAR CON ALCANCE LIMITADO,AE 210/2105 de pertenencia de referencia; AF 23 handoffs en su contrato,AE|AFLOG,No son el denominador ni el numerador de una tasa.
+C17,R2-4k,RETIRAR O NO SOSTENER,Tasa histórica de cuarentena y exactitud pre/post como resultados medidos,AE|AFLOG|THRESH,NOT_ASSESSED; no 0%. Las tablas no concilian.
+C18,R1-3,CONSERVAR CON ALCANCE LIMITADO,AF según declaración de referencia en ECG de 10 s,AF,No incidencia clínica ni primer diagnóstico.
+C19,R2-5,CONSERVAR CON ALCANCE LIMITADO,Clasificación PVC por ECG y conteos de ventanas beat-derived en V3P,PVC|THRESH,No detección de latidos ni estimación de carga.
+C20,R1-3|R2-5,RETIRAR O NO SOSTENER,AF incidente y detección PVC por latido para el release,AF|PVC,Requieren referencias temporales o longitudinales y evaluación específica.

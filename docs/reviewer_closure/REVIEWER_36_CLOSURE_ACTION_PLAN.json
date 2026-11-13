@@ -1,0 +1,2151 @@
+{
+  "schema": "TITAN_V45_REVIEWER_36_CLOSURE_ACTION_PLAN_V1",
+  "as_of": "2026-11-11",
+  "source_matrix": "docs/reviewer_closure/REVIEWER_48_DETAILED.json",
+  "source_matrix_commit": "34ef99dcd5de5e49e062eb10b0878da3a3731b51",
+  "pr_state_checked": {
+    "number": 3,
+    "head": "52ae5743f33419e3d045d4e0c9ab58d93607e90a",
+    "base": "main",
+    "state": "OPEN_DRAFT",
+    "merge_performed": false
+  },
+  "counts": {
+    "reviewer_comments": 36,
+    "internal_audits_linked_not_duplicated": 12,
+    "reviewer_satisfaction": {
+      "EDITORIAL_ACTION_ONLY": 21,
+      "NOT_SATISFIED": 3,
+      "PARTIALLY_ADDRESSED": 12
+    },
+    "technical_status": {
+      "ACTIVE_RECOVERY_REQUIRED": 1,
+      "EVIDENCE_CEILING_REACHED": 4,
+      "EXPERIMENT_COMPLETED_WITH_LIMITATIONS": 3,
+      "MANUSCRIPT_ONLY_PENDING": 21,
+      "NEW_EXPERIMENT_REQUIRED": 1,
+      "VERIFIED_WITH_LIMITATIONS": 6
+    }
+  },
+  "internal_audit_ids": [
+    "A-01",
+    "A-02",
+    "A-03",
+    "A-04",
+    "A-05",
+    "A-06",
+    "A-07",
+    "A-08",
+    "A-09",
+    "A-10",
+    "A-11",
+    "A-12"
+  ],
+  "interpretation": "Counts describe evidence disposition, not probability of acceptance. The 12 internal audits are linked to the authoritative 48-item matrix and are not duplicated among these 36 reviewer comments.",
+  "items": [
+    {
+      "id": "R1-1",
+      "technical_status": "EXPERIMENT_COMPLETED_WITH_LIMITATIONS",
+      "reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+      "manuscript_state": "SIN_EDITAR",
+      "closure_basis": "NOT_CLOSED_BY_CI_OR_DOCUMENTATION_ALONE",
+      "evidence_confidence": "An experiment was executed; this does not imply that the original request is fully satisfied.",
+      "traceability": {
+        "evidence_refs": [
+          "docs/reviewer_closure/SPH_DELIVERY_AUDIT.md",
+          "docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md",
+          "docs/external_validation/sph_results.md",
+          "docs/external_validation/sph_independence_assessment.md",
+          "docs/external_validation/sph_pac_probe_results.md",
+          "docs/reviewer_closure/EVIDENCE_SOURCE_TRIAGE.md",
+          "docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md",
+          "docs/reviewer_closure/V3C_TRIAL6_CHECKPOINT_LINEAGE.md",
+          "docs/reviewer_closure/CEDIA_FINAL_RECOVERY_REPORT.md",
+          "docs/reviewer_closure/receipts/CEDIA_TARGETED_RECOVERY_SEARCH_2026-11-11.json",
+          "docs/reviewer_closure/GENERALIZATION_DATASET_ELIGIBILITY.md",
+          "docs/reviewer_closure/GENERALIZATION_EXPERIMENT_PROTOCOL.md",
+          "docs/reviewer_closure/GENERALIZATION_EXPERIMENT_RESULTS.md",
+          "docs/reviewer_closure/GENERALIZATION_PER_CLASS_METRICS.json",
+          "docs/reviewer_closure/GENERALIZATION_ERROR_ANALYSIS.md",
+          "docs/reviewer_closure/receipts/CEDIA_JOB_LOGS_2026-11-10.json"
+        ],
+        "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
+      },
+      "evidence_assessment": {
+        "recorded_result_or_population": "Frozen transfer evaluated 25,770 SPH ECG from 24,666 source patients across P6, P8 and P4; all 14 compatible ECG-statement endpoints were scored with patient-component intervals. Newly recovered job 17314 records a P6 epoch sweep; job 17315 explicitly evaluates epoch 8 on the V3H accepted/balanced manifest at 1,564/1,643, accuracy 0.951917 and macro-F1 0.800938. This makes V3H model-selection/development evidence, not an untouched test. A separate fixed V3F-embedding PAC probe used the same SPH source and a 5,143-record exploratory patient holdout; its AUROCs were 0.910 (logistic) and 0.910 (MLP sensitivity), with no holdout tuning. The CEDIA audit found 539 code-30 records and 4 code-31 records (1 both, 3 code-31-only); all eligible rows remain in the code-30 statement endpoint, and absence is not a clinical negative. Commit 99b1065 publishes a scoped receipt binding the unchanged CEDIA aggregate and execution receipt. Confusion-derived metrics are recomputed publicly, while score metrics and intervals are digest-bound but not recalculated from restricted row scores. Prior Primary8 PAC target exposure and incomplete V3F source lineage keep this result nonconfirmatory. The exact 17314 manifest is not recorded. Complete V3F/V3AG pretraining and fine-tuning lineage remains unavailable.",
+        "scope_addressed": "A real full-source SPH transfer analysis and endpoint-specific results exist. New CEDIA accounting/logs also narrow the P6 validation claim by documenting V3H gate use and likely epoch-selection exposure. REV6 adds only a parent_checkpoint path-text concordance with job 16781, not a verified checkpoint-production edge. The PAC probe has a reproducible, hash-pinned aggregate publication and explicit code-30/31 target semantics, but does not establish an independent cohort, clinical adjudication or clinical validity.",
+        "not_demonstrated_or_remaining": "The 17314 sweep log and submitted script do not preserve the exact manifest binding; the same epoch-8 metrics and threshold vector appear in the immediately subsequent 17315 V3H gate report, strongly supporting use of that development holdout for selection but not providing a cryptographic same-file proof. Historical backbone/source overlap is not certified, labels are not clinical adjudication, and no truly untouched cohort has been selected."
+      },
+      "work_required": {
+        "code_change": "No new code change is identified by the current source record. Implement one only if a specific reproducible defect is found.",
+        "repeat_verification": "Repeat only if new source bytes, code, data or a protocol change affects this item; use the existing linked receipt as the current evidence.",
+        "targeted_recovery": "The REV3-REV6 export, NOC-reviewed backup listing and a bounded 2026-11-11 filename search in the known project/backup roots did not locate the exact sweep script or full training manifests. Reopen only if exact job-linked scripts, manifests, checkpoint hashes and patient mappings are supplied. A new independent cohort is not recoverable from the current SPH evaluation.",
+        "new_experiment": "A new, admissible, patient- and signal-disjoint cohort is required if independent generalization is claimed.",
+        "manuscript_edit": "Describe V3H P6 as selected development/model-selection evidence, distinguish it from the later SPH transfer, and do not call either clinical validation or assert complete independence without the missing lineage. Remove untested deployment claims.",
+        "author_approval": "Required before final manuscript wording or submission."
+      },
+      "remaining_actions": {
+        "recovery": "The REV3-REV6 export, NOC-reviewed backup listing and a bounded 2026-11-11 filename search in the known project/backup roots did not locate the exact sweep script or full training manifests. Reopen only if exact job-linked scripts, manifests, checkpoint hashes and patient mappings are supplied. A new independent cohort is not recoverable from the current SPH evaluation.",
+        "experiment": "A new, admissible, patient- and signal-disjoint cohort is required if independent generalization is claimed.",
+        "editorial": "Describe V3H P6 as selected development/model-selection evidence, distinguish it from the later SPH transfer, and do not call either clinical validation or assert complete independence without the missing lineage. Remove untested deployment claims.",
+        "action_class": "REPORT_EXPERIMENT_WITH_LIMITS_AND_DECIDE_IF_NEW_STUDY_IS_NEEDED",
+        "responsible_party": "Codex reports measured results and limits; authors approve claims; a new study is needed if the broader claim is retained."
+      },
+      "source_record": {
+        "id": "R1-1",
+        "origin": "Reviewer 1, Round 1, first methodological comment",
+        "request": "Clarify that an external-development holdout from public sources used during development is not equivalent to independent external validation; provide source-level training, validation and holdout counts or evaluate a truly independent cohort, and moderate generalizability and deployment claims.",
+        "manuscript_scope": "Abstract, cohort description, Results, Discussion and deployment/generalizability claims.",
+        "technical_status": "EXPERIMENT_COMPLETED_WITH_LIMITATIONS",
+        "reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+        "evidence": [
+          "docs/reviewer_closure/SPH_DELIVERY_AUDIT.md",
+          "docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md",
+          "docs/external_validation/sph_results.md",
+          "docs/external_validation/sph_independence_assessment.md",
+          "docs/external_validation/sph_pac_probe_results.md",
+          "docs/reviewer_closure/EVIDENCE_SOURCE_TRIAGE.md",
+          "docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md",
+          "docs/reviewer_closure/V3C_TRIAL6_CHECKPOINT_LINEAGE.md",
+          "docs/reviewer_closure/CEDIA_FINAL_RECOVERY_REPORT.md",
+          "docs/reviewer_closure/receipts/CEDIA_TARGETED_RECOVERY_SEARCH_2026-11-11.json",
+          "docs/reviewer_closure/GENERALIZATION_DATASET_ELIGIBILITY.md",
+          "docs/reviewer_closure/GENERALIZATION_EXPERIMENT_PROTOCOL.md",
+          "docs/reviewer_closure/GENERALIZATION_EXPERIMENT_RESULTS.md",
+          "docs/reviewer_closure/GENERALIZATION_PER_CLASS_METRICS.json",
+          "docs/reviewer_closure/GENERALIZATION_ERROR_ANALYSIS.md",
+          "docs/reviewer_closure/receipts/CEDIA_JOB_LOGS_2026-11-10.json"
+        ],
+        "protocol_population_result": "Frozen transfer evaluated 25,770 SPH ECG from 24,666 source patients across P6, P8 and P4; all 14 compatible ECG-statement endpoints were scored with patient-component intervals. Newly recovered job 17314 records a P6 epoch sweep; job 17315 explicitly evaluates epoch 8 on the V3H accepted/balanced manifest at 1,564/1,643, accuracy 0.951917 and macro-F1 0.800938. This makes V3H model-selection/development evidence, not an untouched test. A separate fixed V3F-embedding PAC probe used the same SPH source and a 5,143-record exploratory patient holdout; its AUROCs were 0.910 (logistic) and 0.910 (MLP sensitivity), with no holdout tuning. The CEDIA audit found 539 code-30 records and 4 code-31 records (1 both, 3 code-31-only); all eligible rows remain in the code-30 statement endpoint, and absence is not a clinical negative. Commit 99b1065 publishes a scoped receipt binding the unchanged CEDIA aggregate and execution receipt. Confusion-derived metrics are recomputed publicly, while score metrics and intervals are digest-bound but not recalculated from restricted row scores. Prior Primary8 PAC target exposure and incomplete V3F source lineage keep this result nonconfirmatory. The exact 17314 manifest is not recorded. Complete V3F/V3AG pretraining and fine-tuning lineage remains unavailable.",
+        "addressed_scope": "A real full-source SPH transfer analysis and endpoint-specific results exist. New CEDIA accounting/logs also narrow the P6 validation claim by documenting V3H gate use and likely epoch-selection exposure. REV6 adds only a parent_checkpoint path-text concordance with job 16781, not a verified checkpoint-production edge. The PAC probe has a reproducible, hash-pinned aggregate publication and explicit code-30/31 target semantics, but does not establish an independent cohort, clinical adjudication or clinical validity.",
+        "unresolved": "The 17314 sweep log and submitted script do not preserve the exact manifest binding; the same epoch-8 metrics and threshold vector appear in the immediately subsequent 17315 V3H gate report, strongly supporting use of that development holdout for selection but not providing a cryptographic same-file proof. Historical backbone/source overlap is not certified, labels are not clinical adjudication, and no truly untouched cohort has been selected.",
+        "recovery_assessment": "The REV3-REV6 export, NOC-reviewed backup listing and a bounded 2026-11-11 filename search in the known project/backup roots did not locate the exact sweep script or full training manifests. Reopen only if exact job-linked scripts, manifests, checkpoint hashes and patient mappings are supplied. A new independent cohort is not recoverable from the current SPH evaluation.",
+        "experiment_requirement": "A new, admissible, patient- and signal-disjoint cohort is required if independent generalization is claimed.",
+        "editorial_action": "Describe V3H P6 as selected development/model-selection evidence, distinguish it from the later SPH transfer, and do not call either clinical validation or assert complete independence without the missing lineage. Remove untested deployment claims.",
+        "scientific_risk": "High if SPH transfer is described as independent validation or clinical effectiveness."
+      }
+    },
+    {
+      "id": "R1-2",
+      "technical_status": "EXPERIMENT_COMPLETED_WITH_LIMITATIONS",
+      "reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+      "manuscript_state": "SIN_EDITAR",
+      "closure_basis": "NOT_CLOSED_BY_CI_OR_DOCUMENTATION_ALONE",
+      "evidence_confidence": "An experiment was executed; this does not imply that the original request is fully satisfied.",
+      "traceability": {
+        "evidence_refs": [
+          "docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md",
+          "docs/reviewer_closure/R1_2_EVIDENCE_CEILING.md",
+          "docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md",
+          "outputs/results/external_sph/sph_aggregate_32669.json",
+          "docs/reviewer_closure/RECOVERED_VS_MISSING_HISTORICAL_EVIDENCE.md",
+          "docs/reviewer_closure/SELECTIVE_PREDICTION_EXPERIMENT.md",
+          "docs/reviewer_closure/OTHER_CLASS_COVERAGE_EXPERIMENT.md",
+          "docs/reviewer_closure/GENERALIZATION_EXPERIMENT_RESULTS.md",
+          "docs/reviewer_closure/V4_LEGACY_QUARANTINE_DISPOSITION.md",
+          "docs/reviewer_closure/receipts/LEGACY_V4_QUARANTINE_RECOMPUTATION_2026-11-10.json",
+          "docs/reviewer_closure/receipts/CEDIA_TARGETED_RECOVERY_SEARCH_2026-11-11.json"
+        ],
+        "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
+      },
+      "evidence_assessment": {
+        "recorded_result_or_population": "The later SPH source has 25,770/25,770 scores per profile and all 14 compatible endpoint comparisons. The retained selected development replay has 2,193 P8 keys, including 1,643 P6 keys, plus 733 P4 keys: a verified 2,926-key P8/P4 union, not a patient count. Routing was computed without reference labels.",
+        "scope_addressed": "The measured all-source SPH profile coverage, empty-set/fallback counts and compatible predictive results are documented separately from selected-cohort replays.",
+        "not_demonstrated_or_remaining": "The June preselection population, exclusion reasons, complete all-class reference ontology and authentic historical quarantine policy/ledger remain unavailable. The recovered V3H accepted/balanced manifest is selected data, not the parent population. No pre/post quarantine rate can be calculated."
+      },
+      "work_required": {
+        "code_change": "No new code change is identified by the current source record. Implement one only if a specific reproducible defect is found.",
+        "repeat_verification": "Repeat only if new source bytes, code, data or a protocol change affects this item; use the existing linked receipt as the current evidence.",
+        "targeted_recovery": "The supplied archives, exact historical paths, NOC-reviewed backup listing and bounded 2026-11-11 filename search do not locate the parent population or quarantine artifacts in the searched roots. Reopen only on receipt of parent manifests, exclusion reasons and checkpoint/job-linked routing ledger; this is not a global-absence finding.",
+        "new_experiment": "A complete all-class workflow with compatible reference labels and an explicit quarantine policy is required to satisfy the original request; SPH cannot retroactively supply the missing historical flow.",
+        "manuscript_edit": "Report selected denominators and measured SPH coverage; do not call either a reconstructed historical all-input workflow.",
+        "author_approval": "Required before final manuscript wording or submission."
+      },
+      "remaining_actions": {
+        "recovery": "The supplied archives, exact historical paths, NOC-reviewed backup listing and bounded 2026-11-11 filename search do not locate the parent population or quarantine artifacts in the searched roots. Reopen only on receipt of parent manifests, exclusion reasons and checkpoint/job-linked routing ledger; this is not a global-absence finding.",
+        "experiment": "A complete all-class workflow with compatible reference labels and an explicit quarantine policy is required to satisfy the original request; SPH cannot retroactively supply the missing historical flow.",
+        "editorial": "Report selected denominators and measured SPH coverage; do not call either a reconstructed historical all-input workflow.",
+        "action_class": "REPORT_EXPERIMENT_WITH_LIMITS_AND_DECIDE_IF_NEW_STUDY_IS_NEEDED",
+        "responsible_party": "Codex reports measured results and limits; authors approve claims; a new study is needed if the broader claim is retained."
+      },
+      "source_record": {
+        "id": "R1-2",
+        "origin": "Reviewer 1, Round 1, second methodological comment",
+        "request": "Report the complete clinical workflow, including primary and cascade classes, complete denominators, quarantine proportions, errors inside and outside quarantine, and predictive values under original prevalence; do not present a restricted denominator as end-to-end performance.",
+        "manuscript_scope": "Primary denominator, Results tables, cascade and quarantine claims.",
+        "technical_status": "EXPERIMENT_COMPLETED_WITH_LIMITATIONS",
+        "reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+        "evidence": [
+          "docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md",
+          "docs/reviewer_closure/R1_2_EVIDENCE_CEILING.md",
+          "docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md",
+          "outputs/results/external_sph/sph_aggregate_32669.json",
+          "docs/reviewer_closure/RECOVERED_VS_MISSING_HISTORICAL_EVIDENCE.md",
+          "docs/reviewer_closure/SELECTIVE_PREDICTION_EXPERIMENT.md",
+          "docs/reviewer_closure/OTHER_CLASS_COVERAGE_EXPERIMENT.md",
+          "docs/reviewer_closure/GENERALIZATION_EXPERIMENT_RESULTS.md",
+          "docs/reviewer_closure/V4_LEGACY_QUARANTINE_DISPOSITION.md",
+          "docs/reviewer_closure/receipts/LEGACY_V4_QUARANTINE_RECOMPUTATION_2026-11-10.json",
+          "docs/reviewer_closure/receipts/CEDIA_TARGETED_RECOVERY_SEARCH_2026-11-11.json"
+        ],
+        "protocol_population_result": "The later SPH source has 25,770/25,770 scores per profile and all 14 compatible endpoint comparisons. The retained selected development replay has 2,193 P8 keys, including 1,643 P6 keys, plus 733 P4 keys: a verified 2,926-key P8/P4 union, not a patient count. Routing was computed without reference labels.",
+        "addressed_scope": "The measured all-source SPH profile coverage, empty-set/fallback counts and compatible predictive results are documented separately from selected-cohort replays.",
+        "unresolved": "The June preselection population, exclusion reasons, complete all-class reference ontology and authentic historical quarantine policy/ledger remain unavailable. The recovered V3H accepted/balanced manifest is selected data, not the parent population. No pre/post quarantine rate can be calculated.",
+        "recovery_assessment": "The supplied archives, exact historical paths, NOC-reviewed backup listing and bounded 2026-11-11 filename search do not locate the parent population or quarantine artifacts in the searched roots. Reopen only on receipt of parent manifests, exclusion reasons and checkpoint/job-linked routing ledger; this is not a global-absence finding.",
+        "experiment_requirement": "A complete all-class workflow with compatible reference labels and an explicit quarantine policy is required to satisfy the original request; SPH cannot retroactively supply the missing historical flow.",
+        "editorial_action": "Report selected denominators and measured SPH coverage; do not call either a reconstructed historical all-input workflow.",
+        "scientific_risk": "High if restricted Primary results are described as full clinical workflow accuracy or unmeasured quarantine benefit."
+      }
+    },
+    {
+      "id": "R1-3",
+      "technical_status": "VERIFIED_WITH_LIMITATIONS",
+      "reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+      "manuscript_state": "SIN_EDITAR",
+      "closure_basis": "NOT_CLOSED_BY_CI_OR_DOCUMENTATION_ALONE",
+      "evidence_confidence": "A bounded result is verified; residual limitations remain open.",
+      "traceability": {
+        "evidence_refs": [
+          "docs/reviewer_closure/AF_PVC_REFERENCE_DISPOSITION.md",
+          "docs/af-reference-contract.md",
+          "outputs/results/revision_20261029/af_reference_consistency.json"
+        ],
+        "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
+      },
+      "evidence_assessment": {
+        "recorded_result_or_population": "Stored AF flags agree with retained code 164889003 for 1,643 P6 rows and 2,193 P8 rows; each overlapping profile has 390 positive rows and zero flag mismatches or unresolved code rows. P6 is nested within P8, so counts must not be added. A co-occurring normal-rhythm code was retained, not adjudicated.",
+        "scope_addressed": "The archived fields are internally consistent for the selected rows and the available contract supports ECG-record wording.",
+        "not_demonstrated_or_remaining": "The audit does not establish independent clinical adjudication for every source, onset, first diagnosis, incidence or patient-level longitudinal truth."
+      },
+      "work_required": {
+        "code_change": "No new code change is identified by the current source record. Implement one only if a specific reproducible defect is found.",
+        "repeat_verification": "Repeat only if new source bytes, code, data or a protocol change affects this item; use the existing linked receipt as the current evidence.",
+        "targeted_recovery": "The current row-level code check is complete within its scope; incident AF cannot be recovered without longitudinal patient data and an appropriate reference.",
+        "new_experiment": "Longitudinal AF claims require a new study; no such study is needed if the claim is confined to ECG-level statements.",
+        "manuscript_edit": "State AF on the ECG, describe source-specific reference limitations and remove incident/first-diagnosed terminology unless authors supply longitudinal evidence.",
+        "author_approval": "Required before final manuscript wording or submission."
+      },
+      "remaining_actions": {
+        "recovery": "The current row-level code check is complete within its scope; incident AF cannot be recovered without longitudinal patient data and an appropriate reference.",
+        "experiment": "Longitudinal AF claims require a new study; no such study is needed if the claim is confined to ECG-level statements.",
+        "editorial": "State AF on the ECG, describe source-specific reference limitations and remove incident/first-diagnosed terminology unless authors supply longitudinal evidence.",
+        "action_class": "DOCUMENT_LIMITS_AND_PREPARE_EDITORIAL_ACTION",
+        "responsible_party": "Codex prepares precise wording; authors approve scope and interpretation."
+      },
+      "source_record": {
+        "id": "R1-3",
+        "origin": "Reviewer 1, Round 1, AF-label comment",
+        "request": "Describe how AF reference labels were created and harmonized by source, how multiple or conflicting labels were handled, and restrict language to ECG-level AF rather than incident or first-diagnosed AF without longitudinal evidence.",
+        "manuscript_scope": "AF endpoint definition, label harmonization and Discussion terminology.",
+        "technical_status": "VERIFIED_WITH_LIMITATIONS",
+        "reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+        "evidence": [
+          "docs/reviewer_closure/AF_PVC_REFERENCE_DISPOSITION.md",
+          "docs/af-reference-contract.md",
+          "outputs/results/revision_20261029/af_reference_consistency.json"
+        ],
+        "protocol_population_result": "Stored AF flags agree with retained code 164889003 for 1,643 P6 rows and 2,193 P8 rows; each overlapping profile has 390 positive rows and zero flag mismatches or unresolved code rows. P6 is nested within P8, so counts must not be added. A co-occurring normal-rhythm code was retained, not adjudicated.",
+        "addressed_scope": "The archived fields are internally consistent for the selected rows and the available contract supports ECG-record wording.",
+        "unresolved": "The audit does not establish independent clinical adjudication for every source, onset, first diagnosis, incidence or patient-level longitudinal truth.",
+        "recovery_assessment": "The current row-level code check is complete within its scope; incident AF cannot be recovered without longitudinal patient data and an appropriate reference.",
+        "experiment_requirement": "Longitudinal AF claims require a new study; no such study is needed if the claim is confined to ECG-level statements.",
+        "editorial_action": "State AF on the ECG, describe source-specific reference limitations and remove incident/first-diagnosed terminology unless authors supply longitudinal evidence.",
+        "scientific_risk": "High for incidence or prognosis claims; moderate for pooled ECG statement classification because annotation policies differ."
+      }
+    },
+    {
+      "id": "R1-4",
+      "technical_status": "VERIFIED_WITH_LIMITATIONS",
+      "reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+      "manuscript_state": "SIN_EDITAR",
+      "closure_basis": "NOT_CLOSED_BY_CI_OR_DOCUMENTATION_ALONE",
+      "evidence_confidence": "A bounded result is verified; residual limitations remain open.",
+      "traceability": {
+        "evidence_refs": [
+          "docs/hash-correction-20261028.md",
+          "docs/reviewer_closure/EVIDENCE_COMMITS.md",
+          "docs/reviewer_closure/HISTORICAL_EVIDENCE_HANDOFF.md",
+          "docs/reviewer_closure/OPTUNA_HISTORICAL_OBJECTIVE_AND_LINEAGE.md",
+          "docs/reviewer_closure/OPTUNA_PR4_EVIDENCE_HANDOFF.md",
+          "docs/reviewer_closure/receipts/CEDIA_TARGETED_RECOVERY_SEARCH_2026-11-11.json"
+        ],
+        "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
+      },
+      "evidence_assessment": {
+        "recorded_result_or_population": "The submitted A10 contained one empty-file SHA-256 and four patterned example values. Five physical V3F/V3AG and specialist checkpoints have measured hashes, sizes and a release manifest in PR #4; Optuna DB and generic prediction artifact were not certified as recovered.",
+        "scope_addressed": "Actual model checkpoint identities are verifiable from the public release and separate correction evidence. REV6 adds a hash-pinned static 60/40 objective-source copy, separately handed to PR #4.",
+        "not_demonstrated_or_remaining": "The original Optuna database and generic prediction file are not located; the 60/40 source copy is not linked to the May jobs and does not reconcile their separate captured 0.45/0.35/0.10/0.10 formula. The corrected artifact list is not a one-to-one substitute for every original A10 row."
+      },
+      "work_required": {
+        "code_change": "No new code change is identified by the current source record. Implement one only if a specific reproducible defect is found.",
+        "repeat_verification": "Repeat only if new source bytes, code, data or a protocol change affects this item; use the existing linked receipt as the current evidence.",
+        "targeted_recovery": "Bounded local/CEDIA/release checks, including the 2026-11-11 filename search in the known V4.5 and backup roots, found no verified copies of the missing database or generic artifact; a new authenticated institutional backup catalog result could reopen this.",
+        "new_experiment": "No model experiment is needed for the five checkpoint hashes; do not fabricate hashes for missing files.",
+        "manuscript_edit": "Replace A10 with the verified artifact inventory and explicitly remove claims for unavailable artifacts; preserve the submitted PDF unchanged.",
+        "author_approval": "Required before final manuscript wording or submission."
+      },
+      "remaining_actions": {
+        "recovery": "Bounded local/CEDIA/release checks, including the 2026-11-11 filename search in the known V4.5 and backup roots, found no verified copies of the missing database or generic artifact; a new authenticated institutional backup catalog result could reopen this.",
+        "experiment": "No model experiment is needed for the five checkpoint hashes; do not fabricate hashes for missing files.",
+        "editorial": "Replace A10 with the verified artifact inventory and explicitly remove claims for unavailable artifacts; preserve the submitted PDF unchanged.",
+        "action_class": "DOCUMENT_LIMITS_AND_PREPARE_EDITORIAL_ACTION",
+        "responsible_party": "Codex prepares precise wording; authors approve scope and interpretation."
+      },
+      "source_record": {
+        "id": "R1-4",
+        "origin": "Reviewer 1, Round 1, cryptographic hashes comment",
+        "request": "Replace the empty-file and placeholder values in A10 with checksums for actual archived artifacts and provide an accessible verification route; otherwise remove unsupported cryptographic reproducibility claims.",
+        "manuscript_scope": "Appendix Table A10, artifact availability and reproducibility claims.",
+        "technical_status": "VERIFIED_WITH_LIMITATIONS",
+        "reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+        "evidence": [
+          "docs/hash-correction-20261028.md",
+          "docs/reviewer_closure/EVIDENCE_COMMITS.md",
+          "docs/reviewer_closure/HISTORICAL_EVIDENCE_HANDOFF.md",
+          "docs/reviewer_closure/OPTUNA_HISTORICAL_OBJECTIVE_AND_LINEAGE.md",
+          "docs/reviewer_closure/OPTUNA_PR4_EVIDENCE_HANDOFF.md",
+          "docs/reviewer_closure/receipts/CEDIA_TARGETED_RECOVERY_SEARCH_2026-11-11.json"
+        ],
+        "protocol_population_result": "The submitted A10 contained one empty-file SHA-256 and four patterned example values. Five physical V3F/V3AG and specialist checkpoints have measured hashes, sizes and a release manifest in PR #4; Optuna DB and generic prediction artifact were not certified as recovered.",
+        "addressed_scope": "Actual model checkpoint identities are verifiable from the public release and separate correction evidence. REV6 adds a hash-pinned static 60/40 objective-source copy, separately handed to PR #4.",
+        "unresolved": "The original Optuna database and generic prediction file are not located; the 60/40 source copy is not linked to the May jobs and does not reconcile their separate captured 0.45/0.35/0.10/0.10 formula. The corrected artifact list is not a one-to-one substitute for every original A10 row.",
+        "recovery_assessment": "Bounded local/CEDIA/release checks, including the 2026-11-11 filename search in the known V4.5 and backup roots, found no verified copies of the missing database or generic artifact; a new authenticated institutional backup catalog result could reopen this.",
+        "experiment_requirement": "No model experiment is needed for the five checkpoint hashes; do not fabricate hashes for missing files.",
+        "editorial_action": "Replace A10 with the verified artifact inventory and explicitly remove claims for unavailable artifacts; preserve the submitted PDF unchanged.",
+        "scientific_risk": "High if unverified artifacts remain represented as hashed or reproducible."
+      }
+    },
+    {
+      "id": "R2-general",
+      "technical_status": "NEW_EXPERIMENT_REQUIRED",
+      "reviewer_satisfaction": "NOT_SATISFIED",
+      "manuscript_state": "SIN_EDITAR",
+      "closure_basis": "NOT_CLOSED_BY_CI_OR_DOCUMENTATION_ALONE",
+      "evidence_confidence": "Current evidence does not satisfy the request; a distinct new experiment is required.",
+      "traceability": {
+        "evidence_refs": [
+          "docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md",
+          "docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md",
+          "docs/revision-data-dispositions.md",
+          "docs/external_validation/sph_pac_probe_results.md",
+          "outputs/models/heads/global_head_contracts.json",
+          "docs/reviewer_closure/OTHER_CLASS_COVERAGE_EXPERIMENT.md",
+          "docs/reviewer_closure/GENERALIZATION_EXPERIMENT_RESULTS.md"
+        ],
+        "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
+      },
+      "evidence_assessment": {
+        "recorded_result_or_population": "The published architecture declares 14 rhythm and 7 pathology outputs; P8 includes NSR and PAC. SPH measured all profile predictions on 25,770 ECG, but only 14 endpoints have compatible statement references. P8 produced 16,700 NSR top-1 outputs; no validated Other output exists. The additional code-30 PAC probe reports one statement endpoint from the same SPH source; it is not an all-class evaluation and does not define or validate Other.",
+        "scope_addressed": "All-input profile decisions and the limits of declared auxiliary outputs are now visible; missing scores and incompatible labels are not converted to negatives. The separate PAC probe adds a fully reported model comparison for one endpoint only; it does not close the Other/cascade request.",
+        "not_demonstrated_or_remaining": "No validated Other class, complete ontology, class-level labels for all inputs, or evaluated primary-to-cascade performance is available."
+      },
+      "work_required": {
+        "code_change": "No new code change is identified by the current source record. Implement one only if a specific reproducible defect is found.",
+        "repeat_verification": "Repeat only if new source bytes, code, data or a protocol change affects this item; use the existing linked receipt as the current evidence.",
+        "targeted_recovery": "The old outputs cannot establish the requested Other-class performance. A new dataset/reference mapping and model or routing evaluation would be needed.",
+        "new_experiment": "Required if the original all-class performance request is retained; not satisfied by narrowing text alone.",
+        "manuscript_edit": "Describe only evaluated primary endpoints and explicitly state that Other/cascade performance is not validated.",
+        "author_approval": "Required before final manuscript wording or submission."
+      },
+      "remaining_actions": {
+        "recovery": "The old outputs cannot establish the requested Other-class performance. A new dataset/reference mapping and model or routing evaluation would be needed.",
+        "experiment": "Required if the original all-class performance request is retained; not satisfied by narrowing text alone.",
+        "editorial": "Describe only evaluated primary endpoints and explicitly state that Other/cascade performance is not validated.",
+        "action_class": "DESIGN_AND_APPROVE_A_DISTINCT_NEW_EXPERIMENT",
+        "responsible_party": "Authors/study team approve endpoint, data rights and protocol; Codex can implement and audit the approved workflow."
+      },
+      "source_record": {
+        "id": "R2-general",
+        "origin": "Reviewer 2, Round 1, general class-scope comment",
+        "request": "Represent excluded rhythm and pathology classes as Other arrhythmia/Other pathologies, or otherwise report them so excluded classes and NSR are not hidden from realistic performance assessment.",
+        "manuscript_scope": "Class ontology, primary and cascade heads, Methods and full-population results.",
+        "technical_status": "NEW_EXPERIMENT_REQUIRED",
+        "reviewer_satisfaction": "NOT_SATISFIED",
+        "evidence": [
+          "docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md",
+          "docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md",
+          "docs/revision-data-dispositions.md",
+          "docs/external_validation/sph_pac_probe_results.md",
+          "outputs/models/heads/global_head_contracts.json",
+          "docs/reviewer_closure/OTHER_CLASS_COVERAGE_EXPERIMENT.md",
+          "docs/reviewer_closure/GENERALIZATION_EXPERIMENT_RESULTS.md"
+        ],
+        "protocol_population_result": "The published architecture declares 14 rhythm and 7 pathology outputs; P8 includes NSR and PAC. SPH measured all profile predictions on 25,770 ECG, but only 14 endpoints have compatible statement references. P8 produced 16,700 NSR top-1 outputs; no validated Other output exists. The additional code-30 PAC probe reports one statement endpoint from the same SPH source; it is not an all-class evaluation and does not define or validate Other.",
+        "addressed_scope": "All-input profile decisions and the limits of declared auxiliary outputs are now visible; missing scores and incompatible labels are not converted to negatives. The separate PAC probe adds a fully reported model comparison for one endpoint only; it does not close the Other/cascade request.",
+        "unresolved": "No validated Other class, complete ontology, class-level labels for all inputs, or evaluated primary-to-cascade performance is available.",
+        "recovery_assessment": "The old outputs cannot establish the requested Other-class performance. A new dataset/reference mapping and model or routing evaluation would be needed.",
+        "experiment_requirement": "Required if the original all-class performance request is retained; not satisfied by narrowing text alone.",
+        "editorial_action": "Describe only evaluated primary endpoints and explicitly state that Other/cascade performance is not validated.",
+        "scientific_risk": "Very high if all-input or Other performance is implied from class declarations or fallback counts."
+      }
+    },
+    {
+      "id": "R2-1a",
+      "technical_status": "MANUSCRIPT_ONLY_PENDING",
+      "reviewer_satisfaction": "EDITORIAL_ACTION_ONLY",
+      "manuscript_state": "SIN_EDITAR",
+      "closure_basis": "NOT_CLOSED_BY_CI_OR_DOCUMENTATION_ALONE",
+      "evidence_confidence": "Technical evidence is available for the bounded claim, but the manuscript remains unedited.",
+      "traceability": {
+        "evidence_refs": [
+          "docs/architecture.md",
+          "docs/reviewer_closure/REVIEWER_48_STATUS.md"
+        ],
+        "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
+      },
+      "evidence_assessment": {
+        "recorded_result_or_population": "The release contract identifies P6 as six rhythm targets and P4 as four binary pathology panels; their model assets and evaluation units are separate.",
+        "scope_addressed": "The technical definitions are documented and can be stated without a new experiment.",
+        "not_demonstrated_or_remaining": "The submitted manuscript has not been revised to define the terms at the requested locations."
+      },
+      "work_required": {
+        "code_change": "No new code change is identified by the current source record. Implement one only if a specific reproducible defect is found.",
+        "repeat_verification": "Repeat only if new source bytes, code, data or a protocol change affects this item; use the existing linked receipt as the current evidence.",
+        "targeted_recovery": "No historical recovery is needed.",
+        "new_experiment": "None; editorial clarification only.",
+        "manuscript_edit": "Add one-sentence definitions at both locations and retain distinct denominators.",
+        "author_approval": "Required before final manuscript wording or submission."
+      },
+      "remaining_actions": {
+        "recovery": "No historical recovery is needed.",
+        "experiment": "None; editorial clarification only.",
+        "editorial": "Add one-sentence definitions at both locations and retain distinct denominators.",
+        "action_class": "PREPARE_EDITORIAL_CHANGE_WITHOUT_EDITING_SUBMITTED_MANUSCRIPT",
+        "responsible_party": "Codex prepares proposed edits; authors review and approve before any manuscript change or submission."
+      },
+      "source_record": {
+        "id": "R2-1a",
+        "origin": "Reviewer 2, Round 1, point 1, abstract",
+        "request": "Briefly explain what Primary6 rhythm specialist and Primary4 pathology specialist mean in the abstract and at first use in the main text.",
+        "manuscript_scope": "Abstract and first occurrence in the Introduction or Methods.",
+        "technical_status": "MANUSCRIPT_ONLY_PENDING",
+        "reviewer_satisfaction": "EDITORIAL_ACTION_ONLY",
+        "evidence": [
+          "docs/architecture.md",
+          "docs/reviewer_closure/REVIEWER_48_STATUS.md"
+        ],
+        "protocol_population_result": "The release contract identifies P6 as six rhythm targets and P4 as four binary pathology panels; their model assets and evaluation units are separate.",
+        "addressed_scope": "The technical definitions are documented and can be stated without a new experiment.",
+        "unresolved": "The submitted manuscript has not been revised to define the terms at the requested locations.",
+        "recovery_assessment": "No historical recovery is needed.",
+        "experiment_requirement": "None; editorial clarification only.",
+        "editorial_action": "Add one-sentence definitions at both locations and retain distinct denominators.",
+        "scientific_risk": "Low if corrected; ambiguity remains until the manuscript is edited."
+      }
+    },
+    {
+      "id": "R2-1b",
+      "technical_status": "MANUSCRIPT_ONLY_PENDING",
+      "reviewer_satisfaction": "EDITORIAL_ACTION_ONLY",
+      "manuscript_state": "SIN_EDITAR",
+      "closure_basis": "NOT_CLOSED_BY_CI_OR_DOCUMENTATION_ALONE",
+      "evidence_confidence": "Technical evidence is available for the bounded claim, but the manuscript remains unedited.",
+      "traceability": {
+        "evidence_refs": [
+          "docs/reviewer_closure/REVIEWER_48_STATUS.md"
+        ],
+        "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
+      },
+      "evidence_assessment": {
+        "recorded_result_or_population": "No model or dataset calculation is requested; the remaining work is a full-document terminology pass after scope and tables are fixed.",
+        "scope_addressed": "The need is identified but no final manuscript audit has been performed in this phase.",
+        "not_demonstrated_or_remaining": "First-use consistency in the submitted source remains unchecked against the final revised layout."
+      },
+      "work_required": {
+        "code_change": "No new code change is identified by the current source record. Implement one only if a specific reproducible defect is found.",
+        "repeat_verification": "Repeat only if new source bytes, code, data or a protocol change affects this item; use the existing linked receipt as the current evidence.",
+        "targeted_recovery": "Fully addressable in editorial review; no archive is needed.",
+        "new_experiment": "None.",
+        "manuscript_edit": "Expand each abbreviation on first use and verify captions independently.",
+        "author_approval": "Required before final manuscript wording or submission."
+      },
+      "remaining_actions": {
+        "recovery": "Fully addressable in editorial review; no archive is needed.",
+        "experiment": "None.",
+        "editorial": "Expand each abbreviation on first use and verify captions independently.",
+        "action_class": "PREPARE_EDITORIAL_CHANGE_WITHOUT_EDITING_SUBMITTED_MANUSCRIPT",
+        "responsible_party": "Codex prepares proposed edits; authors review and approve before any manuscript change or submission."
+      },
+      "source_record": {
+        "id": "R2-1b",
+        "origin": "Reviewer 2, Round 1, point 1, abbreviations",
+        "request": "Define abbreviations at first use throughout the manuscript, tables and figures.",
+        "manuscript_scope": "Whole manuscript, tables, captions and figures.",
+        "technical_status": "MANUSCRIPT_ONLY_PENDING",
+        "reviewer_satisfaction": "EDITORIAL_ACTION_ONLY",
+        "evidence": [
+          "docs/reviewer_closure/REVIEWER_48_STATUS.md"
+        ],
+        "protocol_population_result": "No model or dataset calculation is requested; the remaining work is a full-document terminology pass after scope and tables are fixed.",
+        "addressed_scope": "The need is identified but no final manuscript audit has been performed in this phase.",
+        "unresolved": "First-use consistency in the submitted source remains unchecked against the final revised layout.",
+        "recovery_assessment": "Fully addressable in editorial review; no archive is needed.",
+        "experiment_requirement": "None.",
+        "editorial_action": "Expand each abbreviation on first use and verify captions independently.",
+        "scientific_risk": "Low scientific risk; substantial readability risk if left inconsistent."
+      }
+    },
+    {
+      "id": "R2-2a",
+      "technical_status": "MANUSCRIPT_ONLY_PENDING",
+      "reviewer_satisfaction": "EDITORIAL_ACTION_ONLY",
+      "manuscript_state": "SIN_EDITAR",
+      "closure_basis": "NOT_CLOSED_BY_CI_OR_DOCUMENTATION_ALONE",
+      "evidence_confidence": "Technical evidence is available for the bounded claim, but the manuscript remains unedited.",
+      "traceability": {
+        "evidence_refs": [
+          "docs/reviewer_closure/REVIEWER_48_STATUS.md",
+          "docs/reviewer_closure/REVIEWER_48_DETAILED.json"
+        ],
+        "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
+      },
+      "evidence_assessment": {
+        "recorded_result_or_population": "This is a literature and framing request. The final scope is constrained by measured selected-cohort and SPH transfer evidence, not a claim of clinical deployment.",
+        "scope_addressed": "The intended scope can now be bounded by the evidence package, but the bibliography has not been rewritten or fully checked here.",
+        "not_demonstrated_or_remaining": "Reference adequacy, citation-to-claim fit and the final objective wording remain to be assessed after the author-approved scope is fixed."
+      },
+      "work_required": {
+        "code_change": "No new code change is identified by the current source record. Implement one only if a specific reproducible defect is found.",
+        "repeat_verification": "Repeat only if new source bytes, code, data or a protocol change affects this item; use the existing linked receipt as the current evidence.",
+        "targeted_recovery": "Addressable by bibliography review; no historical compute files are needed.",
+        "new_experiment": "None for citations; a broader scientific claim would require additional evidence, not just references.",
+        "manuscript_edit": "Audit each general claim against primary literature and state a narrow descriptive/evaluative objective.",
+        "author_approval": "Required before final manuscript wording or submission."
+      },
+      "remaining_actions": {
+        "recovery": "Addressable by bibliography review; no historical compute files are needed.",
+        "experiment": "None for citations; a broader scientific claim would require additional evidence, not just references.",
+        "editorial": "Audit each general claim against primary literature and state a narrow descriptive/evaluative objective.",
+        "action_class": "PREPARE_EDITORIAL_CHANGE_WITHOUT_EDITING_SUBMITTED_MANUSCRIPT",
+        "responsible_party": "Codex prepares proposed edits; authors review and approve before any manuscript change or submission."
+      },
+      "source_record": {
+        "id": "R2-2a",
+        "origin": "Reviewer 2, Round 1, point 2, Introduction references",
+        "request": "Add adequate references to the Introduction's general statements and make the study objective clear at the end of the section.",
+        "manuscript_scope": "Introduction before subsection 1.1 and final paragraph of the Introduction.",
+        "technical_status": "MANUSCRIPT_ONLY_PENDING",
+        "reviewer_satisfaction": "EDITORIAL_ACTION_ONLY",
+        "evidence": [
+          "docs/reviewer_closure/REVIEWER_48_STATUS.md",
+          "docs/reviewer_closure/REVIEWER_48_DETAILED.json"
+        ],
+        "protocol_population_result": "This is a literature and framing request. The final scope is constrained by measured selected-cohort and SPH transfer evidence, not a claim of clinical deployment.",
+        "addressed_scope": "The intended scope can now be bounded by the evidence package, but the bibliography has not been rewritten or fully checked here.",
+        "unresolved": "Reference adequacy, citation-to-claim fit and the final objective wording remain to be assessed after the author-approved scope is fixed.",
+        "recovery_assessment": "Addressable by bibliography review; no historical compute files are needed.",
+        "experiment_requirement": "None for citations; a broader scientific claim would require additional evidence, not just references.",
+        "editorial_action": "Audit each general claim against primary literature and state a narrow descriptive/evaluative objective.",
+        "scientific_risk": "Moderate if unsupported background claims or an overbroad objective remain."
+      }
+    },
+    {
+      "id": "R2-2b",
+      "technical_status": "ACTIVE_RECOVERY_REQUIRED",
+      "reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+      "manuscript_state": "SIN_EDITAR",
+      "closure_basis": "NOT_CLOSED_BY_CI_OR_DOCUMENTATION_ALONE",
+      "evidence_confidence": "A bounded recovery lead remains; no conclusion of global absence is allowed.",
+      "traceability": {
+        "evidence_refs": [
+          "docs/reviewer_closure/REVIEWER_48_STATUS.md",
+          "docs/figure-evidence.md",
+          "docs/reviewer_closure/R2-2B_FIGURES_1_2_PROVENANCE.md",
+          "outputs/figures/figure_manifest.json"
+        ],
+        "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
+      },
+      "evidence_assessment": {
+        "recorded_result_or_population": "The author-supplied source ZIP has SHA-256 36c1c6db30a759ef9d349ae2e545577cfd7ce3af91a3b97fb459380113f294a8 and contains the archived TeX callouts/captions and both figure PNGs. The figures match the repository manifest byte-for-byte; exact paths, hashes, dimensions and stated purposes are recorded in R2-2B_FIGURES_1_2_PROVENANCE.md.",
+        "scope_addressed": "The supplied archive establishes immediate source-package provenance and the purposes stated in its TeX: a proposed modular P6/P4 architecture (Figure 1) and a data-curation/harmonization workflow (Figure 2). This does not independently validate depicted historical operations.",
+        "not_demonstrated_or_remaining": "Creator/editor identity, any third-party assets and permissions are not established. The authors must confirm Figure 2's cohort/split claims against run-level evidence; the ZIP alone cannot prove execution or patient-level independence."
+      },
+      "work_required": {
+        "code_change": "No new code change is identified by the current source record. Implement one only if a specific reproducible defect is found.",
+        "repeat_verification": "Repeat only if new source bytes, code, data or a protocol change affects this item; use the existing linked receipt as the current evidence.",
+        "targeted_recovery": "Archive-level provenance is recovered. Authorship, third-party source and rights require author/source records or licenses; if these cannot be established, replace or remove affected content.",
+        "new_experiment": "None unless a figure makes a new empirical claim.",
+        "manuscript_edit": "After author confirmation, attribute or identify the figures as author-created only if supported; narrow Figure 2 to verified operations and use an authorized replacement or remove it if origin/permissions remain unclear.",
+        "author_approval": "Required before final manuscript wording or submission."
+      },
+      "remaining_actions": {
+        "recovery": "Archive-level provenance is recovered. Authorship, third-party source and rights require author/source records or licenses; if these cannot be established, replace or remove affected content.",
+        "experiment": "None unless a figure makes a new empirical claim.",
+        "editorial": "After author confirmation, attribute or identify the figures as author-created only if supported; narrow Figure 2 to verified operations and use an authorized replacement or remove it if origin/permissions remain unclear.",
+        "action_class": "BOUNDED_RECOVERY_THEN_CUSTODIAN_DISPOSITION",
+        "responsible_party": "Codex performs only the identified bounded search; CEDIA custodian supplies any inaccessible archive; authors decide disposition if absent."
+      },
+      "source_record": {
+        "id": "R2-2b",
+        "origin": "Reviewer 2, Round 1, point 2, Figures 1 and 2",
+        "request": "Explain the purpose of Figures 1 and 2 and identify their sources or provenance.",
+        "manuscript_scope": "Introduction figure captions, callouts and source acknowledgments.",
+        "technical_status": "ACTIVE_RECOVERY_REQUIRED",
+        "reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+        "evidence": [
+          "docs/reviewer_closure/REVIEWER_48_STATUS.md",
+          "docs/figure-evidence.md",
+          "docs/reviewer_closure/R2-2B_FIGURES_1_2_PROVENANCE.md",
+          "outputs/figures/figure_manifest.json"
+        ],
+        "protocol_population_result": "The author-supplied source ZIP has SHA-256 36c1c6db30a759ef9d349ae2e545577cfd7ce3af91a3b97fb459380113f294a8 and contains the archived TeX callouts/captions and both figure PNGs. The figures match the repository manifest byte-for-byte; exact paths, hashes, dimensions and stated purposes are recorded in R2-2B_FIGURES_1_2_PROVENANCE.md.",
+        "addressed_scope": "The supplied archive establishes immediate source-package provenance and the purposes stated in its TeX: a proposed modular P6/P4 architecture (Figure 1) and a data-curation/harmonization workflow (Figure 2). This does not independently validate depicted historical operations.",
+        "unresolved": "Creator/editor identity, any third-party assets and permissions are not established. The authors must confirm Figure 2's cohort/split claims against run-level evidence; the ZIP alone cannot prove execution or patient-level independence.",
+        "recovery_assessment": "Archive-level provenance is recovered. Authorship, third-party source and rights require author/source records or licenses; if these cannot be established, replace or remove affected content.",
+        "experiment_requirement": "None unless a figure makes a new empirical claim.",
+        "editorial_action": "After author confirmation, attribute or identify the figures as author-created only if supported; narrow Figure 2 to verified operations and use an authorized replacement or remove it if origin/permissions remain unclear.",
+        "scientific_risk": "Moderate for unsupported provenance; high if an illustrative figure is presented as measured evidence."
+      }
+    },
+    {
+      "id": "R2-2c",
+      "technical_status": "MANUSCRIPT_ONLY_PENDING",
+      "reviewer_satisfaction": "EDITORIAL_ACTION_ONLY",
+      "manuscript_state": "SIN_EDITAR",
+      "closure_basis": "NOT_CLOSED_BY_CI_OR_DOCUMENTATION_ALONE",
+      "evidence_confidence": "Technical evidence is available for the bounded claim, but the manuscript remains unedited.",
+      "traceability": {
+        "evidence_refs": [
+          "docs/reviewer_closure/REVIEWER_48_STATUS.md",
+          "docs/revision-data-dispositions.md"
+        ],
+        "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
+      },
+      "evidence_assessment": {
+        "recorded_result_or_population": "No new benchmark comparison has been performed. Existing published studies differ in task, label ontology, cohort, sampling, parameter reporting and evaluation unit, so their headline values are not directly comparable.",
+        "scope_addressed": "The non-equivalence risk is recognized; no replacement systematic or balanced literature table is yet verified.",
+        "not_demonstrated_or_remaining": "A defensible study-selection rule, broader sources and comparable task definitions are needed if the table remains."
+      },
+      "work_required": {
+        "code_change": "No new code change is identified by the current source record. Implement one only if a specific reproducible defect is found.",
+        "repeat_verification": "Repeat only if new source bytes, code, data or a protocol change affects this item; use the existing linked receipt as the current evidence.",
+        "targeted_recovery": "Editorial literature work is feasible; it should not be replaced by selecting only favorable studies.",
+        "new_experiment": "No model experiment; any quantitative comparison must use compatible published endpoints and disclose differences.",
+        "manuscript_edit": "Remove the Life-only selection or define a transparent, reproducible comparator scope and revise the caption.",
+        "author_approval": "Required before final manuscript wording or submission."
+      },
+      "remaining_actions": {
+        "recovery": "Editorial literature work is feasible; it should not be replaced by selecting only favorable studies.",
+        "experiment": "No model experiment; any quantitative comparison must use compatible published endpoints and disclose differences.",
+        "editorial": "Remove the Life-only selection or define a transparent, reproducible comparator scope and revise the caption.",
+        "action_class": "PREPARE_EDITORIAL_CHANGE_WITHOUT_EDITING_SUBMITTED_MANUSCRIPT",
+        "responsible_party": "Codex prepares proposed edits; authors review and approve before any manuscript change or submission."
+      },
+      "source_record": {
+        "id": "R2-2c",
+        "origin": "Reviewer 2, Round 1, point 2, Table 1 comparator selection",
+        "request": "Justify why Table 1 selects only Life/MDPI studies, replace the unsupported representative/comparator framing, and explain what the table is intended to compare.",
+        "manuscript_scope": "Introduction Table 1, caption and comparator rationale.",
+        "technical_status": "MANUSCRIPT_ONLY_PENDING",
+        "reviewer_satisfaction": "EDITORIAL_ACTION_ONLY",
+        "evidence": [
+          "docs/reviewer_closure/REVIEWER_48_STATUS.md",
+          "docs/revision-data-dispositions.md"
+        ],
+        "protocol_population_result": "No new benchmark comparison has been performed. Existing published studies differ in task, label ontology, cohort, sampling, parameter reporting and evaluation unit, so their headline values are not directly comparable.",
+        "addressed_scope": "The non-equivalence risk is recognized; no replacement systematic or balanced literature table is yet verified.",
+        "unresolved": "A defensible study-selection rule, broader sources and comparable task definitions are needed if the table remains.",
+        "recovery_assessment": "Editorial literature work is feasible; it should not be replaced by selecting only favorable studies.",
+        "experiment_requirement": "No model experiment; any quantitative comparison must use compatible published endpoints and disclose differences.",
+        "editorial_action": "Remove the Life-only selection or define a transparent, reproducible comparator scope and revise the caption.",
+        "scientific_risk": "High risk of selection bias and misleading state-of-the-art claims if unchanged."
+      }
+    },
+    {
+      "id": "R2-2d",
+      "technical_status": "MANUSCRIPT_ONLY_PENDING",
+      "reviewer_satisfaction": "EDITORIAL_ACTION_ONLY",
+      "manuscript_state": "SIN_EDITAR",
+      "closure_basis": "NOT_CLOSED_BY_CI_OR_DOCUMENTATION_ALONE",
+      "evidence_confidence": "Technical evidence is available for the bounded claim, but the manuscript remains unedited.",
+      "traceability": {
+        "evidence_refs": [
+          "docs/architecture.md",
+          "docs/reviewer_closure/REVIEWER_48_STATUS.md"
+        ],
+        "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
+      },
+      "evidence_assessment": {
+        "recorded_result_or_population": "Repository model parameter counts and V4.5 architecture are documented, but many external papers report NR/proprietary values and unlike tasks cannot be normalized to a direct ranking.",
+        "scope_addressed": "The TITAN architecture's local parameter counts are documented; this does not fill missing comparator-study parameters.",
+        "not_demonstrated_or_remaining": "The manuscript table still needs explicit NR labels and task/cohort comparability caveats."
+      },
+      "work_required": {
+        "code_change": "No new code change is identified by the current source record. Implement one only if a specific reproducible defect is found.",
+        "repeat_verification": "Repeat only if new source bytes, code, data or a protocol change affects this item; use the existing linked receipt as the current evidence.",
+        "targeted_recovery": "Published comparator parameters can be checked from primary articles; undisclosed values cannot be reconstructed.",
+        "new_experiment": "None unless a new benchmark is proposed.",
+        "manuscript_edit": "Report verified model counts, mark unreported values NR and avoid implying a direct performance comparison.",
+        "author_approval": "Required before final manuscript wording or submission."
+      },
+      "remaining_actions": {
+        "recovery": "Published comparator parameters can be checked from primary articles; undisclosed values cannot be reconstructed.",
+        "experiment": "None unless a new benchmark is proposed.",
+        "editorial": "Report verified model counts, mark unreported values NR and avoid implying a direct performance comparison.",
+        "action_class": "PREPARE_EDITORIAL_CHANGE_WITHOUT_EDITING_SUBMITTED_MANUSCRIPT",
+        "responsible_party": "Codex prepares proposed edits; authors review and approve before any manuscript change or submission."
+      },
+      "source_record": {
+        "id": "R2-2d",
+        "origin": "Reviewer 2, Round 1, point 2, parameter reporting",
+        "request": "Explain missing architecture parameters, avoid comparisons between non-equivalent tasks, and clarify the table's purpose and direct-comparator terminology.",
+        "manuscript_scope": "Introduction Table 1 and architecture comparison text.",
+        "technical_status": "MANUSCRIPT_ONLY_PENDING",
+        "reviewer_satisfaction": "EDITORIAL_ACTION_ONLY",
+        "evidence": [
+          "docs/architecture.md",
+          "docs/reviewer_closure/REVIEWER_48_STATUS.md"
+        ],
+        "protocol_population_result": "Repository model parameter counts and V4.5 architecture are documented, but many external papers report NR/proprietary values and unlike tasks cannot be normalized to a direct ranking.",
+        "addressed_scope": "The TITAN architecture's local parameter counts are documented; this does not fill missing comparator-study parameters.",
+        "unresolved": "The manuscript table still needs explicit NR labels and task/cohort comparability caveats.",
+        "recovery_assessment": "Published comparator parameters can be checked from primary articles; undisclosed values cannot be reconstructed.",
+        "experiment_requirement": "None unless a new benchmark is proposed.",
+        "editorial_action": "Report verified model counts, mark unreported values NR and avoid implying a direct performance comparison.",
+        "scientific_risk": "Moderate to high if unequal tasks are presented as head-to-head evidence."
+      }
+    },
+    {
+      "id": "R2-2e",
+      "technical_status": "MANUSCRIPT_ONLY_PENDING",
+      "reviewer_satisfaction": "EDITORIAL_ACTION_ONLY",
+      "manuscript_state": "SIN_EDITAR",
+      "closure_basis": "NOT_CLOSED_BY_CI_OR_DOCUMENTATION_ALONE",
+      "evidence_confidence": "Technical evidence is available for the bounded claim, but the manuscript remains unedited.",
+      "traceability": {
+        "evidence_refs": [
+          "docs/reviewer_closure/REVIEWER_48_STATUS.md"
+        ],
+        "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
+      },
+      "evidence_assessment": {
+        "recorded_result_or_population": "No scientific calculation is involved; the requested verification must run on the final manuscript and all figure assets.",
+        "scope_addressed": "The issue is catalogued but no final abbreviation pass is complete.",
+        "not_demonstrated_or_remaining": "SCP's intended expansion and first-use order must be confirmed by authors from the study context."
+      },
+      "work_required": {
+        "code_change": "No new code change is identified by the current source record. Implement one only if a specific reproducible defect is found.",
+        "repeat_verification": "Repeat only if new source bytes, code, data or a protocol change affects this item; use the existing linked receipt as the current evidence.",
+        "targeted_recovery": "Editorially recoverable if authors can define the term; do not guess the expansion.",
+        "new_experiment": "None.",
+        "manuscript_edit": "Confirm the intended meaning of SCP, define it and run a first-use audit.",
+        "author_approval": "Required before final manuscript wording or submission."
+      },
+      "remaining_actions": {
+        "recovery": "Editorially recoverable if authors can define the term; do not guess the expansion.",
+        "experiment": "None.",
+        "editorial": "Confirm the intended meaning of SCP, define it and run a first-use audit.",
+        "action_class": "PREPARE_EDITORIAL_CHANGE_WITHOUT_EDITING_SUBMITTED_MANUSCRIPT",
+        "responsible_party": "Codex prepares proposed edits; authors review and approve before any manuscript change or submission."
+      },
+      "source_record": {
+        "id": "R2-2e",
+        "origin": "Reviewer 2, Round 1, point 2, SCP and abbreviations",
+        "request": "Define SCP and every abbreviation used in the text, tables and figures.",
+        "manuscript_scope": "Introduction and all tables, legends and captions.",
+        "technical_status": "MANUSCRIPT_ONLY_PENDING",
+        "reviewer_satisfaction": "EDITORIAL_ACTION_ONLY",
+        "evidence": [
+          "docs/reviewer_closure/REVIEWER_48_STATUS.md"
+        ],
+        "protocol_population_result": "No scientific calculation is involved; the requested verification must run on the final manuscript and all figure assets.",
+        "addressed_scope": "The issue is catalogued but no final abbreviation pass is complete.",
+        "unresolved": "SCP's intended expansion and first-use order must be confirmed by authors from the study context.",
+        "recovery_assessment": "Editorially recoverable if authors can define the term; do not guess the expansion.",
+        "experiment_requirement": "None.",
+        "editorial_action": "Confirm the intended meaning of SCP, define it and run a first-use audit.",
+        "scientific_risk": "Low, but an undefined technical acronym can obscure the method."
+      }
+    },
+    {
+      "id": "R2-2f",
+      "technical_status": "MANUSCRIPT_ONLY_PENDING",
+      "reviewer_satisfaction": "EDITORIAL_ACTION_ONLY",
+      "manuscript_state": "SIN_EDITAR",
+      "closure_basis": "NOT_CLOSED_BY_CI_OR_DOCUMENTATION_ALONE",
+      "evidence_confidence": "Technical evidence is available for the bounded claim, but the manuscript remains unedited.",
+      "traceability": {
+        "evidence_refs": [
+          "docs/architecture.md",
+          "docs/reviewer_closure/REVIEWER_48_STATUS.md"
+        ],
+        "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
+      },
+      "evidence_assessment": {
+        "recorded_result_or_population": "Architecture and operational scope are documented elsewhere in the repository; no manuscript restructuring has been carried out.",
+        "scope_addressed": "The technical source material is identifiable, but section placement remains unchanged.",
+        "not_demonstrated_or_remaining": "The authors must decide whether the final study is retrospective audit/transfer or a broader architecture evaluation."
+      },
+      "work_required": {
+        "code_change": "No new code change is identified by the current source record. Implement one only if a specific reproducible defect is found.",
+        "repeat_verification": "Repeat only if new source bytes, code, data or a protocol change affects this item; use the existing linked receipt as the current evidence.",
+        "targeted_recovery": "Editorially recoverable after scope approval.",
+        "new_experiment": "None for moving text; a broader stated aim must be supported by data.",
+        "manuscript_edit": "Keep prior-art synthesis in Introduction, move this study's implementation to Methods and add a bounded aim.",
+        "author_approval": "Required before final manuscript wording or submission."
+      },
+      "remaining_actions": {
+        "recovery": "Editorially recoverable after scope approval.",
+        "experiment": "None for moving text; a broader stated aim must be supported by data.",
+        "editorial": "Keep prior-art synthesis in Introduction, move this study's implementation to Methods and add a bounded aim.",
+        "action_class": "PREPARE_EDITORIAL_CHANGE_WITHOUT_EDITING_SUBMITTED_MANUSCRIPT",
+        "responsible_party": "Codex prepares proposed edits; authors review and approve before any manuscript change or submission."
+      },
+      "source_record": {
+        "id": "R2-2f",
+        "origin": "Reviewer 2, Round 1, point 2, study placement and aim",
+        "request": "Move implementation details of the present study out of the Introduction and state the study aim clearly at the end of the section.",
+        "manuscript_scope": "Introduction Table 2 and related description; final Introduction paragraph.",
+        "technical_status": "MANUSCRIPT_ONLY_PENDING",
+        "reviewer_satisfaction": "EDITORIAL_ACTION_ONLY",
+        "evidence": [
+          "docs/architecture.md",
+          "docs/reviewer_closure/REVIEWER_48_STATUS.md"
+        ],
+        "protocol_population_result": "Architecture and operational scope are documented elsewhere in the repository; no manuscript restructuring has been carried out.",
+        "addressed_scope": "The technical source material is identifiable, but section placement remains unchanged.",
+        "unresolved": "The authors must decide whether the final study is retrospective audit/transfer or a broader architecture evaluation.",
+        "recovery_assessment": "Editorially recoverable after scope approval.",
+        "experiment_requirement": "None for moving text; a broader stated aim must be supported by data.",
+        "editorial_action": "Keep prior-art synthesis in Introduction, move this study's implementation to Methods and add a bounded aim.",
+        "scientific_risk": "Moderate if the aim overstates what the study actually demonstrates."
+      }
+    },
+    {
+      "id": "R2-3a",
+      "technical_status": "EVIDENCE_CEILING_REACHED",
+      "reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+      "manuscript_state": "SIN_EDITAR",
+      "closure_basis": "NOT_CLOSED_BY_CI_OR_DOCUMENTATION_ALONE",
+      "evidence_confidence": "The searched sources reached a documented evidence ceiling; absence is limited to those sources.",
+      "traceability": {
+        "evidence_refs": [
+          "docs/reviewer_closure/SPLIT_CALIBRATION_DISPOSITION.md",
+          "docs/reviewer_closure/R1_2_EVIDENCE_CEILING.md",
+          "outputs/results/revision_replay_diagnostics_20261107/p4_official_fold_coverage.json",
+          "docs/reviewer_closure/HISTORICAL_EVIDENCE_HANDOFF.md",
+          "docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md",
+          "docs/reviewer_closure/RECOVERED_VS_MISSING_HISTORICAL_EVIDENCE.md",
+          "docs/reviewer_closure/CHECKPOINT_JOB_MANIFEST_VERIFICATION_FINAL.md",
+          "docs/reviewer_closure/receipts/CEDIA_JOB_LOGS_2026-11-10.json",
+          "docs/reviewer_closure/V3C_TRIAL6_CHECKPOINT_LINEAGE.md",
+          "docs/reviewer_closure/CEDIA_FINAL_RECOVERY_REPORT.md",
+          "docs/reviewer_closure/receipts/CEDIA_TARGETED_RECOVERY_SEARCH_2026-11-11.json"
+        ],
+        "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
+      },
+      "evidence_assessment": {
+        "recorded_result_or_population": "Verified selected counts are P6 1,643 ECG, P8 2,193 ECG, and P4 962 panel rows over 733 ECG/676 patients. PTB-XL fold 10 has 2,198 ECG/1,904 patients; 733 P4 ECG map to 676 fold-10 patients with no overlap with official folds 1-9. SLURM records V3H jobs 16785/16786 and V3M jobs 16816/16819 as completed, but their exact historical work directories and full split files are absent at the checked paths.",
+        "scope_addressed": "Selected counts, official fold relation, completed-job accounting, checkpoint-declared manifest names and surviving calibration logs are documented with their different evidentiary strength. REV3-REV6 corroborates the parent-checkpoint path recorded in V3F/V3AG metadata and the 16781 submission.",
+        "not_demonstrated_or_remaining": "Historical train/validation/calibration manifests, patient mappings and full per-class source counts are not all linked to released checkpoints; the matching parent path is not a file-read/hash edge. Official fold membership and a completed job do not certify historical patient isolation."
+      },
+      "work_required": {
+        "code_change": "No new code change is identified by the current source record. Implement one only if a specific reproducible defect is found.",
+        "repeat_verification": "Repeat only if new source bytes, code, data or a protocol change affects this item; use the existing linked receipt as the current evidence.",
+        "targeted_recovery": "Reopen only with exact job/checkpoint-linked split manifests and exclusions. The supplied archives, bounded CEDIA filename search and NOC-reviewed backup listing did not recover them; this is not a global-absence finding.",
+        "new_experiment": "A new split analysis is required for any new model; historical split claims cannot be recreated from selected results.",
+        "manuscript_edit": "Report known selected counts and explicitly mark unrecovered historical counts/isolation as unknown.",
+        "author_approval": "Required before final manuscript wording or submission."
+      },
+      "remaining_actions": {
+        "recovery": "Reopen only with exact job/checkpoint-linked split manifests and exclusions. The supplied archives, bounded CEDIA filename search and NOC-reviewed backup listing did not recover them; this is not a global-absence finding.",
+        "experiment": "A new split analysis is required for any new model; historical split claims cannot be recreated from selected results.",
+        "editorial": "Report known selected counts and explicitly mark unrecovered historical counts/isolation as unknown.",
+        "action_class": "DECLARE_SOURCE_BOUNDED_CEILING_AND_PREPARE_SCOPE_DECISION",
+        "responsible_party": "Codex stops unbounded searching and records the ceiling; authors decide claim scope; custodian acts only on a new archive lead."
+      },
+      "source_record": {
+        "id": "R2-3a",
+        "origin": "Reviewer 2, Round 1, point 3, database and split description",
+        "request": "Describe each database, available and used classes, segment counts, and ECG/patient numbers by training, validation and test split; explain what happened to remaining classes.",
+        "manuscript_scope": "Materials and Methods dataset subsection and split tables.",
+        "technical_status": "EVIDENCE_CEILING_REACHED",
+        "reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+        "evidence": [
+          "docs/reviewer_closure/SPLIT_CALIBRATION_DISPOSITION.md",
+          "docs/reviewer_closure/R1_2_EVIDENCE_CEILING.md",
+          "outputs/results/revision_replay_diagnostics_20261107/p4_official_fold_coverage.json",
+          "docs/reviewer_closure/HISTORICAL_EVIDENCE_HANDOFF.md",
+          "docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md",
+          "docs/reviewer_closure/RECOVERED_VS_MISSING_HISTORICAL_EVIDENCE.md",
+          "docs/reviewer_closure/CHECKPOINT_JOB_MANIFEST_VERIFICATION_FINAL.md",
+          "docs/reviewer_closure/receipts/CEDIA_JOB_LOGS_2026-11-10.json",
+          "docs/reviewer_closure/V3C_TRIAL6_CHECKPOINT_LINEAGE.md",
+          "docs/reviewer_closure/CEDIA_FINAL_RECOVERY_REPORT.md",
+          "docs/reviewer_closure/receipts/CEDIA_TARGETED_RECOVERY_SEARCH_2026-11-11.json"
+        ],
+        "protocol_population_result": "Verified selected counts are P6 1,643 ECG, P8 2,193 ECG, and P4 962 panel rows over 733 ECG/676 patients. PTB-XL fold 10 has 2,198 ECG/1,904 patients; 733 P4 ECG map to 676 fold-10 patients with no overlap with official folds 1-9. SLURM records V3H jobs 16785/16786 and V3M jobs 16816/16819 as completed, but their exact historical work directories and full split files are absent at the checked paths.",
+        "addressed_scope": "Selected counts, official fold relation, completed-job accounting, checkpoint-declared manifest names and surviving calibration logs are documented with their different evidentiary strength. REV3-REV6 corroborates the parent-checkpoint path recorded in V3F/V3AG metadata and the 16781 submission.",
+        "unresolved": "Historical train/validation/calibration manifests, patient mappings and full per-class source counts are not all linked to released checkpoints; the matching parent path is not a file-read/hash edge. Official fold membership and a completed job do not certify historical patient isolation.",
+        "recovery_assessment": "Reopen only with exact job/checkpoint-linked split manifests and exclusions. The supplied archives, bounded CEDIA filename search and NOC-reviewed backup listing did not recover them; this is not a global-absence finding.",
+        "experiment_requirement": "A new split analysis is required for any new model; historical split claims cannot be recreated from selected results.",
+        "editorial_action": "Report known selected counts and explicitly mark unrecovered historical counts/isolation as unknown.",
+        "scientific_risk": "High if official folds or selected cohorts are presented as proof of historical train/test isolation."
+      }
+    },
+    {
+      "id": "R2-3b",
+      "technical_status": "MANUSCRIPT_ONLY_PENDING",
+      "reviewer_satisfaction": "EDITORIAL_ACTION_ONLY",
+      "manuscript_state": "SIN_EDITAR",
+      "closure_basis": "NOT_CLOSED_BY_CI_OR_DOCUMENTATION_ALONE",
+      "evidence_confidence": "Technical evidence is available for the bounded claim, but the manuscript remains unedited.",
+      "traceability": {
+        "evidence_refs": [
+          "docs/architecture.md",
+          "docs/reviewer_closure/REVIEWER_48_STATUS.md",
+          "docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md"
+        ],
+        "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
+      },
+      "evidence_assessment": {
+        "recorded_result_or_population": "Available evidence covers architecture contracts, selected historical predictions, reconstructed replay and later SPH transfer; it does not make these evidence types interchangeable. CEDIA job 17314 records a multi-epoch P6 gate sweep, and job 17315 reports epoch 8 against the named V3H manifest, so V3H must be treated as development/model-selection evidence.",
+        "scope_addressed": "The technical package distinguishes design from evaluation stages.",
+        "not_demonstrated_or_remaining": "The manuscript has not yet stated the exact retrospective scope and what was designed versus evaluated."
+      },
+      "work_required": {
+        "code_change": "No new code change is identified by the current source record. Implement one only if a specific reproducible defect is found.",
+        "repeat_verification": "Repeat only if new source bytes, code, data or a protocol change affects this item; use the existing linked receipt as the current evidence.",
+        "targeted_recovery": "Editorially recoverable using existing evidence; no historical search required.",
+        "new_experiment": "None for wording; claims of a new design process require corresponding provenance.",
+        "manuscript_edit": "State exactly which architecture was developed, which checkpoints were evaluated and which replays are reconstructed.",
+        "author_approval": "Required before final manuscript wording or submission."
+      },
+      "remaining_actions": {
+        "recovery": "Editorially recoverable using existing evidence; no historical search required.",
+        "experiment": "None for wording; claims of a new design process require corresponding provenance.",
+        "editorial": "State exactly which architecture was developed, which checkpoints were evaluated and which replays are reconstructed.",
+        "action_class": "PREPARE_EDITORIAL_CHANGE_WITHOUT_EDITING_SUBMITTED_MANUSCRIPT",
+        "responsible_party": "Codex prepares proposed edits; authors review and approve before any manuscript change or submission."
+      },
+      "source_record": {
+        "id": "R2-3b",
+        "origin": "Reviewer 2, Round 1, point 3, design versus evaluation",
+        "request": "Clarify whether the study only evaluates specialist networks or also designs them.",
+        "manuscript_scope": "Materials and Methods opening statement and study aim.",
+        "technical_status": "MANUSCRIPT_ONLY_PENDING",
+        "reviewer_satisfaction": "EDITORIAL_ACTION_ONLY",
+        "evidence": [
+          "docs/architecture.md",
+          "docs/reviewer_closure/REVIEWER_48_STATUS.md",
+          "docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md"
+        ],
+        "protocol_population_result": "Available evidence covers architecture contracts, selected historical predictions, reconstructed replay and later SPH transfer; it does not make these evidence types interchangeable. CEDIA job 17314 records a multi-epoch P6 gate sweep, and job 17315 reports epoch 8 against the named V3H manifest, so V3H must be treated as development/model-selection evidence.",
+        "addressed_scope": "The technical package distinguishes design from evaluation stages.",
+        "unresolved": "The manuscript has not yet stated the exact retrospective scope and what was designed versus evaluated.",
+        "recovery_assessment": "Editorially recoverable using existing evidence; no historical search required.",
+        "experiment_requirement": "None for wording; claims of a new design process require corresponding provenance.",
+        "editorial_action": "State exactly which architecture was developed, which checkpoints were evaluated and which replays are reconstructed.",
+        "scientific_risk": "Moderate if design and evaluation evidence are conflated."
+      }
+    },
+    {
+      "id": "R2-3c",
+      "technical_status": "VERIFIED_WITH_LIMITATIONS",
+      "reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+      "manuscript_state": "SIN_EDITAR",
+      "closure_basis": "NOT_CLOSED_BY_CI_OR_DOCUMENTATION_ALONE",
+      "evidence_confidence": "A bounded result is verified; residual limitations remain open.",
+      "traceability": {
+        "evidence_refs": [
+          "docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md",
+          "outputs/models/heads/global_head_contracts.json",
+          "docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md",
+          "docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md",
+          "docs/reviewer_closure/AUXILIARY_CLASS_TRAINING_EVIDENCE.md",
+          "docs/reviewer_closure/OTHER_CLASS_COVERAGE_EXPERIMENT.md",
+          "docs/reviewer_closure/CEDIA_SOURCE_CODE_AUTHENTICATION.md"
+        ],
+        "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
+      },
+      "evidence_assessment": {
+        "recorded_result_or_population": "The contract declares P8's eight outputs, including NSR, plus six additional global rhythm outputs. SPH P8 predicts NSR top-1 on 16,700 records; P8 fallback is separately recorded. The code and outputs do not prove run-specific training support for each auxiliary class.",
+        "scope_addressed": "Implemented output/fallback roles and the NSR distinction remain documented. REV6 adds static evidence of a generic 14-output rhythm-loss path and a separate V3F routine that directly indexes P8/P4.",
+        "not_demonstrated_or_remaining": "The exact runtime label map, per-class support/masks, effective job configuration and checkpoint-producing source are unavailable; these code copies do not show which rhythm classes were historically supervised or evaluated."
+      },
+      "work_required": {
+        "code_change": "No new code change is identified by the current source record. Implement one only if a specific reproducible defect is found.",
+        "repeat_verification": "Repeat only if new source bytes, code, data or a protocol change affects this item; use the existing linked receipt as the current evidence.",
+        "targeted_recovery": "Recoverable only with original training labels/masks, manifests, configuration, logs and checkpoint linkage.",
+        "new_experiment": "No new experiment needed to state current contract; new supervised class performance requires a valid training/evaluation design.",
+        "manuscript_edit": "Separate declared outputs, training supervision, scored predictions and role/routing; correct the NSR description.",
+        "author_approval": "Required before final manuscript wording or submission."
+      },
+      "remaining_actions": {
+        "recovery": "Recoverable only with original training labels/masks, manifests, configuration, logs and checkpoint linkage.",
+        "experiment": "No new experiment needed to state current contract; new supervised class performance requires a valid training/evaluation design.",
+        "editorial": "Separate declared outputs, training supervision, scored predictions and role/routing; correct the NSR description.",
+        "action_class": "DOCUMENT_LIMITS_AND_PREPARE_EDITORIAL_ACTION",
+        "responsible_party": "Codex prepares precise wording; authors approve scope and interpretation."
+      },
+      "source_record": {
+        "id": "R2-3c",
+        "origin": "Reviewer 2, Round 1, point 3, cascade and auxiliary rhythm labels",
+        "request": "Explain how primary, cascade and auxiliary rhythm labels are used in training and evaluation, and do not describe NSR as a low-prevalence arrhythmia.",
+        "manuscript_scope": "Methods class-role description and training/evaluation flow.",
+        "technical_status": "VERIFIED_WITH_LIMITATIONS",
+        "reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+        "evidence": [
+          "docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md",
+          "outputs/models/heads/global_head_contracts.json",
+          "docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md",
+          "docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md",
+          "docs/reviewer_closure/AUXILIARY_CLASS_TRAINING_EVIDENCE.md",
+          "docs/reviewer_closure/OTHER_CLASS_COVERAGE_EXPERIMENT.md",
+          "docs/reviewer_closure/CEDIA_SOURCE_CODE_AUTHENTICATION.md"
+        ],
+        "protocol_population_result": "The contract declares P8's eight outputs, including NSR, plus six additional global rhythm outputs. SPH P8 predicts NSR top-1 on 16,700 records; P8 fallback is separately recorded. The code and outputs do not prove run-specific training support for each auxiliary class.",
+        "addressed_scope": "Implemented output/fallback roles and the NSR distinction remain documented. REV6 adds static evidence of a generic 14-output rhythm-loss path and a separate V3F routine that directly indexes P8/P4.",
+        "unresolved": "The exact runtime label map, per-class support/masks, effective job configuration and checkpoint-producing source are unavailable; these code copies do not show which rhythm classes were historically supervised or evaluated.",
+        "recovery_assessment": "Recoverable only with original training labels/masks, manifests, configuration, logs and checkpoint linkage.",
+        "experiment_requirement": "No new experiment needed to state current contract; new supervised class performance requires a valid training/evaluation design.",
+        "editorial_action": "Separate declared outputs, training supervision, scored predictions and role/routing; correct the NSR description.",
+        "scientific_risk": "High if output presence is treated as evidence of training or validated cascade performance."
+      }
+    },
+    {
+      "id": "R2-3d",
+      "technical_status": "EVIDENCE_CEILING_REACHED",
+      "reviewer_satisfaction": "NOT_SATISFIED",
+      "manuscript_state": "SIN_EDITAR",
+      "closure_basis": "NOT_CLOSED_BY_CI_OR_DOCUMENTATION_ALONE",
+      "evidence_confidence": "The searched sources reached a documented evidence ceiling; absence is limited to those sources.",
+      "traceability": {
+        "evidence_refs": [
+          "docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md",
+          "docs/revision-data-dispositions.md",
+          "outputs/models/heads/global_head_contracts.json",
+          "docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md",
+          "docs/reviewer_closure/AUXILIARY_CLASS_TRAINING_EVIDENCE.md",
+          "docs/reviewer_closure/CEDIA_SOURCE_CODE_AUTHENTICATION.md"
+        ],
+        "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
+      },
+      "evidence_assessment": {
+        "recorded_result_or_population": "The global contract has seven pathology outputs, and reconstructed P4 inference emitted ALMI/ILMI/LAE scores on 733 selected ECG. A candidate manifest has positives, but it is not linked to the released checkpoint's training run.",
+        "scope_addressed": "Outputs are emitted in the reconstructed path. REV6 also shows a generic seven-output pathology loss path using a row-level label-presence mask, alongside a separate V3F P4-only loss path.",
+        "not_demonstrated_or_remaining": "The code's row mask is not a per-class unknown mask, and omitted labels enter the seven-wide loss as zero. Historical label completeness, positive/negative supports, job execution, checkpoint linkage, selection policy and evaluation metrics remain uncertified."
+      },
+      "work_required": {
+        "code_change": "No new code change is identified by the current source record. Implement one only if a specific reproducible defect is found.",
+        "repeat_verification": "Repeat only if new source bytes, code, data or a protocol change affects this item; use the existing linked receipt as the current evidence.",
+        "targeted_recovery": "Requires exact training/validation manifests, labels/masks, run configuration and checkpoint-linked job receipt; no inference can reconstruct missing provenance.",
+        "new_experiment": "New training and evaluation are required if performance for these classes is claimed.",
+        "manuscript_edit": "Describe them as unvalidated auxiliary outputs or remove claims of trained/evaluated pathology classes.",
+        "author_approval": "Required before final manuscript wording or submission."
+      },
+      "remaining_actions": {
+        "recovery": "Requires exact training/validation manifests, labels/masks, run configuration and checkpoint-linked job receipt; no inference can reconstruct missing provenance.",
+        "experiment": "New training and evaluation are required if performance for these classes is claimed.",
+        "editorial": "Describe them as unvalidated auxiliary outputs or remove claims of trained/evaluated pathology classes.",
+        "action_class": "DECLARE_SOURCE_BOUNDED_CEILING_AND_PREPARE_SCOPE_DECISION",
+        "responsible_party": "Codex stops unbounded searching and records the ceiling; authors decide claim scope; custodian acts only on a new archive lead."
+      },
+      "source_record": {
+        "id": "R2-3d",
+        "origin": "Reviewer 2, Round 1, point 3, ALMI/ILMI/LAE",
+        "request": "Clarify whether ALMI, ILMI and LAE were trained and evaluated or merely logged as auxiliary pathology labels.",
+        "manuscript_scope": "Methods pathology head, training masks and results scope.",
+        "technical_status": "EVIDENCE_CEILING_REACHED",
+        "reviewer_satisfaction": "NOT_SATISFIED",
+        "evidence": [
+          "docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md",
+          "docs/revision-data-dispositions.md",
+          "outputs/models/heads/global_head_contracts.json",
+          "docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md",
+          "docs/reviewer_closure/AUXILIARY_CLASS_TRAINING_EVIDENCE.md",
+          "docs/reviewer_closure/CEDIA_SOURCE_CODE_AUTHENTICATION.md"
+        ],
+        "protocol_population_result": "The global contract has seven pathology outputs, and reconstructed P4 inference emitted ALMI/ILMI/LAE scores on 733 selected ECG. A candidate manifest has positives, but it is not linked to the released checkpoint's training run.",
+        "addressed_scope": "Outputs are emitted in the reconstructed path. REV6 also shows a generic seven-output pathology loss path using a row-level label-presence mask, alongside a separate V3F P4-only loss path.",
+        "unresolved": "The code's row mask is not a per-class unknown mask, and omitted labels enter the seven-wide loss as zero. Historical label completeness, positive/negative supports, job execution, checkpoint linkage, selection policy and evaluation metrics remain uncertified.",
+        "recovery_assessment": "Requires exact training/validation manifests, labels/masks, run configuration and checkpoint-linked job receipt; no inference can reconstruct missing provenance.",
+        "experiment_requirement": "New training and evaluation are required if performance for these classes is claimed.",
+        "editorial_action": "Describe them as unvalidated auxiliary outputs or remove claims of trained/evaluated pathology classes.",
+        "scientific_risk": "High if auxiliary scores are reported as established diagnostic performance."
+      }
+    },
+    {
+      "id": "R2-3e",
+      "technical_status": "VERIFIED_WITH_LIMITATIONS",
+      "reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+      "manuscript_state": "SIN_EDITAR",
+      "closure_basis": "NOT_CLOSED_BY_CI_OR_DOCUMENTATION_ALONE",
+      "evidence_confidence": "A bounded result is verified; residual limitations remain open.",
+      "traceability": {
+        "evidence_refs": [
+          "docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md",
+          "src/titan_v45/cascade/policy.py",
+          "docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md",
+          "docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md",
+          "docs/reviewer_closure/SELECTIVE_PREDICTION_EXPERIMENT.md"
+        ],
+        "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
+      },
+      "evidence_assessment": {
+        "recorded_result_or_population": "The code declares primary, auxiliary and cascade roles; the selected replay measures only implemented decision behavior. The historic per-record role/transition ledger is unavailable; SPH fallback counts are not quarantine transitions.",
+        "scope_addressed": "Code roles, predicted outputs and observed transitions are explicitly distinguished.",
+        "not_demonstrated_or_remaining": "Historical assignment and role-transition counts for the original all-input pathway are not recoverable from the selected panels."
+      },
+      "work_required": {
+        "code_change": "No new code change is identified by the current source record. Implement one only if a specific reproducible defect is found.",
+        "repeat_verification": "Repeat only if new source bytes, code, data or a protocol change affects this item; use the existing linked receipt as the current evidence.",
+        "targeted_recovery": "Reopen only with the authentic role/transition ledger, policy version and linked predictions.",
+        "new_experiment": "A new measured operational workflow is required if human review or route effectiveness is retained as a claim.",
+        "manuscript_edit": "Define Role as a declared data/model contract and avoid interpreting it as actual human review.",
+        "author_approval": "Required before final manuscript wording or submission."
+      },
+      "remaining_actions": {
+        "recovery": "Reopen only with the authentic role/transition ledger, policy version and linked predictions.",
+        "experiment": "A new measured operational workflow is required if human review or route effectiveness is retained as a claim.",
+        "editorial": "Define Role as a declared data/model contract and avoid interpreting it as actual human review.",
+        "action_class": "DOCUMENT_LIMITS_AND_PREPARE_EDITORIAL_ACTION",
+        "responsible_party": "Codex prepares precise wording; authors approve scope and interpretation."
+      },
+      "source_record": {
+        "id": "R2-3e",
+        "origin": "Reviewer 2, Round 1, point 3, Table 5 Role",
+        "request": "Define what Role means in Table 5 and how role assignments are determined.",
+        "manuscript_scope": "Table 5 and Methods role/route definitions.",
+        "technical_status": "VERIFIED_WITH_LIMITATIONS",
+        "reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+        "evidence": [
+          "docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md",
+          "src/titan_v45/cascade/policy.py",
+          "docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md",
+          "docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md",
+          "docs/reviewer_closure/SELECTIVE_PREDICTION_EXPERIMENT.md"
+        ],
+        "protocol_population_result": "The code declares primary, auxiliary and cascade roles; the selected replay measures only implemented decision behavior. The historic per-record role/transition ledger is unavailable; SPH fallback counts are not quarantine transitions.",
+        "addressed_scope": "Code roles, predicted outputs and observed transitions are explicitly distinguished.",
+        "unresolved": "Historical assignment and role-transition counts for the original all-input pathway are not recoverable from the selected panels.",
+        "recovery_assessment": "Reopen only with the authentic role/transition ledger, policy version and linked predictions.",
+        "experiment_requirement": "A new measured operational workflow is required if human review or route effectiveness is retained as a claim.",
+        "editorial_action": "Define Role as a declared data/model contract and avoid interpreting it as actual human review.",
+        "scientific_risk": "High if a declared role is mistaken for measured routing or clinician action."
+      }
+    },
+    {
+      "id": "R2-3f",
+      "technical_status": "EVIDENCE_CEILING_REACHED",
+      "reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+      "manuscript_state": "SIN_EDITAR",
+      "closure_basis": "NOT_CLOSED_BY_CI_OR_DOCUMENTATION_ALONE",
+      "evidence_confidence": "The searched sources reached a documented evidence ceiling; absence is limited to those sources.",
+      "traceability": {
+        "evidence_refs": [
+          "docs/recovered-feature-contract.md",
+          "docs/reviewer_closure/REPLAY_EQUIVALENCE_DISPOSITION.md",
+          "docs/figure-evidence.md",
+          "docs/reviewer_closure/HISTORICAL_LOADER_IDENTITY_AND_REPLAY.md",
+          "docs/reviewer_closure/HISTORICAL_RECOVERY_FINAL_EXECUTION.md",
+          "docs/reviewer_closure/SPECIALIST_192_512_ARCHITECTURE_RESOLUTION.md",
+          "docs/reviewer_closure/CEDIA_SOURCE_CODE_AUTHENTICATION.md",
+          "docs/reviewer_closure/receipts/CEDIA_TARGETED_RECOVERY_SEARCH_2026-11-11.json"
+        ],
+        "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
+      },
+      "evidence_assessment": {
+        "recorded_result_or_population": "Ten-feature candidate code and several historical event sources were recovered; 10 of 11 inventoried files match known hashes. The exact original loader is absent. P4 replay matched 962/962 decisions but maximum probability residual 0.0006194115 exceeds historical tolerance 1e-5.",
+        "scope_addressed": "The candidate feature contract and its provenance boundary are documented, and strict score equivalence is explicitly recorded as failed. REV6 exposes a separate P4 epoch-report path that constructs 512-wide class heads but writes a 192 width field; this is a possible report-writer mismatch only.",
+        "not_demonstrated_or_remaining": "That path is not linked to the released P4 checkpoint and does not explain the P6/P8 runtime width fields. Exact historical feature implementation, loader identity and figure-to-runtime arrow semantics remain unverified."
+      },
+      "work_required": {
+        "code_change": "No new code change is identified by the current source record. Implement one only if a specific reproducible defect is found.",
+        "repeat_verification": "Repeat only if new source bytes, code, data or a protocol change affects this item; use the existing linked receipt as the current evidence.",
+        "targeted_recovery": "The exact loader may reopen this only if supplied with its expected hash fc8d7367f9f2c108376839435021ec3172fe2757faa4a615f0ef5d39cbf1e855 or an independently linked source snapshot. The latest filename search did not locate the expected basename in the searched project root.",
+        "new_experiment": "No threshold retuning; a future replay may test equivalence only if the exact loader and inputs are recovered.",
+        "manuscript_edit": "List each feature and unit, redraw arrows to match verified dataflow, and identify reconstructed code as such.",
+        "author_approval": "Required before final manuscript wording or submission."
+      },
+      "remaining_actions": {
+        "recovery": "The exact loader may reopen this only if supplied with its expected hash fc8d7367f9f2c108376839435021ec3172fe2757faa4a615f0ef5d39cbf1e855 or an independently linked source snapshot. The latest filename search did not locate the expected basename in the searched project root.",
+        "experiment": "No threshold retuning; a future replay may test equivalence only if the exact loader and inputs are recovered.",
+        "editorial": "List each feature and unit, redraw arrows to match verified dataflow, and identify reconstructed code as such.",
+        "action_class": "DECLARE_SOURCE_BOUNDED_CEILING_AND_PREPARE_SCOPE_DECISION",
+        "responsible_party": "Codex stops unbounded searching and records the ceiling; authors decide claim scope; custodian acts only on a new archive lead."
+      },
+      "source_record": {
+        "id": "R2-3f",
+        "origin": "Reviewer 2, Round 1, point 3, Figures 5 and 6",
+        "request": "Name and define the ten morphology features, explain asymmetric arrows and every block-diagram connection, and correct or remove unsupported flow arrows.",
+        "manuscript_scope": "Methods architecture and Figures 5-6 plus captions.",
+        "technical_status": "EVIDENCE_CEILING_REACHED",
+        "reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+        "evidence": [
+          "docs/recovered-feature-contract.md",
+          "docs/reviewer_closure/REPLAY_EQUIVALENCE_DISPOSITION.md",
+          "docs/figure-evidence.md",
+          "docs/reviewer_closure/HISTORICAL_LOADER_IDENTITY_AND_REPLAY.md",
+          "docs/reviewer_closure/HISTORICAL_RECOVERY_FINAL_EXECUTION.md",
+          "docs/reviewer_closure/SPECIALIST_192_512_ARCHITECTURE_RESOLUTION.md",
+          "docs/reviewer_closure/CEDIA_SOURCE_CODE_AUTHENTICATION.md",
+          "docs/reviewer_closure/receipts/CEDIA_TARGETED_RECOVERY_SEARCH_2026-11-11.json"
+        ],
+        "protocol_population_result": "Ten-feature candidate code and several historical event sources were recovered; 10 of 11 inventoried files match known hashes. The exact original loader is absent. P4 replay matched 962/962 decisions but maximum probability residual 0.0006194115 exceeds historical tolerance 1e-5.",
+        "addressed_scope": "The candidate feature contract and its provenance boundary are documented, and strict score equivalence is explicitly recorded as failed. REV6 exposes a separate P4 epoch-report path that constructs 512-wide class heads but writes a 192 width field; this is a possible report-writer mismatch only.",
+        "unresolved": "That path is not linked to the released P4 checkpoint and does not explain the P6/P8 runtime width fields. Exact historical feature implementation, loader identity and figure-to-runtime arrow semantics remain unverified.",
+        "recovery_assessment": "The exact loader may reopen this only if supplied with its expected hash fc8d7367f9f2c108376839435021ec3172fe2757faa4a615f0ef5d39cbf1e855 or an independently linked source snapshot. The latest filename search did not locate the expected basename in the searched project root.",
+        "experiment_requirement": "No threshold retuning; a future replay may test equivalence only if the exact loader and inputs are recovered.",
+        "editorial_action": "List each feature and unit, redraw arrows to match verified dataflow, and identify reconstructed code as such.",
+        "scientific_risk": "High if a candidate implementation is represented as the exact historical architecture."
+      }
+    },
+    {
+      "id": "R2-3g",
+      "technical_status": "MANUSCRIPT_ONLY_PENDING",
+      "reviewer_satisfaction": "EDITORIAL_ACTION_ONLY",
+      "manuscript_state": "SIN_EDITAR",
+      "closure_basis": "NOT_CLOSED_BY_CI_OR_DOCUMENTATION_ALONE",
+      "evidence_confidence": "Technical evidence is available for the bounded claim, but the manuscript remains unedited.",
+      "traceability": {
+        "evidence_refs": [
+          "docs/reviewer_closure/METRIC_DEFINITIONS.md",
+          "docs/external_validation/sph_results.md"
+        ],
+        "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
+      },
+      "evidence_assessment": {
+        "recorded_result_or_population": "The metric definitions and later SPH Brier scores are available in separate documents; this reviewer comment concerns location and attribution of method versus results.",
+        "scope_addressed": "The evidence distinguishes definitions from observed results; the submitted manuscript has not been edited.",
+        "not_demonstrated_or_remaining": "All original numerical claims in Methods must be traced to their exact cohort and moved or removed."
+      },
+      "work_required": {
+        "code_change": "No new code change is identified by the current source record. Implement one only if a specific reproducible defect is found.",
+        "repeat_verification": "Repeat only if new source bytes, code, data or a protocol change affects this item; use the existing linked receipt as the current evidence.",
+        "targeted_recovery": "Editorially recoverable from the audited metric outputs.",
+        "new_experiment": "None if the original results are accurately sourced; no unsupported value should be retained.",
+        "manuscript_edit": "Keep the Brier definition in Methods and report cohort-specific values only in Results.",
+        "author_approval": "Required before final manuscript wording or submission."
+      },
+      "remaining_actions": {
+        "recovery": "Editorially recoverable from the audited metric outputs.",
+        "experiment": "None if the original results are accurately sourced; no unsupported value should be retained.",
+        "editorial": "Keep the Brier definition in Methods and report cohort-specific values only in Results.",
+        "action_class": "PREPARE_EDITORIAL_CHANGE_WITHOUT_EDITING_SUBMITTED_MANUSCRIPT",
+        "responsible_party": "Codex prepares proposed edits; authors review and approve before any manuscript change or submission."
+      },
+      "source_record": {
+        "id": "R2-3g",
+        "origin": "Reviewer 2, Round 1, point 3, Brier score statements",
+        "request": "Move numerical Brier scores from Methods to Results if they are observed results, and distinguish the metric definition from the measured values.",
+        "manuscript_scope": "Evaluation Metrics and Confidence Intervals subsection and Results.",
+        "technical_status": "MANUSCRIPT_ONLY_PENDING",
+        "reviewer_satisfaction": "EDITORIAL_ACTION_ONLY",
+        "evidence": [
+          "docs/reviewer_closure/METRIC_DEFINITIONS.md",
+          "docs/external_validation/sph_results.md"
+        ],
+        "protocol_population_result": "The metric definitions and later SPH Brier scores are available in separate documents; this reviewer comment concerns location and attribution of method versus results.",
+        "addressed_scope": "The evidence distinguishes definitions from observed results; the submitted manuscript has not been edited.",
+        "unresolved": "All original numerical claims in Methods must be traced to their exact cohort and moved or removed.",
+        "recovery_assessment": "Editorially recoverable from the audited metric outputs.",
+        "experiment_requirement": "None if the original results are accurately sourced; no unsupported value should be retained.",
+        "editorial_action": "Keep the Brier definition in Methods and report cohort-specific values only in Results.",
+        "scientific_risk": "Moderate if numbers are presented as prespecified method constants rather than measured outcomes."
+      }
+    },
+    {
+      "id": "R2-3h",
+      "technical_status": "MANUSCRIPT_ONLY_PENDING",
+      "reviewer_satisfaction": "EDITORIAL_ACTION_ONLY",
+      "manuscript_state": "SIN_EDITAR",
+      "closure_basis": "NOT_CLOSED_BY_CI_OR_DOCUMENTATION_ALONE",
+      "evidence_confidence": "Technical evidence is available for the bounded claim, but the manuscript remains unedited.",
+      "traceability": {
+        "evidence_refs": [
+          "docs/reviewer_closure/METRIC_DEFINITIONS.md",
+          "docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md"
+        ],
+        "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
+      },
+      "evidence_assessment": {
+        "recorded_result_or_population": "The repository defines panel-level binary P4 metrics separately from multiclass/top-1 rhythm metrics; the SPH endpoints are per-class statement-level binary comparisons.",
+        "scope_addressed": "The distinctions are documented and testable, but equations have not been inserted into the manuscript.",
+        "not_demonstrated_or_remaining": "The final manuscript still needs equations matched to each reported unit, averaging scheme, denominator and missing-label rule."
+      },
+      "work_required": {
+        "code_change": "No new code change is identified by the current source record. Implement one only if a specific reproducible defect is found.",
+        "repeat_verification": "Repeat only if new source bytes, code, data or a protocol change affects this item; use the existing linked receipt as the current evidence.",
+        "targeted_recovery": "Editorially recoverable from documented formulas and outputs.",
+        "new_experiment": "None for equations; any value must be recomputed if its denominator or metric definition changes.",
+        "manuscript_edit": "Define accuracy, macro-F1, top-1, AUROC, AP and calibration with their exact units and averaging rules.",
+        "author_approval": "Required before final manuscript wording or submission."
+      },
+      "remaining_actions": {
+        "recovery": "Editorially recoverable from documented formulas and outputs.",
+        "experiment": "None for equations; any value must be recomputed if its denominator or metric definition changes.",
+        "editorial": "Define accuracy, macro-F1, top-1, AUROC, AP and calibration with their exact units and averaging rules.",
+        "action_class": "PREPARE_EDITORIAL_CHANGE_WITHOUT_EDITING_SUBMITTED_MANUSCRIPT",
+        "responsible_party": "Codex prepares proposed edits; authors review and approve before any manuscript change or submission."
+      },
+      "source_record": {
+        "id": "R2-3h",
+        "origin": "Reviewer 2, Round 1, point 3, accuracy metrics",
+        "request": "Provide equations and explanations for all accuracy metrics and clarify whether rhythm and pathology metrics differ and why.",
+        "manuscript_scope": "Evaluation Metrics and Confidence Intervals subsection.",
+        "technical_status": "MANUSCRIPT_ONLY_PENDING",
+        "reviewer_satisfaction": "EDITORIAL_ACTION_ONLY",
+        "evidence": [
+          "docs/reviewer_closure/METRIC_DEFINITIONS.md",
+          "docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md"
+        ],
+        "protocol_population_result": "The repository defines panel-level binary P4 metrics separately from multiclass/top-1 rhythm metrics; the SPH endpoints are per-class statement-level binary comparisons.",
+        "addressed_scope": "The distinctions are documented and testable, but equations have not been inserted into the manuscript.",
+        "unresolved": "The final manuscript still needs equations matched to each reported unit, averaging scheme, denominator and missing-label rule.",
+        "recovery_assessment": "Editorially recoverable from documented formulas and outputs.",
+        "experiment_requirement": "None for equations; any value must be recomputed if its denominator or metric definition changes.",
+        "editorial_action": "Define accuracy, macro-F1, top-1, AUROC, AP and calibration with their exact units and averaging rules.",
+        "scientific_risk": "High if panel rows, ECG counts and class-wise binary endpoints are conflated."
+      }
+    },
+    {
+      "id": "R2-4a",
+      "technical_status": "VERIFIED_WITH_LIMITATIONS",
+      "reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+      "manuscript_state": "SIN_EDITAR",
+      "closure_basis": "NOT_CLOSED_BY_CI_OR_DOCUMENTATION_ALONE",
+      "evidence_confidence": "A bounded result is verified; residual limitations remain open.",
+      "traceability": {
+        "evidence_refs": [
+          "docs/evidence-status.md",
+          "docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md",
+          "docs/external_validation/sph_results.md",
+          "docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md",
+          "docs/reviewer_closure/GENERALIZATION_DATASET_ELIGIBILITY.md",
+          "docs/reviewer_closure/GENERALIZATION_EXPERIMENT_RESULTS.md"
+        ],
+        "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
+      },
+      "evidence_assessment": {
+        "recorded_result_or_population": "The release separates selected development predictions from the later frozen SPH transfer. Primary6 contains 1,643 ECG; P8 contains 2,193 with P6 nested; P4 uses 962 panel rows/733 ECG. SPH is 25,770 ECG from another source. CEDIA jobs 17314/17315 show that the V3H P6 gate informed epoch selection and is not an untouched test.",
+        "scope_addressed": "The evidence packages and populations are now named and numerically distinguished in technical documentation.",
+        "not_demonstrated_or_remaining": "Complete historical usage and selection lineage of every development package remain unknown; V3H selection exposure is now documented, but the exact 17314 manifest and complete backbone lineage remain unavailable. The manuscript terminology has not been harmonized."
+      },
+      "work_required": {
+        "code_change": "No new code change is identified by the current source record. Implement one only if a specific reproducible defect is found.",
+        "repeat_verification": "Repeat only if new source bytes, code, data or a protocol change affects this item; use the existing linked receipt as the current evidence.",
+        "targeted_recovery": "Historical usage is bounded by the recovery ceiling; terminology is editorially recoverable.",
+        "new_experiment": "None for definition; new evidence is needed for any independent-test interpretation.",
+        "manuscript_edit": "Define each package as a concrete artifact/population and use one term consistently.",
+        "author_approval": "Required before final manuscript wording or submission."
+      },
+      "remaining_actions": {
+        "recovery": "Historical usage is bounded by the recovery ceiling; terminology is editorially recoverable.",
+        "experiment": "None for definition; new evidence is needed for any independent-test interpretation.",
+        "editorial": "Define each package as a concrete artifact/population and use one term consistently.",
+        "action_class": "DOCUMENT_LIMITS_AND_PREPARE_EDITORIAL_ACTION",
+        "responsible_party": "Codex prepares precise wording; authors approve scope and interpretation."
+      },
+      "source_record": {
+        "id": "R2-4a",
+        "origin": "Reviewer 2, Round 1, point 4, Table 8 terminology",
+        "request": "Define the external-development evidence package, say whether it is the test dataset, use consistent terminology and describe it in the database or Methods section.",
+        "manuscript_scope": "Results Table 8 and cohort/methods description.",
+        "technical_status": "VERIFIED_WITH_LIMITATIONS",
+        "reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+        "evidence": [
+          "docs/evidence-status.md",
+          "docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md",
+          "docs/external_validation/sph_results.md",
+          "docs/reviewer_closure/CHECKPOINT_TO_PATIENT_SPLIT_LINEAGE.md",
+          "docs/reviewer_closure/GENERALIZATION_DATASET_ELIGIBILITY.md",
+          "docs/reviewer_closure/GENERALIZATION_EXPERIMENT_RESULTS.md"
+        ],
+        "protocol_population_result": "The release separates selected development predictions from the later frozen SPH transfer. Primary6 contains 1,643 ECG; P8 contains 2,193 with P6 nested; P4 uses 962 panel rows/733 ECG. SPH is 25,770 ECG from another source. CEDIA jobs 17314/17315 show that the V3H P6 gate informed epoch selection and is not an untouched test.",
+        "addressed_scope": "The evidence packages and populations are now named and numerically distinguished in technical documentation.",
+        "unresolved": "Complete historical usage and selection lineage of every development package remain unknown; V3H selection exposure is now documented, but the exact 17314 manifest and complete backbone lineage remain unavailable. The manuscript terminology has not been harmonized.",
+        "recovery_assessment": "Historical usage is bounded by the recovery ceiling; terminology is editorially recoverable.",
+        "experiment_requirement": "None for definition; new evidence is needed for any independent-test interpretation.",
+        "editorial_action": "Define each package as a concrete artifact/population and use one term consistently.",
+        "scientific_risk": "High if selected development cohorts are described as independent tests."
+      }
+    },
+    {
+      "id": "R2-4b",
+      "technical_status": "MANUSCRIPT_ONLY_PENDING",
+      "reviewer_satisfaction": "EDITORIAL_ACTION_ONLY",
+      "manuscript_state": "SIN_EDITAR",
+      "closure_basis": "NOT_CLOSED_BY_CI_OR_DOCUMENTATION_ALONE",
+      "evidence_confidence": "Technical evidence is available for the bounded claim, but the manuscript remains unedited.",
+      "traceability": {
+        "evidence_refs": [
+          "docs/reviewer_closure/REVIEWER_48_STATUS.md"
+        ],
+        "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
+      },
+      "evidence_assessment": {
+        "recorded_result_or_population": "A cross-reference correction is requested; no new data or model execution is needed.",
+        "scope_addressed": "The defect is identified, but the submitted manuscript remains unchanged.",
+        "not_demonstrated_or_remaining": "Final figure numbering may change during layout and must be checked after the final figure assembly."
+      },
+      "work_required": {
+        "code_change": "No new code change is identified by the current source record. Implement one only if a specific reproducible defect is found.",
+        "repeat_verification": "Repeat only if new source bytes, code, data or a protocol change affects this item; use the existing linked receipt as the current evidence.",
+        "targeted_recovery": "Fully editorially recoverable.",
+        "new_experiment": "None.",
+        "manuscript_edit": "Correct the reference and recheck all figure/table references after composition.",
+        "author_approval": "Required before final manuscript wording or submission."
+      },
+      "remaining_actions": {
+        "recovery": "Fully editorially recoverable.",
+        "experiment": "None.",
+        "editorial": "Correct the reference and recheck all figure/table references after composition.",
+        "action_class": "PREPARE_EDITORIAL_CHANGE_WITHOUT_EDITING_SUBMITTED_MANUSCRIPT",
+        "responsible_party": "Codex prepares proposed edits; authors review and approve before any manuscript change or submission."
+      },
+      "source_record": {
+        "id": "R2-4b",
+        "origin": "Reviewer 2, Round 1, point 4, figure cross-reference",
+        "request": "Correct the paragraph after Table 8 to refer to Figure 8 rather than Figure 10.",
+        "manuscript_scope": "Results paragraph immediately following Table 8.",
+        "technical_status": "MANUSCRIPT_ONLY_PENDING",
+        "reviewer_satisfaction": "EDITORIAL_ACTION_ONLY",
+        "evidence": [
+          "docs/reviewer_closure/REVIEWER_48_STATUS.md"
+        ],
+        "protocol_population_result": "A cross-reference correction is requested; no new data or model execution is needed.",
+        "addressed_scope": "The defect is identified, but the submitted manuscript remains unchanged.",
+        "unresolved": "Final figure numbering may change during layout and must be checked after the final figure assembly.",
+        "recovery_assessment": "Fully editorially recoverable.",
+        "experiment_requirement": "None.",
+        "editorial_action": "Correct the reference and recheck all figure/table references after composition.",
+        "scientific_risk": "Low scientific risk; incorrect references impair verification."
+      }
+    },
+    {
+      "id": "R2-4c",
+      "technical_status": "MANUSCRIPT_ONLY_PENDING",
+      "reviewer_satisfaction": "EDITORIAL_ACTION_ONLY",
+      "manuscript_state": "SIN_EDITAR",
+      "closure_basis": "NOT_CLOSED_BY_CI_OR_DOCUMENTATION_ALONE",
+      "evidence_confidence": "Technical evidence is available for the bounded claim, but the manuscript remains unedited.",
+      "traceability": {
+        "evidence_refs": [
+          "outputs/results/primary/canonical_profiles.json",
+          "docs/external_validation/sph_results.md"
+        ],
+        "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
+      },
+      "evidence_assessment": {
+        "recorded_result_or_population": "Historical selected-panel P6 F1 is 62.58% for 1AVB and 65.64% for PVC. Later SPH statement-level results are lower for P6 PVC (54.08%) and differ in population/reference; they must not be conflated.",
+        "scope_addressed": "Canonical values and the unfavorable transfer result are available for a bounded interpretation.",
+        "not_demonstrated_or_remaining": "The original adjective remains in the submitted manuscript and requires author-approved replacement."
+      },
+      "work_required": {
+        "code_change": "No new code change is identified by the current source record. Implement one only if a specific reproducible defect is found.",
+        "repeat_verification": "Repeat only if new source bytes, code, data or a protocol change affects this item; use the existing linked receipt as the current evidence.",
+        "targeted_recovery": "Editorially recoverable from verified metrics; no further data recovery needed to remove the adjective.",
+        "new_experiment": "None to moderate the wording; any claim of reliability requires a defined operational criterion and validation.",
+        "manuscript_edit": "Describe exact F1 values and cohort; avoid 'reliable' without a prespecified threshold.",
+        "author_approval": "Required before final manuscript wording or submission."
+      },
+      "remaining_actions": {
+        "recovery": "Editorially recoverable from verified metrics; no further data recovery needed to remove the adjective.",
+        "experiment": "None to moderate the wording; any claim of reliability requires a defined operational criterion and validation.",
+        "editorial": "Describe exact F1 values and cohort; avoid 'reliable' without a prespecified threshold.",
+        "action_class": "PREPARE_EDITORIAL_CHANGE_WITHOUT_EDITING_SUBMITTED_MANUSCRIPT",
+        "responsible_party": "Codex prepares proposed edits; authors review and approve before any manuscript change or submission."
+      },
+      "source_record": {
+        "id": "R2-4c",
+        "origin": "Reviewer 2, Round 1, point 4, F1 interpretation",
+        "request": "Do not call F1 values around 62.58% and 65.64% reliable performance; revise the strength of the interpretation.",
+        "manuscript_scope": "Results paragraph on 1AVB and PVC and corresponding Discussion claims.",
+        "technical_status": "MANUSCRIPT_ONLY_PENDING",
+        "reviewer_satisfaction": "EDITORIAL_ACTION_ONLY",
+        "evidence": [
+          "outputs/results/primary/canonical_profiles.json",
+          "docs/external_validation/sph_results.md"
+        ],
+        "protocol_population_result": "Historical selected-panel P6 F1 is 62.58% for 1AVB and 65.64% for PVC. Later SPH statement-level results are lower for P6 PVC (54.08%) and differ in population/reference; they must not be conflated.",
+        "addressed_scope": "Canonical values and the unfavorable transfer result are available for a bounded interpretation.",
+        "unresolved": "The original adjective remains in the submitted manuscript and requires author-approved replacement.",
+        "recovery_assessment": "Editorially recoverable from verified metrics; no further data recovery needed to remove the adjective.",
+        "experiment_requirement": "None to moderate the wording; any claim of reliability requires a defined operational criterion and validation.",
+        "editorial_action": "Describe exact F1 values and cohort; avoid 'reliable' without a prespecified threshold.",
+        "scientific_risk": "High if a moderate F1 is framed as reliable diagnostic performance."
+      }
+    },
+    {
+      "id": "R2-4d",
+      "technical_status": "MANUSCRIPT_ONLY_PENDING",
+      "reviewer_satisfaction": "EDITORIAL_ACTION_ONLY",
+      "manuscript_state": "SIN_EDITAR",
+      "closure_basis": "NOT_CLOSED_BY_CI_OR_DOCUMENTATION_ALONE",
+      "evidence_confidence": "Technical evidence is available for the bounded claim, but the manuscript remains unedited.",
+      "traceability": {
+        "evidence_refs": [
+          "docs/external_validation/sph_results.md",
+          "docs/reviewer_closure/REVIEWER_48_STATUS.md"
+        ],
+        "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
+      },
+      "evidence_assessment": {
+        "recorded_result_or_population": "The plotted metrics and the available patient-component intervals are distinct artifacts; the original figure/caption must be reconciled with the final values and intervals.",
+        "scope_addressed": "The evidence package defines available uncertainty intervals; the submitted figure has not been replaced or recaptioned.",
+        "not_demonstrated_or_remaining": "It is not established that every plotted bar has a matching interval in the current submitted figure."
+      },
+      "work_required": {
+        "code_change": "No new code change is identified by the current source record. Implement one only if a specific reproducible defect is found.",
+        "repeat_verification": "Repeat only if new source bytes, code, data or a protocol change affects this item; use the existing linked receipt as the current evidence.",
+        "targeted_recovery": "Editorially recoverable by regenerating the figure from the selected aggregate and explicitly displaying uncertainty where computed.",
+        "new_experiment": "No new ECG experiment; interval calculation is needed only if the final figure reports confidence intervals not already available.",
+        "manuscript_edit": "Rebuild from the exact source table, label all three measures and either show valid bounds or state they are not shown.",
+        "author_approval": "Required before final manuscript wording or submission."
+      },
+      "remaining_actions": {
+        "recovery": "Editorially recoverable by regenerating the figure from the selected aggregate and explicitly displaying uncertainty where computed.",
+        "experiment": "No new ECG experiment; interval calculation is needed only if the final figure reports confidence intervals not already available.",
+        "editorial": "Rebuild from the exact source table, label all three measures and either show valid bounds or state they are not shown.",
+        "action_class": "PREPARE_EDITORIAL_CHANGE_WITHOUT_EDITING_SUBMITTED_MANUSCRIPT",
+        "responsible_party": "Codex prepares proposed edits; authors review and approve before any manuscript change or submission."
+      },
+      "source_record": {
+        "id": "R2-4d",
+        "origin": "Reviewer 2, Round 1, point 4, Figure 8 caption and uncertainty",
+        "request": "Correct Figure 8's caption to acknowledge precision, recall and F1, and show or accurately describe the absence of 95% confidence bounds.",
+        "manuscript_scope": "Results Figure 8 graphic and caption.",
+        "technical_status": "MANUSCRIPT_ONLY_PENDING",
+        "reviewer_satisfaction": "EDITORIAL_ACTION_ONLY",
+        "evidence": [
+          "docs/external_validation/sph_results.md",
+          "docs/reviewer_closure/REVIEWER_48_STATUS.md"
+        ],
+        "protocol_population_result": "The plotted metrics and the available patient-component intervals are distinct artifacts; the original figure/caption must be reconciled with the final values and intervals.",
+        "addressed_scope": "The evidence package defines available uncertainty intervals; the submitted figure has not been replaced or recaptioned.",
+        "unresolved": "It is not established that every plotted bar has a matching interval in the current submitted figure.",
+        "recovery_assessment": "Editorially recoverable by regenerating the figure from the selected aggregate and explicitly displaying uncertainty where computed.",
+        "experiment_requirement": "No new ECG experiment; interval calculation is needed only if the final figure reports confidence intervals not already available.",
+        "editorial_action": "Rebuild from the exact source table, label all three measures and either show valid bounds or state they are not shown.",
+        "scientific_risk": "Moderate if a point estimate is visually implied to carry confidence bounds it does not show."
+      }
+    },
+    {
+      "id": "R2-4e",
+      "technical_status": "EXPERIMENT_COMPLETED_WITH_LIMITATIONS",
+      "reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+      "manuscript_state": "SIN_EDITAR",
+      "closure_basis": "NOT_CLOSED_BY_CI_OR_DOCUMENTATION_ALONE",
+      "evidence_confidence": "An experiment was executed; this does not imply that the original request is fully satisfied.",
+      "traceability": {
+        "evidence_refs": [
+          "docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md",
+          "docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md",
+          "outputs/results/revision_20261107/rhythm_waveform.json",
+          "outputs/results/revision_20261107/pathology_waveform.json",
+          "docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md",
+          "docs/reviewer_closure/SELECTIVE_PREDICTION_EXPERIMENT.md"
+        ],
+        "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
+      },
+      "evidence_assessment": {
+        "recorded_result_or_population": "On all 25,770 SPH ECG, P6 had 16,785 empty threshold sets; P4 had 8,343; P8 applied top-1 fallback on 801. In the selected replay P8 fallback was 58/2,193. No reference labels were used to route.",
+        "scope_addressed": "No-crossing behavior and complete-source counts are now measured for the frozen profiles.",
+        "not_demonstrated_or_remaining": "P6/P4 empty sets and P8 fallback do not establish a quarantine rate, an Other class, or human review; historical all-input June routes remain unknown."
+      },
+      "work_required": {
+        "code_change": "No new code change is identified by the current source record. Implement one only if a specific reproducible defect is found.",
+        "repeat_verification": "Repeat only if new source bytes, code, data or a protocol change affects this item; use the existing linked receipt as the current evidence.",
+        "targeted_recovery": "Measured profile behavior is complete for the frozen SPH run; historical route history needs its original policy and ledger.",
+        "new_experiment": "No new experiment to state these frozen rules; a quarantine effectiveness claim requires a separate defined evaluation.",
+        "manuscript_edit": "Define thresholding and fallback separately, report denominators and do not relabel fallback as quarantine.",
+        "author_approval": "Required before final manuscript wording or submission."
+      },
+      "remaining_actions": {
+        "recovery": "Measured profile behavior is complete for the frozen SPH run; historical route history needs its original policy and ledger.",
+        "experiment": "No new experiment to state these frozen rules; a quarantine effectiveness claim requires a separate defined evaluation.",
+        "editorial": "Define thresholding and fallback separately, report denominators and do not relabel fallback as quarantine.",
+        "action_class": "REPORT_EXPERIMENT_WITH_LIMITS_AND_DECIDE_IF_NEW_STUDY_IS_NEEDED",
+        "responsible_party": "Codex reports measured results and limits; authors approve claims; a new study is needed if the broader claim is retained."
+      },
+      "source_record": {
+        "id": "R2-4e",
+        "origin": "Reviewer 2, Round 1, point 4, threshold non-crossing",
+        "request": "Explain what happens when no class score crosses its threshold and how such cases are counted.",
+        "manuscript_scope": "Decision policy in Methods and all-input Results.",
+        "technical_status": "EXPERIMENT_COMPLETED_WITH_LIMITATIONS",
+        "reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+        "evidence": [
+          "docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md",
+          "docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md",
+          "outputs/results/revision_20261107/rhythm_waveform.json",
+          "outputs/results/revision_20261107/pathology_waveform.json",
+          "docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md",
+          "docs/reviewer_closure/SELECTIVE_PREDICTION_EXPERIMENT.md"
+        ],
+        "protocol_population_result": "On all 25,770 SPH ECG, P6 had 16,785 empty threshold sets; P4 had 8,343; P8 applied top-1 fallback on 801. In the selected replay P8 fallback was 58/2,193. No reference labels were used to route.",
+        "addressed_scope": "No-crossing behavior and complete-source counts are now measured for the frozen profiles.",
+        "unresolved": "P6/P4 empty sets and P8 fallback do not establish a quarantine rate, an Other class, or human review; historical all-input June routes remain unknown.",
+        "recovery_assessment": "Measured profile behavior is complete for the frozen SPH run; historical route history needs its original policy and ledger.",
+        "experiment_requirement": "No new experiment to state these frozen rules; a quarantine effectiveness claim requires a separate defined evaluation.",
+        "editorial_action": "Define thresholding and fallback separately, report denominators and do not relabel fallback as quarantine.",
+        "scientific_risk": "High if empty sets/fallback are hidden or represented as clinical review."
+      }
+    },
+    {
+      "id": "R2-4f",
+      "technical_status": "MANUSCRIPT_ONLY_PENDING",
+      "reviewer_satisfaction": "EDITORIAL_ACTION_ONLY",
+      "manuscript_state": "SIN_EDITAR",
+      "closure_basis": "NOT_CLOSED_BY_CI_OR_DOCUMENTATION_ALONE",
+      "evidence_confidence": "Technical evidence is available for the bounded claim, but the manuscript remains unedited.",
+      "traceability": {
+        "evidence_refs": [
+          "docs/reviewer_closure/REVIEWER_48_STATUS.md"
+        ],
+        "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
+      },
+      "evidence_assessment": {
+        "recorded_result_or_population": "This is a visual consistency issue; no model or cohort calculation is requested.",
+        "scope_addressed": "The required edit is identified, but the submitted figures remain unchanged.",
+        "not_demonstrated_or_remaining": "The final unit convention must be applied after the final figure selection."
+      },
+      "work_required": {
+        "code_change": "No new code change is identified by the current source record. Implement one only if a specific reproducible defect is found.",
+        "repeat_verification": "Repeat only if new source bytes, code, data or a protocol change affects this item; use the existing linked receipt as the current evidence.",
+        "targeted_recovery": "Fully editorially recoverable.",
+        "new_experiment": "None.",
+        "manuscript_edit": "Choose counts or percentages consistently and verify axis labels, color scales and captions.",
+        "author_approval": "Required before final manuscript wording or submission."
+      },
+      "remaining_actions": {
+        "recovery": "Fully editorially recoverable.",
+        "experiment": "None.",
+        "editorial": "Choose counts or percentages consistently and verify axis labels, color scales and captions.",
+        "action_class": "PREPARE_EDITORIAL_CHANGE_WITHOUT_EDITING_SUBMITTED_MANUSCRIPT",
+        "responsible_party": "Codex prepares proposed edits; authors review and approve before any manuscript change or submission."
+      },
+      "source_record": {
+        "id": "R2-4f",
+        "origin": "Reviewer 2, Round 1, point 4, Figure 9 units",
+        "request": "Use a consistent numeric or percentage presentation across Figures 7 and 9.",
+        "manuscript_scope": "Results Figures 7 and 9 and captions.",
+        "technical_status": "MANUSCRIPT_ONLY_PENDING",
+        "reviewer_satisfaction": "EDITORIAL_ACTION_ONLY",
+        "evidence": [
+          "docs/reviewer_closure/REVIEWER_48_STATUS.md"
+        ],
+        "protocol_population_result": "This is a visual consistency issue; no model or cohort calculation is requested.",
+        "addressed_scope": "The required edit is identified, but the submitted figures remain unchanged.",
+        "unresolved": "The final unit convention must be applied after the final figure selection.",
+        "recovery_assessment": "Fully editorially recoverable.",
+        "experiment_requirement": "None.",
+        "editorial_action": "Choose counts or percentages consistently and verify axis labels, color scales and captions.",
+        "scientific_risk": "Low scientific risk; mixed units can confuse comparative reading."
+      }
+    },
+    {
+      "id": "R2-4g",
+      "technical_status": "MANUSCRIPT_ONLY_PENDING",
+      "reviewer_satisfaction": "EDITORIAL_ACTION_ONLY",
+      "manuscript_state": "SIN_EDITAR",
+      "closure_basis": "NOT_CLOSED_BY_CI_OR_DOCUMENTATION_ALONE",
+      "evidence_confidence": "Technical evidence is available for the bounded claim, but the manuscript remains unedited.",
+      "traceability": {
+        "evidence_refs": [
+          "docs/reviewer_closure/REVIEWER_48_STATUS.md",
+          "docs/figure-evidence.md"
+        ],
+        "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
+      },
+      "evidence_assessment": {
+        "recorded_result_or_population": "The comment identifies duplicate content in the submitted layout; no new empirical result is required to remove a duplicate.",
+        "scope_addressed": "The figure-level issue is recorded; a final accepted figure set has not been assembled.",
+        "not_demonstrated_or_remaining": "Figure identity, captions and cross-references must be checked together after editorial revisions."
+      },
+      "work_required": {
+        "code_change": "No new code change is identified by the current source record. Implement one only if a specific reproducible defect is found.",
+        "repeat_verification": "Repeat only if new source bytes, code, data or a protocol change affects this item; use the existing linked receipt as the current evidence.",
+        "targeted_recovery": "Fully editorially recoverable from original figure sources.",
+        "new_experiment": "None unless the duplicate figure contains unique, unverified data.",
+        "manuscript_edit": "Retain one authoritative figure or document the distinct information each figure conveys.",
+        "author_approval": "Required before final manuscript wording or submission."
+      },
+      "remaining_actions": {
+        "recovery": "Fully editorially recoverable from original figure sources.",
+        "experiment": "None unless the duplicate figure contains unique, unverified data.",
+        "editorial": "Retain one authoritative figure or document the distinct information each figure conveys.",
+        "action_class": "PREPARE_EDITORIAL_CHANGE_WITHOUT_EDITING_SUBMITTED_MANUSCRIPT",
+        "responsible_party": "Codex prepares proposed edits; authors review and approve before any manuscript change or submission."
+      },
+      "source_record": {
+        "id": "R2-4g",
+        "origin": "Reviewer 2, Round 1, point 4, duplicate figures",
+        "request": "Resolve the reported duplication between Figures 8 and 10.",
+        "manuscript_scope": "Results figures and final figure inventory.",
+        "technical_status": "MANUSCRIPT_ONLY_PENDING",
+        "reviewer_satisfaction": "EDITORIAL_ACTION_ONLY",
+        "evidence": [
+          "docs/reviewer_closure/REVIEWER_48_STATUS.md",
+          "docs/figure-evidence.md"
+        ],
+        "protocol_population_result": "The comment identifies duplicate content in the submitted layout; no new empirical result is required to remove a duplicate.",
+        "addressed_scope": "The figure-level issue is recorded; a final accepted figure set has not been assembled.",
+        "unresolved": "Figure identity, captions and cross-references must be checked together after editorial revisions.",
+        "recovery_assessment": "Fully editorially recoverable from original figure sources.",
+        "experiment_requirement": "None unless the duplicate figure contains unique, unverified data.",
+        "editorial_action": "Retain one authoritative figure or document the distinct information each figure conveys.",
+        "scientific_risk": "Low scientifically, but duplication undermines presentation quality and traceability."
+      }
+    },
+    {
+      "id": "R2-4h",
+      "technical_status": "MANUSCRIPT_ONLY_PENDING",
+      "reviewer_satisfaction": "EDITORIAL_ACTION_ONLY",
+      "manuscript_state": "SIN_EDITAR",
+      "closure_basis": "NOT_CLOSED_BY_CI_OR_DOCUMENTATION_ALONE",
+      "evidence_confidence": "Technical evidence is available for the bounded claim, but the manuscript remains unedited.",
+      "traceability": {
+        "evidence_refs": [
+          "docs/reviewer_closure/METRIC_DEFINITIONS.md",
+          "docs/external_validation/sph_results.md"
+        ],
+        "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
+      },
+      "evidence_assessment": {
+        "recorded_result_or_population": "The frozen SPH score curves use ECG-record statements; historical development metrics use their own selected record/panel units.",
+        "scope_addressed": "The technical evidence identifies the relevant record-level units; the manuscript's ambiguous phrase remains unchanged.",
+        "not_demonstrated_or_remaining": "The text must identify the exact cohort, endpoint and unit for each plotted curve."
+      },
+      "work_required": {
+        "code_change": "No new code change is identified by the current source record. Implement one only if a specific reproducible defect is found.",
+        "repeat_verification": "Repeat only if new source bytes, code, data or a protocol change affects this item; use the existing linked receipt as the current evidence.",
+        "targeted_recovery": "Editorially recoverable from the plot source and protocol.",
+        "new_experiment": "None if the source arrays and endpoint remain unchanged.",
+        "manuscript_edit": "Replace 'evaluation tracings' with the precise ECG-record denominator and name each target.",
+        "author_approval": "Required before final manuscript wording or submission."
+      },
+      "remaining_actions": {
+        "recovery": "Editorially recoverable from the plot source and protocol.",
+        "experiment": "None if the source arrays and endpoint remain unchanged.",
+        "editorial": "Replace 'evaluation tracings' with the precise ECG-record denominator and name each target.",
+        "action_class": "PREPARE_EDITORIAL_CHANGE_WITHOUT_EDITING_SUBMITTED_MANUSCRIPT",
+        "responsible_party": "Codex prepares proposed edits; authors review and approve before any manuscript change or submission."
+      },
+      "source_record": {
+        "id": "R2-4h",
+        "origin": "Reviewer 2, Round 1, point 4, ROC/PR evaluation unit",
+        "request": "Define what 'evaluation tracings' means in the ROC and precision-recall description and use the correct ECG-level unit.",
+        "manuscript_scope": "Results text for Figures 11 and 12 and metric methods.",
+        "technical_status": "MANUSCRIPT_ONLY_PENDING",
+        "reviewer_satisfaction": "EDITORIAL_ACTION_ONLY",
+        "evidence": [
+          "docs/reviewer_closure/METRIC_DEFINITIONS.md",
+          "docs/external_validation/sph_results.md"
+        ],
+        "protocol_population_result": "The frozen SPH score curves use ECG-record statements; historical development metrics use their own selected record/panel units.",
+        "addressed_scope": "The technical evidence identifies the relevant record-level units; the manuscript's ambiguous phrase remains unchanged.",
+        "unresolved": "The text must identify the exact cohort, endpoint and unit for each plotted curve.",
+        "recovery_assessment": "Editorially recoverable from the plot source and protocol.",
+        "experiment_requirement": "None if the source arrays and endpoint remain unchanged.",
+        "editorial_action": "Replace 'evaluation tracings' with the precise ECG-record denominator and name each target.",
+        "scientific_risk": "Moderate if rhythm classes, ECGs and panel rows are treated as the same unit."
+      }
+    },
+    {
+      "id": "R2-4i",
+      "technical_status": "MANUSCRIPT_ONLY_PENDING",
+      "reviewer_satisfaction": "EDITORIAL_ACTION_ONLY",
+      "manuscript_state": "SIN_EDITAR",
+      "closure_basis": "NOT_CLOSED_BY_CI_OR_DOCUMENTATION_ALONE",
+      "evidence_confidence": "Technical evidence is available for the bounded claim, but the manuscript remains unedited.",
+      "traceability": {
+        "evidence_refs": [
+          "outputs/results/primary/canonical_profiles.json",
+          "docs/external_validation/sph_results.md"
+        ],
+        "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
+      },
+      "evidence_assessment": {
+        "recorded_result_or_population": "The selected P4 macro-AUROC is 87.46%; its unit and population differ from later endpoint-specific SPH AUROCs, including low PPV/F1 despite some high AUROC values.",
+        "scope_addressed": "Canonical and transfer values are available for a qualified description.",
+        "not_demonstrated_or_remaining": "The adjective and interpretation in the submitted manuscript have not been revised."
+      },
+      "work_required": {
+        "code_change": "No new code change is identified by the current source record. Implement one only if a specific reproducible defect is found.",
+        "repeat_verification": "Repeat only if new source bytes, code, data or a protocol change affects this item; use the existing linked receipt as the current evidence.",
+        "targeted_recovery": "Editorially recoverable from verified metrics.",
+        "new_experiment": "None to revise the adjective; broader clinical meaning requires a prespecified benchmark.",
+        "manuscript_edit": "Report the value without 'high' or explain its context, metric uncertainty and class-specific limitations.",
+        "author_approval": "Required before final manuscript wording or submission."
+      },
+      "remaining_actions": {
+        "recovery": "Editorially recoverable from verified metrics.",
+        "experiment": "None to revise the adjective; broader clinical meaning requires a prespecified benchmark.",
+        "editorial": "Report the value without 'high' or explain its context, metric uncertainty and class-specific limitations.",
+        "action_class": "PREPARE_EDITORIAL_CHANGE_WITHOUT_EDITING_SUBMITTED_MANUSCRIPT",
+        "responsible_party": "Codex prepares proposed edits; authors review and approve before any manuscript change or submission."
+      },
+      "source_record": {
+        "id": "R2-4i",
+        "origin": "Reviewer 2, Round 1, point 4, AUROC interpretation",
+        "request": "Revise the characterization of 87.46% pathology macro-AUROC as high.",
+        "manuscript_scope": "Results interpretation of rhythm and pathology macro-AUROC.",
+        "technical_status": "MANUSCRIPT_ONLY_PENDING",
+        "reviewer_satisfaction": "EDITORIAL_ACTION_ONLY",
+        "evidence": [
+          "outputs/results/primary/canonical_profiles.json",
+          "docs/external_validation/sph_results.md"
+        ],
+        "protocol_population_result": "The selected P4 macro-AUROC is 87.46%; its unit and population differ from later endpoint-specific SPH AUROCs, including low PPV/F1 despite some high AUROC values.",
+        "addressed_scope": "Canonical and transfer values are available for a qualified description.",
+        "unresolved": "The adjective and interpretation in the submitted manuscript have not been revised.",
+        "recovery_assessment": "Editorially recoverable from verified metrics.",
+        "experiment_requirement": "None to revise the adjective; broader clinical meaning requires a prespecified benchmark.",
+        "editorial_action": "Report the value without 'high' or explain its context, metric uncertainty and class-specific limitations.",
+        "scientific_risk": "Moderate to high if discrimination is used to imply good operating performance."
+      }
+    },
+    {
+      "id": "R2-4j",
+      "technical_status": "MANUSCRIPT_ONLY_PENDING",
+      "reviewer_satisfaction": "EDITORIAL_ACTION_ONLY",
+      "manuscript_state": "SIN_EDITAR",
+      "closure_basis": "NOT_CLOSED_BY_CI_OR_DOCUMENTATION_ALONE",
+      "evidence_confidence": "Technical evidence is available for the bounded claim, but the manuscript remains unedited.",
+      "traceability": {
+        "evidence_refs": [
+          "docs/reviewer_closure/METRIC_DEFINITIONS.md",
+          "outputs/results/external_sph/sph_aggregate_32669.json"
+        ],
+        "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
+      },
+      "evidence_assessment": {
+        "recorded_result_or_population": "The frozen SPH aggregate reports ECE with ten bins; calibration curves and metrics are defined for the actual scored endpoints. This does not certify the original Figure 13's plotted source or axis ticks.",
+        "scope_addressed": "A reproducible calibration definition and later source-specific ECE evidence exist.",
+        "not_demonstrated_or_remaining": "The submitted calibration plot and its data source must be matched to the final binning implementation and labels."
+      },
+      "work_required": {
+        "code_change": "No new code change is identified by the current source record. Implement one only if a specific reproducible defect is found.",
+        "repeat_verification": "Repeat only if new source bytes, code, data or a protocol change affects this item; use the existing linked receipt as the current evidence.",
+        "targeted_recovery": "Recoverable from the figure source data and plotting script; do not infer from the image alone.",
+        "new_experiment": "No new inference if the same saved probabilities and fixed bins are used; otherwise recompute from the correct source.",
+        "manuscript_edit": "Define bin occupancy and mean confidence versus observed statement frequency; standardize labels/ticks and document empty bins.",
+        "author_approval": "Required before final manuscript wording or submission."
+      },
+      "remaining_actions": {
+        "recovery": "Recoverable from the figure source data and plotting script; do not infer from the image alone.",
+        "experiment": "No new inference if the same saved probabilities and fixed bins are used; otherwise recompute from the correct source.",
+        "editorial": "Define bin occupancy and mean confidence versus observed statement frequency; standardize labels/ticks and document empty bins.",
+        "action_class": "PREPARE_EDITORIAL_CHANGE_WITHOUT_EDITING_SUBMITTED_MANUSCRIPT",
+        "responsible_party": "Codex prepares proposed edits; authors review and approve before any manuscript change or submission."
+      },
+      "source_record": {
+        "id": "R2-4j",
+        "origin": "Reviewer 2, Round 1, point 4, Figure 13 calibration",
+        "request": "Use consistent observed-frequency/empirical-accuracy terminology, define how it is estimated and make the ten confidence-bin axes match their stated range.",
+        "manuscript_scope": "Figure 13 axes, caption and calibration-method description.",
+        "technical_status": "MANUSCRIPT_ONLY_PENDING",
+        "reviewer_satisfaction": "EDITORIAL_ACTION_ONLY",
+        "evidence": [
+          "docs/reviewer_closure/METRIC_DEFINITIONS.md",
+          "outputs/results/external_sph/sph_aggregate_32669.json"
+        ],
+        "protocol_population_result": "The frozen SPH aggregate reports ECE with ten bins; calibration curves and metrics are defined for the actual scored endpoints. This does not certify the original Figure 13's plotted source or axis ticks.",
+        "addressed_scope": "A reproducible calibration definition and later source-specific ECE evidence exist.",
+        "unresolved": "The submitted calibration plot and its data source must be matched to the final binning implementation and labels.",
+        "recovery_assessment": "Recoverable from the figure source data and plotting script; do not infer from the image alone.",
+        "experiment_requirement": "No new inference if the same saved probabilities and fixed bins are used; otherwise recompute from the correct source.",
+        "editorial_action": "Define bin occupancy and mean confidence versus observed statement frequency; standardize labels/ticks and document empty bins.",
+        "scientific_risk": "Moderate if a calibration curve is mislabeled or its estimate cannot be reproduced."
+      }
+    },
+    {
+      "id": "R2-4k",
+      "technical_status": "EVIDENCE_CEILING_REACHED",
+      "reviewer_satisfaction": "NOT_SATISFIED",
+      "manuscript_state": "SIN_EDITAR",
+      "closure_basis": "NOT_CLOSED_BY_CI_OR_DOCUMENTATION_ALONE",
+      "evidence_confidence": "The searched sources reached a documented evidence ceiling; absence is limited to those sources.",
+      "traceability": {
+        "evidence_refs": [
+          "docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md",
+          "docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md",
+          "outputs/results/revision_20261107/rhythm_waveform.json",
+          "outputs/results/revision_20261107/pathology_waveform.json",
+          "docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md",
+          "docs/reviewer_closure/SELECTIVE_PREDICTION_EXPERIMENT.md",
+          "docs/reviewer_closure/V4_LEGACY_QUARANTINE_DISPOSITION.md",
+          "docs/reviewer_closure/receipts/LEGACY_V4_QUARANTINE_RECOMPUTATION_2026-11-10.json",
+          "docs/reviewer_closure/QUARANTINE_HISTORICAL_VS_PROSPECTIVE.md",
+          "docs/reviewer_closure/CEDIA_FINAL_RECOVERY_REPORT.md",
+          "docs/reviewer_closure/receipts/CEDIA_TARGETED_RECOVERY_SEARCH_2026-11-11.json"
+        ],
+        "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
+      },
+      "evidence_assessment": {
+        "recorded_result_or_population": "The selected reconstruction and all-input SPH flow contain no checkpoint-linked uncertainty score plus verified quarantine policy; quarantine is not assessed, not 0%. P8 fallback and empty sets are not quarantine.",
+        "scope_addressed": "The invalid inference from fallback to quarantine is explicitly rejected; routing counts are documented with their actual semantics. REV6 reports 23 Plan AF handoff rows and reported policy/manifest hashes, but the source bytes are absent and hashes were not recomputed.",
+        "not_demonstrated_or_remaining": "The 23 rows are not a complete denominator. No historic pre/post ledger, quarantine denominator, policy version or uncertainty inputs are available; rates and pre/post accuracy cannot be reconstructed."
+      },
+      "work_required": {
+        "code_change": "No new code change is identified by the current source record. Implement one only if a specific reproducible defect is found.",
+        "repeat_verification": "Repeat only if new source bytes, code, data or a protocol change affects this item; use the existing linked receipt as the current evidence.",
+        "targeted_recovery": "Reopen only if an authentic policy, ledger, score inputs and checkpoint/job linkage are recovered. The direct filename search found no match for the named AE policy, quarantine manifest or identified AF jobs in the scoped roots.",
+        "new_experiment": "Required to support any quarantine effectiveness claim; otherwise the claim and rate must be removed.",
+        "manuscript_edit": "Do not report an assumed quarantine percentage; mark historical rate unavailable or remove the claim.",
+        "author_approval": "Required before final manuscript wording or submission."
+      },
+      "remaining_actions": {
+        "recovery": "Reopen only if an authentic policy, ledger, score inputs and checkpoint/job linkage are recovered. The direct filename search found no match for the named AE policy, quarantine manifest or identified AF jobs in the scoped roots.",
+        "experiment": "Required to support any quarantine effectiveness claim; otherwise the claim and rate must be removed.",
+        "editorial": "Do not report an assumed quarantine percentage; mark historical rate unavailable or remove the claim.",
+        "action_class": "DECLARE_SOURCE_BOUNDED_CEILING_AND_PREPARE_SCOPE_DECISION",
+        "responsible_party": "Codex stops unbounded searching and records the ceiling; authors decide claim scope; custodian acts only on a new archive lead."
+      },
+      "source_record": {
+        "id": "R2-4k",
+        "origin": "Reviewer 2, Round 1, point 4, quarantine rates",
+        "request": "Define the quarantine rate and pre/post-quarantine accuracy and explain how these values are estimated.",
+        "manuscript_scope": "Methods quarantine policy and Results figures/tables reporting rates or accuracy.",
+        "technical_status": "EVIDENCE_CEILING_REACHED",
+        "reviewer_satisfaction": "NOT_SATISFIED",
+        "evidence": [
+          "docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md",
+          "docs/reviewer_closure/ALL_INPUT_FLOW_COVERAGE.md",
+          "outputs/results/revision_20261107/rhythm_waveform.json",
+          "outputs/results/revision_20261107/pathology_waveform.json",
+          "docs/reviewer_closure/OTHER_AUX_ROUTING_AND_QUARANTINE_PROVENANCE.md",
+          "docs/reviewer_closure/SELECTIVE_PREDICTION_EXPERIMENT.md",
+          "docs/reviewer_closure/V4_LEGACY_QUARANTINE_DISPOSITION.md",
+          "docs/reviewer_closure/receipts/LEGACY_V4_QUARANTINE_RECOMPUTATION_2026-11-10.json",
+          "docs/reviewer_closure/QUARANTINE_HISTORICAL_VS_PROSPECTIVE.md",
+          "docs/reviewer_closure/CEDIA_FINAL_RECOVERY_REPORT.md",
+          "docs/reviewer_closure/receipts/CEDIA_TARGETED_RECOVERY_SEARCH_2026-11-11.json"
+        ],
+        "protocol_population_result": "The selected reconstruction and all-input SPH flow contain no checkpoint-linked uncertainty score plus verified quarantine policy; quarantine is not assessed, not 0%. P8 fallback and empty sets are not quarantine.",
+        "addressed_scope": "The invalid inference from fallback to quarantine is explicitly rejected; routing counts are documented with their actual semantics. REV6 reports 23 Plan AF handoff rows and reported policy/manifest hashes, but the source bytes are absent and hashes were not recomputed.",
+        "unresolved": "The 23 rows are not a complete denominator. No historic pre/post ledger, quarantine denominator, policy version or uncertainty inputs are available; rates and pre/post accuracy cannot be reconstructed.",
+        "recovery_assessment": "Reopen only if an authentic policy, ledger, score inputs and checkpoint/job linkage are recovered. The direct filename search found no match for the named AE policy, quarantine manifest or identified AF jobs in the scoped roots.",
+        "experiment_requirement": "Required to support any quarantine effectiveness claim; otherwise the claim and rate must be removed.",
+        "editorial_action": "Do not report an assumed quarantine percentage; mark historical rate unavailable or remove the claim.",
+        "scientific_risk": "Very high if invented or unmeasured quarantine benefit/rates remain."
+      }
+    },
+    {
+      "id": "R2-4l",
+      "technical_status": "MANUSCRIPT_ONLY_PENDING",
+      "reviewer_satisfaction": "EDITORIAL_ACTION_ONLY",
+      "manuscript_state": "SIN_EDITAR",
+      "closure_basis": "NOT_CLOSED_BY_CI_OR_DOCUMENTATION_ALONE",
+      "evidence_confidence": "Technical evidence is available for the bounded claim, but the manuscript remains unedited.",
+      "traceability": {
+        "evidence_refs": [
+          "docs/reviewer_closure/METRIC_DEFINITIONS.md",
+          "docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md",
+          "outputs/results/primary/canonical_profiles.json"
+        ],
+        "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
+      },
+      "evidence_assessment": {
+        "recorded_result_or_population": "The selected P6 top-1 accuracy is 1,564/1,643 = 95.19%; P8 has its own accepted top-1 denominator and fallback semantics. Neither is pooled P4 panel accuracy.",
+        "scope_addressed": "The calculation and selected denominators can be traced in code and canonical results.",
+        "not_demonstrated_or_remaining": "The submitted manuscript must define argmax, denominator, treatment of fallback and selected-cohort scope."
+      },
+      "work_required": {
+        "code_change": "No new code change is identified by the current source record. Implement one only if a specific reproducible defect is found.",
+        "repeat_verification": "Repeat only if new source bytes, code, data or a protocol change affects this item; use the existing linked receipt as the current evidence.",
+        "targeted_recovery": "Editorially recoverable from canonical metrics and decision policy.",
+        "new_experiment": "None if definitions and data remain unchanged.",
+        "manuscript_edit": "State the per-record argmax rule and report P6/P8 separately, including fallback treatment.",
+        "author_approval": "Required before final manuscript wording or submission."
+      },
+      "remaining_actions": {
+        "recovery": "Editorially recoverable from canonical metrics and decision policy.",
+        "experiment": "None if definitions and data remain unchanged.",
+        "editorial": "State the per-record argmax rule and report P6/P8 separately, including fallback treatment.",
+        "action_class": "PREPARE_EDITORIAL_CHANGE_WITHOUT_EDITING_SUBMITTED_MANUSCRIPT",
+        "responsible_party": "Codex prepares proposed edits; authors review and approve before any manuscript change or submission."
+      },
+      "source_record": {
+        "id": "R2-4l",
+        "origin": "Reviewer 2, Round 1, point 4, rhythm top-1",
+        "request": "Define rhythm top-1 accuracy and explain exactly how it is calculated.",
+        "manuscript_scope": "Metrics Methods and Results table/figure captions.",
+        "technical_status": "MANUSCRIPT_ONLY_PENDING",
+        "reviewer_satisfaction": "EDITORIAL_ACTION_ONLY",
+        "evidence": [
+          "docs/reviewer_closure/METRIC_DEFINITIONS.md",
+          "docs/reviewer_closure/ROLE_SUPERVISION_AND_ROUTING.md",
+          "outputs/results/primary/canonical_profiles.json"
+        ],
+        "protocol_population_result": "The selected P6 top-1 accuracy is 1,564/1,643 = 95.19%; P8 has its own accepted top-1 denominator and fallback semantics. Neither is pooled P4 panel accuracy.",
+        "addressed_scope": "The calculation and selected denominators can be traced in code and canonical results.",
+        "unresolved": "The submitted manuscript must define argmax, denominator, treatment of fallback and selected-cohort scope.",
+        "recovery_assessment": "Editorially recoverable from canonical metrics and decision policy.",
+        "experiment_requirement": "None if definitions and data remain unchanged.",
+        "editorial_action": "State the per-record argmax rule and report P6/P8 separately, including fallback treatment.",
+        "scientific_risk": "High if top-1 is interpreted as all-class or end-to-end accuracy."
+      }
+    },
+    {
+      "id": "R2-4m",
+      "technical_status": "MANUSCRIPT_ONLY_PENDING",
+      "reviewer_satisfaction": "EDITORIAL_ACTION_ONLY",
+      "manuscript_state": "SIN_EDITAR",
+      "closure_basis": "NOT_CLOSED_BY_CI_OR_DOCUMENTATION_ALONE",
+      "evidence_confidence": "Technical evidence is available for the bounded claim, but the manuscript remains unedited.",
+      "traceability": {
+        "evidence_refs": [
+          "docs/figure-evidence.md",
+          "docs/reviewer_closure/REVIEWER_48_STATUS.md"
+        ],
+        "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
+      },
+      "evidence_assessment": {
+        "recorded_result_or_population": "The submitted figure quality concern is known; this technical phase intentionally does not regenerate the manuscript or its final figures.",
+        "scope_addressed": "A later layout/render check is explicitly reserved; no claim is made that the figures are currently fixed.",
+        "not_demonstrated_or_remaining": "Font sizes, axis labels, line weights, contrast and page-scale legibility remain unverified in the final layout."
+      },
+      "work_required": {
+        "code_change": "No new code change is identified by the current source record. Implement one only if a specific reproducible defect is found.",
+        "repeat_verification": "Repeat only if new source bytes, code, data or a protocol change affects this item; use the existing linked receipt as the current evidence.",
+        "targeted_recovery": "Editorially recoverable from vector/source figures after content and scope are frozen.",
+        "new_experiment": "None if plots use verified aggregates; new evidence is needed only if the plot content changes empirically.",
+        "manuscript_edit": "Regenerate, render the final PDF and inspect every page at realistic size; verify captions and all figure callouts.",
+        "author_approval": "Required before final manuscript wording or submission."
+      },
+      "remaining_actions": {
+        "recovery": "Editorially recoverable from vector/source figures after content and scope are frozen.",
+        "experiment": "None if plots use verified aggregates; new evidence is needed only if the plot content changes empirically.",
+        "editorial": "Regenerate, render the final PDF and inspect every page at realistic size; verify captions and all figure callouts.",
+        "action_class": "PREPARE_EDITORIAL_CHANGE_WITHOUT_EDITING_SUBMITTED_MANUSCRIPT",
+        "responsible_party": "Codex prepares proposed edits; authors review and approve before any manuscript change or submission."
+      },
+      "source_record": {
+        "id": "R2-4m",
+        "origin": "Reviewer 2, Round 1, point 4, Figures 14 and 15 readability",
+        "request": "Improve unreadable axes and values in Figures 14 and 15 and check all figures.",
+        "manuscript_scope": "Final manuscript figure source, captions and rendered PDF.",
+        "technical_status": "MANUSCRIPT_ONLY_PENDING",
+        "reviewer_satisfaction": "EDITORIAL_ACTION_ONLY",
+        "evidence": [
+          "docs/figure-evidence.md",
+          "docs/reviewer_closure/REVIEWER_48_STATUS.md"
+        ],
+        "protocol_population_result": "The submitted figure quality concern is known; this technical phase intentionally does not regenerate the manuscript or its final figures.",
+        "addressed_scope": "A later layout/render check is explicitly reserved; no claim is made that the figures are currently fixed.",
+        "unresolved": "Font sizes, axis labels, line weights, contrast and page-scale legibility remain unverified in the final layout.",
+        "recovery_assessment": "Editorially recoverable from vector/source figures after content and scope are frozen.",
+        "experiment_requirement": "None if plots use verified aggregates; new evidence is needed only if the plot content changes empirically.",
+        "editorial_action": "Regenerate, render the final PDF and inspect every page at realistic size; verify captions and all figure callouts.",
+        "scientific_risk": "Moderate if key values cannot be read or visual framing overstates results."
+      }
+    },
+    {
+      "id": "R2-5",
+      "technical_status": "VERIFIED_WITH_LIMITATIONS",
+      "reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+      "manuscript_state": "SIN_EDITAR",
+      "closure_basis": "NOT_CLOSED_BY_CI_OR_DOCUMENTATION_ALONE",
+      "evidence_confidence": "A bounded result is verified; residual limitations remain open.",
+      "traceability": {
+        "evidence_refs": [
+          "docs/reviewer_closure/AF_PVC_REFERENCE_DISPOSITION.md",
+          "docs/external_validation/sph_results.md",
+          "configs/external_validation/sph_frozen.json",
+          "docs/reviewer_closure/GENERALIZATION_PER_CLASS_METRICS.json",
+          "docs/reviewer_closure/GENERALIZATION_ERROR_ANALYSIS.md"
+        ],
+        "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
+      },
+      "evidence_assessment": {
+        "recorded_result_or_population": "SPH PVC uses ECG statement code 60: 1,067 positive and 24,703 negative recorded-statement comparisons per P6/P8; F1 is 54.08% for P6 and 66.16% for P8. No beat annotations or localization metric are present.",
+        "scope_addressed": "The available result is correctly bounded to record-level ECG statement agreement.",
+        "not_demonstrated_or_remaining": "Beat-level detection, temporal matching, episode counts and clinical adjudication are not measured."
+      },
+      "work_required": {
+        "code_change": "No new code change is identified by the current source record. Implement one only if a specific reproducible defect is found.",
+        "repeat_verification": "Repeat only if new source bytes, code, data or a protocol change affects this item; use the existing linked receipt as the current evidence.",
+        "targeted_recovery": "Cannot be recovered from record-level codes; needs beat-labeled ECGs and matching protocol.",
+        "new_experiment": "Required if beat detection or localization is claimed; not required for a strictly record-level statement study.",
+        "manuscript_edit": "Explicitly state the ECG-level unit and remove any beat-level performance implication.",
+        "author_approval": "Required before final manuscript wording or submission."
+      },
+      "remaining_actions": {
+        "recovery": "Cannot be recovered from record-level codes; needs beat-labeled ECGs and matching protocol.",
+        "experiment": "Required if beat detection or localization is claimed; not required for a strictly record-level statement study.",
+        "editorial": "Explicitly state the ECG-level unit and remove any beat-level performance implication.",
+        "action_class": "DOCUMENT_LIMITS_AND_PREPARE_EDITORIAL_ACTION",
+        "responsible_party": "Codex prepares precise wording; authors approve scope and interpretation."
+      },
+      "source_record": {
+        "id": "R2-5",
+        "origin": "Reviewer 2, Round 1, point 5, PVC unit of analysis",
+        "request": "Acknowledge that PVC is often analyzed at heartbeat level and avoid treating 10-second ECG-level classification as beat-level detection.",
+        "manuscript_scope": "Discussion of PVC performance and any heartbeat-level interpretation.",
+        "technical_status": "VERIFIED_WITH_LIMITATIONS",
+        "reviewer_satisfaction": "PARTIALLY_ADDRESSED",
+        "evidence": [
+          "docs/reviewer_closure/AF_PVC_REFERENCE_DISPOSITION.md",
+          "docs/external_validation/sph_results.md",
+          "configs/external_validation/sph_frozen.json",
+          "docs/reviewer_closure/GENERALIZATION_PER_CLASS_METRICS.json",
+          "docs/reviewer_closure/GENERALIZATION_ERROR_ANALYSIS.md"
+        ],
+        "protocol_population_result": "SPH PVC uses ECG statement code 60: 1,067 positive and 24,703 negative recorded-statement comparisons per P6/P8; F1 is 54.08% for P6 and 66.16% for P8. No beat annotations or localization metric are present.",
+        "addressed_scope": "The available result is correctly bounded to record-level ECG statement agreement.",
+        "unresolved": "Beat-level detection, temporal matching, episode counts and clinical adjudication are not measured.",
+        "recovery_assessment": "Cannot be recovered from record-level codes; needs beat-labeled ECGs and matching protocol.",
+        "experiment_requirement": "Required if beat detection or localization is claimed; not required for a strictly record-level statement study.",
+        "editorial_action": "Explicitly state the ECG-level unit and remove any beat-level performance implication.",
+        "scientific_risk": "High if record-level F1 is interpreted as heartbeat detector accuracy."
+      }
+    },
+    {
+      "id": "R2-6",
+      "technical_status": "MANUSCRIPT_ONLY_PENDING",
+      "reviewer_satisfaction": "EDITORIAL_ACTION_ONLY",
+      "manuscript_state": "SIN_EDITAR",
+      "closure_basis": "NOT_CLOSED_BY_CI_OR_DOCUMENTATION_ALONE",
+      "evidence_confidence": "Technical evidence is available for the bounded claim, but the manuscript remains unedited.",
+      "traceability": {
+        "evidence_refs": [
+          "docs/reviewer_closure/REVIEWER_48_STATUS.md",
+          "docs/external_validation/sph_results.md"
+        ],
+        "binding_rule": "Use the linked source documents for exact artifact hashes, job IDs and commits. A path, filename, checkpoint metadata or completed scheduler state alone does not prove that a job consumed an artifact; unresolved edges remain unverified."
+      },
+      "evidence_assessment": {
+        "recorded_result_or_population": "Observed external transfer includes very low PPV/F1 for P4 and P8 PAC; the data do not establish that the framework eliminates diagnostic distortion or provides an uncompromised benchmark.",
+        "scope_addressed": "The measured evidence constrains the claim and identifies the need to verify the reference.",
+        "not_demonstrated_or_remaining": "The submitted sentence and citation have not been corrected; citation [4] must be checked against the final claim."
+      },
+      "work_required": {
+        "code_change": "No new code change is identified by the current source record. Implement one only if a specific reproducible defect is found.",
+        "repeat_verification": "Repeat only if new source bytes, code, data or a protocol change affects this item; use the existing linked receipt as the current evidence.",
+        "targeted_recovery": "Editorially recoverable, but a stronger causal claim would require new comparative evidence.",
+        "new_experiment": "None if the absolute claim is removed; required for any retained claim that the architecture eliminates distortion.",
+        "manuscript_edit": "Replace the absolute claim with a bounded observation or remove it, and verify the cited source.",
+        "author_approval": "Required before final manuscript wording or submission."
+      },
+      "remaining_actions": {
+        "recovery": "Editorially recoverable, but a stronger causal claim would require new comparative evidence.",
+        "experiment": "None if the absolute claim is removed; required for any retained claim that the architecture eliminates distortion.",
+        "editorial": "Replace the absolute claim with a bounded observation or remove it, and verify the cited source.",
+        "action_class": "PREPARE_EDITORIAL_CHANGE_WITHOUT_EDITING_SUBMITTED_MANUSCRIPT",
+        "responsible_party": "Codex prepares proposed edits; authors review and approve before any manuscript change or submission."
+      },
+      "source_record": {
+        "id": "R2-6",
+        "origin": "Reviewer 2, Round 1, point 6, distortion and citation",
+        "request": "Clarify whether the claim that the framework eliminates diagnostic distortion refers to this study and justify or correct citation [4].",
+        "manuscript_scope": "Discussion claim and its cited reference.",
+        "technical_status": "MANUSCRIPT_ONLY_PENDING",
+        "reviewer_satisfaction": "EDITORIAL_ACTION_ONLY",
+        "evidence": [
+          "docs/reviewer_closure/REVIEWER_48_STATUS.md",
+          "docs/external_validation/sph_results.md"
+        ],
+        "protocol_population_result": "Observed external transfer includes very low PPV/F1 for P4 and P8 PAC; the data do not establish that the framework eliminates diagnostic distortion or provides an uncompromised benchmark.",
+        "addressed_scope": "The measured evidence constrains the claim and identifies the need to verify the reference.",
+        "unresolved": "The submitted sentence and citation have not been corrected; citation [4] must be checked against the final claim.",
+        "recovery_assessment": "Editorially recoverable, but a stronger causal claim would require new comparative evidence.",
+        "experiment_requirement": "None if the absolute claim is removed; required for any retained claim that the architecture eliminates distortion.",
+        "editorial_action": "Replace the absolute claim with a bounded observation or remove it, and verify the cited source.",
+        "scientific_risk": "High if the manuscript asserts elimination of bias or distortion without an appropriate comparison."
+      }
+    }
+  ]
+}
