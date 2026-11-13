@@ -1,0 +1,929 @@
+{
+  "archives": [
+    {
+      "artifact_id": "sha256:bb32e8a7f2bf32b8182a14195a04c3dda9d9356fe0ae5c580f9da353a863803b",
+      "internal_sha_matches": 0,
+      "internal_sha_missing_or_mismatch": 0,
+      "members": 10,
+      "status": "CRC_OK"
+    },
+    {
+      "artifact_id": "sha256:5f7e586e864a8d4983ec60652d29342a6e0d6edb1e68bf738cf5f1f5f2e26749",
+      "internal_sha_matches": 0,
+      "internal_sha_missing_or_mismatch": 0,
+      "members": 71,
+      "status": "CRC_OK"
+    },
+    {
+      "artifact_id": "sha256:11e0a10182868452a1133fd346c28a406afb225993c8647d3d70d306d62f054d",
+      "internal_sha_matches": 28,
+      "internal_sha_missing_or_mismatch": 0,
+      "members": 29,
+      "status": "CRC_OK"
+    },
+    {
+      "artifact_id": "sha256:984525cd52197797c731893daa733f16cab641dea84d4077e5ce38d5a2b22860",
+      "internal_sha_matches": 409,
+      "internal_sha_missing_or_mismatch": 0,
+      "members": 410,
+      "status": "CRC_OK"
+    },
+    {
+      "artifact_id": "sha256:de73efab36cad145784263610bbb7aac7bae0d36210b19cb5ff8c429b8efa6b7",
+      "internal_sha_matches": 14,
+      "internal_sha_missing_or_mismatch": 0,
+      "members": 15,
+      "status": "CRC_OK"
+    },
+    {
+      "artifact_id": "sha256:1637b2fe3f2a9f65551dd78f51fc659d7d58c0364437cf69b646bc3b819eb8aa",
+      "internal_sha_matches": 61,
+      "internal_sha_missing_or_mismatch": 0,
+      "members": 62,
+      "status": "CRC_OK"
+    },
+    {
+      "artifact_id": "sha256:00bd89d0f5cdbb7c7fe2f309c2d8e019269c0cf76018e8c91b21820d65714a4a",
+      "internal_sha_matches": 17,
+      "internal_sha_missing_or_mismatch": 0,
+      "members": 18,
+      "status": "CRC_OK"
+    },
+    {
+      "artifact_id": "sha256:9b223e999394b61c6b0f68377260683309e57650c03743bf5100e3e4651c0f4e",
+      "internal_sha_matches": 17,
+      "internal_sha_missing_or_mismatch": 0,
+      "members": 18,
+      "status": "CRC_OK"
+    },
+    {
+      "artifact_id": "sha256:a765b9039aae89de987ced8822e39ff2179cd88d3eb60796f5371d94b5e26a25",
+      "internal_sha_matches": 60,
+      "internal_sha_missing_or_mismatch": 0,
+      "members": 61,
+      "status": "CRC_OK"
+    },
+    {
+      "artifact_id": "sha256:066b8018538b243da2ec2355b67104249d8df214b7cd73c6dd77bb7c8e8d821c",
+      "internal_sha_matches": 18,
+      "internal_sha_missing_or_mismatch": 0,
+      "members": 19,
+      "status": "CRC_OK"
+    },
+    {
+      "artifact_id": "sha256:43bde72751a9e80d6702a96b46d462b84710d0cce6bd1df13eefc2968c8693f8",
+      "internal_sha_matches": 395,
+      "internal_sha_missing_or_mismatch": 0,
+      "members": 396,
+      "status": "CRC_OK"
+    },
+    {
+      "artifact_id": "sha256:578810d0c381629356b3ab0257178dcb7dc300799878c885ae9d85a93bab4964",
+      "internal_sha_matches": 410,
+      "internal_sha_missing_or_mismatch": 0,
+      "members": 411,
+      "status": "CRC_OK"
+    },
+    {
+      "artifact_id": "sha256:32a6dc839354e624f7154ccaf63ad308bf0de923bc967b76f9e54d77964f0a8c",
+      "internal_sha_matches": 14,
+      "internal_sha_missing_or_mismatch": 0,
+      "members": 15,
+      "status": "CRC_OK"
+    }
+  ],
+  "content_identities": 2967,
+  "duplicate_location_count": 2005,
+  "empty_locations": 476,
+  "experiment_index": {
+    "catalog_only_rows": 143,
+    "checkpoint_rows": 71,
+    "entries": 213,
+    "family_or_run_rows": 70,
+    "family_or_run_states": {
+      "PARTIALLY_VERIFIED": 6,
+      "RECEIPT_ONLY_VERIFICATION": 14,
+      "REPRODUCED_INDEPENDENTLY": 4,
+      "UNSUPPORTED_CLAIM": 1,
+      "VERIFIED_PRIMARY_EVIDENCE": 1,
+      "VERIFIED_WITH_SCOPE_LIMITATION": 44
+    },
+    "training_rows": 33
+  },
+  "first_parent_merges": [
+    "6f50a6337fc3e8b518655b05916ced7447598b47 85c1d8e6f3603560af9aea47e33806a530428cfb dfad673da0c8e45a746f52d4d99f645ba0b24d2b Publish TITAN integration verification receipts",
+    "85c1d8e6f3603560af9aea47e33806a530428cfb 2677a3333069c16915cb71acd55d0f0176570bcf 3e11ecf3fd4554fee7dda981977ec9295f6f0030 Consolidate audited TITAN scientific evidence via PR #13",
+    "2677a3333069c16915cb71acd55d0f0176570bcf 79af292762eef20b23161d17541b496ea98218e9 a10f1b1eab62de241c8913a7b9f3c559e37d9b7e Merge pull request #2 from Mateo197802/codex/reviewer-replay-diagnostics",
+    "79af292762eef20b23161d17541b496ea98218e9 ff5814bd2c6d8743e663f50e88eddd66e6d65704 5ddda529c78428cf20538f76cbf4d19757edc1a9 Merge pull request #1 from Mateo197802/revision/life-4620846"
+  ],
+  "github": {
+    "main_ci": {
+      "conclusion": "success",
+      "headSha": "6f50a6337fc3e8b518655b05916ced7447598b47",
+      "jobs": [
+        {
+          "conclusion": "success",
+          "name": "test (3.12)"
+        },
+        {
+          "conclusion": "success",
+          "name": "test (3.10)"
+        },
+        {
+          "conclusion": "success",
+          "name": "test (3.11)"
+        }
+      ],
+      "status": "completed"
+    },
+    "prs": [
+      {
+        "baseRefName": "codex/titan-performance-recovery",
+        "baseRefOid": "732ecb1c8e697997cdedf85f67db70d38bd765ed",
+        "headRefName": "codex/titan-autonomous-optimization",
+        "headRefOid": "8a2d8aab60f9d017ce515847bfa96c8de97ce565",
+        "isDraft": true,
+        "mergeCommit": null,
+        "number": 16,
+        "state": "OPEN",
+        "title": "TITAN V4.5: autonomous development optimization in CEDIA"
+      },
+      {
+        "baseRefName": "codex/titan-duration-aware-adaptation",
+        "baseRefOid": "0b87b9354796807b3bab26f3ded158f38afcc489",
+        "headRefName": "codex/titan-performance-recovery",
+        "headRefOid": "732ecb1c8e697997cdedf85f67db70d38bd765ed",
+        "isDraft": true,
+        "mergeCommit": null,
+        "number": 15,
+        "state": "OPEN",
+        "title": "TITAN V4.5: verified corrective weight study results"
+      },
+      {
+        "baseRefName": "main",
+        "baseRefOid": "85c1d8e6f3603560af9aea47e33806a530428cfb",
+        "headRefName": "codex/titan-v45-main-integration-receipt-20261112",
+        "headRefOid": "dfad673da0c8e45a746f52d4d99f645ba0b24d2b",
+        "isDraft": false,
+        "mergeCommit": {
+          "oid": "6f50a6337fc3e8b518655b05916ced7447598b47"
+        },
+        "number": 14,
+        "state": "MERGED",
+        "title": "Record TITAN main integration verification"
+      },
+      {
+        "baseRefName": "main",
+        "baseRefOid": "2677a3333069c16915cb71acd55d0f0176570bcf",
+        "headRefName": "codex/titan-v45-main-integration-20261112",
+        "headRefOid": "3e11ecf3fd4554fee7dda981977ec9295f6f0030",
+        "isDraft": false,
+        "mergeCommit": {
+          "oid": "85c1d8e6f3603560af9aea47e33806a530428cfb"
+        },
+        "number": 13,
+        "state": "MERGED",
+        "title": "Consolidate TITAN V4.5 scientific evidence and separate V4.6 experiments"
+      },
+      {
+        "baseRefName": "codex/titan-v45-scientific-closure",
+        "baseRefOid": "e5aa65ec1ef43cf5477e688c934577f5dcc4d75c",
+        "headRefName": "codex/titan-v45-r2-3f-r2-4k-rigorous",
+        "headRefOid": "608b8c1be17e4dd15a3e73a75be69bc49ac4b003",
+        "isDraft": false,
+        "mergeCommit": {
+          "oid": "511709561cfece3acf4edafd564640dcc99a169b"
+        },
+        "number": 12,
+        "state": "MERGED",
+        "title": "Verify TITAN V4.5 morphology and selective prediction in CEDIA"
+      },
+      {
+        "baseRefName": "codex/titan-duration-aware-adaptation",
+        "baseRefOid": "63c74b3fde2c51f7f8cde4ad396d77a1bd16cb29",
+        "headRefName": "codex/titan-performance-recovery",
+        "headRefOid": "2d1f8432177835e189cfa769e7880d4f0165cdcb",
+        "isDraft": false,
+        "mergeCommit": {
+          "oid": "0b87b9354796807b3bab26f3ded158f38afcc489"
+        },
+        "number": 11,
+        "state": "MERGED",
+        "title": "TITAN V4.5: development-only specialist performance recovery"
+      },
+      {
+        "baseRefName": "codex/titan-external-validation-20261111",
+        "baseRefOid": "85d673ac04986fe1c50a8cf39d8279344a708647",
+        "headRefName": "codex/titan-duration-aware-adaptation",
+        "headRefOid": "63c74b3fde2c51f7f8cde4ad396d77a1bd16cb29",
+        "isDraft": false,
+        "mergeCommit": {
+          "oid": "a44984d31bf075059684a399834aba52f6308017"
+        },
+        "number": 10,
+        "state": "MERGED",
+        "title": "TITAN V4.5 duration-aware domain adaptation"
+      },
+      {
+        "baseRefName": "codex/titan-v45-four-reviewer-experiments",
+        "baseRefOid": "bf081e9c2fd62704821f56d614399d7d0eb6e656",
+        "headRefName": "codex/titan-v45-scientific-closure",
+        "headRefOid": "e5aa65ec1ef43cf5477e688c934577f5dcc4d75c",
+        "isDraft": false,
+        "mergeCommit": {
+          "oid": "ad0e8a929bed88895d40f2de572169be80d62fb9"
+        },
+        "number": 9,
+        "state": "MERGED",
+        "title": "TITAN V4.5: scientific closure experiments for four reviewer comments"
+      },
+      {
+        "baseRefName": "main",
+        "baseRefOid": "2677a3333069c16915cb71acd55d0f0176570bcf",
+        "headRefName": "codex/titan-v45-evidence-reconciliation",
+        "headRefOid": "4abb2de2bda3b3a2fa61b9418594690b5a3fc629",
+        "isDraft": true,
+        "mergeCommit": {
+          "oid": "69ecb60b410697b045a72be9e66b3674ff0e1d2b"
+        },
+        "number": 8,
+        "state": "MERGED",
+        "title": "TITAN V4.5: reconcile reviewer evidence and scientific claims"
+      },
+      {
+        "baseRefName": "main",
+        "baseRefOid": "2677a3333069c16915cb71acd55d0f0176570bcf",
+        "headRefName": "codex/titan-v45-reviewer-12-clarifications-20261112",
+        "headRefOid": "1ee102e94484c46f01cca14346ef2c041c456b25",
+        "isDraft": true,
+        "mergeCommit": {
+          "oid": "39c031f92b6e62d9d044e9fc740682b2b1ee445c"
+        },
+        "number": 7,
+        "state": "MERGED",
+        "title": "docs: clarify 12 reviewer evidence statuses and clinical scope"
+      },
+      {
+        "baseRefName": "codex/titan-specialist-heads-20261111",
+        "baseRefOid": "f4d6be30b0befea739cf2e35df1033230a1f5d10",
+        "headRefName": "codex/titan-external-validation-20261111",
+        "headRefOid": "85d673ac04986fe1c50a8cf39d8279344a708647",
+        "isDraft": false,
+        "mergeCommit": {
+          "oid": "05b5f2c7970243061b907ef61d555653f4bb5c30"
+        },
+        "number": 6,
+        "state": "MERGED",
+        "title": "TITAN V4.5 external study: executed preflight and reference-support gate"
+      },
+      {
+        "baseRefName": "main",
+        "baseRefOid": "2677a3333069c16915cb71acd55d0f0176570bcf",
+        "headRefName": "research/titan-benchmarkmax-v46",
+        "headRefOid": "8dfc29d83910dee7d2caea7a6028b96d481a134a",
+        "isDraft": true,
+        "mergeCommit": {
+          "oid": "6f9d7f360677c492bcbf868f95a9123747417f8a"
+        },
+        "number": 5,
+        "state": "MERGED",
+        "title": "TITAN V4.6 BenchmarkMax experimental program"
+      },
+      {
+        "baseRefName": "main",
+        "baseRefOid": "2677a3333069c16915cb71acd55d0f0176570bcf",
+        "headRefName": "codex/titan-a10-optuna-evidence",
+        "headRefOid": "81a75ec69f086dae7c295d65f1c2720416d9db81",
+        "isDraft": true,
+        "mergeCommit": {
+          "oid": "e0d6ce6daa2c9a954b56779e77c7974105a6fa81"
+        },
+        "number": 4,
+        "state": "MERGED",
+        "title": "Document verified A10 artifacts and Optuna evidence limits"
+      },
+      {
+        "baseRefName": "main",
+        "baseRefOid": "2677a3333069c16915cb71acd55d0f0176570bcf",
+        "headRefName": "codex/titan-v45-external-review",
+        "headRefOid": "68274ee05dab1e5aaa48aa588262b5b8289cbbd4",
+        "isDraft": true,
+        "mergeCommit": {
+          "oid": "84f989e8074004ee29e8607a3a996c86b1b64c41"
+        },
+        "number": 3,
+        "state": "MERGED",
+        "title": "Execute frozen SPH transfer evaluation and document V4.5 evidence"
+      },
+      {
+        "baseRefName": "main",
+        "baseRefOid": "79af292762eef20b23161d17541b496ea98218e9",
+        "headRefName": "codex/reviewer-replay-diagnostics",
+        "headRefOid": "a10f1b1eab62de241c8913a7b9f3c559e37d9b7e",
+        "isDraft": false,
+        "mergeCommit": {
+          "oid": "2677a3333069c16915cb71acd55d0f0176570bcf"
+        },
+        "number": 2,
+        "state": "MERGED",
+        "title": "Quantify frozen replay residuals and official PTB-XL coverage"
+      },
+      {
+        "baseRefName": "main",
+        "baseRefOid": "ff5814bd2c6d8743e663f50e88eddd66e6d65704",
+        "headRefName": "revision/life-4620846",
+        "headRefOid": "5ddda529c78428cf20538f76cbf4d19757edc1a9",
+        "isDraft": false,
+        "mergeCommit": {
+          "oid": "79af292762eef20b23161d17541b496ea98218e9"
+        },
+        "number": 1,
+        "state": "MERGED",
+        "title": "Audit revision evidence and disclose failed CEDIA replay equivalence"
+      }
+    ],
+    "release_assets": [
+      {
+        "digest": "sha256:bf71e4cf8acc34031cb3611c7031e0649822e705fd7dcea354a3ea583ce920ee",
+        "name": "backbone-v3ag-pathology.pt",
+        "size": 233566092
+      },
+      {
+        "digest": "sha256:ca5d4dcb4b9828e6c4339800fe81ec27f32d9b09a090bb57503bfb56746a8da8",
+        "name": "backbone-v3f-original.pt",
+        "size": 233565900
+      },
+      {
+        "digest": "sha256:fc1c3fc5374af962a8fc5903b6d1dd99a44ebfd7c66e0dfceaa106167afee558",
+        "name": "external-dev-pathology-ptbxl-fold10.tar.zst",
+        "size": 10977160
+      },
+      {
+        "digest": "sha256:ec6ade27ab77b9807d41331016def56e54cbb96fba528fd7aca811e5a468f2fb",
+        "name": "external-dev-rhythm-chapman-shaoxing.tar.zst",
+        "size": 97120385
+      },
+      {
+        "digest": "sha256:0e4d5d9785026fda1b43b7257729264b9c26895e82bd179b8a9df381c01d6132",
+        "name": "release-manifest.json",
+        "size": 4287
+      },
+      {
+        "digest": "sha256:6ce4da65c476386609591f839f40fc21219715f9226d31669616ffb2c4c85ead",
+        "name": "SHA256SUMS",
+        "size": 826
+      },
+      {
+        "digest": "sha256:cf5091e962fffb3254b1a71fe57236dd82ea0139093df192511499d931391dbc",
+        "name": "specialists-v3ag-primary4-calibrated.pt",
+        "size": 29413606
+      },
+      {
+        "digest": "sha256:9c5a9265a7155e1206c551cc4e6d645b86363ba3dbdeb7baf7b9f173c314be3d",
+        "name": "specialists-v3p-e008-primary6-diagnostic.pt",
+        "size": 22354966
+      },
+      {
+        "digest": "sha256:b30cb2bbb45f1231c93ff1c196aa966b57b49831cadb296131c0283e7b0ceb02",
+        "name": "specialists-v3q-primary8-best-candidate.pt",
+        "size": 29498326
+      }
+    ]
+  },
+  "history_additional_pr_refs": [
+    "05b5f2c7970243061b907ef61d555653f4bb5c30",
+    "0b87b9354796807b3bab26f3ded158f38afcc489",
+    "1ee102e94484c46f01cca14346ef2c041c456b25",
+    "2677a3333069c16915cb71acd55d0f0176570bcf",
+    "2d1f8432177835e189cfa769e7880d4f0165cdcb",
+    "39c031f92b6e62d9d044e9fc740682b2b1ee445c",
+    "3e11ecf3fd4554fee7dda981977ec9295f6f0030",
+    "4abb2de2bda3b3a2fa61b9418594690b5a3fc629",
+    "511709561cfece3acf4edafd564640dcc99a169b",
+    "5ddda529c78428cf20538f76cbf4d19757edc1a9",
+    "608b8c1be17e4dd15a3e73a75be69bc49ac4b003",
+    "63c74b3fde2c51f7f8cde4ad396d77a1bd16cb29",
+    "68274ee05dab1e5aaa48aa588262b5b8289cbbd4",
+    "69ecb60b410697b045a72be9e66b3674ff0e1d2b",
+    "6f50a6337fc3e8b518655b05916ced7447598b47",
+    "6f9d7f360677c492bcbf868f95a9123747417f8a",
+    "732ecb1c8e697997cdedf85f67db70d38bd765ed",
+    "79af292762eef20b23161d17541b496ea98218e9",
+    "81a75ec69f086dae7c295d65f1c2720416d9db81",
+    "84f989e8074004ee29e8607a3a996c86b1b64c41",
+    "85c1d8e6f3603560af9aea47e33806a530428cfb",
+    "85d673ac04986fe1c50a8cf39d8279344a708647",
+    "8a2d8aab60f9d017ce515847bfa96c8de97ce565",
+    "8dfc29d83910dee7d2caea7a6028b96d481a134a",
+    "a10f1b1eab62de241c8913a7b9f3c559e37d9b7e",
+    "a44984d31bf075059684a399834aba52f6308017",
+    "ad0e8a929bed88895d40f2de572169be80d62fb9",
+    "dfad673da0c8e45a746f52d4d99f645ba0b24d2b",
+    "e0d6ce6daa2c9a954b56779e77c7974105a6fa81",
+    "e5aa65ec1ef43cf5477e688c934577f5dcc4d75c"
+  ],
+  "history_only_blobs": 909,
+  "local_link_candidates": [],
+  "locations": 4972,
+  "main": "6f50a6337fc3e8b518655b05916ced7447598b47",
+  "main_files": 1151,
+  "metric_states": {
+    "DERIVED_FROM_VERIFIED_INPUT": 170,
+    "REPRODUCED_INDEPENDENTLY": 145
+  },
+  "native": {
+    "read_failures": [],
+    "receipt_ids": [
+      "sha256:b8504048783aa787a77da366fa6c922f45320a6f88d8918ae677e6b0eb0c4b38"
+    ],
+    "roots": {
+      "external-validation-20261111": true,
+      "specialist-heads-20261111-v2": true,
+      "titan-corrective-v1": true,
+      "titan-four-reviewers-historical-replay": true,
+      "titan-four-reviewers-november-phase1": true,
+      "titan-main-integration-audit-20261112": true,
+      "titan-performance-recovery-v1": true,
+      "titan-v45-benchmarkmax-v46": true,
+      "titan-v45-scientific-closure": true,
+      "titan-v45-two-comment-rigorous": true
+    },
+    "scheduler": [
+      {
+        "elapsed": "00:22:55",
+        "end_scheduler_local": "2026-06-22T10:42:23",
+        "exit": "0:0",
+        "job": "16748",
+        "start_scheduler_local": "2026-06-22T10:19:28",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:23:06",
+        "end_scheduler_local": "2026-06-22T11:06:30",
+        "exit": "0:0",
+        "job": "16749",
+        "start_scheduler_local": "2026-06-22T10:43:24",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:23:04",
+        "end_scheduler_local": "2026-06-22T11:29:46",
+        "exit": "0:0",
+        "job": "16750",
+        "start_scheduler_local": "2026-06-22T11:06:42",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:22:40",
+        "end_scheduler_local": "2026-06-22T11:52:42",
+        "exit": "0:0",
+        "job": "16751",
+        "start_scheduler_local": "2026-06-22T11:30:02",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:23:16",
+        "end_scheduler_local": "2026-06-22T12:16:16",
+        "exit": "0:0",
+        "job": "16752",
+        "start_scheduler_local": "2026-06-22T11:53:00",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:23:58",
+        "end_scheduler_local": "2026-06-22T12:40:26",
+        "exit": "0:0",
+        "job": "16753",
+        "start_scheduler_local": "2026-06-22T12:16:28",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:23:09",
+        "end_scheduler_local": "2026-06-22T13:03:49",
+        "exit": "0:0",
+        "job": "16754",
+        "start_scheduler_local": "2026-06-22T12:40:40",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:45:55",
+        "end_scheduler_local": "2026-06-22T13:50:14",
+        "exit": "0:0",
+        "job": "16755",
+        "start_scheduler_local": "2026-06-22T13:04:19",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:24:19",
+        "end_scheduler_local": "2026-06-22T14:14:54",
+        "exit": "0:0",
+        "job": "16756",
+        "start_scheduler_local": "2026-06-22T13:50:35",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:15:59",
+        "end_scheduler_local": "2026-06-22T14:31:24",
+        "exit": "0:0",
+        "job": "16757",
+        "start_scheduler_local": "2026-06-22T14:15:25",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:18:47",
+        "end_scheduler_local": "2026-06-22T14:50:31",
+        "exit": "0:0",
+        "job": "16758",
+        "start_scheduler_local": "2026-06-22T14:31:44",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:21:56",
+        "end_scheduler_local": "2026-06-22T15:12:50",
+        "exit": "0:0",
+        "job": "16759",
+        "start_scheduler_local": "2026-06-22T14:50:54",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "01:22:18",
+        "end_scheduler_local": "2026-06-22T17:07:24",
+        "exit": "0:0",
+        "job": "16768",
+        "start_scheduler_local": "2026-06-22T15:45:06",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:19:00",
+        "end_scheduler_local": "2026-06-23T01:02:10",
+        "exit": "0:0",
+        "job": "16781",
+        "start_scheduler_local": "2026-06-23T00:43:10",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:15:07",
+        "end_scheduler_local": "2026-11-08T10:16:20",
+        "exit": "0:0",
+        "job": "32668",
+        "start_scheduler_local": "2026-11-08T10:01:13",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:17:46",
+        "end_scheduler_local": "2026-11-08T10:39:29",
+        "exit": "0:0",
+        "job": "32669",
+        "start_scheduler_local": "2026-11-08T10:21:43",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:00:41",
+        "end_scheduler_local": "2026-11-08T10:55:00",
+        "exit": "0:0",
+        "job": "32677",
+        "start_scheduler_local": "2026-11-08T10:54:19",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:01:25",
+        "end_scheduler_local": "2026-11-08T21:17:39",
+        "exit": "0:0",
+        "job": "32728",
+        "start_scheduler_local": "2026-11-08T21:16:14",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:03:11",
+        "end_scheduler_local": "2026-11-09T03:40:07",
+        "exit": "0:0",
+        "job": "32758",
+        "start_scheduler_local": "2026-11-09T03:36:56",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:01:11",
+        "end_scheduler_local": "2026-11-09T05:03:41",
+        "exit": "0:0",
+        "job": "32761",
+        "start_scheduler_local": "2026-11-09T05:02:30",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:03:08",
+        "end_scheduler_local": "2026-11-09T06:21:36",
+        "exit": "0:0",
+        "job": "32763",
+        "start_scheduler_local": "2026-11-09T06:18:28",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:25:55",
+        "end_scheduler_local": "2026-11-09T12:06:10",
+        "exit": "0:0",
+        "job": "32805",
+        "start_scheduler_local": "2026-11-09T11:40:15",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:46:19",
+        "end_scheduler_local": "2026-11-12T01:47:40",
+        "exit": "0:0",
+        "job": "33296",
+        "start_scheduler_local": "2026-11-12T01:01:21",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:15:18",
+        "end_scheduler_local": "2026-11-12T04:19:34",
+        "exit": "0:0",
+        "job": "33355",
+        "start_scheduler_local": "2026-11-12T04:04:16",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:18:43",
+        "end_scheduler_local": "2026-11-12T04:53:46",
+        "exit": "0:0",
+        "job": "33357",
+        "start_scheduler_local": "2026-11-12T04:35:03",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:00:26",
+        "end_scheduler_local": "2026-11-12T04:54:15",
+        "exit": "0:0",
+        "job": "33362",
+        "start_scheduler_local": "2026-11-12T04:53:49",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:01:11",
+        "end_scheduler_local": "2026-11-12T04:55:42",
+        "exit": "0:0",
+        "job": "33390",
+        "start_scheduler_local": "2026-11-12T04:54:31",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:01:14",
+        "end_scheduler_local": "2026-11-12T04:56:58",
+        "exit": "0:0",
+        "job": "33396",
+        "start_scheduler_local": "2026-11-12T04:55:44",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:00:13",
+        "end_scheduler_local": "2026-11-12T04:57:13",
+        "exit": "0:0",
+        "job": "33399",
+        "start_scheduler_local": "2026-11-12T04:57:00",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "01:27:14",
+        "end_scheduler_local": "2026-11-12T06:24:29",
+        "exit": "0:0",
+        "job": "33410",
+        "start_scheduler_local": "2026-11-12T04:57:15",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:00:34",
+        "end_scheduler_local": "2026-11-12T06:26:49",
+        "exit": "0:0",
+        "job": "33414",
+        "start_scheduler_local": "2026-11-12T06:26:15",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "04:03:53",
+        "end_scheduler_local": "2026-11-12T10:34:29",
+        "exit": "1:0",
+        "job": "33474",
+        "start_scheduler_local": "2026-11-12T06:30:36",
+        "state": "FAILED"
+      },
+      {
+        "elapsed": "00:08:03",
+        "end_scheduler_local": "2026-11-12T10:42:55",
+        "exit": "0:0",
+        "job": "33572",
+        "start_scheduler_local": "2026-11-12T10:34:52",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "01:03:36",
+        "end_scheduler_local": "2026-11-12T11:46:58",
+        "exit": "0:0",
+        "job": "33573",
+        "start_scheduler_local": "2026-11-12T10:43:22",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:17:49",
+        "end_scheduler_local": "2026-11-12T12:06:17",
+        "exit": "0:0",
+        "job": "33574",
+        "start_scheduler_local": "2026-11-12T11:48:28",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:00:23",
+        "end_scheduler_local": "2026-11-12T12:06:52",
+        "exit": "0:0",
+        "job": "33575",
+        "start_scheduler_local": "2026-11-12T12:06:29",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:01:13",
+        "end_scheduler_local": "2026-11-12T11:48:11",
+        "exit": "0:0",
+        "job": "33596",
+        "start_scheduler_local": "2026-11-12T11:46:58",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:06:39",
+        "end_scheduler_local": "2026-11-12T15:24:04",
+        "exit": "0:0",
+        "job": "33697",
+        "start_scheduler_local": "2026-11-12T15:17:25",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:01:32",
+        "end_scheduler_local": "2026-11-12T16:03:11",
+        "exit": "0:0",
+        "job": "33704",
+        "start_scheduler_local": "2026-11-12T16:01:39",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:01:28",
+        "end_scheduler_local": "2026-11-12T16:12:53",
+        "exit": "0:0",
+        "job": "33720",
+        "start_scheduler_local": "2026-11-12T16:11:25",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:02:24",
+        "end_scheduler_local": "2026-11-12T16:32:19",
+        "exit": "0:0",
+        "job": "33737",
+        "start_scheduler_local": "2026-11-12T16:29:55",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:01:24",
+        "end_scheduler_local": "2026-11-12T17:06:12",
+        "exit": "0:0",
+        "job": "33747",
+        "start_scheduler_local": "2026-11-12T17:04:48",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:02:40",
+        "end_scheduler_local": "2026-11-12T18:26:01",
+        "exit": "0:0",
+        "job": "33795",
+        "start_scheduler_local": "2026-11-12T18:23:21",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:04:09",
+        "end_scheduler_local": "2026-11-12T18:30:33",
+        "exit": "0:0",
+        "job": "33796",
+        "start_scheduler_local": "2026-11-12T18:26:24",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:00:52",
+        "end_scheduler_local": "2026-11-12T18:31:46",
+        "exit": "0:0",
+        "job": "33799",
+        "start_scheduler_local": "2026-11-12T18:30:54",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:04:26",
+        "end_scheduler_local": "2026-11-12T18:36:50",
+        "exit": "0:0",
+        "job": "33801",
+        "start_scheduler_local": "2026-11-12T18:32:24",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:10:15",
+        "end_scheduler_local": "2026-11-12T18:48:39",
+        "exit": "0:0",
+        "job": "33803",
+        "start_scheduler_local": "2026-11-12T18:38:24",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:01:36",
+        "end_scheduler_local": "2026-11-12T18:53:00",
+        "exit": "0:0",
+        "job": "33805",
+        "start_scheduler_local": "2026-11-12T18:51:24",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:03:15",
+        "end_scheduler_local": "2026-11-12T18:58:39",
+        "exit": "0:0",
+        "job": "33807",
+        "start_scheduler_local": "2026-11-12T18:55:24",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:03:12",
+        "end_scheduler_local": "2026-11-12T19:29:07",
+        "exit": "0:0",
+        "job": "33825",
+        "start_scheduler_local": "2026-11-12T19:25:55",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:20:05",
+        "end_scheduler_local": "2026-11-12T19:49:27",
+        "exit": "0:0",
+        "job": "33826",
+        "start_scheduler_local": "2026-11-12T19:29:22",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:02:23",
+        "end_scheduler_local": "2026-11-12T19:52:09",
+        "exit": "0:0",
+        "job": "33827",
+        "start_scheduler_local": "2026-11-12T19:49:46",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:01:24",
+        "end_scheduler_local": "2026-11-12T19:53:41",
+        "exit": "0:0",
+        "job": "33829",
+        "start_scheduler_local": "2026-11-12T19:52:17",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:00:28",
+        "end_scheduler_local": "2026-11-12T19:54:45",
+        "exit": "0:0",
+        "job": "33831",
+        "start_scheduler_local": "2026-11-12T19:54:17",
+        "state": "COMPLETED"
+      },
+      {
+        "elapsed": "00:00:33",
+        "end_scheduler_local": "2026-11-12T19:55:50",
+        "exit": "0:0",
+        "job": "33832",
+        "start_scheduler_local": "2026-11-12T19:55:17",
+        "state": "COMPLETED"
+      }
+    ]
+  },
+  "native_adaptation_best_checkpoint_readback": 11,
+  "native_checkpoint_locations": 98,
+  "native_checkpoint_unique": 69,
+  "pr15": "732ecb1c8e697997cdedf85f67db70d38bd765ed",
+  "pr15_payload_delta": [
+    "A\tdocs/performance_recovery/CORRECTIVE_TECHNICAL_ASSESSMENT.md",
+    "A\tdocs/performance_recovery/corrective_evidence/CORRECTIVE_DECISION.json",
+    "A\tdocs/performance_recovery/corrective_evidence/CORRECTIVE_DIAGNOSIS.json",
+    "A\tdocs/performance_recovery/corrective_evidence/CORRECTIVE_FITS.json",
+    "A\tdocs/performance_recovery/corrective_evidence/CORRECTIVE_METRICS.csv",
+    "A\tdocs/performance_recovery/corrective_evidence/CORRECTIVE_PAIRED_INTERVALS.csv",
+    "A\tdocs/performance_recovery/corrective_evidence/CORRECTIVE_PRIVATE_READBACK.json",
+    "A\tdocs/performance_recovery/corrective_evidence/CORRECTIVE_REPRESENTATION_PROBE.csv",
+    "A\tdocs/performance_recovery/corrective_evidence/CORRECTIVE_REPRESENTATION_RECEIPT.json",
+    "A\tdocs/performance_recovery/corrective_evidence/CORRECTIVE_SELECTION.json",
+    "A\tdocs/performance_recovery/corrective_evidence/CORRECTIVE_SLURM.csv",
+    "M\tscripts/domain_adaptation/verify_corrective_delivery.py"
+  ],
+  "pr15_payload_presence_in_main": {
+    "docs/performance_recovery/CORRECTIVE_TECHNICAL_ASSESSMENT.md": "absent",
+    "docs/performance_recovery/corrective_evidence/CORRECTIVE_DECISION.json": "absent",
+    "docs/performance_recovery/corrective_evidence/CORRECTIVE_DIAGNOSIS.json": "absent",
+    "docs/performance_recovery/corrective_evidence/CORRECTIVE_FITS.json": "absent",
+    "docs/performance_recovery/corrective_evidence/CORRECTIVE_METRICS.csv": "absent",
+    "docs/performance_recovery/corrective_evidence/CORRECTIVE_PAIRED_INTERVALS.csv": "absent",
+    "docs/performance_recovery/corrective_evidence/CORRECTIVE_PRIVATE_READBACK.json": "absent",
+    "docs/performance_recovery/corrective_evidence/CORRECTIVE_REPRESENTATION_PROBE.csv": "absent",
+    "docs/performance_recovery/corrective_evidence/CORRECTIVE_REPRESENTATION_RECEIPT.json": "absent",
+    "docs/performance_recovery/corrective_evidence/CORRECTIVE_SELECTION.json": "absent",
+    "docs/performance_recovery/corrective_evidence/CORRECTIVE_SLURM.csv": "absent",
+    "scripts/domain_adaptation/verify_corrective_delivery.py": "earlier_or_different"
+  },
+  "release_declared_assets": 7,
+  "release_native_exact_match": 5,
+  "tree": "f4ce35f55af909786dd3e9e78c453db35c17024c"
+}
