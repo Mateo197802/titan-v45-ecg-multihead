@@ -52,6 +52,10 @@ case "$mode" in
     corrective-eval) python -B -u scripts/domain_adaptation/corrective_evaluate.py "$@" ;;
     corrective-probe) python -B -u scripts/domain_adaptation/corrective_probe.py "$@" ;;
     corrective-readback) python -B -u scripts/domain_adaptation/corrective_readback.py "$@" ;;
+    autonomous) python -B -u scripts/domain_adaptation/autonomous_loop.py "$@" ;;
+    autonomous-export) python -B -u scripts/domain_adaptation/autonomous_export.py "$@" ;;
+    autonomous-replay) python -B -u scripts/domain_adaptation/autonomous_replay.py "$@" ;;
+    autonomous-interval-audit) python -B -u scripts/domain_adaptation/autonomous_interval_audit.py "$@" ;;
     corrective-group)
         failed=0
         for arm in targeted targeted_source; do

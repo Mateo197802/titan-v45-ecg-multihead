@@ -1,0 +1,9 @@
+{
+  "max_absolute_error": 1.0798653637955624e-16,
+  "metric": "paired_macro_f1",
+  "protocol_sha256": "1641bf793725d444e3ec2411e8de2756c8718d47c0fcfa999594fc3c4e0bf342",
+  "scope": "CODE_SELECTION_ONLY",
+  "slurm_job": "33873",
+  "test_opened": false,
+  "valid_replicates": 1000
+}
