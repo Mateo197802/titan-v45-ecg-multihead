@@ -1,0 +1,76 @@
+{
+  "schema": "TITAN_SPECIALIST_STAGE_A_PUBLIC_REPRODUCIBILITY_MANIFEST_V1",
+  "study_id": "specialist-heads-20261111-v2",
+  "scope": "new_post_hoc_development_experiment_not_historical_v45_reproduction",
+  "protocol_revision": 2,
+  "configuration_sha256": "6be93477c3905c38a7cdd257cf6007a6a1246ce27354d067024ef1f5f5c9c14c",
+  "code": {
+    "feature_extraction_commit": "7cc45eb45a256d2495b352aa3ad614d2142de9a5",
+    "training_evaluation_commit": "341d022e5f524f7af514cacf234ce48da8309b0a",
+    "feature_pipeline_unchanged_between_commits": true
+  },
+  "cedia_jobs": {
+    "feature_extraction": {
+      "job_id": "33142",
+      "state": "COMPLETED",
+      "rhythm_records_scored": 11133,
+      "rhythm_windows_scored": 13725,
+      "p4_records_scored": 6205,
+      "errors": 0
+    },
+    "stage_a_training_evaluation": {
+      "job_id": "33182",
+      "state": "COMPLETED",
+      "training_runs": 29,
+      "candidate_checkpoints": 29,
+      "comparison_rows": 34,
+      "per_class_rows": 208
+    }
+  },
+  "baseline_release_assets_sha256": {
+    "backbone-v3f-original.pt": "ca5d4dcb4b9828e6c4339800fe81ec27f32d9b09a090bb57503bfb56746a8da8",
+    "backbone-v3ag-pathology.pt": "bf71e4cf8acc34031cb3611c7031e0649822e705fd7dcea354a3ea583ce920ee",
+    "specialists-v3p-e008-primary6-diagnostic.pt": "9c5a9265a7155e1206c551cc4e6d645b86363ba3dbdeb7baf7b9f173c314be3d",
+    "specialists-v3q-primary8-best-candidate.pt": "b30cb2bbb45f1231c93ff1c196aa966b57b49831cadb296131c0283e7b0ceb02",
+    "specialists-v3ag-primary4-calibrated.pt": "cf5091e962fffb3254b1a71fe57236dd82ea0139093df192511499d931391dbc"
+  },
+  "public_aggregate_artifacts": {
+    "SPECIALIST_MODEL_COMPARISON.csv": {
+      "public_lf_normalized_bytes": 7383,
+      "public_lf_normalized_sha256": "127b2b840b6547a7df7f2cb922e3dc08633f44d68a71059bbef99ebd5218251a",
+      "source_cedia_bytes": 7418,
+      "source_cedia_sha256": "86c2d013788727715cb08c571e0c692e6e9d80ded4879109874150e5cc8afb7a",
+      "transformation": "CRLF to LF only; table content unchanged"
+    },
+    "SPECIALIST_PER_CLASS_RESULTS.csv": {
+      "public_lf_normalized_bytes": 161156,
+      "public_lf_normalized_sha256": "2646a4ffec403d2446726514d307bdc42e704e80e8468f8f9a4ce2986ad9b1a0",
+      "source_cedia_bytes": 161365,
+      "source_cedia_sha256": "c08c5f34e022a798bb53759056c31554af546b001867bd8d57c1f5867495051d",
+      "transformation": "CRLF to LF only; table content unchanged"
+    },
+    "SPECIALIST_DATASET_SPLITS.json": {
+      "public_bytes": 2840,
+      "sha256": "3e69633764049070966a973eca60c9a5468a785c5aab92951a0f867228f3daa1",
+      "source_cedia_bytes": 16133,
+      "source_cedia_sha256": "8db588976fb7ec8dd4b9caac9a7a99ed4d99486273cfb663a6c51bcd226e39c6",
+      "transformation": "sanitized whitelist of aggregate split/source counts; row-level data omitted"
+    },
+    "SPECIALIST_AGGREGATE_AUDIT.json": {
+      "public_bytes": 593,
+      "sha256": "ed1a109a8bba945b7106aaaf5589473e98693b53c4d30e37329a165a70d3354a"
+    }
+  },
+  "privacy": {
+    "row_level_signals_labels_features_or_predictions_published": false,
+    "candidate_checkpoints_published": false,
+    "private_receipts_or_checkpoint_hashes_published": false,
+    "patient_or_ecg_identifiers_published": false
+  },
+  "analysis_state": {
+    "optuna_search": "NOT_RUN_BY_FROZEN_STAGE_A_DESIGN",
+    "partial_backbone_fine_tuning": "NOT_RUN",
+    "independent_external_validation": "NOT_RUN",
+    "historical_v45_weights_thresholds_predictions_modified": false
+  }
+}

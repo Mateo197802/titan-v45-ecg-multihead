@@ -1,0 +1,20 @@
+{
+  "baseline_delta_rows_verified": 29,
+  "comparison_rows": 34,
+  "confusion_metric_rows_verified": 186,
+  "identifier_like_columns": [],
+  "inputs": {
+    "SPECIALIST_MODEL_COMPARISON.csv": {
+      "bytes": 7383,
+      "sha256": "127b2b840b6547a7df7f2cb922e3dc08633f44d68a71059bbef99ebd5218251a"
+    },
+    "SPECIALIST_PER_CLASS_RESULTS.csv": {
+      "bytes": 161156,
+      "sha256": "2646a4ffec403d2446726514d307bdc42e704e80e8468f8f9a4ce2986ad9b1a0"
+    }
+  },
+  "macro_f1_rows_verified": 34,
+  "per_class_rows": 208,
+  "schema": "TITAN_SPECIALIST_AGGREGATE_AUDIT_V1",
+  "status": "PASS"
+}

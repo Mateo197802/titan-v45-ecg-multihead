@@ -19,6 +19,7 @@ ENTRYPOINTS = (
     "scripts/evaluation/audit_optuna.py",
     "scripts/artifacts/verify_artifact_hashes.py",
     "scripts/artifacts/fetch_release_assets.py",
+    "scripts/specialist_experiments/verify_release_weights.py",
     "scripts/artifacts/build_external_dev_archive.py",
     "scripts/artifacts/build_release_manifest.py",
     "scripts/artifacts/sanitize_report.py",

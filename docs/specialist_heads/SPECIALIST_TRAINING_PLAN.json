@@ -1,0 +1,62 @@
+{
+  "schema": "TITAN_SPECIALIST_TRAINING_PLAN_V2",
+  "study_id": "specialist-heads-20261111-v2",
+  "protocol_file": "configs/specialist_heads/study_20261111_v2.json",
+  "protocol_amendment": "docs/specialist_heads/PROTOCOL_AMENDMENT_20261111_01.md",
+  "baseline_audit": "docs/specialist_heads/SPECIALIST_BASELINE_AUDIT.md",
+  "stage_a": {
+    "status": "COMPLETED_WITH_MIXED_AND_NEGATIVE_SOURCE_RESULTS",
+    "execution_report": "docs/specialist_heads/SPECIALIST_TRAINING_EXECUTION.md",
+    "cedia_feature_job": "33142",
+    "cedia_training_evaluation_job": "33182",
+    "training_runs": 29,
+    "candidate_checkpoints_private": 29,
+    "comparison_rows": 34,
+    "per_class_rows": 208,
+    "aggregate_audit": "outputs/results/specialist_heads/20261111-v2/SPECIALIST_AGGREGATE_AUDIT.json",
+    "backbones": "frozen V3F and V3AG release assets",
+    "profiles": ["P6", "P8", "P4"],
+    "architecture": "ClassWiseBinaryMLP",
+    "hidden_dim": 192,
+    "dropout": 0.25,
+    "optimizer": "AdamW",
+    "learning_rate": 0.001,
+    "batch_size": 256,
+    "max_epochs": 40,
+    "early_stopping_patience": 6,
+    "selection": "record-aggregated masked validation BCE",
+    "losses": [
+      "source-balanced BCE with training-only positive weight clipped to [1, 10]",
+      "source-balanced BCE without positive multiplier",
+      "source-balanced focal loss, gamma 2, training-only prevalence alpha"
+    ],
+    "seeds": [20261111, 20261112, 20261113],
+    "fixed_primary_candidate": "weighted_bce_seed_20261111",
+    "threshold_calibration": "separate frozen calibration partition; holdout labels never used for threshold selection",
+    "compare_to": "immutable published weights on the same raw eligible records and endpoint masks"
+  },
+  "source_holdouts": {
+    "primary_rhythm": "train Chapman plus CPSC after excluding every record in the pinned public V4.5 P6/P8 evaluation manifests and exact waveform duplicates; calibrate and early-stop on separate Chapman partitions; evaluate remaining Georgia source records; historical backbone exposure remains unknown",
+    "complementary_loso": "train Chapman plus eligible Georgia records after excluding all known public V4.5 P6/P8 evaluation records and exact waveform duplicates; evaluate CPSC; development-domain sensitivity only",
+    "pathology": "PTB-XL folds 1-7 train, fold 8 early stopping, patient-hash split of fold 9 for calibration/internal evaluation; fold 10 excluded"
+  },
+  "stage_b": {
+    "status": "NOT_STARTED",
+    "gate": "consider only after Stage-A diagnostics; freeze a separate protocol and assess catastrophic-forgetting risk before unfreezing any backbone block",
+    "current_task_authorizes_automatic_finetuning": false
+  },
+  "optuna": {
+    "status": "NOT_RUN",
+    "reason": "bounded predeclared Stage-A comparison; source holdouts must not become search/tuning sets"
+  },
+  "external_validation": {
+    "status": "NOT_RUN",
+    "independent_external_validation": false,
+    "excluded_sources": ["SPH previously examined", "V3H previously used for selection", "PTB-XL fold 10"]
+  },
+  "privacy": {
+    "row_level_data_and_predictions": "authorized CEDIA storage only",
+    "new_checkpoints": "private CEDIA storage until separate release/privacy review",
+    "public_outputs": "sanitized aggregates, code, configs, hashes of model artifacts only"
+  }
+}
