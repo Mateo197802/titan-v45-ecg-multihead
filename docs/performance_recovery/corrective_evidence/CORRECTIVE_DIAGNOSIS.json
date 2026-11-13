@@ -1,0 +1,815 @@
+{
+  "allow_source": true,
+  "chapman_sb_ap": 0.6517444518074987,
+  "chapman_sb_frontier_has_feasible": true,
+  "checkpoint_tensor_count": 291,
+  "class_diagnosis": {
+    "1AVB": {
+      "feasible_threshold_exists": true,
+      "margin_by_outcome": {
+        "fn": {
+          "mean": -0.2934874892234802,
+          "n": 21
+        },
+        "fp": {
+          "mean": 0.25721004605293274,
+          "n": 61
+        },
+        "tn": {
+          "mean": -0.49795955419540405,
+          "n": 2972
+        },
+        "tp": {
+          "mean": 0.2996506989002228,
+          "n": 34
+        }
+      },
+      "max_feasible_f1": 0.5037037037037037,
+      "original": {
+        "accuracy": 0.9734455958549223,
+        "auroc": 0.9639720648622725,
+        "average_precision": 0.3692992016973517,
+        "brier_score": 0.019766523971182188,
+        "ece": 0.019959775663605343,
+        "f1": 0.4533333333333333,
+        "fn": 21,
+        "fp": 61,
+        "missing_probability_rows": 0,
+        "negative_support": 3033,
+        "positive_support": 55,
+        "precision": 0.35789473684210527,
+        "predicted_positive_support": 95,
+        "probability_negative_support": 3033,
+        "probability_positive_support": 55,
+        "probability_rows": 3088,
+        "recall": 0.6181818181818182,
+        "rows": 3088,
+        "specificity": 0.9798878997692054,
+        "tn": 2972,
+        "tp": 34,
+        "undefined": {}
+      },
+      "original_cut": 0.51,
+      "validation_oracle_only": true
+    },
+    "AFIB": {
+      "feasible_threshold_exists": true,
+      "margin_by_outcome": {
+        "fn": {
+          "mean": -0.44766998291015625,
+          "n": 22
+        },
+        "fp": {
+          "mean": 0.2136499583721161,
+          "n": 31
+        },
+        "tn": {
+          "mean": -0.6507209539413452,
+          "n": 2998
+        },
+        "tp": {
+          "mean": 0.24954470992088318,
+          "n": 37
+        }
+      },
+      "max_feasible_f1": 0.5844155844155844,
+      "original": {
+        "accuracy": 0.9828367875647669,
+        "auroc": 0.9601087789783505,
+        "average_precision": 0.601837360012004,
+        "brier_score": 0.015619473307146152,
+        "ece": 0.014142015918260399,
+        "f1": 0.5826771653543307,
+        "fn": 22,
+        "fp": 31,
+        "missing_probability_rows": 0,
+        "negative_support": 3029,
+        "positive_support": 59,
+        "precision": 0.5441176470588235,
+        "predicted_positive_support": 68,
+        "probability_negative_support": 3029,
+        "probability_positive_support": 59,
+        "probability_rows": 3088,
+        "recall": 0.6271186440677966,
+        "rows": 3088,
+        "specificity": 0.9897655992076593,
+        "tn": 2998,
+        "tp": 37,
+        "undefined": {}
+      },
+      "original_cut": 0.66,
+      "validation_oracle_only": true
+    },
+    "RBBB": {
+      "feasible_threshold_exists": true,
+      "margin_by_outcome": {
+        "fn": {
+          "mean": -0.2871686816215515,
+          "n": 19
+        },
+        "fp": {
+          "mean": 0.3308745324611664,
+          "n": 42
+        },
+        "tn": {
+          "mean": -0.43414923548698425,
+          "n": 2946
+        },
+        "tp": {
+          "mean": 0.44426408410072327,
+          "n": 81
+        }
+      },
+      "max_feasible_f1": 0.7488151658767772,
+      "original": {
+        "accuracy": 0.9802461139896373,
+        "auroc": 0.982235609103079,
+        "average_precision": 0.7297447142981323,
+        "brier_score": 0.014508485635340842,
+        "ece": 0.008377061685440813,
+        "f1": 0.726457399103139,
+        "fn": 19,
+        "fp": 42,
+        "missing_probability_rows": 0,
+        "negative_support": 2988,
+        "positive_support": 100,
+        "precision": 0.6585365853658537,
+        "predicted_positive_support": 123,
+        "probability_negative_support": 2988,
+        "probability_positive_support": 100,
+        "probability_rows": 3088,
+        "recall": 0.81,
+        "rows": 3088,
+        "specificity": 0.9859437751004017,
+        "tn": 2946,
+        "tp": 81,
+        "undefined": {}
+      },
+      "original_cut": 0.44,
+      "validation_oracle_only": true
+    },
+    "SB": {
+      "feasible_threshold_exists": true,
+      "margin_by_outcome": {
+        "fn": {
+          "mean": -0.49561986327171326,
+          "n": 24
+        },
+        "fp": {
+          "mean": 0.0735592171549797,
+          "n": 35
+        },
+        "tn": {
+          "mean": -0.8545984029769897,
+          "n": 3000
+        },
+        "tp": {
+          "mean": 0.08562467992305756,
+          "n": 29
+        }
+      },
+      "max_feasible_f1": 0.5294117647058824,
+      "original": {
+        "accuracy": 0.9808937823834197,
+        "auroc": 0.9687731186472289,
+        "average_precision": 0.4534953994680007,
+        "brier_score": 0.02011023362508602,
+        "ece": 0.020378137991196282,
+        "f1": 0.49572649572649574,
+        "fn": 24,
+        "fp": 35,
+        "missing_probability_rows": 0,
+        "negative_support": 3035,
+        "positive_support": 53,
+        "precision": 0.453125,
+        "predicted_positive_support": 64,
+        "probability_negative_support": 3035,
+        "probability_positive_support": 53,
+        "probability_rows": 3088,
+        "recall": 0.5471698113207547,
+        "rows": 3088,
+        "specificity": 0.9884678747940692,
+        "tn": 3000,
+        "tp": 29,
+        "undefined": {}
+      },
+      "original_cut": 0.87,
+      "validation_oracle_only": true
+    },
+    "STACH": {
+      "feasible_threshold_exists": true,
+      "margin_by_outcome": {
+        "fn": {
+          "mean": -0.3848130404949188,
+          "n": 15
+        },
+        "fp": {
+          "mean": 0.38643530011177063,
+          "n": 44
+        },
+        "tn": {
+          "mean": -0.4772665500640869,
+          "n": 2976
+        },
+        "tp": {
+          "mean": 0.4532303810119629,
+          "n": 53
+        }
+      },
+      "max_feasible_f1": 0.6710526315789473,
+      "original": {
+        "accuracy": 0.9808937823834197,
+        "auroc": 0.9767432800934943,
+        "average_precision": 0.5972709354841319,
+        "brier_score": 0.015611042704471417,
+        "ece": 0.014127379398966196,
+        "f1": 0.6424242424242425,
+        "fn": 15,
+        "fp": 44,
+        "missing_probability_rows": 0,
+        "negative_support": 3020,
+        "positive_support": 68,
+        "precision": 0.5463917525773195,
+        "predicted_positive_support": 97,
+        "probability_negative_support": 3020,
+        "probability_positive_support": 68,
+        "probability_rows": 3088,
+        "recall": 0.7794117647058824,
+        "rows": 3088,
+        "specificity": 0.9854304635761589,
+        "tn": 2976,
+        "tp": 53,
+        "undefined": {}
+      },
+      "original_cut": 0.48,
+      "validation_oracle_only": true
+    }
+  },
+  "diagnostic_pass": true,
+  "gradient_groups_by_samples": {
+    "1250": {
+      "base.backbone.final_norm.bias": {
+        "active": 640,
+        "disconnected": 0,
+        "frozen": 0,
+        "nonfinite": 0,
+        "nonzero": 1
+      },
+      "base.backbone.final_norm.weight": {
+        "active": 640,
+        "disconnected": 0,
+        "frozen": 0,
+        "nonfinite": 0,
+        "nonzero": 1
+      },
+      "base.backbone.head_biometrics.0": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 164096,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.head_biometrics.3": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 771,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.head_ecg_axes.conduction": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 166918,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.head_ecg_axes.ectopy": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 165890,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.head_ecg_axes.rate_frequency": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 166147,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.head_ecg_axes.repolarization_qt": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 165633,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.head_ecg_axes.supraventricular_irregular": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 165890,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.head_pathology.0": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 1280,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.head_pathology.1": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 328192,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.head_pathology.4": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 3591,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.head_quality.0": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 82048,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.head_quality.3": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 129,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.head_rhythm.0": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 1300,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.head_rhythm.1": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 333312,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.head_rhythm.4": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 7182,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.lead_mask_projection.0": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 8320,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.lead_mask_projection.2": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 410240,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.res_layers.0": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 131048,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.res_layers.1": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 411468,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.res_layers.2": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 521676,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.res_layers.3": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 1643160,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.res_layers.4": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 2084760,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.res_layers.5": {
+        "active": 6567216,
+        "disconnected": 0,
+        "frozen": 0,
+        "nonfinite": 0,
+        "nonzero": 13
+      },
+      "base.backbone.stem.0": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 17280,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.stem.1": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 192,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.token_projection.weight": {
+        "active": 491520,
+        "disconnected": 0,
+        "frozen": 0,
+        "nonfinite": 0,
+        "nonzero": 1
+      },
+      "base.backbone.transformer.layers": {
+        "active": 9847040,
+        "disconnected": 0,
+        "frozen": 34464640,
+        "nonfinite": 0,
+        "nonzero": 24
+      },
+      "head": {
+        "active": 85143,
+        "disconnected": 0,
+        "frozen": 0,
+        "nonfinite": 0,
+        "nonzero": 6
+      }
+    },
+    "917": {
+      "base.backbone.final_norm.bias": {
+        "active": 640,
+        "disconnected": 0,
+        "frozen": 0,
+        "nonfinite": 0,
+        "nonzero": 1
+      },
+      "base.backbone.final_norm.weight": {
+        "active": 640,
+        "disconnected": 0,
+        "frozen": 0,
+        "nonfinite": 0,
+        "nonzero": 1
+      },
+      "base.backbone.head_biometrics.0": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 164096,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.head_biometrics.3": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 771,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.head_ecg_axes.conduction": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 166918,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.head_ecg_axes.ectopy": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 165890,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.head_ecg_axes.rate_frequency": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 166147,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.head_ecg_axes.repolarization_qt": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 165633,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.head_ecg_axes.supraventricular_irregular": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 165890,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.head_pathology.0": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 1280,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.head_pathology.1": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 328192,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.head_pathology.4": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 3591,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.head_quality.0": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 82048,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.head_quality.3": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 129,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.head_rhythm.0": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 1300,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.head_rhythm.1": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 333312,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.head_rhythm.4": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 7182,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.lead_mask_projection.0": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 8320,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.lead_mask_projection.2": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 410240,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.res_layers.0": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 131048,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.res_layers.1": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 411468,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.res_layers.2": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 521676,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.res_layers.3": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 1643160,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.res_layers.4": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 2084760,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.res_layers.5": {
+        "active": 6567216,
+        "disconnected": 0,
+        "frozen": 0,
+        "nonfinite": 0,
+        "nonzero": 13
+      },
+      "base.backbone.stem.0": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 17280,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.stem.1": {
+        "active": 0,
+        "disconnected": 0,
+        "frozen": 192,
+        "nonfinite": 0,
+        "nonzero": 0
+      },
+      "base.backbone.token_projection.weight": {
+        "active": 491520,
+        "disconnected": 0,
+        "frozen": 0,
+        "nonfinite": 0,
+        "nonzero": 1
+      },
+      "base.backbone.transformer.layers": {
+        "active": 9847040,
+        "disconnected": 0,
+        "frozen": 34464640,
+        "nonfinite": 0,
+        "nonzero": 24
+      },
+      "head": {
+        "active": 85143,
+        "disconnected": 0,
+        "frozen": 0,
+        "nonfinite": 0,
+        "nonzero": 6
+      }
+    }
+  },
+  "masked_gradient_zero": true,
+  "max_probability_replay_error": 0.0,
+  "parameters": 58437362,
+  "protocol_sha256": "518e058411ea6a3771112a1c792549024b991415b250f3ac4c2211aeb55e1563",
+  "slurm_job": "33825",
+  "sources": {
+    "chapman_group_is_provider_proxy": true,
+    "chapman_train_validation_overlap_counts": {
+      "group_matches": 0,
+      "identity_matches": 0,
+      "waveform_sha256_matches": 0
+    },
+    "counts": {
+      "chapman_shaoxing/train": {
+        "ecgs": 1998,
+        "groups": 1998,
+        "references": {
+          "1AVB": {
+            "-1": 0,
+            "0": 1959,
+            "1": 39
+          },
+          "AFIB": {
+            "-1": 0,
+            "0": 1676,
+            "1": 322
+          },
+          "RBBB": {
+            "-1": 0,
+            "0": 1932,
+            "1": 66
+          },
+          "SB": {
+            "-1": 0,
+            "0": 1250,
+            "1": 748
+          },
+          "STACH": {
+            "-1": 0,
+            "0": 1704,
+            "1": 294
+          }
+        }
+      },
+      "chapman_shaoxing/validation": {
+        "ecgs": 700,
+        "groups": 700,
+        "references": {
+          "1AVB": {
+            "-1": 0,
+            "0": 689,
+            "1": 11
+          },
+          "AFIB": {
+            "-1": 0,
+            "0": 572,
+            "1": 128
+          },
+          "RBBB": {
+            "-1": 0,
+            "0": 669,
+            "1": 31
+          },
+          "SB": {
+            "-1": 0,
+            "0": 435,
+            "1": 265
+          },
+          "STACH": {
+            "-1": 0,
+            "0": 602,
+            "1": 98
+          }
+        }
+      },
+      "cpsc2018/train": {
+        "ecgs": 1596,
+        "groups": null,
+        "references": {
+          "1AVB": {
+            "-1": 0,
+            "0": 1431,
+            "1": 165
+          },
+          "AFIB": {
+            "-1": 0,
+            "0": 1304,
+            "1": 292
+          },
+          "RBBB": {
+            "-1": 0,
+            "0": 1166,
+            "1": 430
+          },
+          "SB": {
+            "-1": 1596,
+            "0": 0,
+            "1": 0
+          },
+          "STACH": {
+            "-1": 1596,
+            "0": 0,
+            "1": 0
+          }
+        }
+      }
+    },
+    "cpsc_masked_endpoints": [
+      "SB",
+      "STACH"
+    ],
+    "cpsc_patient_count": null,
+    "cross_source_independence": "NOT_CERTIFIED"
+  },
+  "splits": {
+    "cross_split_patient_exam_and_exact_waveform_overlap": 0,
+    "historical_test_opened": false,
+    "pr6_eligibility_is_not_verified_pr6_test_membership": true,
+    "splits": {
+      "calibration": {
+        "ecgs": 3080,
+        "manifest_sha256": "d20d1ea7b187671a60aa1346aa713b9a6530005565b0e02e70a76e11ea7c9562",
+        "patients": 2435,
+        "pr6_eligible_patients": 0
+      },
+      "train": {
+        "ecgs": 9869,
+        "manifest_sha256": "997f2f0688c1579eedb57423b5a2a9c226f0e1c300cf34a1a892d5305fbeb3c4",
+        "patients": 7808,
+        "pr6_eligible_patients": 992
+      },
+      "validation": {
+        "ecgs": 3088,
+        "manifest_sha256": "14a7bdc5cab503e363f19c459dc9f1dba4665eac497ccb78100fe62a680ad829",
+        "patients": 2426,
+        "pr6_eligible_patients": 0
+      }
+    }
+  },
+  "test_opened": false
+}
