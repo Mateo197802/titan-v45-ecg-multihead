@@ -1,0 +1,15 @@
+{
+  "method": "CODE-train-only logistic readouts, standardization fitted on train, fixed L2=0.01, no grid search",
+  "protocol_sha256": "518e058411ea6a3771112a1c792549024b991415b250f3ac4c2211aeb55e1563",
+  "published_weights": {
+    "backbone-v3ag-pathology.pt": "bf71e4cf8acc34031cb3611c7031e0649822e705fd7dcea354a3ea583ce920ee",
+    "backbone-v3f-original.pt": "ca5d4dcb4b9828e6c4339800fe81ec27f32d9b09a090bb57503bfb56746a8da8",
+    "specialists-v3ag-primary4-calibrated.pt": "cf5091e962fffb3254b1a71fe57236dd82ea0139093df192511499d931391dbc",
+    "specialists-v3p-e008-primary6-diagnostic.pt": "9c5a9265a7155e1206c551cc4e6d645b86363ba3dbdeb7baf7b9f173c314be3d",
+    "specialists-v3q-primary8-best-candidate.pt": "b30cb2bbb45f1231c93ff1c196aa966b57b49831cadb296131c0283e7b0ceb02"
+  },
+  "results_sha256": "e626956e239a3f3e158f3269b6da190a7d909821e574c160ef97cfae093199f0",
+  "scope": "retrospective diagnostic only; not used to select fits or thresholds",
+  "slurm_job": "33829",
+  "test_opened": false
+}
