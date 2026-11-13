@@ -1,0 +1,109 @@
+{
+  "chapman_group_is_provider_proxy": true,
+  "chapman_train_validation_overlap_counts": {
+    "group_matches": 0,
+    "identity_matches": 0,
+    "waveform_sha256_matches": 0
+  },
+  "counts": {
+    "chapman_shaoxing/train": {
+      "ecgs": 1998,
+      "groups": 1998,
+      "references": {
+        "1AVB": {
+          "-1": 0,
+          "0": 1959,
+          "1": 39
+        },
+        "AFIB": {
+          "-1": 0,
+          "0": 1676,
+          "1": 322
+        },
+        "RBBB": {
+          "-1": 0,
+          "0": 1932,
+          "1": 66
+        },
+        "SB": {
+          "-1": 0,
+          "0": 1250,
+          "1": 748
+        },
+        "STACH": {
+          "-1": 0,
+          "0": 1704,
+          "1": 294
+        }
+      }
+    },
+    "chapman_shaoxing/validation": {
+      "ecgs": 700,
+      "groups": 700,
+      "references": {
+        "1AVB": {
+          "-1": 0,
+          "0": 689,
+          "1": 11
+        },
+        "AFIB": {
+          "-1": 0,
+          "0": 572,
+          "1": 128
+        },
+        "RBBB": {
+          "-1": 0,
+          "0": 669,
+          "1": 31
+        },
+        "SB": {
+          "-1": 0,
+          "0": 435,
+          "1": 265
+        },
+        "STACH": {
+          "-1": 0,
+          "0": 602,
+          "1": 98
+        }
+      }
+    },
+    "cpsc2018/train": {
+      "ecgs": 1596,
+      "groups": null,
+      "references": {
+        "1AVB": {
+          "-1": 0,
+          "0": 1431,
+          "1": 165
+        },
+        "AFIB": {
+          "-1": 0,
+          "0": 1304,
+          "1": 292
+        },
+        "RBBB": {
+          "-1": 0,
+          "0": 1166,
+          "1": 430
+        },
+        "SB": {
+          "-1": 1596,
+          "0": 0,
+          "1": 0
+        },
+        "STACH": {
+          "-1": 1596,
+          "0": 0,
+          "1": 0
+        }
+      }
+    }
+  },
+  "cpsc_masked_endpoints": [
+    "SB",
+    "STACH"
+  ],
+  "cpsc_patient_count": null,
+  "cross_source_independence": "NOT_CERTIFIED"
+}

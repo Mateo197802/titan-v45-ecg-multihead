@@ -1,0 +1,35 @@
+{
+  "parent_commit": "4fddf0de37c0a5768dd39994cdcfdf283dfde131",
+  "scope": "development only; no PR6/PR10 test access; no HEEDB; no historical weight changes",
+  "endpoints": ["AFIB", "SB", "STACH", "RBBB", "1AVB"],
+  "parent_protocol_sha256": "4d17cf25bf380454277b8e0f7584377370379bcef3b65431a728ea2ca0d0fa9f",
+  "seeds": [20261112, 20261113, 20261114],
+  "epochs": 3,
+  "max_fits": 6,
+  "gpu_allocation_hours_max": 4,
+  "initialization": "matching PR10 checkpoint per seed; same waveform contract and shared head",
+  "arms": {
+    "targeted": "CODE; hard positives and hard negatives mined from frozen same-seed parent on training batches; AFIB/SB/1AVB supervised emphasis; STACH/RBBB logit preservation",
+    "targeted_source": "same correction plus 15% Chapman training batches; SB class balance computed per source; do not use Chapman validation for gradient updates"
+  },
+  "optimization": {
+    "batch_size": 32,
+    "head_lr": 0.00008,
+    "transformer_lr": 0.000008,
+    "resnet_lr": 0.000004,
+    "earlier_lr": 0.000002,
+    "weight_decay": 0.01,
+    "gradient_clip": 1.0,
+    "hard_positive_probability_max": 0.45,
+    "hard_negative_probability_min": 0.40,
+    "hard_weight": 2.0,
+    "protected_logit_mse_weight": 0.15,
+    "external_batch_fraction": 0.15
+  },
+  "diagnostic_gate": "strict physical parent SHA and state load; score replay <= 1e-5; finite nonzero gradients for active backbone and head; no gradient on frozen or masked cells; verify development roster and source-label mask",
+  "source_gate": "run targeted_source only if audited incumbent Chapman SB AP >= 0.50 and >= 0.20 sensitivity at PPV >= 0.30 is achievable somewhere on its descriptive validation frontier; neither threshold is deployed",
+  "selection": "fit epochs chosen exclusively by grouped OOF within CODE validation: compute restricted cuts on other folds, apply to each held-out fold; compare failed guards, summed deficit, macro F1 and AP. Calibrate selected epochs using separate calibration only, with per-endpoint Platt and exact parent constrained thresholds. Rank family by number of seeds passing all development guards, then mean OOF selection F1, then mean raw AP; select median OOF F1 seed. No further fits after six; full fine-tuning is not repeated without a new demonstrated representation failure.",
+  "guards": "PR11 per-class rules and Brier/ECE limits unchanged; additionally require macro-F1 >= 0.70, positive paired macro-F1 gain, no Chapman five-endpoint or eligible CPSC three-endpoint macro-F1 loss > 0.03, and three seeds passing the class safeguards for development success",
+  "paired_bootstrap": {"replicates": 1000, "seed": 20261112, "support_min_positive_and_negative_groups": 20},
+  "promotion": "no promotion without an independently authorized untouched institution and the original independent gate"
+}
