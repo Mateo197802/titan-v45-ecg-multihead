@@ -12,6 +12,10 @@ These values were computed from actual CEDIA files and agree with [`release-mani
 
 The [follow-up physical hash recheck](../outputs/results/revision_20261028/model_hash_recheck.json) re-read all five model files and again confirmed their sizes and SHA-256 values. It is separate from the metadata-only local checkout audit.
 
+The later [artifact-by-artifact disposition](reproducibility/A10_ARTIFACT_DISPOSITION.md)
+records CEDIA job `32733`, GitHub release metadata, explicit missing-original
+statuses and the limits of identifying historical generic names.
+
 | Actual artifact | Bytes | Measured SHA-256 |
 | --- | ---: | --- |
 | `backbone-v3f-original.pt` | 233565900 | `ca5d4dcb4b9828e6c4339800fe81ec27f32d9b09a090bb57503bfb56746a8da8` |
