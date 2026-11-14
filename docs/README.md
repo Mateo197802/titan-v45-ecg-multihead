@@ -4,7 +4,12 @@ This directory records architecture, evaluation protocols, CEDIA execution, prov
 
 The [integration audit](integration/ALL_PULL_REQUESTS_INTEGRATION_MATRIX.md) records the original PRs and their dependencies. Its [scientific provenance guide](integration/SCIENTIFIC_PROVENANCE_PRESERVATION.md) distinguishes the released model, replays, November studies, adaptation candidates and V4.6.
 
-See [Evidence and Claim Boundaries](evidence-status.md) for the current Primary6, Primary4, and Primary8 status, metric definitions, source links, and the command that recomputes the published metrics from tracked predictions.
+See [Evidence and Claim Boundaries](evidence-status.md) for the Primary6,
+Primary4, and Primary8 evaluation protocols, metric definitions, and
+recalculation commands. The [CODE-15% evidence package](external_evidence/README.md)
+documents a separate held-out evaluation within CODE after adaptation.
+The [forensic audit](postmerge_forensic/POSTMERGE_FORENSIC_AUDIT_REPORT.md)
+describes a pinned historical repository snapshot, not the current tree.
 
 The [frozen waveform audit](frozen-waveform-audit.md) reports the newer CEDIA inference and matched-reference comparison. The [disposition index](revision-data-dispositions.md) distinguishes new results, absent historical evidence and deferred external evaluation.
 

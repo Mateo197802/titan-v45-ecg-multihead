@@ -1,68 +1,93 @@
 # TITAN V4.5 ECG Multihead
 
-Code and evidence repository for TITAN V4.5 ECG research. This repository is not a manuscript or conversation archive; the canonical results and their limits are summarized here and linked to machine-readable evidence.
+TITAN V4.5 is a research framework for 12-lead electrocardiogram (ECG)
+analysis. It combines a one-dimensional residual encoder and a Transformer
+with specialist configurations for rhythm and ECG pathology classification.
+This repository provides the implementation, evaluation evidence, and
+reproducibility tools. The reported results do not establish independent
+institutional or prospective clinical validation.
 
-## Reported Results
+## System Architecture
 
-These are repeated external-development evaluations. They are not untouched external-final validation or clinical validation.
+The original profiles process ten-second, 12-lead windows at 125 Hz.
+The V3F rhythm and V3AG pathology branches use separately fine-tuned
+backbones. Each released profile pairs a backbone and specialist with a
+class contract and thresholds. See the [architecture](docs/architecture.md)
+and [evaluation protocol](docs/evaluation-protocol.md) for the input and
+output contracts.
 
-| Profile | Evidence size | Reported result | Status |
-| --- | ---: | --- | --- |
-| Rhythm Primary6 | 1,643 records | 95.19% top-1 accuracy; 80.09% binary-panel macro-F1 | Six-class diagnostic branch reported in the paper ([metrics](outputs/results/external_dev/rhythm_primary6_metrics.json)). |
-| Pathology Primary4 | 962 panel rows / 733 ECGs / 676 linked patients | 80.23% mean binary-panel accuracy; 79.35% macro-F1 | Accepted by project decision; observed accuracy remains 80.23% ([metrics](outputs/results/external_dev/pathology_primary4_metrics.json)). |
-| Rhythm Primary8 | 2,193 records | 90.61% top-1 accepted-label accuracy; 76.14% binary-panel macro-F1 | Candidate only; it does not meet the 97% accuracy and 80% macro-F1 gates ([metrics](outputs/results/external_dev/rhythm_primary8_metrics.json)). |
+## Evaluated Configurations and Performance
 
-Primary8's separate single-target diagnostic accuracy is 85.27% (1,870/2,193); it is not the 90.61% accepted-label metric. See the [evidence status and metric definitions](docs/evidence-status.md) before citing these values.
+| Configuration | Task | Evaluation data | Reported metrics |
+| --- | --- | --- | --- |
+| Primary6 | Six-class cardiac rhythm classification | 1,643 selected ECGs from the mixed-source rhythm evaluation | 95.19% top-1 accuracy; 80.09% binary-panel macro-F1 ([report](outputs/results/external_dev/rhythm_primary6_metrics.json)) |
+| Primary8 | Eight-class cardiac rhythm classification | 2,193 selected ECGs from the mixed-source rhythm evaluation, including the Primary6 records | 90.61% top-1 accepted-label accuracy; 76.14% binary-panel macro-F1 ([report](outputs/results/external_dev/rhythm_primary8_metrics.json)) |
+| Primary4 | Four-class ECG pathology classification | PTB-XL fold-10 panels: 962 observations across 733 ECGs and 676 linked patients | 80.23% mean binary-panel accuracy; 79.35% binary-panel macro-F1 ([report](outputs/results/external_dev/pathology_primary4_metrics.json)) |
 
-**New waveform audit, with limits.** CEDIA replay on the selected development manifests recovered agreement on all 962 P4 binary decisions and all 2,193 P8 top-1 and binary-set decisions; P6 had one top-1 difference in 1,643 ECGs. This supersedes the earlier 166-decision P4 discrepancy for the reconstructed runner, not the historical equivalence finding. The P4 probability tolerance still fails, and original loader identity, patient split isolation and the historical all-input cascade are not certified. See the [measured audit and runbook](docs/frozen-waveform-audit.md).
+These are selected external-development evaluations with different class
+definitions and denominators. Primary6 top-1 accuracy checks membership
+in its reference label set. Primary8 accepted-label accuracy checks the
+profile's accepted reference set; its separate single-target accuracy
+is 85.27% (1,870/2,193). Rhythm macro-F1 averages the classwise binary
+results, not top-1 decisions. Primary4 gives equal weight to the four
+binary panels, and an ECG can occur in more than one panel. See the
+[metric definitions](docs/evidence-status.md#metric-definitions) and
+[cohort manifests](data/manifests/README.md).
 
-## Verify Reported Metrics
+The later [CODE-15% evidence package](docs/external_evidence/README.md)
+compares three systems on the same held-out ECGs within CODE-15% after
+supervised adaptation of the candidate to that source. It is separate from
+the release results above and is not independent institutional validation.
 
-The [29 October source and policy follow-up](docs/revision-evidence-20261029.md) identifies all 84 selected `data_test` signals against official PhysioNet checksums and reconstructs every saved P8 decision using membership scores with an explicit empty-set fallback. These close bounded source/decision questions, not historical waveform reproduction, training isolation or distribution approval.
+## Reproducibility
 
-The [October 2026 revision analysis](docs/revision-evidence-20261028.md) adds per-class metrics, explicit ECG/panel denominators, ECG-clustered bootstrap intervals and findings from the surviving CEDIA model files and historical logs. Its scope and remaining waveform-replay limitations are recorded separately from the historical release.
-
-From the repository root, recompute the reported metrics from the tracked per-record prediction tables and check them against the canonical reports, cohort manifests, and release hashes:
-
-```bash
-python scripts/evaluation/verify_release_evidence.py
-```
-
-The command prints a JSON report with the recomputed values and SHA-256 hashes of its inputs after normalizing text line endings to LF. This keeps evidence hashes stable between Windows and Linux. The repository also includes the checked-in [verification report](outputs/results/release_evidence_verification.json); regenerate it with:
-
-```bash
-python scripts/evaluation/verify_release_evidence.py --output outputs/results/release_evidence_verification.json
-```
-
-The verifier checks saved prediction evidence; it does not rerun waveform inference or model training. Run the full test suite with `python -m pytest`.
-
-The [submitted hash-table correction](docs/hash-correction-20261028.md) distinguishes the invalid A10 example values from measured model hashes. Run `python scripts/evaluation/verify_release_hashes.py` to validate declarations and any available physical files; add `--require-models` where all model assets are installed. Missing assets are not reported as physically verified.
-
-## Data
-
-Full source ECG datasets are not stored in this repository. Their sources, links, versions, and licenses are documented in [`data/licenses`](data/licenses/README.md). Evaluation manifests are in [`data/manifests`](data/manifests/README.md). Published assets and their hashes are listed in [`release-manifest.json`](release-manifest.json).
-
-The 14 current manuscript figure PNGs are included. The manuscript source and compiled PDF are outside this repository.
-
-Distribution of the `v0.1.0` rhythm archive is on hold because some records have unresolved provenance and licensing. See the [source inventory](data/licenses/README.md).
-
-## Run
-
-Requires Python 3.10, 3.11, or 3.12.
+Use Python 3.10, 3.11, or 3.12. From the repository root:
 
 ```bash
 python -m pip install -r requirements/requirements-dev.txt
+python scripts/evaluation/verify_release_evidence.py
+python scripts/evaluation/verify_release_hashes.py
 python -m pytest
 ```
 
-Export a profile summary from the canonical registry (this does not recompute predictions):
+The [verification report](outputs/results/release_evidence_verification.json)
+recalculates published metrics from archived predictions, not from a new
+waveform inference run. Hash verification distinguishes missing assets
+from verified local files; add `--require-models` when all weights are
+installed. See the [CEDIA runbook](docs/cedia-reproducibility.md) and the
+[results index](outputs/results/README.md) for other verification paths.
 
-```bash
-python scripts/evaluation/evaluate_primary.py --profile rhythm_primary6_diagnostic --output outputs/results/primary/rhythm_primary6_diagnostic.json
-```
+## Model Assets and Data
 
-Available results are in [`outputs/results`](outputs/results/README.md). Full retraining is not reproducible from this repository alone: it does not include all original datasets, checkpoints, or training logs. See [`docs/cedia-reproducibility.md`](docs/cedia-reproducibility.md) for CEDIA.
+The [v0.1.0 release](https://github.com/Mateo197802/titan-v45-ecg-multihead/releases/tag/v0.1.0)
+contains the original model assets. The [release manifest](release-manifest.json)
+records filenames, byte sizes, and SHA-256 digests. Full source datasets
+are not stored in Git. The mixed-source rhythm archive should not be
+republished while upstream provenance and redistribution rights remain
+unresolved; see the [source and rights inventory](data/licenses/README.md).
 
-## License
+## Limitations
 
-Code is licensed under Apache-2.0. Model weights and datasets have separate terms; see [`MODEL_LICENSE.md`](MODEL_LICENSE.md) and [`data/licenses`](data/licenses/README.md).
+The selected cohorts do not establish full-input coverage, historical
+patient isolation, or independent clinical performance. The [waveform
+replay](docs/frozen-waveform-audit.md) reproduced all 962 Primary4 binary
+decisions but did not meet the frozen probability tolerance. The exact
+original loader and the historical all-input cascade are not certified.
+The complete original training lineage cannot be reproduced from the
+public repository alone.
+
+## Licensing
+
+Code is licensed under Apache-2.0 ([license](LICENSE)). Model weights and
+datasets have separate terms ([model license](MODEL_LICENSE.md),
+[data sources and licenses](data/licenses/README.md)).
+
+## Scientific References and Supporting Evidence
+
+Use [CITATION.cff](CITATION.cff) for software attribution and cite the
+source datasets as specified in their
+[dataset cards](reports/dataset_cards/chapman-shaoxing-external-dev.md)
+and [PTB-XL card](reports/dataset_cards/ptb-xl-external-dev.md).
+The [documentation index](docs/README.md) links the methods, evidence,
+and historical audits. The 14 current manuscript figure PNGs are included.
+The manuscript source and compiled PDF are outside this repository.
