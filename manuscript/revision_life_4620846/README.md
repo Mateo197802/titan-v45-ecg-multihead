@@ -14,4 +14,4 @@ The supplied evidence ZIP is byte-identical to the public `docs/external_evidenc
 
 See the change ledger, figure reconciliation, layout QA report and scientific QA JSON. Reviewer reconciliation and response drafts remain in the local author delivery. Missing original reviewer reports prevent guaranteed verbatim-report reconciliation; R1-1 and independent portions of R2-4a remain scientifically open.
 
-A Spanish [technical decision and results summary](RESUMEN_TECNICO_Y_RESULTADOS.tex) documents the evidence used, the scope of the CODE comparison, the principal positive and negative findings, and the checks performed. It is a standalone LaTeX companion; compile it separately from `latex/manuscrito.tex`.
+The English [technical decision and results summary](TECHNICAL_DECISIONS_AND_RESULTS.tex) documents the evidence used, the scope of the CODE comparison, the principal positive and negative findings, and the checks performed. It is a standalone LaTeX companion; compile it separately from `latex/manuscrito.tex`. All current revision documents are written in English.
