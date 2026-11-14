@@ -76,14 +76,22 @@
     "Within-CODE patient-held-out adaptation completed. Independent institutional and P4 validation unperformed; R1-1 and independent component of R2-4a remain open.",
     "Complete original reviewer reports unavailable: 36 paraphrases and two preserved quotations cannot guarantee a verbatim report audit.",
     "Exact historical Optuna database, loader, job-consumed rosters, intermediate lineage and original quarantine ledger remain unauthenticated.",
-    "Authors must verify inherited contributions, funding/ethics declarations and cover-letter approval/exclusivity before submission.",
-    "User explicitly authorized fork publication; fork created. Draft PR publication follows local artifact verification."
+    "Authors must verify inherited contributions, funding/ethics declarations and cover-letter approval/exclusivity before submission."
   ],
   "github": {
     "local_branch": "codex/life-4620846-manuscript-revision",
     "existing_pr": "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/18",
-    "remote_publication": "AUTHORIZED_PENDING_FINAL_VERIFICATION",
-    "source_repo_push_permission": false
+    "remote_publication": "DRAFT_PR_CREATED_FROM_AUTHORIZED_FORK",
+    "source_repo_push_permission": false,
+    "pr": "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/23",
+    "fork": "https://github.com/Yehudha-kennedy/titan-v45-ecg-multihead",
+    "manuscript_content_commit": "5aab9d210f79820c1228d06bfc8a229693f515a4",
+    "base": "main",
+    "base_sha": "72f179c5db5dc8d956e43b8586f37f463d55b3fe",
+    "draft": true,
+    "merge_conflicts": false,
+    "merged": false,
+    "remote_ci": "No checks reported by GitHub at verification; local checks listed separately."
   },
   "visual_review": "All final PDF pages rendered; page contact scan and detailed checks of architecture, plots, tables, equations and letters. See layout report.",
   "zip_recompilation": "PASS: clean extraction compiled; full normalized PDF text identical; no overfull boxes, missing characters or unresolved references",
