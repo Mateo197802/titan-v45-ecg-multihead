@@ -11,14 +11,14 @@
     "zip_sha256": "36c1c6db30a759ef9d349ae2e545577cfd7ce3af91a3b97fb459380113f294a8"
   },
   "revised": {
-    "pages": 45,
-    "alphabetic_word_count": 17843,
+    "pages": 46,
+    "alphabetic_word_count": 18294,
     "tables": 35,
     "figure_calls": 18,
     "equation_environments": 22,
     "numbered_equations": 24,
     "bibliography_entries": 33,
-    "pdf_sha256": "658e4b194c75a3a7c9b3f7c12007e32db1188ddacc713bf1ad0ef539d6c962cd"
+    "pdf_sha256": "7c0a406b2b10053445b305414ab264693ac4f1ef869daccc4be8f44df085a2ad"
   },
   "word_count_method": "Alphabetic tokens, including hyphenated words; identical extraction/counting rule used for original and revision.",
   "checks": {
@@ -54,7 +54,15 @@
     "figure_hashes_match": true,
     "relative_latex_paths": true,
     "no_private_cedia_paths": true,
-    "no_word_delivery": true
+    "no_word_delivery": true,
+    "requested_title_in_main_and_all_letters": true,
+    "cascade_sections_and_figure_unchanged": true,
+    "eleven_matrix_endpoints_match_global_output_contract": true,
+    "partition_evidence_states_explicit": true,
+    "morphology_source_and_existing_fixture_pass": true,
+    "five_model_download_links_embedded_in_pdf": true,
+    "supplementary_table_one_page": true,
+    "clean_zip_text_matches_canonical_pdf": true
   },
   "reviewer_reconciliation_rows": 61,
   "scientific_subrequirements": 40,
@@ -76,7 +84,8 @@
     "Within-CODE patient-held-out adaptation completed. Independent institutional and P4 validation unperformed; R1-1 and independent component of R2-4a remain open.",
     "Complete original reviewer reports unavailable: 36 paraphrases and two preserved quotations cannot guarantee a verbatim report audit.",
     "Exact historical Optuna database, loader, job-consumed rosters, intermediate lineage and original quarantine ledger remain unauthenticated.",
-    "Authors must verify inherited contributions, funding/ethics declarations and cover-letter approval/exclusivity before submission."
+    "Authors must verify inherited contributions, funding/ethics declarations and cover-letter approval/exclusivity before submission.",
+    "User explicitly authorized fork publication; fork created. Draft PR publication follows local artifact verification."
   ],
   "github": {
     "local_branch": "codex/life-4620846-manuscript-revision",
@@ -91,21 +100,11 @@
     "draft": true,
     "merge_conflicts": false,
     "merged": false,
-    "remote_ci": "No checks reported by GitHub at verification; local checks listed separately."
+    "remote_ci": "No checks reported by GitHub at verification; local checks listed separately.",
+    "latest_amendment": "Requested title; supervision matrix; partition evidence states; morphology notation; exact release links. Cascade content preserved."
   },
-  "visual_review": "All final PDF pages rendered; page contact scan and detailed checks of architecture, plots, tables, equations and letters. See layout report.",
-  "zip_recompilation": "PASS: clean extraction compiled; full normalized PDF text identical; no overfull boxes, missing characters or unresolved references",
-  "verification": {
-    "ruff": "PASS",
-    "targeted_publication_tests": "5 passed",
-    "external_package": "57 members and 46 Git source trace rows verified; confusion-derived metrics and arithmetic macros reconciled",
-    "rendered_pages": 45,
-    "visual_detail_pages": [
-      32,
-      33
-    ],
-    "model_training_or_new_inference": false
-  },
+  "visual_review": "All 46 pages inspected in contact sheets. Detail checks: pages 15,16,43; title, cover letter and one-page supplementary matrix inspected.",
+  "zip_recompilation": "PASS: clean source extraction compiled to identical normalized PDF text, with no overfull boxes, missing characters or unresolved references.",
   "external_evaluation": {
     "scope": "WITHIN_CODE_HELD_OUT_AFTER_SUPERVISED_ADAPTATION",
     "ecgs": 4921,
@@ -115,5 +114,43 @@
     "independent_institutional": "NOT_EVALUATED",
     "P4": "NOT_EVALUATED",
     "promotion": "NOT_AUTHORIZED"
+  },
+  "verification": {
+    "ruff": "PASS",
+    "targeted_publication_tests": "5 passed",
+    "external_package": "57 members and 46 Git source trace rows verified; confusion-derived metrics and arithmetic macros reconciled",
+    "rendered_pages": 46,
+    "visual_detail_pages": [
+      15,
+      16,
+      43
+    ],
+    "model_training_or_new_inference": false,
+    "synthetic_morphology_feature_fixture": "PASS; existing ten-feature fixture, no model inference",
+    "supplementary_table_pages": 1
+  },
+  "reviewer_refinements": {
+    "requested_title": "Modular CNN–Transformer Specialists for Multi-Source 12-Lead ECG Rhythm and Pathology Classification",
+    "cascade_content_preserved": true,
+    "preserved_sha256": {
+      "selective_methods": "e4a7a1ea293d20a2ef2b23e1892a81caaa1be92413ac9169086272b3d47eb266",
+      "selective_results": "c9c029b42a1cbf4841b9671af7f272dafdc8505e3f900ff5f207679eed4a6af6",
+      "figure_contract": "b150d501a9f863e4196205c2e966f69312f256b0ad023cfff96d407ae4ab1fb8",
+      "results_expansion": "044ac937766e2551f4874800243ccea053eeaaf49abddedd55522afa3c731c4c",
+      "discussion_expansion": "4c1e12ef7d66cbe1bcf4f51acb1326054a090d144a10d8d676ab8d9b0e9a3c90"
+    },
+    "synthesis_flow_table": "Not added: author explicitly requested preservation of all cascade material",
+    "supplementary_class_rows": 11,
+    "partition_states": [
+      "RECORDED",
+      "RECONSTRUCTED",
+      "UNCERTIFIED"
+    ],
+    "morphology_source_fixture": "PASS: ten feature definitions; source hash and synthetic fixtures verified; no model inference",
+    "negative_morphology_results_and_simultaneous_intervals_preserved": true,
+    "five_direct_artifact_links_present_in_pdf": true,
+    "artifact_hashes_and_lengths_unchanged": true,
+    "supplementary_table_pages": 1,
+    "main_pages": 46
   }
 }

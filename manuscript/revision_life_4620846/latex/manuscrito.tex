@@ -28,7 +28,7 @@
 \daterevised{ }
 \dateaccepted{ }
 \datepublished{ }
-\Title{Modular CNN--Transformer Specialist Cascades for Multi-Source 12-Lead ECG Rhythm and Pathology Classification}
+\Title{Modular CNN--Transformer Specialists for Multi-Source 12-Lead ECG Rhythm and Pathology Classification}
 
 \Author{Isaac Mateo Gavilanes-Chávez $^{1,2}$\orcidA{}, Ethan Aaron Guevara Lopez $^{1}$\orcidB{}, Yehudhah Kennedy Rodriguez Moran $^{1}$\orcidC{}, Andrés Tirado-Espín $^{3}$\orcidD{}, Fernando Villalba-Meneses $^{1}$\orcidE{}, Paulina Vizcaíno-Imacaña $^{4,*}$\orcidF{} and Diego Almeida-Galarraga $^{1}$\orcidG{}}
 
@@ -320,12 +320,14 @@ Recovered V3F code indexes P8 in its rhythm loss (0.70 focal binary cross-entrop
 
 In Table~\ref{tab:contracts}, \emph{Role} identifies a reporting or output contract. Primary outputs enter that profile's metrics; secondary candidates are outside the report and were proposed for separate handling; auxiliary endpoints are global outputs outside the specialist evaluation. These categories are not dispatch decisions. NSR is normal rhythm, excluded from P6 but included in P8. A residual Other group requires a specified ontology and reference; NSR should not be called Other arrhythmia.
 
+Supplementary Table~S1 separates global-logit availability, recovered stage-specific supervision, published specialist evaluation and later experimental evidence for all eleven out-of-profile or auxiliary endpoints. A documented loss index is not a recovered patient-level training roster, and an experimental head or newly selected threshold does not become a published specialist decision.
+
 \subsubsection{Reconstructed morphology inputs and tensor connections}
 \label{sec:morphology}
 
 The reconstruction used physical millivolt waveforms, a causal third-order Butterworth filter (0.5--45 Hz on nonconstant leads), polyphase resampling from 500 to 125 Hz, central ten seconds with padding when required, and per-lead standardization. The $12\times1250$ waveform has a 12-element lead mask. This contract was instrumented on LUDB, not authenticated as the exact historical loader. Inter-peak RR intervals supply the timing proxies, including the root mean square of successive differences (RMSSD). Coefficient of variation and spectral ratios are dimensionless.
 
-The extractor uses lead II if nonflat, otherwise the highest-variance lead. Median-centered magnitude peaks exceed the larger of the 88th percentile and mean plus 0.8 standard deviations and are separated by at least 0.28 s. Positive inter-peak intervals $RR_i$ are in seconds. $E_{a:b}$ is one-sided Fourier power in the band, averaged across leads unless specified; $E_{\mathrm{tot}}$ is total power. Values are divided by the listed scales and clipped to $[0,1]$ (signed asymmetry $[-1,1]$); nonfinite values become zero.
+The extractor uses lead II if nonflat, otherwise the highest-variance lead. Median-centered magnitude peaks meet or exceed the larger of the 88th percentile and mean plus 0.8 standard deviations and are separated by at least 0.28 s. For peak sample indices $p_i$, inter-peak intervals $RR_i=(p_{i+1}-p_i)/f_s>10^{-6}$ are in seconds, with $f_s=125$~Hz in the reconstructed path. For lead $\ell$, let $P_{\ell k}=|\operatorname{rFFT}(x_\ell)_k|^2$ and $\bar P_k$ be its across-lead mean. In the energy ratios, $E_{a:b}=\sum_{k:a\le f_k\le b}\bar P_k$ and $E_{\mathrm{tot}}=\sum_k\bar P_k$; band endpoints are inclusive. Limb asymmetry uses lead-specific sums $E_\ell=\sum_{k:5\le f_k\le18}P_{\ell k}$. These are unnormalized squared Fourier magnitudes of prepared samples, not physical power measurements. A total at or below $10^{-12}$ produces a zero band ratio. Values are divided by the listed scales and clipped to $[0,1]$ (signed asymmetry $[-1,1]$); nonfinite values become zero.
 
 \begin{table}[htbp]
 \caption{Ten morphology descriptors. Width and pre-peak lag are proxies, not clinical intervals.\label{tab:morphology}}
@@ -337,16 +339,18 @@ Descriptor & Computation and unit & Scale \\
 Median heart rate & $60/\mathrm{median}(RR)$, beats/min & 220 \\
 RR variation & Population $\mathrm{SD}(RR)/\mathrm{mean}(RR)$ & 1 \\
 RMSSD & $10^3\sqrt{\mathrm{mean}[(RR_{i+1}-RR_i)^2]}$, ms & 500 \\
-QRS-width proxy & Median span above max(35\% local maximum, 70th percentile) within 0.18 s of peak, ms & 220 \\
+QRS-width proxy & Median inclusive span above max(35\% segment maximum, 70th percentile) within $\pm0.18$ s of a peak, ms & 220 \\
 P-to-R proxy & Median lag to maximal pre-peak deflection 0.08--0.28 s before peak; retain lags 60--320 ms & 320 \\
 QRS-band energy & $E_{5:18}/E_{\mathrm{tot}}$ & 1 \\
 Low-frequency energy & $E_{0:0.7}/E_{\mathrm{tot}}$ & 1 \\
 High-frequency energy & $E_{35:\mathrm{Nyq}}/E_{\mathrm{tot}}$ & 1 \\
-Cross-lead correlation & Mean absolute off-diagonal Pearson correlation over nonflat leads & 1 \\
+Cross-lead correlation & Mean finite absolute off-diagonal Pearson correlation over leads with SD $>10^{-6}$ & 1 \\
 Limb-lead asymmetry & $(E_I-E_{aVF})/\max(E_I+E_{aVF},10^{-12})$ in 5--18 Hz & 1 \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+The QRS-width proxy uses the first and last threshold-active sample indices $a_i,b_i$, including intervening gaps: $1000(b_i-a_i+1)/f_s$~ms. The pre-peak search uses the half-open sample interval from $p_i-\operatorname{round}(0.28f_s)$ to $p_i-\operatorname{round}(0.08f_s)$, bounded by the window. The table's divisors use the corresponding raw units, so all ten emitted features are dimensionless after scaling. Nonfinite input samples are replaced by zero before extraction; undefined derived descriptors become zero during normalization. Supplementary file \path{MORPHOLOGY_FORMULA_CODE_AUDIT.csv} maps every descriptor to the recovered function, unit, divisor and boundary rule. The extractor matches the source bound to the reconstructed runtime, rather than certifying the unavailable historical loader.
 
 The global rhythm head receives a 640-dimensional waveform/mask embedding and ten descriptors (width 650). The global pathology head receives the embedding without direct morphology. P6/P8 (681 inputs) and P4 (670 inputs) both receive morphology at indices 640--649 alongside task-specific score or event inputs. P4 also receives rhythm scores. Stored rhythm head width 512 supersedes stale metadata declaring 192; P4 hidden width is also 512. The 58,352,219-parameter backbone count includes the global heads, and does not describe the separate 41M models.
 
@@ -736,7 +740,7 @@ Seventh, the comparisons were retrospective, several used inspected development 
 This study designed and evaluated a modular CNN--Transformer architecture with separate rhythm and pathology specialists. The historical selected development results support P6 top-1 accuracy of 95.19\% and mean binary F1 of 80.09\% on 1,643 ECGs, and P4 mean binary accuracy of 80.23\% and macro-F1 of 79.35\% on 962 ECG--label observations from 733 ECGs. These estimates do not measure end-to-end clinical performance. Subsequent bounded analyses demonstrate sensitivity to the evaluated population, limited benefit of the tested morphology addition, and the tradeoff between emitted errors and withheld opportunities. Released bytes and selected reported metrics can be checked independently. Complete training replay, historical patient/signal disjointness and historical clinical quarantine were not established. The completed within-CODE adaptation evaluation achieved macro-F1 60.27\% on five endpoints in 4,921 reserved ECGs from 3,891 patients, with paired gains over frozen P6/P8 systems but failed promotion safeguards and persistent endpoint-specific errors. This does not validate P4 or establish independent institutional transport, which remains untested.
 
 
-\supplementary{Appendix~\ref{appendix:supplement} includes verified development summaries, profile-specific tables and release hashes. The companion supplement contains aggregate recalculations and evidence references.}
+\supplementary{Appendix~\ref{appendix:supplement} includes verified development summaries, profile-specific tables and release hashes. The companion supplement contains aggregate recalculations, Supplementary Table S1 on supervision and endpoint evidence, partition-evidence states, a morphology formula/code audit and direct model-download references.}
 
 \authorcontributions{Conceptualization, I.M.G.-C., D.A.-G. and P.V.-I.; methodology, I.M.G.-C., D.A.-G., A.T.-E. and F.V.-M.; software, I.M.G.-C.; validation, I.M.G.-C., E.A.G.-L., Y.K.R.-M., A.T.-E. and F.V.-M.; formal analysis, I.M.G.-C., D.A.-G., A.T.-E. and F.V.-M.; investigation, I.M.G.-C., E.A.G.-L., Y.K.R.-M., A.T.-E. and F.V.-M.; resources, I.M.G.-C., D.A.-G. and P.V.-I.; data curation, E.A.G.-L. and Y.K.R.-M.; writing---original draft preparation, I.M.G.-C., E.A.G.-L. and Y.K.R.-M.; writing---review and editing, I.M.G.-C., E.A.G.-L., Y.K.R.-M., A.T.-E., F.V.-M., D.A.-G. and P.V.-I.; visualization, I.M.G.-C.; supervision, D.A.-G. and P.V.-I.; project administration, I.M.G.-C. and D.A.-G. }
 
@@ -916,8 +920,7 @@ Endpoint and binary decision & Defines pathology panel counts \\
 \end{table}
 
 
-To verify a published file, download it from release v0.1.0 and run
-\texttt{sha256sum FILE} or \texttt{Get-FileHash -Algorithm SHA256 FILE}. Compare the full digest and byte length in Table~\ref{tab:app_hashes}. V3F and V3AG are distinct waveform backbones; V3P and V3Q are P6 and P8 specialist weights; the remaining V3AG file is the P4 specialist. The unrecovered historical Optuna database and the generic predictions file formerly listed are not represented as verified release objects.
+To obtain the specific files, open the \href{https://github.com/Mateo197802/titan-v45-ecg-multihead/releases/tag/v0.1.0}{v0.1.0 release} or follow the linked filenames in Table~\ref{tab:app_hashes}. Download the required model file, replace \texttt{FILE} with its local filename, and run \texttt{sha256sum FILE} on Linux, \texttt{shasum -a 256 FILE} on macOS, or \texttt{Get-FileHash -Algorithm SHA256 FILE} in PowerShell. Compare all 64 hexadecimal characters and the byte length with the table. The release also provides its \href{https://github.com/Mateo197802/titan-v45-ecg-multihead/releases/download/v0.1.0/SHA256SUMS}{checksum list}. Matching bytes establishes file identity, not complete historical training replay or patient separation. V3F and V3AG are distinct waveform backbones; V3P and V3Q are P6 and P8 specialist weights; the remaining V3AG file is the P4 specialist. The unrecovered historical Optuna database and the generic predictions file formerly listed are not represented as verified release objects.
 \input{tables/release_hashes}
 
 \input{morphology_support}

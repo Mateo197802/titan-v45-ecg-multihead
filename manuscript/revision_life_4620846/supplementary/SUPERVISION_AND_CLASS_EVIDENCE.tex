@@ -1,0 +1,44 @@
+\documentclass[10pt,a4paper,landscape]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=15mm]{geometry}
+\usepackage{mathpazo,booktabs,array,longtable,hyperref,microtype}
+\setlength{\parindent}{0pt}
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.06}
+\emergencystretch=2em
+\setlength{\LTcapwidth}{\linewidth}
+\setlength{\LTpre}{4pt}
+\setlength{\LTpost}{4pt}
+\renewcommand{\thetable}{S\arabic{table}}
+\begin{document}
+\textbf{Supplementary evidence for Life manuscript 4620846}\\
+Modular CNN--Transformer Specialists for Multi-Source 12-Lead ECG Rhythm and Pathology Classification
+
+\small
+\begin{longtable}{@{}p{.045\linewidth}p{.035\linewidth}p{.285\linewidth}p{.14\linewidth}p{.25\linewidth}p{.17\linewidth}@{}}
+\caption{Output availability, recovered supervision and evaluation evidence for the eleven out-of-profile or auxiliary endpoints.}\label{tab:S1}\\
+\toprule
+Class & Global logit & Recovered direct supervision & Published specialist evaluation & Later experimental evidence & Interpretation limit\\
+\midrule\endfirsthead
+\multicolumn{6}{l}{Supplementary Table S1 (continued)}\\
+\toprule
+Class & Global logit & Recovered direct supervision & Published specialist evaluation & Later experimental evidence & Interpretation limit\\
+\midrule\endhead
+\bottomrule\endfoot
+NSR & Yes & V3F: P8 direct term documented. V3AG: Direct subset documented. & Native P8 endpoint; not P6 & Native P8 evaluation. Selected development and compatible LUDB principal-rhythm references. & Not a residual arrhythmia or proof of a disease-free ECG \\
+PAC & Yes & V3F: P8 direct term documented. V3AG: Not in the recovered eight-target subset. & Native P8 endpoint; not P6 & Native P8 and experimental P6 Other union. SPH reference mapping; grouped P6 residual head. & ECG statement recognition, not beat-by-beat detection \\
+Flutter & Yes & V3F: No direct term in recovered stage. V3AG: Direct subset and internal panels documented. & No native P6/P8 endpoint & New SPH binary head evaluated. Held source-specific contrast; not released. & Internal V3AG panels are not published specialist validation \\
+Paced & Yes & V3F: No direct term in recovered stage. V3AG: Direct subset and internal panels documented. & No native P6/P8 endpoint & Unchanged V3AG global output with new threshold; no new head. Held PTB-XL fold-9 contrast after folds 1-8 threshold fitting. & New operating point; incomplete historical ancestry; not a native specialist decision \\
+LBBB & Yes & V3F: No direct term in recovered stage. V3AG: Not in the recovered eight-target subset. & No native P6/P8 endpoint & New SPH binary head evaluated. Complete-LBBB mapped contrast. & Complete and incomplete block are distinct references \\
+2AVB & Yes & V3F: No direct term in recovered stage. V3AG: Not in the recovered eight-target subset. & No native P6/P8 endpoint & New SPH binary head; separate V3AG rank-only analysis. Source-specific binary fit; pooled PTB-XL ranks descriptive. & Held V3AG binary estimate not supported by one positive subject \\
+3AVB & Yes & V3F: No direct term in recovered stage. V3AG: Not in the recovered eight-target subset. & No native P6/P8 endpoint & No supported SPH binary fit; V3AG rank-only analysis. Pooled PTB-XL ranks and positive-only LUDB references. & Held V3AG binary estimate not supported by two positive subjects \\
+LQTS & Yes & V3F: No direct term in recovered stage. V3AG: Not in the recovered eight-target subset. & No native P6/P8 endpoint & Not evaluable with compatible direct syndrome references. No authorized compatible direct reference in this evaluation. & Prolonged QT is not a substitute for congenital LQTS \\
+ALMI & Yes & V3F: Outside recovered P4 direct objective. V3AG: Outside recovered P4 direct objective. & No native P4 endpoint & Separate PTB-XL-trained experimental head evaluated. Frozen PTB Diagnostic transport; original auxiliary rank separate. & Not the published P4 head; limited transported sensitivity \\
+ILMI & Yes & V3F: Outside recovered P4 direct objective. V3AG: Outside recovered P4 direct objective. & No native P4 endpoint & Separate PTB-XL-trained experimental head evaluated. Frozen PTB Diagnostic transport; original auxiliary rank separate. & Inferior and inferolateral localization remain distinct \\
+LAE & Yes & V3F: Outside recovered P4 direct objective. V3AG: Outside recovered P4 direct objective. & No native P4 endpoint & Original auxiliary rank only; new LAO/LAE union head. Explicit SPH LAE rank contrast; separate PTB-XL union. & Union evidence does not validate isolated clinical LAE or equate LAO with LAE \\
+\end{longtable}
+\textbf{Evidence boundary.} Direct supervision means a documented objective in the recovered stage, not a fully authenticated training roster or complete pretraining history. Global-logit presence does not establish direct label exposure, a specialist decision or clinical validation. NSR is normal rhythm. The P6/P8 residual unions and the ALMI/ILMI/LAO--LAE pathology union are distinct experimental endpoints; their results do not validate every component individually. No published all-class Other specialist is established. Unrelated 41M experiments are not attributed to the released 58.35M backbones.
+
+\textbf{Sources.} See the linked \href{https://github.com/Mateo197802/titan-v45-ecg-multihead/blob/3f072de59413f0bc341726f0266400895eaa0ea4/outputs/models/heads/global_head_contracts.json}{output contract}, \href{https://github.com/Mateo197802/titan-v45-ecg-multihead/blob/3f072de59413f0bc341726f0266400895eaa0ea4/docs/reviewer_experiments/RELEASE_HEAD_SUPPORT.md}{supervision audit}, and \href{https://github.com/Mateo197802/titan-v45-ecg-multihead/blob/3f072de59413f0bc341726f0266400895eaa0ea4/docs/reviewer_closure_experiments/OTHER_CLASS_VALIDATION.md}{endpoint evidence}. The companion CSV retains repository-relative source paths.
+\end{document}

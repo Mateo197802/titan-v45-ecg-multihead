@@ -4,7 +4,7 @@ The authenticated 26-page original is retained read-only. The 27-page PDF added 
 
 | Original subject | Final disposition | Evidence / reason |
 |---|---|---|
-| Title, MDPI Life class, author order, correspondence | Preserved; supplied name spelling/ORCIDs reconciled | Sole corresponding author Paulina Vizcaíno-Imacaña, UIDE; Diego last |
+| Title, MDPI Life class, author order, correspondence | Title updated to the author-requested Specialists wording; class and author metadata preserved | Sole corresponding author Paulina Vizcaíno-Imacaña, UIDE; Diego last |
 | Introduction and state of art | Expanded, cross-venue and task-bounded | 33 primary or repository reference records checked; Zhu DOI/title corrected |
 | Original 17 mathematical subjects | Preserved or corrected in place, with added metric/risk formulas | Masked focal loss; stage-dependent multitask objective; binary ECE; MC definitions retained without unsupported execution claims |
 | Dataset methods | Expanded | Source/ontology table, historical partitions, units, exclusions and overlap limits |
@@ -24,3 +24,7 @@ The authenticated 26-page original is retained read-only. The 27-page PDF added 
 Historical 20.5/40 rubric is retained as a technical baseline, not upgraded into reviewer acceptance. The 61-row reconciliation includes the 40 scientific subrequirements and additional editorial items; only two repository-preserved excerpts are represented as quotations. Complete original reviewer reports are still needed for a guaranteed literal-report reconciliation.
 
 Git integration preserves the existing PR18 history and the newly checked main base. Restricted predictions, waveform data, private CEDIA paths, credentials, full licensed template dependencies, compiled journal files and private response letters are excluded from public source publication. They remain in the local submission delivery where applicable.
+
+## Requested reviewer refinements
+
+The author-selected title now uses Specialists. Supplementary Table S1 and CSV distinguish eleven endpoints by global-logit availability, recovered direct objectives, published specialist evaluation and later evidence. Partition evidence is marked Recorded, Reconstructed or Uncertified without estimating missing cells. The ten morphology definitions were checked against the recovered source and its existing synthetic fixture; negative findings and simultaneous intervals remain intact. Five filenames now link directly to release downloads, with Linux/macOS/PowerShell verification instructions. Cascade, abstention and fallback sections and the contract figure are byte-identical to the prior revision; no consolidated flow table was added under this correction.

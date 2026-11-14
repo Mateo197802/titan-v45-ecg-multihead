@@ -1,0 +1,11 @@
+feature,raw_formula,raw_unit,normalization_divisor,output_unit,normalized_range,nonfinite_output,source_file,source_lf_sha256
+hr_median_bpm,60 / median(RR),beats/min,220,dimensionless,"[0,1]",zero,scripts/cedia/recovery_candidates/morphology_features_v4.py,2bd1c1822ed72d1531b1f62712d8007c7e2f21009056ad1a3ee905f37051fc3d
+rrv_cv,population SD(RR) / mean(RR),ratio,1,dimensionless,"[0,1]",zero,scripts/cedia/recovery_candidates/morphology_features_v4.py,2bd1c1822ed72d1531b1f62712d8007c7e2f21009056ad1a3ee905f37051fc3d
+rrv_rmssd_ms,1000 sqrt(mean(diff(RR)^2)),ms,500,dimensionless,"[0,1]",zero,scripts/cedia/recovery_candidates/morphology_features_v4.py,2bd1c1822ed72d1531b1f62712d8007c7e2f21009056ad1a3ee905f37051fc3d
+qrs_width_proxy_ms,median 1000 (last_active-first_active+1) / fs,ms proxy,220,dimensionless,"[0,1]",zero,scripts/cedia/recovery_candidates/morphology_features_v4.py,2bd1c1822ed72d1531b1f62712d8007c7e2f21009056ad1a3ee905f37051fc3d
+p_to_r_proxy_ms,median 1000 (peak-prepeak_argmax) / fs; accepted 60..320 ms,ms proxy,320,dimensionless,"[0,1]",zero,scripts/cedia/recovery_candidates/morphology_features_v4.py,2bd1c1822ed72d1531b1f62712d8007c7e2f21009056ad1a3ee905f37051fc3d
+qrs_band_ratio,"sum(mean-lead FFT power, inclusive 5..18 Hz) / total",ratio,1,dimensionless,"[0,1]",zero,scripts/cedia/recovery_candidates/morphology_features_v4.py,2bd1c1822ed72d1531b1f62712d8007c7e2f21009056ad1a3ee905f37051fc3d
+lowfreq_ratio,"sum(mean-lead FFT power, inclusive 0..0.7 Hz) / total",ratio,1,dimensionless,"[0,1]",zero,scripts/cedia/recovery_candidates/morphology_features_v4.py,2bd1c1822ed72d1531b1f62712d8007c7e2f21009056ad1a3ee905f37051fc3d
+hf_ratio,"sum(mean-lead FFT power, inclusive 35..Nyquist Hz) / total",ratio,1,dimensionless,"[0,1]",zero,scripts/cedia/recovery_candidates/morphology_features_v4.py,2bd1c1822ed72d1531b1f62712d8007c7e2f21009056ad1a3ee905f37051fc3d
+lead_corr_abs_mean,mean finite absolute upper-triangle Pearson correlations; lead SD > 1e-6,ratio,1,dimensionless,"[0,1]",zero,scripts/cedia/recovery_candidates/morphology_features_v4.py,2bd1c1822ed72d1531b1f62712d8007c7e2f21009056ad1a3ee905f37051fc3d
+limb_qrs_asymmetry,"(lead-I minus aVF 5..18 Hz power) / max(sum,1e-12)",signed ratio,1,dimensionless,"[-1,1]",zero,scripts/cedia/recovery_candidates/morphology_features_v4.py,2bd1c1822ed72d1531b1f62712d8007c7e2f21009056ad1a3ee905f37051fc3d

@@ -10,7 +10,8 @@
 \begin{document}
 \begin{center}
 {\Large\bfseries Technical Decisions and Results Summary}\\[4pt]
-TITAN V4.5 --- Life manuscript 4620846 revision
+TITAN V4.5 --- Life manuscript 4620846 revision\\[2pt]
+{\small Modular CNN--Transformer Specialists for Multi-Source 12-Lead ECG Rhythm and Pathology Classification}
 \end{center}
 
 This summary documents the revision decisions using the archived evidence, results and verification records. Its scope is editorial integration and aggregate verification; no new model training or ECG inference was performed during this revision.
@@ -46,7 +47,7 @@ Adapted candidate & 60.27 [56.46--63.41] & 97.81 & 57.95\\
 Table values are percentages. F1 intervals use 1,000 patient-cluster bootstrap draws; macro-AUROC/AP intervals were not supplied. Paired F1 differences are +25.47 percentage points versus P6 (95\% CI: +22.20 to +28.83) and +23.23 versus P8 (+19.77 to +26.87). The candidate missed 45 of 101 AFIB-positive and 30 of 64 SB-positive ECGs. Its mean binary accuracy of 98.31\% does not represent complete diagnostic accuracy per ECG.
 
 \section*{Verification and traceability}
-Public confusion-derived metrics and arithmetic macro averages were recalculated. AUROC, AP and bootstrap intervals come from receipt-authenticated aggregates; they were not recalculated locally from private predictions. The manuscript contains 45 pages, including four additional tables and two additional figures. A clean extraction of the ZIP compiled to the same normalized PDF text; 33 local consistency checks, Ruff and five targeted tests passed.
+Public confusion-derived metrics and arithmetic macro averages were recalculated. AUROC, AP and bootstrap intervals come from receipt-authenticated aggregates; they were not recalculated locally from private predictions. The manuscript contains 46 pages, including four additional tables and two additional figures. A clean extraction of the ZIP compiled to the same normalized PDF text; 33 local consistency checks, Ruff and five targeted tests passed.
 
 Traceability files, with paths relative to the revision directory:
 \begin{itemize}
@@ -54,7 +55,7 @@ Traceability files, with paths relative to the revision directory:
 \item \path{supplementary/MANUSCRIPT_EVIDENCE_LEDGER.csv}
 \item \path{FINAL_MANUSCRIPT_SCIENTIFIC_QA.json}
 \end{itemize}
-Complete CODE tables are in the \path{supplementary/CODE_*} CSV files. Methods and limitations are detailed in \path{latex/code_methods.tex}, \path{latex/code_results.tex} and \path{latex/code_discussion.tex}. The documentation retains the limitations concerning historical provenance and incomplete original reviewer reports.
+Supplementary Table S1 distinguishes output availability, recovered supervision, published specialist evaluation and later evidence. Additional CSVs document partition evidence states, the morphology formula/code audit and direct model downloads. Complete CODE tables are in the \path{supplementary/CODE_*} CSV files. Methods and limitations are detailed in \path{latex/code_methods.tex}, \path{latex/code_results.tex} and \path{latex/code_discussion.tex}. The documentation retains the limitations concerning historical provenance and incomplete original reviewer reports.
 
 \href{https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/23}{Draft PR \#23: revision sources, results and documentation.}
 \end{document}

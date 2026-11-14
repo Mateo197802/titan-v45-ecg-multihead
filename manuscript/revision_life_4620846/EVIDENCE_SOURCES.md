@@ -9,3 +9,5 @@ The evidence ledger supplies experiment, dataset, model, configuration, metric, 
 Final format: LaTeX only, as expressly requested by the user during revision. Journal instructions: https://www.mdpi.com/journal/life/instructions . Crossref/publisher and repository metadata records are in the audit directory. Manuscript disclosures include the actual use of Codex for this revision.
 
 Complete original reviewer reports were not located. Repository paraphrases and two preserved quotations are identified honestly in the reconciliation and response drafts. The original 20.5/40 rubric is not an editorial acceptance score.
+
+The reviewer refinement audit records the preserved cascade-section hashes, eleven-endpoint supervision matrix, partition evidence states, source-bound morphology check and exact model-download links. Current release API digests and byte lengths match all five manuscript entries; no new download or local rehash of the full weights was performed. See `audit/REVIEWER_REFINEMENT_AUDIT.json`, `audit/RELEASE_DOWNLOAD_VERIFICATION.json` and `audit/MORPHOLOGY_NOTATION_AUDIT.json`.

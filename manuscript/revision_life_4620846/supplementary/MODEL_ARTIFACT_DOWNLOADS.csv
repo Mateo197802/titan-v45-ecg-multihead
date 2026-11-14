@@ -1,0 +1,6 @@
+name,bytes,sha256,download_url
+backbone-v3ag-pathology.pt,233566092,bf71e4cf8acc34031cb3611c7031e0649822e705fd7dcea354a3ea583ce920ee,https://github.com/Mateo197802/titan-v45-ecg-multihead/releases/download/v0.1.0/backbone-v3ag-pathology.pt
+backbone-v3f-original.pt,233565900,ca5d4dcb4b9828e6c4339800fe81ec27f32d9b09a090bb57503bfb56746a8da8,https://github.com/Mateo197802/titan-v45-ecg-multihead/releases/download/v0.1.0/backbone-v3f-original.pt
+specialists-v3ag-primary4-calibrated.pt,29413606,cf5091e962fffb3254b1a71fe57236dd82ea0139093df192511499d931391dbc,https://github.com/Mateo197802/titan-v45-ecg-multihead/releases/download/v0.1.0/specialists-v3ag-primary4-calibrated.pt
+specialists-v3p-e008-primary6-diagnostic.pt,22354966,9c5a9265a7155e1206c551cc4e6d645b86363ba3dbdeb7baf7b9f173c314be3d,https://github.com/Mateo197802/titan-v45-ecg-multihead/releases/download/v0.1.0/specialists-v3p-e008-primary6-diagnostic.pt
+specialists-v3q-primary8-best-candidate.pt,29498326,b30cb2bbb45f1231c93ff1c196aa966b57b49831cadb296131c0283e7b0ceb02,https://github.com/Mateo197802/titan-v45-ecg-multihead/releases/download/v0.1.0/specialists-v3q-primary8-best-candidate.pt
