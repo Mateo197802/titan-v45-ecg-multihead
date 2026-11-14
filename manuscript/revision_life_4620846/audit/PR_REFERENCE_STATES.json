@@ -1,0 +1,150 @@
+{
+  "checked_date": "2026-11-13",
+  "main_sha": "6f50a6337fc3e8b518655b05916ced7447598b47",
+  "pull_requests": [
+    {
+      "number": 3,
+      "state": "closed",
+      "draft": true,
+      "merged": true,
+      "merged_at": "2026-11-13T00:39:14Z",
+      "merge_commit_sha": "84f989e8074004ee29e8607a3a996c86b1b64c41",
+      "head_sha": "68274ee05dab1e5aaa48aa588262b5b8289cbbd4",
+      "base_sha": "2677a3333069c16915cb71acd55d0f0176570bcf",
+      "url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/3",
+      "title": "Execute frozen SPH transfer evaluation and document V4.5 evidence"
+    },
+    {
+      "number": 4,
+      "state": "closed",
+      "draft": true,
+      "merged": true,
+      "merged_at": "2026-11-13T00:39:14Z",
+      "merge_commit_sha": "e0d6ce6daa2c9a954b56779e77c7974105a6fa81",
+      "head_sha": "81a75ec69f086dae7c295d65f1c2720416d9db81",
+      "base_sha": "2677a3333069c16915cb71acd55d0f0176570bcf",
+      "url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/4",
+      "title": "Document verified A10 artifacts and Optuna evidence limits"
+    },
+    {
+      "number": 6,
+      "state": "closed",
+      "draft": false,
+      "merged": true,
+      "merged_at": "2026-11-13T00:40:00Z",
+      "merge_commit_sha": "05b5f2c7970243061b907ef61d555653f4bb5c30",
+      "head_sha": "85d673ac04986fe1c50a8cf39d8279344a708647",
+      "base_sha": "f4d6be30b0befea739cf2e35df1033230a1f5d10",
+      "url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/6",
+      "title": "TITAN V4.5 external study: executed preflight and reference-support gate"
+    },
+    {
+      "number": 7,
+      "state": "closed",
+      "draft": true,
+      "merged": true,
+      "merged_at": "2026-11-13T00:39:14Z",
+      "merge_commit_sha": "39c031f92b6e62d9d044e9fc740682b2b1ee445c",
+      "head_sha": "1ee102e94484c46f01cca14346ef2c041c456b25",
+      "base_sha": "2677a3333069c16915cb71acd55d0f0176570bcf",
+      "url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/7",
+      "title": "docs: clarify 12 reviewer evidence statuses and clinical scope"
+    },
+    {
+      "number": 8,
+      "state": "closed",
+      "draft": true,
+      "merged": true,
+      "merged_at": "2026-11-13T00:39:13Z",
+      "merge_commit_sha": "69ecb60b410697b045a72be9e66b3674ff0e1d2b",
+      "head_sha": "4abb2de2bda3b3a2fa61b9418594690b5a3fc629",
+      "base_sha": "2677a3333069c16915cb71acd55d0f0176570bcf",
+      "url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/8",
+      "title": "TITAN V4.5: reconcile reviewer evidence and scientific claims"
+    },
+    {
+      "number": 9,
+      "state": "closed",
+      "draft": false,
+      "merged": true,
+      "merged_at": "2026-11-13T00:40:08Z",
+      "merge_commit_sha": "ad0e8a929bed88895d40f2de572169be80d62fb9",
+      "head_sha": "e5aa65ec1ef43cf5477e688c934577f5dcc4d75c",
+      "base_sha": "bf081e9c2fd62704821f56d614399d7d0eb6e656",
+      "url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/9",
+      "title": "TITAN V4.5: scientific closure experiments for four reviewer comments"
+    },
+    {
+      "number": 12,
+      "state": "closed",
+      "draft": false,
+      "merged": true,
+      "merged_at": "2026-11-13T00:40:31Z",
+      "merge_commit_sha": "511709561cfece3acf4edafd564640dcc99a169b",
+      "head_sha": "608b8c1be17e4dd15a3e73a75be69bc49ac4b003",
+      "base_sha": "e5aa65ec1ef43cf5477e688c934577f5dcc4d75c",
+      "url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/12",
+      "title": "Verify TITAN V4.5 morphology and selective prediction in CEDIA"
+    },
+    {
+      "number": 13,
+      "state": "closed",
+      "draft": false,
+      "merged": true,
+      "merged_at": "2026-11-13T00:39:11Z",
+      "merge_commit_sha": "85c1d8e6f3603560af9aea47e33806a530428cfb",
+      "head_sha": "3e11ecf3fd4554fee7dda981977ec9295f6f0030",
+      "base_sha": "2677a3333069c16915cb71acd55d0f0176570bcf",
+      "url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/13",
+      "title": "Consolidate TITAN V4.5 scientific evidence and separate V4.6 experiments"
+    },
+    {
+      "number": 14,
+      "state": "closed",
+      "draft": false,
+      "merged": true,
+      "merged_at": "2026-11-13T00:46:33Z",
+      "merge_commit_sha": "6f50a6337fc3e8b518655b05916ced7447598b47",
+      "head_sha": "dfad673da0c8e45a746f52d4d99f645ba0b24d2b",
+      "base_sha": "85c1d8e6f3603560af9aea47e33806a530428cfb",
+      "url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/14",
+      "title": "Record TITAN main integration verification"
+    },
+    {
+      "number": 15,
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "merged_at": null,
+      "merge_commit_sha": "003517158d450f5cc6c35a842f7b4f25290313d2",
+      "head_sha": "732ecb1c8e697997cdedf85f67db70d38bd765ed",
+      "base_sha": "0b87b9354796807b3bab26f3ded158f38afcc489",
+      "url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/15",
+      "title": "TITAN V4.5: verified corrective weight study results"
+    },
+    {
+      "number": 16,
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "merged_at": null,
+      "merge_commit_sha": "bf6212cce9ee2ea91878e774116e92c9ba8f193a",
+      "head_sha": "0e1480b15739581e69f672df349cc3f86244d0f8",
+      "base_sha": "732ecb1c8e697997cdedf85f67db70d38bd765ed",
+      "url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/16",
+      "title": "TITAN V4.5: autonomous development optimization in CEDIA"
+    },
+    {
+      "number": 17,
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "merged_at": null,
+      "merge_commit_sha": "90b205eb0ceeeba1d157518ba0f94e7685e65435",
+      "head_sha": "483ff0635c5a3bd53203346cfd515d08f716907a",
+      "base_sha": "6f50a6337fc3e8b518655b05916ced7447598b47",
+      "url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/17",
+      "title": "Forensic audit of consolidated TITAN V4.5 evidence"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "figure": 5,
+  "file": "fig03_internal_architecture",
+  "supplied_filename": "codex-clipboard-f6b18072-0019-4aee-b9c0-8d78df2aa40d.png",
+  "native_pixels": [
+    1586,
+    992
+  ],
+  "supplied_png_sha256": "1ada61835d2156c8e55a88cf5925d4363f4ac7b712e418ec8ad71f8b2d1a3068",
+  "pdf_sha256": "ac65d5e5915b8b53b18b3c918f65d53d479ecec173281b926d3fb23b414c0cbf",
+  "matches_previously_pixel_verified_wrapper": true,
+  "source_pixels_modified": false,
+  "scope": "Current local manuscript package; the five-image AUTHOR_SUPPLIED_FIGURES.json is a historical import receipt."
+}

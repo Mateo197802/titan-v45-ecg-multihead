@@ -1,0 +1,61 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=24mm]{geometry}
+\usepackage{mathpazo,booktabs,hyperref,microtype}
+\hypersetup{colorlinks=true,urlcolor=blue}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\emergencystretch=2em
+\begin{document}
+\begin{center}
+{\Large\bfseries Technical Decisions and Results Summary}\\[4pt]
+TITAN V4.5 --- Life manuscript 4620846 revision\\[2pt]
+{\small Modular CNN--Transformer Specialists for Multi-Source 12-Lead ECG Rhythm and Pathology Classification}
+\end{center}
+
+This summary documents the revision decisions using the archived evidence, results and verification records. Its scope is editorial integration and aggregate verification; no new model training or ECG inference was performed during this revision.
+
+\section*{Decisions and supporting evidence}
+\begin{enumerate}
+\item \textbf{Preserve the original results and their denominators.}
+P6 retains 95.19\% top-1 accuracy and 80.09\% mean binary F1 on 1,643 ECGs. P4 retains 80.23\% mean binary accuracy and 79.35\% macro-F1 on 962 ECG--label observations from 733 distinct ECGs. These are selected retrospective estimates; the new experiment does not replace them.
+
+\item \textbf{Authenticate the supplied package before integration.}
+The ZIP is byte-identical to the public package. The verifier checked 57 files and 46 provenance records against the original Git objects. The primary evidence is pinned to commit \texttt{63c74b3fde2c51f7f8cd}\allowbreak\texttt{e4ad396d77a1bd16cb29}. Hashes establish file identity; they do not certify the complete training history.
+
+\item \textbf{Define the scope of CODE precisely.}
+The candidate received supervised training on CODE patients and was evaluated on 4,921 ECGs from 3,891 other, reserved patients. The audit reports zero patient-key overlap across the four CODE partitions. This supports a patient-disjoint evaluation within CODE following adaptation. Independent institutional confirmation and external P4 evaluation remain pending. The five endpoints are AFIB, SB, STACH, RBBB and 1AVB.
+
+\item \textbf{Compare the same ECGs and retain adverse findings.}
+P6, P8 and the candidate use the same ECGs and references in this five-endpoint comparison. Their processing paths and operating points differ, so the gain cannot be attributed to one isolated component. AFIB/SB sensitivity losses and lower 1AVB positive predictive value relative to P8 remain explicit. The candidate did not meet the macro-F1 target of 0.70 or all promotion safeguards.
+\end{enumerate}
+
+\section*{CODE experiment results}
+\begin{center}
+\small
+\begin{tabular}{lrrr}
+\toprule
+System & Macro-F1 [95\% CI] & Macro-AUROC & Macro-AP\\
+\midrule
+Frozen P6 & 34.80 [32.00--37.50] & 92.40 & 35.74\\
+Frozen P8 & 37.04 [33.96--40.04] & 93.11 & 39.00\\
+Adapted candidate & 60.27 [56.46--63.41] & 97.81 & 57.95\\
+\bottomrule
+\end{tabular}
+\end{center}
+Table values are percentages. F1 intervals use 1,000 patient-cluster bootstrap draws; macro-AUROC/AP intervals were not supplied. Paired F1 differences are +25.47 percentage points versus P6 (95\% CI: +22.20 to +28.83) and +23.23 versus P8 (+19.77 to +26.87). The candidate missed 45 of 101 AFIB-positive and 30 of 64 SB-positive ECGs. Its mean binary accuracy of 98.31\% does not represent complete diagnostic accuracy per ECG.
+
+\section*{Verification and traceability}
+Public confusion-derived metrics and arithmetic macro averages were recalculated. AUROC, AP and bootstrap intervals come from receipt-authenticated aggregates; they were not recalculated locally from private predictions. The manuscript contains 46 pages, including four additional tables and two additional figures. A clean extraction of the ZIP compiled to the same normalized PDF text; Local consistency checks, Ruff and five targeted tests passed. Five conceptual illustrations were subsequently replaced by supplied native PNGs, embedded losslessly in PDF; the remaining figures and manuscript text were preserved.
+
+Traceability files, with paths relative to the revision directory:
+\begin{itemize}
+\item \path{audit/CODE_EVIDENCE_INTEGRATION.json}
+\item \path{supplementary/MANUSCRIPT_EVIDENCE_LEDGER.csv}
+\item \path{FINAL_MANUSCRIPT_SCIENTIFIC_QA.json}
+\end{itemize}
+Supplementary Table S1 distinguishes output availability, recovered supervision, published specialist evaluation and later evidence. Additional CSVs document partition evidence states, the morphology formula/code audit and direct model downloads. Complete CODE tables are in the \path{supplementary/CODE_*} CSV files. Methods and limitations are detailed in \path{latex/code_methods.tex}, \path{latex/code_results.tex} and \path{latex/code_discussion.tex}. The documentation retains the limitations concerning historical provenance and incomplete original reviewer reports.
+
+\href{https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/23}{Draft PR \#23: revision sources, results and documentation.}
+\end{document}

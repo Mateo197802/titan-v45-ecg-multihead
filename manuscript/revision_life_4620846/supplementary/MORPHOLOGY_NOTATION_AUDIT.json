@@ -1,0 +1,54 @@
+{
+  "source_lf_sha256": "2bd1c1822ed72d1531b1f62712d8007c7e2f21009056ad1a3ee905f37051fc3d",
+  "source_file": "scripts/cedia/recovery_candidates/morphology_features_v4.py",
+  "fixture_source": "scripts/evaluation/reviewer_morphology_runtime.py",
+  "fixture_source_sha256": "08e03e4f9f9c62223e496b9da4346f8b186c7485d077e1dfd515c2f1c2ef888c",
+  "status": "PASS",
+  "feature_definitions": 10,
+  "scope": "Synthetic feature fixtures and source/formula audit only; no new model inference, training or clinical interval validation",
+  "fixture": {
+    "expected": {
+      "hr_median_bpm": 66.66666666666667,
+      "rrv_cv": 0.11111111111111112,
+      "rrv_rmssd_ms": 200,
+      "qrs_width_proxy_ms": 24,
+      "p_to_r_proxy_ms": 160,
+      "qrs_band_ratio": 0.2857142857142857,
+      "lowfreq_ratio": 0.07142857142857142,
+      "hf_ratio": 0.6428571428571429,
+      "lead_corr_abs_mean": 1,
+      "limb_qrs_asymmetry": 0.6
+    },
+    "observed": {
+      "hr_median_bpm": 66.66666666666667,
+      "rrv_cv": 0.11111111111111108,
+      "rrv_rmssd_ms": 199.99999999999994,
+      "qrs_width_proxy_ms": 24.0,
+      "p_to_r_proxy_ms": 160.0,
+      "qrs_band_ratio": 0.28571428571428525,
+      "lowfreq_ratio": 0.07142857142857144,
+      "hf_ratio": 0.6428571428571433,
+      "lead_corr_abs_mean": 0.9999999999999996,
+      "limb_qrs_asymmetry": 0.6000000000000001
+    },
+    "pulse_peak_count": 3,
+    "flat_line_artifact": {
+      "peaks": 36,
+      "normalized_values": [
+        0.9740259647369385,
+        1.9825410964950798e-16,
+        0.0,
+        0.0,
+        0.875,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "clamp_checked": true,
+    "negative_limb_asymmetry_checked": true
+  },
+  "negative_and_simultaneous_interval_results_preserved": true
+}

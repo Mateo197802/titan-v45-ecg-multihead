@@ -1,0 +1,63 @@
+\subsubsection{Historical development populations and partitions}
+\label{sec:history}
+
+Files, windows, ECGs, patients and binary evaluation opportunities are distinct units. V3C records 9,021 training and 924 validation windows and removal of 390 record matches in its development roster. Job 16768 records 7,485 enumerated files and 9,945 windows: 9,021 train and 924 validation. The V3F reports separately record 9,021 rhythm training and 144 rhythm validation windows, and 5,013 pathology training and 776 pathology validation windows. These task-specific counts cannot be summed to count patients. The separate V3M/V3AG record-based split lists 9,885 training and 1,132 validation windows. P4 calibration job 17296 records 1,492 window--panel observations. Its exact roster and separation from all prior development stages were not authenticated.
+
+PTB-XL, Chapman--Shaoxing, Ningbo, CPSC2018, CPSC2018-Extra, Georgia and CODE test appear among the retained aliases; a mixed local grouping is not a separate institution. Appendix~\ref{appendix:supplement} reports recoverable P6 and P4 source counts. Chapman--Shaoxing contributes 1,514 of 1,643 P6 ECGs. The joint training and validation table by source, class, window and patient cannot be recovered. A conditional metadata reconstruction for V3M/V3AG flagged possible shared patients despite distinct record identifiers. It neither identifies the bytes consumed by historical jobs nor demonstrates contamination of PTB-XL fold 10.
+
+\subsubsection{ECG-associated reference statements}
+\label{sec:af-reference}
+
+For retained Challenge-format rows, atrial fibrillation (AF) and normal sinus rhythm (NSR) correspond to SNOMED CT codes 164889003 and 426783006. CPSC, Georgia, Chapman--Shaoxing and Ningbo rows use source-associated diagnosis fields, not a newly adjudicated reference. PTB-XL uses source Standard Communications Protocol for Computer-Assisted Electrocardiography (SCP-ECG) metadata, with mapped codes in its Challenge representation. CODE test uses supplied references; the mixed local group cannot be assumed to have a uniform annotation process. Source procedures differ and the archive does not authenticate all individual readers \citep{Reyna2022Challenge,Wagner2020PTBXL}.
+
+Coexisting eligible labels are kept in the accepted reference set. Top-1 is correct if its class belongs to that set. One record contains both AF and NSR. P8 retains both and P6 excludes NSR by profile definition, not by adjudication. The AF code and retained reference agree in all 1,643 P6 and 2,193 P8 rows. Each overlapping profile has 390 AF-positive rows (373 Chapman--Shaoxing, 13 mixed local, four PTB-XL Challenge); the counts cannot be added. Other aliases have no AF-positive reference in these selected records, which does not estimate parent prevalence.
+
+P4 references are panel-specific SCP-derived statements. The recorded label agrees with the relevant SCP key in 962/962 panel observations. This is mapping concordance, not an independent ECG reading or clinical adjudication. AF recognition is ECG-associated statement prediction, not detection of first diagnosis or incident disease, which requires longitudinal evidence \citep{Rossi2026AF}.
+
+\subsubsection{Output definitions and direct supervision}
+\label{sec:supervision}
+
+Global rhythm and pathology heads expose 14 and seven outputs. P6 reports AFIB, sinus bradycardia (SB), sinus tachycardia (STACH), right bundle branch block (RBBB), first-degree atrioventricular block (1AVB), and premature ventricular contractions (PVC). P8 adds NSR and premature atrial contractions (PAC). P4 reports anteroseptal myocardial infarction (ASMI), left ventricular hypertrophy (LVH), inferior myocardial infarction (IMI), and ischemic ST--T change (ISC\_). V3F and V3AG are separate released backbone files. Shared design does not imply identical fitted weights.
+
+Recovered V3F code indexes P8 in its rhythm loss (0.70 focal binary cross-entropy plus 0.30 categorical cross-entropy) and P4 in its pathology focal binary loss. Flutter, paced rhythm, left bundle branch block (LBBB), second- and third-degree atrioventricular block (2AVB and 3AVB), and long QT syndrome (LQTS) have no direct term in that V3F objective. Separate V3AG development code uses a different rhythm subset including Flutter and paced rhythm. Anterolateral and inferolateral myocardial infarction (ALMI and ILMI) and left atrial enlargement (LAE) are outside the recovered V3F direct pathology objective. This does not reconstruct earlier supervision or bind every runtime mask to released weights. Auxiliary metrics from 41M experiments cannot be attributed to V3F or V3AG. LQTS is not interchangeable with a prolonged-QT statement, nor is LAE automatically equivalent to left atrial overload (LAO).
+
+In Table~\ref{tab:contracts}, \emph{Role} identifies a reporting or output contract. Primary outputs enter that profile's metrics; secondary candidates are outside the report and were proposed for separate handling; auxiliary endpoints are global outputs outside the specialist evaluation. These categories are not dispatch decisions. NSR is normal rhythm, excluded from P6 but included in P8. A residual Other group requires a specified ontology and reference; NSR should not be called Other arrhythmia.
+
+\subsubsection{Reconstructed morphology inputs and tensor connections}
+\label{sec:morphology}
+
+The reconstruction used physical millivolt waveforms, a causal third-order Butterworth filter (0.5--45 Hz on nonconstant leads), polyphase resampling from 500 to 125 Hz, central ten seconds with padding when required, and per-lead standardization. The $12\times1250$ waveform has a 12-element lead mask. This contract was instrumented on LUDB, not authenticated as the exact historical loader.
+
+The extractor uses lead II if nonflat, otherwise the highest-variance lead. Median-centered magnitude peaks exceed the larger of the 88th percentile and mean plus 0.8 standard deviations and are separated by at least 0.28 s. Positive inter-peak intervals $RR_i$ are in seconds. $E_{a:b}$ is one-sided Fourier power in the band, averaged across leads unless specified; $E_{\mathrm{tot}}$ is total power. Values are divided by the listed scales and clipped to $[0,1]$ (signed asymmetry $[-1,1]$); nonfinite values become zero.
+
+\begin{table}[htbp]
+\caption{Ten morphology descriptors. Width and pre-peak lag are proxies, not clinical intervals.\label{tab:morphology}}
+\centering\small
+\begin{tabular}{@{}p{.25\linewidth}p{.57\linewidth}p{.12\linewidth}@{}}
+\toprule
+Descriptor & Computation and unit & Scale \\
+\midrule
+Median heart rate & $60/\mathrm{median}(RR)$, beats/min & 220 \\
+RR variation & Population $\mathrm{SD}(RR)/\mathrm{mean}(RR)$ & 1 \\
+RMSSD & $10^3\sqrt{\mathrm{mean}[(RR_{i+1}-RR_i)^2]}$, ms & 500 \\
+QRS-width proxy & Median span above max(35\% local maximum, 70th percentile) within 0.18 s of peak, ms & 220 \\
+P-to-R proxy & Median lag to maximal pre-peak deflection 0.08--0.28 s before peak; retain lags 60--320 ms & 320 \\
+QRS-band energy & $E_{5:18}/E_{\mathrm{tot}}$ & 1 \\
+Low-frequency energy & $E_{0:0.7}/E_{\mathrm{tot}}$ & 1 \\
+High-frequency energy & $E_{35:\mathrm{Nyq}}/E_{\mathrm{tot}}$ & 1 \\
+Cross-lead correlation & Mean absolute off-diagonal Pearson correlation over nonflat leads & 1 \\
+Limb-lead asymmetry & $(E_I-E_{aVF})/\max(E_I+E_{aVF},10^{-12})$ in 5--18 Hz & 1 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The global rhythm head receives a 640-dimensional waveform/mask embedding and ten descriptors (width 650). The global pathology head receives the embedding without direct morphology. P6/P8 (681 inputs) and P4 (670 inputs) both receive morphology at indices 640--649 alongside task-specific score or event inputs. P4 also receives rhythm scores. Stored rhythm head width 512 supersedes stale metadata declaring 192; P4 hidden width is also 512. The 58,352,219-parameter backbone count includes the global heads, and does not describe the separate 41M models.
+
+A flat-signal fixture produced spurious plateau peaks and nonzero descriptors. The proxies are not clinically validated. Job 33796 instrumented both tensor paths on 16 LUDB ECGs and exactly repeated a reconstructed fixed-batch forward. This is not historical waveform replay: a separate strict P4 comparison exceeded the score tolerance for 836/962 observations even though threshold decisions agreed in that comparison.
+
+\subsubsection{Separate retrospective analyses}
+\label{sec:retrospective-methods}
+
+The Shanghai People's Hospital (SPH) analysis applied released profiles to all 25,770 metadata ECGs (24,666 source patient identifiers) before forming nested profile-compatible subsets from the same scores. Absence of a compatible statement is negative for the mapped endpoint, not adjudicated absence of disease. The primary SPH mapping does not supply 1AVB, NSR or ISC\_ references. A PTB-XL folds 1--9 development cache supplied separate 1AVB and ISC\_ statements; 6,205 of 19,601 metadata ECGs were technically scored. LUDB and PTB Diagnostic are separate sources and cannot replace SPH or the missing June population.
+
+Other experiments fit new development heads. The rhythm residual covers mapped out-of-profile statements; normal rhythm and unknown references remain distinct. The pathology residual is a bounded PTB-XL ALMI/ILMI/LAO-or-LAE union. A morphology ablation fit equal-capacity heads with fixed backbone representations, five matched seeds per arm, and simultaneous intervals against a predefined $\pm2$ percentage-point relevance margin. These are not independent validation, full-network retraining, or changes to the released models.

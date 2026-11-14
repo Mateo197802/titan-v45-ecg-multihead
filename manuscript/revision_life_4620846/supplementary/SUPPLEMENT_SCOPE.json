@@ -1,0 +1,12 @@
+{
+  "manuscript_file": "TITAN_V45_LIFE_4620846_EDITORIAL.pdf",
+  "manuscript_sha256": "1f6aea4f9958e2c1d504824118d741928ee08bb4dd7251b497499f660a8b116c",
+  "manuscript_pages": 45,
+  "all_18_figure_pdf_hashes_match_current_latex_package": true,
+  "figure_counts": {
+    "author_supplied_raster_pdf_wrappers": 6,
+    "vector_figures": 12
+  },
+  "scientific_csvs_changed": false,
+  "scope": "Aggregate evidence and reproducibility support only. Historical audits describe the versions named within them. This alignment changes descriptive figure metadata and README only; scientific evidence is unchanged."
+}

@@ -1,0 +1,11 @@
+# Aggregate supplementary evidence
+
+The evidence ledger identifies the experiment, source, model, configuration, metric, denominator, statistical unit, source digest and limitation. INDEPENDENT_AGGREGATE_RECALCULATION.json contains confusion/ranking/calibration calculations derived locally from the archived selected-release predictions. The historical epoch CSV is an internal development run, not release performance.
+
+No raw ECGs, patient identifiers, individual prediction rows or model weights are redistributed. Later experiments rely on published sealed aggregate evidence and native execution receipts; no new CEDIA experiment was run for this editorial revision. The CODE adaptation experiment is completed; independent institutional evaluation remains unfinished.
+
+To regenerate data-derived figures, use build_figures.py with the pinned repository inputs and the documented NumPy/Matplotlib environment. Its input prediction files remain in that repository subject to source terms. Use the author-supplied conceptual PDF wrappers from the current manuscript LaTeX package; these images are author artwork rather than plots regenerated from predictions. The output data are aggregate only. Model release hashes identify bytes, not complete training lineage.
+
+The current manuscript uses six author-supplied conceptual diagrams as lossless raster PDF wrappers and twelve vector figures. FIGURE_MANIFEST.json records the current PDF digests. The original five-image import receipt remains in AUTHOR_SUPPLIED_FIGURES.json; FIGURE5_AUTHOR_IMPORT.json documents the later sixth replacement. HISTORICAL_FIGURE_MANIFEST.json preserves the earlier manifest. Original PNG hashes are recorded in the receipts; the manuscript LaTeX ZIP supplies the PDF wrappers. SUPPLEMENT_SCOPE.json identifies the current manuscript. Historical audits refer to their stated source versions. Supplementary Table S1 and all class, partition, morphology, model-download and CODE evidence CSVs are unchanged.
+
+The GitHub publication updates AUTHOR_SUPPLIED_FIGURES.json to the six-image V2 receipt so the figure builder preserves every supplied schematic. Historical five-image provenance remains in Git history. The scientific aggregate files and compiled Supplementary Table S1 are unchanged.

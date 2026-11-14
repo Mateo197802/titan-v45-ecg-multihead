@@ -1,0 +1,6 @@
+# Archive manifests bind exact bytes, including third-party template line endings.
+# Do not normalize packaged sources, aggregate evidence, or downloadable artifacts.
+latex/** -text
+latex/Definitions/** -text -whitespace
+supplementary/** -text whitespace=cr-at-eol
+artifacts/** -text

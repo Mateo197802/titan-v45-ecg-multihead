@@ -1,0 +1,26 @@
+\subsection{Five-seed morphology endpoint support and variability}
+\label{sec:app-morph-support}
+Table~\ref{tab:app-morph-support} reports the known positive and negative supports for the later fixed-representation head study. P6 and P8 share six endpoint contrasts; their rows do not represent independent samples. The P4 endpoints have different known-reference masks. Counts describe eligible ECG observations rather than a verified historical training census. Mean differences average the five matched seeds; the range records the smallest and largest seed-level differences, not a confidence interval. Simultaneous profile-level intervals and the two-point relevance margin remain the primary interpretation in Section~\ref{sec:other-results}.
+
+\begin{table}[tbp]
+\caption{Later morphology study: known endpoint support and descriptive seed variability. Differences are F1 percentage points, with minus without morphology.\label{tab:app-morph-support}}
+\centering\small
+\begin{tabular}{@{}llrrrr@{}}
+\toprule
+Profile & Endpoint & Positive & Negative & Mean difference & Seed range \\
+\midrule
+P6/P8 & AFIB & 201 & 1,050 & +0.59 & $[-2.14,1.89]$ \\
+P6/P8 & SB & 452 & 799 & +0.29 & $[-0.02,0.60]$ \\
+P6/P8 & STACH & 193 & 1,058 & +0.77 & $[-0.03,1.46]$ \\
+P6/P8 & RBBB & 50 & 1,201 & $-0.13$ & $[-0.88,0.63]$ \\
+P6/P8 & 1AVB & 33 & 1,218 & $-0.66$ & $[-5.38,4.60]$ \\
+P6/P8 & PVC & 39 & 1,212 & +0.12 & $[-1.97,2.02]$ \\
+P8 & NSR & 216 & 1,035 & $-0.08$ & $[-0.94,0.64]$ \\
+P8 & PAC & 22 & 1,229 & $-1.77$ & $[-5.22,1.61]$ \\
+P4 & ASMI & 51 & 135 & +0.29 & $[0.00,1.45]$ \\
+P4 & LVH & 45 & 135 & +0.06 & $[0.00,0.29]$ \\
+P4 & IMI & 57 & 135 & +0.89 & $[-5.33,6.44]$ \\
+P4 & ISC\_ & 26 & 135 & 0.00 & $[0.00,0.00]$ \\
+\bottomrule
+\end{tabular}
+\end{table}
