@@ -10,4 +10,4 @@ Final format: LaTeX only, as expressly requested by the user during revision. Jo
 
 Complete original reviewer reports were not located. Repository paraphrases and two preserved quotations are identified honestly in the reconciliation and response drafts. The original 20.5/40 rubric is not an editorial acceptance score.
 
-The reviewer refinement audit records the preserved cascade-section hashes, eleven-endpoint supervision matrix, partition evidence states, source-bound morphology check and exact model-download links. Current release API digests and byte lengths match all five manuscript entries; no new download or local rehash of the full weights was performed. See `audit/REVIEWER_REFINEMENT_AUDIT.json`, `audit/RELEASE_DOWNLOAD_VERIFICATION.json` and `audit/MORPHOLOGY_NOTATION_AUDIT.json`.
+Five author-supplied schematic replacements are bound by their original PNG hashes, dimensions and exact PDF-embedded RGB pixel comparisons in `audit/AUTHOR_SUPPLIED_FIGURES.json`. No scientific result was recalculated for this illustration update.

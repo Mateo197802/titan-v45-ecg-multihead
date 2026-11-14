@@ -35,9 +35,23 @@ plt.rcParams.update(
 )
 COLORS = ["#0072B2", "#D55E00", "#009E73", "#CC79A7", "#A6761D", "#56B4E9", "#555555", "#8064A2"]
 inventory = []
+author_receipt = HERE / "audit/AUTHOR_SUPPLIED_FIGURES.json"
+author_figures = (
+    {entry["file"]: entry["manifest_entry"] for entry in json.loads(author_receipt.read_text())["entries"]}
+    if author_receipt.exists() else {}
+)
 
 
 def save(fig, name, sources, kind="quantitative"):
+    if name in author_figures:
+        entry = author_figures[name]
+        for ext in ("pdf", "png"):
+            actual = hashlib.sha256((FIG / f"{name}.{ext}").read_bytes()).hexdigest()
+            if actual != entry[f"{ext}_sha256"]:
+                raise ValueError(f"Author-supplied figure changed: {name}.{ext}")
+        inventory.append(entry)
+        plt.close(fig)
+        return
     fig.savefig(FIG / (name + ".pdf"), bbox_inches="tight", pad_inches=0.10)
     fig.savefig(FIG / (name + ".png"), dpi=320, bbox_inches="tight", pad_inches=0.10)
     plt.close(fig)

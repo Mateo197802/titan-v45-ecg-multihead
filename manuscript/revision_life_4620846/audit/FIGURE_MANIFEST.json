@@ -1,43 +1,67 @@
 [
   {
     "file": "fig00_ecg_ai_context",
-    "kind": "schematic",
+    "kind": "author-supplied schematic",
     "sources": [
-      "Study schematic; Methods input and reporting contracts"
+      "User attachment: codex-clipboard-d316df35-3a9d-4ed8-8b5d-c3fabeae499a.png",
+      "12-lead ECG workflow; checked against existing manuscript definitions"
     ],
-    "creator": "Code-generated for this revision; no third-party artwork",
-    "pdf_sha256": "451e3ea7d81fc06c47deace2b7283efecdcaf1bebd4f01ca6e686179047246fb",
-    "png_sha256": "83081527417f66c87a5281cc6d7f33494a15f85fcdc2d3fde5e676766c0f3f61"
+    "creator": "Author-supplied replacement; imported without pixel edits",
+    "pdf_sha256": "2173dde90937f255fdd07aa7896105559ee721789cd3f2929007bdc75d173cfc",
+    "png_sha256": "54318d76c699fbfc9d39dc39749a776780953d1d8314b7197322edcfc1919bb7",
+    "format": "Original RGB PNG; lossless raster image embedded in PDF",
+    "native_pixels": [
+      1683,
+      935
+    ]
   },
   {
     "file": "fig00b_ecg_ai_evolution_gap",
-    "kind": "schematic",
+    "kind": "author-supplied schematic",
     "sources": [
-      "Endpoint scope schematic"
+      "User attachment: codex-clipboard-2a1ea7ba-71be-41fa-8a68-c74f2c91889a.png",
+      "Distinct reference units; checked against existing manuscript definitions"
     ],
-    "creator": "Code-generated for this revision; no third-party artwork",
-    "pdf_sha256": "4edcd4525485e55cc52b8e45766083ae0f2659e5d58a9701a80b22bf4ce9d7d1",
-    "png_sha256": "617d90ad42014d590235245ef92d36b175998d9126648e0a3873033158c0b13e"
+    "creator": "Author-supplied replacement; imported without pixel edits",
+    "pdf_sha256": "07a42226edbedfdabb7e23740735d5cb89899c8736eaaab270a490652071b676",
+    "png_sha256": "c0de3975787bba913925b73d8acf387fc674f68aa576353ade0dfdc495b12b27",
+    "format": "Original RGB PNG; lossless raster image embedded in PDF",
+    "native_pixels": [
+      1683,
+      935
+    ]
   },
   {
     "file": "fig01_graphical_abstract",
-    "kind": "schematic",
+    "kind": "author-supplied schematic",
     "sources": [
-      "Verified checkpoint and selected-profile contracts"
+      "User attachment: codex-clipboard-418fcee1-e6e5-4c9c-a3c8-4bff48c8db67.png",
+      "Separate fitted specialists; checked against existing manuscript definitions"
     ],
-    "creator": "Code-generated for this revision; no third-party artwork",
-    "pdf_sha256": "f80704a6e507ae485aedcb0eee1b5db2e22c11221b868d0d735b1447cb06cca2",
-    "png_sha256": "0576c6d2a68004835dc7b1ac4abe8c53f73328bfd53196f13447255f26a733b7"
+    "creator": "Author-supplied replacement; imported without pixel edits",
+    "pdf_sha256": "272badc218b922e228f888e117c814a5083018088fc682cd765845b2b562a015",
+    "png_sha256": "a4890f3577446e233eab16e8a19410e3bfe6b9bd11b43a359e990e48ec7041e2",
+    "format": "Original RGB PNG; lossless raster image embedded in PDF",
+    "native_pixels": [
+      1683,
+      935
+    ]
   },
   {
     "file": "fig02_data_processing_bias_workflow",
-    "kind": "schematic",
+    "kind": "author-supplied schematic",
     "sources": [
-      "Reconstructed preprocessing; evidence-stage distinction"
+      "User attachment: codex-clipboard-cd6ebc28-1ae8-4383-b2df-b5fea95f99a5.png",
+      "Signal preparation and evidence stages; checked against existing manuscript definitions"
     ],
-    "creator": "Code-generated for this revision; no third-party artwork",
-    "pdf_sha256": "34d7a3414e57d48e5751ae7cad06f786b67108c380cdc331fbb31ac4285f0768",
-    "png_sha256": "18e900b47654a9fb0fc4fcf5a8b5c078816344026a4c50701374082feb7e6593"
+    "creator": "Author-supplied replacement; imported without pixel edits",
+    "pdf_sha256": "84f22bd4927668f757f983bab5704342e777af5931c8cc8a3e631ae28a826118",
+    "png_sha256": "9f06f1f4948446a2e809eb6f9dd644acf52bd75d0a2ed69a603ae642397ed37a",
+    "format": "Original RGB PNG; lossless raster image embedded in PDF",
+    "native_pixels": [
+      1683,
+      935
+    ]
   },
   {
     "file": "fig03_internal_architecture",
@@ -51,13 +75,19 @@
   },
   {
     "file": "fig03_cascade_contract",
-    "kind": "schematic",
+    "kind": "author-supplied schematic",
     "sources": [
-      "Verified output ontology; no dispatch inferred"
+      "User attachment: codex-clipboard-ef71fb54-a8df-49de-bbe8-29740b3ad63b.png",
+      "Reporting contracts; checked against existing manuscript definitions"
     ],
-    "creator": "Code-generated for this revision; no third-party artwork",
-    "pdf_sha256": "b150d501a9f863e4196205c2e966f69312f256b0ad023cfff96d407ae4ab1fb8",
-    "png_sha256": "fe5639b8df4e902d381842738506d07c9b63ecfe0b9a392c0df64bfdc884685c"
+    "creator": "Author-supplied replacement; imported without pixel edits",
+    "pdf_sha256": "7fb6f48e185925005dc41646c368341f4795b285a57df0e2c64021056588ea33",
+    "png_sha256": "48efe1d97702b73ae657b47cbfe29ed5fe078ab070c82596b9a2de6e0b4d5e4c",
+    "format": "Original RGB PNG; lossless raster image embedded in PDF",
+    "native_pixels": [
+      1672,
+      941
+    ]
   },
   {
     "file": "fig06_rhythm_confusion",

@@ -1,0 +1,163 @@
+{
+  "schema": "TITAN_AUTHOR_SUPPLIED_SCHEMATICS_V1",
+  "entries": [
+    {
+      "file": "fig00_ecg_ai_context",
+      "figure_number": 1,
+      "purpose": "12-lead ECG workflow",
+      "supplied_filename": "codex-clipboard-d316df35-3a9d-4ed8-8b5d-c3fabeae499a.png",
+      "supplied_png_sha256": "54318d76c699fbfc9d39dc39749a776780953d1d8314b7197322edcfc1919bb7",
+      "native_pixels": [
+        1683,
+        935
+      ],
+      "source_dpi_metadata": null,
+      "imported_png_identical": true,
+      "pdf_pixels_identical": true,
+      "manifest_entry": {
+        "file": "fig00_ecg_ai_context",
+        "kind": "author-supplied schematic",
+        "sources": [
+          "User attachment: codex-clipboard-d316df35-3a9d-4ed8-8b5d-c3fabeae499a.png",
+          "12-lead ECG workflow; checked against existing manuscript definitions"
+        ],
+        "creator": "Author-supplied replacement; imported without pixel edits",
+        "pdf_sha256": "2173dde90937f255fdd07aa7896105559ee721789cd3f2929007bdc75d173cfc",
+        "png_sha256": "54318d76c699fbfc9d39dc39749a776780953d1d8314b7197322edcfc1919bb7",
+        "format": "Original RGB PNG; lossless raster image embedded in PDF",
+        "native_pixels": [
+          1683,
+          935
+        ]
+      }
+    },
+    {
+      "file": "fig00b_ecg_ai_evolution_gap",
+      "figure_number": 2,
+      "purpose": "Distinct reference units",
+      "supplied_filename": "codex-clipboard-2a1ea7ba-71be-41fa-8a68-c74f2c91889a.png",
+      "supplied_png_sha256": "c0de3975787bba913925b73d8acf387fc674f68aa576353ade0dfdc495b12b27",
+      "native_pixels": [
+        1683,
+        935
+      ],
+      "source_dpi_metadata": null,
+      "imported_png_identical": true,
+      "pdf_pixels_identical": true,
+      "manifest_entry": {
+        "file": "fig00b_ecg_ai_evolution_gap",
+        "kind": "author-supplied schematic",
+        "sources": [
+          "User attachment: codex-clipboard-2a1ea7ba-71be-41fa-8a68-c74f2c91889a.png",
+          "Distinct reference units; checked against existing manuscript definitions"
+        ],
+        "creator": "Author-supplied replacement; imported without pixel edits",
+        "pdf_sha256": "07a42226edbedfdabb7e23740735d5cb89899c8736eaaab270a490652071b676",
+        "png_sha256": "c0de3975787bba913925b73d8acf387fc674f68aa576353ade0dfdc495b12b27",
+        "format": "Original RGB PNG; lossless raster image embedded in PDF",
+        "native_pixels": [
+          1683,
+          935
+        ]
+      }
+    },
+    {
+      "file": "fig01_graphical_abstract",
+      "figure_number": 3,
+      "purpose": "Separate fitted specialists",
+      "supplied_filename": "codex-clipboard-418fcee1-e6e5-4c9c-a3c8-4bff48c8db67.png",
+      "supplied_png_sha256": "a4890f3577446e233eab16e8a19410e3bfe6b9bd11b43a359e990e48ec7041e2",
+      "native_pixels": [
+        1683,
+        935
+      ],
+      "source_dpi_metadata": null,
+      "imported_png_identical": true,
+      "pdf_pixels_identical": true,
+      "manifest_entry": {
+        "file": "fig01_graphical_abstract",
+        "kind": "author-supplied schematic",
+        "sources": [
+          "User attachment: codex-clipboard-418fcee1-e6e5-4c9c-a3c8-4bff48c8db67.png",
+          "Separate fitted specialists; checked against existing manuscript definitions"
+        ],
+        "creator": "Author-supplied replacement; imported without pixel edits",
+        "pdf_sha256": "272badc218b922e228f888e117c814a5083018088fc682cd765845b2b562a015",
+        "png_sha256": "a4890f3577446e233eab16e8a19410e3bfe6b9bd11b43a359e990e48ec7041e2",
+        "format": "Original RGB PNG; lossless raster image embedded in PDF",
+        "native_pixels": [
+          1683,
+          935
+        ]
+      }
+    },
+    {
+      "file": "fig03_cascade_contract",
+      "figure_number": 6,
+      "purpose": "Reporting contracts",
+      "supplied_filename": "codex-clipboard-ef71fb54-a8df-49de-bbe8-29740b3ad63b.png",
+      "supplied_png_sha256": "48efe1d97702b73ae657b47cbfe29ed5fe078ab070c82596b9a2de6e0b4d5e4c",
+      "native_pixels": [
+        1672,
+        941
+      ],
+      "source_dpi_metadata": null,
+      "imported_png_identical": true,
+      "pdf_pixels_identical": true,
+      "manifest_entry": {
+        "file": "fig03_cascade_contract",
+        "kind": "author-supplied schematic",
+        "sources": [
+          "User attachment: codex-clipboard-ef71fb54-a8df-49de-bbe8-29740b3ad63b.png",
+          "Reporting contracts; checked against existing manuscript definitions"
+        ],
+        "creator": "Author-supplied replacement; imported without pixel edits",
+        "pdf_sha256": "7fb6f48e185925005dc41646c368341f4795b285a57df0e2c64021056588ea33",
+        "png_sha256": "48efe1d97702b73ae657b47cbfe29ed5fe078ab070c82596b9a2de6e0b4d5e4c",
+        "format": "Original RGB PNG; lossless raster image embedded in PDF",
+        "native_pixels": [
+          1672,
+          941
+        ]
+      }
+    },
+    {
+      "file": "fig02_data_processing_bias_workflow",
+      "figure_number": 4,
+      "purpose": "Signal preparation and evidence stages",
+      "supplied_filename": "codex-clipboard-cd6ebc28-1ae8-4383-b2df-b5fea95f99a5.png",
+      "supplied_png_sha256": "9f06f1f4948446a2e809eb6f9dd644acf52bd75d0a2ed69a603ae642397ed37a",
+      "native_pixels": [
+        1683,
+        935
+      ],
+      "source_dpi_metadata": null,
+      "imported_png_identical": true,
+      "pdf_pixels_identical": true,
+      "manifest_entry": {
+        "file": "fig02_data_processing_bias_workflow",
+        "kind": "author-supplied schematic",
+        "sources": [
+          "User attachment: codex-clipboard-cd6ebc28-1ae8-4383-b2df-b5fea95f99a5.png",
+          "Signal preparation and evidence stages; checked against existing manuscript definitions"
+        ],
+        "creator": "Author-supplied replacement; imported without pixel edits",
+        "pdf_sha256": "84f22bd4927668f757f983bab5704342e777af5931c8cc8a3e631ae28a826118",
+        "png_sha256": "9f06f1f4948446a2e809eb6f9dd644acf52bd75d0a2ed69a603ae642397ed37a",
+        "format": "Original RGB PNG; lossless raster image embedded in PDF",
+        "native_pixels": [
+          1683,
+          935
+        ]
+      }
+    }
+  ],
+  "source_images_modified": false,
+  "image_processing": "Byte-identical PNG import and lossless RGB embedding in PDF; no cropping, recoloring, resampling or upscaling",
+  "scope": "Five conceptual schematics only; quantitative result plots and their data are unchanged",
+  "previous_cascade_scope": "The reporting-contract illustration is visually replaced as explicitly requested; cascade, abstention and fallback text, policies and outcomes remain unchanged",
+  "journal_guidance_checked": "https://www.mdpi.com/journal/life/instructions",
+  "all_other_13_figure_pairs_unchanged": true,
+  "main_latex_text_unchanged": true,
+  "main_latex_sha256": "1cdc848e64c9d88de12e35935fb1fdd8c5bdf0968dc89e522233e080846fb65c"
+}
