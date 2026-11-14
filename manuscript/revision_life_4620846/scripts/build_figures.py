@@ -655,6 +655,24 @@ assert abs(np.mean([v["f1"] for v in profiles["P4"].values()]) - 0.7934563704) <
 (HERE / "supplementary/INDEPENDENT_AGGREGATE_RECALCULATION.json").write_text(
     json.dumps(summary, indent=2)
 )
+# Retain the authenticated CODE plots alongside the regenerated release plots.
+# These public package figures have their own source and checksums.
+for source, target in (
+    ("figure_03_sensitivity_ppv", "fig_code_sensitivity_ppv"),
+    ("figure_05_observed_precision_recall", "fig_code_observed_pr"),
+):
+    for ext in ("pdf", "png"):
+        data = (REPO / "docs/external_evidence/figures" / f"{source}.{ext}").read_bytes()
+        (FIG / f"{target}.{ext}").write_bytes(data)
+    inventory.append({
+        "file": target,
+        "kind": "authenticated aggregate result",
+        "sources": [f"docs/external_evidence/figures/{source}.pdf",
+                    "PR10 source commit 63c74b3fde2c51f7f8cde4ad396d77a1bd16cb29"],
+        "creator": "Supplied public evidence package; copied byte-for-byte",
+        "pdf_sha256": hashlib.sha256((FIG / f"{target}.pdf").read_bytes()).hexdigest(),
+        "png_sha256": hashlib.sha256((FIG / f"{target}.png").read_bytes()).hexdigest(),
+    })
 (HERE / "audit/FIGURE_MANIFEST.json").write_text(json.dumps(inventory, indent=2))
 (FIG / "figure_manifest.json").write_text(
     json.dumps(

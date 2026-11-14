@@ -4,21 +4,21 @@
     "LaTeX",
     "PDF"
   ],
-  "main_reference": "6bf133b1b503fe7e8092a3c109a896cecad6b8a8",
+  "main_reference": "72f179c5db5dc8d956e43b8586f37f463d55b3fe",
   "original": {
     "pages": 26,
     "alphabetic_word_count": 8907,
     "zip_sha256": "36c1c6db30a759ef9d349ae2e545577cfd7ce3af91a3b97fb459380113f294a8"
   },
   "revised": {
-    "pages": 40,
-    "alphabetic_word_count": 15888,
-    "tables": 31,
-    "figure_calls": 16,
+    "pages": 45,
+    "alphabetic_word_count": 17843,
+    "tables": 35,
+    "figure_calls": 18,
     "equation_environments": 22,
     "numbered_equations": 24,
-    "bibliography_entries": 32,
-    "pdf_sha256": "0bc9458ffbae865a2e1a19fb45c7b0ed3d4a32f9a3f67ce95518cc882af84f2c"
+    "bibliography_entries": 33,
+    "pdf_sha256": "658e4b194c75a3a7c9b3f7c12007e32db1188ddacc713bf1ad0ef539d6c962cd"
   },
   "word_count_method": "Alphabetic tokens, including hyphenated words; identical extraction/counting rule used for original and revision.",
   "checks": {
@@ -46,8 +46,11 @@
     "no_unconditional_H_floats": true,
     "no_resizebox_tables": true,
     "independent_study_explicitly_pending": true,
+    "code_completed_with_reserved_patients": true,
+    "code_failed_safeguards_reported": true,
+    "code_p4_not_validated": true,
     "cleanup_explanation_not_in_article": true,
-    "sixteen_distinct_figures": true,
+    "eighteen_distinct_figures": true,
     "figure_hashes_match": true,
     "relative_latex_paths": true,
     "no_private_cedia_paths": true,
@@ -70,23 +73,39 @@
   },
   "local_work_only": "No model training, waveform inference or live CEDIA run was performed. Later results are checked against their published native receipts and aggregates.",
   "open_items": [
-    "Independent external study intentionally unfinished; R1-1 and corresponding R2-4a remain open.",
+    "Within-CODE patient-held-out adaptation completed. Independent institutional and P4 validation unperformed; R1-1 and independent component of R2-4a remain open.",
     "Complete original reviewer reports unavailable: 36 paraphrases and two preserved quotations cannot guarantee a verbatim report audit.",
     "Exact historical Optuna database, loader, job-consumed rosters, intermediate lineage and original quarantine ledger remain unauthenticated.",
     "Authors must verify inherited contributions, funding/ethics declarations and cover-letter approval/exclusivity before submission.",
-    "Automatic approval review rejected creating a new fork as an additional publication destination; no fork or remote revision update was created."
+    "User explicitly authorized fork publication; fork created. Draft PR publication follows local artifact verification."
   ],
   "github": {
     "local_branch": "codex/life-4620846-manuscript-revision",
     "existing_pr": "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/18",
-    "remote_publication": "NOT_UPDATED_FOR_THIS_AMENDMENT_APPROVAL_REQUIRED",
+    "remote_publication": "AUTHORIZED_PENDING_FINAL_VERIFICATION",
     "source_repo_push_permission": false
   },
   "visual_review": "All final PDF pages rendered; page contact scan and detailed checks of architecture, plots, tables, equations and letters. See layout report.",
-  "zip_recompilation": "PASS: final ZIP compiled from clean extraction; complete normalized PDF text identical",
-  "code_verification": {
-    "ruff": "PASS: revision tooling and affected inventory test",
-    "targeted_tests": "5 passed: publication scope, citation/license boundaries, retained source attribution, release declaration limits, and tracked figure manifests/hashes",
-    "full_model_suite": "Not run; no model implementation or weights changed"
+  "zip_recompilation": "PASS: clean extraction compiled; full normalized PDF text identical; no overfull boxes, missing characters or unresolved references",
+  "verification": {
+    "ruff": "PASS",
+    "targeted_publication_tests": "5 passed",
+    "external_package": "57 members and 46 Git source trace rows verified; confusion-derived metrics and arithmetic macros reconciled",
+    "rendered_pages": 45,
+    "visual_detail_pages": [
+      32,
+      33
+    ],
+    "model_training_or_new_inference": false
+  },
+  "external_evaluation": {
+    "scope": "WITHIN_CODE_HELD_OUT_AFTER_SUPERVISED_ADAPTATION",
+    "ecgs": 4921,
+    "patients": 3891,
+    "endpoints": 5,
+    "macro_f1": 0.6026576474782945,
+    "independent_institutional": "NOT_EVALUATED",
+    "P4": "NOT_EVALUATED",
+    "promotion": "NOT_AUTHORIZED"
   }
 }

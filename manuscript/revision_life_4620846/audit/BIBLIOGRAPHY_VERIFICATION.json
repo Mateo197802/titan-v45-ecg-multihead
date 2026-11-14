@@ -181,5 +181,12 @@
     "key": "Kassis2026Skills",
     "status": "primary_repository_metadata_verified",
     "source": "https://doi.org/10.48550/arXiv.2609.00065"
+  },
+  {
+    "key": "CODE15Dataset",
+    "status": "metadata_verified",
+    "source": "https://zenodo.org/records/4916206",
+    "verified_date": "2026-11-13",
+    "claim_fit": "Official CODE-15% v1.0.0 dataset size, patient count, lead order, sampling and storage. Actual admitted border durations are from experiment QC, not asserted as provider acquisition durations."
   }
 ]

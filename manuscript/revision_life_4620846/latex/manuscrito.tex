@@ -53,7 +53,7 @@ $^{4}$ \quad Facultad de Ingenier\'ias Digitales y Tecnolog\'ias Emergentes, Uni
 \firstnote{Senior author: Diego Almeida-Galarraga.}
 
 
-\abstract{This study designed and evaluated modular convolutional neural network (CNN)--Transformer specialists for ten-second 12-lead electrocardiograms (ECGs). A 58.35-million-parameter backbone design has separately fitted rhythm and pathology versions. Primary6 reports six selected rhythm and conduction statements; Primary4 comprises four binary pathology panels. In selected retrospective development evaluations, Primary6 achieved 95.19\% top-1 accuracy and 80.09\% mean binary F1 across 1,643 ECGs. Primary4 achieved 80.23\% mean binary accuracy and 79.35\% macro-F1 across 962 ECG--label observations from 733 distinct ECGs. These conditional estimates do not measure a complete diagnostic workflow. Separate completed retrospective analyses quantify denominator sensitivity, morphology inputs and the tradeoff between emitted errors and withheld decisions. Released checkpoint identities and archived selected metrics are verifiable, but complete historical training lineage and independence of all partitions remain unestablished. Independent external evaluation is in progress, and no results from that unfinished study are reported.}
+\abstract{This study designed and evaluated modular convolutional neural network (CNN)--Transformer specialists for ten-second 12-lead electrocardiograms (ECGs). A 58.35-million-parameter backbone design has separately fitted rhythm and pathology versions. Primary6 reports six selected rhythm and conduction statements; Primary4 comprises four binary pathology panels. In selected retrospective development evaluations, Primary6 achieved 95.19\% top-1 accuracy and 80.09\% mean binary F1 across 1,643 ECGs. Primary4 achieved 80.23\% mean binary accuracy and 79.35\% macro-F1 across 962 ECG--label observations from 733 distinct ECGs. These conditional estimates do not measure a complete diagnostic workflow. Separate completed retrospective analyses quantify denominator sensitivity, morphology inputs and the tradeoff between emitted errors and withheld decisions. Released checkpoint identities and archived selected metrics are verifiable, but complete historical training lineage and independence of all partitions remain unestablished. A separate patient-held-out CODE evaluation after supervised adaptation achieved 60.27\% five-endpoint macro-F1 on 4,921 ECGs from 3,891 patients, but failed promotion safeguards. Independent institutional evaluation remains unfinished.}
 
 \keyword{12-lead electrocardiogram; deep learning; CNN--Transformer; multi-specialist architecture; arrhythmia classification; myocardial infarction; probability calibration; predictive uncertainty; explainable artificial intelligence}
 
@@ -131,7 +131,7 @@ The objective was to design a modular 12-lead ECG classifier, characterize its s
 This study designed and evaluated CNN--Transformer specialists on standardized ECG windows. \label{sec:study-design}
 The original release identifier \texttt{external\_dev}, termed external-development in the submission, refers to the archived selected development evaluations, not a single untouched test set. V3H used its 2,193-ECG P8 holdout for development validation; the selected P6 profile comprises 1,643 ECGs and its epoch selection used the reported P6 population. P4 uses four selected binary panels; 962 panel observations correspond to 733 unique ECGs, not 962 distinct patients. The panels are not all evaluated for every ECG. Table~\ref{tab:presentstudy} defines the profiles, and Table~\ref{tab:challengeposition} separates reporting choices from clinical decisions.
 
-Independent external evaluation is a separate, unfinished analysis. Its intended confirmatory design binds cohort eligibility, source and patient/signal overlap checks, label mappings, frozen checkpoint bytes, preprocessing, thresholds and analysis endpoints before outcome review. Cohorts inspected during model selection, threshold fitting or domain adaptation are not counted as independent. Any unresolved overlap or reference incompatibility must be reported rather than assumed absent. No performance estimate from the ongoing independent evaluation is presented.
+Independent external evaluation is a separate, unfinished analysis. Its intended confirmatory design binds cohort eligibility, source and patient/signal overlap checks, label mappings, frozen checkpoint bytes, preprocessing, thresholds and analysis endpoints before outcome review. Cohorts inspected during model selection, threshold fitting or domain adaptation are not counted as independent. Any unresolved overlap or reference incompatibility must be reported rather than assumed absent. No performance estimate from the ongoing independent evaluation is presented. The completed within-CODE adaptation experiment is reported separately in Sections~\ref{sec:code-methods} and \ref{sec:code-results}.
 P6 denotes Primary6, whose selected outputs are atrial fibrillation (AFIB), sinus bradycardia (SB), sinus tachycardia (STACH), right bundle branch block (RBBB), first-degree atrioventricular block (1AVB), and premature ventricular contractions (PVC). P4 denotes Primary4: anteroseptal myocardial infarction (ASMI), left ventricular hypertrophy (LVH), inferior myocardial infarction (IMI), and ischemic ST--T change (ISC\_). P8 additionally reports normal sinus rhythm (NSR) and premature atrial contractions (PAC). These are ECG-associated reference statements rather than comprehensive clinical diagnoses.
 
 \begin{table}[htbp]
@@ -488,6 +488,8 @@ ECE & Ten-bin expected calibration error & Probability calibration \\
 
 \input{methods_statistics}
 
+\input{code_methods}
+
 \section{Results}
 
 \subsection{Overall Specialist Performance}
@@ -637,6 +639,8 @@ The fallback's emitted false negatives totaled 103, while 67 known positives rem
 
 \input{results_expansion}
 
+\input{code_results}
+
 \section{Discussion}
 
 
@@ -686,12 +690,14 @@ TITAN P4 & ECG--label observation & Mean binary panel accuracy \\
 
 \input{discussion_expansion}
 
+\input{code_discussion}
+
 \subsection{Limitations}
 \label{sec:limitations}
 
 Several methodological and computational constraints characterize the present investigation, defining crucial avenues for ongoing and future research.
 
-First, the retrospective development and validation cohorts originate predominantly from public international databases in Europe and Asia. Limited and incompletely characterized representation prevents a reliable demographic fairness analysis. The small selected Brazilian CODE test stratum does not provide representative Latin American validation, and age and ethnicity coverage were not established for all historical stages. Although the centralized data pipeline records source provenance to facilitate modular dataset expansion, any revised classification thresholds must be fitted and evaluated in a separate development cohort before any proposed deployment in a different clinical environment.
+First, the retrospective development and validation cohorts originate predominantly from public international databases in Europe and Asia. Limited and incompletely characterized representation prevents a reliable demographic fairness analysis. The small historical selected Brazilian CODE test stratum and the later within-CODE adapted-model evaluation do not establish representative Latin American or independent institutional validation, and age and ethnicity coverage were not established for all historical stages. Although the centralized data pipeline records source provenance to facilitate modular dataset expansion, any revised classification thresholds must be fitted and evaluated in a separate development cohort before any proposed deployment in a different clinical environment.
 
 Second, dynamic lead-wise z-score normalization discards absolute voltage amplitudes to maintain gain invariance across multi-center recording equipment. This can remove information needed for amplitude-dependent structural conditions, particularly Left Ventricular Hypertrophy (LVH, F1 65.73\%), where standard electrocardiographic criteria (such as Sokolow-Lyon and Cornell indices) rely heavily on raw millivolt measurements.
 
@@ -727,7 +733,7 @@ Seventh, the comparisons were retrospective, several used inspected development 
 \section{Conclusions}
 
 
-This study designed and evaluated a modular CNN--Transformer architecture with separate rhythm and pathology specialists. The historical selected development results support P6 top-1 accuracy of 95.19\% and mean binary F1 of 80.09\% on 1,643 ECGs, and P4 mean binary accuracy of 80.23\% and macro-F1 of 79.35\% on 962 ECG--label observations from 733 ECGs. These estimates do not measure end-to-end clinical performance. Subsequent bounded analyses demonstrate sensitivity to the evaluated population, limited benefit of the tested morphology addition, and the tradeoff between emitted errors and withheld opportunities. Released bytes and selected reported metrics can be checked independently. Complete training replay, historical patient/signal disjointness and historical clinical quarantine were not established. Independent external evaluation is ongoing.
+This study designed and evaluated a modular CNN--Transformer architecture with separate rhythm and pathology specialists. The historical selected development results support P6 top-1 accuracy of 95.19\% and mean binary F1 of 80.09\% on 1,643 ECGs, and P4 mean binary accuracy of 80.23\% and macro-F1 of 79.35\% on 962 ECG--label observations from 733 ECGs. These estimates do not measure end-to-end clinical performance. Subsequent bounded analyses demonstrate sensitivity to the evaluated population, limited benefit of the tested morphology addition, and the tradeoff between emitted errors and withheld opportunities. Released bytes and selected reported metrics can be checked independently. Complete training replay, historical patient/signal disjointness and historical clinical quarantine were not established. The completed within-CODE adaptation evaluation achieved macro-F1 60.27\% on five endpoints in 4,921 reserved ECGs from 3,891 patients, with paired gains over frozen P6/P8 systems but failed promotion safeguards and persistent endpoint-specific errors. This does not validate P4 or establish independent institutional transport, which remains untested.
 
 
 \supplementary{Appendix~\ref{appendix:supplement} includes verified development summaries, profile-specific tables and release hashes. The companion supplement contains aggregate recalculations and evidence references.}
@@ -996,8 +1002,10 @@ Efron, B.. Bootstrap Methods: Another Look at the Jackknife. \emph{The Annals of
 Guo, C.; Pleiss, G.; Sun, Y.; Weinberger, K.Q. On Calibration of Modern Neural Networks. In \emph{Proceedings of the 34th International Conference on Machine Learning}; PMLR, \textbf{2017}, 70, 1321--1330. \url{https://proceedings.mlr.press/v70/guo17a.html}.
 \bibitem{Physionet2026}
 Pollard, T.; Moody, B.E.; Lehman, L.w.H.; Gow, B.J.; Fernandes, C.; Xie, C.; Johnson, A.; Mark, R.G.; Heldt, T.. PhysioNet as a global platform for biomedical research. \emph{Nature Health} \textbf{2026}, 1, 792-795. \url{https://doi.org/10.1038/s44360-026-00096-z}.
+\bibitem{CODE15Dataset}
+Ribeiro, A.H.; Paixao, G.M.M.; Lima, E.M.; Horta Ribeiro, M.; Pinto Filho, M.M.; Gomes, P.R.; Oliveira, D.M.; Meira Jr, W.; Schon, T.B.; Ribeiro, A.L.P. CODE-15\%: A large scale annotated dataset of 12-lead ECGs (version 1.0.0). \emph{Zenodo} \textbf{2021}. \url{https://doi.org/10.5281/zenodo.4916206}.
 \bibitem{Kassis2026Skills}
-Kassis, T.; Agarwal, V.; He, Y.; Patel, D.; Brueckner, A.M. Scientific Agent Skills: A Library of Procedural Knowledge for Research Agents. \emph{arXiv} \textbf{2026}, arXiv:2609.00065v2. \url{https://doi.org/10.48550/arXiv.2609.00065}.
+Kassis, T.; Agarwal, V.; He, Y.; Patel, D.; Brueckner, A.M. Scientific Agent Skills: A Library of Procedural Knowledge for Research Agents. \emph{arXiv} \textbf{2026}, arXiv:2609.00065. \url{https://doi.org/10.48550/arXiv.2609.00065}.
 \end{thebibliography}
 
 \end{document}

@@ -158,5 +158,27 @@
     "creator": "Code-generated for this revision; no third-party artwork",
     "pdf_sha256": "b432237cfa3f86ca65f3caab8fb6e8f88e6e29be510d38cde76a7176f359b445",
     "png_sha256": "97e6142e2fc33d53c6c5fbf5b9c1cc630b65857d44ab04c35843d73069f66e34"
+  },
+  {
+    "file": "fig_code_sensitivity_ppv",
+    "kind": "authenticated aggregate result",
+    "sources": [
+      "docs/external_evidence/figures/figure_03_sensitivity_ppv.pdf",
+      "PR10 source commit 63c74b3fde2c51f7f8cde4ad396d77a1bd16cb29"
+    ],
+    "creator": "Supplied public evidence package; copied byte-for-byte",
+    "pdf_sha256": "abf1f0a9d84771400b205b7520d6bd36ed118b0a0f493e8b3d739f2c654692b6",
+    "png_sha256": "478762f17a90906dd1ff3c1ef6a666b1335d7857c144e3e9d09f6c34c722437b"
+  },
+  {
+    "file": "fig_code_observed_pr",
+    "kind": "authenticated aggregate result",
+    "sources": [
+      "docs/external_evidence/figures/figure_05_observed_precision_recall.pdf",
+      "PR10 source commit 63c74b3fde2c51f7f8cde4ad396d77a1bd16cb29"
+    ],
+    "creator": "Supplied public evidence package; copied byte-for-byte",
+    "pdf_sha256": "54b2f8d68d8b238a3c4406395a5d098309cc4a85e27e720b5a7b3b089a3a25df",
+    "png_sha256": "5cf5692abeb841e887e8e5c28ce1e3ae00d11f4b95442dcdfba2c83895819f17"
   }
 ]

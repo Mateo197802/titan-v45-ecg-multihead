@@ -307,5 +307,10 @@
       "display_url": "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/22",
       "display_title": "Integrate PR #16 autonomous development evidence on main"
     }
-  ]
+  ],
+  "current_main_reconciliation": {
+    "commit": "72f179c5db5dc8d956e43b8586f37f463d55b3fe",
+    "integrated": true,
+    "source": "PR21 descriptive language; earlier CODE PR19 package added to manuscript with within-CODE boundary"
+  }
 }
