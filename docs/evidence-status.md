@@ -2,8 +2,33 @@
 
 This page summarizes the released V4.5 evaluations, metric definitions, and
 evidence boundaries. The repository contains code, result tables, evaluation
-manifests, and model-asset hashes; the manuscript source and PDF are not part
-of this release.
+manifests, and model-asset hashes, together with the authorized English
+publication draft and its complete LaTeX and aggregate supplementary packages.
+
+## Publication Status
+
+**Modular CNN–Transformer Specialists for Multi-Source 12-Lead ECG Rhythm and
+Pathology Classification** is available as an **AUTHOR-REVIEW DRAFT**, with
+45 pages and 18 figures: six author-supplied raster PDF wrappers with native
+PNGs retained in the repository, and twelve vector figures. The manuscript
+received a full English editorial pass followed by a targeted 22-paragraph
+clarity pass. Reported scientific results and evaluation boundaries remain
+unchanged, and the manuscript's AI-use acknowledgment remains in place.
+
+The public [PDF](../manuscript/revision_life_4620846/artifacts/TITAN_V45_LIFE_4620846_EDITORIAL.pdf),
+[50-member complete source ZIP](../manuscript/revision_life_4620846/artifacts/TITAN_V45_LIFE_4620846_EDITORIAL_LATEX.zip),
+and [31-member aggregate supplementary ZIP](../manuscript/revision_life_4620846/artifacts/TITAN_V45_LIFE_4620846_SUPPLEMENTARY.zip)
+are described by the [publication manifest](../manuscript/revision_life_4620846/PUBLICATION_MANIFEST.json).
+The source includes the legitimate MDPI dependencies and their
+[attribution notice](../manuscript/revision_life_4620846/latex/THIRD_PARTY_NOTICES.md).
+This public distribution does not establish journal submission or acceptance.
+Confidential editorial/reviewer material, raw ECGs, individual-record data,
+and weights are excluded from the publication artifacts.
+
+The [layout report](../manuscript/revision_life_4620846/MANUSCRIPT_LAYOUT_QA_REPORT.md)
+records the manuscript build checks. The [publication validation record](../manuscript/revision_life_4620846/audit/PUBLICATION_VALIDATION.json) confirms the clean source build, archive hashes, all seven publication tests and repository-wide Ruff. The full suite retains the same eight failures/errors observed on the isolated baseline and is not fully passing. The unchanged original 14-image inventory has a
+historical scope; see [figure evidence](figure-evidence.md) for the current
+18-figure inventory.
 
 ## Reported Profile Performance
 
@@ -14,6 +39,17 @@ of this release.
 | Primary8 | 2,193 selected ECGs | 90.6065% top-1 accepted-label accuracy; 76.1425% binary-panel macro-F1 | Eight rhythm and conduction classes on the mixed-source cohort; includes the Primary6 records. |
 
 All three numbers describe repeated external-development evaluation. They are not an untouched external-final validation or a clinical performance claim. Primary6 and Primary4 use separate model branches: Primary6 uses the V3F rhythm backbone and its Primary6 specialist; Primary4 uses the separately fine-tuned V3AG pathology backbone and its calibrated specialist.
+
+## Later CODE Evaluation
+
+The [CODE evidence package](external_evidence/README.md) reports a completed
+within-source, patient-held-out evaluation **after supervised adaptation**
+to CODE. On 4,921 ECGs from 3,891 patients, the five-endpoint candidate
+achieved macro-F1 60.27% (95% CI 56.46–63.41). The interval is a
+patient-bootstrap aggregate. The comparison uses the same held-out ECGs
+for three systems; it does not replace the selected P6/P4 release results.
+The candidate failed promotion safeguards. Independent institutional
+validation and independent P4 external validation remain pending.
 
 ## Metric Definitions
 

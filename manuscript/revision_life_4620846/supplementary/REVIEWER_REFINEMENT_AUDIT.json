@@ -1,0 +1,24 @@
+{
+  "requested_title": "Modular CNN–Transformer Specialists for Multi-Source 12-Lead ECG Rhythm and Pathology Classification",
+  "cascade_content_preserved": true,
+  "preserved_sha256": {
+    "selective_methods": "e4a7a1ea293d20a2ef2b23e1892a81caaa1be92413ac9169086272b3d47eb266",
+    "selective_results": "c9c029b42a1cbf4841b9671af7f272dafdc8505e3f900ff5f207679eed4a6af6",
+    "figure_contract": "b150d501a9f863e4196205c2e966f69312f256b0ad023cfff96d407ae4ab1fb8",
+    "results_expansion": "044ac937766e2551f4874800243ccea053eeaaf49abddedd55522afa3c731c4c",
+    "discussion_expansion": "4c1e12ef7d66cbe1bcf4f51acb1326054a090d144a10d8d676ab8d9b0e9a3c90"
+  },
+  "synthesis_flow_table": "Not added: author explicitly requested preservation of all cascade material",
+  "supplementary_class_rows": 11,
+  "partition_states": [
+    "RECORDED",
+    "RECONSTRUCTED",
+    "UNCERTIFIED"
+  ],
+  "morphology_source_fixture": "PASS: ten feature definitions; source hash and synthetic fixtures verified; no model inference",
+  "negative_morphology_results_and_simultaneous_intervals_preserved": true,
+  "five_direct_artifact_links_present_in_pdf": true,
+  "artifact_hashes_and_lengths_unchanged": true,
+  "supplementary_table_pages": 1,
+  "main_pages": 46
+}

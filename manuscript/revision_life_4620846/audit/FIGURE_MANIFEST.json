@@ -65,13 +65,19 @@
   },
   {
     "file": "fig03_internal_architecture",
-    "kind": "schematic",
+    "kind": "author-supplied schematic",
     "sources": [
-      "docs/reviewer_two_comment_rigorous/R2_3F_MORPHOLOGY_FINAL_VALIDATION.md"
+      "User attachment: codex-clipboard-f6b18072-0019-4aee-b9c0-8d78df2aa40d.png",
+      "Previously verified lossless Figure 5 replacement; preserved in the current manuscript ZIP"
     ],
-    "creator": "Code-generated for this revision; no third-party artwork",
-    "pdf_sha256": "cd3046cef49b2c573afe1188f2a191863b29f9f84e3c73f6110eea4ebc1507ca",
-    "png_sha256": "f776cc6efe8af02f41d0ba202ea7c0ddd5be9242f955fbb27aeda17d58e867a2"
+    "creator": "Author-supplied replacement; no pixel edits",
+    "pdf_sha256": "ac65d5e5915b8b53b18b3c918f65d53d479ecec173281b926d3fb23b414c0cbf",
+    "png_sha256": "1ada61835d2156c8e55a88cf5925d4363f4ac7b712e418ec8ad71f8b2d1a3068",
+    "format": "Original RGB PNG; lossless raster image embedded in PDF",
+    "native_pixels": [
+      1586,
+      992
+    ]
   },
   {
     "file": "fig03_cascade_contract",

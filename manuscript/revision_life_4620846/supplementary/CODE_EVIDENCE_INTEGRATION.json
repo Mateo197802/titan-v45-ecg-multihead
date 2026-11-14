@@ -1,0 +1,19 @@
+{
+  "input_zip_sha256": "ae5c3457d49f07cca4978d37a3ef711bb326e3dd4cadb4a2f718d0f162470520",
+  "source_commit": "63c74b3fde2c51f7f8cde4ad396d77a1bd16cb29",
+  "public_package_byte_identical": true,
+  "verification": {
+    "members": 57,
+    "source_trace_rows": 46,
+    "primary_models": 3,
+    "endpoints": 5
+  },
+  "scope": "Patient-disjoint held-out evaluation within CODE following supervised adaptation; independent institutional and P4 evaluation not performed",
+  "local_recalculation": "Confusion-derived points and arithmetic macros only; rank metrics and bootstrap bounds authenticated via sealed aggregates",
+  "manuscript_inputs": [
+    "code_methods.tex",
+    "code_results.tex",
+    "code_discussion.tex"
+  ],
+  "plots_copied": 2
+}

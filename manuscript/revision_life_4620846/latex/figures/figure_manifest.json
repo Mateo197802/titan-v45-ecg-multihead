@@ -11,8 +11,8 @@
     "fig02_data_processing_bias_workflow.png": "9f06f1f4948446a2e809eb6f9dd644acf52bd75d0a2ed69a603ae642397ed37a",
     "fig03_cascade_contract.pdf": "7fb6f48e185925005dc41646c368341f4795b285a57df0e2c64021056588ea33",
     "fig03_cascade_contract.png": "48efe1d97702b73ae657b47cbfe29ed5fe078ab070c82596b9a2de6e0b4d5e4c",
-    "fig03_internal_architecture.pdf": "cd3046cef49b2c573afe1188f2a191863b29f9f84e3c73f6110eea4ebc1507ca",
-    "fig03_internal_architecture.png": "f776cc6efe8af02f41d0ba202ea7c0ddd5be9242f955fbb27aeda17d58e867a2",
+    "fig03_internal_architecture.pdf": "ac65d5e5915b8b53b18b3c918f65d53d479ecec173281b926d3fb23b414c0cbf",
+    "fig03_internal_architecture.png": "1ada61835d2156c8e55a88cf5925d4363f4ac7b712e418ec8ad71f8b2d1a3068",
     "fig06_rhythm_confusion.pdf": "bedd9797511ff8e3d00e50552a81fed9daba65aea0b42016e73108ef3c4745c5",
     "fig06_rhythm_confusion.png": "72809e48dbf129af018f85721faa36ccd3001abc8117d06d0e79e9e62567d3a3",
     "fig07_pathology_confusion.pdf": "9eb73be7eb0484722ca1ced02981d3eca8967dbdaa447ccbe98be4dc96d91b70",
@@ -33,9 +33,9 @@
     "fig13_error_flows.png": "aabf7216b3848bb174bf82f8fa87ec0ace9c85578e847ac1207fa9ad26aa58dd",
     "fig16768_internal_history.pdf": "b432237cfa3f86ca65f3caab8fb6e8f88e6e29be510d38cde76a7176f359b445",
     "fig16768_internal_history.png": "97e6142e2fc33d53c6c5fbf5b9c1cc630b65857d44ab04c35843d73069f66e34",
-    "fig_code_sensitivity_ppv.pdf": "abf1f0a9d84771400b205b7520d6bd36ed118b0a0f493e8b3d739f2c654692b6",
-    "fig_code_sensitivity_ppv.png": "478762f17a90906dd1ff3c1ef6a666b1335d7857c144e3e9d09f6c34c722437b",
     "fig_code_observed_pr.pdf": "54b2f8d68d8b238a3c4406395a5d098309cc4a85e27e720b5a7b3b089a3a25df",
-    "fig_code_observed_pr.png": "5cf5692abeb841e887e8e5c28ce1e3ae00d11f4b95442dcdfba2c83895819f17"
+    "fig_code_observed_pr.png": "5cf5692abeb841e887e8e5c28ce1e3ae00d11f4b95442dcdfba2c83895819f17",
+    "fig_code_sensitivity_ppv.pdf": "abf1f0a9d84771400b205b7520d6bd36ed118b0a0f493e8b3d739f2c654692b6",
+    "fig_code_sensitivity_ppv.png": "478762f17a90906dd1ff3c1ef6a666b1335d7857c144e3e9d09f6c34c722437b"
   }
 }

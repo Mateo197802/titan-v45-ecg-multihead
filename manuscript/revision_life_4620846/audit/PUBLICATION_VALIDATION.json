@@ -1,0 +1,58 @@
+{
+  "schema": "TITAN_LIFE_PUBLICATION_VALIDATION_V1",
+  "checked_on": "2026-11-14",
+  "baseline_commit": "4d8abc8b696381ec2350966b42daf802d3fec3cb",
+  "publication_manifest_sha256": "23a7ceae8f7db859662f09d7a1625a5d48da5280260859aa8b04a92ca7c4c662",
+  "artifact_checks": {
+    "publication_tests_passed": 7,
+    "public_source_zip_members": 50,
+    "supplement_zip_members": 31,
+    "all_49_source_zip_member_hashes_verified": true,
+    "all_six_native_pngs_match_lossless_pdf_pixels": true,
+    "all_102_staged_source_archive_media_bytes_match_manifest": true,
+    "line_endings_preserved": true,
+    "clean_source_compile": {
+      "public_zip_clean_compile": true,
+      "pdf_pages": 45,
+      "all_page_drawing_streams_match_published_pdf": true,
+      "compiler_checks": {
+        "overfull_boxes": 0,
+        "missing_characters": 0,
+        "undefined": 0,
+        "fatal_errors": 0
+      }
+    }
+  },
+  "static_analysis": {
+    "ruff_check_repository": "passed",
+    "diagnostics": 0
+  },
+  "full_repository_suite": {
+    "current": {
+      "passed": 782,
+      "failures": 4,
+      "errors": 4,
+      "total": 790
+    },
+    "baseline": {
+      "passed": 780,
+      "failures": 4,
+      "errors": 4,
+      "total": 788
+    },
+    "same_failing_test_ids_on_isolated_baseline": true,
+    "failing_test_ids": [
+      "tests.evaluation.test_cedia_rev3_rev6_integration::test_rev3_rev6_coverage_recalculates_without_satisfaction_upgrade",
+      "tests.evaluation.test_recovery_round2_evidence::test_round2_reviewer_coverage_and_statuses_are_internally_consistent",
+      "tests.figure_evaluation.scripts.test_figures::test_attribution_illustration_is_not_claimed_as_gradcam",
+      "tests.figure_evaluation.scripts.test_figures::test_generate_all_figures_creates_portable_hashed_assets",
+      "tests.figure_evaluation.scripts.test_figures::test_png_figures_are_nonblank_and_large_enough",
+      "tests.figure_evaluation.scripts.test_figures::test_probability_figures_are_evidence_gated",
+      "tests.regression.test_canonical_evidence_files::test_synthetic_fixtures_are_materialized",
+      "tests.regression.test_ci_workflow::test_ci_installs_declared_development_requirements"
+    ],
+    "status": "Not green: eight preexisting coverage/fixture/CI incidences; no new failures introduced by this publication change."
+  },
+  "science": "No new experiments, training, inference or statistical results. Independent institutional and P4 external validation remain pending; CODE adaptation promotion failed.",
+  "privacy": "No private reviewer reports, automated writing-analysis reports, raw ECGs, individual predictions or model weights in the publication artifacts."
+}

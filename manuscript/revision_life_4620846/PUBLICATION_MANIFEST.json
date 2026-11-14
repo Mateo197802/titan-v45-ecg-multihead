@@ -1,0 +1,561 @@
+{
+  "schema": "TITAN_LIFE_PUBLICATION_MANIFEST_V1",
+  "title": "Modular CNN–Transformer Specialists for Multi-Source 12-Lead ECG Rhythm and Pathology Classification",
+  "status": "Author-review draft; no journal acceptance or submission implied",
+  "source": "manuscript/revision_life_4620846/latex/manuscrito.tex",
+  "artifacts": {
+    "manuscript_pdf": {
+      "path": "manuscript/revision_life_4620846/artifacts/TITAN_V45_LIFE_4620846_EDITORIAL.pdf",
+      "kind": "manuscript_pdf",
+      "sha256": "1f6aea4f9958e2c1d504824118d741928ee08bb4dd7251b497499f660a8b116c",
+      "bytes": 10331222,
+      "pages": 45
+    },
+    "latex_source_zip": {
+      "path": "manuscript/revision_life_4620846/artifacts/TITAN_V45_LIFE_4620846_EDITORIAL_LATEX.zip",
+      "kind": "latex_source_zip",
+      "sha256": "1a7c1122512fced70dce2374f93bb80bf269ca7bf6e43d52f7160dba597c0bb1",
+      "bytes": 8866420,
+      "members": {
+        "Definitions/journalnames.tex": {
+          "sha256": "30a7629adfb074e62683aa3acffe58c032b81b0d090c62f9ad5a6ea7344e7a09",
+          "bytes": 124319
+        },
+        "Definitions/logo-mdpi-eps-converted-to.pdf": {
+          "sha256": "53322350259b7b32b6b9788b5be394fb44112d8089d066fff2d1bfdfb6f574a4",
+          "bytes": 13253
+        },
+        "Definitions/logo-mdpi.eps": {
+          "sha256": "f02d31469c6b2666c9de2da8d8731773bce3751d2fa99a27ff4bcf61a106cdcf",
+          "bytes": 563678
+        },
+        "Definitions/logo-mdpi.pdf": {
+          "sha256": "25f472f271e74dca2efe6314095e8a89aa78da38ed0277b9256ff78058dc0dc2",
+          "bytes": 13480
+        },
+        "Definitions/logo-orcid.pdf": {
+          "sha256": "0558a0097dc4d1ffe3f4a1b3c9b4b98c6e568eac7d7439d447ca56ed1a8ec759",
+          "bytes": 12671
+        },
+        "Definitions/logo-updates.eps": {
+          "sha256": "71ad8b00bcca718b62f3286af02ea56678e8199b5843d7ed4fdc86bd969c2809",
+          "bytes": 287998
+        },
+        "Definitions/logo-updates.pdf": {
+          "sha256": "fbfdff2cfa70cd330968929f261d40a4b7f5da8180b2d713e7d002d533a8ede7",
+          "bytes": 17011
+        },
+        "Definitions/mdpi.bst": {
+          "sha256": "3b747eee144173c46a43562ead905c26322c7cb394e350a925d36dcf63884680",
+          "bytes": 23683
+        },
+        "Definitions/mdpi.cls": {
+          "sha256": "784704ca94164be4632ef37a8133ee26be87593eb1c171c4105c841261fda616",
+          "bytes": 64457
+        },
+        "Definitions/mdpi_apacite.bst": {
+          "sha256": "c7fffe0231922e5521dc360889fafe941ee26d154c1ce4e167e4ec9f2d13498f",
+          "bytes": 138426
+        },
+        "Definitions/mdpi_apacite.sty": {
+          "sha256": "9e9bb23ded45f7f76236ad304d4bda2c066fb48041b272cebc20f940c17865a7",
+          "bytes": 71315
+        },
+        "Definitions/mdpi_chicago.bst": {
+          "sha256": "4a73faf6e0cf1a225d1b9a41a6955d3cc29a55c5fdce662177d00eee3946ce36",
+          "bytes": 37920
+        },
+        "README.md": {
+          "sha256": "18e8c5e9546dc8579391be1a681a493ca526c97e86b1cdadc2635c734c888f8f",
+          "bytes": 1786
+        },
+        "SHA256SUMS.txt": {
+          "sha256": "0de5a30ac2931bbbce38c8df5e1b675ee8c1310fd73079779e606a62e55a4c6d",
+          "bytes": 4628
+        },
+        "THIRD_PARTY_NOTICES.md": {
+          "sha256": "58360fac2252881806e3db63bc35329b9ee84290b297a3c8f9c3314f79d40f93",
+          "bytes": 1632
+        },
+        "code_discussion.tex": {
+          "sha256": "784a406ce72224e8ead6aa34c149039ab1f8b2dff9855305306dcb276e5acffa",
+          "bytes": 2003
+        },
+        "code_methods.tex": {
+          "sha256": "61004c3943cb7c5544310100aba639e2758e3b53d516ad3d337c52b894219f71",
+          "bytes": 6477
+        },
+        "code_results.tex": {
+          "sha256": "b1c3850e570bd27c4d4263ea5e26326775bf3708b43126a2655085ada5391c41",
+          "bytes": 6583
+        },
+        "discussion_expansion.tex": {
+          "sha256": "a011adb4e1f9a670f42baa336f710a314169703be180d860f210d26e1d0f2753",
+          "bytes": 7085
+        },
+        "figures/fig00_ecg_ai_context.pdf": {
+          "sha256": "2173dde90937f255fdd07aa7896105559ee721789cd3f2929007bdc75d173cfc",
+          "bytes": 1471520
+        },
+        "figures/fig00b_ecg_ai_evolution_gap.pdf": {
+          "sha256": "07a42226edbedfdabb7e23740735d5cb89899c8736eaaab270a490652071b676",
+          "bytes": 1562989
+        },
+        "figures/fig01_graphical_abstract.pdf": {
+          "sha256": "272badc218b922e228f888e117c814a5083018088fc682cd765845b2b562a015",
+          "bytes": 1548503
+        },
+        "figures/fig02_data_processing_bias_workflow.pdf": {
+          "sha256": "84f22bd4927668f757f983bab5704342e777af5931c8cc8a3e631ae28a826118",
+          "bytes": 1662785
+        },
+        "figures/fig03_cascade_contract.pdf": {
+          "sha256": "7fb6f48e185925005dc41646c368341f4795b285a57df0e2c64021056588ea33",
+          "bytes": 1790886
+        },
+        "figures/fig03_internal_architecture.pdf": {
+          "sha256": "ac65d5e5915b8b53b18b3c918f65d53d479ecec173281b926d3fb23b414c0cbf",
+          "bytes": 1744441
+        },
+        "figures/fig06_rhythm_confusion.pdf": {
+          "sha256": "bedd9797511ff8e3d00e50552a81fed9daba65aea0b42016e73108ef3c4745c5",
+          "bytes": 18402
+        },
+        "figures/fig07_pathology_confusion.pdf": {
+          "sha256": "9eb73be7eb0484722ca1ced02981d3eca8967dbdaa447ccbe98be4dc96d91b70",
+          "bytes": 15942
+        },
+        "figures/fig08_class_metrics.pdf": {
+          "sha256": "88bf73fc0d30eb9d409c81bde7f4504958bb46374b20777f9671314caca8650c",
+          "bytes": 12322
+        },
+        "figures/fig08b_pathology_class_metrics.pdf": {
+          "sha256": "95bdbd417b10155068e97b4a8f51772cc3971d144ab152b15ac9344a8c054fb5",
+          "bytes": 12101
+        },
+        "figures/fig09_roc_curves.pdf": {
+          "sha256": "7ae7894bacf2cce927f8b9a6fe1efb23aa20a2e468e2e91a81422323134ad5b8",
+          "bytes": 18498
+        },
+        "figures/fig10_precision_recall_curves.pdf": {
+          "sha256": "fc0706f1d5f9fc3b1b4a4a7706b2ee107a6d30ec7c5d2a114bed72b1b235c2d6",
+          "bytes": 20821
+        },
+        "figures/fig11_calibration.pdf": {
+          "sha256": "d064306927a4c648f472d5a73bac5a6c33fb00c3d2d3c47a25f32baf4175ddb9",
+          "bytes": 21448
+        },
+        "figures/fig12_source_performance.pdf": {
+          "sha256": "963d5f145a5eb227c0d8686b3aeac2e982f9e647eacad2d16046a66faa725388",
+          "bytes": 16110
+        },
+        "figures/fig13_error_flows.pdf": {
+          "sha256": "a11c76e203c510e7c00e604a99a5576c09fe011deba4172e67c3a3532b85d6b2",
+          "bytes": 17550
+        },
+        "figures/fig16768_internal_history.pdf": {
+          "sha256": "b432237cfa3f86ca65f3caab8fb6e8f88e6e29be510d38cde76a7176f359b445",
+          "bytes": 13675
+        },
+        "figures/fig_code_observed_pr.pdf": {
+          "sha256": "54b2f8d68d8b238a3c4406395a5d098309cc4a85e27e720b5a7b3b089a3a25df",
+          "bytes": 97963
+        },
+        "figures/fig_code_sensitivity_ppv.pdf": {
+          "sha256": "abf1f0a9d84771400b205b7520d6bd36ed118b0a0f493e8b3d739f2c654692b6",
+          "bytes": 66967
+        },
+        "manuscrito.tex": {
+          "sha256": "2e6a95c12da4c2793e287251d6c62a7e2d1de5f8383f7a7c65b455908d3d0682",
+          "bytes": 95350
+        },
+        "methods_datasets.tex": {
+          "sha256": "aca7623e922513bf5f8124040b3c7ef70183b85e911977ed4d016d8ed98cd792",
+          "bytes": 12121
+        },
+        "methods_expansion.tex": {
+          "sha256": "f7df6738d7b56ad0626b2d8e117f271881b990e99f90131e1a8d83021ea65c5b",
+          "bytes": 4411
+        },
+        "methods_statistics.tex": {
+          "sha256": "bb93f4613270375332e96bca91e0c1f5e7eb1ba9bf6fd8827f12a5988f7768c8",
+          "bytes": 5356
+        },
+        "morphology_support.tex": {
+          "sha256": "a691a842ab926f73d2ceac6a000544a3190ffc3e6409158d0e2ece8c611b1275",
+          "bytes": 1759
+        },
+        "results_expansion.tex": {
+          "sha256": "4a795067b72c3a565be6325b7c8ebe9c1a65c9b0cda63b118ba93a334b8d386e",
+          "bytes": 5160
+        },
+        "tables/classes_p4.tex": {
+          "sha256": "f09313f133ee3bbb014c3c34ac3c9d4ee8175e44509a5e91b78650f2fc49ec44",
+          "bytes": 589
+        },
+        "tables/classes_p6.tex": {
+          "sha256": "3f2ccb35ee5a017aec74956ae707614de3d8673c02c440df84fa69480d8e120a",
+          "bytes": 730
+        },
+        "tables/classes_p8.tex": {
+          "sha256": "ce879286c1e63e2c3baa4c80931d5659fc733396be2c52901305576a8c9e56c7",
+          "bytes": 862
+        },
+        "tables/p4_sources.tex": {
+          "sha256": "ce5d7fbf2d0d2c06f90b981fffafebac8aaf55d2a6cae60a63820ebab9a01551",
+          "bytes": 366
+        },
+        "tables/p6_sources.tex": {
+          "sha256": "83fc78e60e1ed7b9f0d1479039536718b3917c7ffc7337faf4db5fdac9984129",
+          "bytes": 784
+        },
+        "tables/release_hashes.tex": {
+          "sha256": "2b21b8854f44dbfd0063db280fe2f28891d47f2187f902844e2fab3c12e0a102",
+          "bytes": 1736
+        },
+        "tables/sph_endpoints.tex": {
+          "sha256": "0a6946debb6cbd6cd715fae5a002a1f578b4a8c5dc2a6b531acfd4fedc29b750",
+          "bytes": 1463
+        }
+      },
+      "member_count": 50,
+      "source_directory": "manuscript/revision_life_4620846/latex"
+    },
+    "aggregate_supplement_zip": {
+      "path": "manuscript/revision_life_4620846/artifacts/TITAN_V45_LIFE_4620846_SUPPLEMENTARY.zip",
+      "kind": "aggregate_supplement_zip",
+      "sha256": "c35b57da94b3e861a3bf1b9a9380d2bc1d4096ce6d1ade54bdf7b9052a08c9fb",
+      "bytes": 70698,
+      "members": {
+        "AUTHOR_SUPPLIED_FIGURES.json": {
+          "sha256": "2c7e44a8989d07f24ac5ff58b0d36a72374666107f4e152471b6c87654ac01dd",
+          "bytes": 7881
+        },
+        "BIBLIOGRAPHY_VERIFICATION.json": {
+          "sha256": "5217f4746af6a9c68c4c63fb8937e68ace8e9bc14238991f3bfa653f2dfdf966",
+          "bytes": 6646
+        },
+        "CODE_BASELINE_COMPARISON.csv": {
+          "sha256": "b26306a68bad3cd164b2571019e7072ff14306311af8f88e83da1913e4d9b7bf",
+          "bytes": 671
+        },
+        "CODE_BASELINE_PER_CLASS_RESULTS.csv": {
+          "sha256": "0e3e121444841ace4c3ac6294c9533e11a68af3afd0276a3b7bdd2fe71d8633f",
+          "bytes": 6701
+        },
+        "CODE_CONFUSION_MATRICES.csv": {
+          "sha256": "dfc988fa4285fecf3532b2bf6d3f82099f77d128bd443c008addd8b60f81f2a7",
+          "bytes": 146
+        },
+        "CODE_EVIDENCE_INTEGRATION.json": {
+          "sha256": "f54be861ca308a0dc550e97d6e52f4c05a863571f754eeb1e794625638003596",
+          "bytes": 744
+        },
+        "CODE_EVIDENCE_README.md": {
+          "sha256": "603b844b313676936df04dd285a67861f20556186c25c94657d9e6f3f748e4a2",
+          "bytes": 908
+        },
+        "CODE_PER_CLASS_RESULTS.csv": {
+          "sha256": "4b18e527539748b526891b1711b67def8b5a40845643af34f144e3cbbfe2b2b6",
+          "bytes": 3610
+        },
+        "CODE_PRIMARY_RESULTS_TABLE.csv": {
+          "sha256": "fa24cba685e9532ecea65760265aec8bd05488a3f74cf95f7e1b64ec6648b8db",
+          "bytes": 1345
+        },
+        "CODE_SENSITIVITY_PPV.csv": {
+          "sha256": "a2686d790d815d9723f03adec9b4f123d09a84959b759a79f607e2f35d14e1da",
+          "bytes": 1974
+        },
+        "FIGURE5_AUTHOR_IMPORT.json": {
+          "sha256": "1a3ce39deda21b389fba03ce99bd4de58610eba5f0e2ebc9e108b4639fbee3a2",
+          "bytes": 575
+        },
+        "FIGURE_MANIFEST.json": {
+          "sha256": "e3a73a86d34f4faf9060b45abbd0fb882bd45929b94b05bb3bf0abce8cf40bf5",
+          "bytes": 9240
+        },
+        "HISTORICAL_FIGURE_MANIFEST.json": {
+          "sha256": "f024c37bcfa8338d3c6fc5af4bff8c082bdd1b3717ed1a4e44ec1f5b6c243e70",
+          "bytes": 9010
+        },
+        "INDEPENDENT_AGGREGATE_RECALCULATION.json": {
+          "sha256": "893b8ad98f54dfd57995d850556b5054b13a7233cba0d39cdf61dd35eaac50fe",
+          "bytes": 32532
+        },
+        "JOB_16768_AGGREGATE_EPOCHS.csv": {
+          "sha256": "1db3e9d1abceecc5ab88f4c573be496ce3cf6adc1d4967faa17ee2dbe87362fb",
+          "bytes": 2002
+        },
+        "LATE_MAIN_REFERENCE_UPDATE.json": {
+          "sha256": "64050d05c219d9bddb567d6d9e5a12007f9cf06c9e5f6f328df08ebe38e2e489",
+          "bytes": 14313
+        },
+        "MANUSCRIPT_EVIDENCE_LEDGER.csv": {
+          "sha256": "1d48d982586fde716f53bd3bf1bb7329f303a021d0f9c0c7affdc17240f4597c",
+          "bytes": 8520
+        },
+        "MODEL_ARTIFACT_DOWNLOADS.csv": {
+          "sha256": "62dc0513a9480581a01fef0d71f5571946d1051d1f3ef2d7f392d5d5aa160d0c",
+          "bytes": 1161
+        },
+        "MORPHOLOGY_FORMULA_CODE_AUDIT.csv": {
+          "sha256": "2296e1e36afd31315107f3ec3dd71124d780a8c80cba838f2e76466bf64b7b6d",
+          "bytes": 2371
+        },
+        "MORPHOLOGY_NOTATION_AUDIT.json": {
+          "sha256": "f3e7807bb9fbc7e0010c5314151a80ea99f398855d119e8a3001ad0cb2050332",
+          "bytes": 1781
+        },
+        "ORIGINAL_CONTENT_CONSERVATION.json": {
+          "sha256": "93251331838cb8faf65ad45e578fdf521000f85ef419a5fe9f7aeb57b0eeb90b",
+          "bytes": 1063
+        },
+        "PARTITION_EVIDENCE_STATUS.csv": {
+          "sha256": "4cd5083b4adbccc3abdfed318b471bb72f1448af6c31ed84a866366463249621",
+          "bytes": 1708
+        },
+        "README.md": {
+          "sha256": "13d37a69d20ce03e50245f312d9ada701e6541e0ed031fb2b4ef2934ca5c65dd",
+          "bytes": 2277
+        },
+        "RELEASE_DOWNLOAD_VERIFICATION.json": {
+          "sha256": "85657cb126618275fc8fc8199d54e0028ad49a2e3f0343f9261e3d35f39009a2",
+          "bytes": 1836
+        },
+        "REVIEWER_REFINEMENT_AUDIT.json": {
+          "sha256": "097791a794516d0d16b817155de3f7be760d50f5882502579c6613da2720a7c1",
+          "bytes": 1245
+        },
+        "SHA256SUMS.txt": {
+          "sha256": "755f13f93d3cc60c222c08a7f7757ae101e05d315438bf63fd1f4965a27a25be",
+          "bytes": 2865
+        },
+        "SUPERVISION_AND_CLASS_EVIDENCE.csv": {
+          "sha256": "6aea0d7bbe57c14e3cd777b77e4a16f7ec270cbf4153a2a192017e459511bc11",
+          "bytes": 5310
+        },
+        "SUPERVISION_AND_CLASS_EVIDENCE.pdf": {
+          "sha256": "c0b5acebf57966db88bae36a7c9c6c1fd74f5b8f2a23d0568e460cc5424ad972",
+          "bytes": 16071
+        },
+        "SUPERVISION_AND_CLASS_EVIDENCE.tex": {
+          "sha256": "a28f34abca908ce2852bf1d7932f4d8b1b42a49598d69ecd9d5a3c59725d4e21",
+          "bytes": 5884
+        },
+        "SUPPLEMENT_SCOPE.json": {
+          "sha256": "c19d5fe27a3e4835c12f268d5adb79f9e78e1f917473be8c997f807ec0eaf34c",
+          "bytes": 606
+        },
+        "build_figures.py": {
+          "sha256": "fa3ad914cfd4979701f4bac3d3c0a06aa215fe4eb397ae3adaff4bea270e93b4",
+          "bytes": 23412
+        }
+      },
+      "member_count": 31,
+      "source_directory": "manuscript/revision_life_4620846/supplementary"
+    }
+  },
+  "media_files": {
+    "manuscript/revision_life_4620846/artifacts/TITAN_V45_LIFE_4620846_EDITORIAL.pdf": {
+      "sha256": "1f6aea4f9958e2c1d504824118d741928ee08bb4dd7251b497499f660a8b116c",
+      "bytes": 10331222
+    },
+    "manuscript/revision_life_4620846/latex/Definitions/logo-mdpi-eps-converted-to.pdf": {
+      "sha256": "53322350259b7b32b6b9788b5be394fb44112d8089d066fff2d1bfdfb6f574a4",
+      "bytes": 13253
+    },
+    "manuscript/revision_life_4620846/latex/Definitions/logo-mdpi.eps": {
+      "sha256": "f02d31469c6b2666c9de2da8d8731773bce3751d2fa99a27ff4bcf61a106cdcf",
+      "bytes": 563678
+    },
+    "manuscript/revision_life_4620846/latex/Definitions/logo-mdpi.pdf": {
+      "sha256": "25f472f271e74dca2efe6314095e8a89aa78da38ed0277b9256ff78058dc0dc2",
+      "bytes": 13480
+    },
+    "manuscript/revision_life_4620846/latex/Definitions/logo-orcid.pdf": {
+      "sha256": "0558a0097dc4d1ffe3f4a1b3c9b4b98c6e568eac7d7439d447ca56ed1a8ec759",
+      "bytes": 12671
+    },
+    "manuscript/revision_life_4620846/latex/Definitions/logo-updates.eps": {
+      "sha256": "71ad8b00bcca718b62f3286af02ea56678e8199b5843d7ed4fdc86bd969c2809",
+      "bytes": 287998
+    },
+    "manuscript/revision_life_4620846/latex/Definitions/logo-updates.pdf": {
+      "sha256": "fbfdff2cfa70cd330968929f261d40a4b7f5da8180b2d713e7d002d533a8ede7",
+      "bytes": 17011
+    },
+    "manuscript/revision_life_4620846/latex/figures/fig00_ecg_ai_context.pdf": {
+      "sha256": "2173dde90937f255fdd07aa7896105559ee721789cd3f2929007bdc75d173cfc",
+      "bytes": 1471520
+    },
+    "manuscript/revision_life_4620846/latex/figures/fig00_ecg_ai_context.png": {
+      "sha256": "54318d76c699fbfc9d39dc39749a776780953d1d8314b7197322edcfc1919bb7",
+      "bytes": 1303234
+    },
+    "manuscript/revision_life_4620846/latex/figures/fig00b_ecg_ai_evolution_gap.pdf": {
+      "sha256": "07a42226edbedfdabb7e23740735d5cb89899c8736eaaab270a490652071b676",
+      "bytes": 1562989
+    },
+    "manuscript/revision_life_4620846/latex/figures/fig00b_ecg_ai_evolution_gap.png": {
+      "sha256": "c0de3975787bba913925b73d8acf387fc674f68aa576353ade0dfdc495b12b27",
+      "bytes": 1321609
+    },
+    "manuscript/revision_life_4620846/latex/figures/fig01_graphical_abstract.pdf": {
+      "sha256": "272badc218b922e228f888e117c814a5083018088fc682cd765845b2b562a015",
+      "bytes": 1548503
+    },
+    "manuscript/revision_life_4620846/latex/figures/fig01_graphical_abstract.png": {
+      "sha256": "a4890f3577446e233eab16e8a19410e3bfe6b9bd11b43a359e990e48ec7041e2",
+      "bytes": 1346085
+    },
+    "manuscript/revision_life_4620846/latex/figures/fig02_data_processing_bias_workflow.pdf": {
+      "sha256": "84f22bd4927668f757f983bab5704342e777af5931c8cc8a3e631ae28a826118",
+      "bytes": 1662785
+    },
+    "manuscript/revision_life_4620846/latex/figures/fig02_data_processing_bias_workflow.png": {
+      "sha256": "9f06f1f4948446a2e809eb6f9dd644acf52bd75d0a2ed69a603ae642397ed37a",
+      "bytes": 1398786
+    },
+    "manuscript/revision_life_4620846/latex/figures/fig03_cascade_contract.pdf": {
+      "sha256": "7fb6f48e185925005dc41646c368341f4795b285a57df0e2c64021056588ea33",
+      "bytes": 1790886
+    },
+    "manuscript/revision_life_4620846/latex/figures/fig03_cascade_contract.png": {
+      "sha256": "48efe1d97702b73ae657b47cbfe29ed5fe078ab070c82596b9a2de6e0b4d5e4c",
+      "bytes": 1441881
+    },
+    "manuscript/revision_life_4620846/latex/figures/fig03_internal_architecture.pdf": {
+      "sha256": "ac65d5e5915b8b53b18b3c918f65d53d479ecec173281b926d3fb23b414c0cbf",
+      "bytes": 1744441
+    },
+    "manuscript/revision_life_4620846/latex/figures/fig03_internal_architecture.png": {
+      "sha256": "1ada61835d2156c8e55a88cf5925d4363f4ac7b712e418ec8ad71f8b2d1a3068",
+      "bytes": 1430414
+    },
+    "manuscript/revision_life_4620846/latex/figures/fig06_rhythm_confusion.pdf": {
+      "sha256": "bedd9797511ff8e3d00e50552a81fed9daba65aea0b42016e73108ef3c4745c5",
+      "bytes": 18402
+    },
+    "manuscript/revision_life_4620846/latex/figures/fig06_rhythm_confusion.png": {
+      "sha256": "72809e48dbf129af018f85721faa36ccd3001abc8117d06d0e79e9e62567d3a3",
+      "bytes": 297660
+    },
+    "manuscript/revision_life_4620846/latex/figures/fig07_pathology_confusion.pdf": {
+      "sha256": "9eb73be7eb0484722ca1ced02981d3eca8967dbdaa447ccbe98be4dc96d91b70",
+      "bytes": 15942
+    },
+    "manuscript/revision_life_4620846/latex/figures/fig07_pathology_confusion.png": {
+      "sha256": "d7c533172be15e3a4b24da54f6e7ecf0eb1c031ef7e6c44e241027f2c70e0f8b",
+      "bytes": 259129
+    },
+    "manuscript/revision_life_4620846/latex/figures/fig08_class_metrics.pdf": {
+      "sha256": "88bf73fc0d30eb9d409c81bde7f4504958bb46374b20777f9671314caca8650c",
+      "bytes": 12322
+    },
+    "manuscript/revision_life_4620846/latex/figures/fig08_class_metrics.png": {
+      "sha256": "2f1506e7b5092cee1b8b6e681d8cab2c0771eda0e6bc745cfad2abd9b31df07b",
+      "bytes": 63164
+    },
+    "manuscript/revision_life_4620846/latex/figures/fig08b_pathology_class_metrics.pdf": {
+      "sha256": "95bdbd417b10155068e97b4a8f51772cc3971d144ab152b15ac9344a8c054fb5",
+      "bytes": 12101
+    },
+    "manuscript/revision_life_4620846/latex/figures/fig08b_pathology_class_metrics.png": {
+      "sha256": "c1b3ab0dee91ab73e8cf4a7e85d72409bb27f3ed22a53274ca93c2321424fb7b",
+      "bytes": 57430
+    },
+    "manuscript/revision_life_4620846/latex/figures/fig09_roc_curves.pdf": {
+      "sha256": "7ae7894bacf2cce927f8b9a6fe1efb23aa20a2e468e2e91a81422323134ad5b8",
+      "bytes": 18498
+    },
+    "manuscript/revision_life_4620846/latex/figures/fig09_roc_curves.png": {
+      "sha256": "73806de874995807881bf0aeaa4f0ccd50bc576d11f6e36d2711f411f6c98ff3",
+      "bytes": 264335
+    },
+    "manuscript/revision_life_4620846/latex/figures/fig10_precision_recall_curves.pdf": {
+      "sha256": "fc0706f1d5f9fc3b1b4a4a7706b2ee107a6d30ec7c5d2a114bed72b1b235c2d6",
+      "bytes": 20821
+    },
+    "manuscript/revision_life_4620846/latex/figures/fig10_precision_recall_curves.png": {
+      "sha256": "fe3959358c36f9e8d2675b1eac9ea9ed0f6d829902b95a9d192a1e576d958d58",
+      "bytes": 284573
+    },
+    "manuscript/revision_life_4620846/latex/figures/fig11_calibration.pdf": {
+      "sha256": "d064306927a4c648f472d5a73bac5a6c33fb00c3d2d3c47a25f32baf4175ddb9",
+      "bytes": 21448
+    },
+    "manuscript/revision_life_4620846/latex/figures/fig11_calibration.png": {
+      "sha256": "fcfad7d0df9f663838ac90cfe4b0e5021da03f8ac3036d1e56bc1810b18b46f5",
+      "bytes": 484998
+    },
+    "manuscript/revision_life_4620846/latex/figures/fig12_source_performance.pdf": {
+      "sha256": "963d5f145a5eb227c0d8686b3aeac2e982f9e647eacad2d16046a66faa725388",
+      "bytes": 16110
+    },
+    "manuscript/revision_life_4620846/latex/figures/fig12_source_performance.png": {
+      "sha256": "a9de592e73c8614915c417b862411a299838e7829e9fdd6320dad3aa138fb467",
+      "bytes": 124266
+    },
+    "manuscript/revision_life_4620846/latex/figures/fig13_error_flows.pdf": {
+      "sha256": "a11c76e203c510e7c00e604a99a5576c09fe011deba4172e67c3a3532b85d6b2",
+      "bytes": 17550
+    },
+    "manuscript/revision_life_4620846/latex/figures/fig13_error_flows.png": {
+      "sha256": "aabf7216b3848bb174bf82f8fa87ec0ace9c85578e847ac1207fa9ad26aa58dd",
+      "bytes": 94314
+    },
+    "manuscript/revision_life_4620846/latex/figures/fig16768_internal_history.pdf": {
+      "sha256": "b432237cfa3f86ca65f3caab8fb6e8f88e6e29be510d38cde76a7176f359b445",
+      "bytes": 13675
+    },
+    "manuscript/revision_life_4620846/latex/figures/fig16768_internal_history.png": {
+      "sha256": "97e6142e2fc33d53c6c5fbf5b9c1cc630b65857d44ab04c35843d73069f66e34",
+      "bytes": 207319
+    },
+    "manuscript/revision_life_4620846/latex/figures/fig_code_observed_pr.pdf": {
+      "sha256": "54b2f8d68d8b238a3c4406395a5d098309cc4a85e27e720b5a7b3b089a3a25df",
+      "bytes": 97963
+    },
+    "manuscript/revision_life_4620846/latex/figures/fig_code_observed_pr.png": {
+      "sha256": "5cf5692abeb841e887e8e5c28ce1e3ae00d11f4b95442dcdfba2c83895819f17",
+      "bytes": 416679
+    },
+    "manuscript/revision_life_4620846/latex/figures/fig_code_sensitivity_ppv.pdf": {
+      "sha256": "abf1f0a9d84771400b205b7520d6bd36ed118b0a0f493e8b3d739f2c654692b6",
+      "bytes": 66967
+    },
+    "manuscript/revision_life_4620846/latex/figures/fig_code_sensitivity_ppv.png": {
+      "sha256": "478762f17a90906dd1ff3c1ef6a666b1335d7857c144e3e9d09f6c34c722437b",
+      "bytes": 140679
+    },
+    "manuscript/revision_life_4620846/supplementary/SUPERVISION_AND_CLASS_EVIDENCE.pdf": {
+      "sha256": "c0b5acebf57966db88bae36a7c9c6c1fd74f5b8f2a23d0568e460cc5424ad972",
+      "bytes": 16071
+    }
+  },
+  "figure_counts": {
+    "total": 18,
+    "author_supplied_raster_schematics": 6,
+    "vector_figures": 12
+  },
+  "first_six_figure_pages": [
+    2,
+    3,
+    6,
+    8,
+    13,
+    14
+  ],
+  "third_party_notice": "manuscript/revision_life_4620846/latex/THIRD_PARTY_NOTICES.md",
+  "publication_exclusions": [
+    "private reviewer correspondence",
+    "automated writing-analysis reports",
+    "raw ECG records",
+    "record-level predictions",
+    "model weights",
+    "temporary TeX products",
+    "Word files"
+  ],
+  "scientific_boundary": "Within-CODE patient-held-out evaluation follows supervised adaptation; promotion safeguards failed; independent institutional/P4 validation remains pending."
+}

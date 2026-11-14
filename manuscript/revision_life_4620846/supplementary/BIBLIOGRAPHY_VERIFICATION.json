@@ -1,0 +1,192 @@
+[
+  {
+    "key": "Reyna2022Challenge",
+    "status": "metadata_verified",
+    "source": "https://doi.org/10.1088/1361-6579/ac79fd",
+    "claim_fit": "Primary task/method context only; no direct performance ranking"
+  },
+  {
+    "key": "Wagner2020PTBXL",
+    "status": "metadata_verified",
+    "source": "https://doi.org/10.1038/s41597-020-0495-6",
+    "claim_fit": "Primary task/method context only; no direct performance ranking"
+  },
+  {
+    "key": "Rossi2026AF",
+    "status": "metadata_verified",
+    "source": "https://doi.org/10.1016/j.hrthm.2025.08.007",
+    "claim_fit": "Primary task/method context only; no direct performance ranking"
+  },
+  {
+    "key": "Hannun2019Cardiologist",
+    "status": "metadata_verified",
+    "source": "https://doi.org/10.1038/s41591-018-0268-3",
+    "claim_fit": "Primary task/method context only; no direct performance ranking"
+  },
+  {
+    "key": "Ribeiro2020Automatic",
+    "status": "metadata_verified",
+    "source": "https://doi.org/10.1038/s41467-020-15432-4",
+    "claim_fit": "Primary task/method context only; no direct performance ranking"
+  },
+  {
+    "key": "Zhu2020Automatic",
+    "status": "metadata_verified",
+    "source": "https://doi.org/10.1016/s2589-7500(20)30107-2",
+    "claim_fit": "Primary task/method context only; no direct performance ranking"
+  },
+  {
+    "key": "Strodthoff2021Deep",
+    "status": "metadata_verified",
+    "source": "https://doi.org/10.1109/jbhi.2020.3022989",
+    "claim_fit": "Primary task/method context only; no direct performance ranking"
+  },
+  {
+    "key": "Vranken2021Uncertainty",
+    "status": "metadata_verified",
+    "source": "https://doi.org/10.1093/ehjdh/ztab045",
+    "claim_fit": "Primary task/method context only; no direct performance ranking"
+  },
+  {
+    "key": "Mastoi2022DERMA",
+    "status": "metadata_verified",
+    "source": "https://doi.org/10.3390/life12060842",
+    "claim_fit": "Primary task/method context only; no direct performance ranking"
+  },
+  {
+    "key": "Herman2024",
+    "status": "metadata_verified",
+    "source": "https://doi.org/10.1016/j.jelectrocard.2023.12.009",
+    "claim_fit": "Primary task/method context only; no direct performance ranking"
+  },
+  {
+    "key": "Elsheikhy2025Lightweight",
+    "status": "metadata_verified",
+    "source": "https://doi.org/10.3390/s25175542",
+    "claim_fit": "Primary task/method context only; no direct performance ranking"
+  },
+  {
+    "key": "Zhou2025Classification",
+    "status": "metadata_verified",
+    "source": "https://doi.org/10.1038/s41598-025-94127-6",
+    "claim_fit": "Primary task/method context only; no direct performance ranking"
+  },
+  {
+    "key": "Li2024DualView",
+    "status": "metadata_verified",
+    "source": "https://doi.org/10.1016/j.compbiomed.2024.108751",
+    "claim_fit": "Primary task/method context only; no direct performance ranking"
+  },
+  {
+    "key": "He2016Deep",
+    "status": "metadata_verified",
+    "source": "https://doi.org/10.1109/cvpr.2016.90",
+    "claim_fit": "Primary task/method context only; no direct performance ranking"
+  },
+  {
+    "key": "Hu2018Squeeze",
+    "status": "metadata_verified",
+    "source": "https://doi.org/10.1109/cvpr.2018.00745",
+    "claim_fit": "Primary task/method context only; no direct performance ranking"
+  },
+  {
+    "key": "Vaswani2017Attention",
+    "status": "primary_conference_record_verified",
+    "source": "https://papers.nips.cc/paper/7181-attention-is-all-you-need"
+  },
+  {
+    "key": "Lin2017Focal",
+    "status": "metadata_verified",
+    "source": "https://doi.org/10.1109/iccv.2017.324",
+    "claim_fit": "Primary task/method context only; no direct performance ranking"
+  },
+  {
+    "key": "Akiba2019Optuna",
+    "status": "metadata_verified",
+    "source": "https://doi.org/10.1145/3292500.3330701",
+    "claim_fit": "Primary task/method context only; no direct performance ranking"
+  },
+  {
+    "key": "Szegedy2016Rethinking",
+    "status": "metadata_verified",
+    "source": "https://doi.org/10.1109/cvpr.2016.308",
+    "claim_fit": "Primary task/method context only; no direct performance ranking"
+  },
+  {
+    "key": "Pan1985Real",
+    "status": "metadata_verified",
+    "source": "https://doi.org/10.1109/tbme.1985.325532",
+    "claim_fit": "Primary task/method context only; no direct performance ranking"
+  },
+  {
+    "key": "Selvaraju2017Grad",
+    "status": "metadata_verified",
+    "source": "https://doi.org/10.1109/iccv.2017.74",
+    "claim_fit": "Primary task/method context only; no direct performance ranking"
+  },
+  {
+    "key": "Wilson1927Probable",
+    "status": "metadata_verified",
+    "source": "https://doi.org/10.1080/01621459.1927.10502953",
+    "claim_fit": "Primary task/method context only; no direct performance ranking"
+  },
+  {
+    "key": "Efron1979Bootstrap",
+    "status": "metadata_verified",
+    "source": "https://doi.org/10.1214/aos/1176344552",
+    "claim_fit": "Primary task/method context only; no direct performance ranking"
+  },
+  {
+    "key": "Hanley1982meaning",
+    "status": "metadata_verified",
+    "source": "https://doi.org/10.1148/radiology.143.1.7063747",
+    "claim_fit": "Primary task/method context only; no direct performance ranking"
+  },
+  {
+    "key": "SPH2022",
+    "status": "metadata_verified",
+    "source": "https://doi.org/10.1038/s41597-022-01403-5"
+  },
+  {
+    "key": "Zheng2020Chapman",
+    "status": "metadata_verified",
+    "source": "https://doi.org/10.1038/s41597-020-0386-x"
+  },
+  {
+    "key": "LUDB2020Paper",
+    "status": "metadata_verified",
+    "source": "https://doi.org/10.1109/access.2020.3029211"
+  },
+  {
+    "key": "Physionet2026",
+    "status": "metadata_verified",
+    "source": "https://doi.org/10.1038/s44360-026-00096-z"
+  },
+  {
+    "key": "LUDB2021",
+    "status": "primary_repository_metadata_verified",
+    "source": "https://doi.org/10.13026/eegm-h675"
+  },
+  {
+    "key": "PTBDiagnostic",
+    "status": "primary_repository_metadata_verified",
+    "source": "https://doi.org/10.13026/C28C71"
+  },
+  {
+    "key": "Guo2017Calibration",
+    "status": "primary_repository_metadata_verified",
+    "source": "https://proceedings.mlr.press/v70/guo17a.html"
+  },
+  {
+    "key": "Kassis2026Skills",
+    "status": "primary_repository_metadata_verified",
+    "source": "https://doi.org/10.48550/arXiv.2609.00065"
+  },
+  {
+    "key": "CODE15Dataset",
+    "status": "metadata_verified",
+    "source": "https://zenodo.org/records/4916206",
+    "verified_date": "2026-11-13",
+    "claim_fit": "Official CODE-15% v1.0.0 dataset size, patient count, lead order, sampling and storage. Actual admitted border durations are from experiment QC, not asserted as provider acquisition durations."
+  }
+]

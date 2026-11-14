@@ -53,7 +53,7 @@ $^{4}$ \quad Facultad de Ingenier\'ias Digitales y Tecnolog\'ias Emergentes, Uni
 \firstnote{Senior author: Diego Almeida-Galarraga.}
 
 
-\abstract{This study designed and evaluated modular convolutional neural network (CNN)--Transformer specialists for ten-second 12-lead electrocardiograms (ECGs). A 58.35-million-parameter backbone design has separately fitted rhythm and pathology versions. Primary6 reports six selected rhythm and conduction statements; Primary4 comprises four binary pathology panels. In selected retrospective development evaluations, Primary6 achieved 95.19\% top-1 accuracy and 80.09\% mean binary F1 across 1,643 ECGs. Primary4 achieved 80.23\% mean binary accuracy and 79.35\% macro-F1 across 962 ECG--label observations from 733 distinct ECGs. These conditional estimates do not measure a complete diagnostic workflow. Separate completed retrospective analyses quantify denominator sensitivity, morphology inputs and the tradeoff between emitted errors and withheld decisions. Released checkpoint identities and archived selected metrics are verifiable, but complete historical training lineage and independence of all partitions remain unestablished. A separate patient-held-out CODE evaluation after supervised adaptation achieved 60.27\% five-endpoint macro-F1 on 4,921 ECGs from 3,891 patients, but failed promotion safeguards. Independent institutional evaluation remains unfinished.}
+\abstract{Multi-source electrocardiogram (ECG) classification involves heterogeneous labels and evaluation populations. We designed and evaluated modular convolutional neural network (CNN)--Transformer specialists for 10-second 12-lead ECGs, using separately fitted rhythm and pathology backbones with 58.35 million parameters each. Primary6 (P6) reports six rhythm and conduction statements, whereas Primary4 (P4) comprises four binary pathology panels. In selected retrospective evaluations, P6 achieved 95.19\% top-1 accuracy and 80.09\% mean binary F1 on 1,643 ECGs. P4 achieved 80.23\% mean binary accuracy and 79.35\% macro-F1 across 962 ECG--label observations from 733 distinct ECGs. Additional analyses examined cohort selection, morphology contributions, and the tradeoff between classification errors and withheld decisions. In a separate patient-held-out evaluation within CODE following supervised domain adaptation, a five-endpoint model achieved 60.27\% macro-F1 on 4,921 ECGs from 3,891 patients, but did not meet all prespecified criteria for replacing the released models. These findings describe performance within the evaluated populations rather than a complete clinical diagnostic workflow. Incomplete historical training records limit confirmation of independence across all partitions, and independent institutional validation remains pending.}
 
 \keyword{12-lead electrocardiogram; deep learning; CNN--Transformer; multi-specialist architecture; arrhythmia classification; myocardial infarction; probability calibration; predictive uncertainty; explainable artificial intelligence}
 
@@ -62,18 +62,20 @@ $^{4}$ \quad Facultad de Ingenier\'ias Digitales y Tecnolog\'ias Emergentes, Uni
 
 \section{Introduction}
 
-
-Artificial intelligence (AI) methods for automated electrocardiogram (ECG) interpretation include convolutional neural networks (CNNs) studied on single-lead ambulatory recordings and large 12-lead datasets \citep{Hannun2019Cardiologist,Ribeiro2020Automatic}. Multi-label datasets and benchmarks provide a basis for evaluating rhythm, conduction and structural statements, but endpoints and annotation procedures vary by source \citep{Zhu2020Automatic,Strodthoff2021Deep,Wagner2020PTBXL,Reyna2022Challenge}. Evaluation design matters when class support varies and when uncertain predictions are deferred \citep{Vranken2021Uncertainty}. Aggregate accuracy alone does not quantify how a model performs on an underrepresented statement, nor does restricting a denominator establish clinical reliability.
-
-ECGs encode local waveform morphology and sequential rhythm information. A residual convolutional network provides local temporal features, while self-attention can model relationships across a signal window \citep{He2016Deep,Vaswani2017Attention}. The present study separates a rhythm reporting profile from binary pathology panels. Primary6 reports six selected rhythm and conduction statements; Primary4 reports four separate structural or ischemic statement endpoints. Separate backbones of the same design are paired with their specialists. The design does not imply that all other ECGs are correctly routed or evaluated.
-
-Figures~\ref{fig:fig00_ecg_ai_context} and \ref{fig:fig00b_ecg_ai_evolution_gap} are newly drawn study schematics. The first introduces the input and reporting workflow; the second distinguishes beat, ECG and longitudinal endpoints. Neither is a clinical tracing, outcome, or assertion of superiority.
+Artificial intelligence (AI) methods for automated electrocardiogram (ECG) interpretation, including convolutional neural networks (CNNs), have been evaluated on single-lead ambulatory recordings and large 12-lead datasets \citep{Hannun2019Cardiologist,Ribeiro2020Automatic}. Multi-label studies and benchmarks support the assessment of rhythm, conduction, and other ECG statements, although the available endpoints and annotation procedures differ across sources \citep{Zhu2020Automatic,Strodthoff2021Deep,Wagner2020PTBXL,Reyna2022Challenge}. These differences affect the interpretation of performance estimates, particularly when class support varies or uncertain predictions are deferred \citep{Vranken2021Uncertainty}. Figure~\ref{fig:fig00_ecg_ai_context} summarizes the study workflow, from heterogeneous ECG inputs and signal harmonization to separate rhythm and pathology reporting profiles.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\linewidth,height=.51\textheight,keepaspectratio]{fig00_ecg_ai_context}
 \caption{Multi-source 12-lead ECG workflow mapping. The diagram displays the sequential transition from heterogeneous raw inputs to the separated rhythm and pathology specialist boundaries, illustrating the required physical harmonization constraints.\label{fig:fig00_ecg_ai_context}}
 \end{figure}
+\FloatBarrier
+
+The present study evaluates statements assigned to an entire ECG. A label attached to an individual heartbeat identifies a local event, whereas a longitudinal endpoint concerns a patient over time. Sensitivity and positive predictive value for individual beats describe a different task from classification of a ten-second multi-label ECG. Figure~\ref{fig:fig00b_ecg_ai_evolution_gap} distinguishes these reference levels and places the study at the ECG level. It illustrates the scope of the evaluation without comparing diagnostic performance.
+
+Datasets differ in both their labeling procedures and the findings they record \citep{Reyna2022Challenge}. PTB-XL provides structured SCP-ECG statements, including likelihood information for diagnostic statements \citep{Wagner2020PTBXL}. A common output index can therefore combine labels with different reference information. In particular, a finding that was not annotated cannot be assumed equivalent to one explicitly labeled absent. Interpreting performance requires the mapped endpoint, the known reference states, and the observation unit to be considered together.
+
+High aggregate accuracy can conceal poor recall for an uncommon finding. Classwise confusion counts, unweighted binary F1 summaries, and precision--recall curves show aspects of performance that an overall accuracy value may obscure. Each summary must be interpreted for the evaluated population and endpoint prevalence. Focal loss reduces the contribution of well-classified training examples \citep{Lin2017Focal}; it does not, by itself, ensure unbiased evaluation, calibrated probabilities, or predictive values that generalize to another population. These properties require assessment in an explicitly defined population. Restricting the evaluation denominator alone does not establish clinical reliability.
 
 \begin{figure}[htbp]
 \centering
@@ -81,22 +83,15 @@ Figures~\ref{fig:fig00_ecg_ai_context} and \ref{fig:fig00b_ecg_ai_evolution_gap}
 \caption{Conceptual comparison of beat, ECG and longitudinal reference units. The study evaluates ECG-level statements only.\label{fig:fig00b_ecg_ai_evolution_gap}}
 
 \end{figure}
+\FloatBarrier
 
-
-The clinical information in one tracing spans several reference levels. A beat label describes a local event, an ECG statement summarizes a recording, and incident disease requires a patient history and a time axis. Combining these levels in one comparison can exaggerate what a classifier has learned. Beat-focused algorithms are relevant to event recognition, but their sensitivities and positive predictive values cannot be substituted for performance on a ten-second multi-label ECG. Figures~\ref{fig:fig00_ecg_ai_context} and \ref{fig:fig00b_ecg_ai_evolution_gap} make these reference boundaries explicit.
-
-Multi-label evaluation also requires a decision about missing information. A dataset may annotate one principal rhythm while leaving incidental conduction or morphology findings unspecified. Another may offer a hierarchy of SCP statements with confidence values. A pooled classifier can map both to the same output index, but the resulting truth mask is not automatically equivalent across sources \citep{Wagner2020PTBXL,Reyna2022Challenge}. Performance must therefore be interpreted together with the mapped label definition, known reference states and observation unit. These constraints motivate source-aware reporting and separate summaries for rhythm and pathology.
-
-Class imbalance introduces an additional distinction between common and rare endpoints. A prevalence-dominated accuracy can remain high despite weak recall for an uncommon statement. Unweighted binary F1, classwise confusion counts and precision--recall curves help expose that behavior, while each has a different dependence on the chosen denominator. Focal loss addresses the contribution of easy and difficult training examples \citep{Lin2017Focal}; it does not by itself establish unbiased evaluation, calibrated probabilities or good predictive values under a new prevalence. These questions require measurements on an explicitly defined evaluation population.
-
-CNN--Transformer specialization is consequently evaluated here as an architecture with declared reporting contracts, not as a claim of comprehensive automated diagnosis. Local convolution, channel reweighting and sequence attention have established methodological precedents \citep{He2016Deep,Hu2018Squeeze,Vaswani2017Attention}. Whether their combination improves a specific ECG task depends on the comparison design. The present work preserves the selected development results, documents the executed branch inputs, and examines completed retrospective tests that expose both strengths and limitations. Its independent external study remains separate and unfinished.
+The proposed architecture combines local waveform feature extraction with sequence modeling. Residual convolution, channel reweighting, and self-attention provide established methodological foundations for these components \citep{He2016Deep,Hu2018Squeeze,Vaswani2017Attention}; their combination must nevertheless be assessed within the specific ECG task and evaluation design. TITAN uses separately fitted rhythm and pathology backbones of the same architecture, each paired with its specialist. Primary6 (P6) reports six selected rhythm and conduction statements, whereas Primary4 (P4) evaluates four structural or ischemic ECG statement endpoints in separate binary panels. These profiles define the outputs evaluated in this study; they do not establish correct routing or diagnosis for ECGs outside those reporting boundaries.
 
 \subsection{State of the Art and Comparative Literature}
 
+Published studies illustrate the range of related tasks and evaluation designs. PTB-XL benchmarking compares approaches to ECG statement prediction \citep{Strodthoff2021Deep}, while Li et al. combine within-beat and recording-scale information in a dual-view CNN--Transformer \citep{Li2024DualView}. Vranken et al. examine uncertainty estimation, and Herman et al. validate automated interpretation using expert diagnostic consensus as the reference standard \citep{Vranken2021Uncertainty,Herman2024}. Other approaches include feature extraction for heartbeat classification \citep{Mastoi2022DERMA}, channel-attention CNNs applied to segments labeled by beat category \citep{Elsheikhy2025Lightweight}, and a multiscale hierarchical CNN evaluated on heartbeats in MIT-BIH and recordings in CCDD \citep{Zhou2025Classification}. Differences in their targets and evaluation units require these contributions to be considered separately from the selected TITAN ECG and panel endpoints.
 
-Single-lead ambulatory classification and 12-lead statement classification are distinct tasks \citep{Hannun2019Cardiologist,Ribeiro2020Automatic}. PTB-XL and the PhysioNet Challenge make label and population differences explicit \citep{Wagner2020PTBXL,Strodthoff2021Deep,Reyna2022Challenge}. A dual-view CNN--Transformer has combined within-beat and recording-scale information \citep{Li2024DualView}. Other studies illustrate heterogeneous alternatives: uncertainty assessment on ECGs \citep{Vranken2021Uncertainty}, evaluation against expert consensus \citep{Herman2024}, and beat-level feature extraction and classification \citep{Mastoi2022DERMA,Elsheikhy2025Lightweight,Zhou2025Classification}. Their results cannot be placed on the same scale as the selected TITAN ECG and panel endpoints.
-
-Table~\ref{tab:comparison} is a purposive comparison, not a systematic review or ranking. Direct ECG-AI comparators are studies sharing a multi-lead ECG input or related ECG statement outputs; beat-level and clinical workflow studies provide context only. Venue was not a selection criterion. NR denotes not reported or not comparable on the cited basis. Differences in labels, population, unit of analysis and validation design prevent direct ranking by published scores.
+The comparison in Table~\ref{tab:comparison} is purposive. Studies with multi-lead ECG inputs or related ECG-statement outputs provide the closest task context; heartbeat and clinical-workflow studies illustrate other methods and evaluation settings. Venue was not a selection criterion. Each published score belongs to its own label definitions, population, unit of analysis, and validation design, which prevents a direct ranking of the systems. The table provides context and does not constitute a systematic review or matched performance benchmark. NR identifies information that was not reported or was not comparable on the cited basis.
 
 \begin{table}[htbp]
 \caption{Selected ECG-AI studies across venues, compared by input, task and evaluation unit. DNN, deep neural network; SVM, support vector machine; KNN, k-nearest neighbors; NR, not reported on a comparable basis. DERMA and FrIFT retain the source method names. The present study is excluded from this prior-work table.\label{tab:comparison}}
@@ -106,21 +101,20 @@ Table~\ref{tab:comparison} is a purposive comparison, not a systematic review or
 \toprule
 \textbf{Study / venue} & \textbf{Scope} & \textbf{Architecture / parameter reporting} & \textbf{Outputs and endpoint role} \\
 \midrule
-Mastoi et al. (2022), Life & ECG heartbeat classification with DERMA fusion & DERMA and FrIFT; SVM or KNN & Heartbeat rhythm-label task; Life ECG-AI comparator, not equivalent to 12-lead rhythm-plus-pathology specialist reporting \\
+Mastoi et al. (2022), Life & ECG heartbeat classification with DERMA fusion & DERMA and FrIFT; SVM or KNN & Heartbeat classification; methodological context for 12-lead rhythm-plus-pathology specialist reporting \\
 Ribeiro et al. (2020) & Large 12-lead diagnostic-abnormality classifier & Residual DNN; comparable params NR & Six diagnostic abnormalities; direct 12-lead comparator with different label scope and no cascade contract \\
 Zhu et al. (2020) & Multi-label rhythm and conduction diagnosis & DNN; comparable params NR & Multi-label rhythm/conduction outputs; direct ECG-AI comparator with different ontology and no pathology specialist \\
 Strodthoff et al. (2021) & PTB-XL benchmark across ECG deep learning models & Varies by benchmark model & SCP-style multi-label outputs; benchmark reference rather than one matched specialist architecture \\
 Vranken et al. (2021) & Uncertainty-aware 12-lead ECG analysis & DNN; comparable params NR & 12-lead interpretation with uncertainty review; relevant to audit and uncertainty reporting \\
-Herman et al. (2024) & Clinical validation of automated 12-lead interpretation & Proprietary; params NR & Broad ECG statements; clinical validation context rather than transparent architecture-size comparator \\
+Herman et al. (2024) & Clinical validation of automated 12-lead interpretation & Six deep neural networks & Broad ECG statements; clinical validation context rather than transparent architecture-size comparator \\
 Li et al. (2024) & ECG abnormality classification & Dual-view CNN--Transformer & Beat and recording-scale information; distinct targets \\
-Elsheikhy et al. (2025), MDPI & Beat classification in MIT-BIH and INCART & CNN with channel attention & Five beat classes, not P6/P4 \\
-Zhou et al. (2025) & Multi-lead ECG classification with hierarchical features & Hierarchical CNN; comparable params NR & Beat classification on MIT-BIH and CCDD; not an ECG-level clinical cascade \\
+Elsheikhy et al. (2025), Sensors & Beat classification in MIT-BIH and INCART & CNN with channel attention & Segments labeled by five beat categories, not P6/P4 \\
+Zhou et al. (2025) & Multi-lead ECG classification with hierarchical features & Hierarchical CNN; parameter count reported & Heartbeats in MIT-BIH; recordings in CCDD; not an ECG-level clinical cascade \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-
-The objective was to design a modular 12-lead ECG classifier, characterize its specialist input and output contracts, and quantify accuracy, per-class discrimination and calibration on explicitly defined retrospective populations. The analysis separates evaluation of the released reporting profiles from later experiments addressing denominator sensitivity, morphology and selective prediction.
+The objective of this study was to design a modular 12-lead ECG classifier, characterize the inputs and outputs of its specialists, and quantify accuracy, classwise discrimination, and calibration in explicitly defined retrospective populations. Evaluation of the released reporting profiles is distinguished from later analyses of denominator sensitivity, morphology inputs, and selective prediction. The resulting estimates describe the populations and endpoints actually evaluated and do not measure a complete clinical diagnostic workflow. Independent external validation remains a separate, unfinished study.
 
 \section{Materials and Methods}
 
@@ -129,7 +123,7 @@ The objective was to design a modular 12-lead ECG classifier, characterize its s
 
 \label{sec:boundary}
 This study designed and evaluated CNN--Transformer specialists on standardized ECG windows. \label{sec:study-design}
-The original release identifier \texttt{external\_dev}, termed external-development in the submission, refers to the archived selected development evaluations, not a single untouched test set. V3H used its 2,193-ECG P8 holdout for development validation; the selected P6 profile comprises 1,643 ECGs and its epoch selection used the reported P6 population. P4 uses four selected binary panels; 962 panel observations correspond to 733 unique ECGs, not 962 distinct patients. The panels are not all evaluated for every ECG. Table~\ref{tab:presentstudy} defines the profiles, and Table~\ref{tab:challengeposition} separates reporting choices from clinical decisions.
+The original release identifier \texttt{external\_dev}, termed external-development in the submission, refers to archived selected development evaluations rather than a single untouched test set. V3H used its 2,193-ECG P8 holdout for development validation; the selected P6 profile comprises 1,643 ECGs, and epoch selection used the reported P6 population. P4 uses four selected binary panels, with 962 panel observations from 733 unique ECGs, not 962 distinct patients. Not every panel is evaluated for every ECG. Table~\ref{tab:presentstudy} defines the profiles, and Table~\ref{tab:challengeposition} separates reporting choices from clinical decisions.
 
 Independent external evaluation is a separate, unfinished analysis. Its intended confirmatory design binds cohort eligibility, source and patient/signal overlap checks, label mappings, frozen checkpoint bytes, preprocessing, thresholds and analysis endpoints before outcome review. Cohorts inspected during model selection, threshold fitting or domain adaptation are not counted as independent. Any unresolved overlap or reference incompatibility must be reported rather than assumed absent. No performance estimate from the ongoing independent evaluation is presented. The completed within-CODE adaptation experiment is reported separately in Sections~\ref{sec:code-methods} and \ref{sec:code-results}.
 P6 denotes Primary6, whose selected outputs are atrial fibrillation (AFIB), sinus bradycardia (SB), sinus tachycardia (STACH), right bundle branch block (RBBB), first-degree atrioventricular block (1AVB), and premature ventricular contractions (PVC). P4 denotes Primary4: anteroseptal myocardial infarction (ASMI), left ventricular hypertrophy (LVH), inferior myocardial infarction (IMI), and ischemic ST--T change (ISC\_). P8 additionally reports normal sinus rhythm (NSR) and premature atrial contractions (PAC). These are ECG-associated reference statements rather than comprehensive clinical diagnoses.
@@ -165,53 +159,44 @@ Uncertain predictions & Low-margin or high-entropy cases may appear as hard labe
 \end{tabular}
 \end{table}
 
+
+\subsubsection{Rationale for profile-specific reporting}
+NSR is a physiologic rhythm and may be frequent in unselected populations. Its omission from P6 defines a narrower classification problem; it does not correct selection bias or establish a method for separating normal from abnormal ECGs. Similarly, the four P4 panels test specified statements, not every infarct territory or all structural disease. The role table distinguishes evaluation eligibility from proposed handling outside the profile.
+
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\linewidth,height=.51\textheight,keepaspectratio]{fig01_graphical_abstract}
 \caption{Specialist design. The P6/P8 and P4 evaluations use different fitted versions of the backbone design, V3F and V3AG, respectively.\label{fig:fig01_graphical_abstract}}
 
 \end{figure}
-
-
-Figure~\ref{fig:fig02_data_processing_bias_workflow} separates the reconstructed preprocessing steps from the provenance of the historical selected profiles and the unfinished independent assessment. Harmonizing waveform dimensions does not harmonize source annotation standards or demonstrate patient isolation.
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=\linewidth,height=.51\textheight,keepaspectratio]{fig02_data_processing_bias_workflow}
-\caption{Signal preprocessing and distinct evidence stages. Selected development sets do not establish historical patient separation.\label{fig:fig02_data_processing_bias_workflow}}
-
-\end{figure}
-
-
-\subsubsection{Rationale for profile-specific reporting}
-NSR is a physiologic rhythm and may be frequent in unselected populations. Its omission from P6 defines a narrower classification problem; it does not correct selection bias or establish a method for separating normal from abnormal ECGs. Similarly, the four P4 panels test specified statements, not every infarct territory or all structural disease. The role table distinguishes evaluation eligibility from proposed handling outside the profile.
+\FloatBarrier
 
 \subsection{Dataset Curation, Harmonization, and Population-Shift Control}
 
 
 \label{sec:data}
-Separating patients and waveform duplicates is important because multiple ECGs or windows from one patient can share distinctive morphology. We distinguish source aliases, record-level exclusion and demonstrated patient/signal independence. The exact historical data loader and job-consumed train, calibration and validation rosters are not available for all checkpoints. The historical counts and the verified retrospective preprocessing are therefore reported separately below.
+Patient separation and waveform-duplicate checks matter because multiple ECGs or windows from one patient can share distinctive morphology. We distinguish source aliases and record-level exclusions from demonstrated patient/signal independence. The exact historical data loader and the train, calibration and validation rosters consumed by each job are not available for all checkpoints. Historical counts and verified retrospective preprocessing are therefore reported separately below.
 
-Throughout this mathematical formulation, scalar quantities ($f_s$, $T$, $z_{i,c}$) appear in standard italicized font, whereas column vectors ($\mathbf{x}_{i,\ell} \in \mathbb{R}^T$) and two-dimensional feature matrices ($\mathbf{X}_i \in \mathbb{R}^{L \times T}$) are distinguished by bold lowercase and uppercase notation, respectively. The standard twelve-lead spatial manifold follows the anatomical and projection sequence $\mathcal{L}=\{\mathrm{I},\mathrm{II},\mathrm{III},\mathrm{aVR},\mathrm{aVL},\mathrm{aVF},\mathrm{V1},\mathrm{V2},\mathrm{V3},\mathrm{V4},\mathrm{V5},\mathrm{V6}\}$, capturing frontal plane projections via the limb electrodes alongside horizontal planar views from the precordial montage. An unstandardized bioelectrical acquisition originating from source institution $i$ is formalized as:
+Scalar quantities ($f_s$, $T$, $z_{i,c}$) are italicized, while column vectors ($\mathbf{x}_{i,\ell} \in \mathbb{R}^T$) and two-dimensional feature matrices ($\mathbf{X}_i \in \mathbb{R}^{L \times T}$) use bold lowercase and uppercase notation, respectively. The standard twelve-lead order is $\mathcal{L}=\{\mathrm{I},\mathrm{II},\mathrm{III},\mathrm{aVR},\mathrm{aVL},\mathrm{aVF},\mathrm{V1},\mathrm{V2},\mathrm{V3},\mathrm{V4},\mathrm{V5},\mathrm{V6}\}$, with limb leads representing frontal-plane projections and precordial leads representing horizontal-plane views. An unstandardized recording from source institution $i$ is represented as:
 \begin{equation}
 \mathbf{R}_i \in \mathbb{R}^{L_i \times T_i^{\mathrm{raw}}}, \qquad f_i^{\mathrm{raw}}>0,
 \end{equation}
-where $L_i \le 12$ represents the quantity of active recording leads, $T_i^{\mathrm{raw}}$ denotes the native discrete temporal length, and $f_i^{\mathrm{raw}}$ characterizes the device-specific analog-to-digital sampling frequency.
+where $L_i \le 12$ is the number of active recording leads, $T_i^{\mathrm{raw}}$ is the native discrete temporal length, and $f_i^{\mathrm{raw}}$ is the device-specific analog-to-digital sampling frequency.
 
-Because multi-center clinical datasets inherently incorporate diverse acquisition hardware, varying analog filter topologies, and heterogeneous sampling protocols, inputs must undergo invariant temporal and topological transformation prior to tensor ingestion. To bridge this structural disparity, an invariant temporal resampling and lead-alignment operator $\mathcal{R}_{f_i^{\mathrm{raw}}\rightarrow f_s}$ is formulated to standardize disparate inputs:
+Multi-center clinical datasets differ in acquisition hardware, analog filtering and sampling protocols. Before tensor input, the temporal resampling and lead-alignment operator $\mathcal{R}_{f_i^{\mathrm{raw}}\rightarrow f_s}$ standardizes their dimensions:
 \begin{equation}
 \mathbf{X}_i=\mathcal{R}_{f_i^{\mathrm{raw}}\rightarrow f_s}\!\left(\mathbf{R}_i,\mathcal{L},10~\mathrm{s}\right), \qquad \mathbf{X}_i\in\mathbb{R}^{12\times1250},\quad f_s=125~\mathrm{Hz}.
 \end{equation}
 
-The tensor contract uses 125 Hz and ten seconds. Signal resampling and named-lead alignment are distinct from inference over the label ontology. A lead-validity mask is passed to the model separately from waveform values. This representation does not guarantee preservation of every high-frequency diagnostic feature or reconstruction of absent leads.
+The tensor contract uses 125 Hz and ten seconds. Resampling and named-lead alignment prepare the signal input; inference over the label ontology remains a separate step. The model receives a lead-validity mask separately from the waveform values. This representation does not guarantee preservation of every high-frequency diagnostic feature or reconstruction of absent leads.
 
-Inter-electrode contact impedance, patient respiration, and diverse amplifier calibration gains frequently superimpose low-frequency baseline fluctuations and scale discrepancies across multi-center recordings. To reduce within-lead offset and scale variation, lead-wise z-score standardization is applied independently across each temporal analysis window. It does not preserve absolute voltage or all cross-lead voltage ratios:
+Electrode contact impedance, patient respiration and amplifier calibration gains can introduce low-frequency baseline fluctuations and scale differences across multi-center recordings. Lead-wise z-score standardization reduces within-lead offset and scale variation independently within each temporal analysis window. It does not preserve absolute voltage or all cross-lead voltage ratios:
 \begin{equation}
 \tilde{\mathbf{x}}_{i,\ell}=\frac{\mathbf{x}_{i,\ell}-\mu_{i,\ell}\mathbf{1}}{\sigma_{i,\ell}+\epsilon}, \qquad \ell\in\mathcal{L},
 \end{equation}
-where $\mu_{i,\ell}$ and $\sigma_{i,\ell}$ signify the sample mean and empirical standard deviation computed exclusively across the temporal samples of lead $\ell$ within the active window, with $\epsilon = 10^{-8}$ incorporated to ensure numerical stability during near-isoelectric intervals. By determining normalization statistics strictly within the local temporal window of each specific tracing, this formulation avoids estimating a global normalization constant from pooled partitions; it does not prevent patient or signal overlap.
+where $\mu_{i,\ell}$ and $\sigma_{i,\ell}$ are the sample mean and empirical standard deviation of lead $\ell$ within the active window, and $\epsilon = 10^{-8}$ provides numerical stability during near-isoelectric intervals. Normalization statistics are calculated within the local window of each tracing rather than across pooled partitions; this does not prevent patient or signal overlap.
 
-For extended diagnostic recordings from which multiple overlapping or sequential sliding windows $W_i$ are sampled, record-level pooling aggregates predictions before nonlinear activation. The window-level uncalibrated logit vectors $z_{i,w,c}$ for class $c$ are averaged linearly across all constituent windows before applying the logistic sigmoid mapping:
+For extended diagnostic recordings sampled into multiple overlapping or sequential sliding windows $W_i$, record-level pooling aggregates predictions before nonlinear activation. The uncalibrated window-level logit vectors $z_{i,w,c}$ for class $c$ are averaged across all windows before the logistic sigmoid is applied:
 \begin{equation}
 z_{i,c}=\frac{1}{W_i}\sum_{w=1}^{W_i} z_{i,w,c},\qquad p_{i,c}=\sigma(z_{i,c}),
 \end{equation}
@@ -234,6 +219,16 @@ Coexisting eligible labels are kept in the accepted reference set. Top-1 is corr
 P4 references are panel-specific SCP-derived statements. The recorded label agrees with the relevant SCP key in 962/962 panel observations. This is mapping concordance, not an independent ECG reading or clinical adjudication. AF recognition is ECG-associated statement prediction, not detection of first diagnosis or incident disease, which requires longitudinal evidence \citep{Rossi2026AF}.
 
 
+Figure~\ref{fig:fig02_data_processing_bias_workflow} separates the reconstructed preprocessing steps from the provenance of the historical selected profiles and the unfinished independent assessment. Harmonizing waveform dimensions does not harmonize source annotation standards or demonstrate patient isolation.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth,height=.51\textheight,keepaspectratio]{fig02_data_processing_bias_workflow}
+\caption{Signal preprocessing and distinct evidence stages. Selected development sets do not establish historical patient separation.\label{fig:fig02_data_processing_bias_workflow}}
+
+\end{figure}
+\FloatBarrier
+
 \input{methods_datasets}
 
 \subsection{Architecture and Specialist Branches}
@@ -241,25 +236,33 @@ P4 references are panel-specific SCP-derived statements. The recorded label agre
 
 Convolution and attention operate at different temporal scales. The former builds local waveform features, while the latter integrates information across the ten-second window. The description below summarizes the model design; the observed tensor widths and branch connectivity are reported separately.
 
-Formally, let $\mathbf{X}_i \in \mathbb{R}^{12 \times 1250}$ represent the harmonized multi-lead input matrix. As the signal propagates through the convolutional feature extractor, the intermediate representation entering residual stage $b$, denoted by tensor $\mathbf{H}_b \in \mathbb{R}^{C_b \times T_b}$, is mapped to an upgraded subspace $\mathbf{H}_{b+1} \in \mathbb{R}^{C_{b+1} \times T_{b+1}}$ according to the residual formulation:
+Let $\mathbf{X}_i \in \mathbb{R}^{12 \times 1250}$ denote the harmonized multi-lead input matrix. At residual stage $b$, the convolutional feature extractor maps the intermediate tensor $\mathbf{H}_b \in \mathbb{R}^{C_b \times T_b}$ to $\mathbf{H}_{b+1} \in \mathbb{R}^{C_{b+1} \times T_{b+1}}$ as follows:
 \begin{equation}
 \mathbf{H}_{b+1}=\phi\!\left(F_b(\mathbf{H}_b;\boldsymbol{\theta}_b)+P_b(\mathbf{H}_b)\right),
 \end{equation}
-where the non-linear composite operator $F_b(\cdot;\boldsymbol{\theta}_b)$ embodies sequential one-dimensional convolutions, batch normalization layers, and dropout regularization parameterized by weight tensors $\boldsymbol{\theta}_b$. The operator $P_b(\cdot)$ denotes an identity or linear $1 \times 1$ projection shortcut designed to preserve uninterrupted gradient propagation across deep layer hierarchies, and $\phi(\cdot)$ specifies the Rectified Linear Unit ($\mathrm{ReLU}$) activation function \citep{He2016Deep}. This convolutional stem learns local temporal features from the prepared multi-lead waveforms; the experiment does not validate individual filters as electrophysiological measurements.
+where $F_b(\cdot;\boldsymbol{\theta}_b)$ combines sequential one-dimensional convolutions, batch normalization layers and dropout regularization, with weight tensors $\boldsymbol{\theta}_b$. The shortcut $P_b(\cdot)$ is an identity or linear $1 \times 1$ projection designed to support gradient propagation through deep layers, and $\phi(\cdot)$ denotes the Rectified Linear Unit ($\mathrm{ReLU}$) activation function \citep{He2016Deep}. This convolutional stem learns local temporal features from the prepared multi-lead waveforms; the experiment does not validate individual filters as electrophysiological measurements.
 
-Because standard 12-lead acquisitions project cardiac dipoles onto distinct anatomical planes, diagnostic information is inherently non-uniform across channels; for instance, anterior myocardial necrosis alters precordial leads V1--V4, whereas inferior-territory changes may involve leads II, III, and aVF. To dynamically prioritize informative spatial projections while suppressing noise-corrupted channels, a Squeeze-and-Excitation channel attention mechanism computes a recalibration vector $\mathbf{s} \in (0,1)^C$ from the post-residual feature representation $\mathbf{U} \in \mathbb{R}^{C \times T'}$ \citep{Hu2018Squeeze}:
+Standard 12-lead acquisitions project cardiac dipoles onto distinct anatomical planes, so diagnostic information varies across channels. For example, anterior myocardial necrosis alters precordial leads V1--V4, whereas inferior-territory changes may involve leads II, III, and aVF. A Squeeze-and-Excitation channel attention mechanism is designed to prioritize informative projections and reduce the influence of noisy channels. It computes a recalibration vector $\mathbf{s} \in (0,1)^C$ from the post-residual feature representation $\mathbf{U} \in \mathbb{R}^{C \times T'}$ \citep{Hu2018Squeeze}:
 \begin{equation}
 \mathbf{s}=\sigma\!\left(\mathbf{W}_2\,\mathrm{SiLU}(\mathbf{W}_1\,\mathrm{GAP}(\mathbf{U}))\right),\qquad \widehat{\mathbf{U}}=\mathbf{s}\odot\mathbf{U},
 \end{equation}
-wherein $\mathrm{GAP}(\cdot)$ designates global average pooling executed across the discrete temporal dimension, contracting temporal activations into channel-wise summary statistics. The linear transformation matrices $\mathbf{W}_1$ and $\mathbf{W}_2$ form an excitation bottleneck, activated via the smooth Sigmoid Linear Unit ($\mathrm{SiLU}$), and $\sigma(\cdot)$ denotes the logistic sigmoid gate that scales the channel modulation vector $\mathbf{s}$. The element-wise Hadamard product $\odot$ produces the recalibrated tensor $\widehat{\mathbf{U}}$, reweighting learned feature channels. These feature channels must not be equated one-to-one with physical leads.
+where $\mathrm{GAP}(\cdot)$ averages activations across the temporal dimension to produce channel-wise summaries. The linear transformation matrices $\mathbf{W}_1$ and $\mathbf{W}_2$ form an excitation bottleneck with smooth Sigmoid Linear Unit ($\mathrm{SiLU}$) activation, and $\sigma(\cdot)$ is the logistic sigmoid gate that scales the channel modulation vector $\mathbf{s}$. The element-wise Hadamard product $\odot$ gives the recalibrated tensor $\widehat{\mathbf{U}}$ by reweighting learned feature channels. These feature channels must not be equated one-to-one with physical leads.
 
-To capture non-local temporal patterns across multiple cardiac cycles, the recalibrated representations are processed by a multi-head scaled dot-product self-attention Transformer encoder \citep{Vaswani2017Attention}. This module models contextual interactions across arbitrary temporal distances within the tracing, formalizing attention weights as:
+A multi-head scaled dot-product self-attention Transformer encoder processes the recalibrated representations to capture non-local patterns across multiple cardiac cycles \citep{Vaswani2017Attention}. It models contextual interactions across arbitrary temporal distances within the tracing, with attention defined as:
 \begin{equation}
 \mathrm{Attention}(\mathbf{Q},\mathbf{K},\mathbf{V})=\mathrm{softmax}\!\left(\frac{\mathbf{Q}\mathbf{K}^{\top}}{\sqrt{d_k}}\right)\mathbf{V},
 \end{equation}
-where $\mathbf{Q}$, $\mathbf{K}$, and $\mathbf{V}$ represent the projected query, key, and value matrices derived from the latent sequence, and the denominator $\sqrt{d_k}$ serves as a variance-stabilizing scaling factor to prevent gradient saturation in large inner-product regimes. The Transformer architecture is configured with 10 parallel self-attention heads operating over a latent model embedding dimension of $d_{\mathrm{model}}=640$, coupled to a position-wise feed-forward expansion layer of dimension $d_{\mathrm{ff}}=2560$.
+where $\mathbf{Q}$, $\mathbf{K}$, and $\mathbf{V}$ are the query, key, and value matrices projected from the latent sequence. The denominator $\sqrt{d_k}$ stabilizes variance to limit gradient saturation at large inner products. The Transformer uses 10 parallel self-attention heads with latent embedding dimension $d_{\mathrm{model}}=640$ and a position-wise feed-forward expansion layer of dimension $d_{\mathrm{ff}}=2560$.
 
 The complete computational allocation and topological routing mechanisms are documented in Table~\ref{tab:architecture} and Table~\ref{tab:contracts}. Each loaded CNN--Transformer backbone object contains 58,352,219 parameters including its global heads. The rhythm package and pathology package comprise 63,930,847 and 65,694,183 parameters, respectively, including their separate fitted backbones. Reconstructed tensor interconnectivity and reporting roles are illustrated in Figure~\ref{fig:fig03_internal_architecture} and Figure~\ref{fig:fig03_cascade_contract}.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth,height=.51\textheight,keepaspectratio]{fig03_internal_architecture}
+\caption{Instrumented CNN--Transformer and specialist data flow. Arrows denote tensors passed in the reconstructed runtime. The ten morphology proxies feed both specialists directly; the global pathology head does not consume them directly.\label{fig:fig03_internal_architecture}}
+
+\end{figure}
+\FloatBarrier
 
 \begin{table}[htbp]
 \caption{Architecture and parameter-count summary.\label{tab:architecture}}
@@ -297,12 +300,15 @@ Pathology & Auxiliary global & LAE \\
 \end{tabular}
 \end{table}
 
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=\linewidth,height=.51\textheight,keepaspectratio]{fig03_internal_architecture}
-\caption{Instrumented CNN--Transformer and specialist data flow. Arrows denote tensors passed in the reconstructed runtime. The ten morphology proxies feed both specialists directly; the global pathology head does not consume them directly.\label{fig:fig03_internal_architecture}}
 
-\end{figure}
+\subsubsection{Output definitions and direct supervision}
+\label{sec:supervision}
+
+Global rhythm and pathology heads expose 14 and seven outputs. P6 reports AFIB, sinus bradycardia (SB), sinus tachycardia (STACH), right bundle branch block (RBBB), first-degree atrioventricular block (1AVB), and premature ventricular contractions (PVC). P8 adds NSR and premature atrial contractions (PAC). P4 reports anteroseptal myocardial infarction (ASMI), left ventricular hypertrophy (LVH), inferior myocardial infarction (IMI), and ischemic ST--T change (ISC\_). V3F and V3AG are separate released backbone files. Shared design does not imply identical fitted weights.
+
+Recovered V3F code indexes P8 in its rhythm loss (0.70 focal binary cross-entropy plus 0.30 categorical cross-entropy) and P4 in its pathology focal binary loss. Flutter, paced rhythm, left bundle branch block (LBBB), second- and third-degree atrioventricular block (2AVB and 3AVB), and long QT syndrome (LQTS) have no direct term in that V3F objective. Separate V3AG development code uses a different rhythm subset including Flutter and paced rhythm. Anterolateral and inferolateral myocardial infarction (ALMI and ILMI) and left atrial enlargement (LAE) are outside the recovered V3F direct pathology objective. These code excerpts do not reconstruct earlier supervision or bind every runtime mask to released weights. Auxiliary metrics from the separate 41M experiments cannot be attributed to V3F or V3AG. LQTS is not interchangeable with a prolonged-QT statement, nor is LAE automatically equivalent to left atrial overload (LAO).
+
+In Table~\ref{tab:contracts}, \emph{Role} identifies a reporting or output contract. Primary outputs enter that profile's metrics; secondary candidates are outside the report and were proposed for separate handling; auxiliary endpoints are global outputs outside the specialist evaluation. These categories are not dispatch decisions. NSR is normal rhythm, excluded from P6 but included in P8. A residual Other group requires a specified ontology and reference; NSR should not be called Other arrhythmia.
 
 \begin{figure}[htbp]
 \centering
@@ -310,22 +316,14 @@ Pathology & Auxiliary global & LAE \\
 \caption{Reporting and output contracts. Groupings do not describe a clinical dispatch rule and no arrow implies movement between groups.\label{fig:fig03_cascade_contract}}
 
 \end{figure}
+\FloatBarrier
 
-\subsubsection{Output definitions and direct supervision}
-\label{sec:supervision}
-
-Global rhythm and pathology heads expose 14 and seven outputs. P6 reports AFIB, sinus bradycardia (SB), sinus tachycardia (STACH), right bundle branch block (RBBB), first-degree atrioventricular block (1AVB), and premature ventricular contractions (PVC). P8 adds NSR and premature atrial contractions (PAC). P4 reports anteroseptal myocardial infarction (ASMI), left ventricular hypertrophy (LVH), inferior myocardial infarction (IMI), and ischemic ST--T change (ISC\_). V3F and V3AG are separate released backbone files. Shared design does not imply identical fitted weights.
-
-Recovered V3F code indexes P8 in its rhythm loss (0.70 focal binary cross-entropy plus 0.30 categorical cross-entropy) and P4 in its pathology focal binary loss. Flutter, paced rhythm, left bundle branch block (LBBB), second- and third-degree atrioventricular block (2AVB and 3AVB), and long QT syndrome (LQTS) have no direct term in that V3F objective. Separate V3AG development code uses a different rhythm subset including Flutter and paced rhythm. Anterolateral and inferolateral myocardial infarction (ALMI and ILMI) and left atrial enlargement (LAE) are outside the recovered V3F direct pathology objective. This does not reconstruct earlier supervision or bind every runtime mask to released weights. Auxiliary metrics from 41M experiments cannot be attributed to V3F or V3AG. LQTS is not interchangeable with a prolonged-QT statement, nor is LAE automatically equivalent to left atrial overload (LAO).
-
-In Table~\ref{tab:contracts}, \emph{Role} identifies a reporting or output contract. Primary outputs enter that profile's metrics; secondary candidates are outside the report and were proposed for separate handling; auxiliary endpoints are global outputs outside the specialist evaluation. These categories are not dispatch decisions. NSR is normal rhythm, excluded from P6 but included in P8. A residual Other group requires a specified ontology and reference; NSR should not be called Other arrhythmia.
-
-Supplementary Table~S1 separates global-logit availability, recovered stage-specific supervision, published specialist evaluation and later experimental evidence for all eleven out-of-profile or auxiliary endpoints. A documented loss index is not a recovered patient-level training roster, and an experimental head or newly selected threshold does not become a published specialist decision.
+Supplementary Table~S1 distinguishes global-logit availability, recovered stage-specific supervision, published specialist evaluation and later experimental evidence for all eleven out-of-profile or auxiliary endpoints. A documented loss index is not a recovered patient-level training roster. An experimental head or newly selected threshold does not become a published specialist decision.
 
 \subsubsection{Reconstructed morphology inputs and tensor connections}
 \label{sec:morphology}
 
-The reconstruction used physical millivolt waveforms, a causal third-order Butterworth filter (0.5--45 Hz on nonconstant leads), polyphase resampling from 500 to 125 Hz, central ten seconds with padding when required, and per-lead standardization. The $12\times1250$ waveform has a 12-element lead mask. This contract was instrumented on LUDB, not authenticated as the exact historical loader. Inter-peak RR intervals supply the timing proxies, including the root mean square of successive differences (RMSSD). Coefficient of variation and spectral ratios are dimensionless.
+The reconstruction started with physical millivolt waveforms. It applied a causal third-order Butterworth filter (0.5--45 Hz on nonconstant leads), polyphase resampling from 500 to 125 Hz, extraction of the central ten seconds with padding when required, and per-lead standardization. The $12\times1250$ waveform has a 12-element lead mask. This contract was instrumented on LUDB, not authenticated as the exact historical loader. Inter-peak RR intervals supply the timing proxies, including the root mean square of successive differences (RMSSD). Coefficient of variation and spectral ratios are dimensionless.
 
 The extractor uses lead II if nonflat, otherwise the highest-variance lead. Median-centered magnitude peaks meet or exceed the larger of the 88th percentile and mean plus 0.8 standard deviations and are separated by at least 0.28 s. For peak sample indices $p_i$, inter-peak intervals $RR_i=(p_{i+1}-p_i)/f_s>10^{-6}$ are in seconds, with $f_s=125$~Hz in the reconstructed path. For lead $\ell$, let $P_{\ell k}=|\operatorname{rFFT}(x_\ell)_k|^2$ and $\bar P_k$ be its across-lead mean. In the energy ratios, $E_{a:b}=\sum_{k:a\le f_k\le b}\bar P_k$ and $E_{\mathrm{tot}}=\sum_k\bar P_k$; band endpoints are inclusive. Limb asymmetry uses lead-specific sums $E_\ell=\sum_{k:5\le f_k\le18}P_{\ell k}$. These are unnormalized squared Fourier magnitudes of prepared samples, not physical power measurements. A total at or below $10^{-12}$ produces a zero band ratio. Values are divided by the listed scales and clipped to $[0,1]$ (signed asymmetry $[-1,1]$); nonfinite values become zero.
 
@@ -361,7 +359,7 @@ A flat-signal fixture produced spurious plateau peaks and nonzero descriptors. T
 
 The Shandong Provincial Hospital (SPH) analysis applied released profiles to all 25,770 metadata ECGs (24,666 source patient identifiers) before forming nested profile-compatible subsets from the same scores. Absence of a compatible statement is negative for the mapped endpoint, not adjudicated absence of disease. The primary SPH mapping does not supply 1AVB, NSR or ISC\_ references. A PTB-XL folds 1--9 development cache supplied separate 1AVB and ISC\_ statements; 6,205 of 19,601 metadata ECGs were technically scored. LUDB and PTB Diagnostic are separate sources and cannot replace SPH or the missing June population.
 
-Other experiments fit new development heads. The rhythm residual covers mapped out-of-profile statements; normal rhythm and unknown references remain distinct. The pathology residual is a bounded PTB-XL ALMI/ILMI/LAO-or-LAE union. A morphology ablation fit equal-capacity heads with fixed backbone representations, five matched seeds per arm, and simultaneous intervals against a predefined $\pm2$ percentage-point relevance margin. These are not independent validation, full-network retraining, or changes to the released models.
+Other experiments fitted new development heads. The rhythm residual covers mapped out-of-profile statements; normal rhythm and unknown references remain distinct. The pathology residual is a bounded PTB-XL ALMI/ILMI/LAO-or-LAE union. A morphology ablation fitted equal-capacity heads with fixed backbone representations and five matched seeds per arm. Simultaneous intervals were assessed against a predefined $\pm2$ percentage-point relevance margin. These experiments do not constitute independent validation or full-network retraining, and they do not change the released models.
 
 \input{methods_expansion}
 
@@ -377,7 +375,7 @@ For stages enabling rhythm, pathology and clinical-axis objectives, the original
 \begin{equation}
 \mathcal L_{\mathrm{multi}}=\mathcal L_{\mathrm{rhythm}}+\lambda_{\mathrm{path}}\mathcal L_{\mathrm{pathology}}+\lambda_{\mathrm{axis}}\mathcal L_{\mathrm{axis}}.
 \end{equation}
-Each stage must specify which terms and masks are active. This design equation does not authenticate every historical coefficient or imply useful clinical-axis performance. Optimizer weight decay is reported as a configured parameter rather than assumed to be a separately measured loss term.
+Each stage must identify the active terms and masks. This design equation does not authenticate every historical coefficient or establish useful clinical-axis performance. Optimizer weight decay is reported as a configured parameter; it is not assumed to be a separately measured loss term.
 
 Here $\alpha_{ic}$ denotes a class/target weight when used. Masked or unrecognized labels do not contribute to the corresponding term. The categorical component uses $-\sum_c q_{ic}\log \mathrm{softmax}(z_i)_c$ for target vector $q_i$. The archived 50-epoch development run records auxiliary clinical-axis losses; it does not show that the released specialist decision has a validated auxiliary function. Exact historical configuration and label support are not available for all prior stages.
 
@@ -385,7 +383,7 @@ The public V3C selection summary describes a Tree-structured Parzen Estimator (T
 \begin{equation}
 J_e=0.6F1_{\mathrm{P8},e}+0.4F1_{\mathrm{P4},e}-0.05M_{\mathrm{P8},e}-0.05M_{\mathrm{P4},e},
 \end{equation}
-where $M$ denotes missing target classes or labels, not mini-batch variance. Candidate ranking uses the mean of the last three composites less 0.25 times their population standard deviation. Trial 6 led that ranking (0.624512); trial 8 had the highest single-epoch peak (0.650940). The selection JSON and archived effective configuration agree on the parameters in Table~\ref{tab:optuna}. Job 16768 ran 50 epochs; job 16781 subsequently declared its intermediate checkpoint as the initialization for V3F. The V3F report records eight epochs. The historical V3F output digest agrees with the published backbone. The original Optuna database, intermediate checkpoint bytes and job-level input/output digest binding remain unavailable; neither scheduler completion nor the output digest proves the complete byte-level lineage.
+where $M$ denotes missing target classes or labels, not mini-batch variance. Candidate ranking uses the mean of the last three composites minus 0.25 times their population standard deviation. Trial 6 led the ranking (0.624512); trial 8 had the highest single-epoch peak (0.650940). The selection JSON and archived effective configuration agree on the parameters in Table~\ref{tab:optuna}. Job 16768 ran 50 epochs; job 16781 subsequently declared the intermediate checkpoint from that run as the initialization for V3F. The V3F report records eight epochs. The historical V3F output digest agrees with the published backbone. The original Optuna database, intermediate checkpoint bytes and job-level input/output digest binding remain unavailable. Neither scheduler completion nor the output digest proves the complete byte-level lineage.
 
 \begin{table}[htbp]
 \caption{Recorded V3C trial 6 hyperparameters used in the archived job 16768 configuration.\label{tab:optuna}}
@@ -438,11 +436,11 @@ In the later score-based P8/P4 experiment, profile confidence was the minimum ab
 
 \subsection{Grad-CAM Explainability Contract}
 
-Post hoc saliency can support inspection of model sensitivity, although it does not establish physiological causality. The implementation provides class-discriminative one-dimensional Gradient-weighted Class Activation Mapping (1D Grad-CAM) \citep{Selvaraju2017Grad} coupled to a strict audit contract. For a targeted diagnostic class $c$ with pre-activation score $y^c$ and intermediate temporal activation tensor $A_k(t)$ in convolutional feature channel $k$, spatial-temporal importance weights $\alpha_k^c$ are computed by averaging gradients across the temporal length $T'$:
+Post hoc saliency can support inspection of model sensitivity, although it does not establish physiological causality. The implementation provides class-discriminative one-dimensional Gradient-weighted Class Activation Mapping (1D Grad-CAM) \citep{Selvaraju2017Grad} with a strict audit contract. For a target diagnostic class $c$, let $y^c$ be its pre-activation score and $A_k(t)$ the intermediate temporal activation tensor in convolutional feature channel $k$. The spatial-temporal importance weights $\alpha_k^c$ are computed by averaging gradients across the temporal length $T'$:
 \begin{equation}
 \alpha_k^c=\frac{1}{T'}\sum_{t=1}^{T'}\frac{\partial y^c}{\partial A_k(t)}.
 \end{equation}
-The resulting channel-weighted linear combination is passed through a Rectified Linear Unit activation to isolate strictly positive contributions toward the target class, producing the continuous temporal saliency profile:
+The resulting channel-weighted linear combination passes through a Rectified Linear Unit activation to retain strictly positive contributions toward the target class, producing the continuous temporal saliency profile:
 \begin{equation}
 L_{\mathrm{GradCAM}}^c(t)=\mathrm{ReLU}\left(\sum_k \alpha_k^c A_k(t)\right).
 \end{equation}
@@ -499,7 +497,7 @@ ECE & Ten-bin expected calibration error & Probability calibration \\
 \subsection{Overall Specialist Performance}
 
 
-Table~\ref{tab:overall} reports the selected development evaluations. P6 correctly assigned a top-1 class to 1,564 of 1,643 ECGs (95.19\%) and had thresholded mean binary F1 of 80.09\%. P4 had mean panel accuracy of 80.23\% and macro-F1 of 79.35\% across 962 ECG--label observations from 733 unique ECGs. The P8 development profile achieved 90.61\% top-1 and 76.14\% mean binary F1 across 2,193 ECGs. The profiles overlap and are not independent comparators. None estimates a clinical all-input workflow.
+Table~\ref{tab:overall} reports the selected development evaluations. P6 made a correct top-1 assignment for 1,564 of 1,643 ECGs (95.19\%) and had a thresholded mean binary F1 of 80.09\%. P4 had a mean panel accuracy of 80.23\% and macro-F1 of 79.35\% across 962 ECG--label observations from 733 unique ECGs. The P8 development profile yielded 90.61\% top-1 accuracy and 76.14\% mean binary F1 across 2,193 ECGs. The profiles overlap and are not independent comparators. These selected evaluations do not estimate performance across all inputs in a clinical workflow.
 
 \begin{table}[htbp]
 \caption{Selected development performance. Rhythm denominators count ECGs; P4 counts panel observations.\label{tab:overall}}
@@ -516,7 +514,7 @@ Pathology & Primary4 one-vs.-rest panels & 962 & 80.23\% & 79.35\% & 87.46\% & 8
 \end{table}
 
 
-Figure~\ref{fig:fig06_rhythm_confusion} reports top-1 classification for the 1,460 ECGs with exactly one accepted class. The overall top-1 denominator also includes 183 ECGs with more than one accepted class. Figure~\ref{fig:fig08_class_metrics} and Table~\ref{tab:rhythmclass} report thresholded binary precision, recall and F1 on all 1,643 ECGs, not the single-reference subset. The 1AVB F1 of 62.58\% and PVC F1 of 65.64\% indicate substantial residual errors; neither supports reliable clinical performance.
+Figure~\ref{fig:fig06_rhythm_confusion} summarizes top-1 classification for the 1,460 ECGs with exactly one accepted class. The overall top-1 denominator also includes 183 ECGs with more than one accepted class. Figure~\ref{fig:fig08_class_metrics} and Table~\ref{tab:rhythmclass} report thresholded binary precision, recall and F1 on all 1,643 ECGs rather than only the single-reference subset. The 1AVB F1 of 62.58\% and PVC F1 of 65.64\% indicate substantial residual errors; neither supports reliable clinical performance.
 
 \begin{figure}[htbp]
 \centering
@@ -537,7 +535,7 @@ Figure~\ref{fig:fig06_rhythm_confusion} reports top-1 classification for the 1,4
 \subsection{Pathology Primary4 Results}
 
 
-Table~\ref{tab:pathclass} and Figures~\ref{fig:fig07_pathology_confusion} and \ref{fig:fig08b_pathology_class_metrics} report the four binary panels. ASMI, LVH, IMI and ISC\_ contribute 294, 224, 206 and 238 observations, respectively. One ECG may occur in multiple panels. ISC\_ had F1 of 91.56\%, compared with 65.73\% for LVH; this difference does not establish performance in unselected clinical patients.
+Table~\ref{tab:pathclass} and Figures~\ref{fig:fig07_pathology_confusion} and \ref{fig:fig08b_pathology_class_metrics} report results for the four binary panels. ASMI, LVH, IMI and ISC\_ contribute 294, 224, 206 and 238 observations, respectively. One ECG may contribute to multiple panels. ISC\_ had F1 of 91.56\%, compared with 65.73\% for LVH; this difference does not establish performance in unselected clinical patients.
 
 \input{tables/classes_p4}
 
@@ -559,7 +557,7 @@ Table~\ref{tab:pathclass} and Figures~\ref{fig:fig07_pathology_confusion} and \r
 \subsection{Discrimination, Calibration, and Uncertainty}
 
 
-Figures~\ref{fig:fig09_roc_curves} and \ref{fig:fig10_precision_recall_curves} show classwise ranking for P6 ECGs and P4 panel observations. Macro-AUROC was 96.53\% and 87.46\%, respectively. The estimates refer to different selected tasks and neither establishes calibration or clinical discrimination in an unselected population. With average precision defined as the recall-weighted sum, macro-AP was 85.61\% and 87.85\%. Brier scores ranged from 0.024 (SB) to 0.042 (1AVB) in P6 and 0.078 (ISC\_) to 0.224 (LVH) in P4. Figure~\ref{fig:fig11_calibration} compares mean predicted probability with observed positive frequency in each populated bin.
+Figures~\ref{fig:fig09_roc_curves} and \ref{fig:fig10_precision_recall_curves} show classwise ranking performance for P6 ECGs and P4 panel observations. The corresponding macro-AUROC values were 96.53\% and 87.46\%. These estimates describe different selected tasks; neither establishes calibration or clinical discrimination in an unselected population. With average precision defined as the recall-weighted sum, macro-AP was 85.61\% and 87.85\%. Brier scores ranged from 0.024 (SB) to 0.042 (1AVB) in P6 and 0.078 (ISC\_) to 0.224 (LVH) in P4. Figure~\ref{fig:fig11_calibration} compares mean predicted probability with observed positive frequency in each populated bin.
 
 \begin{figure}[htbp]
 \centering
@@ -586,7 +584,7 @@ Threshold-empty output counts are reported separately in Section~\ref{sec:select
 \subsection{Source-Stratified Robustness and Error Analysis}
 
 
-Figure~\ref{fig:fig12_source_performance} describes P6 top-1 accuracy by retained source alias. The support varies substantially: Chapman--Shaoxing contributes 1,514 ECGs, while five to 19 ECGs are represented in several other groups. The resulting Wilson intervals should not be interpreted as evidence of stable transport across institutions.
+Figure~\ref{fig:fig12_source_performance} describes P6 top-1 accuracy by retained source alias. The number of ECGs varies substantially by source: Chapman--Shaoxing contributes 1,514 ECGs, while several other groups contain only five to 19 ECGs. The resulting Wilson intervals should not be interpreted as evidence of stable transport across institutions.
 
 \begin{figure}[htbp]
 \centering
@@ -604,16 +602,16 @@ Figure~\ref{fig:fig12_source_performance} describes P6 top-1 accuracy by retaine
 \subsection{Denominator sensitivity in retrospective transfer}
 \label{sec:transfer-results}
 
-All 25,770 SPH ECGs were scored by each released profile in the all-input comparison. The unchanged scores gave mapped macro-F1 of 0.7083 (P6), 0.6622 (P8), and 0.0388 (P4) across the full cohort, compared with 0.9057, 0.8553, and 0.7278 in the nested profile-compatible subsets (5,523, 5,925, and 415 ECGs, respectively). These are averages over compatible statements, not the original P6 top-1 task or the P4 selected panel experiment. Different class prevalences and denominators change the interpretation. For example, the SPH PVC reference has 1,067 positive and 24,703 absent-statement comparisons; P6 PVC F1 was 54.08\% and P8 PVC F1 was 66.16\%. Table~\ref{tab:sph_endpoints} reports statement predictive values and patient-component F1 intervals on the original SPH denominator. These results do not supply the missing full June workflow or establish an independent confirmatory result.
+Each released profile scored all 25,770 SPH ECGs in the all-input comparison. With scores unchanged, mapped macro-F1 was 0.7083 (P6), 0.6622 (P8), and 0.0388 (P4) across the full cohort, compared with 0.9057, 0.8553, and 0.7278 in the nested profile-compatible subsets (5,523, 5,925, and 415 ECGs, respectively). These metrics average compatible statements; they do not reproduce the original P6 top-1 task or the P4 selected panel experiment. Their interpretation depends on class prevalence and the evaluation denominator. For example, the SPH PVC reference has 1,067 positive and 24,703 absent-statement comparisons; P6 PVC F1 was 54.08\% and P8 PVC F1 was 66.16\%. Table~\ref{tab:sph_endpoints} reports statement predictive values and patient-component F1 intervals on the original SPH denominator. These results do not supply the missing full June workflow or establish an independent confirmatory result.
 
 \input{tables/sph_endpoints}
 
 \subsection{Exploratory residual classes and morphology}
 \label{sec:other-results}
 
-New rhythm residual heads attained F1 0.647 for the P6 mapping (141 positives among 2,895 known ECGs) and 0.625 for the P8 mapping (43 among 2,797), versus 0.092 and 0.030 for the calibrated auxiliary-score comparators. A new pathology union head attained F1 0.939 on 153 known observations out of 390 held ECGs. These are development results, not outputs of the released specialists. Paced rhythm and LQTS lack compatible SPH references and 3AVB had insufficient support for individual fitting or calibration. A composite LAO/LAE reference does not validate either diagnosis separately.
+The new rhythm residual heads yielded F1 0.647 for the P6 mapping (141 positives among 2,895 known ECGs) and 0.625 for the P8 mapping (43 among 2,797), versus 0.092 and 0.030 for the calibrated auxiliary-score comparators. A new pathology union head yielded F1 0.939 on 153 known observations out of 390 held ECGs. These are development results, not outputs of the released specialists. Paced rhythm and LQTS lack compatible SPH references, and 3AVB had insufficient support for individual fitting or calibration. A composite LAO/LAE reference does not validate either diagnosis separately.
 
-In the five-seed fixed-backbone comparison, adding morphology changed mean macro-F1 by $+0.17$, $-0.11$, and $+0.31$ percentage points for P6, P8, and P4. Simultaneous intervals were $[-0.70,1.03]$, $[-0.76,0.60]$, and $[-0.36,1.17]$ percentage points, respectively, within the prespecified $\pm2$ point margin. The experiment did not establish a practically important gain in these heads, and does not test the effect of end-to-end re-training or transport to new sources.
+In the five-seed fixed-backbone comparison, adding morphology changed mean macro-F1 by $+0.17$, $-0.11$, and $+0.31$ percentage points for P6, P8, and P4. Simultaneous intervals were $[-0.70,1.03]$, $[-0.76,0.60]$, and $[-0.36,1.17]$ percentage points, respectively, within the prespecified $\pm2$ point margin. The experiment did not establish a practically important gain for these heads and did not test the effect of end-to-end re-training or transport to new sources.
 
 \subsection{Later score-based abstention and partial fallback}
 \label{sec:selective-results}
@@ -648,13 +646,13 @@ The fallback's emitted false negatives totaled 103, while 67 known positives rem
 \section{Discussion}
 
 
-The 15.10-point difference between P6 top-1 accuracy and macro-F1 reflects different metrics and decision units as well as the role of uneven class support. Top-1 accepts a class in the reference set; the unweighted binary F1 average gives equal weight to endpoints and uses thresholded membership. The comparison does not show that specialization eliminates bias. Class-level errors, the concentration of the selected source mix, and the marked dependence on denominator selection in SPH constrain interpretation.
+The 15.10-point gap between P6 top-1 accuracy and mean binary F1 reflects different metrics and decision units, together with uneven class support. Top-1 counts a prediction as correct when the class belongs to the reference set. The unweighted binary F1 average gives each endpoint equal weight and evaluates thresholded membership. This comparison does not show that specialization eliminates bias. Interpretation remains limited by class-level errors, the concentrated source mix and the marked dependence on denominator selection in SPH.
 
 \subsection{ECG-level PVC and AF endpoints}
 \label{sec:pvc}
-The PVC endpoint is a statement associated with the ten-second ECG. It does not report whether every ectopic beat was detected, counted, or localized. An alternative design would detect PVC beats against timing-annotated references and aggregate detected events to an ECG-level output. This requires an explicit matching tolerance, adjudicated beat labels, and assessment of both beat-level and ECG-level false positives. The present study did not test that approach. AF similarly denotes an ECG-associated rhythm statement, not first-diagnosed or incident AF \citep{Rossi2026AF}.
+The PVC endpoint denotes a statement associated with the ten-second ECG. It does not establish whether every ectopic beat was detected, counted or localized. An alternative design would detect PVC beats against timing-annotated references and aggregate the detected events into an ECG-level output. Such an approach would require an explicit matching tolerance, adjudicated beat labels and assessment of both beat-level and ECG-level false positives. The present study did not test that approach. AF likewise denotes an ECG-associated rhythm statement, not first-diagnosed or incident AF \citep{Rossi2026AF}.
 
-Tables~\ref{tab:sota_results} and \ref{tab:sota_metrics_comparison} place these findings in the context of different ECG tasks. A shared input modality does not establish comparability of performance; the studies differ in their acquisition, annotation, cohort definitions and units of analysis.
+Tables~\ref{tab:sota_results} and \ref{tab:sota_metrics_comparison} provide context from ECG studies with different tasks. Shared ECG inputs do not make their performance estimates directly comparable, because acquisition, annotation, cohort definitions and units of analysis differ.
 
 \begin{table}[htbp]
 \caption{Architecture and task context across selected published ECG studies.\label{tab:sota_results}}
@@ -669,7 +667,7 @@ Vranken et al. & Uncertainty-aware deep network & 12-lead ECG and clinical simul
 Herman et al. & Six specialized deep networks & 12-lead diagnostic statements \\
 Li et al. & Dual-view CNN--Transformer & ECG abnormalities; beat and recording features \\
 Elsheikhy et al. & CNN with channel attention & Five beat classes; MIT-BIH and INCART \\
-Zhou and Fang & Multiscale hierarchical CNN & Beat classification; MIT-BIH and CCDD \\
+Zhou and Fang & Multiscale hierarchical CNN & Heartbeats in MIT-BIH; recordings in CCDD \\
 TITAN & Residual CNN--Transformer & Selected ECG and binary panel endpoints \\
 \bottomrule
 \end{tabular}
@@ -699,17 +697,17 @@ TITAN P4 & ECG--label observation & Mean binary panel accuracy \\
 \subsection{Limitations}
 \label{sec:limitations}
 
-Several methodological and computational constraints characterize the present investigation, defining crucial avenues for ongoing and future research.
+Several methodological and computational limitations constrain the interpretation of these results.
 
 First, the retrospective development and validation cohorts originate predominantly from public international databases in Europe and Asia. Limited and incompletely characterized representation prevents a reliable demographic fairness analysis. The small historical selected Brazilian CODE test stratum and the later within-CODE adapted-model evaluation do not establish representative Latin American or independent institutional validation, and age and ethnicity coverage were not established for all historical stages. Although the centralized data pipeline records source provenance to facilitate modular dataset expansion, any revised classification thresholds must be fitted and evaluated in a separate development cohort before any proposed deployment in a different clinical environment.
 
-Second, dynamic lead-wise z-score normalization discards absolute voltage amplitudes to maintain gain invariance across multi-center recording equipment. This can remove information needed for amplitude-dependent structural conditions, particularly Left Ventricular Hypertrophy (LVH, F1 65.73\%), where standard electrocardiographic criteria (such as Sokolow-Lyon and Cornell indices) rely heavily on raw millivolt measurements.
+Second, dynamic lead-wise z-score normalization removes absolute voltage amplitudes to maintain gain invariance across multi-center recording equipment. This can remove information relevant to amplitude-dependent structural conditions, particularly left ventricular hypertrophy (LVH, F1 65.73\%), for which standard electrocardiographic criteria (such as Sokolow-Lyon and Cornell indices) rely on raw millivolt measurements. The causal contribution of this information loss to LVH error was not isolated.
 
-Third, diagnostic sensitivity for low-prevalence conduction disorders remains bounded by sample cardinality and native sampling variations. Conditions such as First-Degree AV Block (1AVB, F1 62.58\%) and Premature Ventricular Contractions (PVC, F1 65.64\%) exhibit wider performance confidence intervals when evaluated across heterogeneous recording hardware, necessitating larger curated cohorts with fine-grained electrophysiological annotations.
+Third, sensitivity estimates for sparsely represented endpoints are limited by sample size and variation in native sampling. Estimates for first-degree atrioventricular block (1AVB, F1 62.58\%) and premature ventricular contraction (PVC, F1 65.64\%) should be interpreted alongside their confidence intervals and source-specific support. Larger curated cohorts with fine-grained electrophysiological annotations remain necessary to characterize these endpoints more precisely.
 
-Fourth, the released rhythm and pathology profiles use separate backbone checkpoints, which does not itself establish evaluation isolation. Executing the two profiles separately requires more compute than a single shared pass; comparative deployment cost was not measured in the original evaluation.
+Fourth, the released rhythm and pathology profiles use separate backbone checkpoints; this separation does not establish evaluation isolation. Running the two profiles separately requires more compute than a single shared pass, but comparative deployment cost was not measured in the original evaluation.
 
-Table~\ref{tab:future_directions} summarizes the planned research extensions designed to address each identified constraint, outlining explicit engineering mitigation strategies alongside residual technical risks.
+Table~\ref{tab:future_directions} summarizes the planned extensions, the limitations they are intended to address and their residual technical risks.
 
 \begin{table}[htbp]
 \caption{Planned research extensions and their relationship to current limitations.\label{tab:future_directions}}
@@ -720,7 +718,7 @@ Table~\ref{tab:future_directions} summarizes the planned research extensions des
 \textbf{Limitation} & \textbf{Mitigation Strategy} & \textbf{Residual Risk} \\
 \midrule
 Normalization removes absolute voltage; its causal contribution to LVH error was not isolated & Introduce trainable, source-specific voltage calibration layers at the specialist interface & May overfit to hardware metadata, reducing generalization to unseen devices \\
-Demographic coverage lacks Latin American, African, and pediatric cohorts & Deploy the frozen evidence package in a diverse prospective cohort with patient-level metadata & Demographic shifts may still outpace the periodic recalibration of class thresholds \\
+Regional, ancestry, and age coverage are incompletely characterized & Deploy the frozen evidence package in a diverse prospective cohort with patient-level metadata & Demographic shifts may still outpace the periodic recalibration of class thresholds \\
 Separate fitted backbones require distinct passes; combined peak memory and latency were not measured & Distill the CNN-Transformer ensemble into a single lightweight inference engine & Compression could disproportionately degrade performance on minority conduction classes \\
 Fixed 10~s window assumption precludes continuous Holter monitoring & Adapt temporal feature processing to support variable-length streams with artifact quarantine & Increased false-positive rates due to transient baseline wander and motion artifacts \\
 \bottomrule
@@ -728,11 +726,11 @@ Fixed 10~s window assumption precludes continuous Holter monitoring & Adapt temp
 \end{table}
 
 
-Fifth, source reference statements are not a common clinical gold standard. Mapping concordance, including the 962/962 P4 SCP-key matches, establishes consistency of the retained encoding rather than independent adjudication. Some later endpoints have only positive or unknown references and therefore cannot support specificity or predictive-value estimates. Labels must not be harmonized by converting missing statements to clinical negatives.
+Fifth, source reference statements do not constitute a common clinical gold standard. Mapping concordance, including the 962/962 P4 SCP-key matches, establishes consistency of the retained encoding rather than independent adjudication. Some later endpoints have only positive or unknown references, precluding estimates of specificity or predictive value. Missing statements must not be converted to clinical negatives during label harmonization.
 
 Sixth, the complete historical Optuna database, intermediate checkpoint bytes, job-consumed partitions, exact loader and original quarantine decision ledger were not authenticated. The evidence supports archived metric recalculation and release-file identity, but not exact training replay or complete historical patient/signal separation. The reconstructed morphology and inference path is explicitly distinguished from the unavailable June runtime. No historical clinician-review effectiveness is inferred from the later score-based policy or partial fallback.
 
-Seventh, the comparisons were retrospective, several used inspected development populations, and selected row-level intervals do not account for all development selection or unknown patient clustering. The small source strata and rare endpoints can yield unstable estimates. Prospective clinical evaluation, demographic characterization and an admissible independent external analysis remain necessary before claims about safety, clinical benefit or generalization can be made.
+Seventh, the comparisons were retrospective, several used development populations already inspected, and selected row-level intervals do not account for all development selection or unknown patient clustering. Small source strata and rare endpoints can produce unstable estimates. Prospective clinical evaluation, demographic characterization and an admissible independent external analysis remain necessary before drawing conclusions about safety, clinical benefit or generalization.
 
 \section{Conclusions}
 
@@ -781,7 +779,7 @@ MC & Monte Carlo\\
 
 \section{Supplementary Metrics and Evidence Tables}
 \label{appendix:supplement}
-The appendix preserves the original training, fine-tuning, optimization, source, transition, calibration, record-schema and artifact-identity subjects. Tables distinguish surviving historical summaries from the selected release evaluations and later experiments; unavailable quantities are not reconstructed as if observed.
+The appendix documents historical training, fine-tuning, optimization, source composition, transitions, calibration, record schemas, and artifact identity. The tables distinguish surviving historical summaries from selected release evaluations and later experiments. Unavailable quantities are not presented as observed values.
 
 \begin{table}[htbp]
 \caption{Archived job 16768 summary (50 epochs). Internal development only.\label{tab:app_shared}}
@@ -928,6 +926,7 @@ To obtain the specific files, open the \href{https://github.com/Mateo197802/tita
 
 \reftitle{References}
 \begin{thebibliography}{999}
+\fontsize{9}{10.5}\selectfont
 \bibitem{Hannun2019Cardiologist}
 Hannun, A.Y.; Rajpurkar, P.; Haghpanahi, M.; Tison, G.H.; Bourn, C.; Turakhia, M.P.; Ng, A.Y.. Cardiologist-level arrhythmia detection and classification in ambulatory electrocardiograms using a deep neural network. \emph{Nature Medicine} \textbf{2019}, 25, 65-69. \url{https://doi.org/10.1038/s41591-018-0268-3}.
 \bibitem{Ribeiro2020Automatic}
@@ -942,23 +941,23 @@ Wagner, P.; Strodthoff, N.; Bousseljot, R.D.; Kreiseler, D.; Lunze, F.I.; Samek,
 Reyna, M.A.; Sadr, N.; Perez Alday, E.A.; Gu, A.; Shah, A.J.; Robichaux, C.; Bahrami Rad, A.; Elola, A.; Seyedi, S.; Ansari, S.; et al.. Issues in the automated classification of multilead ecgs using heterogeneous labels and populations. \emph{Physiological Measurement} \textbf{2022}, 43, 084001. \url{https://doi.org/10.1088/1361-6579/ac79fd}.
 \bibitem{Vranken2021Uncertainty}
 Vranken, J.F.; van de Leur, R.R.; Gupta, D.K.; Juarez Orozco, L.E.; Hassink, R.J.; van der Harst, P.; Doevendans, P.A.; Gulshad, S.; van Es, R.. Uncertainty estimation for deep learning-based automated analysis of 12-lead electrocardiograms. \emph{European Heart Journal - Digital Health} \textbf{2021}, 2, 401-415. \url{https://doi.org/10.1093/ehjdh/ztab045}.
+\bibitem[Lin et~al.(2017)]{Lin2017Focal}
+Lin, T.Y.; Goyal, P.; Girshick, R.; He, K.; Doll{\'a}r, P.
+\newblock Focal Loss for Dense Object Detection.
+\newblock In Proceedings of the IEEE International Conference on Computer Vision (ICCV), Venice, Italy, 22--29 October 2017; pp. 2980--2988. \url{https://doi.org/10.1109/ICCV.2017.324}.
 \bibitem[He et~al.(2016)]{He2016Deep}
 He, K.; Zhang, X.; Ren, S.; Sun, J.
 \newblock Deep Residual Learning for Image Recognition.
 \newblock In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), Las Vegas, NV, USA, 27--30 June 2016; pp. 770--778. \url{https://doi.org/10.1109/CVPR.2016.90}.
+\bibitem[Hu et~al.(2018)]{Hu2018Squeeze}
+Hu, J.; Shen, L.; Sun, G.
+\newblock Squeeze-and-Excitation Networks.
+\newblock In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), Salt Lake City, UT, USA, 18--23 June 2018; pp. 7132--7141. \url{https://doi.org/10.1109/CVPR.2018.00745}.
 \bibitem[Vaswani et~al.(2017)]{Vaswani2017Attention}
 Vaswani, A.; Shazeer, N.; Parmar, N.; Uszkoreit, J.; Jones, L.; Gomez, A.N.; Kaiser, L.; Polosukhin, I.
 \newblock Attention Is All You Need.
 \newblock In Advances in Neural Information Processing Systems (NeurIPS); Long Beach, CA, USA, 4--9 December 2017; Vol.~30, pp. 5998--6008.
 
-\bibitem[Lin et~al.(2017)]{Lin2017Focal}
-Lin, T.Y.; Goyal, P.; Girshick, R.; He, K.; Doll{\'a}r, P.
-\newblock Focal Loss for Dense Object Detection.
-\newblock In Proceedings of the IEEE International Conference on Computer Vision (ICCV), Venice, Italy, 22--29 October 2017; pp. 2980--2988. \url{https://doi.org/10.1109/ICCV.2017.324}.
-\bibitem[Hu et~al.(2018)]{Hu2018Squeeze}
-Hu, J.; Shen, L.; Sun, G.
-\newblock Squeeze-and-Excitation Networks.
-\newblock In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), Salt Lake City, UT, USA, 18--23 June 2018; pp. 7132--7141. \url{https://doi.org/10.1109/CVPR.2018.00745}.
 \bibitem{Li2024DualView}
 Li, H.; Han, J.; Zhang, H.; Zhang, X.; Si, Y.; Zhang, Y.; Liu, Y.; Yang, H.. Clinical knowledge-based ECG abnormalities detection using dual-view CNN-Transformer and external attention mechanism. \emph{Computers in Biology and Medicine} \textbf{2024}, 178, 108751. \url{https://doi.org/10.1016/j.compbiomed.2024.108751}.
 \bibitem{Herman2024}
@@ -1003,10 +1002,10 @@ Wilson, E.B.. Probable Inference, the Law of Succession, and Statistical Inferen
 Efron, B.. Bootstrap Methods: Another Look at the Jackknife. \emph{The Annals of Statistics} \textbf{1979}, 7, 1-26. \url{https://doi.org/10.1214/aos/1176344552}.
 \bibitem{Guo2017Calibration}
 Guo, C.; Pleiss, G.; Sun, Y.; Weinberger, K.Q. On Calibration of Modern Neural Networks. In \emph{Proceedings of the 34th International Conference on Machine Learning}; PMLR, \textbf{2017}, 70, 1321--1330. \url{https://proceedings.mlr.press/v70/guo17a.html}.
-\bibitem{Physionet2026}
-Pollard, T.; Moody, B.E.; Lehman, L.w.H.; Gow, B.J.; Fernandes, C.; Xie, C.; Johnson, A.; Mark, R.G.; Heldt, T.. PhysioNet as a global platform for biomedical research. \emph{Nature Health} \textbf{2026}, 1, 792-795. \url{https://doi.org/10.1038/s44360-026-00096-z}.
 \bibitem{CODE15Dataset}
 Ribeiro, A.H.; Paixao, G.M.M.; Lima, E.M.; Horta Ribeiro, M.; Pinto Filho, M.M.; Gomes, P.R.; Oliveira, D.M.; Meira Jr, W.; Schon, T.B.; Ribeiro, A.L.P. CODE-15\%: A large scale annotated dataset of 12-lead ECGs (version 1.0.0). \emph{Zenodo} \textbf{2021}. \url{https://doi.org/10.5281/zenodo.4916206}.
+\bibitem{Physionet2026}
+Pollard, T.; Moody, B.E.; Lehman, L.w.H.; Gow, B.J.; Fernandes, C.; Xie, C.; Johnson, A.; Mark, R.G.; Heldt, T.. PhysioNet as a global platform for biomedical research. \emph{Nature Health} \textbf{2026}, 1, 792-795. \url{https://doi.org/10.1038/s44360-026-00096-z}.
 \bibitem{Kassis2026Skills}
 Kassis, T.; Agarwal, V.; He, Y.; Patel, D.; Brueckner, A.M. Scientific Agent Skills: A Library of Procedural Knowledge for Research Agents. \emph{arXiv} \textbf{2026}, arXiv:2609.00065. \url{https://doi.org/10.48550/arXiv.2609.00065}.
 \end{thebibliography}

@@ -3,20 +3,31 @@ from __future__ import annotations
 import csv
 import hashlib
 import json
+import struct
 import subprocess
 from collections import Counter
 from pathlib import Path
+from zipfile import ZipFile
 
 ROOT = Path(__file__).resolve().parents[3]
 
 
-def test_publication_scope_and_missing_manuscript_are_documented() -> None:
+def test_publication_downloads_and_scientific_boundaries_are_documented() -> None:
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
     evidence_notes = (ROOT / "docs" / "figure-evidence.md").read_text(encoding="utf-8")
-    assert "The 14 current manuscript figure PNGs are included." in readme
-    assert "The manuscript source and compiled PDF are outside this repository." in readme
-    assert "full manuscript, its bibliography" in evidence_notes
-    assert "not included" in evidence_notes
+    revision = ROOT / "manuscript/revision_life_4620846"
+    assert (revision / "latex/manuscrito.tex").is_file()
+    assert "PUBLICATION_MANIFEST.json" in readme
+    assert "PUBLICATION_MANIFEST.json" in evidence_notes
+    for filename in (
+        "TITAN_V45_LIFE_4620846_EDITORIAL.pdf",
+        "TITAN_V45_LIFE_4620846_EDITORIAL_LATEX.zip",
+        "TITAN_V45_LIFE_4620846_SUPPLEMENTARY.zip",
+    ):
+        assert filename in readme
+        assert (revision / "artifacts" / filename).is_file()
+    assert "independent institutional" in readme.lower()
+    assert "historical" in evidence_notes.lower()
 
 
 def test_dataset_citations_and_license_boundaries_are_explicit() -> None:
@@ -224,6 +235,15 @@ def test_repository_contains_only_manifested_manuscript_and_sph_images() -> None
     for name in external_files:
         assert hashlib.sha256((external_dir / name).read_bytes()).hexdigest() == external["files"][name]["sha256"]
 
+    publication = json.loads(
+        (ROOT / "manuscript/revision_life_4620846/PUBLICATION_MANIFEST.json").read_text()
+    )
+    for name, asset in publication["media_files"].items():
+        path = ROOT / name
+        assert path.is_file()
+        assert path.stat().st_size == asset["bytes"]
+        assert hashlib.sha256(path.read_bytes()).hexdigest() == asset["sha256"]
+
     assert actual_media == (
         {f"outputs/figures/{name}" for name in expected}
         | {f"outputs/figures/external_sph/{name}" for name in sph_files}
@@ -234,4 +254,64 @@ def test_repository_contains_only_manifested_manuscript_and_sph_images() -> None
         | {f"outputs/figures/benchmarkmax/{name}" for name in expected_pac}
         | draft_media
         | {f"docs/external_evidence/{name}" for name in external_files}
+        | set(publication["media_files"])
     )
+
+
+def test_publication_archives_match_source_and_exclude_private_payloads() -> None:
+    revision = ROOT / "manuscript/revision_life_4620846"
+    manifest = json.loads((revision / "PUBLICATION_MANIFEST.json").read_text())
+    assert manifest["schema"] == "TITAN_LIFE_PUBLICATION_MANIFEST_V1"
+    expected_counts = {"latex_source_zip": 50, "aggregate_supplement_zip": 31}
+    forbidden = {".doc", ".docx", ".aux", ".log", ".out", ".pt", ".pth", ".ckpt",
+                 ".dat", ".mat", ".hea", ".npy", ".npz", ".parquet"}
+    for kind, asset in manifest["artifacts"].items():
+        path = ROOT / asset["path"]
+        assert path.stat().st_size == asset["bytes"]
+        assert hashlib.sha256(path.read_bytes()).hexdigest() == asset["sha256"]
+        if kind == "manuscript_pdf":
+            assert path.read_bytes().startswith(b"%PDF-")
+            assert asset["pages"] == 45
+            continue
+        with ZipFile(path) as archive:
+            names = archive.namelist()
+            assert archive.testzip() is None
+            assert len(names) == len(set(names)) == expected_counts[kind]
+            assert set(names) == set(asset["members"])
+            for name in names:
+                member = Path(name)
+                assert not member.is_absolute() and ".." not in member.parts
+                assert member.suffix.lower() not in forbidden
+                data = archive.read(name)
+                assert len(data) == asset["members"][name]["bytes"]
+                assert hashlib.sha256(data).hexdigest() == asset["members"][name]["sha256"]
+                assert data == (ROOT / asset["source_directory"] / name).read_bytes()
+            for line in archive.read("SHA256SUMS.txt").decode().splitlines():
+                digest, name = line.split("  ", 1)
+                assert hashlib.sha256(archive.read(name)).hexdigest() == digest
+            if kind == "latex_source_zip":
+                notice = archive.read("THIRD_PARTY_NOTICES.md").decode()
+                assert "MDPI" in notice and "creativecommons.org/licenses/by/4.0/" in notice
+                assert "Definitions/mdpi.cls" in names
+            else:
+                assert "SUPERVISION_AND_CLASS_EVIDENCE.pdf" in names
+                for name in names:
+                    if name.endswith(".csv"):
+                        header = next(csv.reader(archive.read(name).decode().splitlines()))
+                        assert not ({"patient_id", "record_id", "exam_id", "y_true", "y_pred"} & set(header))
+
+
+def test_all_six_author_schematics_keep_original_png_bytes_and_wrappers() -> None:
+    revision = ROOT / "manuscript/revision_life_4620846"
+    receipt = json.loads((revision / "audit/AUTHOR_SUPPLIED_FIGURES.json").read_text())
+    assert receipt["schema"] == "TITAN_AUTHOR_SUPPLIED_SCHEMATICS_V2"
+    assert receipt["source_images_modified"] is False
+    assert {entry["figure_number"] for entry in receipt["entries"]} == set(range(1, 7))
+    for entry in receipt["entries"]:
+        png = (revision / "latex/figures" / (entry["file"] + ".png")).read_bytes()
+        assert png.startswith(b"\x89PNG\r\n\x1a\n")
+        assert list(struct.unpack(">II", png[16:24])) == entry["native_pixels"]
+        assert hashlib.sha256(png).hexdigest() == entry["supplied_png_sha256"]
+        for extension in ("png", "pdf"):
+            data = (revision / "latex/figures" / (entry["file"] + "." + extension)).read_bytes()
+            assert hashlib.sha256(data).hexdigest() == entry["manifest_entry"][extension + "_sha256"]

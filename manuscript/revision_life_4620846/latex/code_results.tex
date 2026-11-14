@@ -1,6 +1,6 @@
 \subsection{Reserved CODE evaluation of the adapted five-endpoint system}
 \label{sec:code-results}
-The three systems were evaluated on the same 4,921 ECGs from 3,891 reserved CODE patients. This completed analysis has a different population, label contract and candidate from the historical selected P6/P4 results. Table~\ref{tab:code-global} reports the five-endpoint comparison without replacing those original estimates.
+The three systems were evaluated on the same 4,921 ECGs from 3,891 reserved CODE patients. For the candidate, this was a patient-held-out evaluation within CODE after supervised adaptation. The evaluation population, label contract and candidate differ from those in the historical selected P6/P4 analyses. Table~\ref{tab:code-global} reports the five-endpoint comparison without replacing those original estimates.
 
 \begin{table}[htbp]
 \caption{Matched five-endpoint CODE results. F1, AUROC, AP and mean binary accuracy are percentages; Brier and ECE are on [0,1].\label{tab:code-global}}
@@ -17,9 +17,9 @@ Adapted & 60.27 [56.46--63.41] & 97.81 & 57.95 & 98.31 & 0.0149 & 0.0142 \\
 \par\smallskip\parbox{\linewidth}{\footnotesize Confidence intervals are patient-cluster bootstrap intervals for macro-F1 only. Macro intervals for the other metrics are unavailable in the supplied aggregate snapshot.}
 \end{table}
 
-The candidate attained macro-F1 60.27\% (95\% CI 56.46--63.41), compared with 34.80\% (32.00--37.50) for frozen P6 and 37.04\% (33.96--40.04) for frozen P8. Paired candidate-minus-baseline differences were +25.47 percentage points (95\% CI +22.20 to +28.83) against P6 and +23.23 points (+19.77 to +26.87) against P8. These are absolute percentage-point differences on matched five-endpoint comparisons, not relative improvements or comparisons with the original selected six-endpoint P6 result. Different operating paths and threshold-fitting histories prevent attribution to one architectural change.
+The candidate attained a macro-F1 of 60.27\% (95\% CI 56.46--63.41), compared with 34.80\% (32.00--37.50) for frozen P6 and 37.04\% (33.96--40.04) for frozen P8. Paired candidate-minus-baseline differences were +25.47 percentage points (95\% CI +22.20 to +28.83) against P6 and +23.23 points (+19.77 to +26.87) against P8. These are absolute percentage-point differences in matched five-endpoint comparisons, not relative improvements or comparisons with the original selected six-endpoint P6 result. The operating paths and threshold-fitting histories differed, so the observed differences cannot be attributed to one architectural change.
 
-Macro-AUROC was 97.81\% and macro-AP 57.95\%; mean binary accuracy was 98.31\%. The latter averages five negative-dominated binary comparisons and is not multiclass accuracy or the proportion of completely correct ECG interpretations. The adapted mean Brier/ECE of 0.0149/0.0142 was lower than for the frozen controls on this cohort. These conditional summaries do not establish calibration under a new prevalence or institution. Macro confidence intervals for AUROC, AP, accuracy, Brier and ECE were not provided and are not inferred from per-class intervals.
+Macro-AUROC was 97.81\% and macro-AP 57.95\%; mean binary accuracy was 98.31\%. The latter averages five negative-dominated binary comparisons; it is neither multiclass accuracy nor the proportion of completely correct ECG interpretations. On this cohort, the adapted mean Brier/ECE was 0.0149/0.0142, lower than for the frozen controls. These cohort-specific summaries do not establish calibration at a different prevalence or institution. Macro confidence intervals for AUROC, AP, accuracy, Brier and ECE were not provided and cannot be inferred from per-class intervals.
 
 \begin{table}[htbp]
 \caption{Adapted candidate performance by endpoint on reserved CODE. All metric columns are percentages.\label{tab:code-class}}
@@ -53,7 +53,7 @@ RBBB & 0.44 & 111 & 116 & 4,756 & 32 & 17 \\
 \end{tabular}
 \end{table}
 
-RBBB had the highest candidate F1 (82.56\%), while AFIB, SB and 1AVB remained at 54.11\%, 46.58\% and 52.38\%. The candidate missed 45 of 101 AFIB-positive and 30 of 64 SB-positive ECGs. AFIB sensitivity fell from 68.32\% (P6) and 62.38\% (P8) to 55.45\%. For SB, false positives fell from 994 (P6) and 1,390 (P8) to 48, but true positives also fell from 46 and 56 to 34. For 1AVB, false positives increased from 27 with P8 to 73 with the candidate, and PPV fell from 49.06\% to 42.97\%. STACH gained PPV while detecting one fewer positive ECG than either baseline (91 versus 92). Thus, an improved macro-F1 did not yield uniform endpoint or sensitivity improvement. Figure~\ref{fig:code-sensitivity} reports operating-point sensitivity and PPV with their uncertainty.
+RBBB had the highest candidate F1 (82.56\%), while AFIB, SB and 1AVB remained at 54.11\%, 46.58\% and 52.38\%. The candidate missed 45 of 101 AFIB-positive and 30 of 64 SB-positive ECGs. AFIB sensitivity fell from 68.32\% (P6) and 62.38\% (P8) to 55.45\%. For SB, false positives fell from 994 (P6) and 1,390 (P8) to 48, but true positives also fell from 46 and 56 to 34. For 1AVB, false positives increased from 27 with P8 to 73 with the candidate, and PPV fell from 49.06\% to 42.97\%. STACH gained PPV while detecting one fewer positive ECG than either baseline (91 versus 92). Thus, the macro-F1 gain did not translate into uniformly improved endpoint performance or sensitivity. Figure~\ref{fig:code-sensitivity} reports operating-point sensitivity and PPV with their uncertainty.
 
 \begin{figure}[htbp]
 \centering
@@ -61,7 +61,7 @@ RBBB had the highest candidate F1 (82.56\%), while AFIB, SB and 1AVB remained at
 \caption{Sensitivity and positive predictive value for frozen P6, frozen P8 and the adapted system on matched reserved CODE patients. Points and whiskers are estimates and 95\% patient-cluster bootstrap intervals. Each system uses its own frozen cutoffs; this is a comparison of complete operating systems.\label{fig:code-sensitivity}}
 \end{figure}
 
-Figure~\ref{fig:code-pr} shows authenticated aggregate precision--recall points on the 0.00--1.00 threshold grid in steps of 0.01. Undefined precision is omitted, and no interpolation or synthetic ROC coordinates are added. These sampled points do not reconstruct the exact non-interpolated AP integral. The wide separation between AUROC and AP, together with the positive support of only 64--133 ECGs per endpoint, motivates reporting both ranking summaries and the integer errors.
+Figure~\ref{fig:code-pr} displays the authenticated aggregate precision--recall points on the 0.00--1.00 threshold grid in steps of 0.01. Undefined precision is omitted; no interpolation or synthetic ROC coordinates are added. These sampled points do not reconstruct the exact non-interpolated AP integral. The wide separation between AUROC and AP, together with the positive support of only 64--133 ECGs per endpoint, motivates reporting both ranking summaries and integer error counts.
 
 \begin{figure}[htbp]
 \centering
