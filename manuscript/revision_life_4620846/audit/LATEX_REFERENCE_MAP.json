@@ -1,0 +1,334 @@
+{
+  "fig:fig00_ecg_ai_context": {
+    "number": "1",
+    "page": "2"
+  },
+  "fig:fig00b_ecg_ai_evolution_gap": {
+    "number": "2",
+    "page": "2"
+  },
+  "tab:comparison": {
+    "number": "1",
+    "page": "4"
+  },
+  "sec:boundary": {
+    "number": "2.1",
+    "page": "4"
+  },
+  "sec:study-design": {
+    "number": "2.1",
+    "page": "4"
+  },
+  "tab:presentstudy": {
+    "number": "2",
+    "page": "5"
+  },
+  "tab:challengeposition": {
+    "number": "3",
+    "page": "5"
+  },
+  "fig:fig01_graphical_abstract": {
+    "number": "3",
+    "page": "6"
+  },
+  "fig:fig02_data_processing_bias_workflow": {
+    "number": "4",
+    "page": "6"
+  },
+  "sec:data": {
+    "number": "2.2",
+    "page": "6"
+  },
+  "sec:history": {
+    "number": "2.2.1",
+    "page": "8"
+  },
+  "sec:af-reference": {
+    "number": "2.2.2",
+    "page": "8"
+  },
+  "sec:references": {
+    "number": "2.2.2",
+    "page": "8"
+  },
+  "sec:datasets": {
+    "number": "2.2.3",
+    "page": "8"
+  },
+  "sec:partition-accounting": {
+    "number": "2.2.4",
+    "page": "9"
+  },
+  "tab:datasets": {
+    "number": "4",
+    "page": "10"
+  },
+  "tab:historical-partitions": {
+    "number": "5",
+    "page": "10"
+  },
+  "sec:external-plan": {
+    "number": "2.2.5",
+    "page": "11"
+  },
+  "tab:architecture": {
+    "number": "6",
+    "page": "13"
+  },
+  "tab:contracts": {
+    "number": "7",
+    "page": "13"
+  },
+  "fig:fig03_internal_architecture": {
+    "number": "5",
+    "page": "13"
+  },
+  "fig:fig03_cascade_contract": {
+    "number": "6",
+    "page": "14"
+  },
+  "sec:supervision": {
+    "number": "2.3.1",
+    "page": "14"
+  },
+  "sec:morphology": {
+    "number": "2.3.2",
+    "page": "14"
+  },
+  "tab:morphology": {
+    "number": "8",
+    "page": "15"
+  },
+  "sec:retrospective-methods": {
+    "number": "2.3.3",
+    "page": "15"
+  },
+  "sec:output-semantics": {
+    "number": "2.3.4",
+    "page": "16"
+  },
+  "sec:signal-limits": {
+    "number": "2.3.5",
+    "page": "16"
+  },
+  "sec:optimization": {
+    "number": "2.4",
+    "page": "17"
+  },
+  "tab:optuna": {
+    "number": "9",
+    "page": "18"
+  },
+  "sec:decision": {
+    "number": "2.4.1",
+    "page": "18"
+  },
+  "sec:selective": {
+    "number": "2.5",
+    "page": "18"
+  },
+  "sec:metrics": {
+    "number": "2.7",
+    "page": "19"
+  },
+  "tab:metrics": {
+    "number": "10",
+    "page": "20"
+  },
+  "sec:calibration": {
+    "number": "2.7.1",
+    "page": "20"
+  },
+  "eq:temperature": {
+    "number": "22",
+    "page": "21"
+  },
+  "sec:risk": {
+    "number": "2.7.2",
+    "page": "21"
+  },
+  "eq:accepted-risk": {
+    "number": "23",
+    "page": "21"
+  },
+  "eq:withholding-cost": {
+    "number": "24",
+    "page": "21"
+  },
+  "tab:overall": {
+    "number": "11",
+    "page": "22"
+  },
+  "fig:fig06_rhythm_confusion": {
+    "number": "7",
+    "page": "22"
+  },
+  "tab:rhythmclass": {
+    "number": "12",
+    "page": "23"
+  },
+  "tab:pathclass": {
+    "number": "13",
+    "page": "23"
+  },
+  "fig:fig08_class_metrics": {
+    "number": "8",
+    "page": "23"
+  },
+  "fig:fig07_pathology_confusion": {
+    "number": "9",
+    "page": "24"
+  },
+  "fig:fig08b_pathology_class_metrics": {
+    "number": "10",
+    "page": "24"
+  },
+  "fig:fig09_roc_curves": {
+    "number": "11",
+    "page": "25"
+  },
+  "fig:fig10_precision_recall_curves": {
+    "number": "12",
+    "page": "25"
+  },
+  "fig:fig11_calibration": {
+    "number": "13",
+    "page": "25"
+  },
+  "fig:fig12_source_performance": {
+    "number": "14",
+    "page": "26"
+  },
+  "fig:fig13_error_flows": {
+    "number": "15",
+    "page": "26"
+  },
+  "tab:sph_endpoints": {
+    "number": "14",
+    "page": "27"
+  },
+  "sec:transfer-results": {
+    "number": "3.5",
+    "page": "27"
+  },
+  "sec:other-results": {
+    "number": "3.6",
+    "page": "27"
+  },
+  "sec:selective-results": {
+    "number": "3.7",
+    "page": "27"
+  },
+  "tab:route-comparison": {
+    "number": "15",
+    "page": "28"
+  },
+  "tab:uncertainty_quarantine": {
+    "number": "15",
+    "page": "28"
+  },
+  "sec:ludb-ptb": {
+    "number": "3.8",
+    "page": "28"
+  },
+  "tab:ptb-transport": {
+    "number": "16",
+    "page": "29"
+  },
+  "sec:morph-history": {
+    "number": "3.9",
+    "page": "29"
+  },
+  "sec:pvc": {
+    "number": "4.1",
+    "page": "30"
+  },
+  "tab:sota_results": {
+    "number": "17",
+    "page": "30"
+  },
+  "tab:sota_metrics_comparison": {
+    "number": "18",
+    "page": "30"
+  },
+  "sec:discussion-transfer": {
+    "number": "4.2",
+    "page": "31"
+  },
+  "sec:discussion-specialization": {
+    "number": "4.3",
+    "page": "31"
+  },
+  "sec:reproducibility": {
+    "number": "4.4",
+    "page": "32"
+  },
+  "sec:limitations": {
+    "number": "4.5",
+    "page": "32"
+  },
+  "tab:future_directions": {
+    "number": "19",
+    "page": "33"
+  },
+  "appendix:supplement": {
+    "number": "A",
+    "page": "35"
+  },
+  "tab:app_shared": {
+    "number": "A1",
+    "page": "35"
+  },
+  "sec:trajectory": {
+    "number": "A.1",
+    "page": "35"
+  },
+  "fig:trajectory": {
+    "number": "A1",
+    "page": "36"
+  },
+  "tab:app_pathology_ft": {
+    "number": "A2",
+    "page": "36"
+  },
+  "tab:app_path_spec": {
+    "number": "A3",
+    "page": "36"
+  },
+  "tab:app_optuna_trials": {
+    "number": "A4",
+    "page": "36"
+  },
+  "tab:app_source_primary6": {
+    "number": "A5",
+    "page": "37"
+  },
+  "tab:app_source_primary4": {
+    "number": "A6",
+    "page": "37"
+  },
+  "tab:app_quarantine_transitions": {
+    "number": "A7",
+    "page": "37"
+  },
+  "tab:app_calibration_reference": {
+    "number": "A8",
+    "page": "37"
+  },
+  "tab:p8class": {
+    "number": "A9",
+    "page": "37"
+  },
+  "tab:app_record_schema": {
+    "number": "A10",
+    "page": "38"
+  },
+  "tab:app_hashes": {
+    "number": "A11",
+    "page": "38"
+  },
+  "LastPage": {
+    "number": "",
+    "page": "40"
+  }
+}

@@ -1,0 +1,36 @@
+\subsubsection{Probability calibration and decision thresholds}
+\label{sec:calibration}
+For the binary reliability analysis, the original binning formulation is retained with reference-positive frequency replacing multiclass correctness:
+\begin{equation}
+\mathrm{ECE}_{\mathrm{binary}}=\sum_{b:n_b>0}\frac{n_b}{n}|\bar y_b-\bar p_b|.
+\end{equation}
+Here $n_b$ is the number of observations in probability bin $b$, $\bar y_b$ its positive-reference fraction and $\bar p_b$ its mean predicted probability. There are ten fixed equal-width bins. This estimator depends on binning and the selected population; low ECE on a selected panel is not a transport guarantee.
+
+Probability calibration and cutoff selection answer different questions. A calibrated probability is intended to agree with observed event frequencies under a specified reference and population, whereas a cutoff defines a binary operating point. A high AUROC does not imply either calibrated probabilities or an appropriate decision threshold \citep{Guo2017Calibration}. The retained pathology cutoffs were 0.670 for ASMI, 0.705 for LVH, 0.635 for IMI and 0.595 for ISC\_. Their internal calibration observations are reported separately in Appendix~\ref{appendix:supplement}; they are not the 962 selected evaluation observations. The exact historical calibration roster and its separation from every earlier development stage were not recovered.
+
+For a vector of logits, a temperature-scaled categorical distribution can be written as
+\begin{equation}
+\tilde p_{ic}=\frac{\exp(z_{ic}/T)}{\sum_j\exp(z_{ij}/T)},\qquad T>0.
+\label{eq:temperature}
+\end{equation}
+This equation describes a calibration family, not a claim that a new temperature was fitted in this revision. Binary membership scores and categorical rhythm probabilities must follow their actual saved activation paths. In particular, a top-1 result cannot be substituted for a thresholded binary call when calculating precision, sensitivity or F1. Published cutoffs remain frozen for the retrospective transfer comparisons; recalibrating on a target evaluation population would constitute a separate development experiment.
+
+The historical optimization evidence contains two seed descriptions: the public V3C promoted-configuration summary records sampler seed 197813, whereas the recovered initial-run account records seed 197802. These descriptions may concern different initialization points, but the unavailable SQLite study and incomplete execution binding prevent certification of a single replayable seed chain. We retain the promoted configuration and recorded trial ranking while treating exact sampler replay and intermediate checkpoint lineage as unresolved. Configured learning-rate values likewise describe a schedule specification rather than a measured per-step learning-rate trace.
+
+\subsubsection{Coverage, risk and the cost of withholding}
+\label{sec:risk}
+Let $K_i$ denote the endpoints with a known reference for ECG $i$, $a_i\in\{0,1\}$ the joint acceptance decision, and $e_{ic}=\mathbb{1}[\hat y_{ic}\ne y_{ic}]$. Conditional accepted risk is
+\begin{equation}
+R_{\mathrm{accepted}}=\frac{\sum_i a_i\sum_{c\in K_i}e_{ic}}{\sum_i a_i|K_i|}.
+\label{eq:accepted-risk}
+\end{equation}
+The no-abstention risk uses the same known opportunities without the factors $a_i$. A policy may lower conditional risk by removing difficult observations while withholding correct decisions and true positives. To retain the original known denominator, we also report
+\begin{equation}
+L_\lambda=\frac{\sum_i a_i\sum_{c\in K_i}e_{ic}+\lambda\sum_i(1-a_i)|K_i|}{\sum_i|K_i|}.
+\label{eq:withholding-cost}
+\end{equation}
+The coefficient $\lambda$ is an explicitly chosen penalty for an unresolved known opportunity, not an empirically established clinical utility. It cannot represent the unequal consequences of all missed diagnoses, false alarms and delays. ECG coverage and endpoint-opportunity coverage are both reported because withholding one ECG may suppress several known calls. A patient with a withheld positive is not an emitted false negative, but that unresolved positive must remain visible in the complete accounting.
+
+The P8/P4 joint rule operates on score distance to released thresholds. It is distinct from entropy, Monte Carlo dropout, a model of out-of-distribution probability or a clinician decision. Its later P6 fallback can return only the six P6 membership endpoints. Partial output coverage counts an ECG with any returned result, whereas complete profile coverage requires all originally requested P8/P4 outputs. The two coverage measures must not be combined. No clinician review or referral outcome was measured.
+
+Selected-development Wilson and multinomial-bootstrap intervals are descriptive at the observed ECG or panel-row level. They do not incorporate model selection, unknown historical clustering or target-population shift. Later analyses use patient or subject/exact-signal components where available. The five-seed morphology study controls three primary profile contrasts with simultaneous 98.333\% component intervals and a prespecified two-percentage-point relevance margin. Per-class seed ranges describe training variability and are not confidence intervals. The earlier single-fit paired study and the later five-seed study use different designs and must not be pooled as independent replications.

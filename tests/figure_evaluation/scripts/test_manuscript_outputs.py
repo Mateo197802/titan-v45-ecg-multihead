@@ -3,6 +3,7 @@ from __future__ import annotations
 import csv
 import hashlib
 import json
+import subprocess
 from collections import Counter
 from pathlib import Path
 
@@ -107,13 +108,12 @@ def test_repository_contains_only_manifested_manuscript_and_sph_images() -> None
         assert hashlib.sha256(path.read_bytes()).hexdigest() == asset["sha256"]
 
     media_suffixes = {".bmp", ".eps", ".gif", ".jpeg", ".jpg", ".pdf", ".png", ".svg", ".tif", ".tiff", ".webp"}
-    actual_media = {
-        path.relative_to(ROOT).as_posix()
-        for path in ROOT.rglob("*")
-        if path.is_file()
-        and not {".git", ".pytest_cache", "__pycache__"}.intersection(path.parts)
-        and path.suffix.lower() in media_suffixes
-    }
+    # Audit the public tracked inventory. Authors may legitimately compile the
+    # ignored journal template and private submission files in the same checkout.
+    tracked = subprocess.check_output(
+        ["git", "ls-files", "-z"], cwd=ROOT
+    ).decode("utf-8").split("\0")
+    actual_media = {name for name in tracked if Path(name).suffix.lower() in media_suffixes}
     sph_dir = ROOT / "outputs" / "figures" / "external_sph"
     sph = json.loads((sph_dir / "figure_manifest.json").read_text(encoding="utf-8"))
     assert sph["schema"] == "TITAN_V45_SPH_AGGREGATE_FIGURE_MANIFEST_V1"
@@ -202,6 +202,16 @@ def test_repository_contains_only_manifested_manuscript_and_sph_images() -> None
         (ROOT / "outputs/results/benchmarkmax/sph_pac_head_comparison_32805.json").read_bytes()
     ).hexdigest()
 
+    draft_dir = ROOT / "manuscript/revision_life_4620846/latex/figures"
+    draft_manifest = json.loads((draft_dir / "figure_manifest.json").read_text(encoding="utf-8"))
+    assert draft_manifest["schema"] == "TITAN_LIFE_REVISION_DRAFT_FIGURES_V1"
+    draft_media = set()
+    for name, digest in draft_manifest["files"].items():
+        assert Path(name).name == name and Path(name).suffix in {".pdf", ".png"}
+        path = draft_dir / name
+        assert hashlib.sha256(path.read_bytes()).hexdigest() == digest
+        draft_media.add(path.relative_to(ROOT).as_posix())
+
     external_dir = ROOT / "docs/external_evidence"
     external = json.loads((external_dir / "technical_package/MANIFEST.json").read_bytes())
     external_files = {
@@ -222,5 +232,6 @@ def test_repository_contains_only_manifested_manuscript_and_sph_images() -> None
         | {f"outputs/figures/benchmarkmax/{name}" for name in expected_b1}
         | {f"outputs/figures/benchmarkmax/{name}" for name in expected_prevalence}
         | {f"outputs/figures/benchmarkmax/{name}" for name in expected_pac}
+        | draft_media
         | {f"docs/external_evidence/{name}" for name in external_files}
     )

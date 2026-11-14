@@ -1,0 +1,92 @@
+{
+  "status": "LOCAL_REVISION_PREPARED_WITH_EXPLICIT_OPEN_ITEMS",
+  "formats": [
+    "LaTeX",
+    "PDF"
+  ],
+  "main_reference": "6bf133b1b503fe7e8092a3c109a896cecad6b8a8",
+  "original": {
+    "pages": 26,
+    "alphabetic_word_count": 8907,
+    "zip_sha256": "36c1c6db30a759ef9d349ae2e545577cfd7ce3af91a3b97fb459380113f294a8"
+  },
+  "revised": {
+    "pages": 40,
+    "alphabetic_word_count": 15888,
+    "tables": 31,
+    "figure_calls": 16,
+    "equation_environments": 22,
+    "numbered_equations": 24,
+    "bibliography_entries": 32,
+    "pdf_sha256": "0bc9458ffbae865a2e1a19fb45c7b0ed3d4a32f9a3f67ce95518cc882af84f2c"
+  },
+  "word_count_method": "Alphabetic tokens, including hyphenated words; identical extraction/counting rule used for original and revision.",
+  "checks": {
+    "minimum_26_substantive_pages": true,
+    "not_shorter_in_alphabetic_words": true,
+    "original_mdpi_class_unchanged": true,
+    "mdpi_life_class": true,
+    "p6_top1_1564_of_1643": true,
+    "p6_macro_f1_80_09": true,
+    "p4_mean_binary_accuracy_80_23": true,
+    "p4_macro_f1_79_35": true,
+    "p4_observations_962_and_distinct_733": true,
+    "p6_strict_single_reference_1460": true,
+    "corrected_macro_ap": true,
+    "all_seven_orcid": true,
+    "sole_uide_correspondence": true,
+    "biology_affiliation_and_diego_last": true,
+    "resolved_references": true,
+    "unique_labels": true,
+    "cited_references_exist": true,
+    "all_references_cited": true,
+    "no_tex_undefined_reference_warnings": true,
+    "no_overfull_boxes": true,
+    "no_missing_pdf_characters": true,
+    "no_unconditional_H_floats": true,
+    "no_resizebox_tables": true,
+    "independent_study_explicitly_pending": true,
+    "cleanup_explanation_not_in_article": true,
+    "sixteen_distinct_figures": true,
+    "figure_hashes_match": true,
+    "relative_latex_paths": true,
+    "no_private_cedia_paths": true,
+    "no_word_delivery": true
+  },
+  "reviewer_reconciliation_rows": 61,
+  "scientific_subrequirements": 40,
+  "letter_pages": {
+    "REVIEWER_1_RESPONSE_DRAFT": 2,
+    "REVIEWER_2_RESPONSE_DRAFT": 9,
+    "COVER_LETTER_LIFE_4620846": 1
+  },
+  "quantitative_recalculation": {
+    "p6_top1": 0.9519172245891662,
+    "p6_macro_f1": 0.8009383239876122,
+    "p4_mean_accuracy": 0.8022904853689048,
+    "p4_macro_f1": 0.7934563704063461,
+    "p6_ap": 0.8560526252087527,
+    "p4_ap": 0.8784781077528641
+  },
+  "local_work_only": "No model training, waveform inference or live CEDIA run was performed. Later results are checked against their published native receipts and aggregates.",
+  "open_items": [
+    "Independent external study intentionally unfinished; R1-1 and corresponding R2-4a remain open.",
+    "Complete original reviewer reports unavailable: 36 paraphrases and two preserved quotations cannot guarantee a verbatim report audit.",
+    "Exact historical Optuna database, loader, job-consumed rosters, intermediate lineage and original quarantine ledger remain unauthenticated.",
+    "Authors must verify inherited contributions, funding/ethics declarations and cover-letter approval/exclusivity before submission.",
+    "Automatic approval review rejected creating a new fork as an additional publication destination; no fork or remote revision update was created."
+  ],
+  "github": {
+    "local_branch": "codex/life-4620846-manuscript-revision",
+    "existing_pr": "https://github.com/Mateo197802/titan-v45-ecg-multihead/pull/18",
+    "remote_publication": "NOT_UPDATED_FOR_THIS_AMENDMENT_APPROVAL_REQUIRED",
+    "source_repo_push_permission": false
+  },
+  "visual_review": "All final PDF pages rendered; page contact scan and detailed checks of architecture, plots, tables, equations and letters. See layout report.",
+  "zip_recompilation": "PASS: final ZIP compiled from clean extraction; complete normalized PDF text identical",
+  "code_verification": {
+    "ruff": "PASS: revision tooling and affected inventory test",
+    "targeted_tests": "5 passed: publication scope, citation/license boundaries, retained source attribution, release declaration limits, and tracked figure manifests/hashes",
+    "full_model_suite": "Not run; no model implementation or weights changed"
+  }
+}

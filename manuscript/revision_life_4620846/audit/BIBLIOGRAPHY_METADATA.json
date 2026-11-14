@@ -1,0 +1,1181 @@
+[
+  {
+    "key": "Reyna2022Challenge",
+    "doi": "10.1088/1361-6579/ac79fd",
+    "status": "publisher_deposited_metadata_checked",
+    "title": "Issues in the automated classification of multilead ecgs using heterogeneous labels and populations",
+    "authors": [
+      {
+        "given": "Matthew A",
+        "family": "Reyna"
+      },
+      {
+        "given": "Nadi",
+        "family": "Sadr"
+      },
+      {
+        "given": "Erick A",
+        "family": "Perez Alday"
+      },
+      {
+        "given": "Annie",
+        "family": "Gu"
+      },
+      {
+        "given": "Amit J",
+        "family": "Shah"
+      },
+      {
+        "given": "Chad",
+        "family": "Robichaux"
+      },
+      {
+        "given": "Ali",
+        "family": "Bahrami Rad"
+      },
+      {
+        "given": "Andoni",
+        "family": "Elola"
+      },
+      {
+        "given": "Salman",
+        "family": "Seyedi"
+      },
+      {
+        "given": "Sardar",
+        "family": "Ansari"
+      },
+      {
+        "given": "Hamid",
+        "family": "Ghanbari"
+      },
+      {
+        "given": "Qiao",
+        "family": "Li"
+      },
+      {
+        "given": "Ashish",
+        "family": "Sharma"
+      },
+      {
+        "given": "Gari D",
+        "family": "Clifford"
+      }
+    ],
+    "journal": "Physiological Measurement",
+    "year": 2022,
+    "volume": "43",
+    "issue": "8",
+    "page": "084001",
+    "url": "https://doi.org/10.1088/1361-6579/ac79fd",
+    "source": "Crossref",
+    "accessed": "2026-11-13"
+  },
+  {
+    "key": "Wagner2020PTBXL",
+    "doi": "10.1038/s41597-020-0495-6",
+    "status": "publisher_deposited_metadata_checked",
+    "title": "PTB-XL, a large publicly available electrocardiography dataset",
+    "authors": [
+      {
+        "given": "Patrick",
+        "family": "Wagner"
+      },
+      {
+        "given": "Nils",
+        "family": "Strodthoff"
+      },
+      {
+        "given": "Ralf-Dieter",
+        "family": "Bousseljot"
+      },
+      {
+        "given": "Dieter",
+        "family": "Kreiseler"
+      },
+      {
+        "given": "Fatima I.",
+        "family": "Lunze"
+      },
+      {
+        "given": "Wojciech",
+        "family": "Samek"
+      },
+      {
+        "given": "Tobias",
+        "family": "Schaeffter"
+      }
+    ],
+    "journal": "Scientific Data",
+    "year": 2020,
+    "volume": "7",
+    "issue": "1",
+    "page": "154",
+    "url": "https://doi.org/10.1038/s41597-020-0495-6",
+    "source": "Crossref",
+    "accessed": "2026-11-13"
+  },
+  {
+    "key": "Rossi2026AF",
+    "doi": "10.1016/j.hrthm.2025.08.007",
+    "status": "publisher_deposited_metadata_checked",
+    "title": "Clinical characteristics and outcomes of first diagnosed atrial fibrillation: Insights from 2 prospective registries in Europe and Asia",
+    "authors": [
+      {
+        "given": "Michele",
+        "family": "Rossi"
+      },
+      {
+        "given": "Tommaso",
+        "family": "Bucci"
+      },
+      {
+        "given": "Enrico",
+        "family": "Tartaglia"
+      },
+      {
+        "given": "Manlin",
+        "family": "Zhao"
+      },
+      {
+        "given": "Steven Ho Man",
+        "family": "Lam"
+      },
+      {
+        "given": "Yang",
+        "family": "Chen"
+      },
+      {
+        "given": "Amir",
+        "family": "Askarinejad"
+      },
+      {
+        "given": "Hongyu",
+        "family": "Liu"
+      },
+      {
+        "given": "Claudio",
+        "family": "Ferri"
+      },
+      {
+        "given": "Giuseppe",
+        "family": "Boriani"
+      },
+      {
+        "given": "Hung-Fat",
+        "family": "Tse"
+      },
+      {
+        "given": "Tze-Fan",
+        "family": "Chao"
+      },
+      {
+        "given": "Gregory Y.H.",
+        "family": "Lip"
+      }
+    ],
+    "journal": "Heart Rhythm",
+    "year": 2026,
+    "volume": "23",
+    "issue": "2",
+    "page": "356-367",
+    "url": "https://doi.org/10.1016/j.hrthm.2025.08.007",
+    "source": "Crossref",
+    "accessed": "2026-11-13"
+  },
+  {
+    "key": "Hannun2019Cardiologist",
+    "doi": "10.1038/s41591-018-0268-3",
+    "status": "publisher_deposited_metadata_checked",
+    "title": "Cardiologist-level arrhythmia detection and classification in ambulatory electrocardiograms using a deep neural network",
+    "authors": [
+      {
+        "given": "Awni Y.",
+        "family": "Hannun"
+      },
+      {
+        "given": "Pranav",
+        "family": "Rajpurkar"
+      },
+      {
+        "given": "Masoumeh",
+        "family": "Haghpanahi"
+      },
+      {
+        "given": "Geoffrey H.",
+        "family": "Tison"
+      },
+      {
+        "given": "Codie",
+        "family": "Bourn"
+      },
+      {
+        "given": "Mintu P.",
+        "family": "Turakhia"
+      },
+      {
+        "given": "Andrew Y.",
+        "family": "Ng"
+      }
+    ],
+    "journal": "Nature Medicine",
+    "year": 2019,
+    "volume": "25",
+    "issue": "1",
+    "page": "65-69",
+    "url": "https://doi.org/10.1038/s41591-018-0268-3",
+    "source": "Crossref",
+    "accessed": "2026-11-13"
+  },
+  {
+    "key": "Ribeiro2020Automatic",
+    "doi": "10.1038/s41467-020-15432-4",
+    "status": "publisher_deposited_metadata_checked",
+    "title": "Automatic diagnosis of the 12-lead ECG using a deep neural network",
+    "authors": [
+      {
+        "given": "Antônio H.",
+        "family": "Ribeiro"
+      },
+      {
+        "given": "Manoel Horta",
+        "family": "Ribeiro"
+      },
+      {
+        "given": "Gabriela M. M.",
+        "family": "Paixão"
+      },
+      {
+        "given": "Derick M.",
+        "family": "Oliveira"
+      },
+      {
+        "given": "Paulo R.",
+        "family": "Gomes"
+      },
+      {
+        "given": "Jéssica A.",
+        "family": "Canazart"
+      },
+      {
+        "given": "Milton P. S.",
+        "family": "Ferreira"
+      },
+      {
+        "given": "Carl R.",
+        "family": "Andersson"
+      },
+      {
+        "given": "Peter W.",
+        "family": "Macfarlane"
+      },
+      {
+        "given": "Wagner",
+        "family": "Meira"
+      },
+      {
+        "given": "Thomas B.",
+        "family": "Schön"
+      },
+      {
+        "given": "Antonio Luiz P.",
+        "family": "Ribeiro"
+      }
+    ],
+    "journal": "Nature Communications",
+    "year": 2020,
+    "volume": "11",
+    "issue": "1",
+    "page": "1760",
+    "url": "https://doi.org/10.1038/s41467-020-15432-4",
+    "source": "Crossref",
+    "accessed": "2026-11-13"
+  },
+  {
+    "key": "Strodthoff2021Deep",
+    "doi": "10.1109/JBHI.2020.3022989",
+    "status": "publisher_deposited_metadata_checked",
+    "title": "Deep Learning for ECG Analysis: Benchmarks and Insights from PTB-XL",
+    "authors": [
+      {
+        "given": "Nils",
+        "family": "Strodthoff"
+      },
+      {
+        "given": "Patrick",
+        "family": "Wagner"
+      },
+      {
+        "given": "Tobias",
+        "family": "Schaeffter"
+      },
+      {
+        "given": "Wojciech",
+        "family": "Samek"
+      }
+    ],
+    "journal": "IEEE Journal of Biomedical and Health Informatics",
+    "year": 2021,
+    "volume": "25",
+    "issue": "5",
+    "page": "1519-1528",
+    "url": "https://doi.org/10.1109/jbhi.2020.3022989",
+    "source": "Crossref",
+    "accessed": "2026-11-13"
+  },
+  {
+    "key": "Vranken2021Uncertainty",
+    "doi": "10.1093/ehjdh/ztab045",
+    "status": "publisher_deposited_metadata_checked",
+    "title": "Uncertainty estimation for deep learning-based automated analysis of 12-lead electrocardiograms",
+    "authors": [
+      {
+        "given": "Jeroen F",
+        "family": "Vranken"
+      },
+      {
+        "given": "Rutger R",
+        "family": "van de Leur"
+      },
+      {
+        "given": "Deepak K",
+        "family": "Gupta"
+      },
+      {
+        "given": "Luis E",
+        "family": "Juarez Orozco"
+      },
+      {
+        "given": "Rutger J",
+        "family": "Hassink"
+      },
+      {
+        "given": "Pim",
+        "family": "van der Harst"
+      },
+      {
+        "given": "Pieter A",
+        "family": "Doevendans"
+      },
+      {
+        "given": "Sadaf",
+        "family": "Gulshad"
+      },
+      {
+        "given": "René",
+        "family": "van Es"
+      }
+    ],
+    "journal": "European Heart Journal - Digital Health",
+    "year": 2021,
+    "volume": "2",
+    "issue": "3",
+    "page": "401-415",
+    "url": "https://doi.org/10.1093/ehjdh/ztab045",
+    "source": "Crossref",
+    "accessed": "2026-11-13"
+  },
+  {
+    "key": "Mastoi2022DERMA",
+    "doi": "10.3390/life12060842",
+    "status": "publisher_deposited_metadata_checked",
+    "title": "Novel DERMA Fusion Technique for ECG Heartbeat Classification",
+    "authors": [
+      {
+        "given": "Qurat-ul-ain",
+        "family": "Mastoi"
+      },
+      {
+        "given": "Teh Ying",
+        "family": "Wah"
+      },
+      {
+        "given": "Mazin Abed",
+        "family": "Mohammed"
+      },
+      {
+        "given": "Uzair",
+        "family": "Iqbal"
+      },
+      {
+        "given": "Seifedine",
+        "family": "Kadry"
+      },
+      {
+        "given": "Arnab",
+        "family": "Majumdar"
+      },
+      {
+        "given": "Orawit",
+        "family": "Thinnukool"
+      }
+    ],
+    "journal": "Life",
+    "year": 2022,
+    "volume": "12",
+    "issue": "6",
+    "page": "842",
+    "url": "https://doi.org/10.3390/life12060842",
+    "source": "Crossref",
+    "accessed": "2026-11-13"
+  },
+  {
+    "key": "Herman2024",
+    "doi": "10.1016/j.jelectrocard.2023.12.009",
+    "status": "publisher_deposited_metadata_checked",
+    "title": "Validation of an automated artificial intelligence system for 12‑lead ECG interpretation",
+    "authors": [
+      {
+        "given": "Robert",
+        "family": "Herman"
+      },
+      {
+        "given": "Anthony",
+        "family": "Demolder"
+      },
+      {
+        "given": "Boris",
+        "family": "Vavrik"
+      },
+      {
+        "given": "Michal",
+        "family": "Martonak"
+      },
+      {
+        "given": "Vladimir",
+        "family": "Boza"
+      },
+      {
+        "given": "Viera",
+        "family": "Kresnakova"
+      },
+      {
+        "given": "Andrej",
+        "family": "Iring"
+      },
+      {
+        "given": "Timotej",
+        "family": "Palus"
+      },
+      {
+        "given": "Jakub",
+        "family": "Bahyl"
+      },
+      {
+        "given": "Olivier",
+        "family": "Nelis"
+      },
+      {
+        "given": "Monika",
+        "family": "Beles"
+      },
+      {
+        "given": "Davide",
+        "family": "Fabbricatore"
+      },
+      {
+        "given": "Leor",
+        "family": "Perl"
+      },
+      {
+        "given": "Jozef",
+        "family": "Bartunek"
+      },
+      {
+        "given": "Robert",
+        "family": "Hatala"
+      }
+    ],
+    "journal": "Journal of Electrocardiology",
+    "year": 2024,
+    "volume": "82",
+    "issue": null,
+    "page": "147-154",
+    "url": "https://doi.org/10.1016/j.jelectrocard.2023.12.009",
+    "source": "Crossref",
+    "accessed": "2026-11-13"
+  },
+  {
+    "key": "Elsheikhy2025Lightweight",
+    "doi": "10.3390/s25175542",
+    "status": "publisher_deposited_metadata_checked",
+    "title": "Lightweight Deep Learning Architecture for Multi-Lead ECG Arrhythmia Detection",
+    "authors": [
+      {
+        "given": "Donia H.",
+        "family": "Elsheikhy"
+      },
+      {
+        "given": "Abdelwahab S.",
+        "family": "Hassan"
+      },
+      {
+        "given": "Nashwa M.",
+        "family": "Yhiea"
+      },
+      {
+        "given": "Ahmed M.",
+        "family": "Fareed"
+      },
+      {
+        "given": "Essam A.",
+        "family": "Rashed"
+      }
+    ],
+    "journal": "Sensors",
+    "year": 2025,
+    "volume": "25",
+    "issue": "17",
+    "page": "5542",
+    "url": "https://doi.org/10.3390/s25175542",
+    "source": "Crossref",
+    "accessed": "2026-11-13"
+  },
+  {
+    "key": "Zhou2025Classification",
+    "doi": "10.1038/s41598-025-94127-6",
+    "status": "publisher_deposited_metadata_checked",
+    "title": "Classification of multi-lead ECG based on multiple scales and hierarchical feature convolutional neural networks",
+    "authors": [
+      {
+        "given": "Feiyan",
+        "family": "Zhou"
+      },
+      {
+        "given": "Duanshu",
+        "family": "Fang"
+      }
+    ],
+    "journal": "Scientific Reports",
+    "year": 2025,
+    "volume": "15",
+    "issue": "1",
+    "page": "16418",
+    "url": "https://doi.org/10.1038/s41598-025-94127-6",
+    "source": "Crossref",
+    "accessed": "2026-11-13"
+  },
+  {
+    "key": "Li2024DualView",
+    "doi": "10.1016/j.compbiomed.2024.108751",
+    "status": "publisher_deposited_metadata_checked",
+    "title": "Clinical knowledge-based ECG abnormalities detection using dual-view CNN-Transformer and external attention mechanism",
+    "authors": [
+      {
+        "given": "Hui",
+        "family": "Li"
+      },
+      {
+        "given": "Jiyang",
+        "family": "Han"
+      },
+      {
+        "given": "Honghao",
+        "family": "Zhang"
+      },
+      {
+        "given": "Xi",
+        "family": "Zhang"
+      },
+      {
+        "given": "Yingjun",
+        "family": "Si"
+      },
+      {
+        "given": "Yu",
+        "family": "Zhang"
+      },
+      {
+        "given": "Yu",
+        "family": "Liu"
+      },
+      {
+        "given": "Hui",
+        "family": "Yang"
+      }
+    ],
+    "journal": "Computers in Biology and Medicine",
+    "year": 2024,
+    "volume": "178",
+    "issue": null,
+    "page": "108751",
+    "url": "https://doi.org/10.1016/j.compbiomed.2024.108751",
+    "source": "Crossref",
+    "accessed": "2026-11-13"
+  },
+  {
+    "key": "Pan1985Real",
+    "doi": "10.1109/TBME.1985.325532",
+    "status": "publisher_deposited_metadata_checked",
+    "title": "A Real-Time QRS Detection Algorithm",
+    "authors": [
+      {
+        "given": "Jiapu",
+        "family": "Pan"
+      },
+      {
+        "given": "Willis J.",
+        "family": "Tompkins"
+      }
+    ],
+    "journal": "IEEE Transactions on Biomedical Engineering",
+    "year": 1985,
+    "volume": "BME-32",
+    "issue": "3",
+    "page": "230-236",
+    "url": "https://doi.org/10.1109/tbme.1985.325532",
+    "source": "Crossref",
+    "accessed": "2026-11-13"
+  },
+  {
+    "key": "SPH2022",
+    "doi": "10.1038/s41597-022-01403-5",
+    "status": "publisher_deposited_metadata_checked",
+    "title": "A large-scale multi-label 12-lead electrocardiogram database with standardized diagnostic statements",
+    "authors": [
+      {
+        "given": "Hui",
+        "family": "Liu"
+      },
+      {
+        "given": "Dan",
+        "family": "Chen"
+      },
+      {
+        "given": "Da",
+        "family": "Chen"
+      },
+      {
+        "given": "Xiyu",
+        "family": "Zhang"
+      },
+      {
+        "given": "Huijie",
+        "family": "Li"
+      },
+      {
+        "given": "Lipan",
+        "family": "Bian"
+      },
+      {
+        "given": "Minglei",
+        "family": "Shu"
+      },
+      {
+        "given": "Yinglong",
+        "family": "Wang"
+      }
+    ],
+    "journal": "Scientific Data",
+    "year": 2022,
+    "volume": "9",
+    "issue": "1",
+    "page": "272",
+    "url": "https://doi.org/10.1038/s41597-022-01403-5",
+    "source": "Crossref",
+    "accessed": "2026-11-13"
+  },
+  {
+    "key": "Zheng2020Chapman",
+    "doi": "10.1038/s41597-020-0386-x",
+    "status": "publisher_deposited_metadata_checked",
+    "title": "A 12-lead electrocardiogram database for arrhythmia research covering more than 10,000 patients",
+    "authors": [
+      {
+        "given": "Jianwei",
+        "family": "Zheng"
+      },
+      {
+        "given": "Jianming",
+        "family": "Zhang"
+      },
+      {
+        "given": "Sidy",
+        "family": "Danioko"
+      },
+      {
+        "given": "Hai",
+        "family": "Yao"
+      },
+      {
+        "given": "Hangyuan",
+        "family": "Guo"
+      },
+      {
+        "given": "Cyril",
+        "family": "Rakovski"
+      }
+    ],
+    "journal": "Scientific Data",
+    "year": 2020,
+    "volume": "7",
+    "issue": "1",
+    "page": "48",
+    "url": "https://doi.org/10.1038/s41597-020-0386-x",
+    "source": "Crossref",
+    "accessed": "2026-11-13"
+  },
+  {
+    "key": "Guo2017Calibration",
+    "doi": "10.48550/arXiv.1706.04599",
+    "status": "repository_metadata_required"
+  },
+  {
+    "key": "LUDB2021",
+    "doi": "10.1109/ACCESS.2020.3035085",
+    "status": "lookup_failed",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "key": "Zhu2020Automatic",
+    "doi": "10.1016/S2589-7500(20)30107-2",
+    "status": "publisher_deposited_metadata_checked",
+    "title": "Automatic multilabel electrocardiogram diagnosis of heart rhythm or conduction abnormalities with deep learning: a cohort study",
+    "authors": [
+      {
+        "given": "Hongling",
+        "family": "Zhu"
+      },
+      {
+        "given": "Cheng",
+        "family": "Cheng"
+      },
+      {
+        "given": "Hang",
+        "family": "Yin"
+      },
+      {
+        "given": "Xingyi",
+        "family": "Li"
+      },
+      {
+        "given": "Ping",
+        "family": "Zuo"
+      },
+      {
+        "given": "Jia",
+        "family": "Ding"
+      },
+      {
+        "given": "Fan",
+        "family": "Lin"
+      },
+      {
+        "given": "Jingyi",
+        "family": "Wang"
+      },
+      {
+        "given": "Beitong",
+        "family": "Zhou"
+      },
+      {
+        "given": "Yonge",
+        "family": "Li"
+      },
+      {
+        "given": "Shouxing",
+        "family": "Hu"
+      },
+      {
+        "given": "Yulong",
+        "family": "Xiong"
+      },
+      {
+        "given": "Binran",
+        "family": "Wang"
+      },
+      {
+        "given": "Guohua",
+        "family": "Wan"
+      },
+      {
+        "given": "Xiaoyun",
+        "family": "Yang"
+      },
+      {
+        "given": "Ye",
+        "family": "Yuan"
+      }
+    ],
+    "journal": "The Lancet Digital Health",
+    "year": 2020,
+    "volume": "2",
+    "issue": "7",
+    "page": "e348-e357",
+    "url": "https://doi.org/10.1016/s2589-7500(20)30107-2",
+    "source": "Crossref",
+    "accessed": "2026-11-13"
+  },
+  {
+    "key": "LUDB2020Paper",
+    "doi": "10.1109/ACCESS.2020.3029211",
+    "status": "publisher_deposited_metadata_checked",
+    "title": "LUDB: A New Open-Access Validation Tool for Electrocardiogram Delineation Algorithms",
+    "authors": [
+      {
+        "given": "Alena I.",
+        "family": "Kalyakulina"
+      },
+      {
+        "given": "Igor I.",
+        "family": "Yusipov"
+      },
+      {
+        "given": "Viktor A.",
+        "family": "Moskalenko"
+      },
+      {
+        "given": "Alexander V.",
+        "family": "Nikolskiy"
+      },
+      {
+        "given": "Konstantin A.",
+        "family": "Kosonogov"
+      },
+      {
+        "given": "Grigory V.",
+        "family": "Osipov"
+      },
+      {
+        "given": "Nikolai Yu.",
+        "family": "Zolotykh"
+      },
+      {
+        "given": "Mikhail V.",
+        "family": "Ivanchenko"
+      }
+    ],
+    "journal": "IEEE Access",
+    "year": 2020,
+    "volume": "8",
+    "issue": null,
+    "page": "186181-186190",
+    "url": "https://doi.org/10.1109/access.2020.3029211",
+    "source": "Crossref",
+    "accessed": "2026-11-13"
+  },
+  {
+    "key": "Physionet2026",
+    "doi": "10.1038/s44360-026-00096-z",
+    "status": "publisher_deposited_metadata_checked",
+    "title": "PhysioNet as a global platform for biomedical research",
+    "authors": [
+      {
+        "given": "Tom",
+        "family": "Pollard"
+      },
+      {
+        "given": "Benjamin E.",
+        "family": "Moody"
+      },
+      {
+        "given": "Li-wei H.",
+        "family": "Lehman"
+      },
+      {
+        "given": "Brian J.",
+        "family": "Gow"
+      },
+      {
+        "given": "Chrystinne",
+        "family": "Fernandes"
+      },
+      {
+        "given": "Chen",
+        "family": "Xie"
+      },
+      {
+        "given": "Alistair",
+        "family": "Johnson"
+      },
+      {
+        "given": "Roger G.",
+        "family": "Mark"
+      },
+      {
+        "given": "Thomas",
+        "family": "Heldt"
+      }
+    ],
+    "journal": "Nature Health",
+    "year": 2026,
+    "volume": "1",
+    "issue": "8",
+    "page": "792-795",
+    "url": "https://doi.org/10.1038/s44360-026-00096-z",
+    "source": "Crossref",
+    "accessed": "2026-11-13"
+  },
+  {
+    "key": "He2016Deep",
+    "doi": "10.1109/CVPR.2016.90",
+    "status": "publisher_deposited_metadata_checked",
+    "title": "Deep Residual Learning for Image Recognition",
+    "authors": [
+      {
+        "given": "Kaiming",
+        "family": "He"
+      },
+      {
+        "given": "Xiangyu",
+        "family": "Zhang"
+      },
+      {
+        "given": "Shaoqing",
+        "family": "Ren"
+      },
+      {
+        "given": "Jian",
+        "family": "Sun"
+      }
+    ],
+    "journal": "2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)",
+    "year": 2016,
+    "volume": null,
+    "issue": null,
+    "page": "770-778",
+    "url": "https://doi.org/10.1109/cvpr.2016.90",
+    "source": "Crossref",
+    "accessed": "2026-11-13"
+  },
+  {
+    "key": "Hu2018Squeeze",
+    "doi": "10.1109/CVPR.2018.00745",
+    "status": "publisher_deposited_metadata_checked",
+    "title": "Squeeze-and-Excitation Networks",
+    "authors": [
+      {
+        "given": "Jie",
+        "family": "Hu"
+      },
+      {
+        "given": "Li",
+        "family": "Shen"
+      },
+      {
+        "given": "Gang",
+        "family": "Sun"
+      }
+    ],
+    "journal": "2018 IEEE/CVF Conference on Computer Vision and Pattern Recognition",
+    "year": 2018,
+    "volume": null,
+    "issue": null,
+    "page": "7132-7141",
+    "url": "https://doi.org/10.1109/cvpr.2018.00745",
+    "source": "Crossref",
+    "accessed": "2026-11-13"
+  },
+  {
+    "key": "Lin2017Focal",
+    "doi": "10.1109/ICCV.2017.324",
+    "status": "publisher_deposited_metadata_checked",
+    "title": "Focal Loss for Dense Object Detection",
+    "authors": [
+      {
+        "given": "Tsung-Yi",
+        "family": "Lin"
+      },
+      {
+        "given": "Priya",
+        "family": "Goyal"
+      },
+      {
+        "given": "Ross",
+        "family": "Girshick"
+      },
+      {
+        "given": "Kaiming",
+        "family": "He"
+      },
+      {
+        "given": "Piotr",
+        "family": "Dollar"
+      }
+    ],
+    "journal": "2017 IEEE International Conference on Computer Vision (ICCV)",
+    "year": 2017,
+    "volume": null,
+    "issue": null,
+    "page": "2999-3007",
+    "url": "https://doi.org/10.1109/iccv.2017.324",
+    "source": "Crossref",
+    "accessed": "2026-11-13"
+  },
+  {
+    "key": "Akiba2019Optuna",
+    "doi": "10.1145/3292500.3330701",
+    "status": "publisher_deposited_metadata_checked",
+    "title": "Optuna",
+    "authors": [
+      {
+        "given": "Takuya",
+        "family": "Akiba"
+      },
+      {
+        "given": "Shotaro",
+        "family": "Sano"
+      },
+      {
+        "given": "Toshihiko",
+        "family": "Yanase"
+      },
+      {
+        "given": "Takeru",
+        "family": "Ohta"
+      },
+      {
+        "given": "Masanori",
+        "family": "Koyama"
+      }
+    ],
+    "journal": "Proceedings of the 25th ACM SIGKDD International Conference on Knowledge Discovery &amp; Data Mining",
+    "year": 2019,
+    "volume": null,
+    "issue": null,
+    "page": "2623-2631",
+    "url": "https://doi.org/10.1145/3292500.3330701",
+    "source": "Crossref",
+    "accessed": "2026-11-13"
+  },
+  {
+    "key": "Szegedy2016Rethinking",
+    "doi": "10.1109/CVPR.2016.308",
+    "status": "publisher_deposited_metadata_checked",
+    "title": "Rethinking the Inception Architecture for Computer Vision",
+    "authors": [
+      {
+        "given": "Christian",
+        "family": "Szegedy"
+      },
+      {
+        "given": "Vincent",
+        "family": "Vanhoucke"
+      },
+      {
+        "given": "Sergey",
+        "family": "Ioffe"
+      },
+      {
+        "given": "Jon",
+        "family": "Shlens"
+      },
+      {
+        "given": "Zbigniew",
+        "family": "Wojna"
+      }
+    ],
+    "journal": "2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)",
+    "year": 2016,
+    "volume": null,
+    "issue": null,
+    "page": "2818-2826",
+    "url": "https://doi.org/10.1109/cvpr.2016.308",
+    "source": "Crossref",
+    "accessed": "2026-11-13"
+  },
+  {
+    "key": "Selvaraju2017Grad",
+    "doi": "10.1109/ICCV.2017.74",
+    "status": "publisher_deposited_metadata_checked",
+    "title": "Grad-CAM: Visual Explanations from Deep Networks via Gradient-Based Localization",
+    "authors": [
+      {
+        "given": "Ramprasaath R.",
+        "family": "Selvaraju"
+      },
+      {
+        "given": "Michael",
+        "family": "Cogswell"
+      },
+      {
+        "given": "Abhishek",
+        "family": "Das"
+      },
+      {
+        "given": "Ramakrishna",
+        "family": "Vedantam"
+      },
+      {
+        "given": "Devi",
+        "family": "Parikh"
+      },
+      {
+        "given": "Dhruv",
+        "family": "Batra"
+      }
+    ],
+    "journal": "2017 IEEE International Conference on Computer Vision (ICCV)",
+    "year": 2017,
+    "volume": null,
+    "issue": null,
+    "page": "618-626",
+    "url": "https://doi.org/10.1109/iccv.2017.74",
+    "source": "Crossref",
+    "accessed": "2026-11-13"
+  },
+  {
+    "key": "Wilson1927Probable",
+    "doi": "10.1080/01621459.1927.10502953",
+    "status": "publisher_deposited_metadata_checked",
+    "title": "Probable Inference, the Law of Succession, and Statistical Inference",
+    "authors": [
+      {
+        "given": "Edwin B.",
+        "family": "Wilson"
+      }
+    ],
+    "journal": "Journal of the American Statistical Association",
+    "year": 1927,
+    "volume": "22",
+    "issue": "158",
+    "page": "209-212",
+    "url": "https://doi.org/10.1080/01621459.1927.10502953",
+    "source": "Crossref",
+    "accessed": "2026-11-13"
+  },
+  {
+    "key": "Efron1979Bootstrap",
+    "doi": "10.1214/aos/1176344552",
+    "status": "publisher_deposited_metadata_checked",
+    "title": "Bootstrap Methods: Another Look at the Jackknife",
+    "authors": [
+      {
+        "given": "B.",
+        "family": "Efron"
+      }
+    ],
+    "journal": "The Annals of Statistics",
+    "year": 1979,
+    "volume": "7",
+    "issue": "1",
+    "page": "1-26",
+    "url": "https://doi.org/10.1214/aos/1176344552",
+    "source": "Crossref",
+    "accessed": "2026-11-13"
+  },
+  {
+    "key": "Hanley1982meaning",
+    "doi": "10.1148/radiology.143.1.7063747",
+    "status": "publisher_deposited_metadata_checked",
+    "title": "The meaning and use of the area under a receiver operating characteristic (ROC) curve.",
+    "authors": [
+      {
+        "given": "J A",
+        "family": "Hanley"
+      },
+      {
+        "given": "B J",
+        "family": "McNeil"
+      }
+    ],
+    "journal": "Radiology",
+    "year": 1982,
+    "volume": "143",
+    "issue": "1",
+    "page": "29-36",
+    "url": "https://doi.org/10.1148/radiology.143.1.7063747",
+    "source": "Crossref",
+    "accessed": "2026-11-13"
+  }
+]

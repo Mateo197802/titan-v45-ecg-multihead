@@ -1,0 +1,162 @@
+[
+  {
+    "file": "fig00_ecg_ai_context",
+    "kind": "schematic",
+    "sources": [
+      "Study schematic; Methods input and reporting contracts"
+    ],
+    "creator": "Code-generated for this revision; no third-party artwork",
+    "pdf_sha256": "451e3ea7d81fc06c47deace2b7283efecdcaf1bebd4f01ca6e686179047246fb",
+    "png_sha256": "83081527417f66c87a5281cc6d7f33494a15f85fcdc2d3fde5e676766c0f3f61"
+  },
+  {
+    "file": "fig00b_ecg_ai_evolution_gap",
+    "kind": "schematic",
+    "sources": [
+      "Endpoint scope schematic"
+    ],
+    "creator": "Code-generated for this revision; no third-party artwork",
+    "pdf_sha256": "4edcd4525485e55cc52b8e45766083ae0f2659e5d58a9701a80b22bf4ce9d7d1",
+    "png_sha256": "617d90ad42014d590235245ef92d36b175998d9126648e0a3873033158c0b13e"
+  },
+  {
+    "file": "fig01_graphical_abstract",
+    "kind": "schematic",
+    "sources": [
+      "Verified checkpoint and selected-profile contracts"
+    ],
+    "creator": "Code-generated for this revision; no third-party artwork",
+    "pdf_sha256": "f80704a6e507ae485aedcb0eee1b5db2e22c11221b868d0d735b1447cb06cca2",
+    "png_sha256": "0576c6d2a68004835dc7b1ac4abe8c53f73328bfd53196f13447255f26a733b7"
+  },
+  {
+    "file": "fig02_data_processing_bias_workflow",
+    "kind": "schematic",
+    "sources": [
+      "Reconstructed preprocessing; evidence-stage distinction"
+    ],
+    "creator": "Code-generated for this revision; no third-party artwork",
+    "pdf_sha256": "34d7a3414e57d48e5751ae7cad06f786b67108c380cdc331fbb31ac4285f0768",
+    "png_sha256": "18e900b47654a9fb0fc4fcf5a8b5c078816344026a4c50701374082feb7e6593"
+  },
+  {
+    "file": "fig03_internal_architecture",
+    "kind": "schematic",
+    "sources": [
+      "docs/reviewer_two_comment_rigorous/R2_3F_MORPHOLOGY_FINAL_VALIDATION.md"
+    ],
+    "creator": "Code-generated for this revision; no third-party artwork",
+    "pdf_sha256": "cd3046cef49b2c573afe1188f2a191863b29f9f84e3c73f6110eea4ebc1507ca",
+    "png_sha256": "f776cc6efe8af02f41d0ba202ea7c0ddd5be9242f955fbb27aeda17d58e867a2"
+  },
+  {
+    "file": "fig03_cascade_contract",
+    "kind": "schematic",
+    "sources": [
+      "Verified output ontology; no dispatch inferred"
+    ],
+    "creator": "Code-generated for this revision; no third-party artwork",
+    "pdf_sha256": "b150d501a9f863e4196205c2e966f69312f256b0ad023cfff96d407ae4ab1fb8",
+    "png_sha256": "fe5639b8df4e902d381842738506d07c9b63ecfe0b9a392c0df64bfdc884685c"
+  },
+  {
+    "file": "fig06_rhythm_confusion",
+    "kind": "quantitative",
+    "sources": [
+      "Archived P6 record-level predictions; single-reference subset"
+    ],
+    "creator": "Code-generated for this revision; no third-party artwork",
+    "pdf_sha256": "bedd9797511ff8e3d00e50552a81fed9daba65aea0b42016e73108ef3c4745c5",
+    "png_sha256": "72809e48dbf129af018f85721faa36ccd3001abc8117d06d0e79e9e62567d3a3"
+  },
+  {
+    "file": "fig08_class_metrics",
+    "kind": "quantitative",
+    "sources": [
+      "Archived P6 predictions; 1000 confusion-multinomial bootstrap replicates, seed 4620846"
+    ],
+    "creator": "Code-generated for this revision; no third-party artwork",
+    "pdf_sha256": "88bf73fc0d30eb9d409c81bde7f4504958bb46374b20777f9671314caca8650c",
+    "png_sha256": "2f1506e7b5092cee1b8b6e681d8cab2c0771eda0e6bc745cfad2abd9b31df07b"
+  },
+  {
+    "file": "fig08b_pathology_class_metrics",
+    "kind": "quantitative",
+    "sources": [
+      "Archived P4 predictions; 1000 confusion-multinomial bootstrap replicates, seed 4620846"
+    ],
+    "creator": "Code-generated for this revision; no third-party artwork",
+    "pdf_sha256": "95bdbd417b10155068e97b4a8f51772cc3971d144ab152b15ac9344a8c054fb5",
+    "png_sha256": "c1b3ab0dee91ab73e8cf4a7e85d72409bb27f3ed22a53274ca93c2321424fb7b"
+  },
+  {
+    "file": "fig07_pathology_confusion",
+    "kind": "quantitative",
+    "sources": [
+      "Archived P4 panel predictions; panel-specific denominators"
+    ],
+    "creator": "Code-generated for this revision; no third-party artwork",
+    "pdf_sha256": "9eb73be7eb0484722ca1ced02981d3eca8967dbdaa447ccbe98be4dc96d91b70",
+    "png_sha256": "d7c533172be15e3a4b24da54f6e7ecf0eb1c031ef7e6c44e241027f2c70e0f8b"
+  },
+  {
+    "file": "fig09_roc_curves",
+    "kind": "quantitative",
+    "sources": [
+      "Archived P6/P4 probabilities; grouped distinct score thresholds; AP uses recall-weighted sum"
+    ],
+    "creator": "Code-generated for this revision; no third-party artwork",
+    "pdf_sha256": "7ae7894bacf2cce927f8b9a6fe1efb23aa20a2e468e2e91a81422323134ad5b8",
+    "png_sha256": "73806de874995807881bf0aeaa4f0ccd50bc576d11f6e36d2711f411f6c98ff3"
+  },
+  {
+    "file": "fig10_precision_recall_curves",
+    "kind": "quantitative",
+    "sources": [
+      "Archived P6/P4 probabilities; grouped distinct score thresholds; AP uses recall-weighted sum"
+    ],
+    "creator": "Code-generated for this revision; no third-party artwork",
+    "pdf_sha256": "fc0706f1d5f9fc3b1b4a4a7706b2ee107a6d30ec7c5d2a114bed72b1b235c2d6",
+    "png_sha256": "fe3959358c36f9e8d2675b1eac9ea9ed0f6d829902b95a9d192a1e576d958d58"
+  },
+  {
+    "file": "fig11_calibration",
+    "kind": "quantitative",
+    "sources": [
+      "Archived binary probabilities; 10 equal-width bins; nonempty bins only"
+    ],
+    "creator": "Code-generated for this revision; no third-party artwork",
+    "pdf_sha256": "d064306927a4c648f472d5a73bac5a6c33fb00c3d2d3c47a25f32baf4175ddb9",
+    "png_sha256": "fcfad7d0df9f663838ac90cfe4b0e5021da03f8ac3036d1e56bc1810b18b46f5"
+  },
+  {
+    "file": "fig12_source_performance",
+    "kind": "quantitative",
+    "sources": [
+      "Archived P6 source aliases and correctness; Wilson ECG intervals"
+    ],
+    "creator": "Code-generated for this revision; no third-party artwork",
+    "pdf_sha256": "963d5f145a5eb227c0d8686b3aeac2e982f9e647eacad2d16046a66faa725388",
+    "png_sha256": "a9de592e73c8614915c417b862411a299838e7829e9fdd6320dad3aa138fb467"
+  },
+  {
+    "file": "fig13_error_flows",
+    "kind": "quantitative",
+    "sources": [
+      "Archived P6 single-reference top-1 confusions; ten largest observed counts"
+    ],
+    "creator": "Code-generated for this revision; no third-party artwork",
+    "pdf_sha256": "a11c76e203c510e7c00e604a99a5576c09fe011deba4172e67c3a3532b85d6b2",
+    "png_sha256": "aabf7216b3848bb174bf82f8fa87ec0ace9c85578e847ac1207fa9ad26aa58dd"
+  },
+  {
+    "file": "fig16768_internal_history",
+    "kind": "quantitative",
+    "sources": [
+      "supplementary/JOB_16768_AGGREGATE_EPOCHS.csv; historical internal run only"
+    ],
+    "creator": "Code-generated for this revision; no third-party artwork",
+    "pdf_sha256": "b432237cfa3f86ca65f3caab8fb6e8f88e6e29be510d38cde76a7176f359b445",
+    "png_sha256": "97e6142e2fc33d53c6c5fbf5b9c1cc630b65857d44ab04c35843d73069f66e34"
+  }
+]

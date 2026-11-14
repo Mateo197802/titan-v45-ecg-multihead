@@ -1,0 +1,22 @@
+\subsection{Denominator sensitivity in retrospective transfer}
+\label{sec:transfer-results}
+
+All 25,770 SPH ECGs were scored by each released profile in the all-input comparison. The unchanged scores gave mapped macro-F1 of 0.7083 (P6), 0.6622 (P8), and 0.0388 (P4) across the full cohort, compared with 0.9057, 0.8553, and 0.7278 in the nested profile-compatible subsets (5,523, 5,925, and 415 ECGs, respectively). These are averages over compatible statements, not the original P6 top-1 task or the P4 selected panel experiment. Different class prevalences and denominators change the interpretation. For example, the SPH PVC reference has 1,067 positive and 24,703 absent-statement comparisons; P6 PVC F1 was 54.08\% and P8 PVC F1 was 66.16\%. Table~\ref{tab:sph_endpoints} reports statement predictive values and patient-component F1 intervals on the original SPH denominator. These results do not supply the missing full June workflow or establish an independent confirmatory result.
+
+\input{tables/sph_endpoints}
+
+\subsection{Exploratory residual classes and morphology}
+\label{sec:other-results}
+
+New rhythm residual heads attained F1 0.647 for the P6 mapping (141 positives among 2,895 known ECGs) and 0.625 for the P8 mapping (43 among 2,797), versus 0.092 and 0.030 for the calibrated auxiliary-score comparators. A new pathology union head attained F1 0.939 on 153 known observations out of 390 held ECGs. These are development results, not outputs of the released specialists. Paced rhythm and LQTS lack compatible SPH references and 3AVB had insufficient support for individual fitting or calibration. A composite LAO/LAE reference does not validate either diagnosis separately.
+
+In the five-seed fixed-backbone comparison, adding morphology changed mean macro-F1 by $+0.17$, $-0.11$, and $+0.31$ percentage points for P6, P8, and P4. Simultaneous intervals were $[-0.70,1.03]$, $[-0.76,0.60]$, and $[-0.36,1.17]$ percentage points, respectively, within the prespecified $\pm2$ point margin. The experiment did not establish a practically important gain in these heads, and does not test the effect of end-to-end re-training or transport to new sources.
+
+\subsection{Later score-based abstention and partial fallback}
+\label{sec:selective-results}
+
+The original June report does not have an authenticated per-ECG quarantine ledger. Neither the original quarantine rate nor pre/post-quarantine accuracy is estimable from the recovered evidence. The archived 79/1,643 P6 and 58/2,193 P8 threshold-empty cases (64 and 22 correct top-1, respectively) remained in their corresponding top-1 denominator. Neither count is an abstention or referral rate. The separate Plan AE manifest recorded reference-based class membership and the Plan AF handoff does not supply an eligible all-input denominator or outcomes. Neither can be used to assign a historical clinical quarantine rate.
+
+In the later SPH held development partition, the joint P8/P4 policy abstained on 2,478 of 12,869 scored ECGs (19.26\%; 95\% component interval 18.55--19.89\%). Known binary endpoint error was 9.53\% before selection and 9.00\% among accepted ECGs. The controlled difference was $-0.54$ percentage points (simultaneous interval $[-0.63,-0.44]$). Of 347 AF-positive ECGs, 274 had a correct emitted decision, ten an emitted false negative, and 63 no decision. Across endpoints, 740 known positives and 19,674 originally correct opportunities were withheld; 337 false negatives were still emitted. At a cost of 0.25 per withheld known opportunity, full-denominator loss was 12.08\%, compared with 9.53\% with no abstention. A lower conditional risk is therefore not the same as a benefit on all patients.
+
+On 200 LUDB ECGs, 48 abstentions were sent to an executed waveform-based P6 fallback. Partial output coverage reached 200/200, but full P8/P4 coverage stayed at 152/200. In 924 known opportunities, the joint route emitted 697 decisions with 139 errors; after fallback it emitted 847 with 147 errors and left 77 unresolved. On comparable fallback opportunities, seven errors were corrected and three introduced. The fallback does not return NSR, PAC or P4 results for the withheld ECGs and did not involve a clinician. Neither analysis validates the historical June policy, full-workflow safety, or clinical benefit.

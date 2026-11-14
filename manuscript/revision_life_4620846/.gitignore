@@ -1,0 +1,14 @@
+__pycache__/
+latex/*.aux
+latex/*.log
+latex/*.out
+latex/*.pdf
+latex/*.synctex.gz
+latex/Definitions/
+REVIEWER_MANUSCRIPT_RECONCILIATION_MATRIX.csv
+reviewer_responses.py
+review_responses/
+build/
+audit/INPUT_AUDIT.json
+audit/WORD_*.json
+audit/EDITORIAL_PLAN.md
